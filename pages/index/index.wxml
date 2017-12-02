@@ -1,0 +1,64 @@
+<!--index/index.wxml-->
+<import src='../../template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view class='l-list-filter l-flex-hc'>
+    <text class='l-icon-639' style='color:#ff9247;'></text>
+    <view class='l-rest'>
+      <view class='_item'>
+        <text>品牌</text>
+        <text class='l-icon-6ac'></text>
+      </view>
+      <view class='_item'>
+        <text>价格</text>
+        <text class='l-icon-6ac'></text>
+      </view>
+      <view class='_item'>
+        <text>车型</text>
+        <text class='l-icon-6ac'></text>
+      </view>
+    </view>
+    <icon type='search' color='#555' size='18'></icon>
+    <view class='_cont' wx:if="{{false}}">
+      <!-- 品牌 -->
+      <view class='weui-grids' wx:if="{{false}}">
+        <block wx:for='{{filterBrand}}' wx:key='*this'>
+          <view class='weui-grid' hover-class='weui-grid_active'>
+            <image class='weui-grid__icon' src='{{item.image}}' />
+            <view class='weui-grid__label'>{{item.name}}</view>
+          </view>
+        </block>
+      </view>
+
+      <!-- 价格 -->
+      <view class="_price">
+        <block wx:for='{{filterPrice}}' wx:key='*this'>
+          <text>{{item.name}}</text>
+        </block>
+      </view>
+
+      <!-- 车型 -->
+      <view class='weui-grids'>
+        <block wx:for='{{filterType}}' wx:key='*this'>
+          <view class='weui-grid' hover-class='weui-grid_active'>
+            <image class='weui-grid__icon' src='{{item.image}}' />
+            <view class='weui-grid__label'>{{item.name}}</view>
+          </view>
+        </block>
+      </view>
+
+      <!-- 搜索 -->
+
+    </view>
+  </view>
+  <view class='l-list-car'>
+    <view class='_item' wx:for="{{10}}">
+      <image mode="aspectFit" src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512222643293&di=36529581c40293a01b60c9f73769f9ae&imgtype=0&src=http%3A%2F%2F365jia.cn%2Fuploads%2Fautoimg%2F201201%2F4f0be3d536825.jpg'></image>
+      <view class='l-padding'>
+        <view class='_tit'>宝马x6 2017款 xddd 领先型</view>
+        <view class='_price1'>官方指导价: 20.47万</view>
+        <view class='_price2'>最高优惠<text>5.3</text>万</view>
+      </view>
+    </view>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+</view>
