@@ -1,11 +1,11 @@
 @import 'style/weui.wxss';
 @font-face {
   font-family: 'l-iconfont';  /* project id 189309 */
-  src: url('//at.alicdn.com/t/font_189309_vd76ewmq0bpgb9.eot');
-  src: url('//at.alicdn.com/t/font_189309_vd76ewmq0bpgb9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_189309_vd76ewmq0bpgb9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_189309_vd76ewmq0bpgb9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_189309_vd76ewmq0bpgb9.svg#l-iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_189309_8zypfsswfo17nwmi.eot');
+  src: url('//at.alicdn.com/t/font_189309_8zypfsswfo17nwmi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_189309_8zypfsswfo17nwmi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_189309_8zypfsswfo17nwmi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_189309_8zypfsswfo17nwmi.svg#l-iconfont') format('svg');
 }
 [class*='l-icon']{
   font-family: 'l-iconfont' !important;
@@ -35,6 +35,8 @@
 .l-icon-6dd::before{ content: '\e6dd';}
 .l-icon-639::before{ content: '\e639';}
 .l-icon-6ac::before{ content: '\e6ac';}
+.l-icon-64a::before{ content: '\e64a';}
+.l-icon-69e::before{ content: '\e69e';}
 
 /*
   http://www.css88.com/book/css/ 
@@ -51,7 +53,7 @@
 .l-flex-vhc,
 .l-flex-wrap {
   /*应用于父元素 */
-  display: flex;
+  display: flex !important;
 }
 /*
   flex-flow: <' flex-direction '> || <' flex-wrap '>
@@ -123,6 +125,7 @@
 /* text style */
 .l-fs-40{font-size: 40pt !important;}
 .l-fs-30{font-size: 30pt !important;}
+.l-fs-26{font-size: 26pt !important;}
 .l-fs-20{font-size: 20pt !important;}
 .l-fs-18{font-size: 18pt !important;}
 .l-fs-17{font-size: 17pt !important;}
@@ -130,9 +133,9 @@
 .l-fs-14{font-size: 14pt !important;}
 .l-fs-13{font-size: 13pt !important;}
 .l-fs-11{font-size: 11pt !important;}
-.l-fs-m{font-size: 14px;}
-.l-fs-s{font-size: 12px;}
-.l-fs-xs{font-size: 11px;}
+.l-fs-m{font-size: 28rpx;}
+.l-fs-s{font-size: 24rpx;}
+.l-fs-xs{font-size: 22rpx;}
 .l-h1{font-size: 20pt; color: #333;}
 .l-h2{font-size: 17pt; color: #333;}
 .l-h3{font-size: 14pt; color: #333;}
@@ -143,7 +146,7 @@
 .l-text-green{color: #09bb07;}
 .l-text-link{color: #576b95;}
 .l-text-gray{color: #999;}
-.l-text-theme{color: #ef5b45;}
+.l-text-theme{color: #ff9247;}
 .l-text-blod{font-weight: 500;}
 .l-text-justify{text-align:justify; text-justify: inter-word;}
 .l-text-wrap{word-break: break-all;text-align:justify; text-justify: inter-word;}
@@ -217,14 +220,10 @@ page{
 navigator.l-text-link{display: inline;}
 navigator button{vertical-align: top;}
 image{max-width: 100%;}
-.l-page-full, .l-h100{height: 100%;}
+.l-page-full, .l-h100{height: 100%; box-sizing: border-box;}
 .l-min-full{min-height: 100%;}
-.l-scroll{
-  box-sizing: border-box;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
+.l-scroll{ box-sizing: border-box; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch;}
+.l-scroll-x{ box-sizing: border-box; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;white-space: nowrap;}
 .l-zoom{overflow: hidden;}
 .l-bg-white{background-color: #fff;}
 .l-layer{position: fixed; background-color: rgba(0, 0, 0, 0.8); top:0; left:0; right:0; bottom:0;}
@@ -241,3 +240,4 @@ image{max-width: 100%;}
 .l-list-none{height: 100%; background: #fff; text-align: center;}
 .l-br{margin-top: 60rpx;}
 .l-br::after{content: ""; height: 1rpx; visibility: hidden; clear: both;}
+.l-download-up{transform: rotate(180deg); vertical-align: -6rpx;}

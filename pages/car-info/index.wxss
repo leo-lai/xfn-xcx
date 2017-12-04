@@ -1,0 +1,30 @@
+/* pages/car-info/index.wxss */
+.l-color-list{
+  margin: 30rpx 60rpx;
+}
+.l-color-list::-webkit-scrollbar {
+    display: none;
+}
+.l-color-list ._item{
+  display: inline-block; text-align: center; margin: 0 20rpx;
+}
+.l-color-list ._color{
+  display: block; width: 40rpx; height: 40rpx; margin:20rpx auto; background: #ff9247;
+  border-radius: 50%; 
+}
+.l-color-list ._name{ font-size: 24rpx; }
+.l-color-list ._active ._color{box-shadow: 0 0 0 8rpx #fff, 0 0 0 10rpx #ff9247;}
+.l-car-price{position: relative; z-index: 0; box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1); margin: 60rpx 0;}
+.l-car-price::before{
+  content: ''; position: absolute; z-index: -1; left: 0; right: 0; top: -10%; bottom: 60%;
+  background-image: radial-gradient(ellipse farthest-side, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0) 100%); 
+}
+.l-car-price::after{
+  content: ''; position: absolute; z-index: -1; left: 0; right: 0; top: 60%; bottom: -10%;
+  background-image: radial-gradient(ellipse farthest-side, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0) 100%); 
+}
+.l-ask-price{
+  background: #ff9247; color: #fff; text-align: center; border-radius: 60rpx;
+  padding: 20rpx; font-size: 34rpx; width: 80%; margin:-60rpx auto 0;
+  box-shadow: 0 10rpx 20rpx rgba(255, 146, 71, 0.5);
+}

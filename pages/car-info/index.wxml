@@ -1,0 +1,47 @@
+<!--pages/car-info/index.wxml-->
+<view class='l-page-full'>
+  <view class='l-text-center l-bg-white l-zoom'>
+    <image style='height: 300rpx;' mode='aspectFit'></image>
+    <view class='l-h3'>宝马X6 2017款 xDrive350i 领先型</view>
+    <view class='l-margin-tb-m'>
+      <text class='l-text-gray'>官方指导价：20.47万</text>
+      <text class='l-margin'>|</text>
+      <text class='l-text-theme'>
+        <text>更换其他车型</text>
+        <text class='l-icon-69e l-fs-m l-margin-l-s'></text>
+      </text>
+    </view>
+    
+    <!-- 颜色选择 -->
+    <view class='l-color-list l-scroll-x'>
+      <view class='_item {{index === 1 ? "_active" : ""}}' wx:for='{{6}}' wx:key='index'>
+        <text class='_color'></text>
+        <text class='_name'>颜色名称</text>
+      </view>
+    </view>
+
+    <!-- 车辆价格 -->
+    <view class='l-car-price'>
+      <view class='l-flex-h l-padding l-bg-white'>
+        <view class='l-padding'>
+          <view>最低报价</view>
+          <text class='l-text-gray'>不含税/保险</text>
+        </view>
+        <view class='l-rest l-padding-tb'>
+          <text class='l-fs-26 l-text-theme'>633.5万</text>
+        </view>
+        <view class='l-padding'>
+          <view class='l-icon-64a'></view>
+          <text class='l-text-gray'>购车计算器</text>
+        </view>
+      </view> 
+    </view>
+    <view style='height: 60rpx;'></view>
+  </view>
+  <view class='l-ask-price'>寻低价</view>
+  <view class='l-margin l-text-center'>
+    <view class='l-br'></view>
+    <icon class='l-download-up' type='download' color='#999' size='18'></icon>
+    <text class='l-text-gray l-margin-l-s'>上拉加载车辆详情</text>
+  </view>
+</view>

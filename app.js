@@ -45,16 +45,16 @@ App({
   navigateTo,
   onLaunch: function () {
     // 获取用户信息
-    // storage.getItem('userInfo').then(userInfo => {
-    //   if (userInfo) {
-    //     this.globalData.userInfo = userInfo
-    //     this.runLoginCbs(userInfo)
-    //   } else {
-    //     this.login()
-    //   }
-    // }).catch(() => {
-    //   this.login()
-    // })
+    storage.getItem('userInfo').then(userInfo => {
+      if (userInfo) {
+        this.globalData.userInfo = userInfo
+        this.runLoginCbs(userInfo)
+      } else {
+        this.login()
+      }
+    }).catch(() => {
+      this.login()
+    })
   },
   // post请求
   post: function (url = '', data = {}, showErr = true) {
