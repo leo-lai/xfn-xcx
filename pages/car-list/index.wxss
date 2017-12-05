@@ -32,7 +32,7 @@
 .l-type-list ._active .weui-grid__label{color: #ff9247;}
 
 .l-list-car ._item{ background: #fff; margin: 30rpx 0; }
-.l-list-car ._item image{ width: 100%; height: 300rpx; }
+.l-list-car ._item image{ width: 100%;}
 .l-list-car ._item ._tit{font-weight: 500; font-size: 34rpx;}
 .l-list-car ._item ._price1{color: #999;}
 .l-list-car ._item ._price2{color: #ff9247; margin-top: 20rpx;}

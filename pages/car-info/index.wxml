@@ -1,22 +1,23 @@
 <!--pages/car-info/index.wxml-->
+<import src="../../components/wxParse/wxParse.wxml" />
 <view class='l-page-full'>
   <view class='l-text-center l-bg-white l-zoom'>
-    <image style='height: 300rpx;' mode='aspectFit'></image>
-    <view class='l-h3'>宝马X6 2017款 xDrive350i 领先型</view>
-    <view class='l-margin-tb-m'>
-      <text class='l-text-gray'>官方指导价：20.47万</text>
+    <image style='width: 100%;' mode='widthFix' src='{{info.indexImage}}'></image>
+    <view class='l-h3 l-margin-tb'>{{info.carsName}}</view>
+    <view>
+      <text class='l-text-gray'>官方指导价：{{info.priceStr}}万</text>
       <text class='l-margin'>|</text>
-      <text class='l-text-theme'>
+      <text class='l-text-theme' bindtap='sltCar'>
         <text>更换其他车型</text>
-        <text class='l-icon-69e l-fs-m l-margin-l-s'></text>
+      <text class='l-icon-69e l-fs-m l-margin-l-s'></text>
       </text>
     </view>
-    
+
     <!-- 颜色选择 -->
     <view class='l-color-list l-scroll-x'>
-      <view class='_item {{index === 1 ? "_active" : ""}}' wx:for='{{6}}' wx:key='index'>
-        <text class='_color'></text>
-        <text class='_name'>颜色名称</text>
+      <view class='_item {{sltedColor.carColourId === item.carColourId ? "_active" : ""}}' wx:for='{{info.list}}' wx:key='carColourId' bindtap='sltColor' data-item='{{item}}'>
+        <text class='_color' style='background:{{item.colourNumber}}; color: {{item.colourNumber}};'></text>
+        <text class='_name'>{{item.carColourName}}</text>
       </view>
     </view>
 
@@ -28,20 +29,74 @@
           <text class='l-text-gray'>不含税/保险</text>
         </view>
         <view class='l-rest l-padding-tb'>
-          <text class='l-fs-26 l-text-theme'>633.5万</text>
+          <text class='l-fs-26 l-text-theme'>{{info.minPriceStr}}万</text>
         </view>
         <view class='l-padding'>
           <view class='l-icon-64a'></view>
           <text class='l-text-gray'>购车计算器</text>
         </view>
-      </view> 
+      </view>
     </view>
     <view style='height: 60rpx;'></view>
   </view>
   <view class='l-ask-price'>寻低价</view>
-  <view class='l-margin l-text-center'>
-    <view class='l-br'></view>
+  <view class='l-br'></view>
+  <view class='l-margin l-text-center' wx:if='{{!isViewDetail}}'>
     <icon class='l-download-up' type='download' color='#999' size='18'></icon>
     <text class='l-text-gray l-margin-l-s'>上拉加载车辆详情</text>
+  </view>
+  <!-- 车辆详细信息 -->
+  <view class='l-car-info l-bg-white l-scroll' style='height: {{winHeight}}px' hidden='{{!isViewDetail}}'>
+    <view class='weui-tab'>
+      <view class='weui-navbar l-sticky'>
+        <block wx:for='{{tabs}}' wx:key='index'>
+          <view data-val='{{index}}' class='weui-navbar__item {{activeIndex == index ? "weui-bar__item_on" : ""}}' bindtap='tabClick'>
+            <view class='weui-navbar__title'>{{item}}</view>
+          </view>
+        </block>
+        <view class='weui-navbar__slider' style='left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);'></view>
+      </view>
+      <view class='weui-tab__panel'>
+        <view class='weui-tab__content l-padding' hidden='{{activeIndex != 0}}'>
+          <template is='wxParse' data='{{wxParseData:introduce.data.nodes}}' />
+           <view class='weui-loadmore' wx:if='{{ introduce.loading }}'>
+            <view class='weui-loading'></view>
+            <view class='weui-loadmore__tips'>正在加载</view>
+          </view>
+        </view>
+        <view class='weui-tab__content l-padding' hidden='{{activeIndex != 1}}'>
+          <view class='kind-list'>
+            <block wx:for='{{parameter.data}}' wx:key='id'>
+              <view class='kind-list__item'>
+                <view id='{{item.id}}' class='weui-flex kind-list__item-hd {{item.open ? "kind-list__item-hd_show" : ""}}' bindtap='paramToggle'>
+                  <view class='weui-flex__item'>{{item.name}}</view>
+                  <text class='l-icon-6ac'></text>
+                </view>
+                <view class='kind-list__item-bd {{item.open ? "kind-list__item-bd_show" : ""}}'>
+                  <view class='weui-cells l-param-list {{item.open ? "weui-cells_show" : ""}}'>
+                    <block wx:for='{{item.list}}' wx:for-item='paramItem' wx:key='index'>
+                      <view class='l-flex-hc _item'>
+                        <text class='l-rest'>{{paramItem.parameterName}}</text>
+                        <text>{{paramItem.parameterValue}}</text>
+                      </view>
+                    </block>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+          <view class='weui-loadmore' wx:if='{{ parameter.loading }}'>
+            <view class='weui-loading'></view>
+            <view class='weui-loadmore__tips'>正在加载</view>
+          </view>
+        </view>
+        <view class='weui-tab__content l-padding' hidden='{{activeIndex != 2}}'>
+          <view class='weui-loadmore' wx:if='{{ problem.loading }}'>
+            <view class='weui-loading'></view>
+            <view class='weui-loadmore__tips'>正在加载</view>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

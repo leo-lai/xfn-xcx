@@ -203,6 +203,7 @@ Page({
       page, ...this.data.filter.data
     }).then(({ data }) => {
       data.list = data.list.map(item => {
+        item.priceStr = (item.price / 10000).toFixed(2)
         return item
       })
 

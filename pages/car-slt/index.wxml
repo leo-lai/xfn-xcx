@@ -1,0 +1,17 @@
+<!--pages/car-slt/index.wxml-->
+<view class='l-page-full'>
+  <view class='l-car-years l-scroll-x'>
+    <text class='{{ sltedYear === item ? "_active" : "" }}' wx:for='{{years}}' wx:key='index' data-val='{{item}}' bindtap='sltYear'>{{item}}</text>
+  </view>
+
+  <view class='l-margin-tb l-border-t l-car-list'>
+    <view class='l-border-b l-flex-h _item {{sltedCar.carsId === item.carsId ? "_active" : ""}}' wx:for='{{list}}' wx:key='carsId' data-item='{{item}}' bindtap='sltCar'>
+      <view class='l-margin-r _icon'>
+        <icon type='circle' size='20'></icon>
+        <icon type='success' size='20' color='#ff9247'></icon>
+      </view>
+      <view class='l-rest'>{{item.carsName}}</view>
+      <text class='l-margin-l l-text-theme'>{{item.priceStr}}万</text>
+    </view>
+  </view>
+</view>

@@ -33,8 +33,12 @@ const storage = {
   }
 }
 // 跳转函数
-const navigateTo = url => {
-  url && wx.navigateTo({ url })
+const navigateTo = event => {
+  if (typeof event === 'string') {
+    wx.navigateTo({ url: event })
+  } else if (typeof event === 'object') {
+    wx.navigateTo({ url:  event.currentTarget.dataset.url })
+  }
 }
 
 App({

@@ -1,0 +1,12 @@
+/* pages/car-slt/index.wxss */
+.l-page-full{padding-top: 98rpx;}
+.l-car-years{ padding: 30rpx; background: #fff; position: fixed; top:0; left: 0; right: 0; z-index: 999;}
+.l-car-years text{display: inline-block; padding: 0 20rpx; margin: 0 20rpx;}
+.l-car-years text._active{color: #ff9247;}
+
+.l-car-list ._item{padding: 30rpx; background: #fff; font-size: 32rpx;}
+.l-car-list ._icon icon{vertical-align: -8rpx;}
+.l-car-list ._icon icon[type=circle]{display: inline-block;}
+.l-car-list ._icon icon[type=success]{display: none;}
+.l-car-list ._active icon[type=circle]{display: none;}
+.l-car-list ._active icon[type=success]{display: inline-block;}

@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/car-info/index",
-    "pages/car-list/index"
+    "pages/car-list/index",
+    "pages/car-slt/index",
+    
+    "pages/car-info/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

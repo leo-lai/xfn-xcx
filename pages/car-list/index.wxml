@@ -75,11 +75,11 @@
   </view>
   <view class='l-list-car'>
     <navigator url='../car-info/index?id={{item.carId}}' class='_item' wx:for='{{list.data}}' wx:key='carId'>
-      <image mode='aspectFit' src='{{item.image}}'></image>
+      <image mode='widthFix' src='{{item.image}}'></image>
       <view class='l-padding'>
         <view class='_tit'>{{item.carsName}}</view>
-        <view class='_price1'>官方指导价: {{item.price}}万</view>
-        <view class='_price2'>最高优惠<text>{{item.discountPrice}}</text>万</view>
+        <view class='_price1'>官方指导价: {{item.priceStr}}万</view>
+        <view class='_price2'>最高优惠<text>{{item.discountPrice}}</text>元</view>
       </view>
     </navigator>
   </view>
