@@ -1,5 +1,5 @@
 // pages/car-info/index.js
-var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+var tabWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var WxParse = require('../../components/wxParse/wxParse.js')
 const app = getApp()
 Page({
@@ -10,23 +10,38 @@ Page({
     sltedCar: {},
     sltedColor: {},
     info: {},
-    winHeight: 602,
-    tabs: ['基本信息', '参数配置', '常见问题'],
-    activeIndex: 0,
-    sliderOffset: 0,
-    sliderLeft: 0,
-    isViewDetail: false,
+    tabs: {
+      visible: false,
+      data: ['基本信息', '参数配置', '常见问题'],
+      offset: 0,
+      left: 0,
+      index: 0,
+      height: 602
+    },
+    // 车辆介绍
     introduce: {
       loading: false,
       data: null
     },
+    // 车辆参数
     parameter: {
       loading: false,
       data: null
     },
+    // 车辆问题
     problem: {
       loading: false,
       data: null
+    },
+    // 计算器
+    counter: {
+      height: 602,
+      visible: false,
+      tabIndex: 0,
+      fullPayment: null,
+      loanPayment: null,
+      percent: 0.3,
+      year: 3
     }
   },
   /**
@@ -37,77 +52,81 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          winHeight: res.windowHeight,
-          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+          'tabs.height': res.windowHeight,
+          'counter.height': res.windowHeight - 240,
+          'tabs.left': (res.windowWidth / that.data.tabs.data.length - tabWidth) / 2,
+          'tabs.offset': res.windowWidth / that.data.tabs.data.length * that.data.tabs.index
         })
       }
     })
 
+    app.storage.removeItem('carInfo-tempCar')
     app.onLogin(userInfo => {
       this.getInfo(options.id)
     })
   },
-  onShow: function() {
+  onShow: function () {
     app.storage.getItem('carInfo-tempCar').then(sltedCar => {
       if (sltedCar && this.data.sltedCar.carsId !== sltedCar.carsId) {
         this.data.sltedCar = sltedCar
         this.getInfo(sltedCar.carsId)
+        WxParse.wxParse('introduce.data', 'html', '', this)
+        this.setData({
+          'parameter.data': null,
+          'tabs.visible': false
+        })
       }
     })
   },
-  onUnload: function() {
-    app.storage.removeItem('carInfo-tempCar')
-  },
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     if (this.data.info || this.data.info.carsId) {
       this.getInfo(this.data.info.carsId).finally(_ => {
         wx.stopPullDownRefresh()
       })
     }
   },
-  onReachBottom: function(event) {
-    if (!this.data.isViewDetail) {
+  onReachBottom: function (event) {
+    if (!this.data.tabs.visible) {
       this.setData({
-        'isViewDetail': true
+        'tabs.visible': true
       })
       this.getIntroduce()
     }
   },
   // 车辆详情
-  getInfo: function(carId = '') {
+  getInfo: function (carId = '') {
     wx.showLoading()
-    return app.post(app.config.carInfo, { carId }).then(({data}) => {
+    return app.post(app.config.carInfo, { carId }).then(({ data }) => {
       data.priceStr = (data.price / 10000).toFixed(2)
       data.minPriceStr = (data.minPrice / 10000).toFixed(2)
       this.setData({
         'info': data,
-        'sltedColor': {}
+        'sltedColor': data.list[0]
       })
     }).finally(_ => {
       wx.hideLoading()
     })
   },
   // 选择颜色
-  sltColor: function(event) {
+  sltColor: function (event) {
     let item = event.currentTarget.dataset.item
     this.setData({
       'sltedColor': item
     })
   },
   // 更换车型
-  sltCar: function(event) {
+  sltCar: function (event) {
     app.navigateTo(`../car-slt/index?id=${this.data.info.familyId}`)
   },
   tabClick: function (event) {
     let index = event.currentTarget.dataset.val
     this.setData({
-      sliderOffset: event.currentTarget.offsetLeft,
-      activeIndex: index
+      'tabs.offset': event.currentTarget.offsetLeft,
+      'tabs.index': index
     })
     if (index === 0) {
       if (!this.data.introduce.data) {
-        this.getIntroduce() 
+        this.getIntroduce()
       }
     } else if (index === 1) {
       if (!this.data.parameter.data) {
@@ -117,10 +136,10 @@ Page({
       if (!this.data.problem.data) {
         this.getProblemList()
       }
-    } 
+    }
   },
   // 车辆介绍
-  getIntroduce: function() {
+  getIntroduce: function () {
     this.setData({
       'introduce.loading': true
     })
@@ -134,7 +153,7 @@ Page({
       })
   },
   // 车辆配置
-  getParameter: function() {
+  getParameter: function () {
     this.setData({
       'parameter.loading': true
     })
@@ -143,16 +162,16 @@ Page({
         let retList = []
         let tempObj = {}
         data.forEach(item => {
-          if (!tempObj[item.typeName]){
+          if (!tempObj[item.typeName]) {
             tempObj[item.typeName] = {
               id: 'param-' + item.typeCode,
-              open: false,
+              open: true,
               code: item.typeCode,
               name: item.typeName,
               list: [item]
             }
             retList.push(tempObj[item.typeName])
-          }else {
+          } else {
             tempObj[item.typeName].list.push(item)
           }
         })
@@ -166,19 +185,19 @@ Page({
       })
   },
   // 车辆问题
-  getProblemList: function() {
+  getProblemList: function () {
     this.setData({
       'problem.loading': true
     })
     app.post(app.config.problemList).then(({ data }) => {
-        this.setData({
-          'problem.data': data
-        })
-      }).finally(_ => {
-        this.setData({
-          'problem.loading': false
-        })
+      this.setData({
+        'problem.data': data
       })
+    }).finally(_ => {
+      this.setData({
+        'problem.loading': false
+      })
+    })
   },
   paramToggle: function (event) {
     var id = event.currentTarget.id, list = this.data.parameter.data
@@ -192,5 +211,70 @@ Page({
     this.setData({
       'parameter.data': list
     })
+  },
+  showCounter() {
+    this.setData({
+      'counter.visible': true
+    })
+    if (this.data.counter.tabIndex === 0) {
+      this.getFullPayment()
+    } else if (this.data.counter.tabIndex === 1) {
+      this.getLoanPayment()
+    }
+  },
+  closeCounter() {
+    this.setData({
+      'counter.visible': false
+    })
+  },
+  counterTab(event) {
+    let index = event.currentTarget.dataset.val
+    this.setData({
+      'counter.tabIndex': index
+    })
+
+    if (index === 0) {
+      this.getFullPayment()
+    } else if (index === 1) {
+      this.getLoanPayment()
+    }
+  },
+  percentChange(event) {
+    this.setData({
+      'counter.percent': event.detail.value
+    })
+    this.getLoanPayment()
+  },
+  yearChange(event) {
+    this.setData({
+      'counter.year': event.detail.value
+    })
+    this.getLoanPayment()
+  },
+  // 全款
+  getFullPayment: function () {
+    app.post(app.config.fullPayment, {
+      carId: this.data.info.carsId
+    }).then(({ data }) => {
+      this.setData({
+        'counter.fullPayment': data
+      })
+    })
+  },
+  // 贷款
+  getLoanPayment: function () {
+    app.post(app.config.loanPayment, {
+      carId: this.data.info.carsId,
+      paymentRatio: this.data.counter.percent,
+      timeOfPayment: this.data.counter.year
+    }).then(({ data }) => {
+      this.setData({
+        'counter.loanPayment': data
+      })
+    })
+  },
+  // 预约
+  askPrice() {
+    app.navigateTo(`../car-bespeak/index?car=${this.data.info.carsId}&color=${this.data.sltedColor.carColourId}`)
   }
 })

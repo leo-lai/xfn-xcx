@@ -28,9 +28,6 @@
 .l-color-list ._name {
   font-size: 24rpx;
 }
-
-/* .l-color-list ._active{color: #ff9247;} */
-
 .l-color-list ._active ._color {
   box-shadow: 0 0 0 8rpx #fff, 0 0 0 10rpx currentColor;
 }
@@ -40,7 +37,6 @@
   z-index: 0;
   box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
   margin: 60rpx 0;
-  overflow: visible;
 }
 
 .l-car-price::before {
@@ -73,7 +69,7 @@
   padding: 20rpx;
   font-size: 34rpx;
   width: 80%;
-  margin: -60rpx auto 0;
+  margin:auto;
   box-shadow: 0 10rpx 20rpx rgba(255, 146, 71, 0.5);
 }
 
@@ -82,11 +78,11 @@
 }
 
 .weui-bar__item_on .weui-navbar__title {
-  color: #f5911e;
+  color: #ff9247;
 }
 
 .weui-navbar__slider {
-  background-color: #f5911e;
+  background-color: #ff9247;
 }
 
 .weui-tab__panel {
@@ -145,9 +141,9 @@
 .kind-list__item-hd .l-icon-6ac{display: inline-block; color: #ccc; font-size: 16rpx; transition: 0.2s linear;}
 .kind-list__item-hd_show .l-icon-6ac{transform: rotate(-180deg);}
 
-.kind-list__item-hd_show {
+/* .kind-list__item-hd_show {
   opacity: 0.4;
-}
+} */
 
 .kind-list__item-bd {
   height: 0;
@@ -160,3 +156,22 @@
 
 .l-param-list{padding: 10rpx; font-size: 28rpx;}
 .l-param-list ._item{margin: 20rpx 0;}
+
+.l-problem-list ._item{padding:30rpx; background: #fff;}
+.l-problem-list ._hd text,
+.l-problem-list ._bd text{width: 40rpx; height: 40rpx; line-height: 40rpx; text-align: center; border-radius: 50%; color: #fff; background: #ff9247; margin-right: 30rpx; font-size:20rpx;}
+.l-problem-list ._bd{margin-top: 20rpx; color: #999;}
+
+.l-buyway-tab ._tit { text-align: center; }
+.l-buyway-tab ._tit ._item{width: 50%; padding: 20rpx 0;position: relative; font-size: 32rpx; }
+.l-buyway-tab ._tit ._item::after{ content: ''; display: block; border: 16rpx solid transparent; 
+border-bottom-color:#ffe8d8; width: 0; height: 0; margin: 0 auto -20rpx; visibility: hidden;}
+.l-buyway-tab ._tit ._item._active{color: #ff9247;}
+.l-buyway-tab ._tit ._item._active::after{visibility: visible;}
+.l-buyway-tab ._all{background: #ffe8d8; text-align: center; padding:20rpx; box-shadow: 0 2px 3px 0 #ccc;position: relative;}
+.l-buyway-tab ._cont{display: none;}
+.l-buyway-tab ._cont._active{display: block;}
+.l-buyway-tab ._slt{background: #fafafa; padding: 30rpx 40rpx; box-shadow: 0 2px 3px 0 #ccc;}
+.l-buyway-tab ._slt .l-rest{margin-left: 50rpx;}
+.l-buyway-tab ._slide-text{display: flex;justify-content:space-between; font-size: 24rpx;}
+.l-buyway-tab ._slide-bar{padding:10rpx 20rpx 0; margin:0; }

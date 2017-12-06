@@ -1,11 +1,11 @@
 @import 'style/weui.wxss';
 @font-face {
   font-family: 'l-iconfont';  /* project id 189309 */
-  src: url('//at.alicdn.com/t/font_189309_8zypfsswfo17nwmi.eot');
-  src: url('//at.alicdn.com/t/font_189309_8zypfsswfo17nwmi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_189309_8zypfsswfo17nwmi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_189309_8zypfsswfo17nwmi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_189309_8zypfsswfo17nwmi.svg#l-iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_189309_flpg7bdtp1w9izfr.eot');
+  src: url('//at.alicdn.com/t/font_189309_flpg7bdtp1w9izfr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_189309_flpg7bdtp1w9izfr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_189309_flpg7bdtp1w9izfr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_189309_flpg7bdtp1w9izfr.svg#l-iconfont') format('svg');
 }
 [class*='l-icon']{
   font-family: 'l-iconfont' !important;
@@ -37,6 +37,11 @@
 .l-icon-6ac::before{ content: '\e6ac';}
 .l-icon-64a::before{ content: '\e64a';}
 .l-icon-69e::before{ content: '\e69e';}
+.l-icon-654::before{ content: '\e654';}
+.l-icon-640::before{ content: '\e640';}
+.l-icon-603::before{ content: '\e603';}
+
+
 
 /*
   http://www.css88.com/book/css/ 
@@ -177,6 +182,8 @@ button[type="primary"][disabled] {
 /* border style */
 .l-border-t{border-top: 1rpx solid #dadadc;}
 .l-border-b{border-bottom: 1rpx solid #dadadc;}
+.l-border-r{border-right: 1rpx solid #dadadc;}
+.l-border-l{border-left: 1rpx solid #dadadc;}
 .l-border-tb{border-top: 1rpx solid #dadadc; border-bottom: 1rpx solid #dadadc;}
 
 /* margin padding style */
@@ -206,6 +213,7 @@ button[type="primary"][disabled] {
 
 /* other style */
 page{
+  position: relative;
   background-color: #eee; 
   color: #555; 
   height: 100%;
@@ -242,3 +250,16 @@ image{max-width: 100%;}
 .l-br{margin-top: 60rpx;}
 .l-br::after{content: ""; height: 1rpx; visibility: hidden; clear: both;}
 .l-download-up{transform: rotate(180deg); vertical-align: -6rpx;}
+
+/* 底部弹窗 */
+.l-popup-bottom{position: fixed; z-index: 9999; left:0; right: 0; bottom: 0; visibility: hidden; pointer-events: none;}
+.l-popup-bottom:before{content: ''; position: absolute; top:-2000px; left: 0; height: 2000px; width: 100%; background: rgba(0, 0, 0, 0); transition: all 0.5s;  z-index: -1;}
+.l-popup-bottom ._inner{position: absolute; left:0; right: 0; bottom: 0; background-color: #fff; box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+	transition: all 0.5s; transform: translate3d(0, 100%, 0); }
+.l-popup-bottom ._inner ._close{position: absolute; top: 0.2rem; right: 0.2rem; width: 1.8rem; height: 1.8rem; line-height: 1.8rem; text-align: center; color: #333; font-size: 40rpx; z-index: 1;}
+.l-popup-bottom ._inner ._hd{padding: 0.5rem 0.75rem; text-align: center;}
+.l-popup-bottom ._inner ._ft{padding:0.75rem;}
+.l-popup-bottom ._inner ._bd{ overflow: auto; -webkit-overflow-scrolling: touch; max-height: 800rpx;}
+.l-popup-bottom._show{visibility: visible; pointer-events: auto; overflow: visible;}
+.l-popup-bottom._show ._inner{transform: translate3d(0, 0, 0);}
+.l-popup-bottom._show:before{background: rgba(0, 0, 0, 0.5);}

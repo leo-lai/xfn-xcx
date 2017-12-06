@@ -1,0 +1,36 @@
+/* pages/car-bespeak/index.wxss */
+.l-ask-price {
+  background: #ff9247;
+  color: #fff;
+  text-align: center;
+  border-radius: 60rpx;
+  padding: 20rpx;
+  font-size: 34rpx;
+  width: 80%;
+  margin:auto;
+  box-shadow: 0 10rpx 20rpx rgba(255, 146, 71, 0.5);
+}
+
+.l-slted-car{padding: 30rpx; border: 2rpx solid #ff9247; position: relative; margin-top: 10rpx; border-radius: 4rpx; overflow: hidden;}
+.l-slted-car .l-icon-654{position: absolute; right: 0; bottom: 0; color: #ff9247; line-height: 1;}
+.l-slted-car image{background: #eee; width: 90rpx; height: 90rpx; margin-right: 30rpx;}
+.l-ask-form{margin: 20rpx 0;}
+.l-ask-form ._input{padding: 20rpx 0; border-bottom: 2rpx solid #eee;}
+.l-ask-form ._input:last-child{border-bottom-color: transparent;}
+.l-ask-form ._input input{width: 100%; }
+
+.l-list-filter{ padding: 20rpx 30rpx; text-align: center;}
+.l-list-filter > .l-rest{overflow: hidden; margin: 0 15rpx; text-align: center;}
+.l-list-filter .l-icon-6ac{
+  display: inline-block; font-size: 14rpx; vertical-align: 4rpx;
+  margin:0 0 0 20rpx; opacity: 0.8; transition: 0.2s linear;
+}
+.l-list-filter icon[type=search]{ -webkit-text-stroke: 2rpx; }
+.l-list-filter ._item{ display: inline-block; min-width: 240rpx; margin: 0 20rpx; transition: 0.2s linear; }
+.l-list-filter ._item._active{ color: #ff9247; }
+.l-list-filter ._item._active .l-icon-6ac{ transform: rotate(-180deg); }
+
+.l-store-item ._icon icon[type=circle]{display: inline-block;}
+.l-store-item ._icon icon[type=success]{display: none;}
+.l-store-item._active icon[type=circle]{display: none;}
+.l-store-item._active icon[type=success]{display: inline-block;}

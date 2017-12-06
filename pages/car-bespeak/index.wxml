@@ -1,0 +1,89 @@
+<!--pages/car-bespeak/index.wxml-->
+<view class='l-page-full'>
+  <view class='l-bg-white l-padding'>
+    <view class='l-flex-hc'>
+      <view class='l-rest l-h3'>预约门店</view>
+      <text class='l-text-link' bindtap='changeStore'>更换门店</text>
+    </view>
+
+    <view class='l-margin-t-m'>
+      <text class='l-text-gray l-fs-s'>已选择距离最近</text>
+      <view class='l-slted-car l-flex-h'>
+        <image></image>
+        <view class='l-rest l-margin-r'>
+          <view class='l-h4'>骏亨旗舰店</view>
+          <view class='l-text-gray'>江门市鹤山镇宝岛大道中</view>
+        </view>
+        <text class='l-text-theme l-h3'>35.6万</text>
+        <text class='l-icon-654'></text>
+      </view>
+    </view>
+  </view>
+  <view class='l-bg-white l-padding l-margin-tb'>
+    <view class='l-rest l-h3'>预约资料</view>
+    <view class='l-ask-form'>
+      <view class='_input'>
+        <input placeholder='输入姓名'></input>
+      </view>
+      <view class='_input'>
+        <input placeholder='输入手机号码'></input>
+      </view>
+      <view class='_input'>
+        <picker mode='selector' value="{{buyIndex}}" range='{{buyTime}}'>
+          <input readonly placeholder='请选择购车时间' value='{{buyTime[buyIndex]}}'></input>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view class='l-margin-tb'>
+    <view class='l-ask-price'>寻低价</view>
+  </view>
+
+  <!-- 门店列表 -->
+  <view class='l-popup-bottom {{store.visible ? "_show" : ""}}'>
+    <view class='_inner'>
+      <text class='_close' bindtap='closeStore'>×</text>
+      <view class='_hd l-border-b'>
+        <text class='l-h4'>门店列表</text>
+      </view>
+      <view class='l-list-filter'>
+        <view class='_item {{store.data.isDistance === 1 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{1}}'>
+          <text>距离排序</text>
+          <text class='l-icon-6ac'></text>
+        </view>
+        <view class='_item {{store.data.isDistance === 0 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{0}}'>
+          <text>优惠力度</text>
+          <text class='l-icon-6ac'></text>
+        </view>
+      </view>
+      <view class='_bd' style='max-height: {{store.height}}px; background:#eee;'>
+        <view class='l-store-item l-bg-white l-margin-tb ' wx:for='{{store.list}}'>
+          <view class='l-flex-h l-padding'>
+            <view class='l-margin-r _icon'>
+              <icon type='circle' size='20'></icon>
+              <icon type='success' size='20' color='#ff9247'></icon>
+            </view>
+            <view class='l-rest'>
+              <view class='l-h4'>{{item.orgName}}</view>
+              <view class='l-text-gray l-fs-m'>{{item.address}}</view>
+            </view>
+            <view>
+              <view class='l-h4 l-text-theme'>15.3万</view>
+              <text class='l-text-gray l-fs-m'>{{item.distance}}km</text>
+            </view> 
+          </view>
+          <view class='l-border-t l-flex-hc l-text-center'>
+            <view class='l-rest l-padding-btn'>
+              <text class='l-icon-603 l-fs-m'></text>
+              <text class='l-margin-l'>导航</text>
+            </view>
+            <view class='l-rest l-padding-btn l-border-l'>
+              <text class='l-icon-640 l-fs-m'></text>
+              <text class='l-margin-l'>电话</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
