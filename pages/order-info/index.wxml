@@ -1,0 +1,110 @@
+<!--pages/order-info/index.wxml-->
+<view class='l-page-full l-bg-white' wx:if='{{info.customerOrderState !== 13}}'>
+  <view class='l-text-center l-padding-btn'>
+    <text class='l-icon-62b l-margin-r' style='font-size: 52rpx; vertical-align: -6rpx;'></text>
+    <text class='l-h4'>{{info.carsName}}</text>
+  </view>
+  <image style='width: 100%; display:block;' mode='widthFix' src='{{info.indexImage}}'></image>
+  <view class='l-progress-tit'>
+    <text>当前进度</text>
+  </view>
+
+  <!-- 预约信息 -->
+  <block wx:if='{{info.isAppointment === 1}}'>
+    <view class='l-progress-info l-text-center l-padding'>
+      <view class='l-h3'>预约成功</view>
+    </view>
+    <view class='l-padding l-margin-t'>
+      <view class='l-fs-xs l-text-gray'>预约门店</view>
+      <view class='l-slted-store l-flex-h'>
+        <image mode='aspectFill' src='{{info.orgImage}}'></image>
+        <view class='l-rest'>
+          <view>
+            <text class='l-fr l-icon-603' data-lat='{{info.latitude}}' data-lng='{{info.longitude}}' bindtap='openMap'></text>
+            <text class='l-fr l-icon-640' data-val='{{info.telPhone}}' bindtap='callPhone'></text>
+            <text class='l-h4'>{{info.shortName}}</text>
+          </view>
+          <view class='l-text-gray l-fs-s'>{{info.address}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 订单信息 -->
+  <block wx:if='{{info.isAppointment === 0}}'>
+    <view class='l-progress-info l-text-center l-padding'>
+      <view class='l-h3'>{{state[info.customerOrderState]}}</view>
+      <view class='l-text-link l-margin-t' bindtap='showTrack'>查看购车历程</view>
+    </view>
+    <view class='l-padding l-margin-t'>
+      <view class='l-fs-xs l-text-gray'>销售顾问</view>
+      <view class='l-flex-h l-slted-store'>
+        <image style='width: 80rpx; height: 80rpx;' mode='aspectFill' src='{{info.systemImage}}'></image>
+        <view class='l-rest'>
+          <view>
+            <text class='l-fr l-icon-640' data-val='{{info.systemUserPhone}}' bindtap='callPhone'></text>
+            <text class='l-h4'>{{info.systemUserName}}</text>
+          </view>
+          <view class='l-text-gray l-fs-s'>{{info.shortName}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 购车历程 -->
+  <view class='l-popup-center l-flex-vhc' wx:if='{{track.visible}}'>
+    <view class='_inner' style='width: 80%;'>
+      <view class='l-track-list'>
+        <view class='l-flex-h _item' wx:for='{{track.data}}' wx:key='{{index}}'>
+          <image mode='widthFix' src='{{track.icons[index]}}'></image>
+          <view class='l-rest'>
+            <view class='l-h4'>{{item.trackContent}}</view>
+            <view class='l-fs-m l-text-gray'>{{item.createDate}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <text class='l-icon-61a _close' bindtap='closeTrack'></text>
+  </view>
+</view>
+
+<view class='l-page-full' wx:if='{{info.customerOrderState === 13}}'>
+  <view class='l-bg-white'>
+    <view class='l-text-center l-padding-btn'>
+      <text class='l-icon-62b l-margin-r' style='font-size: 52rpx; vertical-align: -6rpx;'></text>
+      <text class='l-h4'>{{info.carsName}}</text>
+    </view>
+    <image style='width: 100%;display:block;' mode='widthFix' src='{{info.indexImage}}'></image>
+  </view>
+
+  <view class='l-bg-white l-margin-tb l-padding'>
+    <view class='l-h4'>出险电话</view>
+    <view class='l-text-gray'>发生交通事故，请第一时间直接联系客服电话</view>
+    <view class='l-margin-t l-text-center l-text-theme' data-val='{{info.telPhone}}' bindtap='callPhone'>
+      <text class='l-icon-640 l-margin-r'></text>
+      <text class='l-fs-14'>{{info.telPhone}}</text>
+    </view>
+  </view>
+
+  <view class='l-bg-white l-margin-tb'>
+    <view class=' l-flex-h l-padding'>
+      <view class='l-margin-r'>
+        <image style='width: 100rpx; height: 100rpx;' mode='aspectFill' src='{{info.orgImage}}'></image>
+      </view>
+      <view class='l-rest'>
+        <view class='l-h4 l-margin-b-s'>{{info.shortName}}</view>
+        <view class='l-text-gray l-fs-m'>{{info.address}}</view>
+      </view>
+    </view>
+    <view class='l-border-t l-flex-hc l-text-center'>
+      <view class='l-rest l-padding-btn' data-lat='{{info.latitude}}' data-lng='{{info.longitude}}' bindtap='openMap'>
+        <text class='l-icon-603 l-fs-m'></text>
+        <text class='l-margin-l'>导航</text>
+      </view>
+      <view class='l-rest l-padding-btn l-border-l' data-val='{{info.telPhone}}' bindtap='callPhone'>
+        <text class='l-icon-640 l-fs-m'></text>
+        <text class='l-margin-l'>电话</text>
+      </view>
+    </view>
+  </view>
+</view>

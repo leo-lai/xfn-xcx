@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/car-list/index",
+    "pages/order-info/index",
+    "pages/msg/index",
     "pages/car-bespeak/index",
     "pages/car-slt/index",
     "pages/car-info/index"

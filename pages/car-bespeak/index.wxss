@@ -1,19 +1,7 @@
 /* pages/car-bespeak/index.wxss */
-.l-ask-price {
-  background: #ff9247;
-  color: #fff;
-  text-align: center;
-  border-radius: 60rpx;
-  padding: 20rpx;
-  font-size: 34rpx;
-  width: 80%;
-  margin:auto;
-  box-shadow: 0 10rpx 20rpx rgba(255, 146, 71, 0.5);
-}
-
-.l-slted-car{padding: 30rpx; border: 2rpx solid #ff9247; position: relative; margin-top: 10rpx; border-radius: 4rpx; overflow: hidden;}
-.l-slted-car .l-icon-654{position: absolute; right: 0; bottom: 0; color: #ff9247; line-height: 1;}
-.l-slted-car image{background: #eee; width: 90rpx; height: 90rpx; margin-right: 30rpx;}
+.l-slted-store{padding: 30rpx; border: 2rpx solid #ff9247; position: relative; margin-top: 10rpx; border-radius: 4rpx; overflow: hidden;}
+.l-slted-store .l-icon-654{position: absolute; right: 0; bottom: 0; color: #ff9247; line-height: 1;}
+.l-slted-store image{background: #eee; width: 90rpx; height: 90rpx; margin-right: 30rpx;}
 .l-ask-form{margin: 20rpx 0;}
 .l-ask-form ._input{padding: 20rpx 0; border-bottom: 2rpx solid #eee;}
 .l-ask-form ._input:last-child{border-bottom-color: transparent;}

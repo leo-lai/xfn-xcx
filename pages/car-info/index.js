@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    images: '',
     sltedCar: {},
     sltedColor: {},
     info: {},
@@ -99,8 +100,13 @@ Page({
     return app.post(app.config.carInfo, { carId }).then(({ data }) => {
       data.priceStr = (data.price / 10000).toFixed(2)
       data.minPriceStr = (data.minPrice / 10000).toFixed(2)
+      data.list = data.list.map(item => {
+        item.images = item.imagePath ? item.imagePath.split(',') : []
+        return item
+      })
       this.setData({
         'info': data,
+        'images': data.indexImage,
         'sltedColor': data.list[0]
       })
     }).finally(_ => {
@@ -111,6 +117,7 @@ Page({
   sltColor: function (event) {
     let item = event.currentTarget.dataset.item
     this.setData({
+      'images': item.images[0] || this.data.info.indexImage,
       'sltedColor': item
     })
   },
@@ -275,6 +282,14 @@ Page({
   },
   // 预约
   askPrice() {
+    if (!this.data.info.carsId) return
+    if (!this.data.sltedColor.carColourId) {
+      wx.showModal({
+        title: '请选择车辆颜色',
+        showCancel: false
+      })
+      return
+    }
     app.navigateTo(`../car-bespeak/index?car=${this.data.info.carsId}&color=${this.data.sltedColor.carColourId}`)
   }
 })

@@ -1,9 +1,10 @@
 <!--pages/car-info/index.wxml-->
 <import src="../../components/wxParse/wxParse.wxml" />
+<component-toptips></component-toptips>
 <view class='l-page-full'>
   <!-- 车辆摘要信息 -->
   <view class='l-text-center l-bg-white l-zoom'>
-    <image style='width: 100%;' mode='widthFix' src='{{info.indexImage}}'></image>
+    <image style='width: 100%;' mode='widthFix' src='{{images}}'></image>
     <view class='l-h3 l-margin-tb'>{{info.carsName}}</view>
     <view>
       <text class='l-text-gray'>官方指导价：{{info.priceStr}}万</text>
@@ -41,7 +42,9 @@
     <view style='height: 60rpx;'></view>
   </view>
   
-  <view class='l-ask-price' style='margin-top: -50rpx; margin-bottom: 40rpx;' bindtap='askPrice'>寻低价</view>
+  <view style='margin: -50rpx 30rpx 40rpx;'>
+    <button class='l-button-main' bindtap='askPrice'>询底价</button>
+  </view>
   <view class='l-margin l-text-center' wx:if='{{!tabs.visible}}'>
     <icon class='l-download-up' type='download' color='#999' size='18'></icon>
     <text class='l-text-gray l-margin-l-s'>上拉加载车辆详情</text>
@@ -211,8 +214,8 @@
           </view>
         </view>
       </view>
-      <view class='l-padding-tb'>
-        <view class='l-ask-price' bindtap='askPrice'>寻低价</view>
+      <view class='l-padding'>
+        <button class='l-button-main' bindtap='askPrice'>询底价</button>
       </view>
     </view>
   </view>

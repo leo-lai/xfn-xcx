@@ -61,18 +61,6 @@
   background-image: radial-gradient(ellipse farthest-side, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0) 100%);
 }
 
-.l-ask-price {
-  background: #ff9247;
-  color: #fff;
-  text-align: center;
-  border-radius: 60rpx;
-  padding: 20rpx;
-  font-size: 34rpx;
-  width: 80%;
-  margin:auto;
-  box-shadow: 0 10rpx 20rpx rgba(255, 146, 71, 0.5);
-}
-
 .weui-navbar {
   background: #fff;
 }

@@ -2,7 +2,7 @@
 <import src='../../template/loadmore.wxml' />
 <view class='l-page-full'>
   <view class='l-list-filter l-flex-hc'>
-    <text class='l-icon-639 l-text-theme'></text>
+    <navigator hover-class='none' url='../order-info/index'><text class='l-icon-639 l-text-theme'></text></navigator>
     <view class='l-rest'>
       <view class='_item {{filter.type === 1 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{1}}'>
         <text>品牌</text>

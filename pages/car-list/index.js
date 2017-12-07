@@ -15,7 +15,7 @@ Page({
     },
     filter: {
       loading: false,
-      hidden: false,
+      hidden: true,
       type: '',
       brandId: '',
       priceId: '',
@@ -103,8 +103,12 @@ Page({
     app.onLogin(userInfo => {
       this.setData({ userInfo })
 
-      this.getList()
-      this.getBrandList()
+      this.getList(1, _ => {
+        this.getBrandList()
+        setTimeout(_ => {
+          this.getOrderInfo()
+        }, 600)
+      })
 
       // 获取搜索历史记录
       app.storage.getItem('search_history').then((value) => {
@@ -217,6 +221,13 @@ Page({
         'list.loading': false
       })
       callback(this.data.list.data)
+    })
+  },
+  getOrderInfo: function() {
+    app.post(app.config.orderInfo).then(({data}) => {
+      if(data) {
+        app.navigateTo('../order-info/index')
+      }
     })
   },
   getBrandList: function () {

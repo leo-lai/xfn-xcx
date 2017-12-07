@@ -5,7 +5,7 @@
 .l-list-filter ._cont{ position: absolute; top: 100%; left: 0;right: 0; background: #fff; overflow: hidden; height: 0;}
 .l-list-filter ._cont::after{
   content: ''; position: absolute; background: rgba(0, 0, 0, 0);
-  left:0; right: 0; height: 1000%; transition: 0.2s linear;
+  left:0; right: 0; height: 2000px; transition: 0.2s linear;
 }
 .l-list-filter ._cont._active{height: auto; overflow: visible;}
 .l-list-filter ._cont._active::after{
