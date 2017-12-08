@@ -56,7 +56,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          'tabs.height': res.windowHeight - 50,
+          'tabs.height': res.windowHeight - 102,
           'counter.height': res.windowHeight - 240,
           'tabs.left': (res.windowWidth / that.data.tabs.data.length - tabWidth) / 2,
           'tabs.offset': res.windowWidth / that.data.tabs.data.length * that.data.tabs.index
@@ -363,5 +363,11 @@ Page({
         'imagePlayer.data': images
       })
     }
+  },
+  imagePreview() {
+    wx.previewImage({
+      current: this.data.imagePlayer.data.filter(item => !item.hidden)[0].src,
+      urls: this.data.imagePlayer.data.map(item => item.src)
+    })
   }
 })

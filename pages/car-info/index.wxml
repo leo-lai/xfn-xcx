@@ -7,6 +7,8 @@
       <block wx:for='{{imagePlayer.data}}' wx:key='{{index}}'>
         <image mode='aspectFit' src='{{item.src}}' hidden='{{item.hidden}}'></image>
       </block>
+      <text class='l-icon-623 _360' hidden='{{imagePlayer.data.length <= 1}}'></text>
+      <text class='l-icon-613 _large' bindtap='imagePreview'></text>
     </view>
     <view class='l-h3 l-margin-tb'>{{info.carsName}}</view>
     <view>
@@ -57,7 +59,7 @@
 
   <!-- 车辆详细信息 -->
   <view class='l-car-info l-bg-white' hidden='{{!tabs.visible}}'>
-    <view class='weui-tab' style='padding-bottom: 102rpx;'>
+    <view class='weui-tab' style='padding-bottom: 102rpx; box-sizing: border-box;'>
       <view id='info-tabs' class='weui-navbar l-sticky'>
         <block wx:for='{{tabs.data}}' wx:key='index'>
           <view data-val='{{index}}' class='weui-navbar__item {{tabs.index == index ? "weui-bar__item_on" : ""}}' bindtap='tabClick'>
@@ -94,6 +96,10 @@
                 </view>
               </view>
             </block>
+          </view>
+          <view class='weui-loadmore' wx:if='{{ parameter.loading }}'>
+            <view class='weui-loading'></view>
+            <view class='weui-loadmore__tips'>正在加载</view>
           </view>
         </view>
         <view class='weui-tab__content' hidden='{{tabs.index != 2}}'>

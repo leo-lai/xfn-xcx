@@ -182,7 +182,7 @@ const formatThumb = (src = '', height, width = 375, type = 'webp') => {
 
   // return src += '?imageMogr2/auto-orient/gravity/Center/crop/'+width+'x'+height;
   // src += `?imageMogr2/auto-orient/format/webp/interlace/1/quality/60/gravity/Center/thumbnail/${width}x`
-  src += `?imageMogr2/auto-orient/format/${type}/interlace/1/thumbnail/${width}x`
+  src += `?imageMogr2/auto-orient/interlace/1/thumbnail/${width}x`
   if (height) {
     src += `/gravity/Center/crop/x${height}`
   }
