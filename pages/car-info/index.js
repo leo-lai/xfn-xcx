@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    images: '',
+    imagePlayer: {
+      data: []
+    },
     sltedCar: {},
     sltedColor: {},
     info: {},
@@ -126,12 +128,19 @@ Page({
       data.priceStr = (data.price / 10000).toFixed(2)
       data.minPriceStr = (data.minPrice / 10000).toFixed(2)
       data.list = data.list.map(item => {
-        item.images = item.imagePath ? item.imagePath.split(',') : []
+        item.images = item.imagePath ? item.imagePath.split(',')
+          .filter(image => image)
+          .map((image, index) => {
+            return  {
+              hidden: index > 0 ? true : false,
+              src: image
+            }
+          }) : []
         return item
       })
       this.setData({
         'info': data,
-        'images': data.indexImage,
+        'imagePlayer.data': data.list[0] ? data.list[0].images : [data.indexImage],
         'sltedColor': data.list[0],
         'tabs.visible': false
       })
@@ -143,7 +152,7 @@ Page({
   sltColor: function (event) {
     let item = event.currentTarget.dataset.item
     this.setData({
-      'images': item.images[0] || this.data.info.indexImage,
+      'imagePlayer.data': item.images || [this.data.info.indexImage],
       'sltedColor': item
     })
   },
@@ -312,7 +321,7 @@ Page({
     })
   },
   // 预约
-  askPrice() {
+  askPrice: function () {
     if (!this.data.info.carsId) return
     if (!this.data.sltedColor.carColourId) {
       wx.showModal({
@@ -322,5 +331,37 @@ Page({
       return
     }
     app.navigateTo(`../car-bespeak/index?car=${this.data.info.carsId}&color=${this.data.sltedColor.carColourId}`)
+  },
+  // 360旋转
+  imagesTouchStart: function (event) {
+    this.data.imagePlayer.startX = event.changedTouches[0].clientX
+  },
+  imagesTouchMove: function (event) {
+    let endX = event.changedTouches[0].clientX
+    let diffX = endX - this.data.imagePlayer.startX
+    let images = this.data.imagePlayer.data
+
+    if (images.length > 1 && Math.abs(diffX) > 10) {
+      this.data.imagePlayer.startX = endX
+      images = images.map((image, index) => {
+        if(!image.hidden) {
+          image.hidden = true
+          this.data.imagePlayer.index = index
+        }
+        return image
+      })
+
+      let activeIndex = this.data.imagePlayer.index
+      if (diffX < -10) {
+        ++activeIndex
+      } else if (diffX > 10) {
+        activeIndex = --activeIndex >= 0 ? activeIndex : images.length + activeIndex 
+      }
+
+      images[activeIndex % images.length].hidden = false
+      this.setData({
+        'imagePlayer.data': images
+      })
+    }
   }
 })
