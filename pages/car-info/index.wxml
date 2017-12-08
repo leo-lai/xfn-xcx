@@ -1,10 +1,9 @@
 <!--pages/car-info/index.wxml-->
 <import src="../../components/wxParse/wxParse.wxml" />
-<component-toptips></component-toptips>
-<view class='l-page-full'>
+<view class='l-page-full {{counter.visible ? "l-no-scroll" : ""}}'>
   <!-- 车辆摘要信息 -->
   <view class='l-text-center l-bg-white l-zoom'>
-    <image style='width: 100%;' mode='widthFix' src='{{images}}'></image>
+    <image style='width: 100%; height: 400rpx; ' mode='aspectFill' src='{{images}}'></image>
     <view class='l-h3 l-margin-tb'>{{info.carsName}}</view>
     <view>
       <text class='l-text-gray'>官方指导价：{{info.priceStr}}万</text>
@@ -41,19 +40,21 @@
     </view>
     <view style='height: 60rpx;'></view>
   </view>
-  
-  <view style='margin: -50rpx 30rpx 40rpx;'>
-    <button class='l-button-main' bindtap='askPrice'>询底价</button>
+  <view style='margin-top: -66rpx; height: 132rpx;'>
+    <view class='l-askprice-btn {{tabs.isTop ? "_fixed" : ""}}'>
+      <button class='l-button-main' bindtap='askPrice'>询底价</button>
+    </view>
   </view>
+  
   <view class='l-margin l-text-center' wx:if='{{!tabs.visible}}'>
     <icon class='l-download-up' type='download' color='#999' size='18'></icon>
     <text class='l-text-gray l-margin-l-s'>上拉加载车辆详情</text>
   </view>
 
   <!-- 车辆详细信息 -->
-  <view class='l-car-info l-bg-white l-scroll' style='height: {{tabs.height}}px' hidden='{{!tabs.visible}}'>
-    <view class='weui-tab'>
-      <view class='weui-navbar l-sticky'>
+  <view class='l-car-info l-bg-white' hidden='{{!tabs.visible}}'>
+    <view class='weui-tab' style='padding-bottom: 102rpx;'>
+      <view id='info-tabs' class='weui-navbar l-sticky'>
         <block wx:for='{{tabs.data}}' wx:key='index'>
           <view data-val='{{index}}' class='weui-navbar__item {{tabs.index == index ? "weui-bar__item_on" : ""}}' bindtap='tabClick'>
             <view class='weui-navbar__title'>{{item}}</view>
@@ -61,7 +62,7 @@
         </block>
         <view class='weui-navbar__slider' style='left: {{tabs.left}}px; transform: translateX({{tabs.offset}}px); -webkit-transform: translateX({{tabs.offset}}px);'></view>
       </view>
-      <view class='weui-tab__panel'>
+      <view class='weui-tab__panel' style='min-height: {{tabs.height}}px'>
         <view class='weui-tab__content l-padding' hidden='{{tabs.index != 0}}'>
           <template is='wxParse' data='{{wxParseData:introduce.data.nodes}}' />
           <view class='weui-loadmore' wx:if='{{ introduce.loading }}'>

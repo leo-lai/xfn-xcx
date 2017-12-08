@@ -7,8 +7,8 @@ Page({
    */
   data: {
     topTips: '',
-    buyIndex: 0,
-    buyTime: ['', '随车', '3天内', '7天内'],
+    buyIndex: -1,
+    buyTime: ['今天', '3天内', '7天内'],
     store: {
       visible: false,
       height: 602 - 200,
@@ -50,21 +50,45 @@ Page({
       this.data.store.data.carId = options.car
       this.data.store.data.colourId = options.color
 
-      wx.getLocation({
-        type: 'gcj02',
-        success: function (res) {
-          that.data.store.data.longitude = res.longitude
-          that.data.store.data.latitude = res.latitude
-          that.getInfo()
-        },
-        fail: function (res) {
-          wx.showModal({
-            title: '地理位置获取失败',
-            content: res.errMsg,
-            showCancel: false
-          })
-        }
+      this.getLocation(_ => {
+        this.getInfo()
       })
+    })
+  },
+  getLocation(callback = app.noop) {
+    wx.getLocation({
+      type: 'gcj02',
+      success: res => {
+        this.data.store.data.longitude = res.longitude
+        this.data.store.data.latitude = res.latitude
+        callback()
+      },
+      fail: res => {
+        wx.showModal({
+          title: '授权失败',
+          content: '小程序需要获取您的地理位置',
+          confirmText: '开启定位',
+          success: res => {
+            if (res.confirm) {
+              wx.openSetting({
+                success: res => {
+                  if (res.authSetting['scope.userLocation']) {
+                    this.getLocation(callback)
+                  } else {
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  }
+                }
+              })
+            } else {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          }
+        })
+      }
     })
   },
   getInfo: function () {
@@ -165,7 +189,7 @@ Page({
   bindPicker: function (event) {
     this.setData({
       'buyIndex': event.detail.value,
-      'formData.carPurchaseIntention': event.detail.value
+      'formData.carPurchaseIntention': event.detail.value + 1
     })
   },
   askPrice: function() {

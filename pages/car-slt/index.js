@@ -59,7 +59,7 @@ Page({
       })  
     }
   },
-  sltedYear: function(event) { // 选择年份
+  sltYear: function(event) { // 选择年份
     this.setData({
       'sltedYear': event.currentTarget.dataset.val
     })

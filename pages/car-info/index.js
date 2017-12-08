@@ -12,12 +12,13 @@ Page({
     sltedColor: {},
     info: {},
     tabs: {
+      isTop: false,
       visible: false,
       data: ['基本信息', '参数配置', '常见问题'],
       offset: 0,
       left: 0,
       index: 0,
-      height: 602
+      height: 602 - 50
     },
     // 车辆介绍
     introduce: {
@@ -53,7 +54,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          'tabs.height': res.windowHeight,
+          'tabs.height': res.windowHeight - 50,
           'counter.height': res.windowHeight - 240,
           'tabs.left': (res.windowWidth / that.data.tabs.data.length - tabWidth) / 2,
           'tabs.offset': res.windowWidth / that.data.tabs.data.length * that.data.tabs.index
@@ -73,8 +74,9 @@ Page({
         this.getInfo(sltedCar.carsId)
         WxParse.wxParse('introduce.data', 'html', '', this)
         this.setData({
-          'parameter.data': null,
-          'tabs.visible': false
+          'tabs.visible': false,
+          'introduce.data': null,
+          'parameter.data': null
         })
       }
     })
@@ -91,8 +93,31 @@ Page({
       this.setData({
         'tabs.visible': true
       })
-      this.getIntroduce()
+      this.tabClick()
     }
+  },
+  onPageScroll: function(event) {
+    if(!this.infoTabs) {
+      var query = wx.createSelectorQuery()
+      query.select('#info-tabs').boundingClientRect()
+      this.infoTabs = query
+    }
+
+    clearTimeout(this.scrollTimeid)
+    this.scrollTimeid = setTimeout(_ => {
+      this.infoTabs.exec(res => {
+        let top = res[0].top
+        if (top <= 0 && this.data.tabs.visible){
+          this.setData({
+            'tabs.isTop': true
+          })
+        } else if (top >= this.data.tabs.height) {
+          this.setData({
+            'tabs.isTop': false
+          })
+        }
+      })
+    }, 50)
   },
   // 车辆详情
   getInfo: function (carId = '') {
@@ -107,7 +132,8 @@ Page({
       this.setData({
         'info': data,
         'images': data.indexImage,
-        'sltedColor': data.list[0]
+        'sltedColor': data.list[0],
+        'tabs.visible': false
       })
     }).finally(_ => {
       wx.hideLoading()
@@ -126,11 +152,16 @@ Page({
     app.navigateTo(`../car-slt/index?id=${this.data.info.familyId}`)
   },
   tabClick: function (event) {
-    let index = event.currentTarget.dataset.val
-    this.setData({
-      'tabs.offset': event.currentTarget.offsetLeft,
-      'tabs.index': index
-    })
+    let index
+    if(event) {
+      index = event.currentTarget.dataset.val
+      this.setData({
+        'tabs.offset': event.currentTarget.offsetLeft,
+        'tabs.index': index
+      })
+    }else {
+      index = this.data.tabs.index
+    }
     if (index === 0) {
       if (!this.data.introduce.data) {
         this.getIntroduce()
@@ -168,11 +199,11 @@ Page({
       .then(({ data }) => {
         let retList = []
         let tempObj = {}
-        data.forEach(item => {
+        data.forEach((item, index) => {
           if (!tempObj[item.typeName]) {
             tempObj[item.typeName] = {
               id: 'param-' + item.typeCode,
-              open: true,
+              open: index > 0 ? false : true,
               code: item.typeCode,
               name: item.typeName,
               list: [item]
@@ -212,7 +243,7 @@ Page({
       if (list[i].id == id) {
         list[i].open = !list[i].open
       } else {
-        // list[i].open = false
+        list[i].open = false
       }
     }
     this.setData({

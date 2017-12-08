@@ -156,9 +156,24 @@ App({
             },
             fail: err => {
               // 用户不授权弹出重新授权页面
-              // ...
               wx.hideLoading()
               reject(err)
+              wx.showModal({
+                title: '授权失败',
+                content: '小程序需要您的登录授权',
+                confirmText: '去授权',
+                success: res => {
+                  if(res.confirm) {
+                    wx.openSetting({
+                      success: (res) => {
+                        if (res.authSetting['scope.userInfo']) {
+                          this.login()
+                        }
+                      }
+                    })
+                  }
+                }
+              })
             }
           })
         },
@@ -172,35 +187,18 @@ App({
   // 刷新个人信息
   refreshUserInfo: function () {
     let promise = this.post(config.userInfo)
-
     wx.showNavigationBarLoading()
     promise.then(({ data }) => {
-      data.avatarThumb = utils.formatHead(data.avatarUrl)
-      this.globalData.userInfo = Object.assign({}, this.globalData.userInfo, data)
-      storage.setItem('userInfo', this.globalData.userInfo)
+      this.updateUserInfo(data)
     }).finally(() => {
       wx.hideNavigationBarLoading()
     })
-
     return promise
   },
-  // 请求小程序授权各种权限
-  getAuthFunc: function (funcName = 'getUserInfo') {
-    // wx.openSetting({
-    //   success: (res) => {
-    //     console.info(res.authSetting)
-    //   }
-    // })
-
-    // wx.getSetting({
-    //   success: (res) => {
-    //     console.info(res.authSetting)
-    //     // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-    //     if (res.authSetting['scope.userInfo']) {
-
-    //     }
-    //   }
-    // })
+  updateUserInfo: function (userInfo = {}) {
+    userInfo.avatarThumb = utils.formatHead(userInfo.avatarUrl)
+    Object.assign(this.globalData.userInfo, userInfo)
+    storage.setItem('userInfo', this.globalData.userInfo)
   },
   runLoginCbs: function (userInfo) {
     this.globalData.loginCbs.forEach(cb => {

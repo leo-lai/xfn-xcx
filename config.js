@@ -43,6 +43,10 @@ var config = {
   orderInfo: `${baseUrl}/order/orderInfo`,
   // 订单跟踪
   orderTrack: `${baseUrl}/order/orderTrack`,
+  // 手机验证码
+  phoneCode: `${baseUrl}/weixinapp/phoneVerifyCode`,
+  // 用户绑定
+  bindPhone: `${baseUrl}/weixinapp/phonebinding`,
 
   // 下面的地址配合云端 Server 工作
   baseUrl

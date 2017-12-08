@@ -1,10 +1,64 @@
 <!--pages/order-info/index.wxml-->
-<view class='l-page-full l-bg-white' wx:if='{{info.customerOrderState !== 13}}'>
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<!-- 绑定手机号 -->
+<view class='l-page-full l-bg-white' wx:if='{{nowPage === 1}}'>
+  <view class='l-text-center l-padding'>
+    <view class='l-br'></view>
+    <view class='l-br'></view>
+    <image style='width: 400rpx;' mode='widthFix' src='{{phone.image}}'></image>
+    <view class='l-br'></view>
+    <view class='l-br'></view>
+    <view class='l-h3'>绑定手机号码实时跟踪购车状态</view>
+    <view class='l-br'></view>
+    <view class='l-br'></view>
+    <view class='l-btn-w60'>
+      <button class='l-button-main' bindtap='showBindPhone'>绑定手机</button>
+    </view>
+  </view>
+
+  <view class='l-popup-center l-flex-vhc' wx:if='{{phone.visible}}'>
+    <view class='l-padding-tb l-h4 l-text-center' style='color:rgba(255,255,255, 0.9);'>绑定手机号码</view>
+    <view class='_inner l-padding'>
+      
+      <view class='l-padding l-border-b'>
+        <input placeholder='输入常用手机号码' maxlength='{{11}}' auto-focus id='phoneNumber' bindinput='bindInput'></input>
+      </view>
+      <view class='l-border-b l-padding l-flex-hc'>
+        <view class='l-rest'>
+          <input style='width: 100%;' placeholder='输入验证码' maxlength='{{6}}' id='phoneCode' bindinput='bindInput'></input>
+        </view>
+        <view class='l-text-link {{phone.disabled ? "_disabled": ""}}' style='width: 120rpx; text-align:right;' bindtap='getPhoneCode'>{{phone.disabled ? phone.times + 's' : '点击获取'}}</view>
+      </view>
+      <view class='l-padding l-margin-t'>
+        <button class='l-button-main' bindtap='bindPhone'>立即绑定</button>
+      </view>
+    </view>
+    <text class='l-icon-61a _close' bindtap='closeBindPhone'></text>
+  </view>
+</view>
+<!-- 没有预约/订单信息 -->
+<view class='l-page-full l-bg-white' wx:if='{{nowPage === 2}}'>
+  <view class='l-text-center l-padding'>
+    <view class='l-br'></view>
+    <view class='l-br'></view>
+    <image style='width: 400rpx;' mode='widthFix' src='{{nonInfo.image}}'></image>
+    <view class='l-br'></view>
+    <view class='l-br'></view>
+    <view class='l-h3'>您还没有购车订单</view>
+    <view class='l-br'></view>
+    <navigator url='../car-list/index' hover-class='none' class='l-btn-w60'>
+      <button class='l-button-main'>马上去淘车~</button>
+    </navigator>
+  </view>
+</view>
+
+<!-- 预约/订单跟踪信息 -->
+<view class='l-page-full l-bg-white' wx:if='{{nowPage === 3}}'>
   <view class='l-text-center l-padding-btn'>
     <text class='l-icon-62b l-margin-r' style='font-size: 52rpx; vertical-align: -6rpx;'></text>
     <text class='l-h4'>{{info.carsName}}</text>
   </view>
-  <image style='width: 100%; display:block;' mode='widthFix' src='{{info.indexImage}}'></image>
+  <image style='width: 100%; height: 400rpx; display:block;' mode='aspectFill' src='{{info.indexImage}}'></image>
   <view class='l-progress-tit'>
     <text>当前进度</text>
   </view>
@@ -68,7 +122,8 @@
   </view>
 </view>
 
-<view class='l-page-full' wx:if='{{info.customerOrderState === 13}}'>
+<!-- 订单完成 -->
+<view class='l-page-full' wx:if='{{nowPage === 4}}'>
   <view class='l-bg-white'>
     <view class='l-text-center l-padding-btn'>
       <text class='l-icon-62b l-margin-r' style='font-size: 52rpx; vertical-align: -6rpx;'></text>

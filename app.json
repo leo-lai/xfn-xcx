@@ -8,6 +8,7 @@
     "pages/car-info/index"
   ],
   "window": {
+    "backgroundColor": "#eee",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "喜蜂鸟网络科技服务有限公司",

@@ -1,5 +1,5 @@
 {
   "navigationBarTitleText": "车辆详情",
-  "enablePullDownRefresh": true,
-  "onReachBottomDistance": 0
+  "enablePullDownRefresh": false,
+  "onReachBottomDistance": 1
 }

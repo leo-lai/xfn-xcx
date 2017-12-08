@@ -1,8 +1,6 @@
 <!--pages/car-bespeak/index.wxml-->
-<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>
-  {{topTips}}
-</view>
-<view class='l-page-full'>
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full {{store.visible ? "l-no-scroll" : ""}}'>
   <view class='l-bg-white l-padding'>
     <view class='l-flex-hc'>
       <view class='l-rest l-h3'>选择门店</view>
@@ -33,11 +31,11 @@
         <input placeholder='输入姓名' confirm-type='next' id='customerUsersName' value='{{formData.customerUsersName}}' bindinput='bindInput'></input>
       </view>
       <view class='_input'>
-        <input placeholder='输入手机号码' type='number' confirm-type='next' maxlength='{{11}}' id='phoneNumber' value='{{formData.phoneNumber}}' bindinput='bindInput'></input>
+        <input placeholder='输入常用手机号码' type='number' confirm-type='next' maxlength='{{11}}' id='phoneNumber' value='{{formData.phoneNumber}}' bindinput='bindInput'></input>
       </view>
       <view class='_input'>
         <picker mode='selector' value="{{buyIndex}}" range='{{buyTime}}' bindchange='bindPicker'>
-          <input disabled placeholder='请选择购车时间' value='{{buyTime[buyIndex]}}'></input>
+          <input disabled placeholder='请选择购车时间' value='{{buyTime[buyIndex] || ""}}'></input>
         </picker>
       </view>
     </view>

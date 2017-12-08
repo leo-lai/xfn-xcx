@@ -171,8 +171,7 @@ const formatHead = (src, size = 132) => {
 }
 
 // 七牛缩略图
-const formatThumb = (src = '', width, height) => {
-  width = width || 320
+const formatThumb = (src = '', height, width = 375, type = 'webp') => {
   if (!src) {
     // return `https://placeholdit.imgix.net/~text?txtsize=20&bg=ffffff&txtclr=999&txt=image&w=${width}&h=${width}` 
     return ''
@@ -181,10 +180,11 @@ const formatThumb = (src = '', width, height) => {
     return src
   }
 
-  // return src += '?imageMogr2/gravity/Center/crop/'+width+'x'+height;
-  src += `?imageMogr2/format/jpg/interlace/1/quality/60/gravity/Center/thumbnail/${width}x`
+  // return src += '?imageMogr2/auto-orient/gravity/Center/crop/'+width+'x'+height;
+  // src += `?imageMogr2/auto-orient/format/webp/interlace/1/quality/60/gravity/Center/thumbnail/${width}x`
+  src += `?imageMogr2/auto-orient/format/${type}/interlace/1/thumbnail/${width}x`
   if (height) {
-    src += `/crop/x${height}`
+    src += `/gravity/Center/crop/x${height}`
   }
   return src
 }

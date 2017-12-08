@@ -15,7 +15,7 @@ Page({
     },
     filter: {
       loading: false,
-      hidden: true,
+      visible: false,
       type: '',
       brandId: '',
       priceId: '',
@@ -139,7 +139,7 @@ Page({
       this.hideFilter()
     }else{
       this.setData({
-        'filter.hidden': false,
+        'filter.visible': true,
         'filter.type': filterType
       })
     }
@@ -183,7 +183,7 @@ Page({
   },
   hideFilter: function (event) {
     this.setData({
-      'filter.hidden': true,
+      'filter.visible': false,
       'filter.type': ''
     })
   },
@@ -208,6 +208,7 @@ Page({
     }).then(({ data }) => {
       data.list = data.list.map(item => {
         item.priceStr = (item.price / 10000).toFixed(2)
+        item.thumb = app.utils.formatThumb(item.image, 200)
         return item
       })
 
@@ -266,10 +267,19 @@ Page({
     })
     this.search()
   },
-  cancelSearch() {
+  // 关闭搜索
+  closeSearch: function() { 
     this.setData({
+      'filter.visible': false,
       'filter.type': ''
     })
+  },
+  // 取消搜索
+  cancelSearch: function() {
+    if(!this.data.filter.carsName && this.data.list.data.length === 0){
+      this.getList(1)
+    }
+    this.closeSearch()
   },
   // 搜索
   search: function () {
@@ -281,7 +291,7 @@ Page({
       })
       app.storage.setItem('search_history', historyData)
     }
-    this.cancelSearch()
+    this.closeSearch()
     this.getList()
   }
 })

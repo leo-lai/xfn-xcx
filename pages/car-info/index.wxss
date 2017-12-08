@@ -1,10 +1,9 @@
 /* pages/car-info/index.wxss */
 @import '../../components/wxParse/wxParse.wxss';
+.l-askprice-btn{padding: 20rpx 30rpx; }
+.l-askprice-btn._fixed{position: fixed; z-index: 1000; bottom:0; left:0; width:100%; margin:0; padding: 20rpx 30rpx;  box-sizing: border-box;}
 
-.l-color-list {
-  margin: 30rpx 60rpx;
-}
-
+.l-color-list { margin: 30rpx 60rpx;}
 .l-color-list::-webkit-scrollbar {
   display: none;
 }

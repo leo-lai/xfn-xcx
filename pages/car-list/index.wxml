@@ -1,6 +1,6 @@
 <!--index/index.wxml-->
 <import src='../../template/loadmore.wxml' />
-<view class='l-page-full'>
+<view class='l-page-full {{filter.visible ? "l-no-scroll": ""}}'>
   <view class='l-list-filter l-flex-hc'>
     <navigator hover-class='none' url='../order-info/index'><text class='l-icon-639 l-text-theme'></text></navigator>
     <view class='l-rest'>
@@ -18,7 +18,7 @@
       </view>
     </view>
     <icon type='search' color='#555' size='18' bindtap='sltFilter' data-val='{{4}}'></icon>
-    <view class='_cont {{!filter.hidden ? "_active" : ""}}' bindtap="hideFilter">
+    <view class='_cont {{filter.visible ? "_active" : ""}}' bindtap="hideFilter">
       <!-- 品牌 -->
       <view class='weui-grids l-brand-list' hidden='{{filter.type !== 1}}'>
         <block wx:for='{{brandList}}' wx:key='id'>
@@ -75,7 +75,7 @@
   </view>
   <view class='l-list-car'>
     <navigator url='../car-info/index?id={{item.carId}}' class='_item' wx:for='{{list.data}}' wx:key='carId'>
-      <image mode='widthFix' src='{{item.image}}'></image>
+      <image style='width: 100%; height: 400rpx;' mode='aspectFill' src='{{item.thumb}}'></image>
       <view class='l-padding'>
         <view class='_tit'>{{item.carsName}}</view>
         <view class='_price1'>官方指导价: {{item.priceStr}}万</view>
