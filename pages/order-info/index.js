@@ -142,7 +142,7 @@ Page({
         return
       }
 
-      let times = 10
+      let times = 60
       this.setData({
         'phone.times': times,
         'phone.disabled': true

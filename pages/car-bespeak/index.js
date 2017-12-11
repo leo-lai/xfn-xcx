@@ -8,7 +8,7 @@ Page({
   data: {
     topTips: '',
     buyIndex: -1,
-    buyTime: ['今天', '3天内', '7天内'],
+    buyTime: ['3天内', '7天内'],
     store: {
       visible: false,
       height: 602 - 200,
@@ -40,7 +40,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          'store.height': res.windowHeight
+          'store.height': res.windowHeight - 150
         })
       }
     })

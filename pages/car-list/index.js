@@ -17,9 +17,9 @@ Page({
       loading: false,
       visible: false,
       type: '',
-      brandId: '',
-      priceId: '',
-      typeId: '',
+      sltedBrand: {},
+      sltedPrice: {},
+      sltedType: {},
       data: {
         brandId: '',
         minPrice: '',
@@ -30,11 +30,6 @@ Page({
     },
     brandList: [],
     priceList: [
-      {
-        id: 0,
-        name: '全部',
-        value: []
-      },
       {
         id: 1,
         name: '5-10万',
@@ -149,35 +144,36 @@ Page({
     let data = {}
     switch (this.data.filter.type) {
       case 1:
-        if(this.data.filter.brandId !== item.id) {
-          data['filter.brandId'] = item.id
+        if (this.data.filter.sltedBrand.id !== item.id) {
+          data['filter.sltedBrand'] = item
           data['filter.data.brandId'] = item.id
         }else {
-          data['filter.brandId'] = ''
+          data['filter.sltedBrand'] = {}
           data['filter.data.brandId'] = ''
         }
         break
       case 2:
-        if (this.data.filter.priceId !== item.id) {
-          data['filter.priceId'] = item.id
+        if (this.data.filter.sltedPrice.id !== item.id) {
+          data['filter.sltedPrice'] = item
           data['filter.data.minPrice'] = item.value[0] || ''
           data['filter.data.maxPrice'] = item.value[1] || ''
         }else{
-          data['filter.priceId'] = ''
+          data['filter.sltedPrice'] = {}
           data['filter.data.minPrice'] = ''
           data['filter.data.maxPrice'] = ''
         }
         break
       case 3:
-        if (this.data.filter.typeId !== item.id) {
-          data['filter.typeId'] = item.id
+        if (this.data.filter.sltedType.id !== item.id) {
+          data['filter.sltedType'] = item
           data['filter.data.vehicleName'] = item.name
         }else{
-          data['filter.typeId'] = ''
+          data['filter.sltedType'] = {}
           data['filter.data.vehicleName'] = ''
         }
         break
     }
+    data['filter.data.carsName'] = ''
     this.setData(data)
     this.getList()
   },

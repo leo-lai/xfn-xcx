@@ -237,7 +237,7 @@ image{max-width: 100%;}
 .l-scroll-x::-webkit-scrollbar{display: none;}
 .l-zoom{overflow: hidden;}
 .l-bg-white{background-color: #fff;}
-.l-sticky{position: -webkit-sticky; position: sticky; top: 0; z-index: 20;}
+.l-sticky{ position: relative; position: -webkit-sticky; position: sticky; top: 0; z-index: 20;}
 .l-fl{float: left;}
 .l-fr{float: right;}
 .l-rel{position: relative;}

@@ -59,8 +59,8 @@
 
   <!-- 车辆详细信息 -->
   <view class='l-car-info l-bg-white' hidden='{{!tabs.visible}}'>
-    <view class='weui-tab' style='padding-bottom: 102rpx; box-sizing: border-box;'>
-      <view id='info-tabs' class='weui-navbar l-sticky'>
+    <view id='info-tabs' class='weui-tab' style='padding-bottom: 102rpx; box-sizing: border-box;'>
+      <view class='weui-navbar l-sticky'>
         <block wx:for='{{tabs.data}}' wx:key='index'>
           <view data-val='{{index}}' class='weui-navbar__item {{tabs.index == index ? "weui-bar__item_on" : ""}}' bindtap='tabClick'>
             <view class='weui-navbar__title'>{{item}}</view>

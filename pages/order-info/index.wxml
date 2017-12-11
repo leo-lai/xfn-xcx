@@ -21,11 +21,11 @@
     <view class='_inner l-padding'>
       
       <view class='l-padding l-border-b'>
-        <input placeholder='输入常用手机号码' maxlength='{{11}}' auto-focus id='phoneNumber' bindinput='bindInput'></input>
+        <input placeholder='输入常用手机号码' type='number' maxlength='{{11}}' auto-focus id='phoneNumber' bindinput='bindInput'></input>
       </view>
       <view class='l-border-b l-padding l-flex-hc'>
         <view class='l-rest'>
-          <input style='width: 100%;' placeholder='输入验证码' maxlength='{{6}}' id='phoneCode' bindinput='bindInput'></input>
+          <input style='width: 100%;'  type='number' placeholder='输入验证码' maxlength='{{6}}' id='phoneCode' bindinput='bindInput'></input>
         </view>
         <view class='l-text-link {{phone.disabled ? "_disabled": ""}}' style='width: 120rpx; text-align:right;' bindtap='getPhoneCode'>{{phone.disabled ? phone.times + 's' : '点击获取'}}</view>
       </view>
@@ -46,7 +46,7 @@
     <view class='l-br'></view>
     <view class='l-h3'>您还没有购车订单</view>
     <view class='l-br'></view>
-    <navigator url='../car-list/index' hover-class='none' class='l-btn-w60'>
+    <navigator open-type='navigateBack' url='../car-list/index' hover-class='none' class='l-btn-w60'>
       <button class='l-button-main'>马上去淘车~</button>
     </navigator>
   </view>

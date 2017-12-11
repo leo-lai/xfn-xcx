@@ -28,7 +28,7 @@
     <view class='l-rest l-h3'>填写资料</view>
     <view class='l-ask-form'>
       <view class='_input'>
-        <input placeholder='输入姓名' confirm-type='next' id='customerUsersName' value='{{formData.customerUsersName}}' bindinput='bindInput'></input>
+        <input placeholder='输入姓名' confirm-type='next' id='customerUsersName' value='{{formData.customerUsersName}}' bindinput='bindInput' maxlength='{{50}}'></input>
       </view>
       <view class='_input'>
         <input placeholder='输入常用手机号码' type='number' confirm-type='next' maxlength='{{11}}' id='phoneNumber' value='{{formData.phoneNumber}}' bindinput='bindInput'></input>
