@@ -1,0 +1,2 @@
+/* pages/customer-list/index.wxss */
+.l-page-full{padding-top: 96rpx;}

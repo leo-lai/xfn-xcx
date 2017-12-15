@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.6.6",
 	"appid": "wx032cb58d1eb2fe3e",
-	"projectname": "xfn-xcx",
+	"projectname": "xfn-xcx-customer",
 	"condition": {
 		"search": {
 			"current": -1,

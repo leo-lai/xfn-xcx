@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/customer/index",
+    "pages/home/index",
+    "pages/mine/index",
+    "pages/mine-pwd/index",
+    "pages/msg/index",
+    "pages/login/index",
+    "pages/car-stock/index",
+    "pages/car-stock-info/index",
+    "pages/customer-add/index",
+    "pages/customer-info/index",
+    "pages/customer-list/index"
+  ],
+  "window": {
+    "backgroundColor": "#eee",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "喜蜂鸟网络科技服务有限公司",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#fa5539",
+    "list": [
+      {
+        "iconPath": "images/home-unselected.png",
+        "selectedIconPath": "images/home-selected.png",
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "images/mine-unselected.png",
+        "selectedIconPath": "images/mine-selected.png",
+        "pagePath": "pages/mine/index",
+        "text": "我的"
+      }
+    ]
+  }
+}

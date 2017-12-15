@@ -1,0 +1,53 @@
+<!--pages/car-stock/index.wxml-->
+<import src='../../template/loadmore.wxml' />
+<view class='l-page-full {{filter.visible ? "l-no-scroll": ""}}'>
+  <view class='l-list-filter l-flex-hc'>
+    <view class='_type {{filter.type === "brand" ? "_active" : ""}}' bindtap='showFilter' data-val='brand'>
+      <text>{{filter.sltedBrand.name || '品牌'}}</text>
+      <text class='l-icon-6ac'></text>
+    </view>
+    <view class='_input l-rest'>
+      <view class='l-flex-hvc'>
+        <view class='l-rest'>
+          <input data-val='search' bindfocus='showFilter' bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入车型名称' value='{{filter.data.carsInfo}}'/>
+        </view>
+        <icon class='l-margin-r-m' hidden='{{filter.data.carsInfo === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+        <icon type='search' size='18' color='#555' bindtap='search'></icon>
+      </view>
+    </view>
+    <view class='_cont {{filter.visible ? "_active" : ""}}' bindtap='hideFilter'>
+      <!-- 品牌 -->
+      <view class='weui-grids l-brand-list' hidden='{{filter.type !== "brand"}}'>
+        <block wx:for='{{brandList}}' wx:key='id'>
+          <view class='weui-grid {{filter.sltedBrand.id === item.id ? "_active" : ""}}' bindtap='filterSearch' data-item='{{item}}'>
+            <image class='weui-grid__icon' src='{{item.image}}' />
+            <view class='weui-grid__label'>{{item.name}}</view>
+          </view>
+        </block>
+      </view>
+
+      <!-- 历史记录 -->
+      <view class='_history' hidden='{{filter.type !== "search" || filter.history.length === 0}}' catchtap='noop'>
+        <view>
+          <text class='l-fr l-icon-627 l-fs-m'  bindtap='clearHistory'></text>
+          <text class='l-fs-m'>历史搜索</text>
+        </view>
+        <view class='_history-list'>
+          <text class='l-text-wrap' wx:for='{{filter.history}}' wx:key='{{index}}' bindtap='searchHistory' data-val='{{item}}'>{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='l-list-car'>
+    <navigator url='../car-stock-info/index?ids={{item.carsId}},{{item.colourId}},{{item.interiorId}}' class='l-flex-h _item' wx:for='{{list.data}}' wx:key='carsId'>
+      <image class='l-margin-r' style='width: 180rpx; height: 180rpx;' mode='aspectFill' src='{{item.thumb}}'></image>
+      <view class='l-rest l-fs-s'>
+        <view>{{item.brandFamilyName}}</view>
+        <view class='l-margin-t-xs l-h4'>{{item.carsInfo}}</view>
+        <view class='l-margin-t-xs l-text-gray'>颜色：{{item.colourName}} | 内饰：{{item.interiorName}}</view>
+        <view class='l-margin-t-xs l-text-theme'>现有库存：{{item.number}}</view>
+      </view>
+    </navigator>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+</view>

@@ -1,0 +1,33 @@
+<!--pages/home/index.wxml-->
+<view class='l-page-full'>
+  <view class='l-banner-image' style='position:relative;'>
+    <image mode='widthFix' src='{{images.banner}}'></image>
+    <view style="position:absolute; top: 25%; left:0; right:0; text-align:center;">
+      <block wx:if='{{userInfo && userInfo.realName}}'>
+        <text class='l-text-gray l-fs-m'>欢迎登录</text>
+        <view class='l-margin-t'><text class='l-fs-20'>{{ userInfo.realName }}</text></view>
+      </block>
+      <block wx:else>
+        <view class='l-margin-t'><text class='l-fs-20'>未登录</text></view>
+      </block>
+    </view>
+  </view>
+  <view class='l-menu-grid'>
+    <navigator class='_item' url='../customer/index'>
+      <image mode='widthFix' src='../../images/customer-icon.png'></image>
+      <view class="_txt">客户管理</view>
+    </navigator>
+    <navigator class='_item' url='../car-stock/index'>
+      <image mode='widthFix' src='../../images/stock-icon.png'></image>
+      <view class="_txt">车辆库存</view>
+    </navigator>
+    <navigator class='_item'>
+      <image mode='widthFix' src='../../images/stock-out-icon.png'></image>
+      <view class="_txt">出库车辆</view>
+    </navigator>
+    <navigator class='_item'>
+      <image mode='widthFix' src='../../images/fix-icon2.png'></image>
+      <view class="_txt">加装上牌</view>
+    </navigator>
+  </view>
+</view>

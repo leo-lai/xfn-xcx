@@ -1,0 +1,53 @@
+<!--pages/customer-list/index.wxml-->
+<import src='../../template/loadmore.wxml' />
+<view class='l-page-full {{ search.inputShowed ? "l-no-scroll" : "" }}'>
+  <view class='l-search-box {{search.inputShowed ? "_doing" : ""}}'>
+    <view class='weui-search-bar'>
+      <view class='weui-search-bar__form'>
+        <view class='weui-search-bar__box'>
+          <icon class='weui-icon-search_in-box' type='search' size='14'></icon>
+          <input type='text' class='weui-search-bar__input' placeholder='输入手机号码' value='{{search.inputVal}}' focus='{{search.inputShowed}}' bindinput='inputSearchTyping' />
+          <view class='weui-icon-clear' wx:if='{{search.inputVal.length > 0}}' bindtap='clearSearchInput'>
+            <icon type='clear' size='14'></icon>
+          </view>
+        </view>
+        <label class='weui-search-bar__label' hidden='{{search.inputShowed}}' bindtap='showSearchInput'>
+          <icon class='weui-icon-search' type='search' size='14'></icon>
+          <view class='weui-search-bar__text'>输入手机号码</view>
+        </label>
+      </view>
+      <view class='weui-search-bar__cancel-btn l-text-theme' hidden='{{!search.inputShowed}}' bindtap='hideSearchInput'>取消</view>
+    </view>
+    <view class='weui-cells searchbar-result l-scroll' style='height:{{search.height}}px' hidden='{{search.inputVal.length === 0}}'>
+      <navigator url='../customer-info/index?id={{customerUsersId}}' class='weui-cell' hover-class='weui-cell_active' wx:for='{{search.list}}' wx:key='customerUsersId'>
+        <view class='weui-cell__bd'>{{item.phoneNumber}}</view>
+        <view class='weui-cell__ft'>{{item.customerUsersName}}</view>
+      </navigator>
+      <view class='weui-loadmore l-text-gray' hidden='{{!search.loading}}'>
+        <view class='weui-loading'></view>
+        <view class='weui-loadmore__tips'>搜索中...</view>
+      </view>
+      <view class='l-padding l-text-gray l-text-center' hidden='{{search.loading || search.list.length > 0}}'>搜索不到相关数据</view>
+    </view>
+  </view>
+
+  
+  <!-- <view class='l-text-gray l-fs-s'>当前门店</view> -->
+  <!-- 客户列表 -->
+  <view class='l-customer-list'>
+    <navigator url='../customer-info/index?id={{customerUsersId}}' class='_item l-padding l-bg-white l-margin-tb' wx:for='{{list.data}}' wx:key='{{CustomerUsersId}}'>
+      <view class='l-flex-hc'>
+        <image wx:if='{{item.thumb}}' mode='aspectFit' style='width: 40rpx; height: 40rpx;' class='l-avatar'></image>
+        <view class='l-h4 l-rest'>{{item.CustomerUsersName}}</view>
+        <text class='l-fs-m'>{{item.phoneNumber}}</text>
+      </view>
+      <view class='l-padding-btn l-text-center'>
+        <view class='l-text-gray l-fs-s l-margin-t'>意向/购置车辆</view>
+        <view class='l-margin-t-s'>{{item.carsName}}</view>
+        <view class='l-text-gray l-fs-s l-margin-t'>购车方案</view>
+        <view class='l-margin-t-s'>{{paymentWay[item.paymentWay]}}</view>
+      </view>
+    </navigator>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+</view>

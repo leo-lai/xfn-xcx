@@ -106,9 +106,9 @@ Page({
       })
 
       // 获取搜索历史记录
-      app.storage.getItem('search_history').then((value) => {
+      app.storage.getItem('search_history').then(list => {
         this.setData({
-          'history.data': value || []
+          'history.data': list || []
         })
       })
     })

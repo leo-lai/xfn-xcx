@@ -5,18 +5,19 @@ import config from 'config'
 const noop = function () { }
 
 // 缓存函数
+const storage_prefix = 'customer_'
 const storage = {
   setItem: (key, value) => {
     try {
-      wx.setStorageSync(key, value)
+      wx.setStorageSync(storage_prefix + key, value)
     } catch (err) {
       console.error('本地存储信息失败' + err)
     }
   },
-  getItem: (key) => {
+  getItem: key => {
     return new Promise((resolve, reject) => {
       try {
-        let value = wx.getStorageSync(key)
+        let value = wx.getStorageSync(storage_prefix + key)
         resolve(value)
       } catch (err) {
         console.error('本地存储信息失败' + err)
@@ -24,9 +25,9 @@ const storage = {
       }
     })
   },
-  removeItem: (key) => {
+  removeItem: key => {
     try {
-      wx.removeStorageSync(key)
+      wx.removeStorageSync(storage_prefix + key)
     } catch (err) {
       console.error('本地存储信息失败' + err)
     }
@@ -40,13 +41,22 @@ const navigateTo = event => {
     wx.navigateTo({ url:  event.currentTarget.dataset.url })
   }
 }
+// 提示
+const toast = msg => {
+  return new Promise((resolve, reject) => {
+    wx.showToast({
+      icon: 'success',
+      title: msg,
+      duration: 2000
+    })
+    setTimeout(_ => {
+      resolve()
+    }, 2000)
+  })
+}
 
 App({
-  utils,
-  config,
-  storage,
-  noop,
-  navigateTo,
+  utils, config, storage, noop, toast, navigateTo,
   onLaunch: function () {
     // 获取用户信息
     storage.getItem('userInfo').then(userInfo => {
@@ -135,19 +145,13 @@ App({
                 iv: ''
               }
               utils.copyObj(formData, userInfoRes, loginRes)
-              that.post(config.login, formData).then((apiRes) => {
+              that.post(config.login, formData).then(apiRes => {
                 resolve(apiRes)
-
                 if (apiRes.data) {
                   wx.hideLoading()
-                  apiRes.data.isDoctor = apiRes.data.isDoctor === 1 ? 1 : 0
-                  apiRes.data.avatarThumb = utils.formatHead(apiRes.data.avatarUrl)
-                  that.globalData.userInfo = apiRes.data
-                  storage.setItem('userInfo', apiRes.data)
-
                   // 由于获取用户信息是网络请求，可能会在 Page.onLoad 之后才返回
                   // 所以此处触发回调函数
-                  that.runLoginCbs.call(that, apiRes.data)
+                  that.updateUserInfo(apiRes.data)
                 }
               }).catch(err => {
                 wx.hideLoading()
@@ -196,9 +200,12 @@ App({
     return promise
   },
   updateUserInfo: function (userInfo = {}) {
-    userInfo.avatarThumb = utils.formatHead(userInfo.avatarUrl)
+    if(userInfo.avatarUrl) {
+      userInfo.avatarThumb = utils.formatHead(userInfo.avatarUrl)  
+    }
     Object.assign(this.globalData.userInfo, userInfo)
     storage.setItem('userInfo', this.globalData.userInfo)
+    this.runLoginCbs(this.globalData.userInfo)
   },
   runLoginCbs: function (userInfo) {
     this.globalData.loginCbs.forEach(cb => {

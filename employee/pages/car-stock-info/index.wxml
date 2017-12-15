@@ -1,0 +1,35 @@
+<!--pages/car-stock-info/index.wxml-->
+<view class='l-page-full'>
+  <view class='l-bg-white'>
+    <view class='l-banner-image'>
+      <image mode='widthFix' src='{{info.indexImage}}'></image>
+    </view>
+    <view class='l-padding l-text-center'>
+      <view class='l-h4'>{{info.carsName}}</view>
+      <view class='l-text-gray'>颜色：{{info.colourName}} | 内饰：{{info.interiorName}}</view>
+      <view class='l-text-theme'>现有库存：{{info.number}}</view>
+    </view>
+  </view>
+
+  <view class='weui-cells weui-cells_after-title l-margin-t'>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>指导价</view>
+      <view class='weui-cell__ft'>{{info.guidingPriceStr}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>优惠</view>
+      <view class='weui-cell__ft'>{{info.discountPrice}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>定金</view>
+      <view class='weui-cell__ft'>{{info.depositPrice}}</view>
+    </view>
+  </view>
+
+  <view class='weui-cells weui-cells_after-title l-margin-t'>
+    <view class='weui-cell' wx:for='{{info.list}}' wx:key='stockCarId'>
+      <view class='weui-cell__bd'>{{item.frameNumber}}</view>
+      <view class='weui-cell__ft'><text bindtap='viewImages' data-item='{{item}}' wx:if='{{item.stockCarImages}}' class='l-text-link l-fs-s'>查看验车照片</text></view>
+    </view>
+  </view>
+</view>

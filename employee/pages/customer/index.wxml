@@ -1,0 +1,63 @@
+<!--pages/customer/index.wxml-->
+<view class='l-page-full {{ search.inputShowed ? "l-no-scroll" : "" }}'>
+  <view class='l-search-box {{search.inputShowed ? "_doing" : ""}}'>
+    <view class='weui-search-bar'>
+      <view class='weui-search-bar__form'>
+        <view class='weui-search-bar__box'>
+          <icon class='weui-icon-search_in-box' type='search' size='14'></icon>
+          <input type='text' class='weui-search-bar__input' placeholder='输入手机号码' value='{{search.inputVal}}' focus='{{search.inputShowed}}' bindinput='inputSearchTyping' />
+          <view class='weui-icon-clear' wx:if='{{search.inputVal.length > 0}}' bindtap='clearSearchInput'>
+            <icon type='clear' size='14'></icon>
+          </view>
+        </view>
+        <label class='weui-search-bar__label' hidden='{{search.inputShowed}}' bindtap='showSearchInput'>
+          <icon class='weui-icon-search' type='search' size='14'></icon>
+          <view class='weui-search-bar__text'>输入手机号码</view>
+        </label>
+      </view>
+      <view class='weui-search-bar__cancel-btn l-text-theme' hidden='{{!search.inputShowed}}' bindtap='hideSearchInput'>取消</view>
+    </view>
+    <view class='weui-cells searchbar-result l-scroll' style='height:{{search.height}}px' hidden='{{search.inputVal.length === 0}}'>
+      <navigator url='../customer-info/index?id={{customerUsersId}}' class='weui-cell' hover-class='weui-cell_active' wx:for='{{search.list}}' wx:key='customerUsersId'>
+        <view class='weui-cell__bd'>{{item.phoneNumber}}</view>
+        <view class='weui-cell__ft'>{{item.customerUsersName}}</view>
+      </navigator>
+      <view class='weui-loadmore l-text-gray' hidden='{{!search.loading}}'>
+        <view class='weui-loading'></view>
+        <view class='weui-loadmore__tips'>搜索中...</view>
+      </view>
+      <view class='l-padding l-text-gray l-text-center' hidden='{{search.loading || search.list.length > 0}}'>搜索不到相关数据</view>
+    </view>
+  </view>
+
+  <view class='l-menu-grid'>
+    <navigator class='_item' url='../customer-list/index?type={{0}}'>
+      <image mode='widthFix' src='../../images/appointed-icon.png'></image>
+      <view class="_txt">预约客户</view>
+    </navigator>
+    <navigator class='_item' url='../customer-list/index?type={{1}}'>
+      <image mode='widthFix' src='../../images/wait-for-ensure-icon.png'></image>
+      <view class="_txt">落定客户</view>
+    </navigator>
+    <navigator class='_item' url='../customer-list/index?type={{2}}'>
+      <image mode='widthFix' src='../../images/wait-for-loan-icon.png'></image>
+      <view class="_txt">贷款通过客户</view>
+    </navigator>
+    <navigator class='_item' url='../customer-list/index?type={{3}}'>
+      <image mode='widthFix' src='../../images/wait-for-pay-icon.png'></image>
+      <view class="_txt">待完款客户</view>
+    </navigator>
+    <navigator class='_item' url='../customer-list/index?type={{4}}'>
+      <image mode='widthFix' src='../../images/wait-for-fix-icon.png'></image>
+      <view class="_txt">待加装客户</view>
+    </navigator>
+    <navigator class='_item' url='../customer-list/index?type={{5}}'>
+      <image mode='widthFix' src='../../images/wait-for-handover-icon.png'></image>
+      <view class="_txt">待提车客户</view>
+    </navigator>
+  </view>
+
+  <navigator url='../customer-add/index' hover-class='none' class='l-margin'>
+    <button class='l-button-main'>新增客户</button>
+  </navigator>
+</view>
