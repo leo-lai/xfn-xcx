@@ -99,6 +99,7 @@ Page({
     app.post(url, {
       page, ...this.data.list.filter
     }).then(({ data }) => {
+      // 兼容非分页返回
       if (!data.list && data.length >= 0) {
         data = {
           rows: 10,
@@ -109,7 +110,10 @@ Page({
       }
 
       data.list = data.list.map(item => {
-        item.thumb = app.utils.formatThumb(item.indexImage, 150)
+        item.thumb = app.config.avatar
+        item.customerUsersId = item.customerUsersId || item.CustomerUsersId
+        item.customerUsersName = item.customerUsersName || item.CustomerUsersName
+        item.paymentWay = item.paymentWay || item.expectWayId
         return item
       })
 

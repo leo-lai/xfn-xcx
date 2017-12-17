@@ -3,16 +3,19 @@
  */
 
 var baseUrl = "http://111.230.170.36/tauto/emInterface/employee"
-
+var resURL = 'http://res.mifengqiche.com'
 var config = {
   // 静态资源服务器
-  resURL: 'http://res.mifengqiche.com',
+  resURL,
+  avatar: resURL + '/avatar.png',
+
   // 野狗配置
   wilddog: {
     syncURL: 'https://wd5822510528sjwblr.wilddogio.com',
     authDomain: '<wd5822510528sjwblr.wilddog.com>'
   },
 
+  uploadFile: `${baseUrl}/uploadFile`,
   // 注册/登录
   login: `${baseUrl}/login`,
   // 更改密码
@@ -31,6 +34,12 @@ var config = {
   customerOrder: `${baseUrl}/orderStateCustomerList`,
   // 门店列表
   storeList: `${baseUrl}/organizationLevelList`,
+  // 客户详情
+  customerInfo: `${baseUrl}/customerUsersrInfo`,
+  // 添加备注
+  customerRemark: `${baseUrl}/addCustomerRemarks`,
+  // 上传资料
+  customerUpload: `${baseUrl}/addBankAudits`,
   
   baseUrl
 };

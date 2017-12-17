@@ -18,7 +18,7 @@
       <view class='weui-search-bar__cancel-btn l-text-theme' hidden='{{!search.inputShowed}}' bindtap='hideSearchInput'>取消</view>
     </view>
     <view class='weui-cells searchbar-result l-scroll' style='height:{{search.height}}px' hidden='{{search.inputVal.length === 0}}'>
-      <navigator url='../customer-info/index?id={{customerUsersId}}' class='weui-cell' hover-class='weui-cell_active' wx:for='{{search.list}}' wx:key='customerUsersId'>
+      <navigator url='../customer-info/index?id={{item.customerUsersId}}' class='weui-cell' hover-class='weui-cell_active' wx:for='{{search.list}}' wx:key='customerUsersId'>
         <view class='weui-cell__bd'>{{item.phoneNumber}}</view>
         <view class='weui-cell__ft'>{{item.customerUsersName}}</view>
       </navigator>
@@ -57,7 +57,10 @@
     </navigator>
   </view>
 
-  <navigator url='../customer-add/index' hover-class='none' class='l-margin'>
-    <button class='l-button-main'>新增客户</button>
-  </navigator>
+  <view style='height: 90rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <navigator url='../customer-add/index' hover-class='none' class='l-margin'>
+      <button class='l-button-main'>新增客户</button>
+    </navigator>
+  </view>
 </view>

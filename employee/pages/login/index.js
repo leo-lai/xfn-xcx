@@ -90,11 +90,7 @@ Page({
       // 由于获取用户信息是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处触发回调函数
       app.updateUserInfo(data)
-      app.toast('登录成功').then(_ => {
-        wx.navigateBack({
-          delta: 1
-        })
-      })
+      app.toast('登录成功', true)
     }).catch(err => {
       wx.hideLoading()
     })

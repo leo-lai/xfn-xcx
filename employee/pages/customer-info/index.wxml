@@ -1,2 +1,99 @@
 <!--pages/customer-info/index.wxml-->
-<text>pages/customer-info/index.wxml</text>
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-flex-hc'>
+    <image style='width: 40rpx; height: 40rpx; margin-right: 20rpx;' mode='aspectFit' src='{{avatar}}'></image>
+    <view class='l-h4 l-rest'>胡杨归</view>
+    <text class='l-fs-m'>18602029524</text>
+  </view>
+
+  <!-- 客户信息 -->
+  <view class='l-margin l-radius l-bg-white l-padding'>
+    <view class='l-text-gray l-fs-s'>当前状态</view>
+    <view class='l-text-center l-margin-tb-s l-h4'>支付定金5000.00元</view>
+    <view class='l-text-gray l-fs-s l-text-center'>2017-12-12</view>
+  </view>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>车辆</view>
+        <view class='weui-cell__ft'>{{info.discountPrice}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>购车方案</view>
+        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>贷款方案</view>
+        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>贷款资料</view>
+        <view class='weui-cell__ft l-text-theme'>上传资料</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>销售顾问</view>
+        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预约客户信息 -->
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>预约时间</view>
+        <view class='weui-cell__ft'>{{info.guidingPriceStr}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>意向车辆</view>
+        <view class='weui-cell__ft'>{{info.discountPrice}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>打算购车时间</view>
+        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>打算购车方案</view>
+        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>销售顾问</view>
+        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 客户备注 -->
+  <view class='l-margin l-radius'>
+    <view class='weui-panel'>
+      <view class='weui-panel__hd'>客户备注</view>
+      <view class='weui-panel__bd'>
+        <view class='weui-media-box weui-media-box_text' wx:for='{{3}}' wx:key='{{index}}'>
+          <view class='weui-media-box__desc'>由各种物质组成的巨型球状天体</view>
+          <view class='weui-media-box__info'>
+            <view class='weui-media-box__info__meta'>胡杨树</view>
+            <view class='weui-media-box__info__meta weui-media-box__info__meta_extra'>2017-12-12 12:12:12</view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-panel__ft">
+        <view class="weui-cell weui-cell_access weui-cell_link">
+          <view class="weui-cell__bd l-text-center l-text-theme" bindtap='showRemarkPop'>添加备注</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-popup-center l-flex-vh' wx:if='{{remark.visible}}'>
+    <view class='_inner' style='width: 80%; margin-top: 20%;'>
+      <view class='l-padding'>
+        <textarea style='width:100%; height: 240rpx;' fixed='{{true}}' auto-focus='{{true}}' placeholder='输入备注内容' id='remarksContent' bindinput='bindInput' value='{{remark.data.remarksContent}}'></textarea>
+        <view class='l-margin-t l-text-center'>
+          <button class='l-button-main' disabled='{{remark.loading}}' loading='{{remark.loading}}' bindtap='addRemark'>确定备注</button>
+        </view>
+      </view>
+    </view>
+    <text class='l-icon-61a _close' bindtap='closeRemarkPop'></text>
+  </view>
+</view>

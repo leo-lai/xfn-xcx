@@ -40,22 +40,28 @@ const navigateTo = event => {
     wx.navigateTo({ url:  event.currentTarget.dataset.url })
   }
 }
+const back = (delta = 1) => {
+  wx.navigateBack({ delta })
+}
 // 提示
-const toast = msg => {
+let toastTimeid = 0
+const toast = (msg, isBack) => {
   return new Promise((resolve, reject) => {
     wx.showToast({
       icon: 'success',
       title: msg,
       duration: 2000
     })
-    setTimeout(_ => {
+    clearTimeout(toastTimeid)
+    toastTimeid = setTimeout(_ => {
+      isBack && back()
       resolve()
     }, 2000)
   })
 }
 
 App({
-  utils, config, storage, noop, toast, navigateTo,
+  utils, config, storage, noop, toast, navigateTo, back,
   onLaunch: function () {
     storage.getItem('userInfo').then(userInfo => {
       this.globalData.userInfo = userInfo
@@ -84,9 +90,11 @@ App({
 
           // session失效
           if (data.resultCode === 4002) {
-            toast('登录失效').then(_ => {
-              this.logout()
-            })
+            if(this.globalData.loginTimes++ <= 0) {
+              toast('登录失效').then(_ => {
+                this.logout()
+              })
+            }
             return reject(data)
           }
 

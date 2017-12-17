@@ -1,16 +1,18 @@
 {
   "pages": [
-    "pages/customer/index",
     "pages/home/index",
+    "pages/customer/index",
+    "pages/car-uploader/index",
+    "pages/customer-add/index",
     "pages/mine/index",
     "pages/mine-pwd/index",
     "pages/msg/index",
     "pages/login/index",
     "pages/car-stock/index",
     "pages/car-stock-info/index",
-    "pages/customer-add/index",
     "pages/customer-info/index",
-    "pages/customer-list/index"
+    "pages/customer-list/index",
+    "pages/car-selector/index"
   ],
   "window": {
     "backgroundColor": "#eee",

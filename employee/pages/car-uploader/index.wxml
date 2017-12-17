@@ -1,0 +1,56 @@
+<!--pages/car-uploader/index.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text class='l-fs-s l-text-gray'>资料照片</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files'>
+              <block wx:for='{{uploadImages}}' wx:key='*this'>
+                <view class='weui-uploader__file {{ (item.loading || item.error) ? "weui-uploader__file_status" : "" }}' bindtap='previewImage' id='item.path'>
+                  <image class='weui-uploader__img' src='{{item.path}}' mode='aspectFill' data-val='{{item.tick}}' bindlongpress='longDelImage'/>
+                  <view wx:if='{{item.loading}}' class='weui-uploader__file-content'>{{item.progress}}%</view>
+                  <view wx:if='{{item.error}}' class='weui-uploader__file-content'>
+                    <icon type='warn' size='23' color='#F43530'></icon>
+                  </view>
+                </view>
+              </block>
+            </view>
+            <view class='weui-uploader__input-box'>
+              <view class='weui-uploader__input' bindtap='chooseImage'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text class='l-fs-s l-text-gray'>签名视频</text>
+      <text hidden='{{!uploadVideo.path}}' class='l-fs-s l-text-theme l-margin-l' bindtap='chooseVideo'>重新选择</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view style='padding-right: 9px;'>
+              <video wx:if='{{uploadVideo.path}}' style='width: 100%;' src="{{uploadVideo.path}}"></video>
+              <progress wx:if='{{uploadVideo.path}}' stroke-width='{{1}}' color='#fa5539' percent='{{uploadVideo.progress}}' show-info active/>
+            </view>
+            <view hidden='{{uploadVideo.path}}' class='weui-uploader__input-box'>
+              <view class='weui-uploader__input' bindtap='chooseVideo'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='l-margin'>
+    <button class='l-button-main' bindtap='submit'>上传至银行后台</button>
+  </view>
+</view>

@@ -18,7 +18,7 @@ icon {
   margin-top: 1.17647059em;
   background-color: #fff;
   line-height: 1.41176471;
-  font-size: 17px
+  /* font-size: 34rpx */
 }
 
 .weui-cells:before {
@@ -177,8 +177,8 @@ icon {
 }
 
 .weui-cell_input {
-  padding-top: 0;
-  padding-bottom: 0
+  padding-top: 10rpx;
+  padding-bottom: 10rpx
 }
 
 .weui-label {
@@ -364,7 +364,7 @@ icon {
 }
 
 .weui-cell_select {
-  padding: 0
+  padding: 10rpx 0;
 }
 
 .weui-select {
@@ -419,7 +419,7 @@ icon {
   padding: 0 .6em 0 .7em;
   border-left: 1px solid #e5e5e5;
   line-height: 2.58823529em;
-  font-size: 17px;
+  font-size: 34rpx;
   color: #3cc51f;
   white-space: nowrap
 }
@@ -944,7 +944,7 @@ icon {
 
 .weui-media-box__title {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 34rpx;
   width: auto;
   overflow: hidden;
   text-overflow: ellipsis;
