@@ -3,7 +3,7 @@
 <view class='l-page-full l-bg-white l-padding'>
   <view class='l-padding l-form'>
     <view class='_ipt'>
-      <input password='{{true}}' placeholder='输入旧密码' maxlength='{{50}}' confirm-type='next' id='passwordOld' value='{{formData.passwordOld}}' bindinput='bindInput'></input>
+      <input password='{{true}}' auto-focus placeholder='输入旧密码' maxlength='{{50}}' confirm-type='next' id='passwordOld' value='{{formData.passwordOld}}' bindinput='bindInput'></input>
     </view>
     <view class='_ipt'>
       <input password='{{true}}' placeholder='输入新密码'  maxlength='{{50}}' confirm-type='done' id='password' value='{{formData.password}}' bindinput='bindInput'></input>

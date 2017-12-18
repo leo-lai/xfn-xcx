@@ -2,84 +2,94 @@
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full'>
   <view class='l-margin l-flex-hc'>
-    <image style='width: 40rpx; height: 40rpx; margin-right: 20rpx;' mode='aspectFit' src='{{avatar}}'></image>
-    <view class='l-h4 l-rest'>胡杨归</view>
-    <text class='l-fs-m'>18602029524</text>
+    <image style='width: 40rpx; height: 40rpx; margin-right: 20rpx;' mode='aspectFit' src='{{info.thumb}}'></image>
+    <view class='l-h4 l-rest'>{{info.customerUsersName}}</view>
+    <text class='l-fs-m'>{{info.phoneNumber}}</text>
   </view>
 
   <!-- 客户信息 -->
-  <view class='l-margin l-radius l-bg-white l-padding'>
-    <view class='l-text-gray l-fs-s'>当前状态</view>
-    <view class='l-text-center l-margin-tb-s l-h4'>支付定金5000.00元</view>
-    <view class='l-text-gray l-fs-s l-text-center'>2017-12-12</view>
-  </view>
-  <view class='l-margin l-radius'>
-    <view class='weui-cells weui-cells_after-title'>
-      <view class='weui-cell'>
-        <view class='weui-cell__bd'>车辆</view>
-        <view class='weui-cell__ft'>{{info.discountPrice}}</view>
-      </view>
-      <view class='weui-cell'>
-        <view class='weui-cell__bd'>购车方案</view>
-        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
-      </view>
-      <view class='weui-cell'>
-        <view class='weui-cell__bd'>贷款方案</view>
-        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
-      </view>
-      <view class='weui-cell'>
-        <view class='weui-cell__bd'>贷款资料</view>
-        <view class='weui-cell__ft l-text-theme'>上传资料</view>
-      </view>
-      <view class='weui-cell'>
-        <view class='weui-cell__bd'>销售顾问</view>
-        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
+  <block wx:if='{{isOrder === 1}}'>
+    <view class='l-margin l-radius l-bg-white l-padding'>
+      <view class='l-text-gray l-fs-s'>当前状态</view>
+      <view class='l-text-center l-margin-tb-s l-h4'>{{state.trackContent}}</view>
+      <view class='l-text-gray l-fs-s l-text-center'>{{state.createDate}}</view>
+    </view>
+    <view class='l-margin l-radius'>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell'>
+          <view class='weui-cell__bd'>车辆</view>
+          <view class='weui-cell__ft l-fs-s'>{{info.carsName}}</view>
+        </view>
+        <view class='weui-cell'>
+          <view class='weui-cell__bd'>购车方案</view>
+          <view class='weui-cell__ft'>{{buyWay[info.paymentWay - 1]}}</view>
+        </view>
+        <view class='weui-cell'>
+          <view class='weui-cell__bd'>贷款方案</view>
+          <view class='weui-cell__ft'>{{info.paymentWayInfo}}</view>
+        </view>
+        <view class='weui-cell' wx:if='{{info.bankAuditsvideo}}'>
+          <view class='weui-cell__bd'>贷款资料</view>
+          <view class='weui-cell__ft l-text-theme'>查看资料</view>
+        </view>
+        <navigator wx:else class='weui-cell' url='../car-uploader/index?id={{info.customerUsersId}}' hover-class='none'>
+          <view class='weui-cell__bd'>贷款资料</view>
+          <view class='weui-cell__ft l-text-theme'>上传资料</view>
+        </navigator>
+        <view class='weui-cell'>
+          <view class='weui-cell__bd'>销售顾问</view>
+          <view class='weui-cell__ft'>{{info.systemUserName}}</view>
+        </view>
       </view>
     </view>
-  </view>
-
+  </block>
   <!-- 预约客户信息 -->
-  <view class='l-margin l-radius'>
-    <view class='weui-cells weui-cells_after-title'>
-      <view class='weui-cell'>
-        <view class='weui-cell__bd'>预约时间</view>
-        <view class='weui-cell__ft'>{{info.guidingPriceStr}}</view>
-      </view>
-      <view class='weui-cell'>
-        <view class='weui-cell__bd'>意向车辆</view>
-        <view class='weui-cell__ft'>{{info.discountPrice}}</view>
-      </view>
-      <view class='weui-cell'>
-        <view class='weui-cell__bd'>打算购车时间</view>
-        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
-      </view>
-      <view class='weui-cell'>
-        <view class='weui-cell__bd'>打算购车方案</view>
-        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
-      </view>
-      <view class='weui-cell'>
-        <view class='weui-cell__bd'>销售顾问</view>
-        <view class='weui-cell__ft'>{{info.depositPrice}}</view>
+  <block wx:if='{{isOrder === 0}}'>
+    <view class='l-margin l-radius'>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell'>
+          <view class='weui-cell__bd'>预约时间</view>
+          <view class='weui-cell__ft'>{{info.timeOfAppointmentDate}}</view>
+        </view>
+        <view class='weui-cell'>
+          <view class='weui-cell__bd'>意向车辆</view>
+          <view class='weui-cell__ft l-fs-s'>{{info.intentionCarInfo}}</view>
+        </view>
+        <view class='weui-cell'>
+          <view class='weui-cell__bd'>打算购车时间</view>
+          <view class='weui-cell__ft'>{{buyTime[info.carPurchaseIntention]}}</view>
+        </view>
+        <view class='weui-cell'>
+          <view class='weui-cell__bd'>打算购车方案</view>
+          <view class='weui-cell__ft'>{{info.expectWayName}}</view>
+        </view>
+        <view class='weui-cell'>
+          <view class='weui-cell__bd'>销售顾问</view>
+          <view class='weui-cell__ft'>{{info.systemUserName}}</view>
+        </view>
       </view>
     </view>
-  </view>
+  </block>
 
   <!-- 客户备注 -->
   <view class='l-margin l-radius'>
     <view class='weui-panel'>
       <view class='weui-panel__hd'>客户备注</view>
       <view class='weui-panel__bd'>
-        <view class='weui-media-box weui-media-box_text' wx:for='{{3}}' wx:key='{{index}}'>
-          <view class='weui-media-box__desc'>由各种物质组成的巨型球状天体</view>
+        <view class='weui-media-box weui-media-box_text' wx:for='{{remark.list}}' wx:key='remarksId'>
+          <view class='weui-media-box__desc'>{{item.remarksContent}}</view>
           <view class='weui-media-box__info'>
-            <view class='weui-media-box__info__meta'>胡杨树</view>
-            <view class='weui-media-box__info__meta weui-media-box__info__meta_extra'>2017-12-12 12:12:12</view>
+            <view class='weui-media-box__info__meta'>{{item.systemUserName}}</view>
+            <view class='weui-media-box__info__meta weui-media-box__info__meta_extra'>{{item.createDate}}</view>
           </view>
         </view>
+        <view class='weui-cell' wx:if='remark.list.length === 0'>
+          <view class='weui-cell__bd l-text-center l-text-gray'>暂无备注信息</view>
+        </view>
       </view>
-      <view class="weui-panel__ft">
-        <view class="weui-cell weui-cell_access weui-cell_link">
-          <view class="weui-cell__bd l-text-center l-text-theme" bindtap='showRemarkPop'>添加备注</view>
+      <view class='weui-panel__ft'>
+        <view class='weui-cell weui-cell_access weui-cell_link'>
+          <view class='weui-cell__bd l-text-center l-text-theme' bindtap='showRemarkPop'>添加备注</view>
         </view>
       </view>
     </view>
@@ -89,8 +99,8 @@
     <view class='_inner' style='width: 80%; margin-top: 20%;'>
       <view class='l-padding'>
         <textarea style='width:100%; height: 240rpx;' fixed='{{true}}' auto-focus='{{true}}' placeholder='输入备注内容' id='remarksContent' bindinput='bindInput' value='{{remark.data.remarksContent}}'></textarea>
-        <view class='l-margin-t l-text-center'>
-          <button class='l-button-main' disabled='{{remark.loading}}' loading='{{remark.loading}}' bindtap='addRemark'>确定备注</button>
+        <view class='l-margin-t l-text-center' bindtap='addRemark'>
+          <button class='l-button-main'>确定备注</button>
         </view>
       </view>
     </view>

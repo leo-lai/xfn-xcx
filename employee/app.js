@@ -2,7 +2,7 @@
 import utils from '/script/utils'
 import config from 'config'
 
-const noop = function () { }
+const noopFn = function () {}
 // 缓存函数
 const storage_prefix = 'employee_'
 const storage = {
@@ -61,7 +61,7 @@ const toast = (msg, isBack) => {
 }
 
 App({
-  utils, config, storage, noop, toast, navigateTo, back,
+  utils, config, storage, noopFn, toast, navigateTo, back,
   onLaunch: function () {
     storage.getItem('userInfo').then(userInfo => {
       this.globalData.userInfo = userInfo

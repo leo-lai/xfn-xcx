@@ -19,15 +19,15 @@
           <input class='weui-input' type='number' placeholder='请输入客户手机号码' maxlength='{{11}}' confirm-type='next' id='phoneNumber' value='{{formData.phoneNumber}}' bindinput='bindInput' />
         </view>
       </view>
-      <view class='weui-cell weui-cell_select'>
+      <navigator url='../car-selector/index' class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>意向车辆</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <view wx:if='{{formData.intentionCarId}}' class='weui-select weui-select_in-select-after'>{{carsName}}</view>
+          <view wx:if='{{formData.intentionCarId}}' class='weui-select weui-select_in-select-after l-text-wrap1'>{{carsName}}</view>
           <view wx:else class='weui-select weui-select_in-select-after l-text-gray'>请选择</view>
         </view>
-      </view>
+      </navigator>
       <view class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>打算购车方案</view>
@@ -44,8 +44,8 @@
           <view class='weui-label'>打算购车时间</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <picker id='buyTimeId' bindchange='bindInput' value='{{formData.buyTimeId}}' range='{{buyTime}}'>
-            <view wx:if='{{formData.buyTimeId}}' class='weui-select weui-select_in-select-after'>{{buyTime[formData.buyTimeId]}}</view>
+          <picker id='carPurchaseIntention' bindchange='bindInput' value='{{formData.carPurchaseIntention}}' range='{{buyTime}}'>
+            <view wx:if='{{formData.carPurchaseIntention}}' class='weui-select weui-select_in-select-after'>{{buyTime[formData.carPurchaseIntention]}}</view>
             <view wx:else class='weui-select weui-select_in-select-after l-text-gray'>请选择</view>
           </picker>
         </view>

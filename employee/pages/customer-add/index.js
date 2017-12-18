@@ -9,14 +9,13 @@ Page({
     topTips: '',
     userInfo: null,
     expectWay: ['全款', '分期'],
-    buyTime: ['3天内', '7天内'],
+    buyTime: app.config.baseData.buyTime,
     carsName: '',
     formData: {
       customerUsersName: '',
       phoneNumber: '',
       intentionCarId: '',
       expectWayId: '',
-      buyTimeId: '',
       carPurchaseIntention: '',
       remarks: ''
     },
@@ -34,7 +33,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin()
+    app.checkLogin().then(_ => {
+      app.storage.getItem('carType_slted').then(carTypeSlted => {
+        this.setData({
+          'carsName': carTypeSlted.name,
+          'formData.intentionCarId': carTypeSlted.id
+        })
+      })
+    })
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -73,18 +79,15 @@ Page({
     }
     this.data.formData.expectWayId++
 
-    if (this.data.formData.buyTimeId === '') {
+    if (this.data.formData.carPurchaseIntention === '') {
       this.showTopTips('请选择购车时间')
       return
     }
-    this.data.formData.carPurchaseIntention = this.data.buyTime[this.data.formData.buyTimeId]
+    this.data.formData.carPurchaseIntention++
 
     wx.showLoading({ mask: true })
-    app.post(app.config.login, this.data.formData).then(({ data }) => {
-      // 由于获取用户信息是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处触发回调函数
-      app.updateUserInfo(data)
-      app.toast('登录成功', true)
+    app.post(app.config.customerAdd, this.data.formData).then(({ data }) => {
+      app.toast('新增成功', true)
     }).catch(err => {
       wx.hideLoading()
     })

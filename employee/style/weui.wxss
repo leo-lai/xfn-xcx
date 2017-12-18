@@ -105,6 +105,7 @@ icon {
 }
 
 .weui-cell__ft {
+  max-width: 70%;
   text-align: right;
   color: #999
 }
@@ -417,7 +418,7 @@ icon {
 .weui-vcode-btn {
   display: inline-block;
   padding: 0 .6em 0 .7em;
-  border-left: 1px solid #e5e5e5;
+  border-left: 1px solid #eee;
   line-height: 2.58823529em;
   font-size: 34rpx;
   color: #3cc51f;
@@ -837,11 +838,12 @@ icon {
 
 .weui-loadmore__tips {
   display: inline-block;
+  color: #999;
   vertical-align: middle
 }
 
 .weui-loadmore_line {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #eee;
   margin-top: 60rpx;
 }
 
@@ -886,7 +888,7 @@ icon {
 
 .weui-panel:before {
   top: 0;
-  border-top: 1rpx solid #e5e5e5
+  border-top: 1rpx solid #eee
 }
 
 .weui-panel:after,
@@ -901,7 +903,7 @@ icon {
 
 .weui-panel:after {
   bottom: 0;
-  border-bottom: 1rpx solid #e5e5e5
+  border-bottom: 1rpx solid #eee
 }
 
 .weui-panel__hd {
@@ -917,7 +919,7 @@ icon {
   bottom: 0;
   right: 0;
   height: 1px;
-  border-bottom: 1rpx solid #e5e5e5;
+  border-bottom: 1rpx solid #eee;
   color: #e5e5e5;
   left: 15px
 }
@@ -933,7 +935,7 @@ icon {
   top: 0;
   right: 0;
   height: 1px;
-  border-top: 1rpx solid #e5e5e5;
+  border-top: 1rpx solid #eee;
   color: #e5e5e5;
   left: 15px
 }

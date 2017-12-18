@@ -1,0 +1,15 @@
+<!--pages/car-last-step/index.wxml-->
+<view class='l-page-full'>
+  <navigator url='../car-part/index' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding l-text-center'>
+      <image mode='aspectFit' style='width: 150rpx; height: 150rpx;' src='../../images/fix-icon.png'></image>
+      <view>精品加装</view>
+    </view>
+  </navigator>
+  <navigator url='../car-license/index' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding l-text-center'>
+      <image mode='aspectFit' style='width: 200rpx; height: 150rpx;' src='../../images/license-icon.png'></image>
+      <view>车辆上牌</view>
+    </view>
+  </navigator>
+</view>

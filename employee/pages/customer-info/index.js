@@ -6,10 +6,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    avatar: app.config.avatar,
     topTips: '',
     userInfo: null,
+    isOrder: '',
+    buyTime: app.config.baseData.buyTime,
+    buyWay: app.config.baseData.buyWay,
     info: null,
+    state: {},
     remark: {
       visible: false,
       loading: false,
@@ -27,9 +30,8 @@ Page({
   onLoad: function (options) {
     app.onLogin(userInfo => {
       this.setData({ userInfo })
-      console.log(options.id)
       this.params = {
-        id: options.id
+        ids: options.ids ? options.ids.split(',') : ['','']
       }
       this.getInfo()
     }, this.route)
@@ -38,18 +40,33 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin()
+    app.checkLogin().then(_ => {
+      app.storage.getItem('car_uploader_refresh').then(refresh => {
+        if (refresh) {
+          app.storage.removeItem('car_uploader_refresh')
+          this.getInfo()
+        }
+      })
+    })
   },
   // 客户详情
   getInfo: function () {
     wx.showLoading()
     app.post(app.config.customerInfo, {
-      customerUsersId: this.params.id
+      customerUsersId: this.params.ids[0],
+      customerUsersOrgId: this.params.ids[1]
     }).then(({ data }) => {
-      // data.guidingPriceStr = (data.guidingPrice / 10000).toFixed(2) + '万'
-
-      this.setData({
-        'info': data
+      let info = data.customerMap
+      info.customerUsersId = this.params.ids[0]
+      info.thumb = info.headPortrait ? app.utils.formatHead(info.headPortrait) : app.config.avatar
+      this.setData({ 
+        'info': info,
+        'state': {
+          trackContent: data.trackContent,
+          createDate: data.createDate
+        },
+        'isOrder': data.isOrder,
+        'remark.list': data.remarksMap.list
       })
     }).finally(_ => {
       wx.hideLoading()
@@ -58,7 +75,7 @@ Page({
   showRemarkPop: function () {
     this.setData({
       'remark.visible': true,
-      'remark.data.customerUsersId': this.params.id,
+      'remark.data.customerUsersId': this.params.ids[0],
       'remark.data.remarksContent': ''
     })
   },
@@ -96,10 +113,16 @@ Page({
     app.post(app.config.customerRemark, this.data.remark.data).then(({data}) => {
       app.toast('操作成功')
       this.setData({
-        'remark.list': data ? this.data.remark.list.push(data) : this.data.remark.list, 
         'remark.visible': false,
         'remark.loading': false
       })
+      if(data) {
+        this.setData({
+          'remark.list': this.data.remark.list.push(data)
+        })
+      }else {
+        this.getInfo()
+      }
     }).catch(_ => {
       this.setData({ 'remark.loading': false })
     })

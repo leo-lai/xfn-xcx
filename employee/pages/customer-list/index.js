@@ -81,7 +81,7 @@ Page({
     })
   },
   // 客户列表
-  getList: function (page = 1, callback = app.noop) {
+  getList: function (page = 1, callback = app.noopFn) {
     if (page === 1) {
       this.setData({
         'list.more': true
@@ -110,7 +110,7 @@ Page({
       }
 
       data.list = data.list.map(item => {
-        item.thumb = app.config.avatar
+        item.thumb = item.headPortrait ? app.utils.formatHead(item.headPortrait) : app.config.avatar
         item.customerUsersId = item.customerUsersId || item.CustomerUsersId
         item.customerUsersName = item.customerUsersName || item.CustomerUsersName
         item.paymentWay = item.paymentWay || item.expectWayId

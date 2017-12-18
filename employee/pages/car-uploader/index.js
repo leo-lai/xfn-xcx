@@ -1,12 +1,11 @@
 // pages/car-uploader/index.js
 const app = getApp()
 Page({
-
+  noopFn: app.noopFn,
   /**
    * 页面的初始数据
    */
   data: {
-    noop: app.noop,
     userInfo: null,
     avatar: app.config.avatar,
     uploadImages: [],
@@ -200,7 +199,7 @@ Page({
       return
     }
 
-    if (!this.data.uploadVideo.loading) {
+    if (this.data.uploadVideo.loading) {
       this.showTopTips('请等待签名视频上传完毕')
       return
     }
@@ -210,8 +209,9 @@ Page({
 
     wx.showLoading()
     app.post(app.config.customerUpload, this.data.formData).then(_ => {
+      app.storage.setItem('car_uploader_refresh', 1)
       app.toast('上传成功', true)
-    }).finally(_ => {
+    }).catch(_ => {
       wx.hideLoading()
     })
 

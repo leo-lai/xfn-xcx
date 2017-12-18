@@ -1,17 +1,13 @@
-<!--pages/car-stock/index.wxml-->
+<!--pages/car-part/index.wxml-->
 <import src='../../template/loadmore.wxml' />
 <view class='l-page-full {{filter.visible ? "l-no-scroll": ""}}'>
   <view class='l-list-filter l-flex-hc'>
-    <view class='_type {{filter.type === "brand" ? "_active" : ""}}' bindtap='showFilter' data-val='brand'>
-      <text>{{filter.sltedBrand.name || '品牌'}}</text>
-      <text class='l-icon-6ac'></text>
-    </view>
     <view class='_input l-rest'>
       <view class='l-flex-hvc'>
         <view class='l-rest'>
-          <input data-val='search' bindfocus='showFilter' bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入车型名称' value='{{filter.data.carsInfo}}'/>
+          <input data-val='search' bindfocus='showFilter' bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='选择完成时间' value='{{filter.data.carsSearch}}'/>
         </view>
-        <icon class='l-margin-r-m' hidden='{{filter.data.carsInfo === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+        <icon class='l-margin-r-m' hidden='{{filter.data.carsSearch === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
         <icon type='search' size='18' color='#555' bindtap='search'></icon>
       </view>
     </view>
@@ -27,7 +23,7 @@
       </view>
 
       <!-- 历史记录 -->
-      <view class='_history' hidden='{{filter.type !== "search" || filter.history.length === 0}}' catchtap='noopFn'>
+      <view class='_history' hidden='{{true || filter.type !== "search" || filter.history.length === 0}}' catchtap='noopFn'>
         <view>
           <text class='l-fr l-icon-627 l-fs-m'  bindtap='clearHistory'></text>
           <text class='l-fs-m'>历史搜索</text>
@@ -38,16 +34,25 @@
       </view>
     </view>
   </view>
-  <view class='l-list-car'>
-    <navigator url='../car-stock-info/index?ids={{item.carsId}},{{item.colourId}},{{item.interiorId}}' class='l-flex-h _item' wx:for='{{list.data}}' wx:key='carsId'>
-      <image class='l-margin-r' style='width: 180rpx; height: 180rpx;' mode='aspectFill' src='{{item.thumb}}'></image>
-      <view class='l-rest l-fs-s'>
-        <view>{{item.brandFamilyName}}</view>
-        <view class='l-margin-t-xs l-h4'>{{item.carsInfo}}</view>
-        <view class='l-margin-t-xs l-text-gray'>颜色：{{item.colourName}} | 内饰：{{item.interiorName}}</view>
-        <view class='l-margin-t-xs l-text-theme'>现有库存：{{item.number}}</view>
+  <view class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list.data}}' wx:key='customerOrderId'>
+    <view class='l-padding-b l-border-b'>
+      <text>车架号：{{item.customerOrderCode}}</text>
+    </view>
+    <view class='l-padding-t l-flex-h'>
+      <view class='l-rest'>
+        <view class='l-h4'>{{item.carsNameBefor}}</view>
+        <view>{{item.carsNameAfter}}</view>
+        <view class='l-text-gray l-fs-s'>完款时间：{{item.createDate}}</view>
       </view>
-    </navigator>
+      <view class='l-margin-l'>
+        <button class='l-button-main _radius'></button>
+      </view>
+    </view>
+    <view class='l-padding-btn l-border-t l-text-center'>
+      <text>抵押类型：</text>
+    </view>
   </view>
   <template is='loadmore' data='{{...list}}' />
 </view>
+
+

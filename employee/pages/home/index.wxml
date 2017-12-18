@@ -21,11 +21,11 @@
       <image mode='widthFix' src='../../images/stock-icon.png'></image>
       <view class="_txt">车辆库存</view>
     </navigator>
-    <navigator class='_item'>
+    <navigator class='_item' url='../car-stock-out/index'>
       <image mode='widthFix' src='../../images/stock-out-icon.png'></image>
       <view class="_txt">出库车辆</view>
     </navigator>
-    <navigator class='_item'>
+    <navigator class='_item' url='../car-last-step/index'>
       <image mode='widthFix' src='../../images/fix-icon2.png'></image>
       <view class="_txt">加装上牌</view>
     </navigator>
