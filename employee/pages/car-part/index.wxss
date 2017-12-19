@@ -1,1 +1,2 @@
 /* pages/car-part/index.wxss */
+.l-page-full{padding-top: 100rpx;}

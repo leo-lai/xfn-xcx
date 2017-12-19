@@ -81,9 +81,21 @@ var config = {
   stockOutCar: `${baseUrl}/customerOrderStockCarPutout`,
   // 待上牌列表
   licenseList: `${baseUrl}/orderLicensePlateList`,
+  // 上牌完成
+  licenseDone: `${baseUrl}/licensePlateDone`,
   // 精品加装
   carPartList: `${baseUrl}/carsProductsList`,
-
+  // 销售顾问列表
+  salesList: `${baseUrl}/salesList`,
+  // 分配销售顾问
+  changeSales: `${baseUrl}/systenUserChangeCustomerOrg`,
+  // 精品完成时间
+  estimateDate: `${baseUrl}/addCarsProductsEstimateDate`,
+  // 精品详情
+  carPartInfo: `${baseUrl}/carsProductsInfo`,
+  // 加装完成
+  carPartDone: `${baseUrl}/carsProductsDone`,
+  
   baseUrl
 };
 

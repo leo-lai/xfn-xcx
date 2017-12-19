@@ -180,7 +180,7 @@ button.button-hover[type=primary] { color:rgba(255, 255, 255, 0.6); background-c
 button[type=primary][disabled] { background-color:#ef5b45 !important; opacity: 0.3;}
 
 button.l-button-main{ background: #fa5539; color: #fff; border-radius: 60rpx; padding:0 20rpx; box-shadow: 0 10rpx 20rpx rgba(230, 81, 56, 0.3);}
-button.l-button-main._radius{border-radius: 50%; width: 100rpx; height: 100rpx;}
+button.l-button-main._radius{border-radius: 50%; width: 100rpx; height: 100rpx; line-height: 100rpx; font-size: 28rpx; padding: 0;}
 button.l-button-main.button-hover{  background-color:#e65138;}
 button.l-button-main[disabled] { background-color:#fa5539 !important; opacity: 0.3; color: #fff;}
 
@@ -306,13 +306,14 @@ image{max-width: 100%;}
 .l-list-filter ._cont._active::after{ background: rgba(0, 0, 0, 0.1);}
 .l-list-filter .l-icon-6ac{ display: inline-block; font-size: 14rpx; vertical-align: 4rpx; margin:0 0 0 20rpx; opacity: 0.8; transition: 0.2s linear;}
 .l-list-filter icon[type=search]{ -webkit-text-stroke: 2rpx; }
-.l-list-filter ._type{ transition: 0.2s linear; white-space: nowrap; background-color: #fff; padding: 18rpx 20rpx; border-radius: 10rpx; margin-right: 20rpx;}
+.l-list-filter ._type{ transition: 0.2s linear; white-space: nowrap; background-color: #fff; padding: 0 20rpx; border-radius: 10rpx; height: 80.5rpx; line-height: 80.5rpx;}
 .l-list-filter ._type._active{ color: #ff9247; }
 .l-list-filter ._type._active .l-icon-6ac{ transform: rotate(-180deg); }
-.l-list-filter ._input{ background: #fff; padding: 15rpx 20rpx; border-radius: 10rpx;}
-.l-list-filter ._input input{ width: 100%;}
+.l-list-filter ._input{ background: #fff; padding: 0 20rpx; border-radius: 10rpx;height: 80.5rpx;}
+.l-list-filter ._input input{ width: 100%; }
 .l-list-filter ._history{ background: #fff; padding: 30rpx;  box-sizing: border-box;}
 .l-list-filter ._history-list text{ display: inline-block; background: #eee;  border-radius: 50rpx; padding: 10rpx 30rpx; font-size: 22rpx; margin: 20rpx 20rpx 0 0; line-height: 1.4;}
+.l-filter-date{border-radius: 10rpx; background-color: #fff; text-align: center;}
 
 .l-form ._ipt{
   border-bottom: 2rpx solid #eee;

@@ -49,14 +49,13 @@ const toast = (msg, isBack) => {
   return new Promise((resolve, reject) => {
     wx.showToast({
       icon: 'success',
-      title: msg,
-      duration: 2000
+      title: msg
     })
     clearTimeout(toastTimeid)
     toastTimeid = setTimeout(_ => {
       isBack && back()
       resolve()
-    }, 2000)
+    }, 1500)
   })
 }
 

@@ -14,7 +14,8 @@ Page({
       visible: false,
       history: [],
       data: {
-        carsSearch: ''
+        startDate: '',
+        endDate: ''
       }
     },
     list: {
@@ -114,88 +115,23 @@ Page({
       callback(this.data.list.data)
     })
   },
-
-
-  // 搜索相关=================================================
-  showFilter: function (event) {
-    let filterType = event.currentTarget.dataset.val
-    if (filterType === this.data.filter.type && filterType === 'brand') {
-      this.hideFilter()
-    } else {
-      this.setData({
-        'filter.visible': true,
-        'filter.type': filterType
-      })
-    }
-  },
-  hideFilter: function (event) {
-    this.setData({
-      'filter.visible': false,
-      'filter.type': ''
-    })
-  },
-  // 品牌过滤
-  filterSearch: function (event) {
-    let item = event.currentTarget.dataset.item
+  // 表单输入
+  dateInput: function (event) {
     let data = {}
-    switch (this.data.filter.type) {
-      case 'brand':
-        if (this.data.filter.sltedBrand.id !== item.id) {
-          data['filter.sltedBrand'] = item
-          data['filter.data.brandId'] = item.id
-        } else {
-          data['filter.sltedBrand'] = {}
-          data['filter.data.brandId'] = ''
-        }
-        break
-    }
-    data['filter.data.carsSearch'] = ''
+    data['filter.data.' + event.target.id] = event.detail.value
     this.setData(data)
     this.getList()
   },
-  // 正在输入
-  filterTyping(event) {
-    if (event.detail.value === '') {
-      this.setData({
-        'list.ajax': false
-      })
-    }
-    this.setData({
-      'filter.data.carsSearch': event.detail.value
+  finish: function (event) {
+    let item = event.currentTarget.dataset.item
+    wx.showLoading()
+    app.post(app.config.licenseDone, {
+      customerOrderId: item.customerOrderId
+    }).then(_ => {
+      this.getList()
+      app.toast('操作成功')
+    }).catch(_ => {
+      wx.hideLoading()
     })
-  },
-  // 清楚输入
-  clearTyping() {
-    this.setData({
-      'filter.data.carsSearch': ''
-    })
-    this.search()
-  },
-  // 清除搜索历史记录
-  clearHistory: function () {
-    app.storage.removeItem('stock_out_history')
-    this.setData({
-      'filter.history': []
-    })
-  },
-  // 历史搜索
-  searchHistory: function (event) {
-    this.setData({
-      'filter.data.carsSearch': event.target.dataset.val
-    })
-    this.search()
-  },
-  // 搜索
-  search: function () {
-    // 本地记录搜索关键词
-    if (this.data.filter.data.carsSearch.trim() && !this.data.filter.history.includes(this.data.filter.data.carsSearch)) {
-      let historyData = this.data.filter.history.concat(this.data.filter.data.carsSearch)
-      this.setData({
-        'filter.history': historyData
-      })
-      app.storage.setItem('stock_out_history', historyData)
-    }
-    this.hideFilter()
-    this.getList()
   }
 })

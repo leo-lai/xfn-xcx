@@ -28,7 +28,7 @@
           <view class='weui-cell__bd'>贷款方案</view>
           <view class='weui-cell__ft'>{{info.paymentWayInfo}}</view>
         </view>
-        <view class='weui-cell' wx:if='{{info.bankAuditsvideo}}'>
+        <view wx:if='{{info.bankAuditsvideo}}' class='weui-cell' bindtap='viewBankInfo'>
           <view class='weui-cell__bd'>贷款资料</view>
           <view class='weui-cell__ft l-text-theme'>查看资料</view>
         </view>
@@ -72,7 +72,7 @@
   </block>
 
   <!-- 客户备注 -->
-  <view class='l-margin l-radius'>
+  <view wx:if='{{info}}' class='l-margin l-radius'>
     <view class='weui-panel'>
       <view class='weui-panel__hd'>客户备注</view>
       <view class='weui-panel__bd'>
@@ -83,7 +83,7 @@
             <view class='weui-media-box__info__meta weui-media-box__info__meta_extra'>{{item.createDate}}</view>
           </view>
         </view>
-        <view class='weui-cell' wx:if='remark.list.length === 0'>
+        <view class='weui-cell' wx:if='{{remark.list.length === 0}}'>
           <view class='weui-cell__bd l-text-center l-text-gray'>暂无备注信息</view>
         </view>
       </view>

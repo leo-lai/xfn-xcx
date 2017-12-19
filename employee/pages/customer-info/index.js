@@ -72,17 +72,13 @@ Page({
       wx.hideLoading()
     })
   },
-  showRemarkPop: function () {
-    this.setData({
-      'remark.visible': true,
-      'remark.data.customerUsersId': this.params.ids[0],
-      'remark.data.remarksContent': ''
+  // 查看上传资料
+  viewBankInfo: function() {
+    let { bankAuditsImage, bankAuditsvideo } = this.data.info
+    app.storage.setItem('bankInfo', {
+      bankAuditsImage, bankAuditsvideo
     })
-  },
-  closeRemarkPop: function () {
-    this.setData({
-      'remark.visible': false
-    })
+    app.navigateTo('../car-uploader/view')
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -101,6 +97,18 @@ Page({
     let data = {}
     data['remark.data.' + event.target.id] = event.detail.value
     this.setData(data)
+  },
+  showRemarkPop: function () {
+    this.setData({
+      'remark.visible': true,
+      'remark.data.customerUsersId': this.params.ids[0],
+      'remark.data.remarksContent': ''
+    })
+  },
+  closeRemarkPop: function () {
+    this.setData({
+      'remark.visible': false
+    })
   },
   // 添加备注
   addRemark: function () {

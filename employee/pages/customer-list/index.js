@@ -1,15 +1,26 @@
 // pages/customer-list/index.js
 const app = getApp()
 Page({
-
+  noopFn: app.noopFn,
   /**
    * 页面的初始数据
    */
   data: {
     userInfo: null,
     customerType: ['预约客户', '落定客户', '贷款通过客户', '待完款客户', '待加装客户', '待提车客户'],
-    paymentWay: ['', '全款', '分期'],
+    buyWay: app.config.baseData.buyWay,
     storeList: [],
+    salesList: {
+      visible: false,
+      height: 602 - 200,
+      loading: false,
+      slted: {},
+      list: [],
+      data: {
+        customerUsersOrgId: '',
+        systemUserId: ''
+      }
+    },
     search: {
       loading: false,
       height: 602,
@@ -165,6 +176,56 @@ Page({
       this.setData({
         'search.loading': false
       })
+    })
+  },
+  // 销售顾问列表
+  getSalesList: function (event) {
+    let slted = event.currentTarget.dataset.item
+    wx.showLoading()
+    app.post(app.config.salesList).then(({ data }) => {
+      this.data.salesList.data.customerUsersOrgId = slted.customerUsersOrgId
+      this.setData({
+        'salesList.visible': true,
+        'salesList.list': data.map(item => {
+          item.checked = false
+          if (item.systemUserId === slted.systemUserId) {
+            item.checked = true
+          }
+          return item
+        })
+      })
+    }).finally(_ => {
+      wx.hideLoading()
+    })
+  },
+  sltSalesList: function (event) {
+    let slted = event.currentTarget.dataset.item
+    this.setData({
+      'salesList.slted': slted,
+      'salesList.list': this.data.salesList.list.map(item => {
+        item.checked = false
+        if (item.systemUserId === slted.systemUserId) {
+          item.checked = true
+        }
+        return item
+      })
+    })
+    this.data.salesList.data.systemUserId = slted.systemUserId
+    wx.showLoading()
+    app.post(app.config.changeSales, this.data.salesList.data).then(_ => {
+      app.toast('分配成功').then(_ => {
+        this.getList()
+        this.setData({
+          'salesList.visible': false
+        })
+      })
+    }).catch(_ => {
+      wx.hideLoading()
+    })
+  },
+  closeSalesList: function () {
+    this.setData({
+      'salesList.visible': false
     })
   }
 })

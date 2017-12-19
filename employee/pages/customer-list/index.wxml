@@ -31,7 +31,7 @@
     </view>
   </view>
 
-  
+
   <!-- <view class='l-text-gray l-fs-s'>当前门店</view> -->
   <!-- 客户列表 -->
   <navigator url='../customer-info/index?ids={{item.customerUsersId}},{{item.customerUsersOrgId}}' class=' l-padding l-bg-white l-margin-m l-radius' wx:for='{{list.data}}' wx:key='{{CustomerUsersId}}'>
@@ -44,8 +44,36 @@
       <view class='l-text-gray l-fs-s l-margin-t'>意向/购置车辆</view>
       <view class='l-margin-t-s'>{{item.carsName}}</view>
       <view class='l-text-gray l-fs-s l-margin-t'>购车方案</view>
-      <view class='l-margin-t-s'>{{paymentWay[item.paymentWay]}}</view>
+      <view class='l-margin-t-s'>{{buyWay[item.paymentWay - 1]}}</view>
+    </view>
+    <view catchtap='noopFn'>
+      <view wx:if='{{list.filter.customerType === 0}}' class='l-padding-t l-margin-t l-border-t l-text-center l-text-theme' bindtap='getSalesList' data-item='{{item}}'>分配销售顾问</view>
     </view>
   </navigator>
   <template is='loadmore' data='{{...list}}' />
+
+  <!-- 销售顾问列表 -->
+  <view class='l-popup-bottom {{salesList.visible ? "_show" : ""}}' bindtap='closeSalesList'>
+    <view class='_inner' catchtap='noopFn'>
+      <text class='_close' bindtap='closeSalesList'>×</text>
+      <view class='_hd'>
+        <text class='l-h4'>选择销售顾问</text>
+      </view>
+      <view class='_bd' style='min-height: 400rpx;max-height: {{salesList.height}}px; background:#eee;'>
+        <view class='weui-cells weui-cells_after-title'>
+          <radio-group>
+            <label class='weui-cell weui-check__label' wx:for='{{salesList.list}}' wx:key='systemUserId' data-item='{{item}}' bindtap='sltSalesList'>
+              <radio class='weui-check' value='{{item.systemUserId}}' checked='{{item.checked}}' />
+              <view class='weui-cell__bd'>{{item.systemUserName}}</view>
+              <view class='weui-cell__ft weui-cell__ft_in-radio' wx:if='{{item.checked}}'>
+                <icon color='#fa5539' class='weui-icon-radio' type='success_no_circle' size='16'></icon>
+              </view>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  
 </view>

@@ -8,7 +8,6 @@
     "pages/mine-pwd/index",
     "pages/msg/index",
     "pages/login/index",
-    "pages/car-license/index",
     "pages/car-stock/index",
     "pages/car-stock-info/index",
     "pages/customer-info/index",
@@ -17,7 +16,10 @@
     "pages/car-stock-out/index",
     "pages/car-last-step/index",
     "pages/car-stock-out-info/index",
-    "pages/car-part/index"
+    "pages/car-part/index",
+    "pages/car-license/index",
+    "pages/car-uploader/view",
+    "pages/car-part-info/index"
   ],
   "window": {
     "backgroundColor": "#eee",
