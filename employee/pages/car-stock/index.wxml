@@ -1,7 +1,7 @@
 <!--pages/car-stock/index.wxml-->
 <import src='../../template/loadmore.wxml' />
-<view class='l-page-full {{filter.visible ? "l-no-scroll": ""}}'>
-  <view class='l-list-filter l-flex-hc'>
+<view class='l-page-full'>
+  <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
     <view style='margin-right: 20rpx;' class='_type {{filter.type === "brand" ? "_active" : ""}}' bindtap='showFilter' data-val='brand'>
       <text>{{filter.sltedBrand.name || '品牌'}}</text>
       <text class='l-icon-6ac'></text>
@@ -38,7 +38,7 @@
   </view>
   <view class='l-list-car'>
     <navigator url='../car-stock-info/index?ids={{item.carsId}},{{item.colourId}},{{item.interiorId}}' class='l-flex-h _item' wx:for='{{list.data}}' wx:key='carsId'>
-      <image class='l-margin-r' style='width: 180rpx; height: 180rpx;' mode='aspectFill' src='{{item.thumb}}'></image>
+      <image class='l-margin-r' style='width: 180rpx; height: 180rpx;' mode='aspectFit' src='{{item.thumb}}'></image>
       <view class='l-rest l-fs-s'>
         <view>{{item.brandFamilyName}}</view>
         <view class='l-margin-t-xs l-h4'>{{item.carsInfo}}</view>

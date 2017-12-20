@@ -49,6 +49,8 @@ Page({
           }
         })
       })
+    }).finally(_ => {
+      app.storage.setItem('current_page', this.route)
     })
   },
   // 加载更多

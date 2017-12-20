@@ -27,12 +27,12 @@
         <view class='l-text-gray l-fs-s'>完款时间：{{item.payDate}}</view>
       </view>
     </view>
-    <picker wx:if='{{!item.estimateDate}}' mode='date' value='{{item.estimateDate}}' data-item='{{item}}' bindchange='dateChange'>
-      <view class='l-padding-t l-margin-t l-border-t l-text-center l-text-theme'>添加预计完成时间</view>
-    </picker>
-    <view wx:else catchtap='noopFn'>
-      <view class='l-padding-t l-margin-t l-border-t'>预计完成时间：{{item.estimateDate}}</view>
+    <view wx:if='{{!item.estimateDate}}' catchtap='noopFn'>
+      <picker mode='date' value='{{item.estimateDate}}' data-item='{{item}}' bindchange='dateChange'>
+        <view class='l-padding-t l-margin-t l-border-t l-text-center l-text-theme'>添加预计完成时间</view>
+      </picker>
     </view>
+    <view wx:else class='l-padding-t l-margin-t l-border-t'>预计完成时间：{{item.estimateDate}}</view>
   </navigator>
   <template is='loadmore' data='{{...list}}' />
 </view>

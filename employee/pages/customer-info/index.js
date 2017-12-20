@@ -47,6 +47,8 @@ Page({
           this.getInfo()
         }
       })
+    }).finally(_ => {
+      app.storage.setItem('current_page', this.route)
     })
   },
   // 客户详情
@@ -124,13 +126,13 @@ Page({
         'remark.visible': false,
         'remark.loading': false
       })
-      if(data) {
-        this.setData({
-          'remark.list': this.data.remark.list.push(data)
-        })
-      }else {
+      // if(data) {
+      //   this.setData({
+      //     'remark.list': this.data.remark.list.push(data)
+      //   })
+      // }else {
         this.getInfo()
-      }
+      // }
     }).catch(_ => {
       this.setData({ 'remark.loading': false })
     })

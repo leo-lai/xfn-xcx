@@ -59,18 +59,18 @@ Page({
       } else {
         this.getInfo()
       }
-    })
+    }, this.route)
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().catch(_ => {
+    app.checkLogin().finally(_ => {
       app.storage.setItem('current_page', this.route)
     })
   },
   getInfo: function() {
-    wx.showLoading()
+    this.setData({ 'loading': true })
     app.post(app.config.orderInfo).then(({ data }) => {
       if (data) {
         this.setData({
@@ -91,7 +91,7 @@ Page({
         title: '订单跟踪'
       })
     }).finally(_ => {
-      wx.hideLoading()
+      this.setData({ 'loading': false })
     })
   },
   showTrack: function() {
@@ -188,7 +188,7 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.bindPhone, this.data.phone.data).then(({data}) => {
-      app.updateUserInfo(data)
+      app.updateUserInfo(data, false)
       this.setData({
         'phone.visible': false
       })

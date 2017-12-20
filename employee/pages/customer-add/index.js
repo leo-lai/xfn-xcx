@@ -40,6 +40,8 @@ Page({
           'formData.intentionCarId': carTypeSlted.id
         })
       })
+    }).finally(_ => {
+      app.storage.setItem('current_page', this.route)
     })
   },
   // 顶部显示错误信息

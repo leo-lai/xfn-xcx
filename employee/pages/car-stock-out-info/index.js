@@ -39,7 +39,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin()
+    app.checkLogin().finally(_ => {
+      app.storage.setItem('current_page', this.route)
+    })
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {

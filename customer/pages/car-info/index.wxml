@@ -1,5 +1,6 @@
 <!--pages/car-info/index.wxml-->
 <import src="../../template/wxParse/wxParse.wxml" />
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full'>
   <!-- 车辆摘要信息 -->
   <view class='l-text-center l-bg-white l-zoom'>

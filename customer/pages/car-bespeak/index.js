@@ -55,13 +55,13 @@ Page({
       this.getLocation(_ => {
         this.getInfo()
       })
-    })
+    }, this.route)
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().catch(_ => {
+    app.checkLogin().finally(_ => {
       app.storage.setItem('current_page', this.route)
     })
   },

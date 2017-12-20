@@ -151,8 +151,14 @@ App({
     this.runLoginCbs(this.globalData.userInfo)
   },
   runLoginCbs: function (userInfo) {
-    Object.keys(this.globalData.loginCbs).forEach(cbkey => {
-      this.globalData.loginCbs[cbkey].call(this, userInfo)
+    storage.getItem('current_page').then(currentPage => {
+      if (currentPage && this.globalData.loginCbs[currentPage]) {
+        this.globalData.loginCbs[currentPage].call(this, userInfo)
+      } else {
+        Object.keys(this.globalData.loginCbs).forEach(cbkey => {
+          this.globalData.loginCbs[cbkey].call(this, userInfo)
+        })
+      }
     })
   },
   onLogin: function (callback, cbkey = new Date().getTime()) { // 页面监听登录事件

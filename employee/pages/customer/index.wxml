@@ -1,6 +1,6 @@
 <!--pages/customer/index.wxml-->
-<view class='l-page-full {{ search.inputShowed ? "l-no-scroll" : "" }}'>
-  <view class='l-search-box {{search.inputShowed ? "_doing" : ""}}'>
+<view class='l-page-full'>
+  <view class='l-search-box {{search.inputShowed ? "_doing" : ""}}' catchtouchmove='noopFn'>
     <view class='weui-search-bar'>
       <view class='weui-search-bar__form'>
         <view class='weui-search-bar__box'>
@@ -17,7 +17,7 @@
       </view>
       <view class='weui-search-bar__cancel-btn l-text-theme' hidden='{{!search.inputShowed}}' bindtap='hideSearchInput'>取消</view>
     </view>
-    <view class='weui-cells searchbar-result l-scroll' style='height:{{search.height}}px' hidden='{{search.inputVal.length === 0}}'>
+    <scroll-view scroll-y class='weui-cells searchbar-result l-scroll' style='height:{{search.height}}px' hidden='{{search.inputVal.length === 0}}'>
       <navigator url='../customer-info/index?ids={{item.customerUsersId}},{{item.customerUsersOrgId}}' class='weui-cell' hover-class='weui-cell_active' wx:for='{{search.list}}' wx:key='customerUsersId'>
         <view class='weui-cell__bd'>{{item.phoneNumber}}</view>
         <view class='weui-cell__ft'>{{item.customerUsersName}}</view>
@@ -27,7 +27,7 @@
         <view class='weui-loadmore__tips'>搜索中...</view>
       </view>
       <view class='l-padding l-text-gray l-text-center' hidden='{{search.loading || search.list.length > 0}}'>搜索不到相关数据</view>
-    </view>
+    </scroll-view>
   </view>
 
   <view class='l-menu-grid'>

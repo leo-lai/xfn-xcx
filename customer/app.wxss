@@ -147,6 +147,7 @@
 .l-h2{font-size: 17pt; color: #333;}
 .l-h3{font-size: 14pt; color: #333;}
 .l-h4{font-size: 11pt; color: #333;}
+.l-h5{font-size: 24rpx; color: #333;}
 .l-text-error{color: red;}
 .l-text-center{text-align: center;}
 .l-text-right{text-align: right;}
@@ -264,5 +265,5 @@ image{max-width: 100%;}
 .l-popup-bottom._show::after{ opacity: 0.6;}
 /* 中间弹窗 */
 .l-popup-center{position: fixed; background-color: rgba(0, 0, 0, 0.8); top:0; left:0; right:0; bottom:0;}
-.l-popup-center ._inner{background-color: #fff; border-radius: 10rpx; max-width: 80%; max-height: 80%;}
+.l-popup-center ._inner{background-color: #fff; border-radius: 10rpx; max-width: 80%; max-height: 70%;}
 .l-popup-center ._close{color: #fff; font-size: 50rpx; margin-top: 30rpx;}

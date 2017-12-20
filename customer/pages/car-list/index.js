@@ -102,8 +102,9 @@ Page({
     app.onLogin(userInfo => {
       this.setData({ userInfo })
 
+      wx.showLoading()
+      this.getBrandList()
       this.getList(1, _ => {
-        this.getBrandList()
         setTimeout(_ => {
           this.getOrderInfo()
         }, 600)
@@ -115,13 +116,13 @@ Page({
           'history.data': list || []
         })
       })
-    })
+    }, this.route)
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().catch(_ => {
+    app.checkLogin().finally(_ => {
       app.storage.setItem('current_page', this.route)
     })
   },
@@ -207,10 +208,7 @@ Page({
       return
     }
 
-    this.setData({
-      'list.loading': true
-    })
-    
+    this.setData({'list.loading': true})
     app.post(app.config.carList, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
@@ -225,10 +223,10 @@ Page({
         'list.page': data.page,
         'list.data': data.page === 1 ? data.list : this.data.list.data.concat(data.list)
       })
+    }).catch(_ => {
+      wx.hideLoading()
     }).finally(_ => {
-      this.setData({
-        'list.loading': false
-      })
+      this.setData({'list.loading': false})
       callback(this.data.list.data)
     })
   },
@@ -237,6 +235,8 @@ Page({
       if(data) {
         app.navigateTo('../order-info/index')
       }
+    }).finally(_ => {
+      wx.hideLoading()
     })
   },
   getBrandList: function () {

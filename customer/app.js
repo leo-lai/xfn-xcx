@@ -139,7 +139,6 @@ App({
   // 登录，获取用户信息
   login: function () {
     return new Promise((resolve, reject) => {
-      const that = this
       wx.showLoading()
       wx.login({
         success: loginRes => { // 获取授权code，可以到后台换取 openId, sessionKey, unionId
@@ -154,13 +153,13 @@ App({
                 iv: ''
               }
               utils.copyObj(formData, userInfoRes, loginRes)
-              that.post(config.login, formData).then(apiRes => {
+              this.post(config.login, formData).then(apiRes => {
                 resolve(apiRes)
                 if (apiRes.data) {
                   wx.hideLoading()
                   // 由于获取用户信息是网络请求，可能会在 Page.onLoad 之后才返回
                   // 所以此处触发回调函数
-                  that.updateUserInfo(apiRes.data)
+                  this.updateUserInfo(apiRes.data)
                 }
               }).catch(err => {
                 wx.hideLoading()
@@ -208,13 +207,13 @@ App({
     })
     return promise
   },
-  updateUserInfo: function (userInfo = {}) {
+  updateUserInfo: function (userInfo = {}, isCallback = true) {
     if(userInfo.avatarUrl) {
       userInfo.avatarThumb = utils.formatHead(userInfo.avatarUrl)  
     }
     this.globalData.userInfo = Object.assign({}, this.globalData.userInfo, userInfo)
     storage.setItem('userInfo', this.globalData.userInfo)
-    this.runLoginCbs(this.globalData.userInfo)
+    isCallback && this.runLoginCbs(this.globalData.userInfo)
   },
   runLoginCbs: function (userInfo) {
     storage.getItem('current_page').then(currentPage => {

@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    topTips: '',
     imagePlayer: {
       data: []
     },
@@ -68,7 +69,7 @@ Page({
     app.storage.removeItem('carInfo-tempCar')
     app.onLogin(userInfo => {
       this.getInfo(options.id)
-    })
+    }, this.route)
   },
   /**
    * 生命周期函数--监听页面显示
@@ -87,7 +88,7 @@ Page({
           })
         }
       })
-    }).catch(_ => {
+    }).finally(_ => {
       app.storage.setItem('current_page', this.route)
     })
   },
@@ -128,6 +129,18 @@ Page({
         }
       })
     }, 50)
+  },
+  // 顶部显示错误信息
+  showTopTips: function (topTips = '') {
+    this.setData({
+      topTips
+    })
+    clearTimeout(this.toptipTimeid)
+    this.toptipTimeid = setTimeout(() => {
+      this.setData({
+        topTips: ''
+      })
+    }, 3000)
   },
   // 车辆详情
   getInfo: function (carId = '') {
@@ -330,15 +343,36 @@ Page({
   },
   // 预约
   askPrice: function () {
-    if (!this.data.info.carsId) return
-    if (!this.data.sltedColor.carColourId) {
-      wx.showModal({
-        title: '请选择车辆颜色',
-        showCancel: false
-      })
+    if (!this.data.info.carsId) {
+      this.showTopTips('请选择车型')
       return
     }
-    app.navigateTo(`../car-bespeak/index?ids=${this.data.info.carsId},${this.data.sltedColor.carColourId}`)
+
+    if (!this.data.sltedColor.carColourId) {
+      this.showTopTips('请选择车辆颜色')
+      return
+    }
+
+    wx.showLoading()
+    app.post(app.config.orderInfo).then(({ data }) => {
+      if (data && data.customerOrderState !== 13) {
+        let msg = data.isAppointment === 1 ? '当前账号已有预约进行中，无需重复预约' 
+          : '当前账户已经订单进行中，请先完成该订单再预约'
+        wx.showModal({
+          content: msg,
+          confirmText: '查看进度',
+          success: res => {
+            if(res.confirm) {
+              app.navigateTo('../order-info/index')
+            }
+          }
+        })
+      }else{
+        app.navigateTo(`../car-bespeak/index?ids=${this.data.info.carsId},${this.data.sltedColor.carColourId}`)
+      }
+    }).finally(_ => {
+      wx.hideLoading()
+    })
   },
   // 360旋转
   imagesTouchStart: function (event) {

@@ -1,5 +1,9 @@
 <!--pages/order-info/index.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-padding l-text-center l-text-gray' hidden='{{ !loading }}'>
+  <view class='weui-loading'></view>
+  <view class='weui-loadmore__tips'>正在加载</view>
+</view>
 <!-- 绑定手机号 -->
 <view class='l-page-full l-bg-white' wx:if='{{nowPage === 1}}'>
   <view class='l-text-center l-padding'>
@@ -107,17 +111,17 @@
 
   <!-- 购车历程 -->
   <view catchtouchmove='noopFn' class='l-popup-center l-flex-vhc' wx:if='{{track.visible}}'>
-    <view class='_inner' style='width: 80%;'>
+    <scroll-view scroll-y class='_inner l-scroll' style='width: 80%;'>
       <view class='l-track-list'>
         <view class='l-flex-h _item' wx:for='{{track.data}}' wx:key='{{index}}'>
           <image mode='widthFix' src='{{track.icons[index]}}'></image>
           <view class='l-rest'>
-            <view class='l-h4'>{{item.trackContent}}</view>
-            <view class='l-fs-m l-text-gray'>{{item.createDate}}</view>
+            <view class='l-h5'>{{item.trackContent}}</view>
+            <view class='l-fs-s l-text-gray'>{{item.createDate}}</view>
           </view>
         </view>
       </view>
-    </view>
+    </scroll-view>
     <text class='l-icon-61a _close' bindtap='closeTrack'></text>
   </view>
 </view>

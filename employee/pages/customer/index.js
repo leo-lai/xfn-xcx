@@ -1,7 +1,7 @@
 // pages/customer/index.js
 const app = getApp()
 Page({
-
+  noopFn: app.noopFn,
   /**
    * 页面的初始数据
    */
@@ -27,10 +27,6 @@ Page({
         })
       }
     })
-
-    app.onLogin(userInfo => {
-      this.setData({ userInfo })
-    }, this.route)
   },
   /**
    * 生命周期函数--监听页面显示
