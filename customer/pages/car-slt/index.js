@@ -22,8 +22,16 @@ Page({
           'sltedCar': data
         })
       })
-      this.orgList = []
+      this.sourceList = []
       this.getList(options.id)
+    })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    app.checkLogin().catch(_ => {
+      app.storage.setItem('current_page', this.route)
     })
   },
   // 车系列表
@@ -37,7 +45,7 @@ Page({
           years.push(year)
         }
         item.priceStr = (item.price / 10000).toFixed(2)
-        this.orgList.push(item)
+        this.sourceList.push(item)
       })
       this.setData({
         'years': years,
@@ -51,11 +59,11 @@ Page({
   filterList: function() {
     if (this.data.sltedYear === '全部') {
       this.setData({
-        'list': this.orgList
+        'list': this.sourceList
       })
     }else{
       this.setData({
-        'list': this.orgList.filter(item => item.yearPattern + '款' === this.data.sltedYear)
+        'list': this.sourceList.filter(item => item.yearPattern + '款' === this.data.sltedYear)
       })  
     }
   },

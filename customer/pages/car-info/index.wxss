@@ -1,9 +1,10 @@
 /* pages/car-info/index.wxss */
-@import '../../components/wxParse/wxParse.wxss';
+@import '../../template/wxParse/wxParse.wxss';
 .l-images-360{ width: 100%; height: 400rpx; position: relative; overflow: hidden; box-sizing: border-box;}
 .l-images-360 ._360{position: absolute; top:0; left: 0; padding: 30rpx; color: #ff9247; opacity: 0.5;}
 .l-images-360 ._large{position: absolute; right:0; bottom: 0; padding: 30rpx; color: #999; opacity: 0.5;}
 .l-images-360 image{width: 100%; height: 100%; position: absolute; top:0; left:0;}
+.l-images-360 image._hidden{visibility: hidden;}
 
 .l-askprice-btn{padding: 20rpx 30rpx; }
 .l-askprice-btn._fixed{position: fixed; z-index: 1000; bottom:0; left:0; width:100%; margin:0; padding: 20rpx 30rpx;  box-sizing: border-box;}

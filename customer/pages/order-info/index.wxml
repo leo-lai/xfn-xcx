@@ -16,7 +16,7 @@
     </view>
   </view>
 
-  <view class='l-popup-center l-flex-vhc' wx:if='{{phone.visible}}'>
+  <view catchtouchmove='noopFn' class='l-popup-center l-flex-vhc' wx:if='{{phone.visible}}'>
     <view class='l-padding-tb l-h4 l-text-center' style='color:rgba(255,255,255, 0.9);'>绑定手机号码</view>
     <view class='_inner l-padding'>
       
@@ -106,7 +106,7 @@
   </block>
 
   <!-- 购车历程 -->
-  <view class='l-popup-center l-flex-vhc' wx:if='{{track.visible}}'>
+  <view catchtouchmove='noopFn' class='l-popup-center l-flex-vhc' wx:if='{{track.visible}}'>
     <view class='_inner' style='width: 80%;'>
       <view class='l-track-list'>
         <view class='l-flex-h _item' wx:for='{{track.data}}' wx:key='{{index}}'>

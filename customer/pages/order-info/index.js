@@ -1,14 +1,14 @@
 // pages/order-info/index.js
 const app = getApp()
 Page({
-
+  noopFn: app.noopFn,
   /**
    * 页面的初始数据
    */
   data: {
     nowPage: 0,
     topTips: '',
-    userInfo: {},
+    userInfo: null,
     phone: {
       visible: true,
       disabled: false,
@@ -24,12 +24,14 @@ Page({
       image: app.config.resURL + '/20171208002.png',
     },
     state: {
-      '1': '已提交定车单',
-      '3': '已支付定金',
-      '5': '银行贷款审批通过',
-      '7': '车辆已出库',
-      '9': '已交付尾款',
-      '11': '加装／上牌完成'
+      '1': '已支付定金',
+      '3': '等待银行审批',
+      '5': '等待车辆出库',
+      '7': '车辆到店，待付尾款',
+      '9': '等待加装精品',
+      '11': '等待上牌',
+      '12': '等待提车',
+      '13': '订单完成'
     },
     track: {
       icons: [
@@ -45,23 +47,26 @@ Page({
       data: null
     }
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
-  onShow: function (options) {
+  onLoad: function () {
     app.onLogin(userInfo => {
       this.setData({ userInfo })
       if (!userInfo.phoneNumber) {
-        this.setData({
-          'nowPage': 1
-        })
-        wx.setNavigationBarTitle({
-          title: '绑定手机'
-        })
-      }else {
+        this.setData({ 'nowPage': 1 })
+        wx.setNavigationBarTitle({ title: '绑定手机' })
+      } else {
         this.getInfo()
       }
+    })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    app.checkLogin().catch(_ => {
+      app.storage.setItem('current_page', this.route)
     })
   },
   getInfo: function() {

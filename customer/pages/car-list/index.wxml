@@ -1,7 +1,7 @@
 <!--index/index.wxml-->
 <import src='../../template/loadmore.wxml' />
-<view class='l-page-full {{filter.visible ? "l-no-scroll": ""}}'>
-  <view class='l-list-filter l-flex-hc'>
+<view class='l-page-full'>
+  <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
     <navigator hover-class='none' url='../order-info/index'><text class='l-icon-639 l-text-theme'></text></navigator>
     <view class='l-rest'>
       <view class='_item {{filter.type === 1 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{1}}'>
@@ -57,7 +57,7 @@
           <icon class='l-margin-r-m' hidden='{{filter.data.carsName === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearSearch'></icon>
           <icon type='search' size='18' color='#555' bindtap='search'></icon>
         </view>
-        <text class='l-margin-l' bindtap='cancelSearch'>取消</text>
+        <text class='l-margin-l l-text-theme' bindtap='cancelSearch'>取消</text>
       </view>
 
       <!-- 历史记录 -->

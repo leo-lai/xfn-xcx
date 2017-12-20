@@ -1,8 +1,9 @@
 // pages/car-info/index.js
 var tabWidth = 96; // 需要设置slider的宽度，用于计算中间位置
-var WxParse = require('../../components/wxParse/wxParse.js')
+var WxParse = require('../../template/wxParse/wxParse.js')
 const app = getApp()
 Page({
+  noopFn: app.noopFn,
   /**
    * 页面的初始数据
    */
@@ -69,18 +70,25 @@ Page({
       this.getInfo(options.id)
     })
   },
+  /**
+   * 生命周期函数--监听页面显示
+   */
   onShow: function () {
-    app.storage.getItem('carInfo-tempCar').then(sltedCar => {
-      if (sltedCar && this.data.sltedCar.carsId !== sltedCar.carsId) {
-        this.data.sltedCar = sltedCar
-        this.getInfo(sltedCar.carsId)
-        WxParse.wxParse('introduce.data', 'html', '', this)
-        this.setData({
-          'tabs.visible': false,
-          'introduce.data': null,
-          'parameter.data': null
-        })
-      }
+    app.checkLogin().then(userInfo => {
+      app.storage.getItem('carInfo-tempCar').then(sltedCar => {
+        if (sltedCar && this.data.sltedCar.carsId !== sltedCar.carsId) {
+          this.data.sltedCar = sltedCar
+          this.getInfo(sltedCar.carsId)
+          WxParse.wxParse('introduce.data', 'html', '', this)
+          this.setData({
+            'tabs.visible': false,
+            'introduce.data': null,
+            'parameter.data': null
+          })
+        }
+      })
+    }).catch(_ => {
+      app.storage.setItem('current_page', this.route)
     })
   },
   onPullDownRefresh: function () {
@@ -330,7 +338,7 @@ Page({
       })
       return
     }
-    app.navigateTo(`../car-bespeak/index?car=${this.data.info.carsId}&color=${this.data.sltedColor.carColourId}`)
+    app.navigateTo(`../car-bespeak/index?ids=${this.data.info.carsId},${this.data.sltedColor.carColourId}`)
   },
   // 360旋转
   imagesTouchStart: function (event) {

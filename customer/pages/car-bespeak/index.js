@@ -1,7 +1,7 @@
 // pages/car-bespeak/index.js
 const app = getApp()
 Page({
-
+  noopFn: app.noopFn,
   /**
    * 页面的初始数据
    */
@@ -36,26 +36,36 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this
     wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          'store.height': res.windowHeight - 150
+      success: res => {
+        this.setData({
+          'store.height': res.windowHeight - 200
         })
       }
     })
 
     app.onLogin(userInfo => {
-      this.data.formData.carId = options.car
-      this.data.store.data.carId = options.car
-      this.data.store.data.colourId = options.color
+      this.params = {
+        ids: options.ids ? options.ids.split(',') : []
+      }
+      this.data.formData.carId = this.params.ids[0] || ''
+      this.data.store.data.carId = this.params.ids[0] || ''
+      this.data.store.data.colourId = this.params.ids[1] || ''
 
       this.getLocation(_ => {
         this.getInfo()
       })
     })
   },
-  getLocation(callback = app.noop) {
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    app.checkLogin().catch(_ => {
+      app.storage.setItem('current_page', this.route)
+    })
+  },
+  getLocation(callback = app.noopFn) {
     wx.getLocation({
       type: 'gcj02',
       success: res => {
@@ -167,7 +177,6 @@ Page({
     })
     this.closeStore()
   },
-  catchEvent: app.noop,
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
     this.setData({

@@ -258,7 +258,7 @@ image{max-width: 100%;}
 .l-popup-bottom ._inner ._close{position: absolute; top: 0.2rem; right: 0.2rem; width: 1.8rem; height: 1.8rem; line-height: 1.8rem; text-align: center; color: #333; font-size: 40rpx; z-index: 1;}
 .l-popup-bottom ._inner ._hd{padding: 0.5rem 0.75rem; text-align: center;}
 .l-popup-bottom ._inner ._ft{padding:0.75rem;}
-.l-popup-bottom ._inner ._bd{ overflow: auto; -webkit-overflow-scrolling: touch; max-height: 800rpx;}
+.l-popup-bottom ._inner ._bd{ overflow: auto; -webkit-overflow-scrolling: touch; max-height: 800rpx; box-sizing: border-box;}
 .l-popup-bottom._show{visibility: visible; overflow: visible; pointer-events: auto; }
 .l-popup-bottom._show ._inner{transform: translate3d(0, 0, 0);}
 .l-popup-bottom._show::after{ opacity: 0.6;}

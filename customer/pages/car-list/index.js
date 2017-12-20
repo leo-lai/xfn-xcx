@@ -1,6 +1,10 @@
 //index/index.js
 const app = getApp()
 Page({
+  noopFn: app.noopFn,
+  /**
+   * 页面的初始数据
+   */
   data: {
     userInfo: {},
     history: {
@@ -113,6 +117,14 @@ Page({
       })
     })
   },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    app.checkLogin().catch(_ => {
+      app.storage.setItem('current_page', this.route)
+    })
+  },
   onReachBottom: function () { // 加载更多
     if (this.data.userInfo) {
       this.getList(this.data.list.data.length > 0 ? this.data.list.page + 1 : 1)
@@ -183,7 +195,7 @@ Page({
       'filter.type': ''
     })
   },
-  getList: function (page = 1, callback = app.noop) {
+  getList: function (page = 1, callback = app.noopFn) {
     if(page === 1) {
       this.setData({
         'list.more': true

@@ -2,7 +2,7 @@
 import utils from '/script/utils'
 import config from 'config'
 
-const noop = function () { }
+const noopFn = function () { }
 
 // 缓存函数
 const storage_prefix = 'customer_'
@@ -41,33 +41,31 @@ const navigateTo = event => {
     wx.navigateTo({ url:  event.currentTarget.dataset.url })
   }
 }
+const back = (delta = 1) => {
+  wx.navigateBack({ delta })
+}
 // 提示
-const toast = msg => {
+let toastTimeid = 0
+const toast = (msg, isBack) => {
   return new Promise((resolve, reject) => {
     wx.showToast({
       icon: 'success',
-      title: msg,
-      duration: 2000
+      title: msg
     })
-    setTimeout(_ => {
+    clearTimeout(toastTimeid)
+    toastTimeid = setTimeout(_ => {
+      isBack && back()
       resolve()
-    }, 2000)
+    }, 1500)
   })
 }
 
 App({
-  utils, config, storage, noop, toast, navigateTo,
+  utils, config, storage, noopFn, toast, navigateTo, back,
   onLaunch: function () {
     // 获取用户信息
     storage.getItem('userInfo').then(userInfo => {
-      if (userInfo) {
-        this.globalData.userInfo = userInfo
-        this.runLoginCbs(userInfo)
-      } else {
-        this.login()
-      }
-    }).catch(() => {
-      this.login()
+      this.globalData.userInfo = userInfo
     })
   },
   // post请求
@@ -125,6 +123,17 @@ App({
           reject(err)
         }
       })
+    })
+  },
+  // 检测是否登录
+  checkLogin() {
+    return new Promise((resolve, reject) => {
+      if (this.globalData.userInfo) {
+        resolve(this.globalData.userInfo)
+      } else {
+        reject(null)
+        this.login()
+      }
     })
   },
   // 登录，获取用户信息
@@ -203,18 +212,24 @@ App({
     if(userInfo.avatarUrl) {
       userInfo.avatarThumb = utils.formatHead(userInfo.avatarUrl)  
     }
-    Object.assign(this.globalData.userInfo, userInfo)
+    this.globalData.userInfo = Object.assign({}, this.globalData.userInfo, userInfo)
     storage.setItem('userInfo', this.globalData.userInfo)
     this.runLoginCbs(this.globalData.userInfo)
   },
   runLoginCbs: function (userInfo) {
-    this.globalData.loginCbs.forEach(cb => {
-      cb.call(this, userInfo)
+    storage.getItem('current_page').then(currentPage => {
+      if (currentPage && this.globalData.loginCbs[currentPage]) {
+        this.globalData.loginCbs[currentPage].call(this, userInfo)
+      }else {
+        Object.keys(this.globalData.loginCbs).forEach(cbkey => {
+          this.globalData.loginCbs[cbkey].call(this, userInfo)
+        })
+      }
     })
   },
-  onLogin: function (callback) { // 页面监听登录事件
+  onLogin: function (callback, cbkey = new Date().getTime()) { // 页面监听登录事件
     if (typeof callback === 'function') {
-      this.globalData.loginCbs.push(callback)
+      this.globalData.loginCbs[cbkey] = callback
       if (this.globalData.userInfo) {
         callback.call(this, this.globalData.userInfo)
       }
@@ -222,7 +237,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    loginCbs: [], // 页面登录回调
+    loginCbs: {}, // 页面登录回调
     loginTimes: 0 // 登录失败次数
   }
 })

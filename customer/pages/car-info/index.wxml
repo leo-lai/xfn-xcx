@@ -1,11 +1,11 @@
 <!--pages/car-info/index.wxml-->
-<import src="../../components/wxParse/wxParse.wxml" />
-<view class='l-page-full {{counter.visible ? "l-no-scroll" : ""}}'>
+<import src="../../template/wxParse/wxParse.wxml" />
+<view class='l-page-full'>
   <!-- 车辆摘要信息 -->
   <view class='l-text-center l-bg-white l-zoom'>
     <view class='l-images-360' bindtouchstart='imagesTouchStart' bindtouchmove='imagesTouchMove'>
       <block wx:for='{{imagePlayer.data}}' wx:key='{{index}}'>
-        <image mode='aspectFit' src='{{item.src}}' hidden='{{item.hidden}}'></image>
+        <image mode='aspectFit' src='{{item.src}}' class='{{item.hidden ? "_hidden" : ""}}'></image>
       </block>
       <text class='l-icon-623 _360' hidden='{{imagePlayer.data.length <= 1}}'></text>
       <text class='l-icon-613 _large' bindtap='imagePreview'></text>
@@ -125,14 +125,14 @@
   </view>
 
   <!-- 购车计算器 -->
-  <view class='l-popup-bottom {{counter.visible ? "_show" : ""}}'>
-    <view class='_inner'>
+  <view class='l-popup-bottom {{counter.visible ? "_show" : ""}}' bindtap='closeCounter' catchtouchmove='noopFn'>
+    <view class='_inner' catchtap='noopFn'>
       <text class='_close' bindtap='closeCounter'>×</text>
       <view class='_hd l-border-b'>
         <text class='l-h4'>购车计算器</text>
         <view class='l-text-gray'>政策不同可能导致落地价格稍有偏差</view>
       </view>
-      <view class='_bd l-buyway-tab' style='max-height: {{counter.height}}px'>
+      <scroll-view scroll-y class='_bd l-buyway-tab' style='height: {{counter.height}}px'>
         <view class='l-flex-hc _tit'>
           <view class='_item l-rest {{counter.tabIndex === 0 ? "_active" : ""}}' bindtap='counterTab' data-val='{{0}}'>全款购车</view>
           <view class='_item l-rest {{counter.tabIndex === 1 ? "_active" : ""}}' bindtap='counterTab' data-val='{{1}}'>分期贷款</view>
@@ -224,7 +224,7 @@
             <text>￥{{counter.loanPayment.commercialInsurance}}</text>
           </view>
         </view>
-      </view>
+      </scroll-view>
       <view class='l-padding'>
         <button class='l-button-main' bindtap='askPrice'>询底价</button>
       </view>
