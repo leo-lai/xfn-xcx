@@ -11,7 +11,7 @@
       <text class='l-icon-623 _360' hidden='{{imagePlayer.data.length <= 1}}'></text>
       <text class='l-icon-613 _large' bindtap='imagePreview'></text>
     </view>
-    <view class='l-h3 l-margin-tb'>{{info.carsName}}</view>
+    <view class='l-h4 l-margin-tb'>{{info.carsName}}</view>
     <view>
       <text class='l-text-gray'>官方指导价：{{info.priceStr}}万</text>
       <text class='l-margin'>|</text>

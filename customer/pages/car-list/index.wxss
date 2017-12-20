@@ -33,7 +33,7 @@
 
 .l-list-car ._item{ background: #fff; margin: 30rpx 0; }
 .l-list-car ._item image{ width: 100%;}
-.l-list-car ._item ._tit{font-weight: 500; font-size: 34rpx;}
+.l-list-car ._item ._tit{font-weight: 500; font-size: 30rpx;}
 .l-list-car ._item ._price1{color: #999;}
 .l-list-car ._item ._price2{color: #ff9247; margin-top: 20rpx;}
 .l-list-car ._item ._price2 text{font-size: 40rpx; font-weight: 600; margin: 0 20rpx;}

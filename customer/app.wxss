@@ -143,10 +143,8 @@
 .l-fs-m{font-size: 28rpx;}
 .l-fs-s{font-size: 24rpx;}
 .l-fs-xs{font-size: 22rpx;}
-.l-h1{font-size: 20pt; color: #333;}
-.l-h2{font-size: 17pt; color: #333;}
-.l-h3{font-size: 14pt; color: #333;}
-.l-h4{font-size: 11pt; color: #333;}
+.l-h3{font-size: 34rpx; color: #333;}
+.l-h4{font-size: 30rpx; color: #333;}
 .l-h5{font-size: 24rpx; color: #333;}
 .l-text-error{color: red;}
 .l-text-center{text-align: center;}
