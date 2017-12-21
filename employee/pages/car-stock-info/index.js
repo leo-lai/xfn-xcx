@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null,
     info: null
   },
 
@@ -15,8 +14,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.setData({ userInfo })
-
       this.params = {
         ids: options.ids ? options.ids.split(',') : ['', '', '']
       }
@@ -27,13 +24,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 库存详情
   getInfo: function() {
-    wx.showLoading()
+    wx.showNavigationBarLoading()
     app.post(app.config.carStockInfo, {
       carsId: this.params.ids[0],
       colourId: this.params.ids[1],
@@ -41,11 +36,9 @@ Page({
       rows: 1000
     }).then(({data}) => {
       data.guidingPriceStr = (data.guidingPrice / 10000).toFixed(2) + '万'
-      this.setData({
-        'info': data
-      })
+      this.setData({ 'info': data })
     }).finally(_ => {
-      wx.hideLoading()
+      wx.hideNavigationBarLoading()
     })
   },
   // 查看验车照片

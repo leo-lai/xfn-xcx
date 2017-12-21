@@ -1,6 +1,6 @@
 <!--index/index.wxml-->
 <import src='../../template/loadmore.wxml' />
-<view class='l-page-full'>
+<view class='l-page-full {{loading ? "_disabled" : ""}}'>
   <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
     <navigator hover-class='none' url='../order-info/index'><text class='l-icon-639 l-text-theme'></text></navigator>
     <view class='l-rest'>

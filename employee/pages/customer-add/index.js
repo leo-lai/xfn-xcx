@@ -7,8 +7,7 @@ Page({
    */
   data: {
     topTips: '',
-    userInfo: null,
-    expectWay: ['全款', '分期'],
+    buyWay: app.config.baseData.buyWay,
     buyTime: app.config.baseData.buyTime,
     carsName: '',
     formData: {
@@ -18,31 +17,19 @@ Page({
       expectWayId: '',
       carPurchaseIntention: '',
       remarks: ''
-    },
+    }
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.onLogin(userInfo => {
-      this.setData({ userInfo })
-    }, this.route)
+    
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().then(_ => {
-      app.storage.getItem('carType_slted').then(carTypeSlted => {
-        this.setData({
-          'carsName': carTypeSlted.name,
-          'formData.intentionCarId': carTypeSlted.id
-        })
-      })
-    }).finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -89,7 +76,9 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.customerAdd, this.data.formData).then(({ data }) => {
-      app.toast('新增成功', true)
+      app.toast('新增成功').then(_ => {
+        wx.redirectTo({ url: '../customer-list/index?type=0' })
+      })
     }).catch(err => {
       wx.hideLoading()
     })

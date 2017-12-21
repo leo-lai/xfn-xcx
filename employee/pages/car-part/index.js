@@ -6,8 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    noopFn: app.noopFn,
-    userInfo: null,
     filter: {
       type: '',
       loading: false,
@@ -32,7 +30,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.setData({ userInfo })
       this.getList()
     }, this.route)
   },
@@ -40,18 +37,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().then(_ => {
-      app.checkLogin().then(_ => {
-        app.storage.getItem('car_part_done').then(refresh => {
-          if (refresh) {
-            app.storage.removeItem('car_part_done')
-            this.getList()
-          }
-        })
-      })
-    }).finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 加载更多
   onReachBottom: function () {
@@ -70,15 +56,7 @@ Page({
       wx.stopPullDownRefresh()
     }
   },
-  // 品牌列表
-  getBrandList: function () {
-    app.post(app.config.brandList).then(({ data }) => {
-      this.setData({
-        'brandList': data
-      })
-    })
-  },
-  // 待出库列表
+  // 待加装列表
   getList: function (page = 1, callback = app.noopFn) {
     if (page === 1) {
       this.setData({
@@ -107,8 +85,8 @@ Page({
       callback(this.data.list.data)
     })
   },
-  // 表单输入
-  dateInput: function (event) {
+  // picker change
+  dateChange: function (event) {
     let data = {}
     data['filter.data.' + event.target.id] = event.detail.value
     this.setData(data)
@@ -117,13 +95,12 @@ Page({
   dateChange: function (event) {
     let slted = event.currentTarget.dataset.item
     slted.estimateDate = event.detail.value
-    wx.showLoading()
+    wx.showNavigationBarLoading()
     app.post(app.config.estimateDate, {
       customerOrderId: slted.customerOrderId,
       estimateDate: slted.estimateDate
     }).then(_ => {
-      app.toast('操作成功')
-      // this.setData({ 'list.data': this.data.list.data })
+      app.toast('添加成功')
       this.setData({
         'list.data': this.data.list.data.map(item => {
           if (slted.customerOrderId === item.customerOrderId) {
@@ -133,7 +110,7 @@ Page({
         })
       })
     }).catch(_ => {
-      wx.hideLoading()
+      wx.hideNavigationBarLoading()
     })
   }
 })

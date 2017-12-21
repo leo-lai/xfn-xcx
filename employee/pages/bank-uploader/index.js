@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null,
     avatar: app.config.avatar,
     uploadImages: [],
     uploadVideo: {},
@@ -22,7 +21,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.setData({ userInfo })
       this.data.formData.customerUsersId = options.id
     }, this.route)
   },
@@ -30,9 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -211,7 +207,12 @@ Page({
 
     wx.showLoading()
     app.post(app.config.customerUpload, this.data.formData).then(_ => {
-      app.storage.setItem('car_uploader_refresh', 1)
+      app.getPrevPage().then(prevPage => {
+        prevPage.setData({
+          'info.bankAuditsImage': this.data.formData.bankAuditsImage,
+          'info.bankAuditsvideo': this.data.formData.bankAuditsvideo
+        })
+      })
       app.toast('上传成功', true)
     }).catch(_ => {
       wx.hideLoading()

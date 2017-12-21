@@ -54,14 +54,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this
     wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
+      success: res => {
+        this.setData({
           'tabs.height': res.windowHeight - 102,
           'counter.height': res.windowHeight - 240,
-          'tabs.left': (res.windowWidth / that.data.tabs.data.length - tabWidth) / 2,
-          'tabs.offset': res.windowWidth / that.data.tabs.data.length * that.data.tabs.index
+          'tabs.left': (res.windowWidth / this.data.tabs.data.length - tabWidth) / 2,
+          'tabs.offset': res.windowWidth / this.data.tabs.data.length * this.data.tabs.index
         })
       }
     })
@@ -88,8 +87,6 @@ Page({
           })
         }
       })
-    }).finally(_ => {
-      app.storage.setItem('current_page', this.route)
     })
   },
   onPullDownRefresh: function () {
@@ -144,7 +141,7 @@ Page({
   },
   // 车辆详情
   getInfo: function (carId = '') {
-    wx.showLoading()
+    wx.showNavigationBarLoading()
     return app.post(app.config.carInfo, { carId }).then(({ data }) => {
       data.priceStr = (data.price / 10000).toFixed(2)
       data.minPriceStr = (data.minPrice / 10000).toFixed(2)
@@ -166,7 +163,7 @@ Page({
         'tabs.visible': false
       })
     }).finally(_ => {
-      wx.hideLoading()
+      wx.hideNavigationBarLoading()
     })
   },
   // 选择颜色
@@ -281,9 +278,7 @@ Page({
     })
   },
   showCounter() {
-    this.setData({
-      'counter.visible': true
-    })
+    this.setData({ 'counter.visible': true })
     if (this.data.counter.tabIndex === 0) {
       this.getFullPayment()
     } else if (this.data.counter.tabIndex === 1) {
@@ -291,9 +286,7 @@ Page({
     }
   },
   closeCounter() {
-    this.setData({
-      'counter.visible': false
-    })
+    this.setData({ 'counter.visible': false })
   },
   counterTab(event) {
     let index = event.currentTarget.dataset.val
@@ -321,16 +314,20 @@ Page({
   },
   // 全款
   getFullPayment: function () {
+    wx.showNavigationBarLoading()
     app.post(app.config.fullPayment, {
       carId: this.data.info.carsId
     }).then(({ data }) => {
       this.setData({
         'counter.fullPayment': data
       })
+    }).finally(_ => {
+      wx.hideNavigationBarLoading()
     })
   },
   // 贷款
   getLoanPayment: function () {
+    wx.showNavigationBarLoading()
     app.post(app.config.loanPayment, {
       carId: this.data.info.carsId,
       paymentRatio: this.data.counter.percent,
@@ -339,6 +336,8 @@ Page({
       this.setData({
         'counter.loanPayment': data
       })
+    }).finally(_ => {
+      wx.hideNavigationBarLoading()
     })
   },
   // 预约

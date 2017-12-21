@@ -30,13 +30,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 车系列表
   getList: function(familyId) {
-    wx.showLoading()
+    wx.showNavigationBarLoading()
     app.post(app.config.carListByFid, { familyId }).then(({ data }) => {
       let years = ['全部']
       data.forEach(item => {
@@ -53,7 +51,7 @@ Page({
       })
       this.filterList()
     }).finally(_ => {
-      wx.hideLoading()
+      wx.hideNavigationBarLoading()
     })
   },
   filterList: function() {
@@ -75,14 +73,8 @@ Page({
   },
   sltCar: function(event) { // 选择车辆
     let item = event.currentTarget.dataset.item
-    this.setData({
-      'sltedCar': item
-    })
+    this.setData({ 'sltedCar': item })
     app.storage.setItem('carInfo-tempCar', item)
-    setTimeout(_ => {
-      wx.navigateBack({
-       delta: 1 
-      })
-    }, 50)
+    app.back()
   }
 })

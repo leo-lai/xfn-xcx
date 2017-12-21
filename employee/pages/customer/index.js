@@ -6,12 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null,
     search: {
-      loading: false,
       height: 602,
-      inputShowed: false,
-      inputVal: '',
+      doing: false,
+      typing: false,
+      keyword: '',
       list: []
     }
   },
@@ -35,41 +34,33 @@ Page({
     app.checkLogin()
   },
   showSearchInput: function () {
-    this.setData({
-      'search.inputShowed': true
-    })
+    this.setData({ 'search.typing': true })
   },
   hideSearchInput: function () {
     this.setData({
-      'search.inputVal': '',
-      'search.inputShowed': false
+      'search.keyword': '',
+      'search.typing': false
     })
   },
   clearSearchInput: function () {
-    this.setData({
-      'search.inputVal': ''
-    })
+    this.setData({ 'search.keyword': '' })
   },
   inputSearchTyping: function (event) {
     this.setData({
-      'search.loading': true,
-      'search.inputVal': event.detail.value
+      'search.doing': true,
+      'search.keyword': event.detail.value
     })
     
     clearTimeout(this.searchTimeid)
     this.searchTimeid = setTimeout(_ => {
-      this.search(this.data.search.inputVal)
+      this.search(this.data.search.keyword)
     }, 200)
   },
   search: function (phoneNumber = '') {
     app.post(app.config.customerSearch, { phoneNumber }).then(({data}) => {
-      this.setData({
-        'search.list': data
-      })
+      this.setData({ 'search.list': data })
     }).finally(_ => {
-      this.setData({
-        'search.loading': false
-      })
+      this.setData({ 'search.doing': false })
     })
   }
 })

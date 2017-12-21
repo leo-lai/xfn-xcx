@@ -211,6 +211,7 @@ button.l-button-main[disabled] { background-color:#fa5539 !important; opacity: 0
 .l-margin-l{margin-left: 30rpx;}
 .l-margin-l-s{margin-left: 15rpx;}
 .l-padding{padding: 30rpx;}
+.l-padding-lr{padding-left: 30rpx; padding-right: 30rpx;}
 .l-padding-xl{padding: 50rpx;}
 .l-padding-t{padding-top: 30rpx;}
 .l-padding-t-m{padding-top: 20rpx;}

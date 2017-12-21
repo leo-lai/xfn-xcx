@@ -1,7 +1,7 @@
 <!--pages/car-stock-out/index.wxml-->
 <import src='../../template/loadmore.wxml' />
-<view class='l-page-full {{filter.visible ? "l-no-scroll": ""}}'>
-  <view class='l-list-filter l-flex-hc'>
+<view class='l-page-full'>
+  <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
     <view class='_input l-rest l-flex-hc'>
       <view class='l-rest'>
         <input data-val='search' bindfocus='showFilter' bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入订单号或车型名称' value='{{filter.data.carsSearch}}'/>

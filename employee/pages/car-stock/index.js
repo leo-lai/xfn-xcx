@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null,
     brandList: [],
     filter: {
       type: '',
@@ -33,7 +32,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.setData({ userInfo })
       this.getBrandList()
       this.getList()
 
@@ -49,9 +47,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 加载更多
   onReachBottom: function () {
@@ -89,9 +85,7 @@ Page({
       callback(this.data.list.data)
       return
     }
-    this.setData({
-      'list.loading': true
-    })
+    this.setData({ 'list.loading': true })
     app.post(app.config.carStockList, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
@@ -106,9 +100,7 @@ Page({
         'list.data': data.page === 1 ? data.list : this.data.list.data.concat(data.list)
       })
     }).finally(_ => {
-      this.setData({
-        'list.loading': false
-      })
+      this.setData({ 'list.loading': false })
       callback(this.data.list.data)
     })
   },

@@ -3,12 +3,12 @@
 <view class='l-page-full {{filter.visible ? "l-no-scroll": ""}}'>
   <view class='l-list-filter'>
     <view class='l-filter-date l-flex-hc'>
-      <picker class='l-rest _type {{filter.type === "startDate" ? "_active" : ""}}' mode='date' value='{{filter.data.startDate}}' id='startDate' bindchange='dateInput'>
+      <picker class='l-rest _type {{filter.type === "startDate" ? "_active" : ""}}' mode='date' value='{{filter.data.startDate}}' id='startDate' bindchange='dateChange'>
         <text>{{filter.data.startDate || '开始时间'}}</text>
         <text class='l-icon-6ac'></text>
       </picker>
       <text>至</text>
-      <picker class='l-rest _type {{filter.type === "endDate" ? "_active" : ""}}' mode='date' value='{{filter.data.endDate}}' id='endDate' bindchange='dateInput'>
+      <picker class='l-rest _type {{filter.type === "endDate" ? "_active" : ""}}' mode='date' value='{{filter.data.endDate}}' id='endDate' bindchange='dateChange'>
         <text>{{filter.data.endDate || '结束时间'}}</text>
         <text class='l-icon-6ac'></text>
       </picker>

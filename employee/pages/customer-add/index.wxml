@@ -33,8 +33,8 @@
           <view class='weui-label'>打算购车方案</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <picker id='expectWayId' bindchange='bindInput' value='{{formData.expectWayId}}' range='{{expectWay}}'>
-            <view wx:if='{{formData.expectWayId}}' class='weui-select weui-select_in-select-after'>{{expectWay[formData.expectWayId]}}</view>
+          <picker id='expectWayId' bindchange='bindInput' value='{{formData.expectWayId}}' range='{{buyWay}}'>
+            <view wx:if='{{formData.expectWayId}}' class='weui-select weui-select_in-select-after'>{{buyWay[formData.expectWayId]}}</view>
             <view wx:else class='weui-select weui-select_in-select-after l-text-gray'>请选择</view>
           </picker>
         </view>

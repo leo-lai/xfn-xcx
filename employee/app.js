@@ -40,6 +40,7 @@ const navigateTo = event => {
     wx.navigateTo({ url:  event.currentTarget.dataset.url })
   }
 }
+// 返回
 const back = (delta = 1) => {
   wx.navigateBack({ delta })
 }
@@ -58,9 +59,20 @@ const toast = (msg, isBack) => {
     }, 1500)
   })
 }
+// 获取上一页
+const getPrevPage = _ => {
+  return new Promise((resolve, reject) => {
+    let currentPages = getCurrentPages()
+    if (currentPages.length > 1) {
+      resolve(currentPages[currentPages.length - 2])
+    }else{
+      reject('没有上一页了')
+    }
+  })
+}
 
 App({
-  utils, config, storage, noopFn, toast, navigateTo, back,
+  utils, config, storage, noopFn, toast, navigateTo, back, getPrevPage,
   onLaunch: function () {
     storage.getItem('userInfo').then(userInfo => {
       this.globalData.userInfo = userInfo
@@ -130,7 +142,7 @@ App({
       if(this.globalData.userInfo) {
         resolve(this.globalData.userInfo)
       }else {
-        reject(null)
+        reject('未登录状态')
         this.logout()
       }
     })
@@ -151,14 +163,8 @@ App({
     this.runLoginCbs(this.globalData.userInfo)
   },
   runLoginCbs: function (userInfo) {
-    storage.getItem('current_page').then(currentPage => {
-      if (currentPage && this.globalData.loginCbs[currentPage]) {
-        this.globalData.loginCbs[currentPage].call(this, userInfo)
-      } else {
-        Object.keys(this.globalData.loginCbs).forEach(cbkey => {
-          this.globalData.loginCbs[cbkey].call(this, userInfo)
-        })
-      }
+    getCurrentPages().forEach(page => {
+      this.globalData.loginCbs[page.route] && this.globalData.loginCbs[page.route].call(this, userInfo)
     })
   },
   onLogin: function (callback, cbkey = new Date().getTime()) { // 页面监听登录事件

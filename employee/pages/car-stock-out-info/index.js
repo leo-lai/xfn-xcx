@@ -7,7 +7,6 @@ Page({
    */
   data: {
     topTips: '',
-    userInfo: null,
     orderType: app.config.baseData.orderType,
     info: null,
     carList: {
@@ -28,10 +27,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.setData({ userInfo })
-      this.params = {
-        id: options.id
-      }
       this.getInfo()
     }, this.route)
   },
@@ -39,9 +34,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -59,7 +52,7 @@ Page({
   getInfo: function () {
     wx.showLoading()
     app.post(app.config.stockOutInfo, {
-      customerOrderId: this.params.id
+      customerOrderId: this.options.id
     }).then(({ data }) => {
       this.setData({
         'info': data
@@ -70,9 +63,9 @@ Page({
   },
   // 可出库车辆列表
   getCarList: function () {
-    wx.showLoading()
+    wx.showNavigationBarLoading()
     app.post(app.config.stockOutCarList, {
-      customerOrderId: this.params.id
+      customerOrderId: this.options.id
     }).then(({ data }) => {
       this.setData({
         'carList.visible': true,
@@ -82,7 +75,7 @@ Page({
         })
       })
     }).finally(_ => {
-      wx.hideLoading()
+      wx.hideNavigationBarLoading()
     })
   },
   sltCarList: function (event) {
@@ -108,10 +101,10 @@ Page({
 
     this.setData({ 'carList.loading': true })
     app.post(app.config.stockOutCar, {
-      customerOrderId: this.params.id,
+      customerOrderId: this.options.id,
       stockCarId: this.data.carList.slted.join(',')
     }).then(_ => {
-      app.storage.setItem('stock_out_refresh', 1)
+      app.getPrevPage().then(prevPage => prevPage.getList())
       app.toast('出库成功', true)
     }).finally(_ => {
       this.setData({ 'carList.loading': true })

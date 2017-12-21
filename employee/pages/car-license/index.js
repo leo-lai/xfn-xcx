@@ -6,8 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    noopFn: app.noopFn,
-    userInfo: null,
     filter: {
       type: '',
       loading: false,
@@ -32,31 +30,14 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.setData({ userInfo })
       this.getList()
-
-      // 获取搜索历史记录
-      app.storage.getItem('stock_out_history').then(list => {
-        this.setData({
-          'filter.history': list || []
-        })
-      })
     }, this.route)
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().then(_ => {
-      app.storage.getItem('stock_out_refresh').then(refresh => {
-        if (refresh) {
-          app.storage.removeItem('stock_out_refresh')
-          this.getList()
-        }
-      })
-    }).finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 加载更多
   onReachBottom: function () {
@@ -75,15 +56,7 @@ Page({
       wx.stopPullDownRefresh()
     }
   },
-  // 品牌列表
-  getBrandList: function () {
-    app.post(app.config.brandList).then(({ data }) => {
-      this.setData({
-        'brandList': data
-      })
-    })
-  },
-  // 待出库列表
+  // 待上牌列表
   getList: function (page = 1, callback = app.noopFn) {
     if (page === 1) {
       this.setData({
@@ -100,11 +73,6 @@ Page({
     app.post(app.config.licenseList, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
-      // data.list = data.list.map(item => {
-      //   item.thumb = app.utils.formatThumb(item.indexImage, 150)
-      //   return item
-      // })
-
       this.setData({
         'list.more': data.list.length >= data.rows,
         'list.page': data.page,
@@ -117,8 +85,8 @@ Page({
       callback(this.data.list.data)
     })
   },
-  // 表单输入
-  dateInput: function (event) {
+  // picker change
+  dateChange: function (event) {
     let data = {}
     data['filter.data.' + event.target.id] = event.detail.value
     this.setData(data)

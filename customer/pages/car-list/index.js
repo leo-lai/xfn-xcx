@@ -7,6 +7,7 @@ Page({
    */
   data: {
     userInfo: {},
+    loading: false,
     history: {
       data: []
     },
@@ -102,12 +103,23 @@ Page({
     app.onLogin(userInfo => {
       this.setData({ userInfo })
 
-      wx.showLoading()
-      this.getBrandList()
-      this.getList(1, _ => {
-        setTimeout(_ => {
-          this.getOrderInfo()
-        }, 600)
+      wx.showNavigationBarLoading()
+      this.setData({ 'loading': true })
+      this.getList(1).then(_ => {
+        // 检查是否有预约或有订单
+        app.post(app.config.orderInfo).then(({ data }) => {
+          if (data && data.customerOrderState !== 13) {
+            setTimeout(_ => {
+              app.navigateTo('../order-info/index')
+            }, 100)
+          }
+        }).finally(_ => {
+          wx.hideNavigationBarLoading()
+          this.setData({ 'loading': false })
+        })
+      }).catch(_ => {
+        wx.hideNavigationBarLoading()
+        this.setData({ 'loading': false })
       })
 
       // 获取搜索历史记录
@@ -122,9 +134,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   onReachBottom: function () { // 加载更多
     if (this.data.userInfo) {
@@ -150,6 +160,15 @@ Page({
         'filter.visible': true,
         'filter.type': filterType
       })
+
+      if (filterType === 1 && this.data.brandList.length === 0) {
+        wx.showNavigationBarLoading()
+        app.post(app.config.brandList).then(({ data }) => {
+          this.setData({ 'brandList': data })
+        }).finally(_ => {
+          wx.hideNavigationBarLoading()
+        })
+      }
     }
   },
   filterSearch: function(event) {
@@ -197,6 +216,8 @@ Page({
     })
   },
   getList: function (page = 1, callback = app.noopFn) {
+    let retPromise = Promise.resolve()
+
     if(page === 1) {
       this.setData({
         'list.more': true
@@ -205,13 +226,15 @@ Page({
 
     if (!this.data.list.more || this.data.list.loading) {
       callback(this.data.list.data)
-      return
+      return retPromise
     }
 
     this.setData({'list.loading': true})
-    app.post(app.config.carList, {
+    retPromise = app.post(app.config.carList, {
       page, ...this.data.filter.data
-    }).then(({ data }) => {
+    })
+    
+    retPromise.then(({ data }) => {
       data.list = data.list.map(item => {
         item.priceStr = (item.price / 10000).toFixed(2)
         item.thumb = app.utils.formatThumb(item.image, 200)
@@ -223,28 +246,12 @@ Page({
         'list.page': data.page,
         'list.data': data.page === 1 ? data.list : this.data.list.data.concat(data.list)
       })
-    }).catch(_ => {
-      wx.hideLoading()
     }).finally(_ => {
       this.setData({'list.loading': false})
       callback(this.data.list.data)
     })
-  },
-  getOrderInfo: function() {
-    app.post(app.config.orderInfo).then(({data}) => {
-      if(data) {
-        app.navigateTo('../order-info/index')
-      }
-    }).finally(_ => {
-      wx.hideLoading()
-    })
-  },
-  getBrandList: function () {
-    app.post(app.config.brandList).then(({data}) => {
-      this.setData({
-        'brandList': data
-      })
-    })
+
+    return retPromise
   },
   searchInput(event) {
     if (event.detail.value === '') {

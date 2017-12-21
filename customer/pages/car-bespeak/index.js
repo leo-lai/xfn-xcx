@@ -45,12 +45,12 @@ Page({
     })
 
     app.onLogin(userInfo => {
-      this.params = {
+      this.$params = {
         ids: options.ids ? options.ids.split(',') : []
       }
-      this.data.formData.carId = this.params.ids[0] || ''
-      this.data.store.data.carId = this.params.ids[0] || ''
-      this.data.store.data.colourId = this.params.ids[1] || ''
+      this.data.formData.carId = this.$params.ids[0] || ''
+      this.data.store.data.carId = this.$params.ids[0] || ''
+      this.data.store.data.colourId = this.$params.ids[1] || ''
 
       this.getLocation(_ => {
         this.getInfo()
@@ -61,9 +61,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   getLocation(callback = app.noopFn) {
     wx.getLocation({

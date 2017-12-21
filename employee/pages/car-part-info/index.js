@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null,
     parts: []
   },
 
@@ -15,10 +14,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.setData({ userInfo })
-      this.params = {
-        id: options.id
-      }
       this.getInfo()
     }, this.route)
   },
@@ -26,30 +21,27 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   getInfo: function () {
-    wx.showLoading()
+    wx.showNavigationBarLoading()
     app.post(app.config.carPartInfo, {
-      customerOrderId: this.params.id
+      customerOrderId: this.options.id
     }).then(({data}) => {
-
       this.setData({
-        'parts': data.followInformation ? data.followInformation.split(',') : [],
-        'info': data
+        'info': data,
+        'parts': data.followInformation ? data.followInformation.split(',') : []
       })
     }).finally(_ => {
-      wx.hideLoading()
+      wx.hideNavigationBarLoading()
     })
   },
   finish: function () {
-    wx.showLoading()
+    wx.showLoading({ mask: true })
     app.post(app.config.carPartDone, {
-      customerOrderId: this.params.id
+      customerOrderId: this.options.id
     }).then(_ => {
-      app.storage.setItem('car_part_done', 1)
+      app.getPrevPage().then(prevPage => prevPage.getList())
       app.toast('加装完成', true)
     }).catch(_ => {
       wx.hideLoading()

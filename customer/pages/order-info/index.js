@@ -65,12 +65,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   getInfo: function() {
-    this.setData({ 'loading': true })
+    wx.showNavigationBarLoading()
     app.post(app.config.orderInfo).then(({ data }) => {
       if (data) {
         this.setData({
@@ -91,7 +89,7 @@ Page({
         title: '订单跟踪'
       })
     }).finally(_ => {
-      this.setData({ 'loading': false })
+      wx.hideNavigationBarLoading()
     })
   },
   showTrack: function() {

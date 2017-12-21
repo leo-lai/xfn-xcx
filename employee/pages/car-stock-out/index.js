@@ -1,13 +1,11 @@
 // pages/car-stock-out/index.js
 const app = getApp()
 Page({
-
+  noopFn: app.noopFn,
   /**
    * 页面的初始数据
    */
   data: {
-    noopFn: app.noopFn,
-    userInfo: null,
     filter: {
       type: '',
       loading: false,
@@ -31,7 +29,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.setData({ userInfo })
       this.getList()
 
       // 获取搜索历史记录
@@ -46,16 +43,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().then(_ => {
-      app.storage.getItem('stock_out_refresh').then(refresh => {
-        if (refresh) {
-          app.storage.removeItem('stock_out_refresh')
-          this.getList()
-        }
-      })
-    }).finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 加载更多
   onReachBottom: function () {
@@ -73,14 +61,6 @@ Page({
     } else {
       wx.stopPullDownRefresh()
     }
-  },
-  // 品牌列表
-  getBrandList: function () {
-    app.post(app.config.brandList).then(({ data }) => {
-      this.setData({
-        'brandList': data
-      })
-    })
   },
   // 待出库列表
   getList: function (page = 1, callback = app.noopFn) {
@@ -140,17 +120,6 @@ Page({
   filterSearch: function (event) {
     let item = event.currentTarget.dataset.item
     let data = {}
-    switch (this.data.filter.type) {
-      case 'brand':
-        if (this.data.filter.sltedBrand.id !== item.id) {
-          data['filter.sltedBrand'] = item
-          data['filter.data.brandId'] = item.id
-        } else {
-          data['filter.sltedBrand'] = {}
-          data['filter.data.brandId'] = ''
-        }
-        break
-    }
     data['filter.data.carsSearch'] = ''
     this.setData(data)
     this.getList()

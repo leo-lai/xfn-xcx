@@ -50,13 +50,13 @@
   </view>
 
   <!-- 车辆列表 -->
-  <view class='l-popup-bottom {{carList.visible ? "_show" : ""}}' bindtap='closeCarList'>
+  <view class='l-popup-bottom {{carList.visible ? "_show" : ""}}' bindtap='closeCarList' catchtouchmove='noopFn'>
     <view class='_inner' catchtap='noopFn'>
       <text class='_close' bindtap='closeCarList'>×</text>
       <view class='_hd'>
         <text class='l-h4'>选择出库车辆</text>
       </view>
-      <view class='_bd' style='max-height: {{carList.height}}px; background:#eee;'>
+      <scroll-view scroll-y class='_bd' style='max-height: {{carList.height}}px;'>
         <view class='weui-cells weui-cells_after-title'>
           <checkbox-group bindchange='sltCarList'>
             <label class='weui-cell weui-check__label l-padding' wx:for='{{carList.list}}' wx:key='{{stockCarId}}'>
@@ -66,7 +66,7 @@
           </checkbox-group>
           <view class='l-padding l-text-center l-text-gray' wx:if='{{carList.list.length === 0}}'>暂无车辆可出库</view>
         </view>
-      </view>
+      </scroll-view>
       <view class='_ft'>
         <button class='l-button-main' disabled='{{carList.loading || carList.slted.length === 0}}' loading='{{carList.loading}}' bindtap='outStockOk'>{{ carList.loading ? '出库中...' : '确定出库已选车辆' }}</button>
       </view>

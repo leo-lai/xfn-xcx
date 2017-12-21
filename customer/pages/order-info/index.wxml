@@ -1,9 +1,5 @@
 <!--pages/order-info/index.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
-<view class='l-padding l-text-center l-text-gray' hidden='{{ !loading }}'>
-  <view class='weui-loading'></view>
-  <view class='weui-loadmore__tips'>正在加载</view>
-</view>
 <!-- 绑定手机号 -->
 <view class='l-page-full l-bg-white' wx:if='{{nowPage === 1}}'>
   <view class='l-text-center l-padding'>
@@ -57,7 +53,7 @@
 </view>
 
 <!-- 预约/订单跟踪信息 -->
-<view class='l-page-full l-bg-white' wx:if='{{nowPage === 3}}'>
+<view class='l-page-full l-bg-white {{ track.visible ? "l-no-scroll" : ""}}' wx:if='{{nowPage === 3}}'>
   <view class='l-text-center l-padding-btn'>
     <text class='l-icon-62b l-margin-r' style='font-size: 52rpx; vertical-align: -6rpx;'></text>
     <text class='l-h4'>{{info.carsName}}</text>

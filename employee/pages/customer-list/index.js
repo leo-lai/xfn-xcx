@@ -6,10 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null,
-    customerType: ['预约客户', '落定客户', '贷款通过客户', '待完款客户', '待加装客户', '待提车客户'],
     buyWay: app.config.baseData.buyWay,
-    storeList: [],
     salesList: {
       visible: false,
       height: 602 - 200,
@@ -22,10 +19,10 @@ Page({
       }
     },
     search: {
-      loading: false,
       height: 602,
-      inputShowed: false,
-      inputVal: '',
+      doing: false,
+      typing: false,
+      keyword: '',
       list: []
     },
     list: {
@@ -33,6 +30,7 @@ Page({
       loading: false,
       more: true,
       page: 1,
+      storeList: [],
       filter: {
         customerType: '',
         orgId: ''
@@ -46,17 +44,20 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
+      let customerTypes = ['预约客户', '落定客户', '贷款通过客户', '待完款客户', '待加装客户', '待提车客户']
       let customerType = Number(options.type) || 0
-      this.setData({ 
-        userInfo,
-        'list.filter.customerType': customerType
-      })
 
-      wx.setNavigationBarTitle({
-        title: this.data.customerType[customerType]
+      wx.getSystemInfo({
+        success: res => {
+          this.setData({
+            'salesList.height': res.windowHeight - 200,
+            'search.height': res.windowHeight - 48
+          })
+        }
       })
+      this.setData({ 'list.filter.customerType': customerType })
+      wx.setNavigationBarTitle({ title: customerTypes[customerType] })
 
-      this.getStoreList()
       this.getList()
     }, this.route)
   },
@@ -64,9 +65,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 加载更多
   onReachBottom: function () {
@@ -89,7 +88,7 @@ Page({
   getStoreList: function () {
     app.post(app.config.storeList).then(({ data }) => {
       this.setData({
-        'storeList': data
+        'list.storeList': data
       })
     })
   },
@@ -108,7 +107,8 @@ Page({
       'list.loading': true
     })
 
-    let url = this.data.list.filter.customerType === 0 ? app.config.customerBespeak : app.config.customerOrder
+    let url = this.data.list.filter.customerType === 0 ? 
+      app.config.customerBespeak : app.config.customerOrder
     app.post(url, {
       page, ...this.data.list.filter
     }).then(({ data }) => {
@@ -142,48 +142,44 @@ Page({
       callback(this.data.list.data)
     })
   },
+
+  // 搜索
   showSearchInput: function () {
-    this.setData({
-      'search.inputShowed': true
-    })
+    this.setData({ 'search.typing': true })
   },
   hideSearchInput: function () {
     this.setData({
-      'search.inputVal': '',
-      'search.inputShowed': false
+      'search.keyword': '',
+      'search.typing': false
     })
   },
   clearSearchInput: function () {
-    this.setData({
-      'search.inputVal': ''
-    })
+    this.setData({ 'search.keyword': '' })
   },
   inputSearchTyping: function (event) {
     this.setData({
-      'search.loading': true,
-      'search.inputVal': event.detail.value
+      'search.doing': true,
+      'search.keyword': event.detail.value
     })
 
     clearTimeout(this.searchTimeid)
     this.searchTimeid = setTimeout(_ => {
-      this.search(this.data.search.inputVal)
+      this.search(this.data.search.keyword)
     }, 200)
   },
   search: function (phoneNumber = '') {
     app.post(app.config.customerSearch, { phoneNumber }).then(({ data }) => {
-      this.setData({
-        'search.list': data
-      })
+      this.setData({ 'search.list': data })
     }).finally(_ => {
-      this.setData({
-        'search.loading': false
-      })
+      this.setData({ 'search.doing': false })
     })
   },
+
+
   // 销售顾问列表
   getSalesList: function (event) {
     let slted = event.currentTarget.dataset.item
-    wx.showLoading()
+    wx.showNavigationBarLoading()
     app.post(app.config.salesList).then(({ data }) => {
       this.data.salesList.data.customerUsersOrgId = slted.customerUsersOrgId
       this.setData({
@@ -197,7 +193,7 @@ Page({
         })
       })
     }).finally(_ => {
-      wx.hideLoading()
+      wx.hideNavigationBarLoading()
     })
   },
   sltSalesList: function (event) {
@@ -215,19 +211,13 @@ Page({
     this.data.salesList.data.systemUserId = slted.systemUserId
     wx.showLoading()
     app.post(app.config.changeSales, this.data.salesList.data).then(_ => {
-      app.toast('分配成功').then(_ => {
-        this.getList()
-        this.setData({
-          'salesList.visible': false
-        })
-      })
+      this.setData({ 'salesList.visible': false })
+      app.toast('分配成功').then(_ => this.getList())
     }).catch(_ => {
       wx.hideLoading()
     })
   },
   closeSalesList: function () {
-    this.setData({
-      'salesList.visible': false
-    })
+    this.setData({ 'salesList.visible': false })
   }
 })

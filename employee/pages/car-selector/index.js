@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null,
     brand: {
       visible: true,
       loading: false,
@@ -32,7 +31,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.setData({ userInfo })
       this.getBrandList()
     }, this.route)
   },
@@ -40,9 +38,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 品牌列表
   getBrandList: function () {
@@ -113,6 +109,12 @@ Page({
       'carType.visible': false
     })
     app.storage.setItem('carType_slted', item)
+    app.getPrevPage().then(prevPage => {
+      prevPage.setData({
+        'carsName': item.name,
+        'formData.intentionCarId': item.id
+      })
+    })
     app.back()
   },
   closeCarType: function () {

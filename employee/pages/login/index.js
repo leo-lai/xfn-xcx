@@ -26,14 +26,10 @@ Page({
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
-    this.setData({
-      topTips
-    })
+    this.setData({ topTips })
     clearTimeout(this.toptipTimeid)
     this.toptipTimeid = setTimeout(() => {
-      this.setData({
-        topTips: ''
-      })
+      this.setData({ topTips: '' })
     }, 3000)
   },
   // 表单输入

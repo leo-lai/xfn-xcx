@@ -957,7 +957,7 @@ icon {
 
 .weui-media-box__desc {
   color: #999;
-  font-size: 13px;
+  font-size: 26rpx;
   line-height: 1.2;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -967,9 +967,9 @@ icon {
 }
 
 .weui-media-box__info {
-  margin-top: 15px;
-  padding-bottom: 5px;
-  font-size: 13px;
+  margin-top: 30rpx;
+  padding-bottom: 10rpx;
+  font-size: 24rpx;
   color: #cecece;
   line-height: 1em;
   list-style: none;

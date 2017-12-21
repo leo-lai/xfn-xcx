@@ -2,7 +2,8 @@
   "pages": [
     "pages/home/index",
     "pages/customer/index",
-    "pages/car-uploader/index",
+    "pages/bank-uploader/index",
+    "pages/bank-uploader/view",
     "pages/customer-add/index",
     "pages/mine/index",
     "pages/mine-pwd/index",
@@ -18,7 +19,6 @@
     "pages/car-stock-out-info/index",
     "pages/car-part/index",
     "pages/car-license/index",
-    "pages/car-uploader/view",
     "pages/car-part-info/index"
   ],
   "window": {

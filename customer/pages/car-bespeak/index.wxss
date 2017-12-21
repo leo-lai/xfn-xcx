@@ -18,6 +18,7 @@
 .l-list-filter ._item._active{ color: #ff9247; }
 .l-list-filter ._item._active .l-icon-6ac{ transform: rotate(-180deg); }
 
+.l-store-item{margin: 30rpx 0;}
 .l-store-item ._icon icon[type=circle]{display: inline-block;}
 .l-store-item ._icon icon[type=success]{display: none;}
 .l-store-item._active icon[type=circle]{display: none;}

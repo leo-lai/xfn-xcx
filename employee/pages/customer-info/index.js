@@ -1,17 +1,16 @@
 // pages/customer-info/index.js
 const app = getApp()
 Page({
-
+  noopFn: app.noopFn,
   /**
    * 页面的初始数据
    */
   data: {
     topTips: '',
-    userInfo: null,
     isOrder: '',
     buyTime: app.config.baseData.buyTime,
     buyWay: app.config.baseData.buyWay,
-    info: null,
+    info: {},
     state: {},
     remark: {
       visible: false,
@@ -28,9 +27,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.onLogin(userInfo => {
-      this.setData({ userInfo })
-      this.params = {
+    app.onLogin(_ => {
+      this.$params = {
         ids: options.ids ? options.ids.split(',') : ['','']
       }
       this.getInfo()
@@ -40,26 +38,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().then(_ => {
-      app.storage.getItem('car_uploader_refresh').then(refresh => {
-        if (refresh) {
-          app.storage.removeItem('car_uploader_refresh')
-          this.getInfo()
-        }
-      })
-    }).finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 客户详情
   getInfo: function () {
-    wx.showLoading()
+    wx.showNavigationBarLoading()
     app.post(app.config.customerInfo, {
-      customerUsersId: this.params.ids[0],
-      customerUsersOrgId: this.params.ids[1]
+      customerUsersId: this.$params.ids[0],
+      customerUsersOrgId: this.$params.ids[1]
     }).then(({ data }) => {
       let info = data.customerMap
-      info.customerUsersId = this.params.ids[0]
+      info.customerUsersId = this.$params.ids[0]
       info.thumb = info.headPortrait ? app.utils.formatHead(info.headPortrait) : app.config.avatar
       this.setData({ 
         'info': info,
@@ -71,7 +60,7 @@ Page({
         'remark.list': data.remarksMap.list
       })
     }).finally(_ => {
-      wx.hideLoading()
+      wx.hideNavigationBarLoading()
     })
   },
   // 查看上传资料
@@ -80,7 +69,7 @@ Page({
     app.storage.setItem('bankInfo', {
       bankAuditsImage, bankAuditsvideo
     })
-    app.navigateTo('../car-uploader/view')
+    app.navigateTo('../bank-uploader/view')
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -103,14 +92,12 @@ Page({
   showRemarkPop: function () {
     this.setData({
       'remark.visible': true,
-      'remark.data.customerUsersId': this.params.ids[0],
+      'remark.data.customerUsersId': this.$params.ids[0],
       'remark.data.remarksContent': ''
     })
   },
   closeRemarkPop: function () {
-    this.setData({
-      'remark.visible': false
-    })
+    this.setData({ 'remark.visible': false })
   },
   // 添加备注
   addRemark: function () {
@@ -124,15 +111,9 @@ Page({
       app.toast('操作成功')
       this.setData({
         'remark.visible': false,
-        'remark.loading': false
+        'remark.loading': false,
+        'remark.list': [data, ...this.data.remark.list]
       })
-      // if(data) {
-      //   this.setData({
-      //     'remark.list': this.data.remark.list.push(data)
-      //   })
-      // }else {
-        this.getInfo()
-      // }
     }).catch(_ => {
       this.setData({ 'remark.loading': false })
     })

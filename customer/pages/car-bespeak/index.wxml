@@ -1,6 +1,6 @@
 <!--pages/car-bespeak/index.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
-<view class='l-page-full'>
+<view class='l-page-full {{ store.visible ? "l-no-scroll" : "" }}'>
   <view class='l-bg-white l-padding'>
     <view class='l-flex-hc'>
       <view class='l-rest l-h3'>选择门店</view>
@@ -61,8 +61,8 @@
           <text class='l-icon-6ac'></text>
         </view>
       </view>
-      <scroll-view scroll-y	class='_bd' style='height: {{store.height}}px; background:#eee;'>
-        <view class='l-store-item l-bg-white l-margin-tb {{item.isChoice === 1 ? "_active" : ""}}' wx:for='{{store.list}}' wx:key='orgId' data-item='{{item}}' bindtap='sltStore'>
+      <scroll-view scroll-y	class='_bd' style='max-height: {{store.height}}px; background:#eee;'>
+        <view class='l-store-item l-bg-white {{item.isChoice === 1 ? "_active" : ""}}' wx:for='{{store.list}}' wx:key='orgId' data-item='{{item}}' bindtap='sltStore'>
           <view class='l-flex-h l-padding'>
             <view class='l-margin-r _icon'>
               <icon type='circle' size='20'></icon>

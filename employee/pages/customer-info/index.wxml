@@ -32,7 +32,7 @@
           <view class='weui-cell__bd'>贷款资料</view>
           <view class='weui-cell__ft l-text-theme'>查看资料</view>
         </view>
-        <navigator wx:else class='weui-cell' url='../car-uploader/index?id={{info.customerUsersId}}' hover-class='none'>
+        <navigator wx:else class='weui-cell' url='../bank-uploader/index?id={{info.customerUsersId}}' hover-class='none'>
           <view class='weui-cell__bd'>贷款资料</view>
           <view class='weui-cell__ft l-text-theme'>上传资料</view>
         </navigator>
@@ -95,12 +95,12 @@
     </view>
   </view>
 
-  <view class='l-popup-center l-flex-vh' wx:if='{{remark.visible}}'>
-    <view class='_inner' style='width: 80%; margin-top: 20%;'>
+  <view class='l-popup-center l-flex-vh' wx:if='{{remark.visible}}' catchtouchmove='noopFn'>
+    <view class='_inner' style='width: 80%; margin-top: 10%;'>
       <view class='l-padding'>
         <textarea style='width:100%; height: 240rpx;' fixed='{{true}}' auto-focus='{{true}}' placeholder='输入备注内容' id='remarksContent' bindinput='bindInput' value='{{remark.data.remarksContent}}'></textarea>
         <view class='l-margin-t l-text-center' bindtap='addRemark'>
-          <button class='l-button-main'>确定备注</button>
+          <button loading='{{remark.loading}}' disabled='{{remark.loading}}' class='l-button-main'>{{remark.loading ? '提交中' : '提交备注'}}</button>
         </view>
       </view>
     </view>

@@ -1,7 +1,7 @@
 <!--pages/car-info/index.wxml-->
 <import src="../../template/wxParse/wxParse.wxml" />
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
-<view class='l-page-full'>
+<view class='l-page-full {{ counter.visible ? "l-no-scroll" : "" }}'>
   <!-- 车辆摘要信息 -->
   <view class='l-text-center l-bg-white l-zoom'>
     <view class='l-images-360' bindtouchstart='imagesTouchStart' bindtouchmove='imagesTouchMove'>
@@ -133,96 +133,98 @@
         <text class='l-h4'>购车计算器</text>
         <view class='l-text-gray'>政策不同可能导致落地价格稍有偏差</view>
       </view>
-      <scroll-view scroll-y class='_bd l-buyway-tab' style='height: {{counter.height}}px'>
-        <view class='l-flex-hc _tit'>
-          <view class='_item l-rest {{counter.tabIndex === 0 ? "_active" : ""}}' bindtap='counterTab' data-val='{{0}}'>全款购车</view>
-          <view class='_item l-rest {{counter.tabIndex === 1 ? "_active" : ""}}' bindtap='counterTab' data-val='{{1}}'>分期贷款</view>
-        </view>
-        <view class='_cont {{counter.tabIndex === 0 ? "_active" : ""}}'>
-          <view class='_all l-fs-14 l-text-theme'>预计总价：{{counter.fullPayment.fullPrice}}</view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>官方指导价</view>
-            <text>￥{{counter.fullPayment.guidancePrice}}</text>
+      <scroll-view scroll-y class='_bd' style='height: {{counter.height}}px'>
+        <view class='_scroll l-buyway-tab'>
+          <view class='l-flex-hc _tit'>
+            <view class='_item l-rest {{counter.tabIndex === 0 ? "_active" : ""}}' bindtap='counterTab' data-val='{{0}}'>全款购车</view>
+            <view class='_item l-rest {{counter.tabIndex === 1 ? "_active" : ""}}' bindtap='counterTab' data-val='{{1}}'>分期贷款</view>
           </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>购置税</view>
-            <text>￥{{counter.fullPayment.purchaseTax}}</text>
-          </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>上牌费用</view>
-            <text>￥{{counter.fullPayment.premium}}</text>
-          </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>车船税</view>
-            <text>￥{{counter.fullPayment.vehicleAndAesselTax}}</text>
-          </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>交强险</view>
-            <text>￥{{counter.fullPayment.strongInsurance}}</text>
-          </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>商业保险(全保）</view>
-            <text>￥{{counter.fullPayment.commercialInsurance}}</text>
-          </view>
-        </view>
-        <view class='_cont {{counter.tabIndex === 1 ? "_active" : ""}}'>
-          <view class='_all'>
-            <text class='l-fs-14 l-text-theme'>预计总价：{{counter.loanPayment.fullPrice}}</text>
-            <view class='l-flex-hc l-margin-t-m'>
-              <text class='l-rest' style='width:33%;text-align:left;'>首付:￥{{counter.loanPayment.downPayments}}</text>
-              <text class='l-rest' style='width:33%;text-align:center;'>月供:￥{{counter.loanPayment.forTheMonth}}</text>
-              <text class='l-rest' style='width:33%;text-align:right;'>利息:￥{{counter.loanPayment.interest}}</text>
+          <view class='_cont {{counter.tabIndex === 0 ? "_active" : ""}}'>
+            <view class='_all l-fs-14 l-text-theme'>预计总价：{{counter.fullPayment.fullPrice}}</view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>官方指导价</view>
+              <text>￥{{counter.fullPayment.guidancePrice}}</text>
+            </view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>购置税</view>
+              <text>￥{{counter.fullPayment.purchaseTax}}</text>
+            </view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>上牌费用</view>
+              <text>￥{{counter.fullPayment.premium}}</text>
+            </view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>车船税</view>
+              <text>￥{{counter.fullPayment.vehicleAndAesselTax}}</text>
+            </view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>交强险</view>
+              <text>￥{{counter.fullPayment.strongInsurance}}</text>
+            </view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>商业保险(全保）</view>
+              <text>￥{{counter.fullPayment.commercialInsurance}}</text>
             </view>
           </view>
-          <view class='_slt'>
-            <view class='l-flex-hc'>
-              <text class='l-h4'>首付比列</text>
-              <view class='l-rest'>
-                <view class='_slide-text'>
-                  <text>20%</text>
-                  <text>30%</text>
-                  <text>40%</text>
-                  <text>50%</text>
-                </view>
-                <slider class='_slide-bar' min='0.2' max='0.5' step='0.1' value='{{counter.percent}}' active-color='#ff9247' bindchange='percentChange'/>
+          <view class='_cont {{counter.tabIndex === 1 ? "_active" : ""}}'>
+            <view class='_all'>
+              <text class='l-fs-14 l-text-theme'>预计总价：{{counter.loanPayment.fullPrice}}</text>
+              <view class='l-flex-hc l-margin-t-m'>
+                <text class='l-rest' style='width:33%;text-align:left;'>首付:￥{{counter.loanPayment.downPayments}}</text>
+                <text class='l-rest' style='width:33%;text-align:center;'>月供:￥{{counter.loanPayment.forTheMonth}}</text>
+                <text class='l-rest' style='width:33%;text-align:right;'>利息:￥{{counter.loanPayment.interest}}</text>
               </view>
             </view>
-            <view class='l-flex-hc l-margin-t'>
-              <text class='l-h4'>贷款年限</text>
-              <view class='l-rest'>
-                <view class='_slide-text'>
-                  <text>1年</text>
-                  <text>2年</text>
-                  <text>3年</text>
-                  <text>4年</text>
+            <view class='_slt'>
+              <view class='l-flex-hc'>
+                <text class='l-h4'>首付比列</text>
+                <view class='l-rest'>
+                  <view class='_slide-text'>
+                    <text>20%</text>
+                    <text>30%</text>
+                    <text>40%</text>
+                    <text>50%</text>
+                  </view>
+                  <slider class='_slide-bar' min='0.2' max='0.5' step='0.1' value='{{counter.percent}}' active-color='#ff9247' bindchange='percentChange'/>
                 </view>
-                <slider class='_slide-bar' min='1' max='4' step='1' value='{{counter.year}}' active-color='#ff9247'  bindchange='yearChange'/>
+              </view>
+              <view class='l-flex-hc l-margin-t'>
+                <text class='l-h4'>贷款年限</text>
+                <view class='l-rest'>
+                  <view class='_slide-text'>
+                    <text>1年</text>
+                    <text>2年</text>
+                    <text>3年</text>
+                    <text>4年</text>
+                  </view>
+                  <slider class='_slide-bar' min='1' max='4' step='1' value='{{counter.year}}' active-color='#ff9247'  bindchange='yearChange'/>
+                </view>
               </view>
             </view>
-          </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>官方指导价</view>
-            <text>￥{{counter.loanPayment.guidancePrice}}</text>
-          </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>购置税</view>
-            <text>￥{{counter.loanPayment.purchaseTax}}</text>
-          </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>上牌费用</view>
-            <text>￥{{counter.loanPayment.premium}}</text>
-          </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>车船税</view>
-            <text>￥{{counter.loanPayment.vehicleAndAesselTax}}</text>
-          </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>交强险</view>
-            <text>￥{{counter.loanPayment.strongInsurance}}</text>
-          </view>
-          <view class='l-flex-hc l-padding-btn l-border-b'>
-            <view class='l-rest'>商业保险(全保）</view>
-            <text>￥{{counter.loanPayment.commercialInsurance}}</text>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>官方指导价</view>
+              <text>￥{{counter.loanPayment.guidancePrice}}</text>
+            </view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>购置税</view>
+              <text>￥{{counter.loanPayment.purchaseTax}}</text>
+            </view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>上牌费用</view>
+              <text>￥{{counter.loanPayment.premium}}</text>
+            </view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>车船税</view>
+              <text>￥{{counter.loanPayment.vehicleAndAesselTax}}</text>
+            </view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>交强险</view>
+              <text>￥{{counter.loanPayment.strongInsurance}}</text>
+            </view>
+            <view class='l-flex-hc l-padding-btn l-border-b'>
+              <view class='l-rest'>商业保险(全保）</view>
+              <text>￥{{counter.loanPayment.commercialInsurance}}</text>
+            </view>
           </view>
         </view>
       </scroll-view>

@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null,
     topTips: '',
     formData: {
       passwordOld: '',
@@ -18,17 +17,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.onLogin(userInfo => {
-      this.setData({ userInfo })
-    }, this.route)
+    
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {

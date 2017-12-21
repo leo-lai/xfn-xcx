@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null,
     uploadImages: [],
     uploadVideo: ''
   },
@@ -15,7 +14,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.setData({ userInfo })
       app.storage.getItem('bankInfo').then(bankInfo => {
         if(bankInfo) {
           this.setData({
@@ -30,9 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().finally(_ => {
-      app.storage.setItem('current_page', this.route)
-    })
+    app.checkLogin()
   },
   previewImage: function (event) {
     wx.previewImage({

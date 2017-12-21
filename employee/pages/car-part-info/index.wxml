@@ -1,10 +1,10 @@
 <!--pages/car-part-info/index.wxml-->
 <view class='l-page-full'>
-  <view class='l-margin l-bg-white l-radius'>
-    <view class='l-padding-btn l-border-b'>
+  <view class='l-margin l-padding-lr l-bg-white l-radius'>
+    <view class='l-padding-tb l-border-b'>
       车架号：{{info.customerOrderCode}}
     </view>
-    <view class='l-padding-btn'>
+    <view class='l-padding-tb'>
       <view class='l-h4'>{{info.carsNameBefor}}</view>
       <view>{{info.carsNameAfter}}</view>
       <view class='l-text-gray l-fs-s'>完款时间：{{info.payDate}}</view>
