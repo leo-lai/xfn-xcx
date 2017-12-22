@@ -103,10 +103,11 @@ App({
           // session失效
           if (data.resultCode === 4002) {
             storage.removeItem('userInfo')
+           
             if(++this.globalData.loginTimes < 3){
-              return this.login() // 重新登录
+              this.login() // 重新登录
             }
-            return reject(data)
+            return reject('登录失效')
           }
 
           // 其他错误码处理
@@ -165,13 +166,13 @@ App({
               }
               utils.copyObj(formData, userInfoRes, loginRes)
               this.post(config.login, formData).then(apiRes => {
-                resolve(apiRes)
                 if (apiRes.data) {
                   wx.hideLoading()
                   // 由于获取用户信息是网络请求，可能会在 Page.onLoad 之后才返回
                   // 所以此处触发回调函数
                   this.updateUserInfo(apiRes.data)
                 }
+                resolve(apiRes)
               }).catch(err => {
                 wx.hideLoading()
                 reject(err)

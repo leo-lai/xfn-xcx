@@ -22,7 +22,8 @@
  *                佛祖坐镇 顺利上线
  */
 
-var baseUrl = "http://111.230.170.36/tauto/emInterface/employee"
+// var baseUrl = "http://111.230.170.36/tauto/emInterface/employee"
+var baseUrl = "https://tomcat.xfnauto.com/tauto/emInterface/employee"
 var resURL = 'http://res.mifengqiche.com'
 var config = {
   baseData: {
