@@ -19,7 +19,7 @@ Page({
         colourId: '',
         latitude: '',
         longitude: '',
-        isDistance: 1
+        isDistance: 0
       },
       list: []
     },
@@ -125,7 +125,8 @@ Page({
           'formData.phoneNumber': data.phoneNumber,
           'store.slted': slted,
           'store.list': data.list.map(item => {
-            item.distance = (item.distance / 10000).toFixed(2)
+            item.distanceStr = item.distance >= 1000 ? 
+              ((item.distance / 1000).toFixed(1) + '公里') : (item.distance + '米')
             return item
           })
         })

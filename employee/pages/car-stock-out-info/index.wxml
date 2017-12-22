@@ -1,6 +1,6 @@
 <!--pages/car-stock-out-info/index.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
-<view class='l-page-full'>
+<view class='l-page-full {{ carList.visible ? "l-no-scroll" : "" }}'>
   <view class='l-margin'>
     <text class='l-text-theme l-fr'>{{info.number}}辆</text>
     <text>{{info.carsName}}</text>

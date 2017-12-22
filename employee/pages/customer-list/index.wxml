@@ -1,6 +1,6 @@
 <!--pages/customer-list/index.wxml-->
 <import src='../../template/loadmore.wxml' />
-<view class='l-page-full'>
+<view class='l-page-full {{ salesList.visible ? "l-no-scroll" : "" }}'>
   <view class='l-search-box {{search.typing ? "_doing" : ""}}' catchtouchmove='noopFn'>
     <view class='weui-search-bar'>
       <view class='weui-search-bar__form'>

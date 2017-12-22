@@ -110,7 +110,7 @@
     <scroll-view scroll-y class='_inner l-scroll' style='width: 80%;'>
       <view class='l-track-list'>
         <view class='l-flex-h _item' wx:for='{{track.data}}' wx:key='{{index}}'>
-          <image mode='widthFix' src='{{track.icons[index]}}'></image>
+          <icon type='success' color='#ff9247'></icon>
           <view class='l-rest'>
             <view class='l-h5'>{{item.trackContent}}</view>
             <view class='l-fs-s l-text-gray'>{{item.createDate}}</view>
