@@ -22,7 +22,7 @@
  *                佛祖坐镇 顺利上线
  */
 // var baseUrl = "http://111.230.170.36/tauto/interface"
-var baseUrl = "http://tomcat.xfnauto.com/tauto/interface"
+var baseUrl = "https://tomcat.xfnauto.com/tauto/interface"
 
 var config = {
   // 静态资源服务器
