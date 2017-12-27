@@ -17,7 +17,7 @@
       <text class='l-margin'>|</text>
       <text class='l-text-theme' bindtap='sltCar'>
         <text>更换其他车型</text>
-      <text class='l-icon-69e l-fs-m l-margin-l-s'></text>
+        <text class='l-icon-69e l-fs-s l-margin-l-s'></text>
       </text>
     </view>
 
@@ -37,7 +37,7 @@
           <text class='l-text-gray'>不含税/保险</text>
         </view>
         <view class='l-rest l-padding-tb'>
-          <text class='l-fs-26 l-text-theme'>{{info.minPriceStr}}万</text>
+          <text class='l-fs-26 l-text-theme'>{{sltedColor.minPriceStr}}万</text>
         </view>
         <view class='l-padding' bindtap='showCounter'>
           <view class='l-icon-64a'></view>
@@ -53,7 +53,7 @@
     </view>
   </view>
   
-  <view class='l-margin l-text-center' wx:if='{{!tabs.visible}}'>
+  <view class='l-margin l-text-center' wx:if='{{!tabs.visible}}' bindtap='onReachBottom'>
     <icon class='l-download-up' type='download' color='#999' size='18'></icon>
     <text class='l-text-gray l-margin-l-s'>上拉加载车辆详情</text>
   </view>
@@ -71,8 +71,8 @@
       </view>
       <view class='weui-tab__panel' style='min-height: {{tabs.height}}px'>
         <view class='weui-tab__content l-padding' hidden='{{tabs.index != 0}}'>
-          <template is='wxParse' data='{{wxParseData:introduce.data.nodes}}' />
-          <view class='weui-loadmore' wx:if='{{ introduce.loading }}'>
+          <template is='wxParse' data='{{wxParseData:introduceData.nodes}}' />
+          <view class='weui-loadmore' wx:if='{{ introduceLoading }}'>
             <view class='weui-loading'></view>
             <view class='weui-loadmore__tips'>正在加载</view>
           </view>

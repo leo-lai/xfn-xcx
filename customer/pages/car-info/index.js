@@ -25,10 +25,9 @@ Page({
       height: 602 - 50
     },
     // 车辆介绍
-    introduce: {
-      loading: false,
-      data: null
-    },
+    introduceData: null,
+    introduceLoading: false,
+    
     // 车辆参数
     parameter: {
       loading: false,
@@ -79,10 +78,10 @@ Page({
         if (sltedCar && this.data.sltedCar.carsId !== sltedCar.carsId) {
           this.data.sltedCar = sltedCar
           this.getInfo(sltedCar.carsId)
-          WxParse.wxParse('introduce.data', 'html', '', this)
+          WxParse.wxParse('introduceData', 'html', '', this)
           this.setData({
             'tabs.visible': false,
-            'introduce.data': null,
+            'introduceData': null,
             'parameter.data': null
           })
         }
@@ -144,8 +143,9 @@ Page({
     wx.showNavigationBarLoading()
     return app.post(app.config.carInfo, { carId }).then(({ data }) => {
       data.priceStr = (data.price / 10000).toFixed(2)
-      data.minPriceStr = (data.minPrice / 10000).toFixed(2)
+      
       data.list = data.list.map(item => {
+        item.minPriceStr = (item.minPrice / 10000).toFixed(2)
         item.images = item.imagePath ? item.imagePath.split(',')
           .filter(image => image)
           .map((image, index) => {
@@ -153,12 +153,12 @@ Page({
               hidden: index > 0 ? true : false,
               src: image
             }
-          }) : []
+          }) : [data.indexImage]
         return item
       })
       this.setData({
         'info': data,
-        'imagePlayer.data': data.list[0] ? data.list[0].images : [data.indexImage],
+        'imagePlayer.data': data.list[0].images,
         'sltedColor': data.list[0],
         'tabs.visible': false
       })
@@ -190,7 +190,7 @@ Page({
       index = this.data.tabs.index
     }
     if (index === 0) {
-      if (!this.data.introduce.data) {
+      if (!this.data.introduceData) {
         this.getIntroduce()
       }
     } else if (index === 1) {
@@ -206,14 +206,14 @@ Page({
   // 车辆介绍
   getIntroduce: function () {
     this.setData({
-      'introduce.loading': true
+      'introduceLoading': true
     })
     app.post(app.config.carIntroduce, { carId: this.data.info.carsId })
       .then(({ data }) => {
-        WxParse.wxParse('introduce.data', 'html', data.introduce || '', this, 5)
+        WxParse.wxParse('introduceData', 'html', data.introduce || '', this, 5)
       }).finally(_ => {
         this.setData({
-          'introduce.loading': false
+          'introduceLoading': false
         })
       })
   },
@@ -273,9 +273,23 @@ Page({
         list[i].open = false
       }
     }
+
     this.setData({
       'parameter.data': list
     })
+
+    var query = wx.createSelectorQuery()
+    query.select('#' + id).boundingClientRect()
+    query.selectViewport().scrollOffset()
+    setTimeout(_ => {
+      query.exec(res => {
+        if (res[0].top < 60) {
+          wx.pageScrollTo({
+            scrollTop: res[1].scrollTop + res[0].top - 60
+          })
+        }
+      })
+    }, 50)
   },
   showCounter() {
     this.setData({ 'counter.visible': true })

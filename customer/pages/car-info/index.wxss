@@ -74,7 +74,7 @@
 
 .kind-list__item { margin: 20rpx 0; border-radius: 2rpx; overflow: hidden;}
 .kind-list__item:first-child { margin-top: 0;}
-.kind-list__item-hd { background-color: #eee; padding: 20rpx; transition: opacity 0.3s;}
+.kind-list__item-hd { background-color: #eee; padding: 20rpx; transition: opacity 0.3s; align-items: center;}
 .kind-list__item-hd .l-icon-6ac{display: inline-block; color: #ccc; font-size: 16rpx; transition: 0.2s linear;}
 .kind-list__item-hd_show .l-icon-6ac{transform: rotate(-180deg);}
 /* .kind-list__item-hd_show { opacity: 0.4;} */

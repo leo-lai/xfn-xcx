@@ -8,9 +8,9 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.6.6",
-	"appid": "wx032cb58d1eb2fe3e",
-	"projectname": "xfn-xcx-customer",
+	"libVersion": "1.7.2",
+	"appid": "wx6bd022401f09940b",
+	"projectname": "%E6%B7%98%E8%BD%A6%E5%BF%AB%E7%94%A8%E6%88%B7%E7%AB%AF%20-%20%E6%AD%A3%E5%BC%8F",
 	"condition": {
 		"search": {
 			"current": -1,

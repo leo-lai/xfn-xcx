@@ -24,7 +24,7 @@
 
 // var baseUrl = "http://111.230.170.36/tauto/emInterface/employee"
 var baseUrl = "https://tomcat.xfnauto.com/tauto/emInterface/employee"
-var resURL = 'http://res.mifengqiche.com'
+var resURL = 'https://res.xfnauto.com'
 var config = {
   baseData: {
     buyTime: ['3天内', '7天内'],

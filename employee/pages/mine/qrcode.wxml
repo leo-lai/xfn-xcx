@@ -1,0 +1,8 @@
+<!--pages/mine/qrcode.wxml-->
+<view class='l-page-full l-bg-white'>
+  <view class='l-br'></view>
+  <view class='l-padding l-text-center'>
+    <image style='width: 60%;' mode='aspectFit' src='{{qrcode}}'></image>
+    <view class='l-margin-t l-fs-13' style='color:#ccc;'>扫一扫进入小程序</view>
+  </view>
+</view>

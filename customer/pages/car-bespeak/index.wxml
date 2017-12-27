@@ -4,20 +4,23 @@
   <view class='l-bg-white l-padding'>
     <view class='l-flex-hc'>
       <view class='l-rest l-h3'>选择门店</view>
-      <text class='l-text-link' bindtap='changeStore'>更换门店</text>
+      <text class='l-text-link' bindtap='changeStore'>
+        <text>更换门店</text>
+        <text class='l-icon-69e l-fs-s l-margin-l-s'></text>
+      </text>
     </view>
 
     <view class='l-margin-t-m'>
       <text class='l-text-gray l-fs-s'>{{store.data.isDistance === 1 ? '距离最近' : '优惠最多'}}</text>
       <view class='l-slted-store l-flex-h' bindtap='changeStore'>
-        <image mode='aspectFill' src='{{store.slted.image}}'></image>
+        <image mode='aspectFit' src='{{store.slted.image}}'></image>
         <view class='l-rest l-margin-r'>
           <view class='l-h4'>{{store.slted.orgName}}</view>
           <view class='l-text-gray l-fs-s'>{{store.slted.address}}</view>
         </view>
         <view>
           <view class='l-text-theme l-h3'>{{store.slted.price}}</view>
-          <text class='l-text-gray l-fs-m' hidden='{{store.data.isDistance === 0}}'>{{store.slted.distance}}km</text>
+          <text class='l-text-gray l-fs-m' hidden='{{store.data.isDistance === 0}}'>{{store.slted.distanceStr}}</text>
           <text class='l-text-gray l-fs-m' hidden='{{store.data.isDistance === 1}}'>-{{store.slted.discount}}元</text>
         </view>
         <text class='l-icon-654'></text>

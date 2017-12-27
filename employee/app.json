@@ -19,7 +19,8 @@
     "pages/car-stock-out-info/index",
     "pages/car-part/index",
     "pages/car-license/index",
-    "pages/car-part-info/index"
+    "pages/car-part-info/index",
+    "pages/mine/qrcode"
   ],
   "window": {
     "backgroundColor": "#eee",

@@ -8,10 +8,10 @@
   </view>
   <view class='l-br'></view>
   <view class='l-mine-menu'>
-    <view class='_item' hover-class='_hover'>
+    <navigator class='_item' hover-class='_hover' url='qrcode'>
       <image class='l-circle-icon' src='../../images/code-icon.png'></image>
       <text>个人二维码</text>
-    </view>
+    </navigator>
     <navigator class='_item' hover-class='_hover' url='../mine-pwd/index'>
       <image class='l-circle-icon' src='../../images/password-icon.png'></image>
       <text>更改密码</text>
