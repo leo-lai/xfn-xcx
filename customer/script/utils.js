@@ -1,25 +1,68 @@
-Promise.prototype.done = Promise.prototype.done || function (onFulfilled, onRejected) {
-  this.then(onFulfilled, onRejected)
-    .catch(reason => setTimeout(() => { throw reason }, 0))
-}
-Promise.prototype.finally = Promise.prototype.finally || function (callback) {
-  let P = this.constructor
-  return this.then(
-    value => P.resolve(callback()).then(() => value),
-    reason => P.resolve(callback()).then(() => { throw reason })
-  )
+// es6 es7 polyfill ************************************************************
+if (!Promise.prototype.done) {
+  Promise.prototype.done = function (onFulfilled, onRejected) {
+    this.then(onFulfilled, onRejected)
+      .catch(reason => setTimeout(() => { throw reason }, 0))
+  }
 }
 
-// 金钱格式 100000.11 -> 100,000.11
-Number.prototype.toMoney = function (places, symbol = '', thousand = ',', decimal = '.') {
-  places = !isNaN(places = Math.abs(places)) ? places : 2
-  var number = this,
-    negative = number < 0 ? '-' : '',
-    i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + '',
-    j = (j = i.length) > 3 ? j % 3 : 0
-  return symbol + negative + (j ? i.substr(0, j) + thousand : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : '')
+if (!Promise.prototype.finally) {
+  Promise.prototype.finally = function (callback) {
+    let P = this.constructor
+    return this.then(
+      value => P.resolve(callback()).then(() => value),
+      reason => P.resolve(callback()).then(() => { throw reason })
+    )
+  }
 }
 
+if (!Array.prototype.includes) {
+  Object.defineProperty(Array.prototype, 'includes', {
+    value: function (searchElement, fromIndex) {
+
+      // 1. Let O be ? ToObject(this value).
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+
+      var o = Object(this);
+
+      // 2. Let len be ? ToLength(? Get(O, "length")).
+      var len = o.length >>> 0;
+
+      // 3. If len is 0, return false.
+      if (len === 0) {
+        return false;
+      }
+
+      // 4. Let n be ? ToInteger(fromIndex).
+      //    (If fromIndex is undefined, this step produces the value 0.)
+      var n = fromIndex | 0;
+
+      // 5. If n ≥ 0, then
+      //  a. Let k be n.
+      // 6. Else n < 0,
+      //  a. Let k be len + n.
+      //  b. If k < 0, let k be 0.
+      var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+
+      // 7. Repeat, while k < len
+      while (k < len) {
+        // a. Let elementK be the result of ? Get(O, ! ToString(k)).
+        // b. If SameValueZero(searchElement, elementK) is true, return true.
+        // c. Increase k by 1.
+        // NOTE: === provides the correct "SameValueZero" comparison needed here.
+        if (o[k] === searchElement) {
+          return true;
+        }
+        k++;
+      }
+
+      // 8. Return false
+      return false;
+    }
+  });
+}
 /** 
  *  对Date的扩展，将 Date 转化为指定格式的String * 月(M)、日(d)、12小时(h)、24小时(H)、分(m)、秒(s)、周(E)、季度(q)
     可以用 1-2 个占位符 * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) * eg: * (new
@@ -29,40 +72,56 @@ Number.prototype.toMoney = function (places, symbol = '', thousand = ',', decima
  * (new Date()).pattern("yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 星期二 08:09:04      
  * (new Date()).pattern("yyyy-M-d h:m:s.S") ==> 2006-7-2 8:9:4.18      
  */
-Date.prototype.format = Date.prototype.format || function (fmt = 'yyyy-MM-dd HH:mm') {
-  var o = {
-    'M+': this.getMonth() + 1, //月份         
-    'd+': this.getDate(), //日         
-    'h+': this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时         
-    'H+': this.getHours(), //小时         
-    'm+': this.getMinutes(), //分         
-    's+': this.getSeconds(), //秒         
-    'q+': Math.floor((this.getMonth() + 3) / 3), //季度         
-    'S': this.getMilliseconds() //毫秒         
-  }
-  var week = {
-    '0': '/u65e5',
-    '1': '/u4e00',
-    '2': '/u4e8c',
-    '3': '/u4e09',
-    '4': '/u56db',
-    '5': '/u4e94',
-    '6': '/u516d'
-  }
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
-  }
-  if (/(E+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? '/u661f/u671f' : '/u5468') : '') + week[this.getDay() + ''])
-  }
-  for (var k in o) {
-    if (new RegExp('(' + k + ')').test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+if (!Date.prototype.format) {
+  Date.prototype.format = function (fmt = 'yyyy-MM-dd HH:mm') {
+    var o = {
+      'M+': this.getMonth() + 1, //月份         
+      'd+': this.getDate(), //日         
+      'h+': this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时         
+      'H+': this.getHours(), //小时         
+      'm+': this.getMinutes(), //分         
+      's+': this.getSeconds(), //秒         
+      'q+': Math.floor((this.getMonth() + 3) / 3), //季度         
+      'S': this.getMilliseconds() //毫秒         
     }
+    var week = {
+      '0': '/u65e5',
+      '1': '/u4e00',
+      '2': '/u4e8c',
+      '3': '/u4e09',
+      '4': '/u56db',
+      '5': '/u4e94',
+      '6': '/u516d'
+    }
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
+    }
+    if (/(E+)/.test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? '/u661f/u671f' : '/u5468') : '') + week[this.getDay() + ''])
+    }
+    for (var k in o) {
+      if (new RegExp('(' + k + ')').test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+      }
+    }
+    return fmt
   }
-  return fmt
 }
 
+// 货币格式 100000.11 -> 100,000.11
+if (!Number.prototype.currency){
+  Number.prototype.currency = function (places, symbol = '', thousand = ',', decimal = '.') {
+    places = !isNaN(places = Math.abs(places)) ? places : 2
+    var number = this,
+      negative = number < 0 ? '-' : '',
+      i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + '',
+      j = (j = i.length) > 3 ? j % 3 : 0
+    return symbol + negative + (j ? i.substr(0, j) + thousand : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : '')
+  }
+
+}
+
+// utils ***********************************************************************
 // dateStr  "yyyy-MM-dd hh:mm:ss" 转成Date对象
 const str2date = (dateStr = '') => {
   return dateStr ? new Date(Date.parse(dateStr.replace(/-/gi, '/'))) : new Date()
@@ -188,8 +247,66 @@ const formatThumb = (src = '', height, width = 375, type = 'webp') => {
   }
   return src
 }
+const getArgs = (url) => {
+  if (typeof url !== 'string') return url
+  url = decodeURIComponent(url)
+  let pos = url.indexOf('?'),
+    pos2 = url.lastIndexOf('#'),
+    qs = pos > -1 ? url.substring(pos + 1, pos2 <= pos ? url.length : pos2) : '',
+    items = qs.split('&')
+  let args = {},
+    arg = null,
+    name = null,
+    value = null
+  for (let i = 0, splitPos = 0, item = null; i < items.length; i++) {
+    item = items[i]
+    splitPos = item.indexOf('=')
+    name = item.substring(0, splitPos)
+    value = item.substring(splitPos + 1)
+    name && (args[name] = value)
+  }
+
+  if (pos2 !== -1) {
+    args['_hash'] = url.substring(pos2 + 1, url.length)
+  }
+
+  return args
+}
+
+const setArgs = (url, name, value) => {
+  if (typeof url !== 'string') return ''
+  if (name === undefined) return url
+
+  let urlArgs = getArgs(url)
+  let params = []
+
+  if (typeof name === 'object') {
+    Object.assign(urlArgs, name)
+  } else if (typeof name === 'string') {
+    urlArgs[name] = value
+  }
+
+  let hash = ''
+  for (let key of Object.keys(urlArgs)) {
+    let val = urlArgs[key]
+    if (val != undefined) {
+      if (key === '_hash') {
+        hash = val
+      } else {
+        params.push(encodeURIComponent(key) + '=' + encodeURIComponent(val))
+      }
+    }
+  }
+
+  params.length > 0 && (url = url.split('?')[0] + '?' + params.join('&'))
+  hash && (url += '#' + hash)
+
+  return url
+}
 
 module.exports = {
+  getArgs,
+  setArgs,
   copyObj,
   str2date,
   formatTime2chs,

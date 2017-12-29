@@ -107,6 +107,7 @@ Page({
     if(!this.infoTabs) {
       var query = wx.createSelectorQuery()
       query.select('#info-tabs').boundingClientRect()
+      query.selectViewport().scrollOffset()
       this.infoTabs = query
     }
 
@@ -126,6 +127,12 @@ Page({
       })
     }, 50)
   },
+  onShareAppMessage: function () {
+    return {
+      title: this.data.info.carsName + '低至' + this.data.sltedColor.minPriceStr + '，分期付款轻松开回家。',
+      path: app.utils.setArgs('/' + this.route, this.options)
+    }
+  },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
     this.setData({
@@ -142,10 +149,10 @@ Page({
   getInfo: function (carId = '') {
     wx.showNavigationBarLoading()
     return app.post(app.config.carInfo, { carId }).then(({ data }) => {
-      data.priceStr = (data.price / 10000).toFixed(2)
+      data.priceStr = (data.price / 10000).toFixed(2) + '万'
       
       data.list = data.list.map(item => {
-        item.minPriceStr = (item.minPrice / 10000).toFixed(2)
+        item.minPriceStr = (item.minPrice / 10000).toFixed(2) + '万'
         item.images = item.imagePath ? item.imagePath.split(',')
           .filter(image => image)
           .map((image, index) => {
@@ -189,6 +196,7 @@ Page({
     }else {
       index = this.data.tabs.index
     }
+
     if (index === 0) {
       if (!this.data.introduceData) {
         this.getIntroduce()
@@ -202,6 +210,14 @@ Page({
         this.getProblemList()
       }
     }
+
+    // this.infoTabs.exec(res => {
+    //   if (res[0].top < 0) {
+    //     wx.pageScrollTo({
+    //       scrollTop: res[1].scrollTop + res[0].top
+    //     })
+    //   }
+    // })
   },
   // 车辆介绍
   getIntroduce: function () {
@@ -266,9 +282,10 @@ Page({
   },
   paramToggle: function (event) {
     var id = event.currentTarget.id, list = this.data.parameter.data
-    for (var i = 0, len = list.length; i < len; ++i) {
+    for (var i = list.length - 1; i >= 0; i--) {
       if (list[i].id == id) {
         list[i].open = !list[i].open
+        break
       } else {
         list[i].open = false
       }
@@ -309,9 +326,9 @@ Page({
     })
 
     if (index === 0) {
-      this.getFullPayment()
+      !this.data.counter.fullPayment && this.getFullPayment()
     } else if (index === 1) {
-      this.getLoanPayment()
+      !this.data.counter.loanPayment && this.getLoanPayment()
     }
   },
   percentChange(event) {

@@ -21,15 +21,24 @@
 .l-list-filter ._item._active .l-icon-6ac{ transform: rotate(-180deg); }
 
 .l-brand-list .weui-grid__icon{ width: 80rpx; height: 80rpx; }
+.l-brand-list .weui-grid{overflow: hidden;}
+.l-brand-list ._tick{position: absolute; right: 0; bottom: -2rpx; line-height: 1; color: #ff9247; display: none;}
+.l-brand-list ._active ._tick{display: block;}
 .l-brand-list ._active .weui-grid__label{color: #ff9247;}
 .l-price-list{ padding:20rpx; overflow: hidden; }
-.l-price-list text{
-  float:left; margin: 2%; min-width: 120rpx; width: 20%; text-align: center;
-  background: #eee; padding: 20rpx 30rpx; border: 2rpx solid #ccc;
+.l-price-list ._item{
+  float:left; margin: 2%; min-width: 120rpx; width: 20%; text-align: center; overflow: hidden;
+  background: #eee; padding: 20rpx 30rpx; border: 2rpx solid #ccc; position: relative;
 }
+.l-price-list ._tick{position: absolute; right: 0; bottom: -2rpx; line-height: 1; color: #ff9247; display: none;}
 .l-price-list ._active{background: #fff; border-color: #ff9247;color: #ff9247;}
+.l-price-list ._active ._tick{display: block;}
 .l-type-list .weui-grid__icon{ width: 160rpx; height: 80rpx; }
+.l-type-list .weui-grid{overflow: hidden;}
 .l-type-list ._active .weui-grid__label{color: #ff9247;}
+.l-type-list ._tick{position: absolute; right: 0; bottom: -2rpx; line-height: 1; color: #ff9247; display: none;}
+.l-type-list ._active ._tick{display: block;}
+
 
 .l-list-car ._item{ background: #fff; margin: 30rpx 0; }
 .l-list-car ._item image{ width: 100%;}

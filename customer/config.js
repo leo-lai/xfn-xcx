@@ -26,7 +26,7 @@ var baseUrl = "https://tomcat.xfnauto.com/tauto/interface"
 
 var config = {
   // 静态资源服务器
-  resURL: 'http://res.mifengqiche.com',
+  resURL: 'http://res.xfnauto.com',
   // 野狗配置
   wilddog: {
     syncURL: 'https://wd5822510528sjwblr.wilddogio.com',

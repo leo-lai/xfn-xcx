@@ -4,16 +4,17 @@
 <view class='l-page-full {{ counter.visible ? "l-no-scroll" : "" }}'>
   <!-- 车辆摘要信息 -->
   <view class='l-text-center l-bg-white l-zoom'>
-    <view class='l-images-360' bindtouchstart='imagesTouchStart' bindtouchmove='imagesTouchMove'>
+    <view class='l-images-360' bindtouchstart='imagesTouchStart' bindtouchmove='imagesTouchMove' bindtap='imagePreview'>
       <block wx:for='{{imagePlayer.data}}' wx:key='{{index}}'>
         <image mode='aspectFit' src='{{item.src}}' class='{{item.hidden ? "_hidden" : ""}}'></image>
       </block>
       <text class='l-icon-623 _360' hidden='{{imagePlayer.data.length <= 1}}'></text>
-      <text class='l-icon-613 _large' bindtap='imagePreview'></text>
+       <!-- <text class='l-icon-613 _large' bindtap='imagePreview'></text>  -->
+      <button catchtap='noopFn' class='l-icon-60e _share l-text-theme' open-type='share' ></button>
     </view>
     <view class='l-h4 l-margin-tb'>{{info.carsName}}</view>
     <view>
-      <text class='l-text-gray'>官方指导价：{{info.priceStr}}万</text>
+      <text class='l-text-gray'>官方指导价：{{info.priceStr}}</text>
       <text class='l-margin'>|</text>
       <text class='l-text-theme' bindtap='sltCar'>
         <text>更换其他车型</text>
@@ -37,7 +38,7 @@
           <text class='l-text-gray'>不含税/保险</text>
         </view>
         <view class='l-rest l-padding-tb'>
-          <text class='l-fs-26 l-text-theme'>{{sltedColor.minPriceStr}}万</text>
+          <text class='l-fs-26 l-text-theme'>{{sltedColor.minPriceStr}}</text>
         </view>
         <view class='l-padding' bindtap='showCounter'>
           <view class='l-icon-64a'></view>
@@ -120,6 +121,7 @@
             <view class='weui-loading'></view>
             <view class='weui-loadmore__tips'>正在加载</view>
           </view>
+          <view class='l-margin-t'></view>
         </view>
       </view>
     </view>

@@ -151,6 +151,12 @@ Page({
       wx.stopPullDownRefresh()
     }
   },
+  onShareAppMessage: function() {
+    return {
+      title: '来喜蜂鸟淘车网买车，让您购车省心、省时、更省钱！',
+      path: '/' + this.route
+    }
+  },
   sltFilter: function (event) {
     let filterType = event.currentTarget.dataset.val
     if(filterType === this.data.filter.type) {

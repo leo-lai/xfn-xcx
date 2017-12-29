@@ -25,15 +25,17 @@
           <view class='weui-grid {{filter.sltedBrand.id === item.id ? "_active" : ""}}' bindtap='filterSearch' data-item='{{item}}'>
             <image class='weui-grid__icon' src='{{item.image}}' />
             <view class='weui-grid__label'>{{item.name}}</view>
+            <text class='l-icon-654 _tick'></text>
           </view>
         </block>
       </view>
 
       <!-- 价格 -->
       <view class='l-price-list' hidden='{{filter.type !== 2}}'>
-        <block wx:for='{{priceList}}' wx:key='id'>
-          <text class='{{filter.sltedPrice.id === item.id ? "_active" : ""}}' bindtap='filterSearch' data-item='{{item}}'>{{item.name}}</text>
-        </block>
+        <view class='_item {{filter.sltedPrice.id === item.id ? "_active" : ""}}' wx:for='{{priceList}}' wx:key='id' bindtap='filterSearch' data-item='{{item}}'>
+          <text>{{item.name}}</text>
+          <text class='l-icon-654 _tick'></text>
+        </view>
       </view>
 
       <!-- 车型 -->
@@ -42,6 +44,7 @@
           <view class='weui-grid {{filter.sltedType.id === item.id ? "_active" : ""}}' bindtap='filterSearch' data-item='{{item}}'>
             <image class='weui-grid__icon' src='{{item.image}}' />
             <view class='weui-grid__label'>{{item.name}}</view>
+            <text class='l-icon-654 _tick'></text>
           </view>
         </block>
       </view>
