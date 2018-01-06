@@ -7,14 +7,31 @@ Page({
    */
   data: {
     topTips: '',
-    isOrder: '',
     buyTime: app.config.baseData.buyTime,
     buyWay: app.config.baseData.buyWay,
-    info: {},
-    state: {},
-    remark: {
+    orderState: {
+      '1': '待交定金',
+      '3': '等待银行审核',
+      '4': '银行审核不通过',
+      '5': '等待车辆出库',
+      '7': '等待加装精品',
+      '9': '等待上牌',
+      '11': '等待贴膜',
+      '13': '等待交付车辆',
+      '15': '等待支付尾款',
+      '17': '订单完成'
+    },
+    appointInfo: {
+      visible: false,
+      data: null
+    },
+    orderInfo: {},
+    customerInfo: {},
+    remarkInfo: {
+      showAll: false,
       visible: false,
       loading: false,
+      _list: [],
       list: [],
       data: {
         customerUsersId: '',
@@ -29,9 +46,12 @@ Page({
   onLoad: function (options) {
     app.onLogin(_ => {
       this.$params = {
-        ids: options.ids ? options.ids.split(',') : ['','']
+        ids: options.ids ? options.ids.split(',') : ['', '']
       }
-      this.getInfo()
+      wx.showNavigationBarLoading()
+      this.getInfo().finally(_ => {
+        wx.hideNavigationBarLoading()
+      })
     }, this.route)
   },
   /**
@@ -42,29 +62,23 @@ Page({
   },
   // 客户详情
   getInfo: function () {
-    wx.showNavigationBarLoading()
-    app.post(app.config.customerInfo, {
+    return app.post(app.config.customerInfo, {
       customerUsersId: this.$params.ids[0],
       customerUsersOrgId: this.$params.ids[1]
     }).then(({ data }) => {
-      let info = data.customerMap
-      info.customerUsersId = this.$params.ids[0]
-      info.thumb = info.headPortrait ? app.utils.formatHead(info.headPortrait) : app.config.avatar
-      this.setData({ 
-        'info': info,
-        'state': {
-          trackContent: data.trackContent,
-          createDate: data.createDate
-        },
-        'isOrder': data.isOrder,
-        'remark.list': data.remarksMap.list
+      data.customerMap.thumb = data.customerMap.headPortrait ? 
+      app.utils.formatHead(data.customerMap.headPortrait) : app.config.avatar
+      this.setData({
+        'appointInfo.data': data.appointmentMap,
+        'orderInfo': data.orderMap,
+        'customerInfo': data.customerMap,
+        'remarkInfo._list': data.remarksMap.list,
+        'remarkInfo.list': data.remarksMap.list.length > 0 ? [data.remarksMap.list[0]] : []
       })
-    }).finally(_ => {
-      wx.hideNavigationBarLoading()
     })
   },
   // 查看上传资料
-  viewBankInfo: function() {
+  viewBankInfo: function () {
     let { bankAuditsImage, bankAuditsvideo } = this.data.info
     app.storage.setItem('bankInfo', {
       bankAuditsImage, bankAuditsvideo
@@ -86,36 +100,57 @@ Page({
   // 表单输入
   bindInput: function (event) {
     let data = {}
-    data['remark.data.' + event.target.id] = event.detail.value
+    data['remarkInfo.data.' + event.target.id] = event.detail.value
     this.setData(data)
   },
   showRemarkPop: function () {
     this.setData({
-      'remark.visible': true,
-      'remark.data.customerUsersId': this.$params.ids[0],
-      'remark.data.remarksContent': ''
+      'remarkInfo.visible': true,
+      'remarkInfo.data.customerUsersId': this.$params.ids[0],
+      'remarkInfo.data.remarksContent': ''
     })
   },
   closeRemarkPop: function () {
-    this.setData({ 'remark.visible': false })
+    this.setData({ 'remarkInfo.visible': false })
   },
   // 添加备注
   addRemark: function () {
-    if (!this.data.remark.data.remarksContent){
+    if (!this.data.remarkInfo.data.remarksContent) {
       this.showTopTips('请输入备注内容')
       return
     }
 
-    this.setData({ 'remark.loading': true })
-    app.post(app.config.customerRemark, this.data.remark.data).then(({data}) => {
+    this.setData({ 'remarkInfo.loading': true })
+    app.post(app.config.customerRemark, this.data.remarkInfo.data).then(({ data }) => {
       app.toast('操作成功')
       this.setData({
-        'remark.visible': false,
-        'remark.loading': false,
-        'remark.list': [data, ...this.data.remark.list]
+        'remarkInfo.visible': false,
+        'remarkInfo.loading': false,
+        'remarkInfo._list': [data, ...this.data.remarkInfo.list],
+        'remarkInfo.list': [data]
       })
     }).catch(_ => {
-      this.setData({ 'remark.loading': false })
+      this.setData({ 'remarkInfo.loading': false })
     })
+  },
+  showAllRemark: function () {
+    let isAll = !this.data.remarkInfo.showAll
+    this.setData({
+      'remarkInfo.showAll': isAll,
+      'remarkInfo.list': isAll ? this.data.remarkInfo._list : [this.data.remarkInfo._list[0]]
+    })
+  },
+  // 显示预约信息
+  showAppoint: function () {
+    this.setData({ 'appointInfo.visible': !this.data.appointInfo.visible })
+  },
+  // 显示客户资料
+  showCustomerDetails: function () {
+    app.storage.setItem('customer_details', this.data.customerInfo)
+    app.navigateTo('../customer-details/index')
+  },
+  // 显示购车单信息
+  showCustomerOrder: function () {
+    app.navigateTo('../customer-order/index?ids=' + this.data.customerInfo.customerUsersId + ',' + this.data.orderInfo.customerOrderId)
   }
 })

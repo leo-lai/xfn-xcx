@@ -1,0 +1,5 @@
+/* pages/customer-order/index.wxss */
+.l-tag-list{overflow: hidden; margin: -20rpx -20rpx 0 0;}
+.l-tag-list ._item{float:left; margin: 20rpx 20rpx 0 0; min-width: 130rpx; padding: 15rpx 10rpx; text-align: center; border: 2rpx solid #ccc; border-radius: 10rpx;}
+.l-tag-list ._item icon{position: relative; right: -20rpx;}
+.l-tag-list ._item._add{background-color: #fa5539; color: #fff; border-color: #fa5539;}

@@ -1,1 +1,2 @@
 /* pages/customer-info/index.wxss */
+._opacity{opacity: 0.3;}

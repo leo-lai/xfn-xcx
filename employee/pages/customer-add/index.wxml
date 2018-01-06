@@ -19,12 +19,34 @@
           <input class='weui-input' type='number' placeholder='请输入客户手机号码' maxlength='{{11}}' confirm-type='next' id='phoneNumber' value='{{formData.phoneNumber}}' bindinput='bindInput' />
         </view>
       </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>预约到店日期</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='appointmentDate' bindchange='bindInput' value='{{formData.appointmentDate}}' mode='date' start='{{todayStr}}'>
+            <view wx:if='{{formData.appointmentDate}}' class='weui-select weui-select_in-select-after'>{{formData.appointmentDate}}</view>
+            <view wx:else class='weui-select weui-select_in-select-after l-text-gray'>请选择</view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>预约到店时间段</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='timeOfAppointment' data-picker='times' bindchange='bindInput' value='{{times.index}}' range='{{times.list}}'>
+            <view wx:if='{{times.index !== -1}}' class='weui-select weui-select_in-select-after'>{{times.list[times.index]}}</view>
+            <view wx:else class='weui-select weui-select_in-select-after l-text-gray'>请选择</view>
+          </picker>
+        </view>
+      </view>
       <navigator url='../car-selector/index' class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>意向车辆</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <view wx:if='{{formData.intentionCarId}}' class='weui-select weui-select_in-select-after l-text-wrap1'>{{carsName}}</view>
+          <view wx:if='{{formData.intentionCarId}}' class='weui-select weui-select_in-select-after'>{{formData.carsName}}</view>
           <view wx:else class='weui-select weui-select_in-select-after l-text-gray'>请选择</view>
         </view>
       </navigator>

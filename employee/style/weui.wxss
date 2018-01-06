@@ -183,7 +183,7 @@ icon {
 }
 
 .weui-label {
-  width: 105px;
+  min-width: 105px;
   word-wrap: break-word;
   word-break: break-all
 }
@@ -370,11 +370,10 @@ icon {
 
 .weui-select {
   position: relative;
-  padding-left: 15px;
-  padding-right: 30px;
-  height: 2.58823529em;
-  min-height: 2.58823529em;
-  line-height: 2.58823529em;
+  padding: 17rpx 60rpx 17rpx 30rpx;
+  /* height: 2.58823529em; */
+  /* min-height: 2.58823529em; */
+  /* line-height: 2.58823529em; */
   border-right: 1rpx solid #efefef
 }
 

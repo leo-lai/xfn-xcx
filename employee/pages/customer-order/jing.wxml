@@ -1,0 +1,20 @@
+<!--pages/customer-order/jing.wxml-->
+<view class='l-page-full l-bg-white'>
+  <view class='weui-cells weui-cells_after-title'>
+    <checkbox-group bindchange='sltcarParts'>
+      <label class='weui-cell weui-check__label l-padding' wx:for='{{list}}' wx:key='id'>
+        <view class='l-margin-r-m'>
+          <checkbox color='#fa5539' value='{{item.name}}' checked='{{item.checked}}' />
+        </view>
+        <view class='weui-cell__bd'>{{item.name}}</view>
+      </label>
+    </checkbox-group>
+  </view>
+  <view class='l-margin-t'></view>
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <view class='l-btn-w60 l-margin-tb'>
+      <button class='l-button-main' bindtap='submit'>确定</button>
+    </view>
+  </view>
+</view>

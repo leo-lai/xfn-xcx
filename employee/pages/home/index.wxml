@@ -13,21 +13,21 @@
     </view>
   </view>
   <view class='l-menu-grid'>
-    <navigator class='_item' url='../customer/index'>
+    <navigator class='_item' url='../customer-list/index'>
       <image mode='widthFix' src='../../images/customer-icon.png'></image>
       <view class="_txt">客户管理</view>
     </navigator>
-    <navigator class='_item' url='../car-stock/index'>
+    <navigator class='_item' url='../car-stock/home'>
       <image mode='widthFix' src='../../images/stock-icon.png'></image>
-      <view class="_txt">车辆库存</view>
-    </navigator>
-    <navigator class='_item' url='../car-stock-out/index'>
-      <image mode='widthFix' src='../../images/stock-out-icon.png'></image>
-      <view class="_txt">出库车辆</view>
+      <view class="_txt">库存/出库</view>
     </navigator>
     <navigator class='_item' url='../car-last-step/index'>
       <image mode='widthFix' src='../../images/fix-icon2.png'></image>
-      <view class="_txt">加装上牌</view>
+      <view class="_txt">加装/上牌</view>
+    </navigator>
+    <navigator class='_item' url='../car-express/index'>
+      <image mode='widthFix' src='../../images/express-icon.png'></image>
+      <view class="_txt">车辆托运</view>
     </navigator>
   </view>
 </view>

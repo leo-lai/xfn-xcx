@@ -110,12 +110,9 @@ Page({
     })
     app.storage.setItem('carType_slted', item)
     app.getPrevPage().then(prevPage => {
-      prevPage.setData({
-        'carsName': item.name,
-        'formData.intentionCarId': item.id
-      })
+      prevPage.changeCar && prevPage.changeCar(this.data.carType.slted, this.data.family.slted, this.data.brand.slted)
+      app.back()
     })
-    app.back()
   },
   closeCarType: function () {
     this.setData({

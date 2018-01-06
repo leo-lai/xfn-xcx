@@ -1,6 +1,7 @@
 <!--pages/car-uploader/index.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full'>
+  <view class='l-tip-msg l-margin l-fs-m'>目前仅农业银行支持线上审批资料，其他银行请按照原有线下流程操作。</view>
   <view class='l-margin l-radius l-bg-white'>
     <view class='l-padding-btn l-border-b'>
       <text class='l-fs-s l-text-gray'>资料照片</text>
@@ -50,7 +51,10 @@
       </view>
     </view>
   </view>
-  <view class='l-margin'>
-    <button class='l-button-main' bindtap='submit'>上传至银行后台</button>
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <view class='l-btn-w60 l-margin-tb'>
+      <button class='l-button-main' bindtap='submit'>上传至银行后台</button>
+    </view>
   </view>
 </view>

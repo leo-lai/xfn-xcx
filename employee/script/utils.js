@@ -199,10 +199,14 @@ const formatTime2chs = (dateStr = '', fmt) => {
   return result
 }
 
+const isObject = (target) => {
+  return Object.prototype.toString.call(target).toLocaleLowerCase() === '[object object]'
+}
+
 // 复制对象
 const copyObj = (target = {}, ...objs) => {
   objs.forEach((obj) => {
-    if (Object.prototype.toString.call({}).toLocaleLowerCase() === '[object object]') {
+    if (isObject(obj)) {
       Object.keys(target).forEach(key => {
         if (obj[key] !== null && obj[key] !== undefined) {
           target[key] = obj[key]
@@ -307,6 +311,7 @@ const setArgs = (url, name, value) => {
 module.exports = {
   getArgs,
   setArgs,
+  isObject,
   copyObj,
   str2date,
   formatTime2chs,

@@ -1,5 +1,6 @@
 // pages/cucstomer-add/index.js
 const app = getApp()
+let todayStr = new Date().format('yyyy-MM-dd')
 Page({
 
   /**
@@ -7,12 +8,19 @@ Page({
    */
   data: {
     topTips: '',
+    todayStr,
+    times: {
+      index: -1,
+      list: ['08:00-09:00', '09:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-13:00', '13:00-14:00', '14:00-15:00', '15:00-16:00', '16:00-17:00', '17:00-18:00']
+    },
     buyWay: app.config.baseData.buyWay,
     buyTime: app.config.baseData.buyTime,
-    carsName: '',
     formData: {
       customerUsersName: '',
       phoneNumber: '',
+      appointmentDate: todayStr,
+      timeOfAppointment: '',
+      carsName: '',
       intentionCarId: '',
       expectWayId: '',
       carPurchaseIntention: '',
@@ -23,7 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
   /**
    * 生命周期函数--监听页面显示
@@ -46,8 +54,27 @@ Page({
   // 表单输入
   bindInput: function (event) {
     let data = {}
-    data['formData.' + event.target.id] = event.detail.value
+    let id = event.target.id
+    let picker = event.target.dataset.picker
+    let value = event.detail.value
+
+    if (picker) {
+      value = Number(value)
+      data[picker + '.index'] = value
+      switch (id) {
+        default:
+          value = this.data[picker].list[value]
+          break
+      }
+    }
+    data['formData.' + id] = value
     this.setData(data)
+  },
+  changeCar: function (carInfo = {}) {
+    this.setData({
+      'formData.carsName': carInfo.name,
+      'formData.intentionCarId': carInfo.id
+    })
   },
   submit: function() {
     if (!this.data.formData.customerUsersName) {
@@ -76,9 +103,7 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.customerAdd, this.data.formData).then(({ data }) => {
-      app.toast('新增成功').then(_ => {
-        wx.redirectTo({ url: '../customer-list/index?type=0' })
-      })
+      app.toast('新增成功', true)
     }).catch(err => {
       wx.hideLoading()
     })

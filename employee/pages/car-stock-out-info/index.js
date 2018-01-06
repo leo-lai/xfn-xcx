@@ -27,6 +27,13 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
+      wx.getSystemInfo({
+        success: res => {
+          this.setData({
+            'carList.height': res.windowHeight - 200
+          })
+        }
+      })
       this.getInfo()
     }, this.route)
   },

@@ -1,77 +1,108 @@
 <!--pages/customer-list/index.wxml-->
 <import src='../../template/loadmore.wxml' />
-<view class='l-page-full {{ salesList.visible ? "l-no-scroll" : "" }}'>
-  <view class='l-search-box {{search.typing ? "_doing" : ""}}' catchtouchmove='noopFn'>
-    <view class='weui-search-bar'>
-      <view class='weui-search-bar__form'>
-        <view class='weui-search-bar__box'>
-          <icon class='weui-icon-search_in-box' type='search' size='14'></icon>
-          <input type='text' class='weui-search-bar__input' placeholder='输入手机号码' value='{{search.keyword}}' focus='{{search.typing}}' bindinput='inputSearchTyping' />
-          <view class='weui-icon-clear' wx:if='{{search.keyword.length > 0}}' bindtap='clearSearchInput'>
-            <icon type='clear' size='14'></icon>
-          </view>
-        </view>
-        <label class='weui-search-bar__label' hidden='{{search.typing}}' bindtap='showSearchInput'>
-          <icon class='weui-icon-search' type='search' size='14'></icon>
-          <view class='weui-search-bar__text'>输入手机号码</view>
-        </label>
-      </view>
-      <view class='weui-search-bar__cancel-btn l-text-theme' hidden='{{!search.typing}}' bindtap='hideSearchInput'>取消</view>
+<view style='padding-top: 100rpx;' class='l-page-full {{ filter.panel ? "l-no-scroll" : "" }}'>
+  <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
+    <view style='margin-right: 20rpx;' class='_type' bindtap='toggleFilterPanel'>
+      <text>筛选</text>
+      <text class='l-icon-6ac'></text>
     </view>
-    <scroll-view scroll-y class='weui-cells searchbar-result l-scroll' style='height:{{search.height}}px' hidden='{{search.keyword.length === 0}}'>
-      <navigator url='../customer-info/index?ids={{item.customerUsersId}},{{item.customerUsersOrgId}}' class='weui-cell' hover-class='weui-cell_active' wx:for='{{search.list}}' wx:key='customerUsersId'>
-        <view class='weui-cell__bd'>{{item.phoneNumber}}</view>
-        <view class='weui-cell__ft'>{{item.customerUsersName}}</view>
-      </navigator>
-      <view class='weui-loadmore l-text-gray' hidden='{{!search.doing}}'>
-        <view class='weui-loading'></view>
-        <view class='weui-loadmore__tips'>搜索中...</view>
+    <view class='_input l-rest l-flex-hc'>
+      <view class='l-rest'>
+        <input data-val='search' bindfocus='showFilter' bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入客户名称或电话' value='{{filter.data.customerUsersSearch}}'/>
       </view>
-      <view class='l-padding l-text-gray l-text-center' hidden='{{search.doing || search.list.length > 0}}'>搜索不到相关数据</view>
-    </scroll-view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.customerUsersSearch === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+    <view class='_cont {{filter.visible ? "_active" : ""}}' bindtap='hideFilter'>
+      <!-- 历史记录 -->
+      <view class='_history' hidden='{{filter.type !== "search" || filter.history.length === 0}}' catchtap='noopFn'>
+        <view>
+          <text class='l-fr l-icon-627 l-fs-m'  bindtap='clearHistory'></text>
+          <text class='l-fs-m'>历史搜索</text>
+        </view>
+        <view class='_history-list'>
+          <text class='l-text-wrap' wx:for='{{filter.history}}' wx:key='{{index}}' bindtap='searchHistory' data-val='{{item}}'>{{item}}</text>
+        </view>
+      </view>
+    </view>
   </view>
-  <view style='height: 48px;'></view>
 
   <!-- 客户列表 -->
-  <navigator url='../customer-info/index?ids={{item.customerUsersId}},{{item.customerUsersOrgId}}' class=' l-padding-lr l-bg-white l-margin-m l-radius' wx:for='{{list.data}}' wx:key='{{CustomerUsersId}}'>
-    <view class='l-flex-hc l-border-b l-padding-tb'>
-      <image class='l-avatar' mode='aspectFit' style='width: 40rpx; height: 40rpx; margin-right: 20rpx;' src='{{item.thumb}}'></image>
-      <view class='l-h4 l-rest'>{{item.customerUsersName}}</view>
-      <text class='l-fs-m'>{{item.phoneNumber}}</text>
+  <navigator url='../customer-info/index?ids={{item.customerUsersId}},{{item.customerUsersOrgId}}' class=' l-padding l-bg-white l-margin-m l-radius' wx:for='{{list.data}}' wx:key='{{customerUsersId}}'>
+
+    <view class='l-flex-h'>
+      <image class='l-avatar' mode='aspectFit' style='width: 80rpx; height: 80rpx; margin-right: 30rpx;' src='{{item.thumb}}'></image>
+      <view class='l-rest'>
+        <view class='l-h4'>{{item.customerUsersName}}</view>
+        <text class='l-fs-m'>{{item.phoneNumber}}</text>  
+      </view>
+      <view>
+        <button class='l-text-theme' size='mini'>{{item.orderState}}</button>
+      </view>
     </view>
-    <view class='l-padding-tb l-text-center'>
-      <view class='l-text-gray l-fs-s'>意向/购置车辆</view>
-      <view class='l-margin-t-s'>{{item.carsName}}</view>
-      <view class='l-text-gray l-fs-s l-margin-t'>购车方案</view>
-      <view class='l-margin-t-s'>{{buyWay[item.paymentWay - 1]}}</view>
+
+    <view class='l-margin-t'>
+      <view class='l-text-gray l-fs-xs'>意向/购置车辆</view>
+      <view class='l-margin-t-xs'>{{item.carsName}}</view>
     </view>
-    <view catchtap='noopFn'>
-      <view wx:if='{{list.filter.customerType === 0}}' class='l-padding-tb l-border-t l-text-center l-text-theme' bindtap='getSalesList' data-item='{{item}}'>分配销售顾问</view>
+
+    <view class='l-margin-t'>
+      <view class='l-text-gray l-fs-xs'>购车方案</view>
+      <view class='l-margin-t-xs'>{{buyWay[item.paymentWay - 1]}}</view>
+    </view>
+
+    <view class='l-margin-t' catchtap='noopFn'>
+      <text class='l-icon-649 l-fr l-text-theme' data-val='{{item.phoneNumber}}' bindtap='callPhone' bindtap='callPhone'></text>
+      <view class='l-text-gray l-fs-xs'>销售顾问</view>
+      <view class='l-margin-t-xs'>{{item.systemUserName}}</view>
     </view>
   </navigator>
-  <template is='loadmore' data='{{...list}}' />
+  <!-- <template is='loadmore' data='{{...list}}' /> -->
+  <view class='weui-loadmore' hidden='{{ !list.loading }}'>
+    <view class='weui-loading'></view>
+    <view class='weui-loadmore__tips'>正在加载</view>
+  </view>
+  <view class='weui-loadmore weui-loadmore_line' hidden='{{ !(list.data.length === 0 && !list.more) }}'>
+    <view class='weui-loadmore__tips weui-loadmore__tips_in-line'>暂无数据</view>
+  </view>
 
-  <!-- 销售顾问列表 -->
-  <view class='l-popup-bottom {{salesList.visible ? "_show" : ""}}' bindtap='closeSalesList' catchtouchmove='noopFn'>
-    <view class='_inner' catchtap='noopFn'>
-      <text class='_close' bindtap='closeSalesList'>×</text>
-      <view class='_hd'>
-        <text class='l-h4'>选择销售顾问</text>
-      </view>
-      <scroll-view scroll-y class='_bd' style='min-height: 400rpx; max-height: {{salesList.height}}px;'>
-        <view class='weui-cells weui-cells_after-title'>
-          <radio-group>
-            <label class='weui-cell weui-check__label' wx:for='{{salesList.list}}' wx:key='systemUserId' data-item='{{item}}' bindtap='sltSalesList'>
-              <radio class='weui-check' value='{{item.systemUserId}}' checked='{{item.checked}}' />
-              <view class='weui-cell__bd'>{{item.systemUserName}}</view>
-              <view class='weui-cell__ft weui-cell__ft_in-radio' wx:if='{{item.checked}}'>
-                <icon color='#fa5539' class='weui-icon-radio' type='success_no_circle' size='16'></icon>
-              </view>
-            </label>
-          </radio-group>
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <navigator url='../customer-add/index' class='l-btn-w60 l-margin-tb' hover-class='none'>
+      <button class='l-button-main'>新增客户</button>
+    </navigator>
+  </view>
+</view>
+
+<view class='l-panel {{ filter.panel ? "_center" : "_left" }}' catchtouchmove='noopFn' bindtap='toggleFilterPanel'>
+  <view class='_inner l-flex-v' style='right: 15%; background-color:#fff;' catchtap='noopFn'>
+    <view class='l-margin l-h4'>筛选</view>
+    <scroll-view class='l-rest l-scroll' scroll-y>
+      <view class='l-filter-state'>
+        <view class='_tit'>客户类型</view>
+        <view class='_cont' bindtap='changeFilterPanel' data-name='buyCarAlready'>
+          <text class='{{filter.data.buyCarAlready === 1 ? "_active" : ""}}' data-val='1'>已下单客户</text>
+          <text class='{{filter.data.buyCarAlready === 0 ? "_active" : ""}}' data-val='0'>未下单客户</text>
         </view>
-      </scroll-view>
+      </view>
+      <view class='l-filter-state'>
+        <view class='_tit'>购车方案</view>
+        <view class='_cont' bindtap='changeFilterPanel' data-name='paymentWay'>
+          <text class='{{filter.data.paymentWay === 1 ? "_active" : ""}}' data-val='1'>全款购车</text>
+          <text class='{{filter.data.paymentWay === 2 ? "_active" : ""}}' data-val='2'>贷款购车</text>
+        </view>
+      </view>
+      <view class='l-filter-state'>
+        <view class='_tit'>购车状态</view>
+        <view class='_cont' bindtap='changeFilterState'>
+          <text class='{{item.checked ? "_active" : ""}}' wx:for='{{filter.state}}' wx:key='value' data-val='{{item.value}}'>{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='l-margin l-flex-hc'>
+      <view class='l-btn-w60'>
+        <button class='l-button-main' bindtap='sureFilterPanel'>确定</button>
+      </view>
     </view>
   </view>
-  
 </view>

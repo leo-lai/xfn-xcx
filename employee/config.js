@@ -22,14 +22,15 @@
  *                佛祖坐镇 顺利上线
  */
 
-// var baseUrl = "http://111.230.170.36/tauto/emInterface/employee"
-var baseUrl = "https://tomcat.xfnauto.com/tauto/emInterface/employee"
+var baseUrl = "http://111.230.170.36/tauto/emInterface/employee"
+// var baseUrl = "https://tomcat.xfnauto.com/tauto/emInterface/employee"
 var resURL = 'https://res.xfnauto.com'
 var config = {
   baseData: {
     buyTime: ['3天内', '7天内'],
     buyWay: ['全款', '分期'],
-    orderType: ['客户订车', '门店订车']
+    orderType: ['客户订车', '门店订车'],
+    carParts: ['防爆膜', '底盘漆', '地毯', '灭火器', '车头锁', '头枕', '抱枕', '香水', '导航', '全车座椅拉皮', '行车记录仪（单向）', '行车记录仪（双向）', '行车记录仪（隐藏式）', '行车记录仪（高清）', '晴雨挡', '挡泥板', '全车隔音', '倒车雷达（4探）', '倒车雷达（6探）']
   },
   // 静态资源服务器
   resURL,
@@ -62,6 +63,8 @@ var config = {
   customerBespeak: `${baseUrl}/bespeakCustomerOrgList`,
   // 订单客户列表
   customerOrder: `${baseUrl}/orderStateCustomerList`,
+  // 客户列表v2 (2018-01-04)
+  customerList: `${baseUrl}/customerUserList`,
   // 门店列表
   storeList: `${baseUrl}/organizationLevelList`,
   // 客户详情
@@ -70,8 +73,22 @@ var config = {
   customerRemark: `${baseUrl}/addCustomerRemarks`,
   // 新增客户
   customerAdd: `${baseUrl}/addCustomerUsersr`,
+  // 修改客户资料
+  customerDetails: `${baseUrl}/changeUserInfo`,
+  // 客户购车单信息
+  customerOrderInfo: `${baseUrl}/customerOrderAllInfo`,
+  // 客户开单前
+  customerOrderBefore: `${baseUrl}/createOrderBefor`,
+  // 客户开单
+  customerOrderAdd: `${baseUrl}/editCustomerOrder`,
+  // 车身颜色列表
+  cheshen: `${baseUrl}/carColourList`,
+  // 内饰颜色
+  neishi: `${baseUrl}/carInteriorList`,
   // 上传资料
   customerUpload: `${baseUrl}/addBankAudits`,
+  // 交付车辆
+  customerJiaoche: `${baseUrl}/turnOverVehicle`,
   // 待出库单列表
   stockOutList: `${baseUrl}/customerOrderList`,
   // 出库单详情
@@ -84,6 +101,10 @@ var config = {
   licenseList: `${baseUrl}/orderLicensePlateList`,
   // 上牌完成
   licenseDone: `${baseUrl}/licensePlateDone`,
+  // 待贴膜列表
+  tiemoList: `${baseUrl}/carsPadPastingList`,
+  // 贴膜完成
+  tiemoDone: `${baseUrl}/carsPadPastingDone`,
   // 精品加装
   carPartList: `${baseUrl}/carsProductsList`,
   // 销售顾问列表

@@ -1,109 +1,136 @@
 <!--pages/customer-info/index.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full'>
-  <view class='l-margin l-flex-hc'>
-    <image style='width: 40rpx; height: 40rpx; margin-right: 20rpx;' mode='aspectFit' src='{{info.thumb}}'></image>
-    <view class='l-h4 l-rest'>{{info.customerUsersName}}</view>
-    <text class='l-fs-m'>{{info.phoneNumber}}</text>
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-flex-h l-padding'>
+      <image class='l-avatar' mode='aspectFit' style='width: 80rpx; height: 80rpx; margin-right: 30rpx;' src='{{customerInfo.thumb}}'></image>
+      <view class='l-rest'>
+        <view class='l-h4'>{{customerInfo.customerUsersName}}</view>
+        <text class='l-fs-m'>{{customerInfo.phoneNumber}}</text>  
+      </view>
+      <view bindtap='showCustomerDetails'>
+        <text class='l-text-theme l-fs-s'>查看资料</text>
+      </view>
+    </view>
   </view>
 
-  <!-- 客户信息 -->
-  <block wx:if='{{isOrder === 1}}'>
-    <view class='l-margin l-radius l-bg-white l-padding'>
-      <view class='l-text-gray l-fs-s'>当前状态</view>
-      <view class='l-text-center l-margin-tb-s l-h4'>{{state.trackContent}}</view>
-      <view class='l-text-gray l-fs-s l-text-center'>{{state.createDate}}</view>
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-flex-hc l-padding'>
+      <view class='l-rest'>购车信息</view>
+      <text class='l-text-theme l-fs-s' bindtap='showCustomerOrder'>查看明细</text>
     </view>
-    <view class='l-margin l-radius'>
-      <view class='weui-cells weui-cells_after-title'>
-        <view class='weui-cell'>
-          <view class='weui-cell__bd'>车辆</view>
-          <view class='weui-cell__ft l-fs-s'>{{info.carsName}}</view>
+
+    <!-- 购车单信息 -->
+    <view wx:if='{{orderInfo.customerOrderId}}' class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>订单号</view>
+        <view class='weui-cell__ft'>{{orderInfo.customerOrderCode}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>购车进度</view>
+        <view class='weui-cell__ft l-fs-s l-text-warn'>{{orderState[orderInfo.customerOrderState]}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>购置车辆</view>
+        <view class='weui-cell__ft'>{{orderInfo.carsName}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>购车方案</view>
+        <view class='weui-cell__ft'>{{orderInfo.paymentWayInfo}}</view>
+      </view>
+      <view class='weui-cell l-text-center' wx:if='{{orderInfo.customerOrderState == 3}}'>
+        <view class='l-btn-w60 l-padding-btn'>
+          <button class='l-button-main'>上传资料</button>
         </view>
-        <view class='weui-cell'>
-          <view class='weui-cell__bd'>购车方案</view>
-          <view class='weui-cell__ft'>{{buyWay[info.paymentWay - 1]}}</view>
-        </view>
-        <view class='weui-cell'>
-          <view class='weui-cell__bd'>贷款方案</view>
-          <view class='weui-cell__ft'>{{info.paymentWayInfo}}</view>
-        </view>
-        <view wx:if='{{info.bankAuditsvideo}}' class='weui-cell' bindtap='viewBankInfo'>
-          <view class='weui-cell__bd'>贷款资料</view>
-          <view class='weui-cell__ft l-text-theme'>查看资料</view>
-        </view>
-        <navigator wx:else class='weui-cell' url='../bank-uploader/index?id={{info.customerUsersId}}' hover-class='none'>
-          <view class='weui-cell__bd'>贷款资料</view>
-          <view class='weui-cell__ft l-text-theme'>上传资料</view>
+      </view>
+      <view class='weui-cell l-text-center' wx:if='{{orderInfo.customerOrderState == 13}}'>
+        <navigator url='../customer-jiaoche/index?id={{orderInfo.customerOrderId}}' class='l-btn-w60 l-padding-btn' hover-class='none'>
+          <button class='l-button-main'>交付车辆</button>
         </navigator>
-        <view class='weui-cell'>
-          <view class='weui-cell__bd'>销售顾问</view>
-          <view class='weui-cell__ft'>{{info.systemUserName}}</view>
-        </view>
       </view>
     </view>
-  </block>
-  <!-- 预约客户信息 -->
-  <block wx:if='{{isOrder === 0}}'>
-    <view class='l-margin l-radius'>
-      <view class='weui-cells weui-cells_after-title'>
-        <view class='weui-cell'>
-          <view class='weui-cell__bd'>预约时间</view>
-          <view class='weui-cell__ft'>{{info.timeOfAppointmentDate}}</view>
-        </view>
-        <view class='weui-cell'>
-          <view class='weui-cell__bd'>意向车辆</view>
-          <view class='weui-cell__ft l-fs-s'>{{info.intentionCarInfo}}</view>
-        </view>
-        <view class='weui-cell'>
-          <view class='weui-cell__bd'>打算购车时间</view>
-          <view class='weui-cell__ft'>{{buyTime[info.carPurchaseIntention]}}</view>
-        </view>
-        <view class='weui-cell'>
-          <view class='weui-cell__bd'>打算购车方案</view>
-          <view class='weui-cell__ft'>{{info.expectWayName}}</view>
-        </view>
-        <view class='weui-cell'>
-          <view class='weui-cell__bd'>销售顾问</view>
-          <view class='weui-cell__ft'>{{info.systemUserName}}</view>
-        </view>
+
+    <!-- 无购车单 -->
+    <view wx:else class='l-padding l-text-center l-border-t'>
+      <view class='l-fs-s l-text-gray'>无购车单</view>
+      <view class='l-btn-w60 l-margin-t'>
+        <button class='l-button-main' bindtap='showCustomerOrder'>开单</button>
       </view>
     </view>
-  </block>
+  </view>
+  
 
   <!-- 客户备注 -->
-  <view wx:if='{{info}}' class='l-margin l-radius'>
+  <view class='l-margin l-radius'>
     <view class='weui-panel'>
-      <view class='weui-panel__hd'>客户备注</view>
+      <view class='l-flex-hc l-padding l-border-b'>
+        <view class='l-rest'>客户备注</view>
+        <text class='l-text-theme l-fs-s' bindtap='showRemarkPop'>添加备注</text>
+      </view>
       <view class='weui-panel__bd'>
-        <view class='weui-media-box weui-media-box_text' wx:for='{{remark.list}}' wx:key='remarksId'>
+        <view class='weui-media-box weui-media-box_text' wx:for='{{remarkInfo.list}}' wx:key='remarksId'>
           <view class='weui-media-box__desc'>{{item.remarksContent}}</view>
           <view class='weui-media-box__info'>
             <view class='weui-media-box__info__meta'>{{item.systemUserName}}</view>
             <view class='weui-media-box__info__meta weui-media-box__info__meta_extra'>{{item.createDate}}</view>
           </view>
         </view>
-        <view class='weui-cell' wx:if='{{remark.list.length === 0}}'>
+        <view class='weui-cell' wx:if='{{remarkInfo._list.length === 0}}'>
           <view class='weui-cell__bd l-text-center l-text-gray'>暂无备注信息</view>
         </view>
       </view>
-      <view class='weui-panel__ft'>
-        <view class='weui-cell weui-cell_access weui-cell_link'>
-          <view class='weui-cell__bd l-text-center l-text-theme' bindtap='showRemarkPop'>添加备注</view>
+      <view class='weui-panel__ft' wx:if='{{remarkInfo._list.length > 1}}'>
+        <view class='weui-cell weui-cell_access weui-cell_link' bindtap='showAllRemark'>
+          <view class='weui-cell__bd l-text-center l-text-gray'>{{remarkInfo.showAll ? '收起' : '查看全部'}}</view>
         </view>
       </view>
     </view>
   </view>
-
-  <view class='l-popup-center l-flex-vh' wx:if='{{remark.visible}}' catchtouchmove='noopFn'>
+  <view class='l-popup-center l-flex-vh' wx:if='{{remarkInfo.visible}}' catchtouchmove='noopFn'>
     <view class='_inner' style='width: 80%; margin-top: 10%;'>
       <view class='l-padding'>
-        <textarea style='width:100%; height: 240rpx;' fixed='{{true}}' auto-focus='{{true}}' placeholder='输入备注内容' id='remarksContent' bindinput='bindInput' value='{{remark.data.remarksContent}}'></textarea>
+        <textarea style='width:100%; height: 240rpx;' fixed='{{true}}' auto-focus='{{true}}' placeholder='输入备注内容' id='remarksContent' bindinput='bindInput' value='{{remarkInfo.data.remarksContent}}'></textarea>
         <view class='l-margin-t l-text-center' bindtap='addRemark'>
-          <button loading='{{remark.loading}}' disabled='{{remark.loading}}' class='l-button-main'>{{remark.loading ? '提交中' : '提交备注'}}</button>
+          <button loading='{{remarkInfo.loading}}' disabled='{{remarkInfo.loading}}' class='l-button-main'>{{remarkInfo.loading ? '提交中' : '提交备注'}}</button>
         </view>
       </view>
     </view>
     <text class='l-icon-61a _close' bindtap='closeRemarkPop'></text>
+  </view>
+  <!-- 客户备注 end-->
+
+  <!-- 预约信息 -->
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-flex-hc l-padding {{appointInfo.visible ? "_opacity" : ""}}'>
+      <view class='l-rest'>预约信息</view>
+      <text class='l-text-theme l-fs-s' bindtap='showAppoint'>查看明细</text>
+    </view>
+
+    <view class='weui-cells weui-cells_after-title' wx:if='{{appointInfo.visible}}'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>预约到店日期</view>
+        <view class='weui-cell__ft'>{{appointInfo.data.appointmentDate}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>预约到店时间段</view>
+        <view class='weui-cell__ft l-fs-s'>{{appointInfo.data.timeOfAppointment}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>意向车辆</view>
+        <view class='weui-cell__ft'>{{appointInfo.data.intentionCarInfo}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>打算购车方案</view>
+        <view class='weui-cell__ft'>{{buyWay[appointInfo.data.expectWayId]}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>打算购车时间</view>
+        <view class='weui-cell__ft'>{{buyTime[appointInfo.data.carPurchaseIntention]}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>销售顾问</view>
+        <view class='weui-cell__ft'>{{appointInfo.data.systemUserName}}</view>
+      </view>
+    </view>
   </view>
 </view>

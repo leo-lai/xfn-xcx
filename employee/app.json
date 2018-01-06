@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/customer-list/index",
+    "pages/customer-jiaoche/index",
+    "pages/customer-details/index",
     "pages/customer/index",
     "pages/bank-uploader/index",
     "pages/bank-uploader/view",
@@ -12,7 +15,6 @@
     "pages/car-stock/index",
     "pages/car-stock-info/index",
     "pages/customer-info/index",
-    "pages/customer-list/index",
     "pages/car-selector/index",
     "pages/car-stock-out/index",
     "pages/car-last-step/index",
@@ -20,7 +22,13 @@
     "pages/car-part/index",
     "pages/car-license/index",
     "pages/car-part-info/index",
-    "pages/mine/qrcode"
+    "pages/mine/qrcode",
+    "pages/customer-order/index",
+    "pages/car-express/index",
+    "pages/car-stock/home",
+    "pages/car-tiemo/index",
+    "pages/car-order/index",
+    "pages/customer-order/jing"
   ],
   "window": {
     "backgroundColor": "#eee",

@@ -64,7 +64,7 @@
               <view class='weui-cell__bd'>车架号：{{item.frameNumber}}</view>
             </label>
           </checkbox-group>
-          <view class='l-padding l-text-center l-text-gray' wx:if='{{carList.list.length === 0}}'>暂无车辆可出库</view>
+          <view class='l-padding l-text-center l-text-gray' wx:if='{{carList.list.length === 0}}'>当前库存暂无此车辆</view>
         </view>
       </scroll-view>
       <view class='_ft'>
