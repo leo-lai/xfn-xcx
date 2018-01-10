@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/car-stock-add/index",
     "pages/customer-list/index",
     "pages/customer-jiaoche/index",
     "pages/customer-details/index",

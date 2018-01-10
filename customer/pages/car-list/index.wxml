@@ -1,29 +1,31 @@
 <!--index/index.wxml-->
 <import src='../../template/loadmore.wxml' />
-<view class='l-page-full {{loading ? "_disabled" : ""}}'>
-  <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
-    <navigator hover-class='none' url='../order-info/index'><text class='l-icon-639 l-text-theme'></text></navigator>
-    <view class='l-rest'>
-      <view class='_item {{filter.type === 1 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{1}}'>
-        <text>{{filter.sltedBrand.name || '品牌'}}</text>
-        <text class='l-icon-6ac'></text>
+<view class='l-page-full {{loading ? "_disabled" : ""}} {{filter.visible ? "l-no-scroll" : ""}}'>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view id='filter-bar' class='_bar l-flex-hc'>
+      <navigator hover-class='none' url='../order-info/index'><text class='l-icon-639 l-text-theme'></text></navigator>
+      <view class='l-rest'>
+        <view class='_item {{filter.type === 1 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{1}}'>
+          <text>{{filter.sltedBrand.name || '品牌'}}</text>
+          <text class='l-icon-6ac'></text>
+        </view>
+        <view class='_item {{filter.type === 2 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{2}}'>
+          <text>{{filter.sltedPrice.name || '价格'}}</text>
+          <text class='l-icon-6ac'></text>
+        </view>
+        <view class='_item {{filter.type === 3 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{3}}'>
+          <text>{{filter.sltedType.name || '车型'}}</text>
+          <text class='l-icon-6ac'></text>
+        </view>
       </view>
-      <view class='_item {{filter.type === 2 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{2}}'>
-        <text>{{filter.sltedPrice.name || '价格'}}</text>
-        <text class='l-icon-6ac'></text>
-      </view>
-      <view class='_item {{filter.type === 3 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{3}}'>
-        <text>{{filter.sltedType.name || '车型'}}</text>
-        <text class='l-icon-6ac'></text>
-      </view>
+      <icon type='search' color='#555' size='18' bindtap='sltFilter' data-val='{{4}}'></icon>
     </view>
-    <icon type='search' color='#555' size='18' bindtap='sltFilter' data-val='{{4}}'></icon>
-    <view class='_cont {{filter.visible ? "_active" : ""}}' bindtap="hideFilter">
+    <scroll-view scroll-y  class='_cont l-scroll {{filter.visible ? "_active" : ""}}' style='height: {{filter.height}}px' bindtap="hideFilter">
       <!-- 品牌 -->
       <view class='weui-grids l-brand-list' hidden='{{filter.type !== 1}}'>
         <block wx:for='{{brandList}}' wx:key='id'>
           <view class='weui-grid {{filter.sltedBrand.id === item.id ? "_active" : ""}}' bindtap='filterSearch' data-item='{{item}}'>
-            <image class='weui-grid__icon' src='{{item.image}}' />
+            <image mode='aspectFit' class='weui-grid__icon' src='{{item.image}}' />
             <view class='weui-grid__label'>{{item.name}}</view>
             <text class='l-icon-654 _tick'></text>
           </view>
@@ -48,10 +50,10 @@
           </view>
         </block>
       </view>
-    </view>
+    </scroll-view>
 
     <!-- 搜索 -->
-    <view class='l-seach-page {{filter.type === 4 ? "_active" : ""}}'>
+    <view class='l-seach-page l-flex-v {{filter.type === 4 ? "_active" : ""}}'>
       <view class='l-search-bar l-flex-hc'>
         <view class='l-rest l-flex-hvc'>
           <view class='l-rest'>
@@ -64,7 +66,7 @@
       </view>
 
       <!-- 历史记录 -->
-      <view class='l-search-history' wx:if='{{history.data.length > 0}}'>
+      <view class='l-search-history l-rest l-scroll' wx:if='{{history.data.length > 0}}'>
         <view>
           <text class='l-fr l-icon-627 l-fs-m'  bindtap='clearHistory'></text>
           <text class='l-fs-m'>历史搜索</text>

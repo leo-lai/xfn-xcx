@@ -41,7 +41,8 @@ Page({
     },
     orderPay: '0.00',
     orderInfo: {
-      customerOrderId: ''
+      customerOrderId: '',
+      isMortgage: 1
     }
   },
 
@@ -63,7 +64,8 @@ Page({
       }
       this.getInfo().then(_ => {
         this.getSales()
-        let followInformation = this.data.orderInfo.followInformation.split(',')
+        this.getOrderPay()
+        let followInformation = this.data.orderInfo.followInformation ? this.data.orderInfo.followInformation.split(',') : []
         this.setData({
           'carParts.list': app.config.baseData.carParts.map((item, index) => {
             return {
@@ -122,6 +124,10 @@ Page({
 
     // 计算订单金额
     switch (id) {
+      case 'loan':
+        value = Math.min(this.data.orderPay, value)
+        data['orderInfo.downPayments'] = this.data.orderPay - value
+        break
       case 'carUnitPrice':
       case 'purchaseTaxPriace':
       case 'licensePlatePriace':
@@ -196,9 +202,14 @@ Page({
       + (Number(this.data.orderInfo.mortgagePriace) || 0)
       + (Number(this.data.orderInfo.boutiquePriace) || 0)
       + (Number(this.data.orderInfo.vehicleAndVesselTax) || 0)
-    this.setData({
+    let data = {
       'orderPay': orderPay.toFixed(2)
-    })
+    }
+
+    if (this.data.orderInfo.loan !== '') {
+      data['orderInfo.downPayments'] = orderPay - Number(this.data.orderInfo.loan)
+    }
+    this.setData(data)
   },
   getCheshen: function (familyId = '') { // 获取车身颜色列表
     app.post(app.config.cheshen, { familyId }).then(({ data }) => {
@@ -283,10 +294,38 @@ Page({
       return
     }
 
+    let formData = app.utils.copyObj({
+      customerUsersId: '',
+      customerOrderId: '',
+      customerUserCard: '',
+      brandId: '',
+      familyId: '',
+      carsId: '',
+      colourId: '',
+      interiorId: '',
+      isMortgage: '',
+      carUnitPrice: '',
+      paymentWay: '',
+      downPayments: '',
+      loan: '',
+      loanPayBackStages: '',
+      licensePlatePriace: '',
+      insurancePriace: '',
+      followInformation: '',
+      remark: '',
+      purchaseTaxPriace: '',
+      boutiquePriace: '',
+      mortgagePriace: '',
+      loanBank: '',
+      systemUserId: '',
+      depositPrice: '',
+      vehicleAndVesselTax: ''
+    }, this.data.orderInfo)
+
     wx.showLoading({ mask: true })
-    app.post(app.config.customerOrderAdd, this.data.orderInfo).then(({ data }) => {
+    app.post(app.config.customerOrderAdd, formData).then(({ data }) => {
       app.getPrevPage().then(prevPage => {
-        prevPage.setData({ 'orderInfo': this.data.orderInfo })
+        prevPage.getInfo()
       })
       app.toast('保存成功', true)
     }).catch(err => {

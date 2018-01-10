@@ -71,7 +71,7 @@
     <view class='l-padding l-margin-t'>
       <view class='l-fs-xs l-text-gray'>预约门店</view>
       <view class='l-slted-store l-flex-h'>
-        <image mode='aspectFill' src='{{info.orgImage}}'></image>
+        <image style='background-color:#fff;' mode='aspectFit' src='{{info.orgImage}}'></image>
         <view class='l-rest'>
           <view>
             <text class='l-fr l-icon-603' data-lat='{{info.latitude}}' data-lng='{{info.longitude}}' bindtap='openMap'></text>
@@ -86,11 +86,28 @@
 
   <!-- 订单信息 -->
   <block wx:if='{{info.isAppointment === 0}}'>
-    <view class='l-progress-info l-text-center l-padding'>
-      <view class='l-h3'>{{state[info.customerOrderState]}}</view>
-      <view class='l-text-link l-margin-t' bindtap='showTrack'>查看购车历程</view>
+    <view class='l-progress-info l-flex-vhc'>
+      <!-- <view class='l-h3'>{{state[info.customerOrderState]}}</view> -->
+      <!-- <view class='l-text-link l-margin-t' bindtap='showTrack'>查看购车历程</view> -->
+      <view class='l-track-list'>
+        <view class='l-flex-h _item {{!item.done ? "_disabled" : "" }}' wx:for='{{track.data}}' wx:key='time'>
+          <view style='margin: -4rpx 20rpx 0 0;'>
+            <icon type='success' color='#ff9247' size='16'></icon>
+          </view>
+          <view style='width: 200rpx;'>
+            {{item.title}}
+          </view>
+          <view class='l-rest'>
+            <view class='l-h5'>{{item.content}}</view>
+            <!-- <view wx:if='{{item.image.length > 0}}' style='margin: -20rpx -20rpx 0 0;'>
+              <image style='margin: 20rpx 20rpx 0 0; width: 100rpx; height: 100rpx;' mode='aspectFit' wx:for='{{item.image}}' src='{{item}}' bindtap='previewTrack'></image>
+            </view> -->
+            <view class='l-fs-s l-text-gray'>{{item.time}}</view>
+          </view>
+        </view>
+      </view>
     </view>
-    <view class='l-padding l-margin-t'>
+    <view class='l-padding'>
       <view class='l-fs-xs l-text-gray'>销售顾问</view>
       <view class='l-flex-h l-slted-store'>
         <image style='width: 80rpx; height: 80rpx;' mode='aspectFill' src='{{info.systemImage}}'></image>
@@ -106,7 +123,7 @@
   </block>
 
   <!-- 购车历程 -->
-  <view catchtouchmove='noopFn' class='l-popup-center l-flex-vhc' wx:if='{{track.visible}}'>
+  <!-- <view catchtouchmove='noopFn' class='l-popup-center l-flex-vhc' wx:if='{{track.visible}}'>
     <scroll-view scroll-y class='_inner l-scroll' style='width: 80%;'>
       <view class='l-track-list'>
         <view class='l-flex-h _item' wx:for='{{track.data}}' wx:key='{{index}}'>
@@ -119,7 +136,7 @@
       </view>
     </scroll-view>
     <text class='l-icon-61a _close' bindtap='closeTrack'></text>
-  </view>
+  </view> -->
 </view>
 
 <!-- 订单完成 -->

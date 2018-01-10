@@ -6,16 +6,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    brandList: [],
     filter: {
       type: '',
       loading: false,
       visible: false,
-      sltedBrand: {},
       history: [],
+      typeText: ['下架', '在售'],
+      sltedType: { value: '', name: '全部', checked: true },
+      typeList: [
+        { value: '', name: '全部', checked: true },
+        { value: '1', name: '在售', checked: false },
+        { value: '0', name: '下架', checked: false }
+      ],
       data: {
-        brandId: '',
-        carsInfo: ''
+        isOnLine: '',
+        carsName: ''
       }
     },
     list: {
@@ -32,7 +37,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      this.getBrandList()
       this.getList()
 
       // 获取搜索历史记录
@@ -51,13 +55,13 @@ Page({
   },
   // 加载更多
   onReachBottom: function () {
-    if (this.data.userInfo) {
+    if (app.globalData.userInfo) {
       this.getList(this.data.list.data.length > 0 ? this.data.list.page + 1 : 1)
     }
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    if (this.data.userInfo) {
+    if (app.globalData.userInfo) {
       this.getList(1, _ => {
         wx.stopPullDownRefresh()
       })
@@ -65,14 +69,6 @@ Page({
     } else {
       wx.stopPullDownRefresh()
     }
-  },
-  // 品牌列表
-  getBrandList: function () {
-    app.post(app.config.brandList).then(({ data }) => {
-      this.setData({
-        'brandList': data
-      })
-    })
   },
   // 库存列表
   getList: function (page = 1, callback = app.noopFn) {
@@ -86,7 +82,7 @@ Page({
       return
     }
     this.setData({ 'list.loading': true })
-    app.post(app.config.carStockList, {
+    app.post(app.config.carOnlineList, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
       data.list = data.list.map(item => {
@@ -109,7 +105,7 @@ Page({
   // 搜索相关=================================================
   showFilter: function (event) {
     let filterType = event.currentTarget.dataset.val
-    if (filterType === this.data.filter.type && filterType === 'brand') {
+    if (filterType === this.data.filter.type && filterType === 'online') {
       this.hideFilter()
     } else {
       this.setData({
@@ -124,24 +120,24 @@ Page({
       'filter.type': ''
     })
   },
-  // 品牌过滤
+  // 是否在售
   filterSearch: function (event) {
-    let item = event.currentTarget.dataset.item
+    let value = event.detail.value
+    let list = this.data.filter.typeList
     let data = {}
-    switch (this.data.filter.type) {
-      case 'brand':
-        if (this.data.filter.sltedBrand.id !== item.id) {
-          data['filter.sltedBrand'] = item
-          data['filter.data.brandId'] = item.id
-        } else {
-          data['filter.sltedBrand'] = {}
-          data['filter.data.brandId'] = ''
-        }
-        break
-    }
-    data['filter.data.carsInfo'] = ''
+    data['filter.typeList'] = list.map(item => {
+      if (item.value === value) {
+        item.checked = true
+        data['filter.sltedType'] = item
+      }else{
+        item.checked = false
+      }
+      return item
+    })
+    data['filter.data.isOnLine'] = value
     this.setData(data)
     this.getList()
+
   },
   // 正在输入
   filterTyping(event) {
@@ -151,13 +147,13 @@ Page({
       })
     }
     this.setData({
-      'filter.data.carsInfo': event.detail.value
+      'filter.data.carsName': event.detail.value
     })
   },
   // 清楚输入
   clearTyping() {
     this.setData({
-      'filter.data.carsInfo': ''
+      'filter.data.carsName': ''
     })
     this.search()
   },
@@ -171,15 +167,15 @@ Page({
   // 历史搜索
   searchHistory: function (event) {
     this.setData({
-      'filter.data.carsInfo': event.target.dataset.val
+      'filter.data.carsName': event.target.dataset.val
     })
     this.search()
   },
   // 搜索
   search: function () {
     // 本地记录搜索关键词
-    if (this.data.filter.data.carsInfo.trim() && !this.data.filter.history.includes(this.data.filter.data.carsInfo)) {
-      let historyData = this.data.filter.history.concat(this.data.filter.data.carsInfo)
+    if (this.data.filter.data.carsName.trim() && !this.data.filter.history.includes(this.data.filter.data.carsName)) {
+      let historyData = this.data.filter.history.concat(this.data.filter.data.carsName)
       this.setData({
         'filter.history': historyData
       })

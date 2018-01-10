@@ -18,8 +18,8 @@ Page({
       '9': '等待上牌',
       '11': '等待贴膜',
       '13': '等待交付车辆',
-      '15': '等待支付尾款',
-      '17': '订单完成'
+      '15': '客户已提车',
+      '17': '已交车完毕'
     },
     appointInfo: {
       visible: false,
@@ -126,8 +126,8 @@ Page({
       this.setData({
         'remarkInfo.visible': false,
         'remarkInfo.loading': false,
-        'remarkInfo._list': [data, ...this.data.remarkInfo.list],
-        'remarkInfo.list': [data]
+        'remarkInfo._list': [data, ...this.data.remarkInfo._list],
+        'remarkInfo.list': this.data.remarkInfo.showAll ? [data, ...this.data.remarkInfo._list] : [data]
       })
     }).catch(_ => {
       this.setData({ 'remarkInfo.loading': false })
@@ -151,6 +151,36 @@ Page({
   },
   // 显示购车单信息
   showCustomerOrder: function () {
-    app.navigateTo('../customer-order/index?ids=' + this.data.customerInfo.customerUsersId + ',' + this.data.orderInfo.customerOrderId)
+    let url = '../customer-order/index?ids=' + this.data.customerInfo.customerUsersId
+    if (this.data.orderInfo.customerOrderId) {
+      url += ',' + this.data.orderInfo.customerOrderId
+    }
+    app.navigateTo(url)
+  },
+  // 银行审核
+  bankPass: function (event) {
+    let isPass = event.currentTarget.dataset.val
+    let promise
+    wx.showLoading({ mask: true })
+    if (isPass == 1) { // 通过审核
+      promise = app.post(app.config.bankPass, { customerOrderId: this.data.orderInfo.customerOrderId })
+    } else if (isPass == 2) { // 不通过审核，全款支付
+      promise = app.post(app.config.bankNotPass, { customerOrderId: this.data.orderInfo.customerOrderId })
+    }
+
+    promise && promise.then(_ => {
+      app.toast('操作成功').then(_ => {
+        this.getInfo()
+      })
+    }).finally(_ => {
+      wx.hideLoading()
+    })
+  },
+  bankUpload: function () {
+    app.storage.setItem('bankInfo', {
+      bankAuditsImage: this.data.orderInfo.bankAuditsImage,
+      bankAuditsvideo: this.data.orderInfo.bankAuditsvideo
+    })
+    app.navigateTo('../bank-uploader/index?id=' + this.data.customerInfo.customerUsersId)
   }
 })

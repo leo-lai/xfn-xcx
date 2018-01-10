@@ -189,9 +189,12 @@ icon {
 }
 
 .weui-input {
-  height: 2.58823529em;
-  min-height: 2.58823529em;
-  line-height: 2.58823529em
+   box-sizing: border-box; 
+  /* height: 2.58823529em; */
+   min-height: 2.58823529em;  
+  /* line-height: 2.58823529em */
+  padding-top: 17rpx;
+  padding-bottom: 17rpx;
 }
 
 .weui-toptips {

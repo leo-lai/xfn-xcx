@@ -11,7 +11,8 @@
   width: 50rpx; height: 50rpx; line-height: 50rpx; font-size: 12px;
 }
 
-.l-track-list{padding: 60rpx 30rpx;}
+.l-track-list{padding: 30rpx;}
 .l-track-list ._item{margin-bottom: 30rpx;}
 .l-track-list ._item:last-child{margin-bottom: 0;}
+.l-track-list ._disabled{opacity: 0.3;}
 .l-track-list image{width: 80rpx; height: 80rpx; margin:-10rpx 30rpx 0 0;}

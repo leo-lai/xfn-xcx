@@ -19,11 +19,11 @@
  *                    `=---='
  *
  * .............................................
- *                佛祖坐镇 顺利上线
+ *                晶哥坐镇 顺利上线
  */
 
 var baseUrl = "http://111.230.170.36/tauto/emInterface/employee"
-// var baseUrl = "https://tomcat.xfnauto.com/tauto/emInterface/employee"
+var baseUrl = "https://tomcat.xfnauto.com/tauto/emInterface/employee"
 var resURL = 'https://res.xfnauto.com'
 var config = {
   baseData: {
@@ -55,6 +55,12 @@ var config = {
   carTypeList: `${baseUrl}/carsListList`,
   // 车辆库存列表
   carStockList: `${baseUrl}/stockCarList`,
+  // 在售车型列表
+  carOnlineList: `${baseUrl}/orgCarsConfigureList`,
+  // 在售车型详情
+  carOnlineInfo: `${baseUrl}/orgCarsConfigureInfo`,
+  // 新增在售
+  carStockAdd: `${baseUrl}/editOrgCarsConfigure`,
   // 车辆库存详情
   carStockInfo: `${baseUrl}/stockCarInfo`,
   // 搜索客户
@@ -117,6 +123,10 @@ var config = {
   carPartInfo: `${baseUrl}/carsProductsInfo`,
   // 加装完成
   carPartDone: `${baseUrl}/carsProductsDone`,
+  // 银行审核通过
+  bankPass: `${baseUrl}/bankApprovalPass`,
+  // 银行审核不通过，全款支付尾款
+  bankNotPass: `${baseUrl}/changeFullPayment`,
   
   baseUrl
 };

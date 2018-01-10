@@ -22,12 +22,12 @@
         </view>
       </view>
     </navigator>
-    <view class='weui-cell weui-cell_input'>
+    <view class='weui-cell weui-cell_input l-text-gray'>
       <view class='weui-cell__hd'>
         <view class='weui-label'>官方指导价（元）</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <input class='weui-input' readonly value='{{orderInfo.guidingPrice}}'/>
+        <input disabled='{{true}}' class='weui-input' type='number' value='{{orderInfo.guidingPrice}}'/>
       </view>
     </view>
     <view class='weui-cell weui-cell_input'>
@@ -61,7 +61,7 @@
         <view class='weui-label'>收取定金（元）</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <input class='weui-input' placeholder='请填写' id='depositPrice' value='{{orderInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        <input disabled='{{orderInfo.customerOrderState > 1}}' class='weui-input' placeholder='请填写' id='depositPrice' value='{{orderInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
     </view>
     <view class='weui-cell weui-cell_input'>
@@ -145,16 +145,16 @@
   </view>
 
   <view class="weui-cells__title">购车方案</view>
-  <view class='weui-cells weui-cells_after-title'>
+  <view class='weui-cells weui-cells_after-title {{orderInfo.customerOrderState >= 5 ? "_disabled" : ""}}'>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__bd l-padding-tb'>
         <radio-group id='paymentWay' bindchange='bindInput'>
           <label>
-            <radio color='#fa5539' value='1' checked='{{orderInfo.paymentWay == 1}}'/>
+            <radio disabled='{{orderInfo.customerOrderState > 1}}' color='#fa5539' value='1' checked='{{orderInfo.paymentWay == 1}}'/>
             <text class='l-margin-l-s'>全款购车</text>
           </label>
           <label class='l-margin-l'>
-            <radio color='#fa5539' value='2' checked='{{orderInfo.paymentWay == 2}}'/>
+            <radio disabled='{{orderInfo.customerOrderState > 1}}' color='#fa5539' value='2' checked='{{orderInfo.paymentWay == 2}}'/>
             <text class='l-margin-l-s'>贷款购车</text>
           </label>
         </radio-group>
@@ -174,12 +174,12 @@
           </picker>
         </view>
       </view>
-      <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell weui-cell_input l-text-gray'>
         <view class='weui-cell__hd'>
           <view class='weui-label'>首付</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请填写' id='downPayments' value='{{orderInfo.downPayments}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+          <input disabled='{{true}}' class='weui-input' id='downPayments' value='{{orderInfo.downPayments}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -254,13 +254,13 @@
 
   <view class="weui-cells__title">订单备注</view>
   <view class='l-padding l-bg-white'>
-    <textarea style='width: 100%; min-height: 2em;' auto-height='{{true}}' maxlength='{{500}}' placeholder='请填写备注' id='remark' bindinput='bindInput'></textarea>
+    <textarea style='width: 100%; min-height: 2em;' auto-height='{{true}}' maxlength='{{500}}' placeholder='请填写备注' id='remark' bindinput='bindInput' value='{{orderInfo.remark}}'></textarea>
   </view>
   <view class='l-margin-t'></view>
   <view style='height: 120rpx;'></view>
   <view class='l-fixed-bottom'>
     <view class='l-btn-w60 l-margin-tb'>
-      <button class='l-button-main' bindtap='submit'>保存购车单信息</button>
+      <button disabled='{{orderInfo.customerOrderState == 17}}' class='l-button-main' bindtap='submit'>保存购车单信息</button>
     </view>
   </view>
 </view>

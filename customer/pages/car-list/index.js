@@ -21,6 +21,7 @@ Page({
     filter: {
       loading: false,
       visible: false,
+      height: 602 - 49,
       type: '',
       sltedBrand: {},
       sltedPrice: {},
@@ -102,6 +103,16 @@ Page({
   onLoad: function () {
     app.onLogin(userInfo => {
       this.setData({ userInfo })
+
+      wx.getSystemInfo({
+        success: res => {
+          wx.createSelectorQuery().select('#filter-bar').boundingClientRect(rect => {
+            this.setData({
+              'filter.height': res.windowHeight - rect.height
+            })
+          })
+        }
+      })
 
       wx.showNavigationBarLoading()
       this.setData({ 'loading': true })

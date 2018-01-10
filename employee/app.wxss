@@ -183,11 +183,16 @@ button[type=primary] {background-color:#ef5b45;}
 button.button-hover[type=primary] { color:rgba(255, 255, 255, 0.6); background-color:#ce4d39;}
 button[type=primary][disabled] { background-color:#ef5b45 !important; opacity: 0.3;}
 
-button.l-button-main{ background: #fa5539; color: #fff; border-radius: 60rpx; padding:0 20rpx; box-shadow: 0 10rpx 20rpx rgba(230, 81, 56, 0.3);}
+button.l-button-main, button.l-button-border{border-radius: 60rpx;padding:0 20rpx;}
+button.l-button-main{ background-color: #fa5539; color: #fff;  border: 2rpx solid #fa5539; box-shadow: 0 10rpx 20rpx rgba(230, 81, 56, 0.3);}
+button.l-button-main::after{display: none;}
 button.l-button-main._radius{border-radius: 50%; width: 100rpx; height: 100rpx; line-height: 100rpx; font-size: 28rpx; padding: 0;}
+button.l-button-main._border{ background-color: #fff; color: #666; border-radius: 60rpx; padding:0 20rpx;}
 button.l-button-main.button-hover{  background-color:#e65138;}
 button.l-button-main[disabled] { background-color:#fa5539 !important; opacity: 0.3; color: #fff;}
 
+button.l-button-border{color: #333; border: 2rpx solid #eee; box-shadow: 0 10rpx 20rpx #ddd;}
+button.l-button-border::after{display: none;}
 /* border style */
 .l-border-t{border-top: 2rpx solid #eee;}
 .l-border-b{border-bottom: 2rpx solid #eee;}
@@ -309,7 +314,7 @@ image{max-width: 100%;}
 .l-list-filter ._cont{ position: absolute; top: 100%; left: 0;right: 0; background: #fff; overflow: hidden; height: 0;}
 .l-list-filter ._cont::after{ content: ''; position: absolute; background: rgba(0, 0, 0, 0); left:0; right: 0; height: 2000px; transition: 0.2s linear;}
 .l-list-filter ._cont._active{height: auto; overflow: visible;}
-.l-list-filter ._cont._active::after{ background: rgba(0, 0, 0, 0.1);}
+.l-list-filter ._cont._active::after{ background: rgba(0, 0, 0, 0.6);}
 .l-list-filter .l-icon-6ac{ display: inline-block; font-size: 14rpx; vertical-align: 4rpx; margin:0 0 0 20rpx; opacity: 0.8; transition: 0.2s linear;}
 .l-list-filter icon[type=search]{ -webkit-text-stroke: 2rpx; }
 .l-list-filter ._type{ transition: 0.2s linear; white-space: nowrap; background-color: #fff; padding: 0 20rpx; border-radius: 10rpx; height: 80.5rpx; line-height: 80.5rpx;}

@@ -43,10 +43,8 @@
   </view>
 
   <view style='height: 120rpx;'></view>
-  <view class='l-fixed-bottom'>
-    <view hover-class='none' class='l-margin'>
-      <button class='l-button-main' bindtap='getCarList'>出库车辆</button>
-    </view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='getCarList'>出库车辆</button>
   </view>
 
   <!-- 车辆列表 -->

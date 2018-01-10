@@ -9,7 +9,7 @@
       <view class="weui-msg__desc">门店客服将会在24小时内联系您提供一对一VIP服务</view>
     </view>
     <view class="weui-msg__opr-area">
-      <navigator open-type='redirect' url='../order-info/index' class="weui-btn-area">
+      <navigator open-type='redirect' url='../order-info/index' class="weui-btn-area l-btn-w60">
         <button class='l-button-main'>查看我购车的进度</button>
       </navigator>
     </view>

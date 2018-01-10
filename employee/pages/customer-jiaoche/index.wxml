@@ -1,7 +1,7 @@
 <!--pages/customer-jiaoche/index.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full'>
-  <view class='l-tip-msg l-margin'>提示：交车前请与财务确认是否收完尾款</view>
+  <!-- <view class='l-tip-msg l-margin'>提示：交车前请与财务确认是否收完尾款</view> -->
   <view class='l-margin l-radius l-bg-white'>
     <view class='l-padding-btn l-border-b'>
       <text class='l-fs-s l-text-gray'>上传人车合照</text>
@@ -32,7 +32,7 @@
   <view style='height: 120rpx;'></view>
   <view class='l-fixed-bottom'>
     <view class='l-btn-w60 l-margin-tb'>
-      <button class='l-button-main' bindtap='submit'>确定交付车辆</button>
+      <button class='l-button-main' bindtap='submit'>确定提车</button>
     </view>
   </view>
 </view>

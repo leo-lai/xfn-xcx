@@ -23,6 +23,23 @@ Page({
   onLoad: function (options) {
     app.onLogin(userInfo => {
       this.data.formData.customerUsersId = options.id
+      app.storage.getItem('bankInfo').then(bankInfo => {
+        if (bankInfo) {
+          this.setData({
+            'uploadImages': bankInfo.bankAuditsImage ? bankInfo.bankAuditsImage.split(',').map(item => {
+              return {
+                path: item,
+                src: item,
+                done: true,
+                loading: false,
+                progress: 100,
+                tick: Date.now()
+              }
+            }) : [],
+            'uploadVideo.path': bankInfo.bankAuditsvideo
+          })
+        }
+      })
     }, this.route)
   },
   /**

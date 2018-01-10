@@ -79,7 +79,8 @@
       </view>
     </view>
   </view>
-  <view class='l-margin'>
-    <button class='l-button-main' bindtap='submit'>保存</button>
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
   </view>
 </view>

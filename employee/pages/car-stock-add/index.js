@@ -1,13 +1,17 @@
-// pages/car-stock-info/index.js
+// pages/car-stock-add/index.js
 const app = getApp()
+let todayStr = new Date().format('yyyy-MM-dd')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    info: null,
-    online: ['下架', '在售'],
+    topTips: '',
+    cheshen: { // 车身颜色
+      index: -1,
+      list: []
+    },
     formData: {
       orgCarsConfigureId: '',
       carsId: '',
@@ -15,21 +19,14 @@ Page({
       colourId: '',
       guidingPrice: '',
       discountPrice: '',
-      depositPrice: '',
-      isOnLine: ''
+      depositPrice: ''
     }
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.onLogin(userInfo => {
-      this.params = {
-        ids: options.ids ? options.ids.split(',') : ['', '', '']
-      }
-      this.getInfo()
-    }, this.route)
+
   },
   /**
    * 生命周期函数--监听页面显示
@@ -60,6 +57,9 @@ Page({
       value = Number(value)
       data[picker + '.index'] = value
       switch (id) {
+        case 'colourId':
+          value = this.data[picker].list[value].carColourId
+          break
         default:
           value = this.data[picker].list[value]
           if (app.utils.isObject(value)) {
@@ -73,26 +73,23 @@ Page({
     data['formData.' + id] = value
     this.setData(data)
   },
-  // 库存详情
-  getInfo: function() {
-    wx.showNavigationBarLoading()
-    app.post(app.config.carOnlineInfo, {
-      orgCarsConfigureId: this.options.id,
-      rows: 1000
-    }).then(({data}) => {
-      data.guidingPriceStr = (data.guidingPrice / 10000).toFixed(2) + '万'
-      this.setData({ 
-        'info': data,
-        'formData': app.utils.copyObj(this.data.formData, data)
+  changeCar: function (carType = {}, family = {}, brand = {}) {
+    if (this.data.formData.carsId !== carType.id) {
+      this.setData({
+        'formData.carsId': carType.id,
+        'formData.carsName': carType.name,
+        'formData.guidingPrice': carType.price,
+        'formData.colourId': ''
       })
-    }).finally(_ => {
-      wx.hideNavigationBarLoading()
-    })
+      this.getCheshen(family.id)
+    }
   },
-  // 查看验车照片
-  viewImages: function (event) {
-    wx.previewImage({
-      urls: event.currentTarget.dataset.item.stockCarImages.split(',')
+  getCheshen: function (familyId = '') { // 获取车身颜色列表
+    app.post(app.config.cheshen, { familyId }).then(({ data }) => {
+      this.setData({
+        'cheshen.index': data.findIndex(item => item.carColourId === this.data.formData.colourId),
+        'cheshen.list': data
+      })
     })
   },
   submit: function () {
@@ -115,10 +112,10 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.carStockAdd, this.data.formData).then(({ data }) => {
-      app.toast('修改成功')
       app.getPrevPage().then(prevPage => {
         prevPage.getList()
       })
+      app.toast('新增成功', true)
     }).catch(err => {
       wx.hideLoading()
     })

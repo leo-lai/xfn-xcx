@@ -24,14 +24,16 @@ Page({
       image: app.config.resURL + '/20171208002.png',
     },
     state: {
-      '1': '已支付定金',
-      '3': '等待银行审批',
+      '1': '待交定金',
+      '3': '等待银行审核',
+      '4': '银行审核不通过',
       '5': '等待车辆出库',
-      '7': '车辆到店，待付尾款',
-      '9': '等待加装精品',
-      '11': '等待上牌',
-      '12': '等待提车',
-      '13': '订单完成'
+      '7': '等待加装精品',
+      '9': '等待上牌',
+      '11': '等待贴膜',
+      '13': '等待交付车辆',
+      '15': '客户已提车',
+      '17': '已交车完毕'
     },
     track: {
       icons: [
@@ -72,9 +74,14 @@ Page({
     app.post(app.config.orderInfo).then(({ data }) => {
       if (data) {
         this.setData({
-          'nowPage': data.customerOrderState === 13 ? 4 : 3,
+          'nowPage': data.customerOrderState === 17 ? 4 : 3,
           'info': data
         })
+        
+        if (data.customerOrderState >= 1 && data.customerOrderState < 17) {
+          this.showTrack()
+        }
+        
         wx.setNavigationBarTitle({
           title: data.isAppointment === 1 ? '预约信息' : '订单跟踪'
         })
@@ -93,21 +100,45 @@ Page({
     })
   },
   showTrack: function() {
-    wx.showLoading()
+    wx.showNavigationBarLoading()
     app.post(app.config.orderTrack, { customerOrderId: this.data.info.customerOrderId })
       .then(({data}) => {
+        let trackData = ['开单', '落定', '贷款审批', '车辆出库', '加装', '上牌', '贴膜', '提车', '交车']
         this.setData({
-          'track.visible': true,
-          'track.data': data
+          // 'track.visible': true,
+          'track.data': trackData.map((item, index) => {
+            let _item = data[index]
+            if (_item) {
+              item = {
+                title: item,
+                content: _item.trackContent,
+                time: _item.createDate,
+                image: _item.image ? _item.image.split(',') : [],
+                done: true
+              }
+            } else {
+              item = {
+                title: item,
+                content: '',
+                time: '',
+                image: [],
+                done: false
+              }
+            }
+            return item
+          })
         })
       }).finally(_ => {
-        wx.hideLoading()
+        wx.hideNavigationBarLoading()
       })
   },
-  closeTrack() {
+  closeTrack: function() {
     this.setData({
       'track.visible': false
     })
+  },
+  previewTrack: function(event) {
+    
   },
   callPhone: function (event) {
     wx.makePhoneCall({ phoneNumber: event.currentTarget.dataset.val })
