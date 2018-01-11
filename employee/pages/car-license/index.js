@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    overline: ['未过线检车', '已过线检查'],
     filter: {
       type: '',
       loading: false,
@@ -96,6 +97,18 @@ Page({
     let item = event.currentTarget.dataset.item
     wx.showLoading()
     app.post(app.config.licenseDone, {
+      customerOrderId: item.customerOrderId
+    }).then(_ => {
+      this.getList()
+      app.toast('操作成功')
+    }).catch(_ => {
+      wx.hideLoading()
+    })
+  },
+  tickOverline: function (event) {
+    let item = event.currentTarget.dataset.item
+    wx.showLoading()
+    app.post(app.config.overTheLine, {
       customerOrderId: item.customerOrderId
     }).then(_ => {
       this.getList()

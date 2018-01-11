@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    overline: ['未过线检车', '已过线检查'],
     filter: {
       type: '',
       loading: false,

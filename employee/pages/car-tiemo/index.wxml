@@ -19,14 +19,13 @@
     <view class='l-padding-b l-border-b'>
       <text>车架号：{{item.customerOrderCode}}</text>
     </view>
-    <view class='l-padding-t l-flex-h'>
-      <view class='l-rest'>
-        <view class='l-h4'>{{item.carsNameBefor}}</view>
-        <view>{{item.carsNameAfter}}</view>
-        <view class='l-text-gray l-fs-s'>完款时间：{{item.createDate}}</view>
-      </view>
-      <view class='l-margin-l'>
-        <button class='l-button-main _radius' bindtap='finish' data-item='{{item}}'>完成</button>
+    <view class='l-padding-t l-rel'>
+      <view class='{{ item.overTheLine === 1 ? "l-text-warn" : "l-text-warn" }}' style='position:absolute; top: 30rpx; right: 0;'>{{overline[item.overTheLine]}}</view>
+      <view class='l-h4'>{{item.carsNameBefor}}</view>
+      <view>{{item.carsNameAfter}}</view>
+      <view class='l-text-gray l-fs-s'>完款时间：{{item.createDate}}</view>
+      <view class='l-margin-t l-text-center'>
+        <button size='mini' class='l-button-main l-btn-w60' bindtap='finish' data-item='{{item}}'>贴膜完成</button>
       </view>
     </view>
   </view>

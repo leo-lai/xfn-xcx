@@ -12,10 +12,10 @@
       <view>出库车辆</view>
     </view>
   </navigator>
-  <navigator url='../car-order/index' class='l-margin l-bg-white l-padding l-radius'>
+  <navigator url='../car-stock-order-list/index' class='l-margin l-bg-white l-padding l-radius'>
     <view class='l-padding l-text-center'>
       <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='../../images/order-car-icon.png'></image>
-      <view>订车</view>
+      <view>订车列表</view>
     </view>
   </navigator>
 </view>

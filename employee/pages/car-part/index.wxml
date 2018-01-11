@@ -18,7 +18,8 @@
   </view>
   <navigator url='../car-part-info/index?id={{item.customerOrderId}}' class='l-margin-m l-bg-white l-padding-lr l-radius' wx:for='{{list.data}}' wx:key='customerOrderId'>
     <view class='l-padding-tb l-border-b'>车架号：{{item.customerOrderCode}}</view>
-    <view class='l-padding-tb'>
+    <view class='l-padding-tb l-rel'>
+      <view class='{{ item.overTheLine === 1 ? "l-text-warn" : "l-text-warn" }}' style='position:absolute; top: 30rpx; right: 0;'>{{overline[item.overTheLine]}}</view>
       <view class='l-h4'>{{item.carsNameBefor}}</view>
       <view>{{item.carsNameAfter}}</view>
       <view class='l-text-gray l-fs-s'>完款时间：{{item.payDate}}</view>

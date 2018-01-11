@@ -93,16 +93,17 @@ Page({
       this.showTopTips('请选择购车方案')
       return
     }
-    this.data.formData.expectWayId++
-
     if (this.data.formData.carPurchaseIntention === '') {
       this.showTopTips('请选择购车时间')
       return
     }
-    this.data.formData.carPurchaseIntention++
+
+    let formData = Object.assign({}, this.data.formData)
+    formData.expectWayId = Number(this.data.formData.expectWayId) + 1
+    formData.carPurchaseIntention = Number(this.data.formData.carPurchaseIntention) + 1
 
     wx.showLoading({ mask: true })
-    app.post(app.config.customerAdd, this.data.formData).then(({ data }) => {
+    app.post(app.config.customerAdd, formData).then(({ data }) => {
       app.toast('新增成功', true)
     }).catch(err => {
       wx.hideLoading()

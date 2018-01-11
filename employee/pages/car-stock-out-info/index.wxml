@@ -1,12 +1,20 @@
 <!--pages/car-stock-out-info/index.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full {{ carList.visible ? "l-no-scroll" : "" }}'>
-  <view class='l-margin'>
+  <!-- <view class='l-margin'>
     <text class='l-text-theme l-fr'>{{info.number}}辆</text>
     <text>{{info.carsName}}</text>
-  </view>
+  </view> -->
   <view class='l-margin l-radius'>
     <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>车辆型号</view>
+        <view class='weui-cell__ft'>{{info.carsName}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>出库数量</view>
+        <view class='weui-cell__ft l-text-theme'>{{info.number}}辆</view>
+      </view>
       <view class='weui-cell'>
         <view class='weui-cell__bd'>车身颜色</view>
         <view class='weui-cell__ft'>{{info.colourName}}</view>
@@ -62,11 +70,18 @@
               <view class='weui-cell__bd'>车架号：{{item.frameNumber}}</view>
             </label>
           </checkbox-group>
-          <view class='l-padding l-text-center l-text-gray' wx:if='{{carList.list.length === 0}}'>当前库存暂无此车辆</view>
+          <view class='l-padding l-text-center' wx:if='{{carList.list.length === 0}}'>
+            <view class='l-br'></view>
+            <view class='l-text-gray'>当前库存暂无此车辆</view>
+            <view class='l-margin-t'>
+              <button size='mini' class='l-button-main l-btn-w60' bindtap='gotoOrder'>去订车</button>
+            </view>
+            <view class='l-br'></view>
+          </view>
         </view>
       </scroll-view>
-      <view class='_ft'>
-        <button class='l-button-main' disabled='{{carList.loading || carList.slted.length === 0}}' loading='{{carList.loading}}' bindtap='outStockOk'>{{ carList.loading ? '出库中...' : '确定出库已选车辆' }}</button>
+      <view class='_ft' wx:if='{{carList.slted.length > 0}}'>
+        <button class='l-button-main' disabled='{{carList.loading}}' loading='{{carList.loading}}' bindtap='outStockOk'>{{ carList.loading ? '出库中...' : '确定出库已选车辆' }}</button>
       </view>
     </view>
   </view>

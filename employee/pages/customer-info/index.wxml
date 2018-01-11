@@ -1,6 +1,6 @@
 <!--pages/customer-info/index.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
-<view class='l-page-full'>
+<view class='l-page-full' wx:if='{{!isNull}}'>
   <view class='l-margin l-radius l-bg-white'>
     <view class='l-flex-h l-padding'>
       <image class='l-avatar' mode='aspectFit' style='width: 80rpx; height: 80rpx; margin-right: 30rpx;' src='{{customerInfo.thumb}}'></image>

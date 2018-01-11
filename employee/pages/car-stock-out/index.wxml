@@ -1,6 +1,7 @@
 <!--pages/car-stock-out/index.wxml-->
 <import src='../../template/loadmore.wxml' />
 <view class='l-page-full'>
+  <view style='height: 100rpx;'></view>
   <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
     <view class='_input l-rest l-flex-hc'>
       <view class='l-rest'>

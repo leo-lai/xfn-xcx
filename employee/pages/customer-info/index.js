@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isNull: true,
     topTips: '',
     buyTime: app.config.baseData.buyTime,
     buyWay: app.config.baseData.buyWay,
@@ -66,15 +67,22 @@ Page({
       customerUsersId: this.$params.ids[0],
       customerUsersOrgId: this.$params.ids[1]
     }).then(({ data }) => {
-      data.customerMap.thumb = data.customerMap.headPortrait ? 
-      app.utils.formatHead(data.customerMap.headPortrait) : app.config.avatar
-      this.setData({
-        'appointInfo.data': data.appointmentMap,
-        'orderInfo': data.orderMap,
-        'customerInfo': data.customerMap,
-        'remarkInfo._list': data.remarksMap.list,
-        'remarkInfo.list': data.remarksMap.list.length > 0 ? [data.remarksMap.list[0]] : []
-      })
+      if (data) {
+        data.customerMap.thumb = data.customerMap.headPortrait ?
+          app.utils.formatHead(data.customerMap.headPortrait) : app.config.avatar
+        this.setData({
+          'isNull': false,
+          'appointInfo.data': data.appointmentMap,
+          'orderInfo': data.orderMap,
+          'customerInfo': data.customerMap,
+          'remarkInfo._list': data.remarksMap.list,
+          'remarkInfo.list': data.remarksMap.list.length > 0 ? [data.remarksMap.list[0]] : []
+        })
+      }else{
+        this.setData({
+          'isNull': true
+        })
+      }
     })
   },
   // 查看上传资料

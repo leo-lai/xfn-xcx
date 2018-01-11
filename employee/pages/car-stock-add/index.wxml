@@ -5,7 +5,7 @@
     <view class='weui-cells weui-cells_after-title'>
       <navigator url='../car-selector/index' class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>车型</view>
+          <view class='weui-label'>车辆型号</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-input'>
@@ -40,7 +40,7 @@
           <view class='weui-label'>优惠金额（元）</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请填写' id='discountPrice' value='{{formData.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+          <input class='weui-input' placeholder='请填写' id='discountPrice' value='{{formData.discountPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>

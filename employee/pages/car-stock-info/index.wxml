@@ -1,23 +1,47 @@
 <!--pages/car-stock-info/index.wxml-->
 <view class='l-page-full'>
-  <view class='l-bg-white'>
+  <!-- <view class='l-bg-white'>
     <view class='l-banner-image'>
       <image mode='widthFix' src='{{info.indexImage}}'></image>
     </view>
     <view class='l-padding l-text-center'>
       <view class='l-h4'>{{info.carsName}}</view>
-      <view class='l-text-gray'>颜色：{{info.colourName}}</view>
+      <view class='l-text-gray'>车身颜色：{{info.colourName}}</view>
       <view class='l-text-gray'>官方指导价：{{info.guidingPriceStr}}</view>
     </view>
-  </view>
+  </view> -->
 
-  <view class='weui-cells weui-cells_after-title l-margin-t'>
+  <view class='weui-cells weui-cells_after-title l-margin l-radius'>
+    <view class='weui-cell weui-cell_input l-text-gray'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>车辆型号</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.carsName}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input l-text-gray'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>车身颜色</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.colourName}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input l-text-gray'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>官方指导价（元）</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.guidingPrice}}</view>
+      </view>
+    </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
         <view class='weui-label'>优惠金额（元）</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <input class='weui-input' placeholder='请填写' id='discountPrice' value='{{formData.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        <input class='weui-input' placeholder='请填写' id='discountPrice' value='{{formData.discountPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
     </view>
     <view class='weui-cell weui-cell_input'>
@@ -46,7 +70,7 @@
     </view>
   </view>
 
-  <view class='weui-cells weui-cells_after-title l-margin-tb'>
+  <view class='weui-cells weui-cells_after-title  l-margin l-radius'>
     <view class='weui-cell'>
       <view class='l-text-center l-h4' style='width: 100%; padding: 10rpx;'>
         当前库存：{{info.number}}辆

@@ -22,11 +22,12 @@
  *                晶哥坐镇 顺利上线
  */
 
-var baseUrl = "http://111.230.170.36/tauto/emInterface/employee"
+// var baseUrl = "http://111.230.170.36/tauto/emInterface/employee"
 var baseUrl = "https://tomcat.xfnauto.com/tauto/emInterface/employee"
 var resURL = 'https://res.xfnauto.com'
 var config = {
   baseData: {
+    carTime: ['随车', '3个工作日内', '7个工作日内', '10个工作日内', '15个工作日内'],
     buyTime: ['3天内', '7天内'],
     buyWay: ['全款', '分期'],
     orderType: ['客户订车', '门店订车'],
@@ -103,6 +104,16 @@ var config = {
   stockOutCarList: `${baseUrl}/customerOrderStockCar`,
   // 确定出库车辆
   stockOutCar: `${baseUrl}/customerOrderStockCarPutout`,
+  // 订车单列表
+  stockOrderList: `${baseUrl}/stockOrderList`,
+  // 订车单详情
+  stockOrderInfo: `${baseUrl}/stockOrderInfo`,
+  // 取消订车单
+  stockOrderCancel: `${baseUrl}/stockOrderCancel`,
+  // 订车单签收
+  stockOrderSign: `${baseUrl}/stockOrderSign`,
+  // 新增订车单
+  stockOrderAdd: `${baseUrl}/stockOrderCreate`,
   // 待上牌列表
   licenseList: `${baseUrl}/orderLicensePlateList`,
   // 上牌完成
@@ -127,6 +138,8 @@ var config = {
   bankPass: `${baseUrl}/bankApprovalPass`,
   // 银行审核不通过，全款支付尾款
   bankNotPass: `${baseUrl}/changeFullPayment`,
+  // 标记为过线检查
+  overTheLine: `${baseUrl}/overTheLine`,
   
   baseUrl
 };
