@@ -1,0 +1,169 @@
+<!--pages/car-stock-in-info/car.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>入库仓位 <text class='l-text-theme'>*</text></view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='warehouseId' data-picker='cang' bindchange='bindInput' value='{{cang.index}}' range='{{cang.list}}' range-key='warehouseName'>
+            <view class="weui-input">
+              <text wx:if='{{cang.index === -1}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{cang.list[cang.index].warehouseName}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <navigator url='../car-selector/index' class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>入库车型 <text class='l-text-theme'>*</text></view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>
+            <text wx:if='{{formData.carsId}}'>{{formData.carsName}}</text>
+            <text wx:else class='l-text-gray'>请选择</text>  
+          </view>
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>车身颜色 <text class='l-text-theme'>*</text></view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='colourId' data-picker='cheshen' bindchange='bindInput' value='{{cheshen.index}}' range='{{cheshen.list}}' range-key='carColourName'>
+            <view class="weui-input">
+              <text wx:if='{{cheshen.index === -1}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{cheshen.list[cheshen.index].carColourName}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>内饰颜色 <text class='l-text-theme'>*</text></view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='interiorId' data-picker='neishi' bindchange='bindInput' value='{{neishi.index}}' range='{{neishi.list}}' range-key='interiorName'>
+            <view class="weui-input">
+              <text wx:if='{{neishi.index === -1}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{neishi.list[neishi.index].interiorName}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>采购单价 <text class='l-text-theme'>*</text></view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请填写' id='unitPrice' value='{{formData.unitPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+      </view>
+      
+    </view>
+  </view>
+
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>车架号 <text class='l-text-theme'>*</text></view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请填写' id='frameNumber' value='{{formData.frameNumber}}' bindinput='bindInput' type='number' maxlength='{{20}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>发动机号</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请填写' id='engineNumber' value='{{formData.engineNumber}}' bindinput='bindInput' type='number' maxlength='{{20}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>票证时间 <text class='l-text-theme'>*</text></view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='certificateDate' bindchange='bindInput' value='{{formData.certificateDate}}' range='{{carTime}}'>
+            <view class='weui-input'>
+              <text wx:if='{{formData.certificateDate}}'>{{carTime[formData.certificateDate]}}</text>
+              <text wx:else class='l-text-gray'>请选择</text>  
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>票证号</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请填写' id='certificateNumber' value='{{formData.certificateNumber}}' bindinput='bindInput' maxlength='{{50}}' />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text class='l-fs-s l-text-gray'>验证照片</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files'>
+              <block wx:for='{{uploadImages}}' wx:key='tick'>
+                <view class='weui-uploader__file {{ (item.loading || item.error) ? "weui-uploader__file_status" : "" }}' bindtap='previewImage' id='item.path'>
+                  <image class='weui-uploader__img' src='{{item.path}}' mode='aspectFill' data-val='{{item.tick}}' bindlongpress='longDelImage'/>
+                  <view wx:if='{{item.loading}}' class='weui-uploader__file-content'>{{item.progress}}%</view>
+                  <view wx:if='{{item.error}}' class='weui-uploader__file-content'>
+                    <icon type='warn' size='23' color='#F43530'></icon>
+                  </view>
+                </view>
+              </block>
+            </view>
+            <view class='weui-uploader__input-box'>
+              <view class='weui-uploader__input' bindtap='chooseImage'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding l-flex-hc'>
+    <view class='l-btn-w60 l-margin-r' wx:if='{{formData.stockCarId}}'>
+      <button class='l-button-border' bindtap='delCar'>删除</button>
+    </view>
+    <view class='l-btn-w60'>
+      <button class='l-button-main' bindtap='submit'>保存</button>
+    </view>
+  </view>
+
+  <!-- 保存成功提示 -->
+  <view catchtouchmove='noopFn' class='l-popup-center l-flex-vhc' wx:if='{{result.visible}}'>
+    <view class='_inner l-padding' style='width: 70%;'>
+      <view class='weui-msg'>
+        <view class='weui-msg__icon-area'>
+          <icon type='success' size='80' color='#fa5539'></icon>
+        </view>
+        <view class='weui-msg__text-area'>
+          <view class='weui-msg__title'>保存成功</view>
+        </view>
+        <view class='weui-msg__opr-area'>
+          <view class='weui-btn-area l-btn-w80'>
+            <button class='l-button-main' bindtap='anginAdd'>继续添加车辆</button>
+            <button class='l-button-border l-margin-t' bindtap='backList'>返回入库单列表</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+

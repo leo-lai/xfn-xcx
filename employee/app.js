@@ -122,14 +122,14 @@ App({
 
           showErr && wx.showModal({
             showCancel: false,
-            content: data.message || '接口请求出错'
+            content: data.message || '服务器繁忙，请稍后再试。'
           })
 
         },
         fail: err => {
           wx.showModal({
             showCancel: false,
-            content: err.errMsg || '接口请求出错'
+            content: err.errMsg || '服务器繁忙，请稍后再试。'
           })
           reject(err)
         }

@@ -82,10 +82,10 @@ Page({
     })
   },
   // 查看车源明细
-  viewInfo: function (event) {
+  viewCar: function (event) {
     let item = event.currentTarget.dataset.item
-    app.storage.setItem('cheyuan-info', item)
-    app.navigateTo('info')
+    app.storage.setItem('stock-order-info-car', item)
+    app.navigateTo('car')
   },
   previewImage: function (event) {
     wx.previewImage({

@@ -77,7 +77,7 @@
       </view>
     </view>
     <view class='weui-cell' wx:for='{{info.list}}' wx:key='stockCarId'>
-      <view class='weui-cell__bd'>{{item.frameNumber}}</view>
+      <view class='weui-cell__bd'>车架号：{{item.frameNumber}}</view>
       <view class='weui-cell__ft'>
         <text bindtap='viewImages' data-item='{{item}}' wx:if='{{item.stockCarImages}}' class='l-text-link l-fs-s'>查看验车照片</text>
       </view>

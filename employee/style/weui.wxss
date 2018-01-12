@@ -465,7 +465,8 @@ icon {
 .weui-uploader__file {
   float: left;
   margin-right: 9px;
-  margin-bottom: 9px
+  margin-bottom: 9px;
+  background-color: #eee;
 }
 
 .weui-uploader__img {

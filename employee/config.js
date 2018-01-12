@@ -104,16 +104,6 @@ var config = {
   stockOutCarList: `${baseUrl}/customerOrderStockCar`,
   // 确定出库车辆
   stockOutCar: `${baseUrl}/customerOrderStockCarPutout`,
-  // 订车单列表
-  stockOrderList: `${baseUrl}/stockOrderList`,
-  // 订车单详情
-  stockOrderInfo: `${baseUrl}/stockOrderInfo`,
-  // 取消订车单
-  stockOrderCancel: `${baseUrl}/stockOrderCancel`,
-  // 订车单签收
-  stockOrderSign: `${baseUrl}/stockOrderSign`,
-  // 新增订车单
-  stockOrderAdd: `${baseUrl}/stockOrderCreate`,
   // 待上牌列表
   licenseList: `${baseUrl}/orderLicensePlateList`,
   // 上牌完成
@@ -126,6 +116,8 @@ var config = {
   carPartList: `${baseUrl}/carsProductsList`,
   // 销售顾问列表
   salesList: `${baseUrl}/salesList`,
+  // 供应商列表
+  supplierList: `${baseUrl}/supplierListList`,
   // 分配销售顾问
   changeSales: `${baseUrl}/systenUserChangeCustomerOrg`,
   // 精品完成时间
@@ -140,7 +132,33 @@ var config = {
   bankNotPass: `${baseUrl}/changeFullPayment`,
   // 标记为过线检查
   overTheLine: `${baseUrl}/overTheLine`,
-  
+
+  // 三级订车--------------------------------
+  // 订车单列表
+  stockOrderList: `${baseUrl}/stockOrderList`,
+  // 订车单详情
+  stockOrderInfo: `${baseUrl}/stockOrderInfo`,
+  // 取消订车单
+  stockOrderCancel: `${baseUrl}/stockOrderCancel`,
+  // 订车单签收
+  stockOrderSign: `${baseUrl}/stockOrderSign`,
+  // 新增订车单
+  stockOrderAdd: `${baseUrl}/stockOrderCreate`,
+
+  // 二级入库--------------------------------
+  // 仓位列表
+  cangList: `${baseUrl}/organizationWarehouseList`,
+  // 入库单列表
+  stockInList: `${baseUrl}/storageList`,
+  // 新增入库单
+  stockInAdd: `${baseUrl}/storageEdit`,
+  // 入库单详情
+  stockInInfo: `${baseUrl}/storageInfo`,
+  // 入库单新增车辆
+  stockInAddCar: `${baseUrl}/storageCarEdit`,
+  // 入库单删除车辆
+  stockInDelCar: `${baseUrl}/storageCarDelete`,
+
   baseUrl
 };
 

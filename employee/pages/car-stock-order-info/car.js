@@ -14,7 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.storage.getItem('cheyuan-info').then(info => {
+    app.storage.getItem('stock-order-info-car').then(info => {
       if (info) {
         this.setData({
           info,
@@ -28,7 +28,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    app.storage.removeItem('cheyuan-info')
+    app.storage.removeItem('stock-order-info-car')
   },
   previewImage: function (event) {
     wx.previewImage({

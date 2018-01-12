@@ -32,7 +32,11 @@
     "pages/car-tiemo/index",
     "pages/car-stock-order-list/index",
     "pages/car-stock-order-info/index",
-    "pages/car-stock-order-info/info"
+    "pages/car-stock-order-info/car",
+    "pages/car-stock-in/index",
+    "pages/car-stock-in-info/index",
+    "pages/car-stock-in-add/index",
+    "pages/car-stock-in-info/car"
   ],
   "window": {
     "backgroundColor": "#eee",

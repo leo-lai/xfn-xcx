@@ -69,7 +69,7 @@
     <view class='weui-cells weui-cells_after-title'>
       <view class='weui-cell' wx:for='{{info.list}}' wx:key='*this'>
         <view class='weui-cell__bd'>车架号：{{item.frameNumber}}</view>
-        <view class='weui-cell__ft l-text-theme' data-item='{{item}}' bindtap='viewInfo'>查看明细</view>
+        <view class='weui-cell__ft l-text-theme' data-item='{{item}}' bindtap='viewCar'>查看明细</view>
       </view>
       <view wx:if='{{info.list.length === 0}}' class='l-padding l-text-center l-text-gray'>无</view>
     </view>
