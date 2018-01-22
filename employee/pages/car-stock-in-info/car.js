@@ -49,8 +49,8 @@ Page({
       this.data.formData.storageId = this.options.id
       app.storage.getItem('stock-in-info-car').then(info => {
         if (info) {
-          info.certificateDate = info.certificateDate ? info.certificateDate - 1 : ''
-          let formData = app.utils.copyObj(info)
+          let formData = app.utils.copyObj(this.data.formData, info)
+          formData.certificateDate = formData.certificateDate ? formData.certificateDate - 1 : ''
           this.setData({ 
             formData,
             'uploadImages': info.stockCarImages ? info.stockCarImages.split(',').map(item => {

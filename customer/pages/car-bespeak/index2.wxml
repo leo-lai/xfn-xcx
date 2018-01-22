@@ -1,0 +1,241 @@
+<!--pages/car-bespeak/index2.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full l-bg-white {{ store.visible ? "l-no-scroll" : "" }}'>
+  <view class='l-rel'>
+    <image style='width: 100%;' mode='widthFix' src='{{resURL + "/20180117010.jpg"}}'></image>
+    <!-- <view bindtap='showQrcode' style='position: absolute; top:0; right:0; width: 260rpx; height: 80rpx;'></view> -->
+  </view>
+  <view class='l-rel' style='margin: -12% 30rpx 0;'>
+    <image style='display:block; width: 100%;' mode='widthFix' src='{{resURL + "/20180115002.jpg"}}'></image>
+  </view>
+  
+  <!-- 填写预约信息 -->
+  <view class='l-padding' style='box-shadow: 0 4rpx 4rpx 2rpx #eee;'>
+    <!-- 选择门店 -->
+    <view bindtap='showStore'>
+      <view class='l-margin-b-s l-fs-s'>
+        <text class='l-fr l-text-theme'>
+          <text>换门店</text>
+          <text class='l-icon-69e l-margin-l-s l-fs-s'></text>
+        </text>
+        <text class='l-text-gray'>选择门店</text>
+      </view>
+      <view class='l-flex-hc l-slted-store'>
+        <image mode='widthFix' src='{{store.slted.imageUrl}}' style='width: 120rpx; height: 120rpx; margin: 0 20rpx 0 0;'></image>
+        <view class='l-rest'>
+          <view class='l-h4'>{{store.slted.shortName}}</view>
+          <view class='l-text-gray l-fs-s'>{{store.slted.address}}</view>
+        </view>
+        <text class='l-icon-654'></text>
+      </view>
+    </view>
+
+    <!-- 选择车辆 -->
+    <view class='l-margin-t'>
+      <view class='l-margin-b-s l-fs-s'>
+        <text class='l-text-gray'>选择车辆</text>
+      </view>
+      <view class='l-flex-hc l-sltor l-margin-tb-s' bindtap='showCarList' data-val='1'>
+        <view class='l-rest l-padding-s'>品牌：{{sltedCar.brandName || '请选择'}}</view>
+        <view class='l-padding-s'><text class='l-icon-6ac'></text></view>
+      </view>
+      <view class='l-flex-hc l-sltor l-margin-tb-s' bindtap='showCarList' data-val='2'>
+        <view class='l-rest l-padding-s'>车系：{{sltedCar.familyName || '请选择'}}</view>
+        <view class='l-padding-s'><text class='l-icon-6ac'></text></view>
+      </view>
+      <view class='l-flex-hc l-sltor l-margin-tb-s' bindtap='showCarList' data-val='3'>
+        <view class='l-rest l-padding-s'>车型：{{sltedCar.carName || '请选择'}}</view>
+        <view class='l-padding-s'><text class='l-icon-6ac'></text></view>
+      </view>
+    </view>
+
+    <!-- 姓名，手机，购车时间 -->
+    <view class='l-margin-t'>
+      <view class='l-margin-b-s l-fs-s'>
+        <text class='l-text-gray'>报名信息</text>
+      </view>
+      <view class='l-flex-hc l-iptor l-margin-tb-s'>
+        <text class='l-icon-639'></text>
+        <view class='l-rest'>
+          <input type='text' maxlength='{{50}}' placeholder='请输入姓名' confirm-type='next' id='customerUsersName' value='{{formData.customerUsersName}}' bindinput='bindInput'/>
+        </view>
+      </view>
+      <view class='l-flex-hc l-iptor l-margin-tb-s'>
+        <text class='l-icon-61b'></text>
+        <view class='l-rest'>
+          <input type='number' maxlength='{{11}}' placeholder='请输入手机号码' confirm-type='next' id='phoneNumber' value='{{formData.phoneNumber}}' bindinput='bindInput'/>
+        </view>
+      </view>
+      <picker id='carPurchaseIntention' mode='selector' value="{{buyTime.index}}" range='{{buyTime.list}}' bindchange='bindInput'>
+        <view class='l-flex-hc l-sltor l-margin-tb-s'>
+          <view class='l-rest l-padding-s'>购车时间：{{buyTime.list[buyTime.index] || '请选择'}}</view>
+          <view class='l-padding-s'><text class='l-icon-6ac'></text></view>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 最新报名 -->
+    <view class='l-margin-t l-flex-h'>
+      <view  class='l-margin-r-s'>
+        <image style='width: 120rpx;' mode='widthFix' src='{{resURL + "/20180115003.jpg"}}'></image>
+      </view>
+      <view class='l-rest l-fs-s'>
+        <swiper style='height: 40rpx;' circular='{{true}}' 
+          autoplay='{{true}}' interval='{{3000}}' duration='{{500}}' vertical='{{true}}'>
+          <swiper-item wx:for='{{asked.list}}' wx:key='*this'>
+            <text class='l-margin-r-s'>{{item.customerUsersName}}</text>
+            <text class='l-margin-r-s'>{{item.phoneNumber}}</text>
+          </swiper-item>
+        </swiper>
+        <view>
+          <text class='l-text-theme'>{{asked.number}}</text>
+          <text>人已经报名询问底价</text>
+        </view>
+      </view>
+      <view class='l-fs-s l-text-center'>
+        <view>距离活动结束还剩</view>
+        <view class='l-time-down'>
+          <text>{{timedown.d}}</text>天<text>{{timedown.h}}</text>时<text>{{timedown.m}}</text>分<text>{{timedown.s}}</text>秒
+        </view>
+      </view>
+    </view>
+
+    <view class='l-margin-t l-text-center' bindtap='askPrice'>
+      <image style='width: 60%;' mode='widthFix' src='{{resURL + "/20180115004.jpg"}}'></image>
+    </view>
+  </view>
+
+  <!-- 员工列表 -->
+  <view class='l-margin-t l-scroll-x'>
+    <view class='l-people' wx:for='{{people}}' wx:key='image'>
+      <view class='_t'>
+        <image mode='widthFix' src='{{resURL + "/20180115013.jpg"}}'></image>
+        <text>{{item.title}}</text>
+      </view>
+      <view class='_c'>
+        <image mode='scaleToFill' src='{{item.image}}'></image>
+        <text class='l-fs-s'>{{item.desc}}</text>
+      </view>
+      <view class='_b l-flex-hc l-text-center'>
+        <view class='l-rest l-margin-r' bindtap='callPhone' data-val='{{item.tel}}'>
+          <text class='l-icon-61b l-text-theme'></text>
+          <view>点击通话</view>
+        </view>
+        <view class='l-rest' bindtap='copyWeiXin' data-val='{{item.tel}}'>
+          <text class='l-icon-694 l-text-theme'></text>
+          <view>添加微信</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-fs-s l-margin-t' style='background-color:#f2f2f2;'>
+    <image style='display:block;width: 100%;' mode='widthFix' src='{{resURL + "/20180115005.jpg"}}'></image>
+    <image style='display:block;width: 100%;' mode='widthFix' src='{{resURL + "/20180115006.jpg"}}'></image>
+    <view class='l-rel l-text-center' style='margin-top: -15%;'>
+      <view>“<text class='l-text-theme'>淘车快</text>”是国内汽车交易社群生态创始者</view>
+      <view>由传创集团倾力打造的一站式互联网<text class='l-text-theme'>汽车直卖平台</text>。</view>
+      <view>通过对技术与科技的结合，提升传统汽车销售模式，</view>
+      <view>整合资源，没有<text class='l-text-theme'>中间环节</text>，实现<text class='l-text-theme'>信息透明、价格最低</text>的销售承诺</view>
+    </view>
+    <view class='l-flex-h l-margin-t l-padding-lr-s'>
+      <view style='width: 240rpx; margin-right: 20rpx;'><image style='width: 100%;height:100%;' mode='widthFix' src='{{resURL + "/20180115007.jpg"}}'></image></view>
+      <view class='l-rest'>
+        <view class='l-text-blod'>厂家直供，没有中间环节，0差价</view>
+        <view>“淘车快”行业资源丰富，资金实力雄厚，掌握畅销车型厂家资源，能在第一时间获取第一手车源，没有中间商赚差价，真正做到全国最低价。</view>
+      </view>
+    </view>
+    <view class='l-flex-hc l-margin-t-s l-padding-lr-s'>
+      <view style='width: 240rpx; margin-right: 20rpx;'><image style='width: 100%;height:100%;' mode='widthFix' src='{{resURL + "/20180115008.jpg"}}'></image></view>
+      <view class='l-rest'>
+        <view class='l-text-blod'>低息贷，放款快，省到就是赚到</view>
+        <view>“淘车快” 金融体系完善，由传创投资全力注资，与多家银行达成战略合作关系，能给客户提供低首付、低月供、低利率、放款快的汽车金融服务。</view>
+      </view>
+    </view>
+    <view class='l-flex-hc l-margin-t-s l-padding-lr-s'>
+      <view style='width: 240rpx; margin-right: 20rpx;'><image style='width: 100%;height:100%;' mode='widthFix' src='{{resURL + "/20180115009.jpg"}}'></image></view>
+      <view class='l-rest'>
+        <view class='l-text-blod'>价格透明、零隐藏，不怕价比价</view>
+        <view>“淘车快”通过对全国车源数据的智能整合，形成独家的优质车源数据库，可在第一时间获取车辆全国最低价格，并实时呈现给客户，比价没在怕。</view>
+      </view>
+    </view>
+    <view class='l-flex-hc l-margin-t-s l-padding-lr-s'>
+      <view style='width: 240rpx; margin-right: 20rpx;'><image style='width: 100%;height:100%;' mode='widthFix' src='{{resURL + "/20180115010.jpg"}}'></image></view>
+      <view class='l-rest'>
+        <view class='l-text-blod'>极速物流，省时省钱，时间就是金钱</view>
+        <view>“淘车快”拥有专业物流团队，新车极速到店，减少客户等待时间，极速物流有效减低库存成本，成本下降，价格自然更低。</view>
+      </view>
+    </view>
+    <view class='l-flex-hc l-margin-t-s l-padding-lr-s'>
+      <view style='width: 240rpx; margin-right: 20rpx;'><image style='width: 100%;height:100%;' mode='widthFix' src='{{resURL + "/20180115011.jpg"}}'></image></view>
+      <view class='l-rest'>
+        <view class='l-text-blod'>保险、上牌、年审一步搞定，省钱省心</view>
+        <view>“淘车快”提供专业汽车保险、上牌、年审等一条龙服务，为客户省下来回交通的费用以及准备审批材料的费用，更能为客户省下宝贵的时间与心力。</view>
+      </view>
+    </view>
+    <view class='l-flex-hc l-margin-t-s l-padding-lr-s'>
+      <view style='width: 240rpx; margin-right: 20rpx;'><image style='width: 100%;height:100%;' mode='widthFix' src='{{resURL + "/20180115012.jpg"}}'></image></view>
+      <view class='l-rest'>
+        <view class='l-text-blod'>标准化管理，最低价格，杜绝猫腻</view>
+        <view>“淘车快”线上平台及线下实体店均实行标准化统一管理，能第一时间获取最低价格，从咨询、购买到售后，为用户提供一站式、标准化的贴心服务，杜绝猫腻。</view>
+      </view>
+    </view>
+
+    <view class='l-border-t l-margin-t-s l-padding-tb-s l-fs-xs'>
+      <view class='l-text-center'>广州市喜蜂鸟网络科技服务有限公司</view>
+      <view class='l-text-center'>地址：广东省广州市海珠区东晓南路548号</view>
+      <view class='l-text-center'>服务热线：400-1639-989</view>
+    </view>
+  </view>
+
+  <!-- 门店列表 -->
+  <view class='l-popup-bottom {{store.visible ? "_show" : ""}}' bindtap='closeStore' catchtouchmove='noopFn'>
+    <view class='_inner' catchtap='noopFn'>
+      <text class='_close' bindtap='closeStore'>×</text>
+      <view class='_hd l-border-b'>
+        <text class='l-h4'>门店列表</text>
+      </view>
+      <scroll-view scroll-y	class='_bd' style='max-height: {{store.height}}px; background:#eee;'>
+        <view class='l-store-item l-bg-white {{item.checked ? "_active" : ""}}' wx:for='{{store.list}}' wx:key='orgId' data-item='{{item}}' bindtap='sltStore'>
+          <view class='l-flex-hc l-padding'>
+            <image mode='widthFix' style='width:120rpx; height: 120rpx; margin-right: 30rpx;' src='{{item.imageUrl}}'></image>
+            <view class='l-rest'>
+              <view class='l-h4'>{{item.shortName}}</view>
+              <view class='l-text-gray l-fs-s'>{{item.address}}</view>
+            </view>
+            <view class='_icon l-margin-l'><icon type='success_no_circle' color='#ff9247' size='20'></icon></view>
+          </view>
+          <view class='l-border-t l-flex-hc l-text-center' catchtap='noopFn'>
+            <view class='l-rest l-padding-btn' data-lat='{{item.latitude}}' data-lng='{{item.longitude}}' bindtap='openMap'>
+              <text class='l-icon-603 l-fs-m'></text>
+              <text class='l-margin-l'>导航</text>
+            </view>
+            <view class='l-rest l-padding-btn l-border-l' data-val='{{item.telPhone}}' bindtap='callPhone'>
+              <text class='l-icon-640 l-fs-m'></text>
+              <text class='l-margin-l'>电话</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>
+
+<!-- 返回顶部 -->
+<view class='l-backtop'>
+  <view class='_inner l-text-theme'>
+    <view data-val='400-1639-989' bindtap='callPhone'>
+      <image mode='aspectFit' style='width: 60rpx; height: 60rpx;' src='../../images/phone.png'></image></view>
+    <view bindtap='backTop' style='border-top:2rpx solid #9b9b9b; padding-top: 10rpx; margin-top: 20rpx;'>
+      <image mode='aspectFit' style='width: 60rpx; height: 60rpx;' src='../../images/top.png'></image></view>
+  </view>
+</view>
+
+<!-- 关注二维码 -->
+<view catchtouchmove='noopFn' class='l-popup-center l-flex-vhc' wx:if='{{qrcode.visible}}'>
+  <view class='l-padding-tb l-h4 l-text-center' style='color:rgba(255,255,255, 0.9);'>长按识别二维码关注领取奖品</view>
+  <view class='_inner l-padding'>
+    <image mode='aspectFit' style='width: 400rpx; height: 400rpx;' src='../../images/taochekuai.jpg'></image>
+  </view>
+  <text class='l-icon-61a _close' bindtap='closeQrcode'></text>
+</view>

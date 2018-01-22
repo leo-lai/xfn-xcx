@@ -18,7 +18,7 @@ icon {
   margin-top: 1.17647059em;
   background-color: #fff;
   line-height: 1.41176471;
-  font-size: 17px
+  /* font-size: 34rpx */
 }
 
 .weui-cells:before {
@@ -105,6 +105,7 @@ icon {
 }
 
 .weui-cell__ft {
+  max-width: 70%;
   text-align: right;
   color: #999
 }
@@ -177,20 +178,23 @@ icon {
 }
 
 .weui-cell_input {
-  padding-top: 0;
-  padding-bottom: 0
+  padding-top: 10rpx;
+  padding-bottom: 10rpx
 }
 
 .weui-label {
-  width: 105px;
+  min-width: 105px;
   word-wrap: break-word;
   word-break: break-all
 }
 
 .weui-input {
-  height: 2.58823529em;
-  min-height: 2.58823529em;
-  line-height: 2.58823529em
+   box-sizing: border-box; 
+  /* height: 2.58823529em; */
+   min-height: 2.58823529em;  
+  /* line-height: 2.58823529em */
+  padding-top: 17rpx;
+  padding-bottom: 17rpx;
 }
 
 .weui-toptips {
@@ -200,7 +204,7 @@ icon {
   top: 0;
   left: 0;
   right: 0;
-  padding: 20rpx;
+  padding: 20rpx 10rpx;
   font-size: 14px;
   text-align: center;
   color: #fff;
@@ -364,16 +368,15 @@ icon {
 }
 
 .weui-cell_select {
-  padding: 0
+  padding: 10rpx 0;
 }
 
 .weui-select {
   position: relative;
-  padding-left: 15px;
-  padding-right: 30px;
-  height: 2.58823529em;
-  min-height: 2.58823529em;
-  line-height: 2.58823529em;
+  padding: 17rpx 60rpx 17rpx 30rpx;
+  /* height: 2.58823529em; */
+  /* min-height: 2.58823529em; */
+  /* line-height: 2.58823529em; */
   border-right: 1rpx solid #efefef
 }
 
@@ -417,9 +420,9 @@ icon {
 .weui-vcode-btn {
   display: inline-block;
   padding: 0 .6em 0 .7em;
-  border-left: 1px solid #e5e5e5;
+  border-left: 1px solid #eee;
   line-height: 2.58823529em;
-  font-size: 17px;
+  font-size: 34rpx;
   color: #3cc51f;
   white-space: nowrap
 }
@@ -462,7 +465,8 @@ icon {
 .weui-uploader__file {
   float: left;
   margin-right: 9px;
-  margin-bottom: 9px
+  margin-bottom: 9px;
+  background-color: #eee;
 }
 
 .weui-uploader__img {
@@ -837,11 +841,12 @@ icon {
 
 .weui-loadmore__tips {
   display: inline-block;
+  color: #999;
   vertical-align: middle
 }
 
 .weui-loadmore_line {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #eee;
   margin-top: 60rpx;
 }
 
@@ -886,7 +891,7 @@ icon {
 
 .weui-panel:before {
   top: 0;
-  border-top: 1rpx solid #e5e5e5
+  border-top: 1rpx solid #eee
 }
 
 .weui-panel:after,
@@ -901,7 +906,7 @@ icon {
 
 .weui-panel:after {
   bottom: 0;
-  border-bottom: 1rpx solid #e5e5e5
+  border-bottom: 1rpx solid #eee
 }
 
 .weui-panel__hd {
@@ -917,7 +922,7 @@ icon {
   bottom: 0;
   right: 0;
   height: 1px;
-  border-bottom: 1rpx solid #e5e5e5;
+  border-bottom: 1rpx solid #eee;
   color: #e5e5e5;
   left: 15px
 }
@@ -933,7 +938,7 @@ icon {
   top: 0;
   right: 0;
   height: 1px;
-  border-top: 1rpx solid #e5e5e5;
+  border-top: 1rpx solid #eee;
   color: #e5e5e5;
   left: 15px
 }
@@ -944,7 +949,7 @@ icon {
 
 .weui-media-box__title {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 34rpx;
   width: auto;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -955,7 +960,7 @@ icon {
 
 .weui-media-box__desc {
   color: #999;
-  font-size: 13px;
+  font-size: 26rpx;
   line-height: 1.2;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -965,9 +970,9 @@ icon {
 }
 
 .weui-media-box__info {
-  margin-top: 15px;
-  padding-bottom: 5px;
-  font-size: 13px;
+  margin-top: 30rpx;
+  padding-bottom: 10rpx;
+  font-size: 24rpx;
   color: #cecece;
   line-height: 1em;
   list-style: none;

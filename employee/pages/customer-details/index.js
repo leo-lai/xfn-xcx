@@ -40,6 +40,7 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
+      this.setData({ userInfo })
       app.storage.getItem('customer_details').then(customerInfo => {
         this.setData({
           customerInfo,

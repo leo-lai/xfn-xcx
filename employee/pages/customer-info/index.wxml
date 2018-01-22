@@ -62,7 +62,7 @@
     <!-- 无购车单 -->
     <view wx:else class='l-padding l-text-center l-border-t'>
       <view class='l-fs-s l-text-gray'>无购车单</view>
-      <view class='l-btn-w60 l-margin-t'>
+      <view class='l-btn-w60 l-margin-t' wx:if='{{userInfo.orgLevel === 3}}'>
         <button class='l-button-main' bindtap='showCustomerOrder'>开单</button>
       </view>
     </view>
@@ -74,7 +74,7 @@
     <view class='weui-panel'>
       <view class='l-flex-hc l-padding l-border-b'>
         <view class='l-rest'>客户备注</view>
-        <text class='l-text-theme l-fs-s' bindtap='showRemarkPop'>添加备注</text>
+        <text class='l-text-theme l-fs-s' bindtap='showRemarkPop' wx:if='{{userInfo.orgLevel === 3}}'>添加备注</text>
       </view>
       <view class='weui-panel__bd l-scroll' style='max-height: 600rpx;'>
         <view class='weui-media-box weui-media-box_text' wx:for='{{remarkInfo.list}}' wx:key='remarksId'>

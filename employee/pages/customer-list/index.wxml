@@ -66,12 +66,15 @@
     <view class='weui-loadmore__tips weui-loadmore__tips_in-line'>暂无数据</view>
   </view>
 
-  <view style='height: 120rpx;'></view>
-  <view class='l-fixed-bottom'>
-    <navigator url='../customer-add/index' class='l-btn-w60 l-margin-tb' hover-class='none'>
-      <button class='l-button-main'>新增客户</button>
-    </navigator>
-  </view>
+  <block wx:if='{{userInfo.orgLevel === 3}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom'>
+      <navigator url='../customer-add/index' class='l-btn-w60 l-margin-tb' hover-class='none'>
+        <button class='l-button-main'>新增客户</button>
+      </navigator>
+    </view>
+  </block>
+
 </view>
 
 <view class='l-panel {{ filter.panel ? "_center" : "_left" }}' catchtouchmove='noopFn' bindtap='toggleFilterPanel'>

@@ -93,7 +93,7 @@ Page({
     })
   },
   getSales: function () { // 获取采购员列表
-    app.post(app.config.salesList).then(({ data }) => {
+    app.post(app.config.buyerList).then(({ data }) => {
       this.setData({
         'sales.index': -1,
         'sales.list': data

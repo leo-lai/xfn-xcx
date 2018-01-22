@@ -65,6 +65,7 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
+      this.setData({ userInfo })
       // 获取搜索历史记录
       app.storage.getItem('customer_history').then(list => {
         this.setData({
@@ -169,7 +170,6 @@ Page({
   },
   changeFilterState: function (event) {
     let val = event.target.dataset.val
-    console.log(event)
     if(val !== '') {
       val = Number(val)
       let state = this.data.filter.state.map(item => {

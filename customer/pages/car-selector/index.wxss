@@ -1,0 +1,7 @@
+/* pages/car-selector/index.wxss */
+.weui-cell._active{
+  background-color:#fd5e02;
+  color:#fff;
+}
+.weui-cell._active::before{visibility: hidden;}
+.weui-cell._active::after{visibility: hidden;}

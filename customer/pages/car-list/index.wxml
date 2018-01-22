@@ -25,7 +25,7 @@
       <view class='weui-grids l-brand-list' hidden='{{filter.type !== 1}}'>
         <block wx:for='{{brandList}}' wx:key='id'>
           <view class='weui-grid {{filter.sltedBrand.id === item.id ? "_active" : ""}}' bindtap='filterSearch' data-item='{{item}}'>
-            <image mode='aspectFit' class='weui-grid__icon' src='{{item.image}}' />
+            <image mode='aspectFit' class='weui-grid__icon' src='{{item.logo}}' />
             <view class='weui-grid__label'>{{item.name}}</view>
             <text class='l-icon-654 _tick'></text>
           </view>

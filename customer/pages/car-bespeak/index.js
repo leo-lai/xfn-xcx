@@ -201,6 +201,11 @@ Page({
     })
   },
   askPrice: function() {
+    if (!this.data.store.slted.orgId) {
+      this.showTopTips('请选择预约门店')
+      return
+    }
+
     if (!this.data.formData.customerUsersName) {
       this.showTopTips('请输入姓名')
       return
@@ -211,13 +216,8 @@ Page({
       return
     }
 
-    if (this.data.formData.carPurchaseIntention <= 0) {
+    if (!this.data.formData.carPurchaseIntention) {
       this.showTopTips('请选择购车时间')
-      return
-    }
-
-    if (!this.data.store.slted.orgId) {
-      this.showTopTips('请选择预约门店')
       return
     }
 

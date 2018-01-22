@@ -118,7 +118,6 @@ if (!Number.prototype.currency){
       j = (j = i.length) > 3 ? j % 3 : 0
     return symbol + negative + (j ? i.substr(0, j) + thousand : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : '')
   }
-
 }
 
 // utils ***********************************************************************
@@ -199,10 +198,39 @@ const formatTime2chs = (dateStr = '', fmt) => {
   return result
 }
 
+// 两位数数字
+const number2 = num => {
+  return num < 10 ? ('0' + num) : ('' + num)
+}
+
+// 倒计时 endDate "yyyy-MM-dd hh:mm:ss"
+const timer = endDate => {
+  //计算剩余的毫秒数
+  var leftMS = str2date(endDate) - new Date()
+  //计算剩余的天数
+  var days = parseInt(leftMS / 1000 / 60 / 60 / 24, 10)
+  //计算剩余的小时
+  var hours = parseInt(leftMS / 1000 / 60 / 60 % 24, 10)
+  //计算剩余的分钟
+  var minutes = parseInt(leftMS / 1000 / 60 % 60, 10)
+  //计算剩余的秒数
+  var seconds = parseInt(leftMS / 1000 % 60, 10)
+
+  hours = number2(hours)
+  minutes = number2(minutes)
+  seconds = number2(seconds)
+  
+  return [days, hours, minutes, seconds]
+}
+
+const isObject = (target) => {
+  return Object.prototype.toString.call(target).toLocaleLowerCase() === '[object object]'
+}
+
 // 复制对象
 const copyObj = (target = {}, ...objs) => {
   objs.forEach((obj) => {
-    if (Object.prototype.toString.call({}).toLocaleLowerCase() === '[object object]') {
+    if (isObject(obj)) {
       Object.keys(target).forEach(key => {
         if (obj[key] !== null && obj[key] !== undefined) {
           target[key] = obj[key]
@@ -247,6 +275,8 @@ const formatThumb = (src = '', height, width = 375, type = 'webp') => {
   }
   return src
 }
+
+// 路径参数
 const getArgs = (url) => {
   if (typeof url !== 'string') return url
   url = decodeURIComponent(url)
@@ -272,7 +302,6 @@ const getArgs = (url) => {
 
   return args
 }
-
 const setArgs = (url, name, value) => {
   if (typeof url !== 'string') return ''
   if (name === undefined) return url
@@ -305,8 +334,10 @@ const setArgs = (url, name, value) => {
 }
 
 module.exports = {
+  timer,
   getArgs,
   setArgs,
+  isObject,
   copyObj,
   str2date,
   formatTime2chs,

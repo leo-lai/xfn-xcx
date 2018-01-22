@@ -21,10 +21,13 @@
  * .............................................
  *                晶哥坐镇 顺利上线
  */
+var host = 'http://111.230.170.36'
+var host = 'https://tomcat.xfnauto.com'
 
-// var baseUrl = "http://111.230.170.36/tauto/emInterface/employee"
-var baseUrl = "https://tomcat.xfnauto.com/tauto/emInterface/employee"
 var resURL = 'https://res.xfnauto.com'
+var commonUrl = host + '/tauto/common'
+var baseUrl = host + '/tauto/emInterface/employee'
+
 var config = {
   baseData: {
     carTime: ['随车', '3个工作日内', '7个工作日内', '10个工作日内', '15个工作日内'],
@@ -43,17 +46,19 @@ var config = {
     authDomain: '<wd5822510528sjwblr.wilddog.com>'
   },
 
+  // 车辆品牌
+  brandList: `${commonUrl}/carsBrandList`,
+  // 车系
+  familyList: `${commonUrl}/carsFamilyList`,
+  // 车类型(品牌，车系，年款，高低配等)
+  carTypeList: `${commonUrl}/carsListList`,
+
+  // 上传文件
   uploadFile: `${baseUrl}/uploadFile`,
   // 注册/登录
   login: `${baseUrl}/login`,
   // 更改密码
   password: `${baseUrl}/changePassword`,
-  // 车辆品牌
-  brandList: `${baseUrl}/carsBrandList`,
-  // 车系
-  familyList: `${baseUrl}/carsFamilyList`,
-  // 车类型(品牌，车系，年款，高低配等)
-  carTypeList: `${baseUrl}/carsListList`,
   // 车辆库存列表
   carStockList: `${baseUrl}/stockCarList`,
   // 在售车型列表
@@ -146,6 +151,8 @@ var config = {
   stockOrderAdd: `${baseUrl}/stockOrderCreate`,
 
   // 二级入库--------------------------------
+  // 采购员列表
+  buyerList: `${baseUrl}/orgOneSelfList`,
   // 仓位列表
   cangList: `${baseUrl}/organizationWarehouseList`,
   // 入库单列表

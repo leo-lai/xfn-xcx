@@ -1,0 +1,65 @@
+<!--pages/car-selector/index.wxml-->
+<!-- 品牌列表 -->
+<view class='l-panel {{ brand.visible ? "_center" : "_right" }}'>
+  <view class='_inner l-flex-v'>
+    <view class='l-padding-btn'>选择品牌</view>
+    <scroll-view class='l-rest l-scroll' scroll-y>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_access {{brand.slted.id === item.id ? "_active" : ""}}' hover-class='weui-cell_active' wx:for='{{brand.list}}' wx:key='id' bindtap='sltBrand' data-item='{{item}}'>
+          <view class='weui-cell__hd'>
+            <image src='{{item.logo}}' mode='aspectFit' style='margin:0 10rpx 0 -10rpx;vertical-align: middle;width:40px; height: 25px;'></image>
+          </view>
+          <view class='weui-cell__bd'>{{item.name}}</view>
+          <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+        </view>
+        <view class='weui-cell weui-cell_access' hidden='{{brand.loading || brand.list.length > 0}}'>
+          <view class='weui-cell__bd l-text-center'>暂无数据</view>
+        </view>
+      </view>
+      <view class='weui-loadmore' hidden='{{ !brand.loading }}'>
+        <view class='weui-loading'></view>
+        <view class='weui-loadmore__tips'>正在加载</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<!-- 车系列表 -->
+<view class='l-panel {{ family.visible ? "_center" : "_right" }}' bindtap='closeFamily'>
+  <view class='_inner l-flex-v' style='left: 15%;' catchtap='noopFn'>
+    <view class='l-padding-btn'>
+      <text>{{brand.slted.name || '选择车系'}}</text>
+      <view class='weui-loading' hidden='{{ !family.loading }}'></view>
+    </view>
+    <scroll-view class='l-rest l-scroll' scroll-y>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_access {{family.slted.id === item.id ? "_active" : ""}}' hover-class='weui-cell_active' wx:for='{{family.list}}' wx:key='id' bindtap='sltFamily' data-item='{{item}}'>
+          <view class='weui-cell__bd'>{{item.name}}</view>
+          <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+        </view>
+        <view class='weui-cell weui-cell_access' hidden='{{family.loading || family.list.length > 0}}'>
+          <view class='weui-cell__bd l-text-center'>暂无数据</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<!-- 车类列表 -->
+<view class='l-panel {{ carType.visible ? "_center" : "_right" }}' bindtap='closeCarType'>
+  <view class='_inner l-flex-v' style='left: 30%;' catchtap='noopFn'>
+    <view class='l-padding-btn'>
+      <text>{{family.slted.name || '选择车类'}}</text>
+      <view class='weui-loading' hidden='{{ !carType.loading }}'></view>
+    </view>
+    <scroll-view class='l-rest l-scroll' scroll-y>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_access {{carType.slted.id === item.id ? "_active" : ""}}' hover-class='weui-cell_active' wx:for='{{carType.list}}' wx:key='id' bindtap='sltCarType' data-item='{{item}}'>
+          <view class='weui-cell__bd'>{{item.name}}</view>
+          <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+        </view>
+        <view class='weui-cell weui-cell_access' hidden='{{carType.loading || carType.list.length > 0}}'>
+          <view class='weui-cell__bd l-text-center'>暂无数据</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

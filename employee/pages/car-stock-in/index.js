@@ -12,7 +12,7 @@ Page({
       visible: false,
       history: [],
       data: {
-        carsSearch: ''
+        storageCode: ''
       }
     },
     list: {
@@ -120,7 +120,7 @@ Page({
   filterSearch: function (event) {
     let item = event.currentTarget.dataset.item
     let data = {}
-    data['filter.data.carsSearch'] = ''
+    data['filter.data.storageCode'] = ''
     this.setData(data)
     this.getList()
   },
@@ -132,13 +132,13 @@ Page({
       })
     }
     this.setData({
-      'filter.data.carsSearch': event.detail.value
+      'filter.data.storageCode': event.detail.value
     })
   },
   // 清楚输入
   clearTyping() {
     this.setData({
-      'filter.data.carsSearch': ''
+      'filter.data.storageCode': ''
     })
     this.search()
   },
@@ -152,15 +152,15 @@ Page({
   // 历史搜索
   searchHistory: function (event) {
     this.setData({
-      'filter.data.carsSearch': event.target.dataset.val
+      'filter.data.storageCode': event.target.dataset.val
     })
     this.search()
   },
   // 搜索
   search: function () {
     // 本地记录搜索关键词
-    if (this.data.filter.data.carsSearch.trim() && !this.data.filter.history.includes(this.data.filter.data.carsSearch)) {
-      let historyData = this.data.filter.history.concat(this.data.filter.data.carsSearch)
+    if (this.data.filter.data.storageCode.trim() && !this.data.filter.history.includes(this.data.filter.data.storageCode)) {
+      let historyData = this.data.filter.history.concat(this.data.filter.data.storageCode)
       this.setData({
         'filter.history': historyData
       })

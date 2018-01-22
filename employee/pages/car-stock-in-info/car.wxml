@@ -72,7 +72,7 @@
           <view class='weui-label'>车架号 <text class='l-text-theme'>*</text></view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请填写' id='frameNumber' value='{{formData.frameNumber}}' bindinput='bindInput' type='number' maxlength='{{20}}' />
+          <input class='weui-input' placeholder='请填写' id='frameNumber' value='{{formData.frameNumber}}' bindinput='bindInput' type='text' maxlength='{{20}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -80,7 +80,7 @@
           <view class='weui-label'>发动机号</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请填写' id='engineNumber' value='{{formData.engineNumber}}' bindinput='bindInput' type='number' maxlength='{{20}}' />
+          <input class='weui-input' placeholder='请填写' id='engineNumber' value='{{formData.engineNumber}}' bindinput='bindInput' type='text' maxlength='{{20}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -90,8 +90,8 @@
         <view class='weui-cell__bd l-text-right'>
           <picker id='certificateDate' bindchange='bindInput' value='{{formData.certificateDate}}' range='{{carTime}}'>
             <view class='weui-input'>
-              <text wx:if='{{formData.certificateDate}}'>{{carTime[formData.certificateDate]}}</text>
-              <text wx:else class='l-text-gray'>请选择</text>  
+              <text wx:if='{{formData.certificateDate === ""}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{carTime[formData.certificateDate]}}</text>  
             </view>
           </picker>
         </view>

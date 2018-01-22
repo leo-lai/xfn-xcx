@@ -174,7 +174,6 @@ Page({
       })
       this.getCheshen(orderInfo.familyId)
       this.getNeishi(orderInfo.familyId)
-      console.log(orderInfo)
     }).finally(_ => {
       wx.hideNavigationBarLoading()
     })
@@ -239,7 +238,6 @@ Page({
     app.storage.setItem('customer_order_jing', this.data.carParts.list)
     app.navigateTo('jing')
     // wx.createSelectorQuery().selectViewport().scrollOffset(res => {
-    //   console.log(res)
     //   this.setData({
     //     'carParts.visible': true,
     //     'carParts.scrollTop': res.scrollTop

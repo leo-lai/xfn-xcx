@@ -45,7 +45,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.onLogin(_ => {
+    app.onLogin(userInfo => {
+      this.setData({ userInfo })
       this.$params = {
         ids: options.ids ? options.ids.split(',') : ['', '']
       }

@@ -20,6 +20,7 @@ Page({
     uploadImages: [],
     formData: {
       carsId: '',
+      carsName: '',
       guidingPrice: '',
       colourId: '',
       interiorId: '',
@@ -35,7 +36,7 @@ Page({
   onLoad: function (options) {
     app.storage.getItem('car-stock-order-info').then(info => {
       if (info) {
-        let formData = app.utils.copyObj(info)
+        let formData = app.utils.copyObj(this.data.formData, info)
         this.setData({ formData })
         this.getCheshen(info.familyId)
         this.getNeishi(info.familyId)

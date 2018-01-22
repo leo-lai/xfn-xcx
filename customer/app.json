@@ -4,6 +4,8 @@
     "pages/order-info/index",
     "pages/msg/index",
     "pages/car-bespeak/index",
+    "pages/car-bespeak/index2",
+    "pages/car-selector/index",
     "pages/car-slt/index",
     "pages/car-info/index"
   ],
