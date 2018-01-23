@@ -181,7 +181,7 @@ button[open-type=share]{border:none;background-color: transparent;padding: 0;lin
 button[open-type=share]::after{display: none;}
 
 
-button.l-button-main{ background: #ff9247; color: #fff; border-radius: 60rpx; padding:0 20rpx; box-shadow: 0 10rpx 20rpx rgba(255, 146, 71, 0.5);}
+button.l-button-main{ background-color: #ff9247; color: #fff; border-radius: 60rpx; padding:0 20rpx; box-shadow: 0 10rpx 20rpx rgba(255, 146, 71, 0.5);}
 button.l-button-main.button-hover{  background-color:#f57d2b;}
 button.l-button-main[disabled] { background-color:#ff9247 !important; opacity: 0.3; color: #fff;}
 
@@ -253,8 +253,9 @@ navigator.l-text-link{display: inline;}
 navigator button{vertical-align: top;}
 image{max-width: 100%;}
 .l-page-full{min-height: 100%; box-sizing: border-box;}
+.l-page-full::after{content:''; display: block; height: 2rpx; margin-bottom: -2rpx;}
 .l-page-full._disabled{position: relative;overflow: hidden;}
-.l-page-full._disabled::after{ content: ''; position: absolute; z-index: 9999; top:0; left: 0; height: 100%; width: 100%; }
+.l-page-full._disabled::before{ content: ''; position: absolute; z-index: 9999; top:0; left: 0; height: 100%; width: 100%; }
 .l-h100{height: 100%; box-sizing: border-box;}
 .l-scroll{ box-sizing: border-box; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch;}
 .l-scroll-x{ box-sizing: border-box; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;white-space: nowrap;}

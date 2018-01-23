@@ -68,7 +68,7 @@
     <view class='l-progress-info l-text-center l-padding'>
       <view class='l-h3'>预约成功</view>
     </view>
-    <view class='l-padding l-margin-t'>
+    <view class='l-margin'>
       <view class='l-fs-xs l-text-gray'>预约门店</view>
       <view class='l-slted-store l-flex-h'>
         <image style='background-color:#fff;' mode='aspectFit' src='{{info.orgImage}}'></image>
@@ -107,9 +107,9 @@
         </view>
       </view>
     </view>
-    <view class='l-padding'>
+    <view class='l-margin'>
       <view class='l-fs-xs l-text-gray'>销售顾问</view>
-      <view class='l-flex-h l-slted-store'>
+      <view class='l-slted-store l-flex-h'>
         <image style='width: 80rpx; height: 80rpx;' mode='aspectFill' src='{{info.systemImage}}'></image>
         <view class='l-rest'>
           <view>
@@ -118,6 +118,13 @@
           </view>
           <view class='l-text-gray l-fs-s'>{{info.shortName}}</view>
         </view>
+      </view>
+    </view>
+    <view class='l-margin'>
+      <view class='l-fs-xs l-text-gray'></view>
+      <view class='l-slted-store l-flex-hc'>
+        <text class='l-rest'>电子购车合同</text>
+        <navigator url='../contract/index?id={{info.customerOrderId}}' class='l-text-theme' hover-class='none'>查看</navigator>
       </view>
     </view>
   </block>

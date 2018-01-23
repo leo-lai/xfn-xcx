@@ -150,6 +150,34 @@ Page({
       callback(this.data.list.data)
     })
   },
+  // 选择销售顾问
+  sltSaler: function (event) {
+    let item = event.currentTarget.dataset.item
+    this.sltedSaler = item
+    app.navigateTo('../saler-list/index')
+  },
+  onSalesChange: function (saler) {
+    if(saler) {
+      wx.showLoading()
+      app.post(app.config.changeSales, {
+        customerUsersOrgId: this.sltedSaler.customerUsersOrgId,
+        systemUserId: saler.systemUserId
+      }).then(_ => {
+        this.setData({
+          'list.data': this.data.list.data.map(item => {
+            if (item.customerUsersOrgId === this.sltedSaler.customerUsersOrgId){
+              item.systemUserId = saler.systemUserId
+              item.systemUserName = saler.systemUserName
+            }
+            return item
+          })
+        })
+        app.toast('分配成功')
+      }).finally(_ => {
+        wx.hideLoading()
+      })
+    }
+  },
 
   // 搜索相关=================================================
   toggleFilterPanel: function () {

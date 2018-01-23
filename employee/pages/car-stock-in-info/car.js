@@ -23,6 +23,10 @@ Page({
       index: -1,
       list: []
     },
+    carParts: { // 选择随车资料
+      list: []
+    },
+    strongInsurance: ['否', '是'],
     carTime: app.config.baseData.carTime,
     uploadImages: [],
     formData: {
@@ -39,6 +43,9 @@ Page({
       certificateDate: '',
       warehouseId: '',
       stockCarImages: '',
+      mileage: '',
+      followInformation: '',
+      overStrongInsurance: 1
     }
   },
   /**
@@ -68,6 +75,16 @@ Page({
           this.getNeishi(info.familyId)
         }
       }).finally(_ => {
+        let followInformation = this.data.formData.followInformation ? this.data.formData.followInformation.split(',') : []
+        this.setData({
+          'carParts.list': app.config.baseData.incarParts.map((item, index) => {
+            return {
+              id: index + 1,
+              checked: followInformation.includes(item),
+              name: item
+            }
+          })
+        })
         this.getCangList()
       })
     }, this.route)
@@ -163,6 +180,10 @@ Page({
         'neishi.list': data
       })
     })
+  },
+  showCarParts: function () {
+    app.storage.setItem('stock-add-car-parts', this.data.carParts.list)
+    app.navigateTo('parts')
   },
   // 选择图片
   chooseImage: function (event) {
@@ -300,16 +321,8 @@ Page({
       this.showTopTips('请选择内饰颜色')
       return
     }
-    if (this.data.formData.unitPrice <= 0) {
-      this.showTopTips('请填写采购单价')
-      return
-    }
     if (!this.data.formData.frameNumber) {
       this.showTopTips('请添加车架号')
-      return
-    }
-    if (!this.data.formData.certificateDate) {
-      this.showTopTips('请选择票证时间')
       return
     }
 

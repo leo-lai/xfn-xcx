@@ -26,6 +26,9 @@ Page({
       visible: false,
       data: null
     },
+    bankPass: {
+      visible: false
+    },
     orderInfo: {},
     customerInfo: {},
     remarkInfo: {
@@ -164,6 +167,7 @@ Page({
     if (this.data.orderInfo.customerOrderId) {
       url += ',' + this.data.orderInfo.customerOrderId
     }
+    this.closeBankPass()
     app.navigateTo(url)
   },
   // 银行审核
@@ -179,6 +183,7 @@ Page({
 
     promise && promise.then(_ => {
       app.toast('操作成功').then(_ => {
+        this.closeBankPass()
         this.getInfo()
       })
     }).finally(_ => {
@@ -191,5 +196,15 @@ Page({
       bankAuditsvideo: this.data.orderInfo.bankAuditsvideo
     })
     app.navigateTo('../bank-uploader/index?id=' + this.data.customerInfo.customerUsersId)
+  },
+  showBankPass: function () {
+    this.setData({
+      'bankPass.visible': true
+    })
+  },
+  closeBankPass: function () {
+    this.setData({
+      'bankPass.visible': false
+    })
   }
 })

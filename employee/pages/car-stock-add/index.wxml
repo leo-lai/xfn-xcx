@@ -28,7 +28,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='colourId' data-picker='cheshen' bindchange='bindInput' value='{{cheshen.index}}' range='{{cheshen.list}}' range-key='carColourName'>
-            <view class="weui-input">
+            <view class='weui-input'>
               <text wx:if='{{cheshen.index === -1}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{cheshen.list[cheshen.index].carColourName}}</text>
             </view>

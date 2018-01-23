@@ -9,7 +9,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='warehouseId' data-picker='cang' bindchange='bindInput' value='{{cang.index}}' range='{{cang.list}}' range-key='warehouseName'>
-            <view class="weui-input">
+            <view class='weui-input'>
               <text wx:if='{{cang.index === -1}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{cang.list[cang.index].warehouseName}}</text>
             </view>
@@ -33,7 +33,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='colourId' data-picker='cheshen' bindchange='bindInput' value='{{cheshen.index}}' range='{{cheshen.list}}' range-key='carColourName'>
-            <view class="weui-input">
+            <view class='weui-input'>
               <text wx:if='{{cheshen.index === -1}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{cheshen.list[cheshen.index].carColourName}}</text>
             </view>
@@ -46,22 +46,13 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='interiorId' data-picker='neishi' bindchange='bindInput' value='{{neishi.index}}' range='{{neishi.list}}' range-key='interiorName'>
-            <view class="weui-input">
+            <view class='weui-input'>
               <text wx:if='{{neishi.index === -1}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{neishi.list[neishi.index].interiorName}}</text>
             </view>
           </picker>
         </view>
       </view>
-      <view class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
-          <view class='weui-label'>采购单价 <text class='l-text-theme'>*</text></view>
-        </view>
-        <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请填写' id='unitPrice' value='{{formData.unitPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
-        </view>
-      </view>
-      
     </view>
   </view>
 
@@ -85,7 +76,15 @@
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>票证时间 <text class='l-text-theme'>*</text></view>
+          <view class='weui-label'>公里数</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请填写' id='mileage' value='{{formData.mileage}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>票证时间</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='certificateDate' bindchange='bindInput' value='{{formData.certificateDate}}' range='{{carTime}}'>
@@ -104,12 +103,52 @@
           <input class='weui-input' placeholder='请填写' id='certificateNumber' value='{{formData.certificateNumber}}' bindinput='bindInput' maxlength='{{50}}' />
         </view>
       </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>采购单价</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请填写' id='unitPrice' value='{{formData.unitPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>是否带交强险</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='overStrongInsurance' bindchange='bindInput' value='{{formData.overStrongInsurance}}' range='{{strongInsurance}}'>
+            <view class='weui-input'>
+              <text wx:if='{{formData.overStrongInsurance === ""}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{strongInsurance[formData.overStrongInsurance]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
     </view>
   </view>
 
+  <!-- 随车资料 -->
   <view class='l-margin l-radius l-bg-white'>
     <view class='l-padding-btn l-border-b'>
-      <text class='l-fs-s l-text-gray'>验证照片</text>
+      <text class='l-fs-s l-text-gray'>随车资料</text>
+    </view>
+    <view class='l-padding l-bg-white'>
+      <view class='l-tag-list'>
+        <view class='_item' wx:for='{{carParts.list}}' wx:key='id' wx:if='{{item.checked}}'>
+          <text>{{item.name}}</text>
+          <!-- <icon size='16' type='clear' color='#ccc'></icon> -->
+        </view>
+        <view class='_item _add' bindtap='showCarParts' wx:if='{{orderInfo.customerOrderState != 17}}'>
+          <text>选择随车资料</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 随车资料 end-->
+
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text class='l-fs-s l-text-gray'>验车照片</text>
     </view>
     <view class='l-padding'>
       <view class='weui-cell__bd'>

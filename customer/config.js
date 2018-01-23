@@ -85,6 +85,9 @@ var config = {
   // 预约接口
   bespeak2: `${baseUrl}/generalize/bespeak`,
 
+  // 合同详情
+  contractInfo: `${baseUrl}/order/customerOrderPrint`,
+  
   // 下面的地址配合云端 Server 工作
   baseUrl
 };

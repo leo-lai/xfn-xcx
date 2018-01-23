@@ -1,11 +1,11 @@
 <!--pages/customer-order/index.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
-<view class='l-page-full {{ carParts.visible ? "l-no-scroll" : "" }}'>
-  <view class="weui-cells__title">订单基本信息</view>
+<view class='l-page-full {{ orderInfo.customerOrderState == 17 ? "l-page-disabled" : "" }}'>
+  <view class='weui-cells__title'>订单基本信息</view>
   <view class='weui-cells weui-cells_after-title'>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>客户身份证号</view>
+        <view class='weui-label'>客户身份证号 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='customerUserCard' value='{{orderInfo.customerUserCard}}' bindinput='bindInput' type='idcard' maxlength='{{18}}'/>
@@ -13,7 +13,7 @@
     </view>
     <navigator url='../car-selector/index' class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>订购车辆</view>
+        <view class='weui-label'>订购车辆 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <view class='weui-input'>
@@ -32,11 +32,11 @@
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>车身颜色</view>
+        <view class='weui-label'>车身颜色 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='colourId' data-picker='cheshen' bindchange='bindInput' value='{{cheshen.index}}' range='{{cheshen.list}}' range-key='carColourName'>
-          <view class="weui-input">
+          <view class='weui-input'>
             <text wx:if='{{cheshen.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{cheshen.list[cheshen.index].carColourName}}</text>
           </view>
@@ -45,11 +45,11 @@
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>内饰颜色</view>
+        <view class='weui-label'>内饰颜色 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='interiorId' data-picker='neishi' bindchange='bindInput' value='{{neishi.index}}' range='{{neishi.list}}' range-key='interiorName'>
-          <view class="weui-input">
+          <view class='weui-input'>
             <text wx:if='{{neishi.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{neishi.list[neishi.index].interiorName}}</text>
           </view>
@@ -58,7 +58,7 @@
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>收取定金（元）</view>
+        <view class='weui-label'>收取定金 <text class='l-text-theme'>*</text>（元）</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <input disabled='{{orderInfo.customerOrderState > 1}}' class='weui-input' placeholder='请填写' id='depositPrice' value='{{orderInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
@@ -70,7 +70,7 @@
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='systemUserId' data-picker='sales' bindchange='bindInput' value='{{sales.index}}' range='{{sales.list}}' range-key='systemUserName'>
-          <view class="weui-input">
+          <view class='weui-input'>
             <text wx:if='{{sales.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{sales.list[sales.index].systemUserName}}</text>
           </view>
@@ -79,11 +79,11 @@
     </view>
   </view>
 
-  <view class="weui-cells__title">订单金额（元）</view>
+  <view class='weui-cells__title'>订单金额（元）</view>
   <view class='weui-cells weui-cells_after-title'>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>车辆最终成交价</view>
+        <view class='weui-label'>车辆最终成交价 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='carUnitPrice' value='{{orderInfo.carUnitPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
@@ -144,7 +144,7 @@
     </view>
   </view>
 
-  <view class="weui-cells__title">购车方案</view>
+  <view class='weui-cells__title'>购车方案</view>
   <view class='weui-cells weui-cells_after-title {{orderInfo.customerOrderState >= 5 ? "_disabled" : ""}}'>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__bd l-padding-tb'>
@@ -167,7 +167,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='loanBank' data-picker='bank' bindchange='bindInput' value='{{bank.index}}' range='{{bank.list}}' range-key='name'>
-            <view class="weui-input">
+            <view class='weui-input'>
               <text wx:if='{{bank.index === -1}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{bank.list[bank.index].name}}</text>
             </view>
@@ -204,7 +204,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='isMortgage' bindchange='bindInput' value='{{orderInfo.isMortgage}}' range='{{diya}}'>
-            <view class="weui-input">
+            <view class='weui-input'>
               <text wx:if='{{orderInfo.isMortgage === ""}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{diya[orderInfo.isMortgage]}}</text>
             </view>
@@ -214,8 +214,8 @@
     </block>
   </view>
 
-  <!-- 精品列表 -->
-  <view class="weui-cells__title">
+  <!-- 赠送精品 -->
+  <view class='weui-cells__title'>
     <text>赠送精品</text>
   </view>
   <view class='l-padding l-bg-white'>
@@ -224,43 +224,24 @@
         <text>{{item.name}}</text>
         <!-- <icon size='16' type='clear' color='#ccc'></icon> -->
       </view>
-      <view class='_item _add' bindtap='showCarParts'>
+      <view class='_item _add' bindtap='showCarParts' wx:if='{{orderInfo.customerOrderState != 17}}'>
         <text>选择精品</text>
       </view>
     </view>
   </view>
-  <view class='l-popup-bottom {{carParts.visible ? "_show" : ""}}' bindtap='closeCarParts' catchtouchmove='noopFn'>
-    <view class='_inner' catchtap='noopFn'>
-      <text class='_close' bindtap='closeCarParts'>×</text>
-      <view class='_hd'>
-        <text class='l-h4'>选择精品</text>
-      </view>
-      <scroll-view scroll-y class='_bd' style='max-height: {{carParts.height}}px;'>
-        <view class='weui-cells weui-cells_after-title'>
-          <checkbox-group bindchange='sltcarParts'>
-            <label class='weui-cell weui-check__label l-padding' wx:for='{{carParts.list}}' wx:key='id'>
-              <view class='l-margin-r-m'><checkbox color='#fa5539' value='{{item.name}}' checked='{{item.checked}}'/></view>
-              <view class='weui-cell__bd'>{{item.name}}</view>
-            </label>
-          </checkbox-group>
-        </view>
-      </scroll-view>
-      <view class='_ft'>
-        <button class='l-button-main' bindtap='closeCarParts'>确定</button>
-      </view>
-    </view>
-  </view>
-  <!-- 精品列表 end-->
+  <!-- 赠送精品 end-->
 
-  <view class="weui-cells__title">订单备注</view>
+  <view class='weui-cells__title'>订单备注</view>
   <view class='l-padding l-bg-white'>
     <textarea style='width: 100%; min-height: 2em;' auto-height='{{true}}' maxlength='{{500}}' placeholder='请填写备注' id='remark' bindinput='bindInput' value='{{orderInfo.remark}}'></textarea>
   </view>
   <view class='l-margin-t'></view>
-  <view style='height: 120rpx;'></view>
-  <view class='l-fixed-bottom'>
-    <view class='l-btn-w60 l-margin-tb'>
-      <button disabled='{{orderInfo.customerOrderState == 17}}' class='l-button-main' bindtap='submit'>保存购车单信息</button>
+  <block wx:if='{{orderInfo.customerOrderState != 17}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom'>
+      <view class='l-btn-w60 l-margin-tb'>
+        <button class='l-button-main' bindtap='submit'>保存购车单信息</button>
+      </view>
     </view>
-  </view>
+  </block>
 </view>

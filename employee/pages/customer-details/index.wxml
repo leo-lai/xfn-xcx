@@ -32,7 +32,7 @@
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='agentGender' data-picker='sex' bindchange='bindInput' value='{{sex.index}}' range='{{sex.list}}'>
-          <view class="weui-input">
+          <view class='weui-input'>
             <text wx:if='{{sex.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{sex.list[sex.index]}}</text>
           </view>
@@ -61,7 +61,7 @@
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='incomeSource' data-picker='income' bindchange='bindInput' value='{{income.index}}' range='{{income.list}}'>
-          <view class="weui-input">
+          <view class='weui-input'>
             <text wx:if='{{income.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{income.list[income.index]}}</text>
           </view>
@@ -74,7 +74,7 @@
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='housingSource' data-picker='house' bindchange='bindInput' value='{{house.index}}' range='{{house.list}}'>
-          <view class="weui-input">
+          <view class='weui-input'>
             <text wx:if='{{house.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{house.list[house.index]}}</text>
           </view>
@@ -87,7 +87,7 @@
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='education' data-picker='edu' bindchange='bindInput' value='{{edu.index}}' range='{{edu.list}}'>
-          <view class="weui-input">
+          <view class='weui-input'>
             <text wx:if='{{edu.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{edu.list[edu.index]}}</text>
           </view>
@@ -100,7 +100,7 @@
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='isHasDriversLicense' bindchange='bindInput' value='{{customerInfo.isHasDriversLicense}}' range='{{driverLicense}}'>
-          <view class="weui-input">
+          <view class='weui-input'>
             <text wx:if='{{customerInfo.isHasDriversLicense === ""}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{driverLicense[customerInfo.isHasDriversLicense]}}</text>
           </view>
@@ -125,7 +125,7 @@
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='emergencyARelationship' data-picker='shipA' bindchange='bindInput' value='{{shipA.index}}' range='{{shipA.list}}'>
-          <view class="weui-input">
+          <view class='weui-input'>
             <text wx:if='{{shipA.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{shipA.list[shipA.index]}}</text>
           </view>
@@ -154,7 +154,7 @@
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='emergencyBRelationship' data-picker='shipB' bindchange='bindInput' value='{{shipB.index}}' range='{{shipB.list}}'>
-          <view class="weui-input">
+          <view class='weui-input'>
             <text wx:if='{{shipB.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{shipB.list[shipB.index]}}</text>
           </view>

@@ -40,9 +40,8 @@
       </view>
       <view class='l-padding l-text-center l-border-t' wx:if='{{orderInfo.customerOrderState == 3 || orderInfo.customerOrderState == 4}}'>
         <view wx:if='{{orderInfo.loanBank != 4 || orderInfo.customerOrderState == 4}}'>
-          <button bindtap='bankPass' data-val='2' class='l-button-border'>银行审核不通过，全款支付尾款</button>
+          <button class='l-button-border' bindtap='showBankPass'>请重新选择贷款方案</button>
         </view>
-
         <view wx:if='{{orderInfo.loanBank != 4}}' class='l-margin-t-m'>
           <button bindtap='bankPass' data-val='1' class='l-button-main'>银行审核通过</button>
         </view>
@@ -138,4 +137,20 @@
       </view>
     </view>
   </view>
+
+  <!-- 银行审核不通过 -->
+  <view catchtouchmove='noopFn' class='l-popup-center l-flex-vhc' wx:if='{{bankPass.visible}}'>
+    <view class='_inner l-padding' style='width: 70%;'>
+      <view class='weui-msg'>
+        <view class='weui-msg__opr-area'>
+          <view class='weui-btn-area l-btn-w60'>
+            <button class='l-button-main' bindtap='showCustomerOrder'>更改贷款银行</button>
+            <button class='l-button-border l-margin-t' bindtap='bankPass' data-val='2'>改为全款支付</button>
+          </view>
+        </view>
+      </view>
+    </view>
+    <text class='l-icon-61a _close' bindtap='closeBankPass'></text>
+  </view>
 </view>
+

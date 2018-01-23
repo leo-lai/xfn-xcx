@@ -34,10 +34,15 @@
       <image class='l-avatar' mode='aspectFit' style='width: 80rpx; height: 80rpx; margin-right: 30rpx;' src='{{item.thumb}}'></image>
       <view class='l-rest'>
         <view class='l-h4'>{{item.customerUsersName}}</view>
-        <text class='l-fs-m'>{{item.phoneNumber}}</text>  
+        <view catchtap='noopFn'>
+          <view data-val='{{item.phoneNumber}}' bindtap='callPhone' bindtap='callPhone'>
+            <text class='l-fs-m'>{{item.phoneNumber}}</text>
+            <text class='l-icon-649 l-text-theme'></text>
+          </view>
+        </view>
       </view>
       <view>
-        <button class='l-text-theme' size='mini'>{{item.orderState}}</button>
+        <text class='l-text-theme l-fs-s'>{{item.orderState}}</text>
       </view>
     </view>
 
@@ -51,10 +56,14 @@
       <view class='l-margin-t-xs'>{{buyWay[item.paymentWay - 1]}}</view>
     </view>
 
-    <view class='l-margin-t' catchtap='noopFn'>
-      <text class='l-icon-649 l-fr l-text-theme' data-val='{{item.phoneNumber}}' bindtap='callPhone' bindtap='callPhone'></text>
+    <view class='l-margin-t'>
       <view class='l-text-gray l-fs-xs'>销售顾问</view>
-      <view class='l-margin-t-xs'>{{item.systemUserName}}</view>
+      <view class='l-margin-t-xs'>
+        {{item.systemUserName || '无'}} 
+        <view class='l-fr' catchtap='noopFn' wx:if='{{item.customerUsersOrgId}}'>
+          <button style='margin-top: -20rpx;' class='l-button-main' size='mini' data-item='{{item}}' bindtap='sltSaler'>分配销售顾问</button>
+        </view>
+      </view>
     </view>
   </navigator>
   <!-- <template is='loadmore' data='{{...list}}' /> -->

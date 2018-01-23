@@ -14,7 +14,7 @@ Page({
       nikeName: '',
       phoneNumber: '',
       password: '',
-      headPortrait: ''
+      headPortrait: '',
     }
   },
 
@@ -42,8 +42,13 @@ Page({
     wx.login({
       success: loginRes => { // 获取授权code，可以到后台换取 openId, sessionKey, unionId
         wx.getUserInfo({ // 小程序授权获取用户信息（头像，昵称等）
-          withCredentials: false,
+          withCredentials: true,
           success: userInfoRes => { // 可以将 userInfoRes 发送给后台解码出 unionId
+            this.data.formData.code = loginRes.code
+            this.data.formData.rawData = userInfoRes.rawData
+            this.data.formData.signature = userInfoRes.signature
+            this.data.formData.encryptedData = userInfoRes.encryptedData
+            this.data.formData.iv = userInfoRes.iv
             this.data.formData.nikeName = userInfoRes.userInfo.nickName
             this.data.formData.headPortrait = userInfoRes.userInfo.avatarUrl
           },

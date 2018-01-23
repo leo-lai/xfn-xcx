@@ -262,6 +262,8 @@ navigator.l-text-link{display: inline;}
 navigator button{vertical-align: top;}
 image{max-width: 100%;}
 .l-page-full{min-height: 100%; box-sizing: border-box; padding: 2rpx 0; margin: -2rpx 0;}
+.l-page-disabled{position: relative;}
+.l-page-disabled::after{content: ''; position: fixed;top:0;left: 0;right: 0;bottom: 0;z-index: 10000;}
 .l-h100{height: 100%; box-sizing: border-box;}
 .l-scroll{ box-sizing: border-box; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch;}
 .l-scroll-x{ box-sizing: border-box; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;white-space: nowrap;}
@@ -330,3 +332,9 @@ image{max-width: 100%;}
   border-bottom: 2rpx solid #eee;
   padding: 30rpx 0;
 }
+
+/* 选择精品、随车资料 */
+.l-tag-list{overflow: hidden; margin: -20rpx -20rpx 0 0;}
+.l-tag-list ._item{float:left; margin: 20rpx 20rpx 0 0; min-width: 130rpx; padding: 15rpx 10rpx; text-align: center; border: 2rpx solid #ccc; border-radius: 10rpx;}
+.l-tag-list ._item icon{position: relative; right: -20rpx;}
+.l-tag-list ._item._add{background-color: #fa5539; color: #fff; border-color: #fa5539;}

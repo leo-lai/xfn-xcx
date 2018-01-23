@@ -36,7 +36,9 @@
     "pages/car-stock-in/index",
     "pages/car-stock-in-info/index",
     "pages/car-stock-in-add/index",
-    "pages/car-stock-in-info/car"
+    "pages/car-stock-in-info/car",
+    "pages/saler-list/index",
+    "pages/car-stock-in-info/parts"
   ],
   "window": {
     "backgroundColor": "#eee",

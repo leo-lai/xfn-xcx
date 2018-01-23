@@ -58,7 +58,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='isOnLine' bindchange='bindInput' value='{{formData.isOnLine}}' range='{{online}}'>
-            <view class="weui-input">
+            <view class='weui-input'>
               <text wx:if='{{formData.isOnLine === ""}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{online[formData.isOnLine]}}</text>
             </view>

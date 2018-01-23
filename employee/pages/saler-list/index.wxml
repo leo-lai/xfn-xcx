@@ -1,0 +1,13 @@
+<!--pages/saler-list/index.wxml-->
+<view class='l-page-full l-bg-white'>
+  <view class='weui-cells weui-cells_after-title'>
+    <radio-group bindchange='sltOk'>
+      <label class='weui-cell weui-check__label l-padding' wx:for='{{list}}' wx:key='systemUserId'>
+        <view class='l-margin-r-m'>
+          <radio color='#fa5539' value='{{item.systemUserId}}' checked='{{item.checked}}' />
+        </view>
+        <view class='weui-cell__bd'>{{item.systemUserName}}</view>
+      </label>
+    </radio-group>
+  </view>
+</view>

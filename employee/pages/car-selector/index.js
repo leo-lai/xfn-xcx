@@ -96,7 +96,10 @@ Page({
       familyId: this.data.family.slted.id
     }).then(({ data }) => {
       this.setData({
-        'carType.list': data
+        'carType.list': data.map(item => {
+          item.priceStr = item.price ? (item.price / 10000).toFixed(2) + '万' : '无'
+          return item
+        })
       })
     }).finally(_ => {
       this.setData({ 'carType.loading': false })

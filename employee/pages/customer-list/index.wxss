@@ -1,6 +1,6 @@
 /* pages/customer-list/index.wxss */
 button.l-text-theme{background-color: #fff; border-radius: 4rpx;}
-.l-icon-649{width: 80rpx; height: 80rpx; border-radius: 50%; border: 2rpx solid rgba(0, 0, 0, 0.1);text-align: center; line-height: 80rpx; font-size: 40rpx;}
+.l-icon-649{font-size: 30rpx; margin-left: 10rpx;}
 .l-filter-state{margin:0 30rpx 30rpx 30rpx;}
 .l-filter-state ._tit{border-bottom: 2rpx solid #eee; color: #999; padding: 15rpx 0; font-size: 24rpx;}
 .l-filter-state ._cont{overflow: hidden; margin-right: -20rpx;}

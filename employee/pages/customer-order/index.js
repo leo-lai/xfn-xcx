@@ -11,14 +11,14 @@ Page({
     bank: { // 贷款银行
       index: -1,
       list: [
-        { id: 1, name: '奇瑞金融'},
-        { id: 2, name: '瑞福德金融'},
-        { id: 3, name: '建设银行'},
-        { id: 4, name: '农业银行'},
+        { id: 1, name: '奇瑞金融' },
+        { id: 2, name: '瑞福德金融' },
+        { id: 3, name: '建设银行' },
+        { id: 4, name: '农业银行' },
         { id: 5, name: '工商银行' },
         { id: 6, name: '广州银行' },
         { id: 7, name: '鹤山珠江村镇银行' },
-        { id: 8, name: '鹤山农村信用合作社'}
+        { id: 8, name: '鹤山农村信用合作社' }
       ]
     },
     sales: { // 销售人员
@@ -33,10 +33,7 @@ Page({
       index: -1,
       list: []
     },
-    carParts: {
-      visible: false,
-      scrollTop: 0,
-      height: 602 - 200,
+    carParts: { // 精品
       list: []
     },
     orderPay: '0.00',
@@ -51,14 +48,6 @@ Page({
    */
   onLoad: function (options) {
     app.onLogin(userInfo => {
-      wx.getSystemInfo({
-        success: res => {
-          this.setData({
-            'carParts.height': res.windowHeight - 200
-          })
-        }
-      })
-
       this.$params = {
         ids: options.ids ? options.ids.split(',') : ['', '']
       }
@@ -163,12 +152,12 @@ Page({
             orderInfo = Object.assign(orderInfo, data)
             resolve(orderInfo)
           }).catch(reject)
-        }else{
+        } else {
           resolve(orderInfo)
         }
       }).catch(reject)
     }).then(orderInfo => {
-      this.setData({ 
+      this.setData({
         orderInfo,
         'bank.index': this.data.bank.list.findIndex(item => item.id === orderInfo.loanBank)
       })
@@ -178,8 +167,8 @@ Page({
       wx.hideNavigationBarLoading()
     })
   },
-  changeCar: function (carType = {}, family = {}, brand = {} ) {
-    if (this.data.orderInfo.carsId !== carType.id){
+  changeCar: function (carType = {}, family = {}, brand = {}) {
+    if (this.data.orderInfo.carsId !== carType.id) {
       this.setData({
         'orderInfo.carsId': carType.id,
         'orderInfo.carsName': carType.name,
@@ -237,34 +226,6 @@ Page({
   showCarParts: function () {
     app.storage.setItem('customer_order_jing', this.data.carParts.list)
     app.navigateTo('jing')
-    // wx.createSelectorQuery().selectViewport().scrollOffset(res => {
-    //   this.setData({
-    //     'carParts.visible': true,
-    //     'carParts.scrollTop': res.scrollTop
-    //   })
-    // }).exec()
-  },
-  sltcarParts: function (event) {
-    let value = event.detail.value
-    let list = this.data.carParts.list.map(item => {
-      item.checked = value.includes(item.name)
-      return item
-    })
-
-    this.setData({
-      'carParts.list': list,
-      'orderInfo.followInformation': value.join(',')
-    })
-  },
-  closeCarParts: function () {
-    this.setData({
-      'carParts.visible': false
-    })
-    // setTimeout(_ => {
-    //   wx.pageScrollTo({
-    //     scrollTop: this.data.carParts.scrollTop
-    //   })
-    // }, 50)
   },
   submit: function () {
     if (!this.data.orderInfo.customerUserCard) {
@@ -283,11 +244,11 @@ Page({
       this.showTopTips('请选择内饰颜色')
       return
     }
-    if (this.data.orderInfo.depositPrice === '') {
+    if (!(this.data.orderInfo.depositPrice > 0)) {
       this.showTopTips('请填写收取定金')
       return
     }
-    if (this.data.orderInfo.carUnitPrice === '') {
+    if (!(this.data.orderInfo.carUnitPrice > 0)) {
       this.showTopTips('请填写车辆最终成交价')
       return
     }
@@ -320,6 +281,9 @@ Page({
       vehicleAndVesselTax: ''
     }, this.data.orderInfo)
 
+    if (Number.isNaN(formData.downPayments)) {
+      formData.downPayments = ''
+    }
     wx.showLoading({ mask: true })
     app.post(app.config.customerOrderAdd, formData).then(({ data }) => {
       app.getPrevPage().then(prevPage => {

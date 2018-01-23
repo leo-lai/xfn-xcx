@@ -9,7 +9,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='storageSource' bindchange='bindInput' value='{{formData.storageSource}}' range='{{carSource}}'>
-            <view class="weui-input">
+            <view class='weui-input'>
               <text wx:if='{{formData.storageSource === ""}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{carSource[formData.storageSource]}}</text>
             </view>
@@ -22,7 +22,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='supplierId' data-picker='supplier' bindchange='bindInput' value='{{supplier.index}}' range='{{supplier.list}}' range-key='name'>
-            <view class="weui-input">
+            <view class='weui-input'>
               <text wx:if='{{supplier.index === -1}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{supplier.list[supplier.index].name}}</text>
             </view>
@@ -35,7 +35,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='systemUserId' data-picker='sales' bindchange='bindInput' value='{{sales.index}}' range='{{sales.list}}' range-key='systemUserName'>
-            <view class="weui-input">
+            <view class='weui-input'>
               <text wx:if='{{sales.index === -1}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{sales.list[sales.index].systemUserName}}</text>
             </view>

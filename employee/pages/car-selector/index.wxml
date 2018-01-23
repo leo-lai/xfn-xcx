@@ -53,7 +53,10 @@
     <scroll-view class='l-rest l-scroll' scroll-y>
       <view class='weui-cells weui-cells_after-title'>
         <view class='weui-cell weui-cell_access' hover-class='weui-cell_active' wx:for='{{carType.list}}' wx:key='id' bindtap='sltCarType' data-item='{{item}}'>
-          <view class='weui-cell__bd'>{{item.name}}</view>
+          <view class='weui-cell__bd'>
+            <view>{{item.name}}</view>
+            <view class='l-text-gray'>官方指导价：{{item.priceStr}}</view>
+          </view>
           <view class='weui-cell__ft weui-cell__ft_in-access'></view>
         </view>
         <view class='weui-cell weui-cell_access' hidden='{{carType.loading || carType.list.length > 0}}'>
