@@ -1,0 +1,58 @@
+<!--level2/customer/add.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>门店名称</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入门店名称' maxlength='{{100}}' confirm-type='next' id='shortName' value='{{formData.shortName}}' bindinput='bindInput' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>联系人</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入联系人姓名' maxlength='{{20}}' confirm-type='next' id='linkMan' value='{{formData.linkMan}}' bindinput='bindInput' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>联系电话</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' type='number' placeholder='请输入11位手机号码' maxlength='{{11}}' confirm-type='next' id='telePhone' value='{{formData.telePhone}}' bindinput='bindInput' />
+        </view>
+      </view>
+      <navigator class='weui-cell weui-cell_select' url='/pages/region/index'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>门店地址</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view wx:if='{{regionName}}' class='weui-select weui-select_in-select-after'>{{regionName}}</view>
+          <view wx:else class='weui-select weui-select_in-select-after l-text-gray'>请选择省市区</view>  
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>详细地址</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入街道、门牌号等' maxlength='{{100}}' confirm-type='next' id='address' value='{{formData.address}}' bindinput='bindInput' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__bd' style='padding: 15rpx 0;'>
+          <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注' id='remarks' value='{{formData.remarks}}' bindinput='bindInput'></textarea>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>

@@ -21,8 +21,8 @@
  * .............................................
  *                晶哥坐镇 顺利上线
  */
-var host = 'http://111.230.170.36'
-var host = 'https://tomcat.xfnauto.com'
+var host = 'http://tomcat.mifengqiche.com'
+// var host = 'https://tomcat.xfnauto.com'
 
 var resURL = 'https://res.xfnauto.com'
 var commonUrl = host + '/tauto/common'
@@ -35,7 +35,7 @@ var config = {
     buyWay: ['全款', '分期'],
     orderType: ['客户订车', '门店订车'],
     carParts: ['防爆膜', '底盘漆', '地毯', '灭火器', '车头锁', '头枕', '抱枕', '香水', '导航', '全车座椅拉皮', '行车记录仪（单向）', '行车记录仪（双向）', '行车记录仪（隐藏式）', '行车记录仪（高清）', '晴雨挡', '挡泥板', '全车隔音', '倒车雷达（4探）', '倒车雷达（6探）'],
-    incarParts: ['车辆统一发明票', '用户手册', '保养手册', '合格证', '天线', '随车地毯', '三包凭证', '点烟器', '一致证书', '工具、备胎']
+    incarParts: ['车辆统一发明票', '用户手册', '保养手册', '合格证', '天线', '随车地毯', '三包凭证', '点烟器', '一致证书', '工具、备胎', '主匙', '备匙', '反光衣', '首保凭证', '档位盖']
   },
   // 静态资源服务器
   resURL,
@@ -151,7 +151,13 @@ var config = {
   // 新增订车单
   stockOrderAdd: `${baseUrl}/stockOrderCreate`,
 
-  // 二级入库--------------------------------
+  // 二级人员--------------------------------
+  lv2: {
+    // 客户列表
+    customerList: `${baseUrl}/organizationList`,
+    // 新增客户
+    customerAdd: `${baseUrl}/organizationEdit`,
+  },
   // 采购员列表
   buyerList: `${baseUrl}/orgOneSelfList`,
   // 仓位列表

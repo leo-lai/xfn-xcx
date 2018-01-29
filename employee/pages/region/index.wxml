@@ -1,0 +1,62 @@
+<!--pages/region/index.wxml-->
+<!-- 省份列表 -->
+<view class='l-panel {{ province.visible ? "_center" : "_right" }}'>
+  <view class='_inner l-flex-v'>
+    <view class='l-padding-btn'>选择省份</view>
+    <scroll-view class='l-rest l-scroll' scroll-y>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_access' hover-class='weui-cell_active' wx:for='{{province.list}}' wx:key='value' bindtap='sltProvince' data-item='{{item}}'>
+          <view class='weui-cell__bd'>{{item.text}}</view>
+          <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+        </view>
+        <view class='weui-cell weui-cell_access' hidden='{{province.loading || province.list.length > 0}}'>
+          <view class='weui-cell__bd l-text-center'>暂无数据</view>
+        </view>
+      </view>
+      <view class='weui-loadmore' hidden='{{ !province.loading }}'>
+        <view class='weui-loading'></view>
+        <view class='weui-loadmore__tips'>正在加载</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<!-- 市区列表 -->
+<view class='l-panel {{ city.visible ? "_center" : "_right" }}' bindtap='closeCity'>
+  <view class='_inner l-flex-v' style='left: 15%;' catchtap='noopFn'>
+    <view class='l-padding-btn'>
+      <text>{{province.slted.text || '选择市区'}}</text>
+      <view class='weui-loading' hidden='{{ !city.loading }}'></view>
+    </view>
+    <scroll-view class='l-rest l-scroll' scroll-y>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_access' hover-class='weui-cell_active' wx:for='{{city.list}}' wx:key='id' bindtap='sltCity' data-item='{{item}}'>
+          <view class='weui-cell__bd'>{{item.text}}</view>
+          <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+        </view>
+        <view class='weui-cell weui-cell_access' hidden='{{city.loading || city.list.length > 0}}'>
+          <view class='weui-cell__bd l-text-center'>暂无数据</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<!-- 县区列表 -->
+<view class='l-panel {{ area.visible ? "_center" : "_right" }}' bindtap='closeArea'>
+  <view class='_inner l-flex-v' style='left: 30%;' catchtap='noopFn'>
+    <view class='l-padding-btn'>
+      <text>{{city.slted.text || '选择车类'}}</text>
+      <view class='weui-loading' hidden='{{ !area.loading }}'></view>
+    </view>
+    <scroll-view class='l-rest l-scroll' scroll-y>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_access' hover-class='weui-cell_active' wx:for='{{area.list}}' wx:key='id' bindtap='sltArea' data-item='{{item}}'>
+          <view class='weui-cell__bd'>{{item.text}}</view>
+          <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+        </view>
+        <view class='weui-cell weui-cell_access' hidden='{{area.loading || area.list.length > 0}}'>
+          <view class='weui-cell__bd l-text-center'>暂无数据</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

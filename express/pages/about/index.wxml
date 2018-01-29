@@ -1,0 +1,60 @@
+<!--pages/about/index.wxml-->
+<view class='l-page-full'>
+  <view class='l-banner-image'>
+    <image mode='widthFix' src='{{resURL + "/20180126001.jpg"}}'></image>
+  </view>
+
+  <view class='l-padding l-bg-white'>
+    <view class='l-about-item'>
+      <view class='_hd'>
+        <image class='l-icon-0'></image>
+        <text class='l-h4 l-margin-l'>省钱</text>
+      </view>
+      <view class='_bd'>
+        通过板车资源合理分配，消除中间环节，降低了配送的成本；在线直接报价，查看计费标准及规则，价格合理透明
+      </view>
+    </view>
+    <view class='l-about-item'>
+      <view class='_hd'>
+        <image class='l-icon-0'></image>
+        <text class='l-h4 l-margin-l'>省时</text>
+      </view>
+      <view class='_bd'>
+        闭环的物流控制系统，后台快速响应托运方订单并发车配板，高效省时；多年的轿运业务累积，各城市之间每天均有专线车辆发车运输来往；丰富的小板资源，灵活最大化配送能力和速度
+      </view>
+    </view>
+    <view class='l-about-item'>
+      <view class='_hd'>
+        <image class='l-icon-0'></image>
+        <text class='l-h4 l-margin-l'>省心</text>
+      </view>
+      <view class='_bd'>
+        专人客服跟进，随时解答托运方遇到的任何疑问；所有托运车辆均购买中华联合的保险，第一时间联系保险方赔付并负责修理；支持货到付款，验车确认无问题再支付运费
+      </view>
+    </view>
+    <view class='l-about-item'>
+      <view class='_hd'>
+        <image class='l-icon-0'></image>
+        <text class='l-h4 l-margin-l'>专业</text>
+      </view>
+      <view class='_bd'>
+        自有物流团队，所有司机经过专业培训、持证上岗；严格规范的操作流程及规章制度，线上同步信息，通过系统调配运输能力，更加专业可靠
+      </view>
+    </view>
+  </view>
+  <view class='l-margin l-padding-lr'>
+    <view class='l-h3 l-text-link'>联系我们</view>
+    <view class='l-margin-t-s'>
+      <view class='l-text-gray l-fs-s'>公司名称</view>
+      <view>广州喜蜂鸟网络科技服务有限公司</view>
+    </view>
+    <view class='l-margin-t-s'>
+      <view class='l-text-gray l-fs-s'>总部地址</view>
+      <view>广州市海珠区东晓南路548号</view>
+    </view>
+    <view class='l-margin-t-s'>
+      <view class='l-text-gray l-fs-s'>客服电话</view>
+      <view>400-1639-989</view>
+    </view>
+  </view>
+</view>

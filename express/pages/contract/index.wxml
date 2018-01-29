@@ -1,0 +1,136 @@
+<!--pages/contract/index.wxml-->
+<view class='l-page-full'>
+  <view class='l-bg-white l-padding'>
+    <view class='l-h3'>骏亨店定购合同</view>
+    <view class='l-fs-s l-text-gray'>联系电话：{{info.telePhone}}</view>
+    <view class='l-fs-s l-text-gray'>联系地址：{{info.orgAddress}}</view>
+    <image mode='aspectFit' style='width: 200rpx; height: 163rpx; position:absolute; top: 10rpx; right: 0; opacity: 0.8; ' src='{{resURL + "/zang.png"}}'></image>
+  </view>
+
+  <view class='l-block-title l-margin-t'>乙方信息</view>
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>姓名</view>
+      <view class='weui-cell__ft'>{{info.customerName}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>身份证</view>
+      <view class='weui-cell__ft'>{{info.customerUserCard}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>联系电话</view>
+      <view class='weui-cell__ft'>{{info.customerPhoneNumber}}</view>
+    </view>
+  </view>
+
+  <view class='l-block-title l-margin-t'>订车信息</view>
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>车型名称</view>
+      <view class='weui-cell__ft l-fs-s'>{{info.carsName}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>官方指导价</view>
+      <view class='weui-cell__ft'>￥{{info.guidingPrice}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>车身颜色</view>
+      <view class='weui-cell__ft'>{{info.colourName}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>内饰颜色</view>
+      <view class='weui-cell__ft'>{{info.interiorName}}</view>
+    </view>
+  </view>
+
+  <view class='l-block-title l-margin-t'>购车金额</view>
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>合计应付金额</view>
+      <view class='weui-cell__ft'>￥{{info.amount}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>应付定金</view>
+      <view class='weui-cell__ft'>￥{{info.depositPrice}}</view>
+    </view>
+  </view>
+
+  <view class='l-block-title l-margin-t'>费用组成</view>
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>车辆最终成交价</view>
+      <view class='weui-cell__ft'>￥{{info.carUnitPrice}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>车辆购置税</view>
+      <view class='weui-cell__ft'>￥{{info.purchaseTaxPriace}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>上牌费</view>
+      <view class='weui-cell__ft'>￥{{info.licensePlatePriace}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>商业保险费用</view>
+      <view class='weui-cell__ft'>￥{{info.insurancePriace}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>按揭费用</view>
+      <view class='weui-cell__ft'>￥{{info.mortgagePriace}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>精品选装费</view>
+      <view class='weui-cell__ft'>￥{{info.boutiquePriace}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>车船税</view>
+      <view class='weui-cell__ft'>￥{{info.vehicleAndVesselTax}}</view>
+    </view>
+  </view>
+
+  <view class='l-block-title l-margin-t'>赠送／加装精品</view>
+  <view class='l-bg-white l-padding'>{{info.followInformation}}</view>
+  
+  <view class='l-block-title l-margin-t'>按揭购车方案（以银行／金融格式实际审批为准）</view>
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>贷款机构</view>
+      <view class='weui-cell__ft'>{{info.loanBankName}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>分期期数</view>
+      <view class='weui-cell__ft'>{{info.loanPayBackStages || 0}}期</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>贷款金额</view>
+      <view class='weui-cell__ft'>￥{{info.loan}}</view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>首付</view>
+      <view class='weui-cell__ft'>￥{{info.downPayments}}</view>
+    </view>
+  </view>
+
+  <view class='l-block-title l-margin-t l-text-center'>约定事项</view>
+  <view class='l-bg-white l-padding l-fs-s'>
+    <view class='l-flex-h l-margin-t-s'>
+      <text>1、</text>
+      <view class='l-rest'>车辆验收：提车时按车辆出厂标准由乙方或乙方委托的代表验收，如有异议应当场提出，如当场未提出异议，则视为乙方认可甲方代购的车辆符合出厂标准，车辆交接完毕后所产生的全部损失由乙方自行承担；</view>
+    </view>
+    <view class='l-flex-h l-margin-t-s'>
+      <text>2、</text>
+      <view class='l-rest'>在定车过程中如遇到不可抗力之因素和政策推迟交货的，交车时间应同时向后推移，同时甲方应及时通知乙方新的交车时间，甲方不负连带责任；</view>
+    </view>
+    <view class='l-flex-h l-margin-t-s'>
+      <text>3、</text>
+      <view class='l-rest'>违约责任：乙方单方面解除合同或无故退车，乙方所支付定金不予退还，所造成的损失由乙方承担；乙方在接到甲方车辆到店通知三日内，须及时到店验车并交清全部余款，否则甲方将有权收回车辆及没收乙方所支付的定金；</view>
+    </view>
+    <view class='l-flex-h l-margin-t-s'>
+      <text>4、</text>
+      <view class='l-rest'>乙方对提供办理所购车辆登记注册资料的真实性负责，如需更改须于甲方向车商定购车辆前提出，否则产生的损失全部由乙方承担；</view>
+    </view>
+    <view class='l-flex-h l-margin-t-s'>
+      <text>5、</text>
+      <view class='l-rest'>合同中金额为初步确认金额，如过程过发生金额变更：如银行贷款方案变化及车船税补交等，甲方应及时通知乙方新的费用方案，甲方不负连带责任；</view>
+    </view>
+  </view>
+</view>

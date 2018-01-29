@@ -1,0 +1,92 @@
+<!--index/index.wxml-->
+<import src='../../template/loadmore.wxml' />
+<view class='l-page-full {{loading ? "_disabled" : ""}} {{filter.visible ? "l-no-scroll" : ""}}'>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view id='filter-bar' class='_bar l-flex-hc'>
+      <navigator hover-class='none' url='../order-info/index'><text class='l-icon-639 l-text-theme'></text></navigator>
+      <view class='l-rest'>
+        <view class='_item {{filter.type === 1 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{1}}'>
+          <text>{{filter.sltedBrand.name || '品牌'}}</text>
+          <text class='l-icon-6ac'></text>
+        </view>
+        <view class='_item {{filter.type === 2 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{2}}'>
+          <text>{{filter.sltedPrice.name || '价格'}}</text>
+          <text class='l-icon-6ac'></text>
+        </view>
+        <view class='_item {{filter.type === 3 ? "_active" : ""}}' bindtap='sltFilter' data-val='{{3}}'>
+          <text>{{filter.sltedType.name || '车型'}}</text>
+          <text class='l-icon-6ac'></text>
+        </view>
+      </view>
+      <icon type='search' color='#555' size='18' bindtap='sltFilter' data-val='{{4}}'></icon>
+    </view>
+    <scroll-view scroll-y  class='_cont l-scroll {{filter.visible ? "_active" : ""}}' style='height: {{filter.height}}px' bindtap="hideFilter">
+      <!-- 品牌 -->
+      <view class='weui-grids l-brand-list' hidden='{{filter.type !== 1}}'>
+        <block wx:for='{{brandList}}' wx:key='id'>
+          <view class='weui-grid {{filter.sltedBrand.id === item.id ? "_active" : ""}}' bindtap='filterSearch' data-item='{{item}}'>
+            <image mode='aspectFit' class='weui-grid__icon' src='{{item.logo}}' />
+            <view class='weui-grid__label'>{{item.name}}</view>
+            <text class='l-icon-654 _tick'></text>
+          </view>
+        </block>
+      </view>
+
+      <!-- 价格 -->
+      <view class='l-price-list' hidden='{{filter.type !== 2}}'>
+        <view class='_item {{filter.sltedPrice.id === item.id ? "_active" : ""}}' wx:for='{{priceList}}' wx:key='id' bindtap='filterSearch' data-item='{{item}}'>
+          <text>{{item.name}}</text>
+          <text class='l-icon-654 _tick'></text>
+        </view>
+      </view>
+
+      <!-- 车型 -->
+      <view class='weui-grids l-type-list' hidden='{{filter.type !== 3}}'>
+        <block wx:for='{{typeList}}' wx:key='id'>
+          <view class='weui-grid {{filter.sltedType.id === item.id ? "_active" : ""}}' bindtap='filterSearch' data-item='{{item}}'>
+            <image class='weui-grid__icon' src='{{item.image}}' />
+            <view class='weui-grid__label'>{{item.name}}</view>
+            <text class='l-icon-654 _tick'></text>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+
+    <!-- 搜索 -->
+    <view class='l-seach-page l-flex-v {{filter.type === 4 ? "_active" : ""}}'>
+      <view class='l-search-bar l-flex-hc'>
+        <view class='l-rest l-flex-hvc'>
+          <view class='l-rest'>
+            <input focus='true' bindinput='searchInput' focus='{{filter.type === 4}}' confirm-type='search' bindconfirm='search' placeholder='请输入您想要的车' value='{{filter.data.carsName}}'/>
+          </view>
+          <icon class='l-margin-r-m' hidden='{{filter.data.carsName === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearSearch'></icon>
+          <icon type='search' size='18' color='#555' bindtap='search'></icon>
+        </view>
+        <text class='l-margin-l l-text-theme' bindtap='cancelSearch'>取消</text>
+      </view>
+
+      <!-- 历史记录 -->
+      <view class='l-search-history l-rest l-scroll' wx:if='{{history.data.length > 0}}'>
+        <view>
+          <text class='l-fr l-icon-627 l-fs-m'  bindtap='clearHistory'></text>
+          <text class='l-fs-m'>历史搜索</text>
+        </view>
+
+        <view class='_list'>
+          <text bindtap='searchHistory' data-val='{{item}}' class='l-text-wrap' wx:for='{{history.data}}' wx:key='{{index}}'>{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='l-list-car'>
+    <navigator url='../car-info/index?id={{item.carId}}' class='_item' wx:for='{{list.data}}' wx:key='carId'>
+      <image style='width: 100%; height: 400rpx;' mode='aspectFill' src='{{item.thumb}}'></image>
+      <view class='l-padding'>
+        <view class='_tit'>{{item.carsName}}</view>
+        <view class='_price1'>官方指导价: {{item.priceStr}}万</view>
+        <view class='_price2'>最高优惠<text>{{item.discountPrice}}</text>元</view>
+      </view>
+    </navigator>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+</view>

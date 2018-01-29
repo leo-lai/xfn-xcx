@@ -21,7 +21,7 @@
  * .............................................
  *                佛祖坐镇 顺利上线
  */
-var host = 'http://tomcat.mifengqiche.com'
+var host = 'http://111.230.170.36'
 var host = 'https://tomcat.xfnauto.com'
 
 var resURL = 'https://res.xfnauto.com'

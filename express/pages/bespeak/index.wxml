@@ -1,0 +1,58 @@
+<!--pages/bespeak/index.wxml-->
+<view class='l-page-full'>
+  <view class='l-banner-image'>
+    <image mode='widthFix' src='{{resURL + "/20180126001.jpg"}}'></image>
+  </view>
+
+  <view class='l-bespeak-form'>
+    <view class='l-flex-h _item'>
+      <text class='_icon'></text>
+      <view>
+        <text class='l-text-gray'>选择托运起点</text>
+      </view>
+    </view>
+    <view class='l-flex-h _item'>
+      <text class='_icon'></text>
+      <view>
+        <text class='l-text-gray'>选择托运终点</text>
+      </view>
+    </view>
+    <view class='l-flex-h _item'>
+      <text class='_icon'></text>
+      <view>
+        <text class='l-text-gray'>选择配送方式及配送时间</text>
+      </view>
+    </view>
+    <view class='l-flex-h _item'>
+      <text class='_icon'></text>
+      <view class='l-rest'>
+        <text class='l-text-gray'>添加托运车型</text>
+      </view>
+      <text class='l-icon-642'></text>
+    </view>
+    <view class='l-flex-h _item _done'>
+      <text class='_icon'></text>
+      <view>
+        <view class='l-h4'>喜蜂鸟科技</view>
+        <view class='l-text-gray l-fs-s'>广州市海珠区东晓南548号</view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 284rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <view class='l-bespeak-btn l-margin'>
+      <view class="l-flex-hc _bd">
+        <text>运费</text>
+        <view class='l-rest l-text-center l-fs-17'>
+          <text>￥</text>
+          <text>4564.22</text>
+        </view>
+        <view>
+          <navigator class='l-text-link' hover-class='none'>收费标准</navigator>
+        </view>
+      </view>
+      <button class='l-button-main'>预约板车托运</button>
+    </view>
+  </view>
+</view>

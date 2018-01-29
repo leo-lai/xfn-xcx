@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/bespeak/index",
+    "pages/tracking/index",
+    "pages/index/index",
+    "pages/about/index"
+  ],
+  "window": {
+    "backgroundColor": "#eee",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "喜蜂鸟网络科技服务有限公司",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#4395ff",
+    "list": [
+      {
+        "pagePath": "pages/bespeak/index",
+        "text": "预约托运",
+        "iconPath": "images/bespeak.png",
+        "selectedIconPath": "images/bespeak-slted.png"
+        
+      },
+      {
+        "pagePath": "pages/tracking/index",
+        "text": "订单跟踪",
+        "iconPath": "images/tracking.png",
+        "selectedIconPath": "images/tracking-slted.png"
+      }
+    ]
+  }
+}

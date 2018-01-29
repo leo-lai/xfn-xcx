@@ -38,7 +38,14 @@
     "pages/car-stock-in-add/index",
     "pages/car-stock-in-info/car",
     "pages/saler-list/index",
-    "pages/car-stock-in-info/parts"
+    "pages/car-stock-in-info/parts",
+    "pages/region/index",
+    "level2/customer/add",
+    "level2/customer/list",
+    "level2/customer/view",
+    "level2/stock/index",
+    "level2/stock/in-car",
+    "level2/order/list"
   ],
   "window": {
     "backgroundColor": "#eee",

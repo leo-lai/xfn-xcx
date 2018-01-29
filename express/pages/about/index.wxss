@@ -1,0 +1,9 @@
+/* pages/about/index.wxss */
+.l-about-item ._bd{
+  padding-left: 80rpx; position: relative; margin: 20rpx 0 30rpx;
+  color: #999; font-size: 26rpx;
+}
+.l-about-item ._bd::before{
+  position: absolute; top:0; left: 25rpx; bottom: 0;
+  content: ''; border-left: 2rpx solid #eee;
+}
