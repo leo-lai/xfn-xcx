@@ -1,0 +1,37 @@
+<!--level2/stock/in/list.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view style='height: 100rpx;'></view>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入采购单号' value='{{filter.data.keywords}}'/>
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+
+  <navigator url='info?id={{item.storageId}}' class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list.data}}' wx:key='storageId'>
+    <view class='l-padding-b l-border-b'>
+      <text class='l-fs-s'>入库单号：{{item.storageCode}}</text>
+    </view>
+    <view class='l-padding-tb l-rel'>
+      <view style='position:absolute; top: 30rpx; right:0; color:#999;'>{{item.carsNumber}}辆</view>
+      <view>入库时间：{{item.createDate}}</view>
+      <view class='l-text-gray'>采购人员：{{item.systemUserName}}</view>
+    </view>
+    <view catchtap='noopFn'>
+      <navigator url='car?id={{item.storageId}}' style='margin-bottom: -30rpx;' class='l-padding-tb l-border-t l-text-center l-text-theme' hover-class='none'>添加入库车辆</navigator>
+    </view>
+  </navigator>
+  <template is='loadmore' data='{{...list}}' />
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
+      <button class='l-button-main'>新增入库单</button>
+    </navigator>
+  </view>
+</view>
+

@@ -1,0 +1,74 @@
+<!--level2/order/info-edit.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-text-gray l-fs-s' style='margin: 30rpx 30rpx -20rpx 30rpx;'>订购信息</view>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <navigator url='/level2/store/list?mode=slt&rows=50&id={{formData.orgId}}' class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>门店名称</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text wx:if='{{formData.orgId}}'>{{formData.orgName}}</text>
+            <text wx:else class='l-text-gray'>请选择</text>
+          </view>
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>联系人</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入联系人姓名' maxlength='{{20}}' confirm-type='next' id='orgLinker' value='{{formData.orgLinker}}' bindinput='bindInput' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>联系电话</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' type='number' placeholder='请输入11位手机号码' maxlength='{{11}}' confirm-type='next' id='orgPhone' value='{{formData.orgPhone}}' bindinput='bindInput' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>物流方式</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='logisticsType' data-picker='wuliu' bindchange='bindInput' value='{{wuliu.index}}' range='{{wuliu.list}}'>
+            <view class='weui-select weui-select_in-select-after'>
+              <text wx:if='{{wuliu.index > -1}}'>{{wuliu.list[wuliu.index]}}</text>
+              <text wx:else class='l-text-gray'>请选择</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>交车日期</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker mode='date' id='pickCarDate' bindchange='bindInput' value='{{formData.pickCarDate}}'>
+            <view class='weui-select weui-select_in-select-after'>
+              <text wx:if='{{formData.pickCarDate}}'>{{formData.pickCarDate}}</text>
+              <text wx:else class='l-text-gray'>请选择</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>联系地点</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入详细地址' maxlength='{{100}}' confirm-type='next' id='pickCarAddr' value='{{formData.pickCarAddr}}' bindinput='bindInput' />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>

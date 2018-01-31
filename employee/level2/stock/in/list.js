@@ -1,4 +1,4 @@
-// level2/order/index.js
+// level2/stock/in/list.js
 const app = getApp()
 Page({
   noopFn: app.noopFn,
@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mode: 'list', // slt
     filter: {
       loading: false,
       visible: false,
@@ -26,7 +25,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onReady: function () {
+  onLoad: function (options) {
     app.onLogin(userInfo => {
       this.getList()
     }, this.route)
@@ -35,14 +34,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().then(_ => {
-      app.storage.getItem('lv2-order-list-refresh').then(refresh => {
-        if (refresh) {
-          app.storage.removeItem('lv2-order-list-refresh')
-          this.getList()
-        }
-      })
-    })
+    app.checkLogin()
   },
   // 加载更多
   onReachBottom: function () {
@@ -61,7 +53,7 @@ Page({
       wx.stopPullDownRefresh()
     }
   },
-  // 订单列表
+  // 待出库列表
   getList: function (page = 1, callback = app.noopFn) {
     page === 1 && this.setData({ 'list.more': true })
 
@@ -69,30 +61,28 @@ Page({
       callback(this.data.list.data)
       return
     }
-
     this.setData({ 'list.loading': true })
-    return app.post(app.config.lv2.orderList, {
-      page, ...this.data.filter.data
-    }).then(({ data }) => {
-      // 如果接口返回的是数组，则转换成分页对象
-      if (!data.list && data.length >= 0) {
-        data = {
-          page: 1,
-          rows: data.length + 1,
-          total: data.length,
-          list: data
-        }
-      }
-      this.setData({
-        'list.more': data.list.length >= data.rows,
-        'list.page': data.page,
-        'list.data': data.page === 1 ? data.list : this.data.list.data.concat(data.list)
-      })
-    }).finally(_ => {
-      this.setData({ 'list.loading': false })
-      callback(this.data.list.data)
-    })
+
+    this.data.filter.data.storageCode = this.data.filter.data.keywords
+    return app.post(app.config.stockInList, {
+            page, ...this.data.filter.data
+          }).then(({ data }) => {
+            data.list = data.list.map(item => {
+              item.thumb = app.utils.formatThumb(item.indexImage, 150)
+              return item
+            })
+
+            this.setData({
+              'list.more': data.list.length >= data.rows,
+              'list.page': data.page,
+              'list.data': data.page === 1 ? data.list : this.data.list.data.concat(data.list)
+            })
+          }).finally(_ => {
+            this.setData({ 'list.loading': false })
+            callback(this.data.list.data)
+          })
   },
+
 
   // 搜索相关=================================================
   // 正在输入

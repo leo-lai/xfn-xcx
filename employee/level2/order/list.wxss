@@ -1,1 +1,5 @@
 /* level2/order/list.wxss */
+.l-order-list-car{margin-top: 20rpx; padding-left: 40rpx;}
+.l-order-list-car::before{ 
+  float: left;content: ''; width: 10rpx; height: 10rpx; border-radius: 50%; background-color: #15b6f2;margin: 20rpx 0 0 -30rpx;}
+button.l-button-main[size]{min-width: 160rpx;}

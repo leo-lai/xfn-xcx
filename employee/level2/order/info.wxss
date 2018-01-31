@@ -1,0 +1,20 @@
+/* level2/order/info.wxss */
+.l-btn-min1{border: 2rpx solid #15b6f2; color: #15b6f2;background-color: #fff;}
+button.l-btn-min1[size='mini']{line-height: 1.6; padding: 0 20rpx; font-size: 24rpx;}
+button.l-btn-min1::after{display: none;}
+.l-btn-min2{border: 2rpx solid #15b6f2; color: #fff; background-color: #15b6f2;}
+button.l-btn-min2[size='mini']{line-height: 1.6; padding: 0 20rpx; font-size: 24rpx;}
+button.l-btn-min2::after{display: none;}
+
+/* 提车人 */
+.l-list-tab-tit{white-space: nowrap; display: none;}
+.l-list-tab-tit ._item{display: inline-block; background-color: #fa5539; color: #fff; padding: 5rpx 20rpx; margin-right: 4rpx; opacity: 0.3;}
+.l-list-tab-tit ._item._slted{
+  border-radius: 15rpx 0 0 0; margin-right: 10rpx; padding-right: 30rpx;
+  opacity: 1;  transform: scale(1.16); transform-origin: 0 100%; 
+  clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
+}
+.l-list-tab-tit ._item._slted text{ display: block; transform: scale(0.84);}
+.l-list-tab-tit ._add{display: inline-block; background-color: #d9d9d9; color: #fff; padding: 5rpx 30rpx;}
+.l-list-tab-cont{background-color: #fff; border-radius: 0 0 10rpx 10rpx; display: none;}
+.l-list-tab-cont._slted{display: block;}

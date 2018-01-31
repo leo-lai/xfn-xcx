@@ -1,0 +1,45 @@
+<!--level2/order/linker.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>{{men}}姓名</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请输入姓名' maxlength='{{20}}' confirm-type='next' id='userName' value='{{formData.userName}}' bindinput='bindInput' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>联系电话</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' type='number' placeholder='请输入11位手机号' maxlength='{{11}}' confirm-type='next' id='userPhone' value='{{formData.userPhone}}' bindinput='bindInput' />
+      </view>
+    </view>
+    <view class='weui-cell'>
+      <view>上传身份证照片</view>
+    </view>
+    <view class='l-flex-hc l-padding-b'>
+      <view id='idCardPicOn' class='l-text-center l-margin-l' bindtap='chooseImage'>
+        <view class='l-upload-add'>
+          <image wx:if='{{formData.idCardPicOn}}' mode='aspectFill' src='{{formData.idCardPicOn}}'></image>
+          <image wx:else mode='aspectFill' src='/images/add-icon.jpg'></image>
+        </view>
+        <view class='l-text-gray l-fs-s'>正面</view> 
+      </view>
+      <view id='idCardPicOff' class='l-text-center l-margin-l' bindtap='chooseImage'>
+        <view class='l-upload-add'>
+          <image wx:if='{{formData.idCardPicOff}}' mode='aspectFill' src='{{formData.idCardPicOff}}'></image>
+          <image wx:else mode='aspectFill' src='/images/add-icon.jpg'></image>
+        </view>
+        <view class='l-text-gray l-fs-s'>反面</view> 
+      </view>
+    </view>
+  </view>
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>

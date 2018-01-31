@@ -1,0 +1,4 @@
+/* level2/customer-list/index.wxss */
+.l-store{margin: 20rpx; padding: 30rpx; background-color: #fff; border-radius: 10rpx;}
+.l-store icon{visibility: hidden;}
+.l-store._slted icon{visibility: visible;}

@@ -1,6 +1,5 @@
-// pages/car-stock-order-add/index.js
+// level2/stock/in/add.js
 const app = getApp()
-let todayStr = new Date().format('yyyy-MM-dd')
 Page({
 
   /**
@@ -8,43 +7,34 @@ Page({
    */
   data: {
     topTips: '',
-    cheshen: { // 车身颜色
-      index: -1,
-      list: []
-    },
-    neishi: { // 内饰颜色
-      index: -1,
-      list: []
-    },
-    carTime: app.config.baseData.carTime,
+    carSource: ['资源采购', '4S店出货'],
     uploadImages: [],
+    sales: { // 供应商
+      index: -1,
+      list: []
+    },
+    supplier: { // 采购人员
+      index: -1,
+      list: []
+    },
     formData: {
-      carsId: '',
-      carsName: '',
-      guidingPrice: '',
-      colourId: '',
-      interiorId: '',
-      stockOrderNumber: '',
-      certificateDate: '',
-      stockOrderRemarks: '',
-      templateImage: ''
+      storageId: '',
+      storageSource: '',
+      supplierId: '',
+      systemUserId: '',
+      logisticsCost: '',
+      remarks: '',
+      contractImage: ''
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.storage.getItem('car-stock-order-info').then(info => {
-      if (info) {
-        let formData = app.utils.copyObj(this.data.formData, info)
-        this.setData({ formData })
-        this.getCheshen(info.familyId)
-        this.getNeishi(info.familyId)
-      }
-    })
-  },
-  onUnload: function () {
-    app.storage.removeItem('car-stock-order-info')
+    app.onLogin(userInfo => {
+      this.getSupplier()
+      this.getSales()
+    }, this.route)
   },
   /**
    * 生命周期函数--监听页面显示
@@ -75,10 +65,10 @@ Page({
       value = Number(value)
       data[picker + '.index'] = value
       switch (id) {
-        case 'colourId':
-          value = this.data[picker].list[value].carColourId
+        case 'supplierId':
+          value = this.data[picker].list[value].id
           break
-        case 'interiorId':
+        case 'systemUserId':
           value = this.data[picker].list[value][id]
           break
         default:
@@ -94,35 +84,19 @@ Page({
     data['formData.' + id] = value
     this.setData(data)
   },
-  // 选择车辆
-  changeCar: function (carType = {}, family = {}, brand = {}) {
-    if (this.data.formData.carsId !== carType.id) {
+  getSupplier: function () { // 获取供应商列表
+    app.post(app.config.supplierList).then(({ data }) => {
       this.setData({
-        'formData.carsId': carType.id,
-        'formData.carsName': carType.name,
-        'formData.guidingPrice': carType.price,
-        'formData.colourId': '',
-        'formData.interiorId': ''
-      })
-      this.getCheshen(family.id)
-      this.getNeishi(family.id)
-    }
-  },
-  getCheshen: function (familyId = '') { // 获取车身颜色列表
-    if (!familyId) return
-    app.post(app.config.cheshen, { familyId }).then(({ data }) => {
-      this.setData({
-        'cheshen.index': data.findIndex(item => item.carColourId === this.data.formData.colourId),
-        'cheshen.list': data
+        'supplier.index': -1,
+        'supplier.list': data
       })
     })
   },
-  getNeishi: function (familyId = '') { // 获取内饰颜色列表
-    if (!familyId) return
-    app.post(app.config.neishi, { familyId }).then(({ data }) => {
+  getSales: function () { // 获取采购员列表
+    app.post(app.config.buyerList).then(({ data }) => {
       this.setData({
-        'neishi.index': data.findIndex(item => item.interiorId === this.data.formData.interiorId),
-        'neishi.list': data
+        'sales.index': -1,
+        'sales.list': data
       })
     })
   },
@@ -218,41 +192,30 @@ Page({
     }
   },
   submit: function () {
-    if (!this.data.formData.carsId) {
-      this.showTopTips('请选择车辆')
+    if (!this.data.formData.storageSource) {
+      this.showTopTips('请选择车辆来源')
       return
     }
-    if (!this.data.formData.colourId) {
-      this.showTopTips('请选择车身颜色')
+    if (!this.data.formData.supplierId) {
+      this.showTopTips('请选择供应商')
       return
     }
-    if (!this.data.formData.interiorId) {
-      this.showTopTips('请选择内饰颜色')
-      return
-    }
-    if (this.data.formData.stockOrderNumber <= 0) {
-      this.showTopTips('请填写采购数量')
-      return
-    }
-    if (!this.data.formData.certificateDate) {
-      this.showTopTips('请选择合格证时间')
+    if (!this.data.formData.systemUserId) {
+      this.showTopTips('请选择采购员')
       return
     }
 
     let formData = Object.assign({}, this.data.formData)
 
-    formData.certificateDate = Number(this.data.formData.certificateDate) + 1
-    formData.templateImage = this.data.uploadImages.map(item => item.src).join(',')
+    formData.storageSource = Number(this.data.formData.storageSource) + 1
+    formData.contractImage = this.data.uploadImages.map(item => item.src).join(',')
 
     wx.showLoading({ mask: true })
-    app.post(app.config.stockOrderAdd, formData).then(({ data }) => {
+    app.post(app.config.stockInAdd, formData).then(({ data }) => {
       app.getPrevPage().then(prevPage => {
-        if (prevPage.route === 'pages/car-stock-order-list/index') {
-          prevPage.getList()
-        }
+        prevPage.getList()
       })
-      
-      app.toast('提交订单成功', true)
+      app.toast('提交成功', true)
     }).catch(err => {
       wx.hideLoading()
     })

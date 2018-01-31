@@ -1,0 +1,32 @@
+<!--level2/customer/view.wxml-->
+<view class='l-page-full l-bg-white'>
+  <view class='l-margin'>
+    <view class='l-padding'>
+      <view class='l-h3'>{{info.shortName}}</view>
+      <view class='l-fs-s l-margin-t-m'>
+        <text class='l-icon-60f l-text-theme2' style='font-size: 26rpx;margin-right: 10rpx;'></text>
+        <text class='l-text-gray'>{{info.regionName + info.address}}</text>
+      </view>
+    </view>
+
+    <view class='l-padding'>
+      <view>
+        <text class='l-text-gray'>联系人：</text>
+        <text>{{info.linkMan}}</text>
+      </view>
+      <view>
+        <text class='l-text-gray'>联系电话：</text>
+        <text>{{info.telePhone}}</text>
+      </view>
+    </view>
+
+    <view class='l-padding l-text-theme2'>
+      备注：{{info.remarks}}
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <navigator class='l-fixed-bottom l-padding' hover-class='none' url='add'>
+    <button class='l-button-main l-btn-w60'>修改客户信息</button>
+  </navigator>
+</view>

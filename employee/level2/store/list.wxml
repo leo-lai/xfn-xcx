@@ -1,0 +1,39 @@
+<!--level2/customer-list/index.wxml-->
+<import src='../../template/loadmore.wxml' />
+<view style='padding-top: 100rpx;' class='l-page-full'>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='按门店名称或手机号查询' value='{{filter.data.keywords}}'/>
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+
+  <!-- 列表 -->
+  <view class='l-flex-hc l-store {{item.checked ? "_slted" : ""}}' wx:for='{{list.data}}' wx:key='{{orgId}}' bindtap='viewInfo' data-item='{{item}}'>
+    <view class='l-rest'>
+      <view class='l-h4'>{{item.shortName}}</view>
+      <view class='l-fs-s l-margin-t-m'>
+        <text class='l-text-gray'>联系人：</text>
+        <text>{{item.linkMan}}</text>
+        <text class='l-text-gray l-margin-l'>联系电话：</text>
+        <text>{{item.telePhone}}</text>
+      </view>
+    </view>
+    <view wx:if='{{mode === "slt"}}'>
+      <icon type='success_no_circle' color='#fa5539'></icon>
+    </view>
+  </view>
+  <template is='loadmore' data='{{...list}}' /> 
+
+  <block wx:if='{{mode !== "slt"}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom'>
+      <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
+        <button class='l-button-main'>新增客户</button>
+      </navigator>
+    </view>
+  </block>
+</view>

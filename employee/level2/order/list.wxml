@@ -1,2 +1,43 @@
 <!--level2/order/list.wxml-->
-<text>level2/order/list.wxml</text>
+<import src='../../template/loadmore.wxml' />
+<view style='padding-top: 100rpx;' class='l-page-full'>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='按订单号或车型查询' value='{{filter.data.keywords}}'/>
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+
+  <!-- 订购单列表 -->
+  <navigator url='info?id={{item.id}}' class=' l-padding l-bg-white l-margin-m l-radius' wx:for='{{list.data}}' wx:key='{{orderCode}}' data-item='{{item}}'>
+    <view>
+      <text class='l-fr l-text-theme'>{{item.orderStateName}}</text>
+      <text>订单号 {{item.orderCode}}</text>
+    </view>
+    <view class='l-order-list-car' wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
+      <view class='l-h4'>{{carItem.carsName}}</view>
+      <view class='l-text-gray l-fs-s'>
+        <text class='l-margin-r'>车身颜色：{{carItem.colorName}}</text>
+        <text>内饰颜色：{{carItem.interiorName}}</text>
+      </view>
+    </view>
+    <view style='margin-top: 50rpx; text-align:center;'>
+      <view class='l-inline' catchtap='noopFn'>
+        <navigator wx:if='{{item.state < 10}}' class='l-inline' url='add-order?id={{item.id}}' hover-class='none'>
+          <button size='mini' class='l-button-main'>新增订购信息</button>
+        </navigator>
+      </view>
+    </view>
+  </navigator>
+  <template is='loadmore' data='{{...list}}' /> 
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
+      <button class='l-button-main'>新增订购单</button>
+    </navigator>
+  </view>
+</view>

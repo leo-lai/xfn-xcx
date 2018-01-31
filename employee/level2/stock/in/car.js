@@ -1,4 +1,4 @@
-// pages/car-stock-order-add/index.js
+// pages/car-stock-in-info/car.js
 const app = getApp()
 let todayStr = new Date().format('yyyy-MM-dd')
 Page({
@@ -8,6 +8,9 @@ Page({
    */
   data: {
     topTips: '',
+    result: {
+      visible: false
+    },
     cheshen: { // 车身颜色
       index: -1,
       list: []
@@ -16,35 +19,78 @@ Page({
       index: -1,
       list: []
     },
+    cang: { // 入库仓位
+      index: -1,
+      list: []
+    },
+    carParts: { // 选择随车资料
+      list: []
+    },
+    strongInsurance: ['否', '是'],
     carTime: app.config.baseData.carTime,
     uploadImages: [],
     formData: {
+      storageId: '',
+      stockCarId: '',
       carsId: '',
       carsName: '',
-      guidingPrice: '',
       colourId: '',
       interiorId: '',
-      stockOrderNumber: '',
+      unitPrice: '',
+      frameNumber: '',
+      engineNumber: '',
+      certificateNumber: '',
       certificateDate: '',
-      stockOrderRemarks: '',
-      templateImage: ''
+      warehouseId: '',
+      stockCarImages: '',
+      mileage: '',
+      followInformation: '',
+      overStrongInsurance: 1
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.storage.getItem('car-stock-order-info').then(info => {
-      if (info) {
-        let formData = app.utils.copyObj(this.data.formData, info)
-        this.setData({ formData })
-        this.getCheshen(info.familyId)
-        this.getNeishi(info.familyId)
-      }
-    })
+    app.onLogin(_ => {
+      this.data.formData.storageId = this.options.id
+      app.storage.getItem('stock-in-info-car').then(info => {
+        if (info) {
+          let formData = app.utils.copyObj(this.data.formData, info)
+          formData.certificateDate = formData.certificateDate ? formData.certificateDate - 1 : ''
+          this.setData({ 
+            formData,
+            'uploadImages': info.stockCarImages ? info.stockCarImages.split(',').map(item => {
+              return {
+                path: item,
+                src: item,
+                done: true,
+                loading: false,
+                progress: 100,
+                tick: app.utils.guid()
+              }
+            }) : []
+          })
+          this.getCheshen(info.familyId)
+          this.getNeishi(info.familyId)
+        }
+      }).finally(_ => {
+        let followInformation = this.data.formData.followInformation ? this.data.formData.followInformation.split(',') : []
+        this.setData({
+          'carParts.list': app.config.baseData.incarParts.map((item, index) => {
+            return {
+              id: index + 1,
+              checked: followInformation.includes(item),
+              name: item
+            }
+          })
+        })
+        this.getCangList()
+      })
+    }, this.route)
   },
   onUnload: function () {
-    app.storage.removeItem('car-stock-order-info')
+    app.storage.removeItem('stock-in-info-car')
   },
   /**
    * 生命周期函数--监听页面显示
@@ -79,6 +125,7 @@ Page({
           value = this.data[picker].list[value].carColourId
           break
         case 'interiorId':
+        case 'warehouseId':
           value = this.data[picker].list[value][id]
           break
         default:
@@ -94,7 +141,15 @@ Page({
     data['formData.' + id] = value
     this.setData(data)
   },
-  // 选择车辆
+  // 仓位
+  getCangList: function () {
+    app.post(app.config.cangList).then(({ data }) => {
+      this.setData({
+        'cang.index': data.findIndex(item => item.warehouseId === this.data.formData.warehouseId),
+        'cang.list': data
+      })
+    })
+  },
   changeCar: function (carType = {}, family = {}, brand = {}) {
     if (this.data.formData.carsId !== carType.id) {
       this.setData({
@@ -125,6 +180,10 @@ Page({
         'neishi.list': data
       })
     })
+  },
+  showCarParts: function () {
+    app.storage.setItem('stock-add-car-parts', this.data.carParts.list)
+    app.navigateTo('parts')
   },
   // 选择图片
   chooseImage: function (event) {
@@ -217,9 +276,41 @@ Page({
       }
     }
   },
-  submit: function () {
+  delCar: function () { // 删除车辆
+    wx.showModal({
+      content: '是否确定删除该车辆',
+      success: res => {
+        if(res.confirm) {
+          wx.showLoading({ mask: true })
+          app.post(app.config.stockInDelCar, {
+            stockCarId: this.data.formData.stockCarId
+          }).then(_ => {
+            app.toast('删除成功', true)
+          }).catch(_ => {
+            wx.hideLoading()
+          })
+        }
+      }
+    })
+  },
+  anginAdd: function () {
+    this.setData({
+      'result.visible': false
+    })
+  },
+  backList: function () {
+    app.getPrevPage().then(prevPage => {
+      prevPage.getList()
+    })
+    app.back()
+  },
+  submit: function () { // 保存信息
+    if (!this.data.formData.warehouseId) {
+      this.showTopTips('请选择入库仓位')
+      return
+    }
     if (!this.data.formData.carsId) {
-      this.showTopTips('请选择车辆')
+      this.showTopTips('请选择入库车型')
       return
     }
     if (!this.data.formData.colourId) {
@@ -230,29 +321,31 @@ Page({
       this.showTopTips('请选择内饰颜色')
       return
     }
-    if (this.data.formData.stockOrderNumber <= 0) {
-      this.showTopTips('请填写采购数量')
-      return
-    }
-    if (!this.data.formData.certificateDate) {
-      this.showTopTips('请选择合格证时间')
+    if (!this.data.formData.frameNumber) {
+      this.showTopTips('请添加车架号')
       return
     }
 
     let formData = Object.assign({}, this.data.formData)
 
     formData.certificateDate = Number(this.data.formData.certificateDate) + 1
-    formData.templateImage = this.data.uploadImages.map(item => item.src).join(',')
+    formData.stockCarImages = this.data.uploadImages.map(item => item.src).join(',')
 
     wx.showLoading({ mask: true })
-    app.post(app.config.stockOrderAdd, formData).then(({ data }) => {
+    app.post(app.config.stockInAddCar, formData).then(({ data }) => {
       app.getPrevPage().then(prevPage => {
-        if (prevPage.route === 'pages/car-stock-order-list/index') {
-          prevPage.getList()
+        if (formData.stockCarId) {
+          prevPage.getInfo()
+          app.toast('保存成功', true)
+        }else{
+          wx.hideLoading()
+          this.setData({
+            'formData.frameNumber': '',
+            'formData.engineNumber': '',
+            'result.visible': true
+          })
         }
       })
-      
-      app.toast('提交订单成功', true)
     }).catch(err => {
       wx.hideLoading()
     })
