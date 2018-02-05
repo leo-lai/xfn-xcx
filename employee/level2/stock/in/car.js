@@ -155,7 +155,7 @@ Page({
       this.setData({
         'formData.carsId': carType.id,
         'formData.carsName': carType.name,
-        'formData.guidingPrice': carType.price,
+        'formData.guidePrice': carType.price,
         'formData.colourId': '',
         'formData.interiorId': ''
       })

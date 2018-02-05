@@ -41,6 +41,12 @@ Page({
   onShow: function () {
     app.checkLogin()
   },
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    app.storage.removeItem('lv2-order-info-base')
+  },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
     this.setData({ topTips })

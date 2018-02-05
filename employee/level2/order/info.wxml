@@ -82,7 +82,7 @@
           </view>
         </view>
       </view>
-      <view class='l-margin-l l-padding-t'>
+      <view class='l-margin-l l-padding-t' wx:if='{{item.state < 10}}'>
         <navigator url='add-order?id={{info.id}}' class='_add'>新增</navigator>
       </view>
     </view> 
@@ -91,7 +91,7 @@
       <view class='l-flex-hc'>
         <text class='l-h4'>客户信息</text>
         <view class='l-rest'></view>
-        <button class='l-btn-min1' size='mini' data-index='{{index}}' bindtap='customerDel'>删除</button>
+        <button wx:if='{{item.state < 10}}' class='l-btn-min1' size='mini' data-index='{{index}}' bindtap='customerDel'>删除</button>
         <button class='l-btn-min2 l-margin-l-s' size='mini' data-index='{{index}}' bindtap='customerEdit'>编辑</button>
       </view>
       <view class='l-margin-t'>
@@ -120,9 +120,11 @@
       <view class='l-flex-hc l-border-t l-margin-t l-padding-t'>
         <text class='l-h4'>车辆信息</text>
         <view class='l-rest'></view>
-        <button class='l-btn-min1' size='mini'>添加车辆</button>
+        <navigator wx:if='{{item.state < 10}}' url='car?ids={{info.id}},{{item.id}}' hover-class='none'>
+          <button class='l-btn-min1' size='mini'>添加车辆</button>
+        </navigator>
       </view>
-      <view wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
+      <view class='{{index < item.infos.length - 1? "l-border-b l-padding-b" : ""}}' wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
         <view class='l-h4 l-margin-t'>{{carItem.carsName}}</view>
         <view class='l-fs-s l-text-gray'>
           <text class='l-margin-r'>车身颜色：{{carItem.colorName}}</text>
@@ -141,8 +143,17 @@
         </view>
         <view class='l-margin-t l-text-gray'>备注：{{carItem.remark}}</view>
         <view class='l-margin-t l-text-right'>
-          <text class='l-btn-link'>删除</text>
-          <text class='l-btn-link l-margin-l'>编辑</text>
+          <view data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>
+            <block wx:if='{{info.state == 10}}'>
+              <button wx:if='{{carItem.state == 1}}' size='mini' class='l-button-main'>配车</button>
+              <text wx:if='{{carItem.state == 2}}' class='l-text-theme'>配车已完成</text>
+            </block>
+            <button wx:if='{{info.state == 15}}' size='mini' class='l-button-main'>验车</button>
+          </view>
+          <view class='l-rest' wx:if='{{info.state < 10}}'>
+            <text class='l-btn-link' data-ids='{{[info.id, item.id, carItem.id]}}' bindtap='carDel'>删除</text>
+            <text class='l-btn-link l-margin-l' data-url='car?ids={{info.id}},{{item.id}}' data-item='{{carItem}}' bindtap='carEdit'>编辑</text>
+          </view>
         </view>
       </view>
     </view>

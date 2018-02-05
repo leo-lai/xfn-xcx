@@ -9,7 +9,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-input'>
-            <text wx:if='{{carInfo.carsId}}'>{{carInfo.carsName}}</text>
+            <text wx:if='{{formData.carsId}}'>{{formData.carsName}}</text>
             <text wx:else class='l-text-gray'>请选择</text>  
           </view>
         </view>
@@ -19,7 +19,7 @@
           <view class='weui-label'>官方指导价（元）</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input disabled='{{true}}' class='weui-input' value='{{carInfo.guidingPrice}}' />
+          <input disabled='{{true}}' class='weui-input' value='{{formData.guidePrice}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -53,7 +53,7 @@
           <view class='weui-label'>数量</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入购买数量' id='carNum' value='{{carInfo.carNum}}' bindinput='bindInput' type='number' maxlength='{{9}}' />
+          <input class='weui-input' placeholder='请输入购买数量' id='carNum' value='{{formData.carNum}}' bindinput='bindInput' type='number' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -61,7 +61,7 @@
           <view class='weui-label'>定金（元）</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入定金金额' id='depositPrice' value='{{carInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+          <input class='weui-input' placeholder='请输入定金金额' id='depositPrice' value='{{formData.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -69,27 +69,27 @@
           <view class='weui-label'>成交价（元）</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入成交价' id='finalPrice' value='{{carInfo.finalPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+          <input class='weui-input' placeholder='请输入成交价' id='finalPrice' value='{{formData.finalPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
           <radio-group id="isDiscount" bindchange='bindInput'>
             <label class='l-margin-r'>
-              <radio color='#fa5539' value='{{1}}' checked='{{carInfo.isDiscount == 1}}'/>已优惠
+              <radio color='#fa5539' value='{{1}}' checked='{{formData.isDiscount == 1}}'/>已优惠
             </label>
             <label>
-              <radio color='#fa5539' value='{{0}}' checked='{{carInfo.isDiscount == 0}}'/>已加价
+              <radio color='#fa5539' value='{{0}}' checked='{{formData.isDiscount == 0}}'/>已加价
             </label>
           </radio-group>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入金额' id='changePrice' value='{{carInfo.changePrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+          <input class='weui-input' placeholder='请输入金额' id='changePrice' value='{{formData.changePrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__bd' style='padding: 15rpx 0;'>
-          <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注' id='remark' value='{{carInfo.remark}}' bindinput='bindInput'></textarea>
+          <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注' id='remark' value='{{formData.remark}}' bindinput='bindInput'></textarea>
         </view>
       </view>
     </view>

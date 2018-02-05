@@ -1,0 +1,76 @@
+<!--level2/order/car-match.wxml-->
+<view class='l-page-full l-bg-white'>
+  <view class='l-padding'>
+    <view class='l-h4 l-margin-t'>{{info.carsName}}</view>
+    <view class='l-fs-s l-text-gray'>
+      <text class='l-margin-r'>车身颜色：{{info.colorName}}</text>
+      <text class='l-margin-r'>内饰颜色：{{info.interiorName}}</text>
+      <text>指导价：{{info.guidePrice}}</text>
+    </view>
+    <view class='l-margin-t'>
+      <view>购买数量：{{info.carNum}}</view>
+      <view>应付定金：{{info.depositPrice}}元</view>
+      <view>{{info.changePrice > 0 ? '加价金额' : '优惠金额'}}：{{info.changePrice}}元</view>
+    </view>
+    <view class='l-text-blod'>
+      成交金额：<text class='l-text-theme'>{{info.finalPrice}}元</text>
+    </view>
+    <view class='l-margin-t l-text-gray'>备注：{{info.remark}}</view>
+
+    <view class='l-border-t l-margin-t l-padding-t' wx:if='{{carFrame.length > 0}}'>
+      <view class='l-margin-b-m' wx:for='{{carFrame}}' wx:key='id'>
+        <view class='l-h4'>车架号：{{item.vin}}</view>
+        <text class='l-margin-r'>发动机号：{{item.stockCar ? item.stockCar.engineNumber : ''}}</text>
+        <text class='l-margin-r'>内饰颜色：{{item.interiorName}}</text>
+        <text wx:if='{{info.orderState == 15}}' class='l-btn-link l-fr' data-item='{{item}}' bindtap='carCheck'>上传验车照片</text>
+        <view>
+          <image mode='aspectFill' style='width: 100rpx; height: 100rpx; margin: 20rpx 20rpx 0 0;' wx:for='{{item.checkImages}}' wx:key='*this' wx:for-item='imgItem' src='{{imgItem}}'></image>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+
+  <block wx:if='{{!(carFrame.length > 0)}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom l-padding'>
+      <button disabled='{{frameList.list.length === 0}}' class='l-button-main l-btn-w60' bindtap='showFrameList'>
+        {{frameList.list.length === 0 ? '库存不足' : '配车'}}
+      </button>
+    </view>
+  </block>
+
+  <!-- 车辆列表 -->
+  <view class='l-popup-bottom {{frameList.visible ? "_show" : ""}}' bindtap='closeFrameList' catchtouchmove='noopFn'>
+    <view class='_inner' catchtap='noopFn'>
+      <text class='_close' bindtap='closeFrameList'>×</text>
+      <view class='_hd'>
+        <text class='l-h4'>选择车架号</text>
+      </view>
+      <scroll-view scroll-y class='_bd' style='max-height: {{frameList.height}}px;'>
+        <view class='weui-cells weui-cells_after-title'>
+          <checkbox-group bindchange='sltFrameList'>
+            <label class='weui-cell weui-check__label l-padding' wx:for='{{frameList.list}}' wx:key='stockCarId'>
+              <view class='l-margin-r-m'><checkbox value='{{item.stockCarId}}' color='#fa5539'/></view>
+              <view class='weui-cell__bd'>
+                <view>车架号：{{item.frameNumber}}</view>
+                <view class='l-fs-s'>
+                  <text class='l-margin-r'>车身颜色：{{item.colourName}}</text>
+                  <text>内饰颜色：{{item.interiorName}}</text>
+                </view>
+              </view>
+            </label>
+          </checkbox-group>
+          <view class='l-padding l-text-center' wx:if='{{frameList.list.length === 0}}'>
+            <view class='l-br'></view>
+            <view class='l-text-gray'>库存不足</view>
+            <view class='l-br'></view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class='_ft'>
+        <button class='l-button-main' disabled='{{frameList.loading}}' loading='{{frameList.loading}}' bindtap='sltFrameOk'>{{ frameList.loading ? '保存中...' : '保存' }}</button>
+      </view>
+    </view>
+  </view>
+</view>

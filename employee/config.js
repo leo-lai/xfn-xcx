@@ -162,16 +162,36 @@ var config = {
     orderList: `${baseUrl}/consumerOrder/listOrders`,
     // 新增订购单
     orderAdd: `${baseUrl}/consumerOrder/createOrder`,
-    // 新增订购信息
-    orderAdd2: `${baseUrl}/consumerOrderInfo/createOrderInfo`,
     // 更新订购单
     orderEdit: `${baseUrl}/consumerOrder/update`,
-    // 订购单详情
+    // 删除订购单
+    orderDel: `${baseUrl}/consumerOrder/delete`,
+    // 订购单详情（客户，车辆，提车人）
     orderInfo: `${baseUrl}/consumerOrder/getOrderDetail`,
-    // 新增/更新 - 提车人/客户
-    orderMen: `${baseUrl}/consumerOrderUser/createOrUpdate`,
-    // 新增/更新车辆信息
-    orderCar: `${baseUrl}/consumerOrderInfo/createOrUpdate`,
+    // 新增订购信息(客户、车辆信息)
+    orderAddOrder: `${baseUrl}/consumerOrderInfo/createOrderInfo`,
+    // 新增车辆
+    orderAddCar: `${baseUrl}/consumerOrderInfo/create`,
+    // 更新车辆
+    orderEditCar: `${baseUrl}/consumerOrderInfo/update`,
+    // 删除车辆
+    orderDelCar: `${baseUrl}/consumerOrderInfo/delete`,
+    // 新增提车人/客户
+    orderAddMen: `${baseUrl}/consumerOrderUser/create`,
+    // 更新提车人/客户
+    orderEditMen: `${baseUrl}/consumerOrderUser/create`,
+    // 删除提车人/客户
+    orderDelMen: `${baseUrl}/consumerOrderUser/delete`,
+    // 更新订单状态
+    orderState: `${baseUrl}/consumerOrder/updateState`,
+    // 车架号列表
+    frameList: `${baseUrl}/consumerOrderInfo/queryVin`,
+    // 配好的车架号列表
+    carFrame: `${baseUrl}/consumerOrderCar/list`,
+    // 配车
+    carMatch: `${baseUrl}/consumerOrderInfo/distributeCar`,
+    // 验车
+    carCheck: `${baseUrl}/consumerOrderCar/uploadCheckCarPic`,
   },
   // 采购员列表
   buyerList: `${baseUrl}/orgOneSelfList`,

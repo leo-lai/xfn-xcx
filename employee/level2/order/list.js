@@ -93,6 +93,30 @@ Page({
       callback(this.data.list.data)
     })
   },
+  // 配车完成
+  sureCar: function (event) {
+    let orderId = event.currentTarget.dataset.val
+    let state = event.currentTarget.dataset.state
+    let content = state == 15 ? '配车完成后，将不可再配车，是否确定？' : '验车完成后，车辆信息将不可再更改，是否确定？'
+    wx.showModal({
+      title: '确认提示',
+      content,
+      success: res => {
+        if(res.confirm) {
+          wx.showLoading()
+          app.post(app.config.lv2.orderState, {
+            orderId, state
+          }).then(_ => {
+            app.toast('配车已完成', false).finally(_ => {
+              this.getList()
+            })
+          }).catch(_ => {
+            wx.hideLoading()
+          })
+        }
+      }
+    })
+  },
 
   // 搜索相关=================================================
   // 正在输入

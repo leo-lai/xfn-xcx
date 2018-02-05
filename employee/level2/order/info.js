@@ -85,7 +85,7 @@ Page({
     let id = app.utils.isObject(event) ? event.currentTarget.id : event
     this.setData({
       'info.customers': this.data.info.customers.map(item => {
-        item.checked = item.id === id
+        item.checked = item.id == id
         return item
       })
     })
@@ -119,7 +119,7 @@ Page({
           let item = this.data.info.customers[index]
 
           wx.showLoading({ mask: true })
-          app.post(app.config.lv2.orderMen, {
+          app.post(app.config.lv2.orderDelMen, {
             orderId: this.data.info.id,
             id: item.id,
             isDel: 1
@@ -133,5 +133,61 @@ Page({
         }
       }
     })
-  }
+  },
+  // 编辑车辆
+  carEdit: function (event) {
+    let url = event.currentTarget.dataset.url
+    let item = event.currentTarget.dataset.item
+    let formData = app.utils.copyObj({
+      id: '',
+      carsId: '',
+      carsName: '',
+      guidePrice: '',
+      colorId: '',
+      colorName: '',
+      interiorId: '',
+      interiorName: '',
+      carNum: '',
+      depositPrice: '',
+      finalPrice: '',
+      isDiscount: item.changePrice < 0 ? 1 : 0,
+      changePrice: '',
+      remark: ''
+    }, item)
+
+    app.storage.setItem('lv2-order-car', formData)
+    app.navigateTo(url)
+  },
+  // 删除车辆
+  carDel: function (event) {
+    let ids = event.currentTarget.dataset.ids
+    wx.showModal({
+      content: '是否确定删除车辆？',
+      success: res => {
+        if (res.confirm) {
+          wx.showLoading({ mask: true })
+          app.post(app.config.lv2.orderDelCar, {
+            orderId: ids[0],
+            customerId: ids[1],
+            id: ids[2],
+            isDel: 1
+          }).then(({ data }) => {
+            app.toast('删除成功', false).then(_ => {
+              this.getInfo()
+            })
+          }).catch(err => {
+            wx.hideLoading()
+          })
+        }
+      }
+    })
+  },
+  // 配车
+  carMatch: function (event) {
+    let item = event.currentTarget.dataset.item
+    let state = event.currentTarget.dataset.state
+    item.orderState = state
+    app.storage.setItem('lv2-order-car-info', item)
+    app.navigateTo('car-match')
+  },
 })

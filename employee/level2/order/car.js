@@ -15,16 +15,13 @@ Page({
       index: -1,
       list: []
     },
-    customerInfo: {
-      userName: '',
-      userPhone: '',
-      idCardPicOn: '',
-      idCardPicOff: ''
-    },
-    carInfo: {
+    formData: {
+      orderId: '',
+      customerId: '',
+      id: '',
       carsId: '',
       carsName: '',
-      guidingPrice: '',
+      guidePrice: '',
       colorId: '',
       colorName: '',
       interiorId: '',
@@ -41,13 +38,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onReady: function (options) {
-
+    app.storage.getItem('lv2-order-car').then(info => {
+      if (info) {
+        console.log(info)
+        console.log(Object.assign({}, this.data.formData, info))
+        this.setData({
+          'formData': Object.assign({}, this.data.formData, info)
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     app.checkLogin()
+  },
+  onUnload: function () {
+    app.storage.removeItem('lv2-order-car')
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -69,12 +77,12 @@ Page({
       data[picker + '.index'] = value
       switch (id) {
         case 'colorId':
-          data['carInfo.colorName'] = this.data[picker].list[value].carColourName
+          data['formData.colorName'] = this.data[picker].list[value].carColourName
           value = this.data[picker].list[value].carColourId
           
           break
         case 'interiorId':
-          data['carInfo.interiorName'] = this.data[picker].list[value].interiorName
+          data['formData.interiorName'] = this.data[picker].list[value].interiorName
           value = this.data[picker].list[value].interiorId
           break
         case 'orgId':
@@ -92,21 +100,21 @@ Page({
         data['customerInfo.' + id] = value
         break
       default:
-        data['carInfo.' + id] = value
+        data['formData.' + id] = value
     }
     this.setData(data)
   },
   // 选择车辆
   changeCar: function (carType = {}, family = {}, brand = {}) {
-    if (this.data.carInfo.carsId !== carType.id) {
+    if (this.data.formData.carsId !== carType.id) {
       this.setData({
-        'carInfo.carsId': carType.id,
-        'carInfo.carsName': carType.name,
-        'carInfo.guidingPrice': carType.price,
-        'carInfo.colorId': '',
-        'carInfo.colorName': '',
-        'carInfo.interiorId': '',
-        'carInfo.interiorName': ''
+        'formData.carsId': carType.id,
+        'formData.carsName': carType.name,
+        'formData.guidePrice': carType.price,
+        'formData.colorId': '',
+        'formData.colorName': '',
+        'formData.interiorId': '',
+        'formData.interiorName': ''
       })
       this.getCheshen(family.id)
       this.getNeishi(family.id)
@@ -116,7 +124,7 @@ Page({
     if (!familyId) return
     app.post(app.config.cheshen, { familyId }).then(({ data }) => {
       this.setData({
-        'cheshen.index': data.findIndex(item => item.carColourId === this.data.carInfo.colourId),
+        'cheshen.index': data.findIndex(item => item.carColourId === this.data.formData.colourId),
         'cheshen.list': data
       })
     })
@@ -125,100 +133,59 @@ Page({
     if (!familyId) return
     app.post(app.config.neishi, { familyId }).then(({ data }) => {
       this.setData({
-        'neishi.index': data.findIndex(item => item.interiorId === this.data.carInfo.interiorId),
+        'neishi.index': data.findIndex(item => item.interiorId === this.data.formData.interiorId),
         'neishi.list': data
       })
     })
   },
-  // 选择图片
-  chooseImage: function (event) {
-    let id = event.currentTarget.id
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: res => {
-        // 上传图片到服务器
-        wx.showLoading({
-          title: '照片上传中'
-        })
-        wx.uploadFile({
-          url: app.config.uploadFile,
-          filePath: res.tempFiles[0].path,
-          name: 'img_file',
-          success: res => {
-            console.log(res)
-            if (res.statusCode === 200) {
-              if (typeof res.data === 'string') {
-                res.data = JSON.parse(res.data)
-              }
-
-              let tempData = {}
-              tempData['customerInfo.' + id] = res.data.data
-              this.setData(tempData)
-              console.log(tempData)
-              wx.hideLoading()
-            } else {
-              wx.showToast({
-                image: '../../images/error.png',
-                title: '上传失败(' + res.statusCode + ')'
-              })
-            }
-          },
-          fail: res => {
-            wx.showToast({
-              image: '../../images/error.png',
-              title: '照片上传失败'
-            })
-          }
-        })
-      }
-    })
-  },
   // 保存信息
   submit: function () {
-    if (!this.data.carInfo.carsId) {
+    if (!this.data.formData.carsId) {
       this.showTopTips('请选择车型')
       return
     }
-    if (!this.data.carInfo.colorId) {
+    if (!this.data.formData.colorId) {
       this.showTopTips('请选择车身颜色')
       return
     }
-    if (!(this.data.carInfo.carNum > 0)) {
+    if (!(this.data.formData.carNum > 0)) {
       this.showTopTips('请输入购买数量')
       return
     }
-    if (!(this.data.carInfo.depositPrice > 0)) {
+    if (!(this.data.formData.depositPrice > 0)) {
       this.showTopTips('请输入定金金额')
       return
     }
-    if (!(this.data.carInfo.finalPrice > 0)) {
+    if (!(this.data.formData.finalPrice > 0)) {
       this.showTopTips('请输入成交价')
       return
     }
-    if (!this.data.carInfo.changePrice) {
-      this.showTopTips('请输入' + (this.data.carInfo.isDiscount == 1 ? '优惠' : '加价') + '金额')
+    if (!this.data.formData.changePrice) {
+      this.showTopTips('请输入' + (this.data.formData.isDiscount == 1 ? '优惠' : '加价') + '金额')
       return
     }
-    let changePrice = this.data.carInfo.isDiscount == 1 ? 
-      (0 - this.data.carInfo.changePrice) : this.data.carInfo.changePrice
-    let carInfo = Object.assign({}, this.data.carInfo, { changePrice: changePrice })
-    let formData = {
-      orderId: this.options.id,
-      customer: Object.assign({}, this.data.customerInfo),
-      infos: [carInfo]
+    let changePrice = this.data.formData.isDiscount == 1 ? 
+      (0 - this.data.formData.changePrice) : this.data.formData.changePrice
+    let formData = Object.assign({}, this.data.formData, { changePrice: changePrice })
+
+    let ids = this.options.ids ? this.options.ids.split(',') : []
+    if (!ids[0]) {
+      this.showTopTips('订购单ID为空')
+      return
     }
-    
+    if (!ids[1]) {
+      this.showTopTips('客户ID为空')
+      return
+    }
+    formData.orderId = ids[0]
+    formData.customerId = ids[1]
+   
     wx.showLoading({ mask: true })
-    app.json(app.config.lv2.orderAdd2, formData).then(({ data }) => {
+    app.post(formData.id ? app.config.lv2.orderEditCar : app.config.lv2.orderAddCar, formData)
+    .then(({ data }) => {
       app.toast('保存成功', true).then(_ => {
         app.getPrevPage().then(prevPage => {
-          if (prevPage.route === 'level2/order/list') { // 列表进来
-            prevPage.getList()
-          } else if (prevPage.route === 'level2/order/info') { // 详情进来
-            prevPage.getInfo()
-          }
+          prevPage.getInfo()
         })
       })
     }).catch(err => {

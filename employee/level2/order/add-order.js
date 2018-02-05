@@ -24,7 +24,7 @@ Page({
     carInfo: {
       carsId: '',
       carsName: '',
-      guidingPrice: '',
+      guidePrice: '',
       colorId: '',
       colorName: '',
       interiorId: '',
@@ -102,7 +102,7 @@ Page({
       this.setData({
         'carInfo.carsId': carType.id,
         'carInfo.carsName': carType.name,
-        'carInfo.guidingPrice': carType.price,
+        'carInfo.guidePrice': carType.price,
         'carInfo.colorId': '',
         'carInfo.colorName': '',
         'carInfo.interiorId': '',
@@ -211,7 +211,7 @@ Page({
     }
     
     wx.showLoading({ mask: true })
-    app.json(app.config.lv2.orderAdd2, formData).then(({ data }) => {
+    app.json(app.config.lv2.orderAddOrder, formData).then(({ data }) => {
       app.toast('保存成功', true).then(_ => {
         app.getPrevPage().then(prevPage => {
           if (prevPage.route === 'level2/order/list') { // 列表进来

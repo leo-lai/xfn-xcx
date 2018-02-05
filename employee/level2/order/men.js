@@ -38,7 +38,7 @@ Page({
     app.storage.getItem('lv2-order-customer').then(info => {
       if (info) {
         this.setData({
-          'formData': info
+          'formData': Object.assign({}, this.data.formData, info)
         })
       }
     })
@@ -135,7 +135,8 @@ Page({
       return
     }
     wx.showLoading({ mask: true })
-    app.post(app.config.lv2.orderMen, this.data.formData).then(({ data }) => {
+    app.post(this.data.formData.id ? app.config.lv2.orderEditMen : app.config.lv2.orderAddMen, this.data.formData)
+    .then(({ data }) => {
       app.toast('保存成功', true).then(_ => {
         app.getPrevPage().then(prevPage => {
           prevPage.getInfo && prevPage.getInfo()

@@ -59,7 +59,7 @@
           <view class='weui-label'>官方指导价（元）</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input disabled='{{true}}' class='weui-input' value='{{carInfo.guidingPrice}}' />
+          <input disabled='{{true}}' class='weui-input' value='{{carInfo.guidePrice}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
