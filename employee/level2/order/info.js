@@ -155,6 +155,7 @@ Page({
       remark: ''
     }, item)
 
+    formData.changePrice = Math.abs(item.changePrice)
     app.storage.setItem('lv2-order-car', formData)
     app.navigateTo(url)
   },

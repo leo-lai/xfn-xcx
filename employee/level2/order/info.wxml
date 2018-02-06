@@ -91,7 +91,7 @@
       <view class='l-flex-hc'>
         <text class='l-h4'>客户信息</text>
         <view class='l-rest'></view>
-        <button wx:if='{{item.state < 10}}' class='l-btn-min1' size='mini' data-index='{{index}}' bindtap='customerDel'>删除</button>
+        <button wx:if='{{info.state < 10}}' class='l-btn-min1' size='mini' data-index='{{index}}' bindtap='customerDel'>删除</button>
         <button class='l-btn-min2 l-margin-l-s' size='mini' data-index='{{index}}' bindtap='customerEdit'>编辑</button>
       </view>
       <view class='l-margin-t'>
@@ -120,7 +120,7 @@
       <view class='l-flex-hc l-border-t l-margin-t l-padding-t'>
         <text class='l-h4'>车辆信息</text>
         <view class='l-rest'></view>
-        <navigator wx:if='{{item.state < 10}}' url='car?ids={{info.id}},{{item.id}}' hover-class='none'>
+        <navigator wx:if='{{info.state < 10}}' url='car?ids={{info.id}},{{item.id}}' hover-class='none'>
           <button class='l-btn-min1' size='mini'>添加车辆</button>
         </navigator>
       </view>
