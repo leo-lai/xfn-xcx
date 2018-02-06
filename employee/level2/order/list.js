@@ -96,8 +96,25 @@ Page({
   // 配车/验车完成
   sureCar: function (event) {
     let orderId = event.currentTarget.dataset.val
-    let state = event.currentTarget.dataset.state
-    let content = state == 15 ? '配车完成后，将不可再配车，是否确定？' : '验车完成后，车辆信息将不可再更改，是否确定？'
+    let state = event.target.dataset.state
+    let content = ''
+    let msg = ''
+
+    if(!state) return
+    switch(state) {
+      case '15':
+        content = '配车完成后，将不可再配车，是否确定？'
+        msg = '配车已完成'
+        break
+      case '35':
+        content = '验车完成后，车辆信息将不可再更改，是否确定？'
+        msg = '验车已完成'
+        break
+      case '45':
+        content = '出库前是核实是否收齐尾款，是否确定？'
+        msg = '出库成功'
+        break
+    }
     wx.showModal({
       title: '确认提示',
       content,
@@ -107,7 +124,7 @@ Page({
           app.post(app.config.lv2.orderState, {
             orderId, state
           }).then(_ => {
-            app.toast(state == 15 ? '配车已完成' : '验车已完成', false).finally(_ => {
+            app.toast(msg, false).finally(_ => {
               this.getList()
             })
           }).catch(_ => {
@@ -116,6 +133,52 @@ Page({
         }
       }
     })
+  },
+  // 出库
+  outCar: function (event) {
+    let item = event.currentTarget.dataset.item
+    let formData = app.utils.copyObj({
+      orderId: item.id,
+      logisticsOrderCode: '',
+      logisticsCompany: '',
+      logisticsPlateNumber: '',
+      logisticsDriver: '',
+      logisticsDriverPhone: ''
+    }, item)
+
+
+    // 先检查物流信息齐全
+    if (!(formData.logisticsOrderCode && formData.logisticsCompany && formData.logisticsPlateNumber 
+      && formData.logisticsDriver && formData.logisticsDriverPhone)) {
+      wx.showModal({
+        content: '订单物流信息不全，请先完善物流信息',
+        showCancel: false,
+        success: res => {
+          app.storage.setItem('lv2-order-wuliu', formData)
+          app.navigateTo('wuliu')
+        }
+      })
+    }else {
+      wx.showModal({
+        title: '确认提示',
+        content: '出库前是核实是否收齐尾款，是否确定？',
+        success: res => {
+          if (res.confirm) {
+            wx.showLoading()
+            app.post(app.config.lv2.orderState, {
+              orderId: formData.orderId, 
+              state: 45
+            }).then(_ => {
+              app.toast('出库成功', false).finally(_ => {
+                this.getList()
+              })
+            }).catch(_ => {
+              wx.hideLoading()
+            })
+          }
+        }
+      })
+    }
   },
 
   // 搜索相关=================================================

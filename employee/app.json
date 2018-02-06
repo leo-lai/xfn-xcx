@@ -52,7 +52,8 @@
     "level2/stock/in/parts",
     "level2/order/car",
     "level2/order/car-match",
-    "level2/order/car-check"
+    "level2/order/car-check",
+    "level2/order/wuliu"
   ],
   "window": {
     "backgroundColor": "#eee",

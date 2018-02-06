@@ -191,4 +191,18 @@ Page({
     app.storage.setItem('lv2-order-car-info', item)
     app.navigateTo('car-match')
   },
+  // 编辑物流信息
+  editWuliu: function () {
+    let formData = app.utils.copyObj({
+      orderId: this.data.info.id,
+      logisticsOrderCode: '',
+      logisticsCompany: '',
+      logisticsPlateNumber: '',
+      logisticsDriver: '',
+      logisticsDriverPhone: ''
+    }, this.data.info)
+
+    app.storage.setItem('lv2-order-wuliu', formData)
+    app.navigateTo('wuliu')
+  }
 })

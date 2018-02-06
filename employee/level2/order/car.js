@@ -40,8 +40,6 @@ Page({
   onReady: function (options) {
     app.storage.getItem('lv2-order-car').then(info => {
       if (info) {
-        console.log(info)
-        console.log(Object.assign({}, this.data.formData, info))
         this.setData({
           'formData': Object.assign({}, this.data.formData, info)
         })

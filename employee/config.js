@@ -194,6 +194,8 @@ var config = {
     carCheck: `${baseUrl}/consumerOrderCar/uploadCheckCarPic`,
     // 换车申请
     carChange: `${baseUrl}/consumerOrderInfo/changeCarApply`,
+    // 更新物流信息
+    wuliu: `${baseUrl}/consumerOrder/updateLogisticsInfo`,
   },
   // 采购员列表
   buyerList: `${baseUrl}/orgOneSelfList`,

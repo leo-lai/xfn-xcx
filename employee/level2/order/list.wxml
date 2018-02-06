@@ -25,14 +25,22 @@
       </view>
     </view>
     <view style='margin-top: 50rpx; text-align:center;'>
-      <button wx:if='{{item.state == 10}}' size='mini' class='l-button-main'>去配车</button>
-      <button wx:if='{{item.state == 15}}' size='mini' class='l-button-main'>去验车</button>
-      <view class='l-inline' catchtap='noopFn'>
-        <navigator wx:if='{{item.state < 10}}' class='l-inline' url='add-order?id={{item.id}}' hover-class='none'>
+      <button wx:if='{{item.state == 10}}' size='mini' class='l-button-main l-margin-r'>去配车</button>
+      <button wx:if='{{item.state == 15}}' size='mini' class='l-button-main l-margin-r'>去验车</button>
+      <view wx:if='{{item.state < 10}}' class='l-inline' catchtap='noopFn'>
+        <navigator class='l-inline' url='add-order?id={{item.id}}' hover-class='none'>
           <button size='mini' class='l-button-main'>新增订购信息</button>
         </navigator>
-        <button wx:if='{{item.state == 10}}' size='mini' class='l-button-main l-margin-l' data-val='{{item.id}}' data-state='15' bindtap='sureCar'>配车完成</button>
-        <button wx:if='{{item.state == 15}}' size='mini' class='l-button-main l-margin-l' data-val='{{item.id}}' data-state='35' bindtap='sureCar'>验车完成</button>
+      </view>
+      <view class='l-inline' catchtap='noopFn'>
+        <view class='l-inline' data-val='{{item.id}}' bindtap='sureCar'>
+          <button wx:if='{{item.state == 10}}' size='mini' class='l-button-main' data-state='15'>配车完成</button>
+          <button wx:if='{{item.state == 15}}' size='mini' class='l-button-main' data-state='35'>验车完成</button>
+          <!-- 自提出库 -->
+          <button wx:if='{{item.state == 40 && item.logisticsType == 1}}' size='mini' class='l-button-main' data-state='45'>出库</button>
+        </view>
+        <!-- 物流方式为其他的出库 -->
+        <button wx:if='{{item.state == 40 && item.logisticsType == 2}}' size='mini' class='l-button-main' data-item='{{item}}' bindtap='outCar'>出库</button>
       </view>
     </view>
   </navigator>

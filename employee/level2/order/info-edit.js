@@ -112,10 +112,11 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.lv2.orderEdit, this.data.formData).then(({ data }) => {
-      app.getPrevPage().then(prevPage => {
-        prevPage.getInfo && prevPage.getInfo()
+      app.toast('保存成功', true).then(_ => {
+        app.getPrevPage().then(prevPage => {
+          prevPage.getInfo && prevPage.getInfo()
+        })
       })
-      app.toast('保存成功', true)
     }).catch(err => {
       wx.hideLoading()
     })

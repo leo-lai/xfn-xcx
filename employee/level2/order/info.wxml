@@ -82,7 +82,7 @@
           </view>
         </view>
       </view>
-      <view class='l-margin-l l-padding-t' wx:if='{{item.state < 10}}'>
+      <view class='l-margin-l l-padding-t' wx:if='{{info.state < 10}}'>
         <navigator url='add-order?id={{info.id}}' class='_add'>新增</navigator>
       </view>
     </view> 
@@ -161,4 +161,23 @@
   </navigator> 
 
   <view class='l-margin-t'></view>
+  <!-- 物流信息 -->
+  <view wx:if='{{info.logisticsType == 2}}' class='l-margin-t l-bg-white l-padding'>
+    <view class='l-flex-hc'>
+      <text class='l-h4 l-margin-r-m'>物流信息</text>
+      <button class='l-btn-min1' size='mini' bindtap='editWuliu'>编辑</button>
+      <view class='l-rest'></view>
+    </view>
+    <view class='l-margin-t'>
+      <view>物流单号：{{info.logisticsOrderCode || '--'}}</view>
+      <view>
+        <text class='l-margin-r'>物流公司：{{info.logisticsCompany || '--'}}</text>
+        <text>运输车车牌：{{info.logisticsPlateNumber || '--'}}</text>
+      </view>
+      <view>
+        <text class='l-margin-r'>司机姓名：{{info.logisticsDriver || '--'}}</text>
+        <text>联系电话：{{info.logisticsDriverPhone || '--'}}</text>
+      </view>
+    </view>
+  </view>
 </view>

@@ -1,0 +1,54 @@
+<!--level2/order/wuliu.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>物流单号</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入物流单号' id='logisticsOrderCode' value='{{formData.logisticsOrderCode}}' bindinput='bindInput'  maxlength='{{100}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>物流公司</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入物流公司名称' id='logisticsCompany' value='{{formData.logisticsCompany}}' bindinput='bindInput' maxlength='{{50}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>运输车车牌</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入运输车车牌号' id='logisticsPlateNumber' value='{{formData.logisticsPlateNumber}}' bindinput='bindInput' maxlength='{{20}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>司机姓名</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入司机姓名' id='logisticsDriver' value='{{formData.logisticsDriver}}' bindinput='bindInput' maxlength='{{20}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>联系电话</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入联系电话' id='logisticsDriverPhone' value='{{formData.logisticsDriverPhone}}' bindinput='bindInput' maxlength='{{11}}' />
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>
+
