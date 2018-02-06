@@ -144,14 +144,11 @@
         <view class='l-margin-t l-text-gray'>备注：{{carItem.remark}}</view>
         <view class='l-margin-t l-text-right'>
           <view data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>
-            <block wx:if='{{info.state == 10}}'>
-              <button wx:if='{{carItem.state == 1}}' size='mini' class='l-button-main'>配车</button>
-              <text wx:if='{{carItem.state == 2}}' class='l-text-theme'>配车已完成</text>
-            </block>
-            <button wx:if='{{info.state == 15}}' size='mini' class='l-button-main'>验车</button>
+            <button wx:if='{{info.state == 10}}' size='mini' class='l-button-main'>去配车</button>
+            <button wx:if='{{info.state == 15}}' size='mini' class='l-button-main'>去验车</button>
           </view>
-          <view class='l-rest' wx:if='{{info.state < 10}}'>
-            <text class='l-btn-link' data-ids='{{[info.id, item.id, carItem.id]}}' bindtap='carDel'>删除</text>
+          <view wx:if='{{info.state < 10}}'>
+            <text class='l-btn-link l-margin-l' data-ids='{{[info.id, item.id, carItem.id]}}' bindtap='carDel'>删除</text>
             <text class='l-btn-link l-margin-l' data-url='car?ids={{info.id}},{{item.id}}' data-item='{{carItem}}' bindtap='carEdit'>编辑</text>
           </view>
         </view>

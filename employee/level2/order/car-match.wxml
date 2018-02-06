@@ -17,18 +17,22 @@
     </view>
     <view class='l-margin-t l-text-gray'>备注：{{info.remark}}</view>
 
-    <view class='l-border-t l-margin-t l-padding-t' wx:if='{{carFrame.length > 0}}'>
-      <view class='l-margin-b-m' wx:for='{{carFrame}}' wx:key='id'>
+    <view class='l-frame-list _border' wx:if='{{carFrame.length > 0}}'>
+      <view class='_item' wx:for='{{carFrame}}' wx:key='id'>
         <view class='l-h4'>车架号：{{item.vin}}</view>
-        <text class='l-margin-r'>发动机号：{{item.stockCar ? item.stockCar.engineNumber : ''}}</text>
-        <text class='l-margin-r'>内饰颜色：{{item.interiorName}}</text>
-        <text wx:if='{{info.orderState == 15}}' class='l-btn-link l-fr' data-item='{{item}}' bindtap='carCheck'>上传验车照片</text>
         <view>
-          <image mode='aspectFill' style='width: 100rpx; height: 100rpx; margin: 20rpx 20rpx 0 0;' wx:for='{{item.checkImages}}' wx:key='*this' wx:for-item='imgItem' src='{{imgItem}}'></image>
+          <text class='l-margin-r'>发动机号：{{item.stockCar ? item.stockCar.engineNumber : ''}}</text>
+          <text>内饰颜色：{{item.interiorName}}</text>
+        </view>
+        <view data-images='{{item.checkImages}}' bindtap='previewImage'>
+          <image mode='aspectFill' id='{{imgItem}}' wx:for='{{item.checkImages}}' wx:key='{{index}}' wx:for-item='imgItem' src='{{imgItem}}'></image>
+        </view>
+        <view class='l-margin-t' data-item='{{item}}' bindtap='carCheck' wx:if='{{info.orderState == 15}}'>
+          <text data-action='1' class='l-btn-link l-margin-r'>上传验车照片</text>
+          <text data-action='2' class='l-btn-link'>申请换车</text>
         </view>
       </view>
     </view>
-    
   </view>
 
   <block wx:if='{{!(carFrame.length > 0)}}'>

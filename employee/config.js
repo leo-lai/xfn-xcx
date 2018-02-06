@@ -179,7 +179,7 @@ var config = {
     // 新增提车人/客户
     orderAddMen: `${baseUrl}/consumerOrderUser/create`,
     // 更新提车人/客户
-    orderEditMen: `${baseUrl}/consumerOrderUser/create`,
+    orderEditMen: `${baseUrl}/consumerOrderUser/update`,
     // 删除提车人/客户
     orderDelMen: `${baseUrl}/consumerOrderUser/delete`,
     // 更新订单状态
@@ -192,6 +192,8 @@ var config = {
     carMatch: `${baseUrl}/consumerOrderInfo/distributeCar`,
     // 验车
     carCheck: `${baseUrl}/consumerOrderCar/uploadCheckCarPic`,
+    // 换车申请
+    carChange: `${baseUrl}/consumerOrderInfo/changeCarApply`,
   },
   // 采购员列表
   buyerList: `${baseUrl}/orgOneSelfList`,

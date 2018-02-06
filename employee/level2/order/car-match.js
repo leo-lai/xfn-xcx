@@ -1,7 +1,7 @@
 // level2/order/car-match.js
 const app = getApp()
 Page({
-
+  noopFn: app.noopFn,
   /**
    * 页面的初始数据
    */
@@ -133,7 +133,20 @@ Page({
   // 验车
   carCheck: function (event) {
     let item = event.currentTarget.dataset.item
-    app.storage.setItem('lv2-order-car-check', item)
-    app.navigateTo('car-check')
+    let action = event.target.dataset.action
+    if (action) {
+      item.action = action
+      app.storage.setItem('lv2-order-car-check', item)
+      app.navigateTo('car-check')
+    }
+  },
+  // 预览图片
+  previewImage: function (event) {
+    if (!event.target.id) return
+    let images = event.currentTarget.dataset.images
+    wx.previewImage({
+      current: event.target.id,
+      urls: images
+    })
   }
 })

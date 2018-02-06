@@ -7,23 +7,26 @@ Page({
    */
   data: {
     topTips: '',
+    action: 1,
     avatar: app.config.avatar,
     uploadImages: [],
     formData: {
       carId: '',
-      checkCarPic: ''
+      checkCarPic: '',
+      auditRemark: ''
     }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onReady: function () {
     app.onLogin(userInfo => {
-      this.data.formData.carId = options.id
       app.storage.getItem('lv2-order-car-check').then(info => {
         if (info) {
+          wx.setNavigationBarTitle({ title: info.action == 2 ? '换车申请' : '验车'})
           this.setData({
+            'action': info.action,
             'formData.carId': info.id,
             'formData.checkCarPic': info.checkCarPic,
             'uploadImages': info.checkCarPic ? info.checkCarPic.split(',').map(item => {
@@ -58,6 +61,16 @@ Page({
         topTips: ''
       })
     }, 3000)
+  },
+  // 表单输入
+  bindInput: function (event) {
+    let data = {}
+    let id = event.target.id
+    let value = event.detail.value
+
+    console.log(id, value)
+    data['formData.' + id] = value
+    this.setData(data)
   },
   // 选择图片
   chooseImage: function (event) {
@@ -160,11 +173,20 @@ Page({
       this.showTopTips('请等待验车照片上传完毕')
       return
     }
-
     this.data.formData.checkCarPic = this.data.uploadImages.map(item => item.src).join(',')
+
+    let url = app.config.lv2.carCheck
+    if(this.data.action == 2) {
+      url = app.config.lv2.carChange
+      if (!this.data.formData.auditRemark) {
+        this.showTopTips('请输入申请换车理由')
+        return
+      }
+    }
+
     wx.showLoading()
-    app.post(app.config.lv2.carCheck, this.data.formData).then(_ => {
-      app.toast('验车成功', true).then(_ => {
+    app.post(url, this.data.formData).then(_ => {
+      app.toast('操作成功', true).then(_ => {
         app.getPrevPage().then(prevPage => {
           prevPage.getCarFrame && prevPage.getCarFrame()
         })  

@@ -93,7 +93,7 @@ Page({
       callback(this.data.list.data)
     })
   },
-  // 配车完成
+  // 配车/验车完成
   sureCar: function (event) {
     let orderId = event.currentTarget.dataset.val
     let state = event.currentTarget.dataset.state
@@ -107,7 +107,7 @@ Page({
           app.post(app.config.lv2.orderState, {
             orderId, state
           }).then(_ => {
-            app.toast('配车已完成', false).finally(_ => {
+            app.toast(state == 15 ? '配车已完成' : '验车已完成', false).finally(_ => {
               this.getList()
             })
           }).catch(_ => {

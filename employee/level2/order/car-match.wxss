@@ -1,1 +1,6 @@
 /* level2/order/car-match.wxss */
+.l-frame-list{ border-top: 2rpx solid #eee; margin-top: 30rpx; padding-top: 30rpx;}
+.l-frame-list ._item{ margin-bottom: 30rpx; }
+.l-frame-list._border ._item{ border-bottom: 2rpx dashed #eee; padding-bottom: 30rpx;}
+.l-frame-list._border ._item:last-child{border-bottom: none; padding-bottom: 0;}
+.l-frame-list image{width: 100rpx; height: 100rpx; margin: 20rpx 20rpx 0 0; background-color: #eee;}

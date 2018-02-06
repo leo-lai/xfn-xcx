@@ -27,11 +27,14 @@
         </view>
       </view>
     </view>
+    <view class='l-padding' wx:if='{{action == 2}}'>
+      <textarea id='auditRemark' bindinput='bindInput' style='width: 100%; min-height: 160rpx;' auto-height='{{true}}' placeholder='请输入申请换车理由'></textarea>
+    </view>
   </view>
   <view style='height: 120rpx;'></view>
   <view class='l-fixed-bottom'>
     <view class='l-btn-w60 l-margin-tb'>
-      <button class='l-button-main' bindtap='submit'>保存</button>
+      <button class='l-button-main' bindtap='submit'>{{ action == 2 ? '提交申请' : '验车完成' }}</button>
     </view>
   </view>
 </view>
