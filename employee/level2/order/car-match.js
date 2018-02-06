@@ -75,6 +75,8 @@ Page({
       infoId: this.data.info.id
     }).then(({ data }) => {
       this.setData({
+        'frameList.visible': false,
+        'frameList.slted': [],
         'frameList.list': data ? data.map(item => {
           item.checked = false
           return item
@@ -101,7 +103,6 @@ Page({
   },
   sltFrameOk: function () {
     if (this.data.frameList.slted.length === 0) {
-      // this.showTopTips('请选择车架号')
       wx.showModal({
         content: '请选择车架号',
         showCancel: false
@@ -109,10 +110,9 @@ Page({
       return
     }
 
-    if (this.data.frameList.slted.length > this.data.info.carNum) {
-      // this.showTopTips('出库车辆不能大于订车数量')
+    if (this.data.frameList.slted.length != this.data.info.carNum) {
       wx.showModal({
-        content: '出库车辆不能大于订车数量',
+        content: '分配车辆数量与订单车辆数量不一致',
         showCancel: false
       })
       return
@@ -123,11 +123,12 @@ Page({
       infoId: this.data.info.id,
       stockCarIds: this.data.frameList.slted.join(',')
     }).then(_ => {
-      app.toast('保存成功', true).then(_ => {
+      app.toast('保存成功', false).then(_ => {
+        this.getCarFrame()
         app.getPrevPage().then(prevPage => prevPage.getInfo && prevPage.getInfo())
       })
     }).finally(_ => {
-      this.setData({ 'frameList.loading': true })
+      this.setData({ 'frameList.loading': false })
     })
   },
   // 验车

@@ -1,0 +1,27 @@
+<!--level2/order/frame-list.wxml-->
+<view class='l-page-full'>
+  <view class='weui-cells weui-cells_after-title'>
+    <radio-group bindchange='sltFrameList'>
+      <label class='weui-cell weui-check__label l-padding' wx:for='{{frameList}}' wx:key='stockCarId'>
+        <view class='l-margin-r-m'><radio value='{{item.stockCarId}}' color='#fa5539'/></view>
+        <view class='weui-cell__bd'>
+          <view>车架号：{{item.frameNumber}}</view>
+          <view class='l-fs-s'>
+            <text class='l-margin-r'>车身颜色：{{item.colourName}}</text>
+            <text>内饰颜色：{{item.interiorName}}</text>
+          </view>
+        </view>
+      </label>
+    </radio-group>
+    <view class='l-padding l-text-center' wx:if='{{isAjax && frameList.length === 0}}'>
+      <view class='l-br'></view>
+      <view class='l-text-gray'>库存不足</view>
+      <view class='l-br'></view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button disabled='{{frameList.length === 0}}' class='l-button-main l-btn-w60' bindtap='submit'>确定配车</button>
+  </view>
+</view>

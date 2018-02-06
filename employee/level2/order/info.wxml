@@ -141,7 +141,7 @@
         <view class='l-margin-t l-text-blod'>
           成交金额：<text class='l-text-theme'>{{carItem.finalPrice}}元</text>
         </view>
-        <view class='l-margin-t l-text-gray'>备注：{{carItem.remark}}</view>
+        <view wx:if='{{carItem.remark}}' class='l-margin-t l-text-gray'>备注：{{carItem.remark}}</view>
         <view class='l-margin-t l-text-right'>
           <view data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>
             <button wx:if='{{info.state == 10}}' size='mini' class='l-button-main'>去配车</button>

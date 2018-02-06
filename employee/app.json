@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/home/index",
     "level2/order/list",
     "level2/order/add-order",
     "level2/order/add",
     "level2/order/men",
     "level2/order/info-edit",
     "level2/order/info",
-    "pages/home/index",
     "pages/car-stock-order-add/index",
     "pages/car-stock-add/index",
     "pages/customer-list/index",
@@ -53,7 +53,8 @@
     "level2/order/car",
     "level2/order/car-match",
     "level2/order/car-check",
-    "level2/order/wuliu"
+    "level2/order/wuliu",
+    "level2/order/frame-list"
   ],
   "window": {
     "backgroundColor": "#eee",

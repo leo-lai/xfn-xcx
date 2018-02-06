@@ -15,7 +15,7 @@
     <view class='l-text-blod'>
       成交金额：<text class='l-text-theme'>{{info.finalPrice}}元</text>
     </view>
-    <view class='l-margin-t l-text-gray'>备注：{{info.remark}}</view>
+    <view wx:if='{{info.remark}}' class='l-margin-t l-text-gray'>备注：{{info.remark}}</view>
 
     <view class='l-frame-list _border' wx:if='{{carFrame.length > 0}}'>
       <view class='_item' wx:for='{{carFrame}}' wx:key='id'>
@@ -27,9 +27,19 @@
         <view data-images='{{item.checkImages}}' bindtap='previewImage'>
           <image mode='aspectFill' id='{{imgItem}}' wx:for='{{item.checkImages}}' wx:key='{{index}}' wx:for-item='imgItem' src='{{imgItem}}'></image>
         </view>
-        <view class='l-margin-t' data-item='{{item}}' bindtap='carCheck' wx:if='{{info.orderState == 15}}'>
-          <text data-action='1' class='l-btn-link l-margin-r'>上传验车照片</text>
-          <text data-action='2' class='l-btn-link'>申请换车</text>
+        <view class='l-margin-t' wx:if='{{info.orderState == 15}}'>
+          <view wx:if='{{item.auditState != 5 && item.auditState != 6}}' data-item='{{item}}' bindtap='carCheck'>
+            <text data-action='1' class='l-btn-link l-margin-r'>上传验车照片</text>
+            <text data-action='2' class='l-btn-link'>申请换车</text>
+          </view>
+          <!-- 换车申请通过，重新配车 -->
+          <view wx:if='{{item.auditState == 6}}'>
+            <text class='l-margin-r l-text-theme'>换车申请通过</text>
+            <navigator class='l-inline l-btn-link' url='frame-list?ids={{info.id}},{{item.id}}'>重新配车</navigator>
+          </view>
+        </view>
+        <view class='l-margin-t l-text-theme'>
+          <view wx:if='{{item.auditState == 5}}'>换车申请审核中，请耐心等待</view>
         </view>
       </view>
     </view>
@@ -44,7 +54,7 @@
     </view>
   </block>
 
-  <!-- 车辆列表 -->
+  <!-- 车架号列表 -->
   <view class='l-popup-bottom {{frameList.visible ? "_show" : ""}}' bindtap='closeFrameList' catchtouchmove='noopFn'>
     <view class='_inner' catchtap='noopFn'>
       <text class='_close' bindtap='closeFrameList'>×</text>

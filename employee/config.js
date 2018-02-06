@@ -190,6 +190,8 @@ var config = {
     carFrame: `${baseUrl}/consumerOrderCar/list`,
     // 配车
     carMatch: `${baseUrl}/consumerOrderInfo/distributeCar`,
+    // 重新配车（单台车）
+    carMatch2: `${baseUrl}/consumerOrderInfo/redistributeCar`,
     // 验车
     carCheck: `${baseUrl}/consumerOrderCar/uploadCheckCarPic`,
     // 换车申请
