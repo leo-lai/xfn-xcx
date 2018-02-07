@@ -28,7 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    app.checkLogin()
   },
 
   // 订购单详情
@@ -40,6 +40,12 @@ Page({
       data.customers.forEach(customer => {
         customer.infos.forEach(cars => {
           cars.changePrice2 = Math.abs(cars.changePrice)
+          cars.auditNum = 0 // 待审核车辆
+          cars.cars && cars.cars.forEach(frame => {
+            if (frame.auditState == 5) {
+              cars.auditNum += 1
+            }
+          })
         })
       })
 
@@ -197,7 +203,7 @@ Page({
       }
     })
   },
-  // 配车
+  // 配车/验车
   carMatch: function (event) {
     let item = event.currentTarget.dataset.item
     let state = event.currentTarget.dataset.state

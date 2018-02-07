@@ -1,5 +1,10 @@
 /* level2/order/list.wxss */
-.l-order-list-car{margin-top: 20rpx; padding-left: 40rpx;}
-.l-order-list-car::before{ 
-  float: left;content: ''; width: 10rpx; height: 10rpx; border-radius: 50%; background-color: #15b6f2;margin: 12rpx 0 0 -30rpx;}
+.l-order-list-item{background-color: #fff;padding: 30rpx;margin: 20rpx;border-radius: 10rpx;}
+.l-order-list-item ._bd{border-top: 2rpx solid #eee; padding-top: 30rpx; margin-top: 30rpx;font-size: 28rpx;}
+.l-order-list-item ._car{margin-top: 20rpx;}
+.l-order-list-item ._car:first-child{margin-top: 0;}
+.l-order-list-item ._ft{border-top: 2rpx solid #eee; padding-top: 30rpx; margin-top: 30rpx;text-align: center;}
+.l-order-list-item ._ft navigator,
+.l-order-list-item ._ft button{display: inline-block; vertical-align: top; margin: 0 8rpx;}
+
 button.l-button-main[size]{min-width: 160rpx;}

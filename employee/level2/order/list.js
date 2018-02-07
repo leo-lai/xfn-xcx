@@ -81,15 +81,28 @@ Page({
     return app.post(url, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
-      // 如果接口返回的是数组，则转换成分页对象
+      // 兼容非分页返回
       if (!data.list && data.length >= 0) {
         data = {
+          rows: 10000,
           page: 1,
-          rows: data.length + 1,
           total: data.length,
           list: data
         }
       }
+
+      data.list.forEach(item => {
+        item.infos.forEach(cars => {
+          cars.changePrice2 = Math.abs(cars.changePrice)
+          cars.auditNum = 0 // 待审核车辆
+          cars.cars && cars.cars.forEach(frame => {
+            if (frame.auditState == 5) {
+              cars.auditNum += 1
+            }
+          })
+        })
+      })
+
       this.setData({
         'list.more': data.list.length >= data.rows,
         'list.page': data.page,
@@ -100,8 +113,16 @@ Page({
       callback(this.data.list.data)
     })
   },
+  // 配车/验车
+  carMatch: function (event) {
+    let item = event.currentTarget.dataset.item
+    let state = event.currentTarget.dataset.state
+    item.orderState = state
+    app.storage.setItem('lv2-order-car-info', item)
+    app.navigateTo('car-match')
+  },
   // 配车/验车完成
-  sureCar: function (event) {
+  carMatchOk: function (event) {
     let orderId = event.currentTarget.dataset.val
     let state = event.target.dataset.state
     let content = ''
@@ -116,10 +137,6 @@ Page({
       case '35':
         content = '验车完成后，车辆信息将不可再更改，是否确定？'
         msg = '验车已完成'
-        break
-      case '45':
-        content = '出库前是核实是否收齐尾款，是否确定？'
-        msg = '出库成功'
         break
     }
     wx.showModal({
@@ -143,20 +160,17 @@ Page({
   },
   // 出库
   outCar: function (event) {
-    let item = event.currentTarget.dataset.item
-    let formData = app.utils.copyObj({
-      orderId: item.id,
-      logisticsOrderCode: '',
-      logisticsCompany: '',
-      logisticsPlateNumber: '',
-      logisticsDriver: '',
-      logisticsDriverPhone: ''
-    }, item)
-
-
-    // 先检查物流信息齐全
-    if (!(formData.logisticsOrderCode && formData.logisticsCompany && formData.logisticsPlateNumber 
-      && formData.logisticsDriver && formData.logisticsDriverPhone)) {
+    let item = this.data.list.data[event.currentTarget.dataset.index]
+    // 如果物流方式是其他
+    if (item.logisticsType == 2 && !(formData.logisticsOrderCode && formData.logisticsCompany && formData.logisticsPlateNumber && formData.logisticsDriver && formData.logisticsDriverPhone)) {
+      let formData = app.utils.copyObj({
+        orderId: item.id,
+        logisticsOrderCode: '',
+        logisticsCompany: '',
+        logisticsPlateNumber: '',
+        logisticsDriver: '',
+        logisticsDriverPhone: ''
+      }, item)
       wx.showModal({
         content: '订单物流信息不全，请先完善物流信息',
         showCancel: false,
@@ -165,7 +179,7 @@ Page({
           app.navigateTo('wuliu')
         }
       })
-    }else {
+    }else{
       wx.showModal({
         title: '确认提示',
         content: '出库前是核实是否收齐尾款，是否确定？',
@@ -173,7 +187,7 @@ Page({
           if (res.confirm) {
             wx.showLoading()
             app.post(app.config.lv2.orderState, {
-              orderId: formData.orderId, 
+              orderId: item.id,
               state: 45
             }).then(_ => {
               app.toast('出库成功', false).finally(_ => {

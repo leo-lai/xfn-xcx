@@ -111,7 +111,7 @@
             <text class='l-btn-link l-margin-l' data-url='car?ids={{info.id}},{{item.id}}' data-item='{{carItem}}' bindtap='carEdit'>编辑</text>
           </view>
         </view>
-        <view wx:if='{{isAdmin}}' class='l-margin-t l-text-right' data-item='{{carItem}}' data-state='{{20}}' bindtap='carMatch'>
+        <view wx:if='{{isAdmin && carItem.auditNum > 0}}' class='l-margin-t l-text-right' data-item='{{carItem}}' data-state='{{20}}' bindtap='carMatch'>
           <button size='mini' class='l-button-main'>去审核</button>
         </view>
       </view>

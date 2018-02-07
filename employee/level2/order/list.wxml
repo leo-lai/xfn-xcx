@@ -12,47 +12,63 @@
   </view>
 
   <!-- 订购单列表 -->
-  <navigator url='info?id={{item.id}}' class=' l-padding l-bg-white l-margin-m l-radius' wx:for='{{list.data}}' wx:key='{{orderCode}}' data-item='{{item}}'>
-    <view>
+  <view class='l-order-list-item' wx:for='{{list.data}}' wx:key='{{orderCode}}'>
+    <view class='_hd'>
       <text class='l-fr l-text-theme'>{{item.orderStateName}}</text>
       <text>订单号 {{item.orderCode}}</text>
     </view>
-    <view class='l-order-list-car l-fs-s' wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
-      <view>{{carItem.carsName}}</view>
-      <view class='l-text-gray'>
-        <text class='l-margin-r'>车身颜色：{{carItem.colorName}}</text>
-        <text class='l-margin-r' wx:if='{{carItem.interiorName}}'>内饰颜色：{{carItem.interiorName}}</text>
-        <text>数量：{{carItem.carNum}}</text>
-      </view>
-    </view>
-    <view style='margin-top: 50rpx; text-align:center;'>
-      <view  wx:if='{{item.state >= 10}}' class='l-inline' catchtap='noopFn'>
-        <navigator class='l-inline' url='contract?id={{item.id}}' hover-class='none'>
-          <button size='mini' class='l-button-border'>电子合同</button>
-        </navigator>
-      </view>
-      <button wx:if='{{isAdmin}}' size='mini' class='l-button-main l-margin-l'>去审核</button>
-      <view class="l-inline l-margin-l" wx:if='{{showEdit}}'>
-        <button wx:if='{{item.state == 10}}' size='mini' class='l-button-main l-margin-r'>去配车</button>
-        <button wx:if='{{item.state == 15}}' size='mini' class='l-button-main l-margin-r'>去验车</button>
-        <view wx:if='{{item.state < 10}}' class='l-inline' catchtap='noopFn'>
-          <navigator class='l-inline' url='add-order?id={{item.id}}' hover-class='none'>
-            <button size='mini' class='l-button-main'>新增订购信息</button>
-          </navigator>
-        </view>
-        <view class='l-inline' catchtap='noopFn'>
-          <view class='l-inline' data-val='{{item.id}}' bindtap='sureCar'>
-            <button wx:if='{{item.state == 10}}' size='mini' class='l-button-main' data-state='15'>配车完成</button>
-            <button wx:if='{{item.state == 15}}' size='mini' class='l-button-main' data-state='35'>验车完成</button>
-            <!-- 自提出库 -->
-            <button wx:if='{{item.state == 40 && item.logisticsType == 1}}' size='mini' class='l-button-main' data-state='45'>出库</button>
+    <view class='_bd'>
+      <view class='_car' wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
+        <view>{{carItem.carsName}}</view>
+        <view class='l-flex-hc'>
+          <view class='l-rest l-text-gray'>
+            <text class='l-margin-r'>车身颜色：{{carItem.colorName}}</text>
+            <text>数量：{{carItem.carNum}}</text>
           </view>
-          <!-- 物流方式为其他的出库 -->
-          <button wx:if='{{item.state == 40 && item.logisticsType == 2}}' size='mini' class='l-button-main' data-item='{{item}}' bindtap='outCar'>出库</button>
+
+          <block wx:if='{{showEdit}}'>
+            <view data-item='{{carItem}}' data-state='{{item.state}}' bindtap='carMatch'>
+              <text wx:if='{{item.state == 10}}' class='l-btn-link'>去配车</text>
+              <text wx:if='{{item.state == 15}}' class='l-btn-link'>去验车</text>
+            </view>
+          </block>
+
+          <!-- 主管审核换车申请 -->
+          <block wx:if='{{isAdmin && carItem.auditNum > 0}}'>
+            <view data-item='{{carItem}}' data-state='{{item.state}}' bindtap='carMatch'>
+              <text class='l-btn-link'>去审核</text>
+            </view>
+          </block>
         </view>
       </view>
     </view>
-  </navigator>
+    <view class='_ft'>
+      <navigator wx:if='{{item.state >= 10}}' url='contract?id={{item.id}}' hover-class='none'>
+        <button size='mini' class='l-button-border'>电子合同</button>
+      </navigator>
+
+      <navigator url='info?id={{item.id}}' hover-class='none'>
+        <button size='mini' class='l-button-border'>查看详情</button>
+      </navigator>
+
+      <!-- 非主管二级 -->
+      <block wx:if='{{showEdit}}'>
+        <!-- 新建购车单 -->
+        <navigator wx:if='{{item.state < 10}}' url='add-order?id={{item.id}}' hover-class='none'>
+          <button size='mini' class='l-button-main'>新增订购信息</button>
+        </navigator>
+
+        <!-- 配车完成/验车完成 -->
+        <view class='l-inline' data-val='{{item.id}}' bindtap='carMatchOk'>
+          <button wx:if='{{item.state == 10}}' size='mini' class='l-button-main' data-state='15'>配车完成</button>
+          <button wx:if='{{item.state == 15}}' size='mini' class='l-button-main' data-state='35'>验车完成</button>
+        </view>
+        
+        <!-- 出库 -->
+        <button wx:if='{{item.state == 40}}' size='mini' class='l-button-main' data-index='{{index}}' bindtap='outCar'>出库</button>
+      </block>
+    </view>
+  </view>
   <template is='loadmore' data='{{...list}}' /> 
 
   <block wx:if='{{showEdit}}'>
