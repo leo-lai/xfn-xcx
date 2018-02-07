@@ -10,7 +10,7 @@
     <view class='l-margin-t'>
       <view>购买数量：{{info.carNum}}</view>
       <view>应付定金：{{info.depositPrice}}元</view>
-      <view>{{info.changePrice > 0 ? '加价金额' : '优惠金额'}}：{{info.changePrice}}元</view>
+      <view>{{info.changePrice > 0 ? '加价金额' : '优惠金额'}}：{{info.changePrice2}}元</view>
     </view>
     <view class='l-text-blod'>
       成交金额：<text class='l-text-theme'>{{info.finalPrice}}元</text>
@@ -19,9 +19,9 @@
 
     <view class='l-frame-list _border' wx:if='{{carFrame.length > 0}}'>
       <view class='_item' wx:for='{{carFrame}}' wx:key='id'>
-        <view class='l-h4'>车架号：{{item.vin}}</view>
+        <view class='l-h4'>车架号：{{item.vin || '--'}}</view>
         <view>
-          <text class='l-margin-r'>发动机号：{{item.stockCar ? item.stockCar.engineNumber : ''}}</text>
+          <text class='l-margin-r'>发动机号：{{item.stockCar ? item.stockCar.engineNumber : '--'}}</text>
           <text>内饰颜色：{{item.interiorName}}</text>
         </view>
         <view data-images='{{item.checkImages}}' bindtap='previewImage'>

@@ -66,7 +66,7 @@ Page({
       infoId: this.data.info.id
     }).then(({data}) => {
       this.setData({ 
-        'carFrame': data.filter(item => item.vin).map(item => {
+        'carFrame': data.map(item => {
           item.checkImages = item.checkCarPic ? item.checkCarPic.split(',') : []
           return item
         }) 
@@ -82,7 +82,6 @@ Page({
       infoId: this.data.info.id
     }).then(({ data }) => {
       this.setData({
-        'frameList.visible': false,
         'frameList.slted': [],
         'frameList.list': data ? data.map(item => {
           item.checked = false
@@ -131,6 +130,7 @@ Page({
       stockCarIds: this.data.frameList.slted.join(',')
     }).then(_ => {
       app.toast('保存成功', false).then(_ => {
+        this.closeFrameList()
         this.getCarFrame()
         app.getPrevPage().then(prevPage => prevPage.getInfo && prevPage.getInfo())
       })

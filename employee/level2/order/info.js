@@ -37,7 +37,14 @@ Page({
     app.post(app.config.lv2.orderInfo, { 
       orderId: this.options.id 
     }).then(({ data }) => {
+      data.customers.forEach(customer => {
+        customer.infos.forEach(cars => {
+          cars.changePrice2 = Math.abs(cars.changePrice)
+        })
+      })
+
       this.setData({ info: data })
+
       if (data.pickers.length > 0) {
         this.tabLinkMan(data.pickers[0].id)
       }
@@ -46,6 +53,7 @@ Page({
         this.tabCustomer(data.customers[0].id)
       }
       
+
     }).finally(_ => {
       wx.hideLoading()
     })
@@ -145,6 +153,7 @@ Page({
     let item = event.currentTarget.dataset.item
     let formData = app.utils.copyObj({
       id: '',
+      familyId: '',
       carsId: '',
       carsName: '',
       guidePrice: '',

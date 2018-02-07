@@ -40,9 +40,12 @@ Page({
   onReady: function (options) {
     app.storage.getItem('lv2-order-car').then(info => {
       if (info) {
+        console.log(info)
         this.setData({
           'formData': Object.assign({}, this.data.formData, info)
         })
+        this.getCheshen(info.familyId)
+        this.getNeishi(info.familyId)
       }
     })
   },
@@ -122,7 +125,7 @@ Page({
     if (!familyId) return
     app.post(app.config.cheshen, { familyId }).then(({ data }) => {
       this.setData({
-        'cheshen.index': data.findIndex(item => item.carColourId === this.data.formData.colourId),
+        'cheshen.index': data.findIndex(item => item.carColourId === this.data.formData.colorId),
         'cheshen.list': data
       })
     })
