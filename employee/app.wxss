@@ -187,16 +187,19 @@ button.button-hover[type=primary] { color:rgba(255, 255, 255, 0.6); background-c
 button[type=primary][disabled] { background-color:#ef5b45 !important; opacity: 0.3;}
 
 button.l-button-main, button.l-button-border{border-radius: 60rpx;padding:0 20rpx;}
-button.l-button-main{ background-color: #fa5539; color: #fff;  border: 2rpx solid #fa5539; box-shadow: 0 10rpx 20rpx rgba(230, 81, 56, 0.3);}
+button.l-button-main{ background-color: #fa5539; color: #fff;  border: 2rpx solid #fa5539; box-shadow: 0 10rpx 20rpx rgba(230, 81, 56, 0.3); }
 button.l-button-main::after{display: none;}
 button.l-button-main._radius{border-radius: 50%; width: 100rpx; height: 100rpx; line-height: 100rpx; font-size: 28rpx; padding: 0;}
 button.l-button-main._border{ background-color: #fff; color: #666; border-radius: 60rpx; padding:0 20rpx;}
 button.l-button-main.button-hover{  background-color:#e65138;}
 button.l-button-main[disabled] { background-color:#fa5539 !important; opacity: 0.3; color: #fff;}
-button.l-button-main[size] { display:inline-block; line-height:2; font-size: 24rpx; padding:0 1.34em; }
 
-button.l-button-border{color: #333; border: 2rpx solid #eee; box-shadow: 0 10rpx 20rpx #ddd;}
+button.l-button-border{background-color: #fff;border: 2rpx solid #e65138; color:#e65138;}
 button.l-button-border::after{display: none;}
+button.l-button-border.button-hover{  background-color:#fff;}
+
+button.l-button-main[size]
+button.l-button-border[size]{ display:inline-block; line-height:2; font-size: 24rpx; padding:0 1.34em; vertical-align: middle; }
 /* border style */
 .l-border-t{border-top: 2rpx solid #eee;}
 .l-border-b{border-bottom: 2rpx solid #eee;}

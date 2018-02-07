@@ -54,7 +54,8 @@
     "level2/order/car-match",
     "level2/order/car-check",
     "level2/order/wuliu",
-    "level2/order/frame-list"
+    "level2/order/frame-list",
+    "level2/order/contract"
   ],
   "window": {
     "backgroundColor": "#eee",

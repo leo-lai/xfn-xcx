@@ -72,10 +72,10 @@
           </checkbox-group>
           <view class='l-padding l-text-center' wx:if='{{carList.list.length === 0}}'>
             <view class='l-br'></view>
-            <view class='l-text-gray'>当前库存暂无此车辆</view>
-            <view class='l-margin-t'>
+            <view class='l-text-gray'>库存不足</view>
+            <!-- <view class='l-margin-t'>
               <button size='mini' class='l-button-main l-btn-w60' bindtap='gotoOrder'>去订车</button>
-            </view>
+            </view> -->
             <view class='l-br'></view>
           </view>
         </view>

@@ -27,20 +27,34 @@
         <view data-images='{{item.checkImages}}' bindtap='previewImage'>
           <image mode='aspectFill' id='{{imgItem}}' wx:for='{{item.checkImages}}' wx:key='{{index}}' wx:for-item='imgItem' src='{{imgItem}}'></image>
         </view>
-        <view class='l-margin-t' wx:if='{{info.orderState == 15}}'>
-          <view wx:if='{{item.auditState != 5 && item.auditState != 6}}' data-item='{{item}}' bindtap='carCheck'>
-            <text data-action='1' class='l-btn-link l-margin-r'>上传验车照片</text>
-            <text data-action='2' class='l-btn-link'>申请换车</text>
-          </view>
-          <!-- 换车申请通过，重新配车 -->
-          <view wx:if='{{item.auditState == 6}}'>
-            <text class='l-margin-r l-text-theme'>换车申请通过</text>
-            <navigator class='l-inline l-btn-link' url='frame-list?ids={{info.id}},{{item.id}}'>重新配车</navigator>
-          </view>
+        <view wx:if='{{item.auditRemark}}' class='l-margin-t l-text-gray'>
+          备注：{{item.auditRemark}}
         </view>
-        <view class='l-margin-t l-text-theme'>
-          <view wx:if='{{item.auditState == 5}}'>换车申请审核中，请耐心等待</view>
+
+        <!-- 主管审核 -->
+        <view class='l-margin-t' wx:if='{{isAdmin && item.auditState == 5}}' data-id='{{item.id}}' bindtap='examineCar'>
+          <button size='mini' class='l-button-main l-margin-r' data-action='1'>同意换车</button>
+          <button size='mini' class='l-button-border' data-action='0'>不同意换车</button>
         </view>
+
+        <!-- 非主管 -->
+        <block wx:if='{{!isAdmin}}'>
+          <view class='l-margin-t' wx:if='{{info.orderState == 15}}'>
+            <view wx:if='{{item.auditState != 5 && item.auditState != 6}}' data-item='{{item}}' bindtap='carCheck'>
+              <text data-action='1' class='l-btn-link l-margin-r'>上传验车照片</text>
+              <text data-action='2' class='l-btn-link'>申请换车</text>
+            </view>
+            
+            <!-- 换车申请通过，重新配车 -->
+            <view wx:if='{{item.auditState == 6}}'>
+              <text class='l-margin-r l-text-theme'>换车申请通过</text>
+              <navigator class='l-inline l-btn-link' url='frame-list?ids={{info.id}},{{item.id}}'>重新配车</navigator>
+            </view>
+          </view>
+          <view class='l-margin-t l-text-theme'>
+            <view wx:if='{{item.auditState == 5}}'>换车申请审核中，请耐心等待</view>
+          </view>
+        </block>
       </view>
     </view>
   </view>

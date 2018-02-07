@@ -1,0 +1,4 @@
+/* level2/order/contract.wxss */
+view{font-size: 28rpx; word-break: break-all; text-align:justify; text-justify: inter-word;}
+.l-h4{font-size: 28rpx; margin-top: 30rpx;}
+.l-indent{text-indent: 2em;}

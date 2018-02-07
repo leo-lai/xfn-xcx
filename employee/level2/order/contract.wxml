@@ -1,0 +1,29 @@
+<!--level2/order/contract.wxml-->
+<view class='l-page-full l-bg-white'>
+  <view class='l-padding'>
+    <view>甲方（供车方）：广州传创投资有限公司</view>
+    <view>乙方（购车方）：<text>{{info.orgName}}</text></view>
+    <view class='l-margin-t l-indent'>经甲乙双方共同协商一致，乙方愿意全权委托甲方代购指定车辆，双方特立此合同，以兹共同遵守：</view>
+    <view class='l-h4'>一、委托代购事项</view>
+    <view class='l-indent'>
+      乙方全权委托甲方在微信小程序“淘车快商户版”中新建一订购单，订购单单号为：<text>{{info.orderCode}}</text>。甲方开单后，乙方可登录微信小程序“淘车快商户版”中查看订购单<text>{{info.orderCode}}</text>的详细信息。
+    </view>
+    <view class='l-h4'>二、款项及支付方式</view>
+    <view class='l-indent'>1、本合同签订时则代表乙方完全同意订购单<text>{{info.orderCode}}</text>中的所有订单信息，并且乙方根据订购单<text>{{info.orderCode}}</text>中的定金要向甲方支付代购定金￥<text>{{info.totalDepositPrice}}</text>；余款￥<text>{{info.totalRestPrice}}</text>；</view>
+    <view class='l-indent'>2、乙方必须在甲方通知提车当天内付清订购单{{info.orderCode}}的全款，如乙方未能在规定期限内付清全款，逾期7天未付甲方有权单方面解除合同，乙方所付定金不予退还，同时甲方有权处置乙方所定车辆；</view>
+    <view class='l-indent'>3、上述订购单{{info.orderCode}}只包括新车裸车价，不含购置税、上牌费用、保险费用及车船使用税等相关费用；</view>
+    <view class='l-indent'>4、上述所有款项，甲方指定收款账号为：</view>
+    <view class='l-indent'>户名：林泽群  账号：6214 8512 0362 9618  开户行：招商银行广州市海珠区新港支行</view>
+    <view class='l-h4'>三、车辆机动车销售发票、合格证及相关资料由相应品牌专营开具并按约定时间交付；</view>
+    <view class='l-h4'>四、乙方须提供准确真实客户信息，如发现作假资料不符合品牌区域销售管控的，本合约自动作废并没收定金；</view>
+    <view class='l-h4'>五、车辆验收：提车时按车辆出厂标准由乙方或乙方委托的代表验收，如有异议应当场提出，如当场未提出异议，则视为乙方认可甲方代购的车辆符合出厂标准，车辆交接完毕后所产生的全部损失由乙方自行承担；</view>
+    <view class='l-h4'>六、乙方购车客户须符合上牌资格，如因乙方客户自身原因导致不能上牌的责任由乙方负责，甲方不予退车或退款；</view>
+    <view class='l-h4'>七、免责条款：协议生效后，因不可抗力的情况下（如因生产商停车，4S店发车时间、价格变动、4S店交通运输延误）而导致甲方无法履行合同，甲方有权解除本合约并退还所收定金；</view>
+    <view class='l-h4'>八、本合同一式两份，于甲方收到购车定金即时生效，同时甲方保留本合约一切解释权</view>
+    <view class='l-text-gray l-rel' style='padding: 60rpx 0;'>
+      盖章处：<image mode='aspectFit' style='position:absolute; width: 200rpx; height: 163rpx; top: 20rpx; opacity: 0.6;' src='{{resURL}}/zang.png'></image>
+    </view>
+    <view>日期：{{info.createTime}}</view>
+    <view>附件：查看订购单<navigator url='info?id={{info.id}}' class='l-inline l-text-link'>{{info.orderCode}}</navigator>详情</view>
+  </view>
+</view>

@@ -32,11 +32,19 @@ Page({
       }
     })
 
-    app.storage.getItem('lv2-order-car-info').then(info => {
-      if (info) {
-        this.setData({ info })
-        this.getCarFrame()
-      }
+    app.onLogin(userInfo => {
+      this.setData({
+        userInfo,
+        'isAdmin': userInfo.roleName == '仓管主管',
+        'showEdit': userInfo.roleName != '仓管主管' && userInfo.orgLevel == 2
+      })
+
+      app.storage.getItem('lv2-order-car-info').then(info => {
+        if (info) {
+          this.setData({ info })
+          this.getCarFrame()
+        }
+      })
     })
   },
   /**
@@ -64,8 +72,7 @@ Page({
         }) 
       })
     }).finally(_ => {
-      // wx.hideLoading()
-      this.getFrameList()
+      this.data.carFrame.length === 0 ? this.getFrameList() : wx.hideLoading()
     })
   },
   // 获取车架号列表
@@ -148,6 +155,22 @@ Page({
     wx.previewImage({
       current: event.target.id,
       urls: images
+    })
+  },
+  // 换车审核通过/不通过
+  examineCar: function (event) {
+    let carId = event.currentTarget.dataset.id
+    let action = event.target.dataset.action
+    if(!action)  return
+
+    let url = action == 1 ? app.config.lv2.carChange1 : app.config.lv2.carChange2
+    wx.showLoading()
+    app.post(url, { carId }).then(_ => {
+      app.toast('操作成功', false).then(_ => {
+        this.getCarFrame()
+      })
+    }).finally(_ => {
+      wx.hideLoading()
     })
   }
 })

@@ -1,5 +1,5 @@
 <!--pages/car-stock/index.wxml-->
-<import src='../../template/loadmore.wxml' />
+<import src='/template/loadmore.wxml' />
 <view class='l-page-full'>
   <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
     <view style='margin-right: 20rpx;' class='_type' bindtap='showFilter' data-val='online'>

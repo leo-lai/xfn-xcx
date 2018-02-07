@@ -42,13 +42,13 @@ Page({
   },
   // 加载更多
   onReachBottom: function () {
-    if (this.data.userInfo) {
+    if (app.globalData.userInfo) {
       this.getList(this.data.list.data.length > 0 ? this.data.list.page + 1 : 1)
     }
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    if (this.data.userInfo) {
+    if (app.globalData.userInfo) {
       this.getList(1, _ => {
         wx.stopPullDownRefresh()
       })

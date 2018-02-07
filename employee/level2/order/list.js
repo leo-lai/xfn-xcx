@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showEdit: false,
     mode: 'list', // slt
     filter: {
       loading: false,
@@ -28,6 +29,11 @@ Page({
    */
   onReady: function () {
     app.onLogin(userInfo => {
+      this.setData({ 
+        userInfo,
+        'isAdmin': userInfo.roleName == '仓管主管',
+        'showEdit': userInfo.roleName != '仓管主管' && userInfo.orgLevel == 2 
+      })
       this.getList()
     }, this.route)
   },
@@ -46,13 +52,13 @@ Page({
   },
   // 加载更多
   onReachBottom: function () {
-    if (this.data.userInfo) {
+    if (app.globalData.userInfo) {
       this.getList(this.data.list.data.length > 0 ? this.data.list.page + 1 : 1)
     }
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    if (this.data.userInfo) {
+    if (app.globalData.userInfo) {
       this.getList(1, _ => {
         wx.stopPullDownRefresh()
       })
@@ -71,7 +77,8 @@ Page({
     }
 
     this.setData({ 'list.loading': true })
-    return app.post(app.config.lv2.orderList, {
+    let url = this.data.isAdmin ? app.config.lv2.orderList2 : app.config.lv2.orderList
+    return app.post(url, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
       // 如果接口返回的是数组，则转换成分页对象

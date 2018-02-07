@@ -3,29 +3,27 @@
   <block wx:if='{{userInfo.orgLevel === 3}}'>
     <navigator url='../car-stock/index' class='l-margin l-bg-white l-padding l-radius'>
       <view class='l-padding-btn l-text-center'>
-        <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='../../images/sell-car-icon.png'></image>
+        <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/sell-car-icon.png'></image>
         <view>在售车辆</view>
       </view>
     </navigator>
     <navigator url='../car-stock-out/index' class='l-margin l-bg-white l-padding l-radius'>
       <view class='l-padding-btn l-text-center'>
-        <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='../../images/out-car-icon.png'></image>
+        <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/out-car-icon.png'></image>
         <view>出库车辆</view>
       </view>
     </navigator>
-    <navigator url='../car-stock-order-list/index' class='l-margin l-bg-white l-padding l-radius'>
+    <navigator url='/level2/stock/in/list' class='l-margin l-bg-white l-padding l-radius'>
       <view class='l-padding-btn l-text-center'>
-        <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='../../images/order-car-icon.png'></image>
-        <view>订车列表</view>
-      </view>
-    </navigator>
-  </block>
-  <block wx:if='{{userInfo.orgLevel === 2}}'>
-    <navigator url='../car-stock-in/index' class='l-margin l-bg-white l-padding l-radius'>
-      <view class='l-padding-btn l-text-center'>
-        <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='../../images/in-car-icon.png'></image>
+        <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/in-car-icon.png'></image>
         <view>车辆入库</view>
       </view>
     </navigator>
+    <!-- <navigator url='../car-stock-order-list/index' class='l-margin l-bg-white l-padding l-radius'>
+      <view class='l-padding-btn l-text-center'>
+        <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/order-car-icon.png'></image>
+        <view>订车列表</view>
+      </view>
+    </navigator> -->
   </block>
 </view>

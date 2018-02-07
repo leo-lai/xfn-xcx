@@ -160,6 +160,8 @@ var config = {
     storeAdd: `${baseUrl}/organizationEdit`,
     // 代购列表
     orderList: `${baseUrl}/consumerOrder/listOrders`,
+    // 代购列表-待审核
+    orderList2: `${baseUrl}/consumerOrder/auditList`,
     // 新增订购单
     orderAdd: `${baseUrl}/consumerOrder/createOrder`,
     // 更新订购单
@@ -196,8 +198,13 @@ var config = {
     carCheck: `${baseUrl}/consumerOrderCar/uploadCheckCarPic`,
     // 换车申请
     carChange: `${baseUrl}/consumerOrderInfo/changeCarApply`,
+    // 同意换车
+    carChange1: `${baseUrl}/consumerOrderInfo/changeCarApprove`,
+    // 不同意换车
+    carChange2: `${baseUrl}/consumerOrderInfo/refuseChangeCar`,
     // 更新物流信息
     wuliu: `${baseUrl}/consumerOrder/updateLogisticsInfo`,
+    
   },
   // 采购员列表
   buyerList: `${baseUrl}/orgOneSelfList`,
@@ -215,6 +222,6 @@ var config = {
   stockInDelCar: `${baseUrl}/storageCarDelete`,
 
   baseUrl
-};
+}
 
 module.exports = config
