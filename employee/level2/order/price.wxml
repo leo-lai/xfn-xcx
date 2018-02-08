@@ -1,0 +1,98 @@
+<!--level2/order/price.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>车型</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input l-fs-s'>
+            <text>{{formData.carsName}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>官方指导价（元）</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>
+            <text>{{formData.guidePrice}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>车身颜色</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>
+            <text>{{formData.colorName}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>内饰颜色</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>
+            <text>{{formData.interiorName}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>数量</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>
+            <text>{{formData.carNum}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>定金（元）</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>
+            <text>{{formData.depositPrice}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-input'>
+            <text>{{formData.changePrice > 0 ? '已加价' : '已优惠'}}（元）</text>
+          </view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>
+            <text>{{formData.changePrice}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>成交价（元）</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入成交价' id='finalPrice' value='{{formData.finalPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__bd' style='padding: 15rpx 0;'>
+          <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注' id='remark' value='{{formData.remark}}' bindinput='bindInput'></textarea>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>确定修改</button>
+  </view>
+</view>

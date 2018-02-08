@@ -68,6 +68,7 @@ Page({
       this.setData({ 
         'carFrame': data.map(item => {
           item.checkImages = item.checkCarPic ? item.checkCarPic.split(',') : []
+          item.ticketImages = item.ticketPic ? item.ticketPic.split(',') : []
           return item
         }) 
       })
@@ -172,5 +173,30 @@ Page({
     }).finally(_ => {
       wx.hideLoading()
     })
+  },
+  // 协商价格
+  carEditPrice: function (event) {
+    let item = event.currentTarget.dataset.item
+    let formData = app.utils.copyObj({
+      id: '',
+      familyId: '',
+      carsId: '',
+      carsName: '',
+      guidePrice: '',
+      colorId: '',
+      colorName: '',
+      interiorId: '',
+      interiorName: '',
+      carNum: '',
+      depositPrice: '',
+      finalPrice: '',
+      isDiscount: this.data.info.changePrice < 0 ? 1 : 0,
+      changePrice: '',
+      remark: ''
+    }, this.data.info)
+
+    formData.changePrice = Math.abs(this.data.info.changePrice)
+    app.storage.setItem('lv2-order-car-price', formData)
+    app.navigateTo(`price?id=${this.data.info.id}`)
   }
 })

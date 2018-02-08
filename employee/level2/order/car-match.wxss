@@ -3,4 +3,4 @@
 .l-frame-list ._item{ margin-bottom: 30rpx; }
 .l-frame-list._border ._item{ border-bottom: 2rpx dashed #eee; padding-bottom: 30rpx;}
 .l-frame-list._border ._item:last-child{border-bottom: none; padding-bottom: 0;}
-.l-frame-list image{width: 100rpx; height: 100rpx; margin: 20rpx 20rpx 0 0; background-color: #eee;}
+.l-frame-list image{width: 100rpx; height: 100rpx; margin: 10rpx 20rpx 10rpx 0; background-color: #eee;}

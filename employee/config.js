@@ -206,6 +206,8 @@ var config = {
     wuliu: `${baseUrl}/consumerOrder/updateLogisticsInfo`,
     // 合同信息
     contract: `${baseUrl}/consumerOrder/getContractInfo`,
+    // 协商价格
+    changeCarPrice: `${baseUrl}/consumerOrderInfo/changePrice`,
   },
   // 采购员列表
   buyerList: `${baseUrl}/orgOneSelfList`,

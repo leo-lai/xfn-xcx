@@ -9,7 +9,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-input'>
-            <text wx:if='{{formData.carsId}}'>{{formData.carsName}}</text>
+            <text class='l-fs-s' wx:if='{{formData.carsId}}'>{{formData.carsName}}</text>
             <text wx:else class='l-text-gray'>请选择</text>  
           </view>
         </view>

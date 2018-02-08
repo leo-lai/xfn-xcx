@@ -59,7 +59,6 @@ Page({
         this.tabCustomer(data.customers[0].id)
       }
       
-
     }).finally(_ => {
       wx.hideLoading()
     })
