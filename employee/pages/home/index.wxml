@@ -15,7 +15,7 @@
   <view class='l-menu-grid' wx:if='{{userInfo.orgLevel === 2}}'>
     <navigator class='_item' url='/level2/store/list'>
       <image mode='widthFix' src='/images/customer-icon.png'></image>
-      <view class="_txt">客户管理</view>
+      <view class="_txt">汽贸店管理</view>
     </navigator>
     <navigator class='_item' url='/level2/stock/index'>
       <image mode='widthFix' src='/images/stock-icon.png'></image>

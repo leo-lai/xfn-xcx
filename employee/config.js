@@ -204,7 +204,8 @@ var config = {
     carChange2: `${baseUrl}/consumerOrderInfo/refuseChangeCar`,
     // 更新物流信息
     wuliu: `${baseUrl}/consumerOrder/updateLogisticsInfo`,
-    
+    // 合同信息
+    contract: `${baseUrl}/consumerOrder/getContractInfo`,
   },
   // 采购员列表
   buyerList: `${baseUrl}/orgOneSelfList`,

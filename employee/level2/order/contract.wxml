@@ -23,7 +23,7 @@
     <view class='l-text-gray l-rel' style='padding: 60rpx 0;'>
       盖章处：<image mode='aspectFit' style='position:absolute; width: 200rpx; height: 163rpx; top: 20rpx; opacity: 0.6;' src='{{resURL}}/zang.png'></image>
     </view>
-    <view>日期：{{info.createTime}}</view>
+    <view>日期：{{info.createTimeStr}}</view>
     <view>附件：查看订购单<navigator url='info?id={{info.id}}' class='l-inline l-text-link'>{{info.orderCode}}</navigator>详情</view>
   </view>
 </view>

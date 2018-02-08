@@ -197,9 +197,7 @@ button.l-button-main[disabled] { background-color:#fa5539 !important; opacity: 0
 button.l-button-border{background-color: #fff;border: 2rpx solid #e65138; color:#e65138;}
 button.l-button-border::after{display: none;}
 button.l-button-border.button-hover{  background-color:#fff;}
-
-button.l-button-main[size]
-button.l-button-border[size]{ display:inline-block; line-height:2; font-size: 24rpx; padding:0 1.34em; vertical-align: middle; }
+button[size='mini']{ display:inline-block; line-height: 2; font-size: 24rpx; padding:0 30rpx; vertical-align: middle;}
 /* border style */
 .l-border-t{border-top: 2rpx solid #eee;}
 .l-border-b{border-bottom: 2rpx solid #eee;}

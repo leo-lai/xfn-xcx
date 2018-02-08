@@ -87,7 +87,9 @@ Page({
     if (storeInfo) {
       this.setData({
         'formData.orgId': storeInfo.orgId,
-        'formData.orgName': storeInfo.shortName
+        'formData.orgName': storeInfo.shortName,
+        'formData.orgLinker': storeInfo.linkMan,
+        'formData.orgPhone': storeInfo.telePhone
       })
     }
   },

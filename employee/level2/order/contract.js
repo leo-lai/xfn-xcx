@@ -15,20 +15,8 @@ Page({
    */
   onReady: function () {
     app.onLogin(userInfo => {
-      this.setData({
-        userInfo,
-        'isAdmin': userInfo.roleName == '仓管主管',
-        'showEdit': userInfo.roleName != '仓管主管' && userInfo.orgLevel == 2
-      })
       this.getInfo()
     }, this.route)
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
   },
   onShareAppMessage: function() {
     return {
@@ -38,9 +26,10 @@ Page({
   // 订购单详情
   getInfo: function () {
     wx.showLoading()
-    app.post(app.config.lv2.orderInfo, {
+    app.post(app.config.lv2.contract, {
       orderId: this.options.id
     }).then(({ data }) => {
+      data.createTimeStr = app.utils.str2date(data.createTime).format('yyyy年MM月dd日')
       this.setData({ info: data })
     }).finally(_ => {
       wx.hideLoading()

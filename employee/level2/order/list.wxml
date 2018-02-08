@@ -17,7 +17,7 @@
       <text class='l-fr l-text-theme'>{{item.orderStateName}}</text>
       <text>订单号 {{item.orderCode}}</text>
     </view>
-    <view class='_bd'>
+    <view class='_bd' wx:if='{{item.infos.length > 0}}'>
       <view class='_car' wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
         <view>{{carItem.carsName}}</view>
         <view class='l-flex-hc'>
@@ -43,7 +43,7 @@
       </view>
     </view>
     <view class='_ft'>
-      <navigator wx:if='{{item.state >= 10}}' url='contract?id={{item.id}}' hover-class='none'>
+      <navigator wx:if='{{item.state > 1}}' url='contract?id={{item.id}}' hover-class='none'>
         <button size='mini' class='l-button-border'>电子合同</button>
       </navigator>
 
