@@ -59,7 +59,7 @@
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>联系地点</view>
+          <view class='weui-label'>交车地点</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请输入详细地址' maxlength='{{100}}' confirm-type='next' id='pickCarAddr' value='{{formData.pickCarAddr}}' bindinput='bindInput' />

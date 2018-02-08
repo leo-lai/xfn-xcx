@@ -1,7 +1,7 @@
 <!--level2/order/contract.wxml-->
 <view class='l-page-full l-bg-white'>
   <view class='l-padding'>
-    <view>甲方（供车方）：广州传创投资有限公司</view>
+    <view>甲方（供车方）：{{info.partyA}}</view>
     <view>乙方（购车方）：<text>{{info.orgName}}</text></view>
     <view class='l-margin-t l-indent'>经甲乙双方共同协商一致，乙方愿意全权委托甲方代购指定车辆，双方特立此合同，以兹共同遵守：</view>
     <view class='l-h4'>一、委托代购事项</view>
@@ -13,7 +13,7 @@
     <view class='l-indent'>2、乙方必须在甲方通知提车当天内付清订购单{{info.orderCode}}的全款，如乙方未能在规定期限内付清全款，逾期7天未付甲方有权单方面解除合同，乙方所付定金不予退还，同时甲方有权处置乙方所定车辆；</view>
     <view class='l-indent'>3、上述订购单{{info.orderCode}}只包括新车裸车价，不含购置税、上牌费用、保险费用及车船使用税等相关费用；</view>
     <view class='l-indent'>4、上述所有款项，甲方指定收款账号为：</view>
-    <view class='l-indent'>户名：林泽群  账号：6214 8512 0362 9618  开户行：招商银行广州市海珠区新港支行</view>
+    <view class='l-indent'>户名：{{info.bankAccountName}}  账号：{{info.bankCardNum}}  开户行：{{info.bankBranch}}</view>
     <view class='l-h4'>三、车辆机动车销售发票、合格证及相关资料由相应品牌专营开具并按约定时间交付；</view>
     <view class='l-h4'>四、乙方须提供准确真实客户信息，如发现作假资料不符合品牌区域销售管控的，本合约自动作废并没收定金；</view>
     <view class='l-h4'>五、车辆验收：提车时按车辆出厂标准由乙方或乙方委托的代表验收，如有异议应当场提出，如当场未提出异议，则视为乙方认可甲方代购的车辆符合出厂标准，车辆交接完毕后所产生的全部损失由乙方自行承担；</view>

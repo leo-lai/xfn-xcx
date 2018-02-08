@@ -52,7 +52,7 @@
         </block>
       </view>
       <view class='l-margin-t-m'>
-        <view><text>姓名：{{item.userName}}</text></view>
+        <view><text>客户姓名：{{item.userName}}</text></view>
         <view><text>联系电话：{{item.userPhone}}</text></view>
         <view>身份证照片：</view>
         <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>

@@ -23,6 +23,7 @@
           <text class='l-margin-r'>发动机号：{{item.stockCar ? item.stockCar.engineNumber : '--'}}</text>
           <text>内饰颜色：{{item.interiorName}}</text>
         </view>
+        <view wx:if='{{item.auditRemark}}' class='l-text-gray'>换车申请备注：{{item.auditRemark}}</view>
         <view wx:if='{{item.checkImages.length > 0}}' data-images='{{item.checkImages}}' bindtap='previewImage'>
           <view class='l-text-gray l-fs-s'>验车照片</view>
           <image mode='aspectFill' id='{{imgItem}}' wx:for='{{item.checkImages}}' wx:key='{{index}}' wx:for-item='imgItem' src='{{imgItem}}'></image>
@@ -30,9 +31,8 @@
         <view wx:if='{{item.ticketImages.length > 0}}' data-images='{{item.ticketImages}}' bindtap='previewImage'>
           <view class='l-text-gray l-fs-s'>票证照片</view>
           <image mode='aspectFill' id='{{imgItem}}' wx:for='{{item.ticketImages}}' wx:key='{{index}}' wx:for-item='imgItem' src='{{imgItem}}'></image>
+          <view wx:if='{{item.ticketRemark}}' class='l-text-gray'>票证备注：{{item.ticketRemark}}</view>
         </view>
-
-        <view wx:if='{{item.auditRemark}}' class='l-text-gray'>备注：{{item.auditRemark}}</view>
 
         <!-- 主管审核 -->
         <view class='l-margin-t-s' wx:if='{{isAdmin && item.auditState == 5}}' data-id='{{item.id}}' bindtap='examineCar'>
