@@ -162,7 +162,7 @@ Page({
   outCar: function (event) {
     let item = this.data.list.data[event.currentTarget.dataset.index]
     // 如果物流方式是其他
-    if (item.logisticsType == 2 && !(formData.logisticsOrderCode && formData.logisticsCompany && formData.logisticsPlateNumber && formData.logisticsDriver && formData.logisticsDriverPhone)) {
+    if (item.logisticsType == 2 && !(item.logisticsOrderCode && item.logisticsCompany && item.logisticsPlateNumber && item.logisticsDriver && item.logisticsDriverPhone)) {
       let formData = app.utils.copyObj({
         orderId: item.id,
         logisticsOrderCode: '',
