@@ -15,6 +15,7 @@
     <view class='l-border-t l-margin-t-s l-padding-tb-s'>
       <view class='l-text-gray'>
         <view>物流方式：{{wuliu[info.logisticsType - 1]}}</view>
+        <view>物流费用：{{info.freight}}元</view>
         <view>交车日期：{{info.pickCarDate}}</view>
         <view>交车地点：{{info.pickCarAddr}}</view>
       </view>

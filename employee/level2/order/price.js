@@ -23,7 +23,10 @@ Page({
       finalPrice: '',
       isDiscount: 1,
       changePrice: '',
-      remark: ''
+      remark: '',
+      nakedPrice: '', // 裸车价
+      trafficCompulsoryInsurancePrice: '', //交强险
+      commercialInsurancePrice: '' // 商业险
     }
   },
   /**
@@ -89,24 +92,71 @@ Page({
       case 'userPhone':
         data['customerInfo.' + id] = value
         break
+      case 'isDiscount':
+      case 'changePrice':
+      case 'depositPrice':
+      case 'nakedPrice':
+      case 'trafficCompulsoryInsurancePrice':
+      case 'commercialInsurancePrice':
+        clearTimeout(this.priceId)
+        this.priceId = setTimeout(_ => {
+          this.finalPrice()
+        }, 300)
       default:
         data['formData.' + id] = value
     }
     this.setData(data)
   },
+  finalPrice: function () {
+    let {
+      isDiscount,
+      changePrice,
+      depositPrice,
+      nakedPrice,
+      trafficCompulsoryInsurancePrice,
+      commercialInsurancePrice
+    } = this.data.formData
+
+    changePrice = Number(changePrice) || 0
+    depositPrice = Number(depositPrice) || 0
+    nakedPrice = Number(nakedPrice) || 0
+    trafficCompulsoryInsurancePrice = Number(trafficCompulsoryInsurancePrice) || 0
+    commercialInsurancePrice = Number(commercialInsurancePrice) || 0
+
+    let finalPrice = depositPrice + nakedPrice + trafficCompulsoryInsurancePrice + commercialInsurancePrice
+    if (isDiscount == 1) {
+      finalPrice -= changePrice
+    } else {
+      finalPrice += changePrice
+    }
+    this.setData({
+      'formData.finalPrice': finalPrice
+    })
+  },
   // 保存信息
   submit: function () {
     
-    if (!(this.data.formData.finalPrice > 0)) {
-      this.showTopTips('请输入成交价')
+    if (!(this.data.formData.nakedPrice > 0)) {
+      this.showTopTips('请输入裸车价')
+      return
+    }
+
+    if (!this.data.formData.changePrice) {
+      this.showTopTips('请输入' + (this.data.formData.isDiscount == 1 ? '优惠' : '加价') + '金额')
       return
     }
     
     let formData = app.utils.copyObj({
       infoId: this.options.id,
-      finalPrice: '',
+      changePrice: '',
+      trafficCompulsoryInsurancePrice: '',
+      commercialInsurancePrice: '',
       remark: ''
     }, this.data.formData)
+
+    let changePrice = this.data.formData.isDiscount == 1 ?
+      (0 - this.data.formData.changePrice) : this.data.formData.changePrice
+    formData.changePrice = changePrice
 
     wx.showLoading({ mask: true })
     app.post(app.config.lv2.changeCarPrice, formData)

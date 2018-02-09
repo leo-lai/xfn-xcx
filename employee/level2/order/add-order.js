@@ -29,12 +29,15 @@ Page({
       colorName: '',
       interiorId: '',
       interiorName: '',
-      carNum: '',
+      carNum: 1,
       depositPrice: '',
       finalPrice: '',
       isDiscount: 1,
       changePrice: '',
-      remark: ''
+      remark: '',
+      nakedPrice: '', // 裸车价
+      trafficCompulsoryInsurancePrice: '', //交强险
+      commercialInsurancePrice: '' // 商业险
     }
   },
   /**
@@ -91,10 +94,46 @@ Page({
       case 'userPhone':
         data['customerInfo.' + id] = value
         break
+      case 'isDiscount':
+      case 'changePrice':
+      case 'depositPrice':
+      case 'nakedPrice':
+      case 'trafficCompulsoryInsurancePrice':
+      case 'commercialInsurancePrice':
+        clearTimeout(this.priceId)
+        this.priceId = setTimeout(_ => {
+          this.finalPrice()
+        }, 300)
       default:
         data['carInfo.' + id] = value
     }
     this.setData(data)
+  },
+  finalPrice: function () {
+    let { 
+      isDiscount, 
+      changePrice, 
+      depositPrice, 
+      nakedPrice, 
+      trafficCompulsoryInsurancePrice, 
+      commercialInsurancePrice
+    } = this.data.carInfo
+
+    changePrice = Number(changePrice) || 0
+    depositPrice = Number(depositPrice) || 0
+    nakedPrice = Number(nakedPrice) || 0
+    trafficCompulsoryInsurancePrice = Number(trafficCompulsoryInsurancePrice) || 0
+    commercialInsurancePrice = Number(commercialInsurancePrice) || 0
+
+    let finalPrice = depositPrice + nakedPrice + trafficCompulsoryInsurancePrice + commercialInsurancePrice
+    if (isDiscount == 1) {
+      finalPrice -= changePrice
+    } else {
+      finalPrice += changePrice
+    }
+    this.setData({
+      'carInfo.finalPrice': finalPrice
+    })
   },
   // 选择车辆
   changeCar: function (carType = {}, family = {}, brand = {}) {
@@ -193,10 +232,11 @@ Page({
       this.showTopTips('请输入定金金额')
       return
     }
-    if (!(this.data.carInfo.finalPrice > 0)) {
-      this.showTopTips('请输入成交价')
+    if (!(this.data.carInfo.nakedPrice > 0)) {
+      this.showTopTips('请输入裸车价')
       return
     }
+
     if (!this.data.carInfo.changePrice) {
       this.showTopTips('请输入' + (this.data.carInfo.isDiscount == 1 ? '优惠' : '加价') + '金额')
       return
