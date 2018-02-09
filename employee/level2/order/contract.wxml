@@ -3,13 +3,45 @@
   <view class='l-padding'>
     <view>甲方（供车方）：{{info.partyA}}</view>
     <view>乙方（购车方）：<text>{{info.orgName}}</text></view>
-    <view class='l-margin-t l-indent'>经甲乙双方共同协商一致，乙方愿意全权委托甲方代购指定车辆，双方特立此合同，以兹共同遵守：</view>
+    <view class='l-margin-t l-indent'>经甲乙双方共同协商一致，乙方愿意全权委托甲方代购指定车辆，双方特立此合同<text>{{info.orderCode}}</text>，以兹共同遵守：</view>
     <view class='l-h4'>一、委托代购事项</view>
-    <view class='l-indent'>
-      乙方全权委托甲方在微信小程序“淘车快商户版”中新建一订购单，订购单单号为：<text>{{info.orderCode}}</text>。甲方开单后，乙方可登录微信小程序“淘车快商户版”中查看订购单<text>{{info.orderCode}}</text>的详细信息。
+    <view style='padding-left: 2em;'>
+      <view class='l-table l-margin-b-m' wx:for='{{info.customers}}'>
+        <view class='_tr'>
+          <text>客户姓名：{{item.userName || ''}}</text>
+          <text>手机号码：{{item.userPhone || ''}}</text>
+        </view>
+        <view wx:for='{{item.infos}}' wx:for-item='carItem'>
+          <view class='_tr l-fs-s'>
+            <text>车型：{{carItem.carsName}}</text>
+          </view>
+          <view class='_tr'>
+            <text>车身颜色：{{carItem.colorName}}</text>
+            <text>内饰颜色：{{carItem.interiorName || ''}}</text>
+          </view>
+          <view class='_tr'>
+            <text>购买数量：{{carItem.carNum}}辆</text>
+            <text>官方指导价：{{carItem.guidePrice}}元</text>
+          </view>
+          <view class='_tr'>
+            <text>裸车价：{{carItem.nakedPrice}}元</text>
+            <text>交强险：{{carItem.trafficCompulsoryInsurancePrice || 0}}元</text>
+          </view>
+          <view class='_tr'>
+            <text>商业险：{{carItem.commercialInsurancePrice || 0}}元</text>
+            <text>{{carItem.changePrice > 0 ? '加价' : '优惠'}}：{{carItem.changePrice > 0 ? carItem.changePrice : 0 - carItem.changePrice}}元</text>
+          </view>
+        </view>
+      </view>
+      <view class='l-table'>
+        <view class='_tr'>
+          <text>定金总额：{{info.totalDepositPrice || 0}}元</text>
+          <text>尾款总额：{{info.totalRestPrice || 0}}元</text>
+        </view>
+      </view>
     </view>
     <view class='l-h4'>二、款项及支付方式</view>
-    <view class='l-indent'>1、本合同签订时则代表乙方完全同意订购单<text>{{info.orderCode}}</text>中的所有订单信息，并且乙方根据订购单<text>{{info.orderCode}}</text>中的定金要向甲方支付代购定金￥<text>{{info.totalDepositPrice}}</text>；余款￥<text>{{info.totalRestPrice}}</text>；</view>
+    <view class='l-indent'>1、本合同签订时则代表乙方完全同意合同<text>{{info.orderCode}}</text>中的所有订单信息，并且乙方根据订购单<text>{{info.orderCode}}</text>中的定金要向甲方支付代购定金总额￥<text>{{info.totalDepositPrice}}</text>；尾款总额￥<text>{{info.totalRestPrice}}</text>；</view>
     <view class='l-indent'>2、乙方必须在甲方通知提车当天内付清订购单{{info.orderCode}}的全款，如乙方未能在规定期限内付清全款，逾期7天未付甲方有权单方面解除合同，乙方所付定金不予退还，同时甲方有权处置乙方所定车辆；</view>
     <view class='l-indent'>3、上述订购单{{info.orderCode}}只包括新车裸车价，不含购置税、上牌费用、保险费用及车船使用税等相关费用；</view>
     <view class='l-indent'>4、上述所有款项，甲方指定收款账号为：</view>

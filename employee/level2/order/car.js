@@ -105,7 +105,6 @@ Page({
         break
       case 'isDiscount':
       case 'changePrice':
-      case 'depositPrice':
       case 'nakedPrice':
       case 'trafficCompulsoryInsurancePrice':
       case 'commercialInsurancePrice':
@@ -122,19 +121,17 @@ Page({
     let {
       isDiscount,
       changePrice,
-      depositPrice,
       nakedPrice,
       trafficCompulsoryInsurancePrice,
       commercialInsurancePrice
     } = this.data.formData
 
     changePrice = Number(changePrice) || 0
-    depositPrice = Number(depositPrice) || 0
     nakedPrice = Number(nakedPrice) || 0
     trafficCompulsoryInsurancePrice = Number(trafficCompulsoryInsurancePrice) || 0
     commercialInsurancePrice = Number(commercialInsurancePrice) || 0
 
-    let finalPrice = depositPrice + nakedPrice + trafficCompulsoryInsurancePrice + commercialInsurancePrice
+    let finalPrice = nakedPrice + trafficCompulsoryInsurancePrice + commercialInsurancePrice
     if (isDiscount == 1) {
       finalPrice -= changePrice
     } else {

@@ -54,7 +54,7 @@
       </view>
       <view class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>交车日期</view>
+          <view class='weui-label'>提车日期</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker mode='date' id='pickCarDate' bindchange='bindInput' value='{{formData.pickCarDate}}'>
@@ -67,7 +67,7 @@
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>交车地点</view>
+          <view class='weui-label'>提车地点</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请输入详细地址' maxlength='{{100}}' confirm-type='next' id='pickCarAddr' value='{{formData.pickCarAddr}}' bindinput='bindInput' />

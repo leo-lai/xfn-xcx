@@ -192,7 +192,10 @@ Page({
       finalPrice: '',
       isDiscount: this.data.info.changePrice < 0 ? 1 : 0,
       changePrice: '',
-      remark: ''
+      remark: '',
+      nakedPrice: '', // 裸车价
+      trafficCompulsoryInsurancePrice: '', //交强险
+      commercialInsurancePrice: '' // 商业险
     }, this.data.info)
 
     formData.changePrice = Math.abs(this.data.info.changePrice)

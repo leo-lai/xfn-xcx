@@ -15,9 +15,9 @@
     <view class='l-border-t l-margin-t-s l-padding-tb-s'>
       <view class='l-text-gray'>
         <view>物流方式：{{wuliu[info.logisticsType - 1]}}</view>
-        <view>物流费用：{{info.freight}}元</view>
-        <view>交车日期：{{info.pickCarDate}}</view>
-        <view>交车地点：{{info.pickCarAddr}}</view>
+        <view>物流费用：{{info.freight || 0}}元</view>
+        <view>提车日期：{{info.pickCarDate}}</view>
+        <view>提车地点：{{info.pickCarAddr}}</view>
       </view>
       <view>
         <view class='l-margin-r'>定金总额：{{info.totalDepositPrice}}元</view>
@@ -89,11 +89,15 @@
           </view>
 
           <view class='l-margin-t-s'>购买数量：{{carItem.carNum}}</view>
+          <view class='l-margin-r'>裸车价：{{carItem.nakedPrice}}元</view>
+          <view class='l-margin-r'>交强险：{{carItem.trafficCompulsoryInsurancePrice || 0}}元</view>
+          <view class='l-margin-r'>商业险：{{carItem.commercialInsurancePrice || 0}}元</view>
           <view class='l-margin-r'>应付定金：{{carItem.depositPrice}}元</view>
           <view>{{carItem.changePrice > 0 ? '加价金额' : '优惠金额'}}：{{carItem.changePrice2}}元</view>
-          <view class='l-text-blod'>
+          
+          <!-- <view class='l-text-blod'>
             成交金额：<text class='l-text-theme'>{{carItem.finalPrice}}元</text>
-          </view>
+          </view> -->
           <view wx:if='{{carItem.remark}}' class='l-margin-t-s l-text-gray'>备注：{{carItem.remark}}</view>
         </view>
 
