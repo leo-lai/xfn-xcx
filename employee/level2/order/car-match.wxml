@@ -8,6 +8,9 @@
     </view>
     <view class='l-margin-t-s'>
       <view>购买数量：{{info.carNum}}</view>
+      <view>裸车价：{{info.nakedPrice}}元</view>
+      <view>交强险：{{info.trafficCompulsoryInsurancePrice || 0}}元</view>
+      <view>商业险：{{info.commercialInsurancePrice || 0}}元</view>
       <view>应付定金：{{info.depositPrice}}元</view>
       <view>{{info.changePrice > 0 ? '加价金额' : '优惠金额'}}：{{info.changePrice2}}元</view>
     </view>
