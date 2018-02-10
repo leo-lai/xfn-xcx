@@ -49,6 +49,10 @@ Page({
         })
         this.getCheshen(info.familyId)
         this.getNeishi(info.familyId)
+        
+        setTimeout(_ => {
+          this.finalPrice()
+        }, 300)
       }
     })
   },
