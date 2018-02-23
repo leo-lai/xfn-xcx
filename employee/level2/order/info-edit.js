@@ -18,8 +18,9 @@ Page({
       orgLinker: '',
       orgPhone: '',
       logisticsType: '',
+      freight: '',
       pickCarDate: '',
-      pickCarAddr: ''
+      pickCarAddr: '',
     }
   },
   /**

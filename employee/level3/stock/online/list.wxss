@@ -1,0 +1,5 @@
+/* level3/stock/online/list.wxss */
+.l-page-full{padding-top: 100rpx;}
+.l-brand-list .weui-grid__icon{ width: 80rpx; height: 80rpx; }
+.l-brand-list ._active .weui-grid__label{color: #ff9247;}
+.l-list-car ._item{ background: #fff; margin: 20rpx; padding: 20rpx; border-radius: 10rpx;}

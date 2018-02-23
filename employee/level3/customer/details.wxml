@@ -1,0 +1,227 @@
+<!--level3/customer/details.wxml-->
+<view class='l-page-full'>
+  <view class="weui-cells__title">基本信息</view>
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>头像</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <image class='l-avatar' mode='aspectFit' style='width: 80rpx; height: 80rpx;' src='{{customerInfo.thumb}}'></image>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>客户姓名</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='customerUsersName' value='{{customerInfo.customerUsersName}}' bindinput='bindInput'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>客户电话</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='phoneNumber' value='{{customerInfo.phoneNumber}}' bindinput='bindInput' type='number' maxlength='{{11}}'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>性别</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <picker id='agentGender' data-picker='sex' bindchange='bindInput' value='{{sex.index}}' range='{{sex.list}}'>
+          <view class='weui-input'>
+            <text wx:if='{{sex.index === -1}}' class='l-text-gray'>请选择</text>
+            <text wx:else>{{sex.list[sex.index]}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>年收入（万）</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='annualIncome' value='{{customerInfo.annualIncome}}' bindinput='bindInput' type='digit' maxlength='{{9}}'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>身份证号</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='cardNo' value='{{customerInfo.cardNo}}' bindinput='bindInput' type='idcard' maxlength='{{18}}'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>收入来源</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <picker id='incomeSource' data-picker='income' bindchange='bindInput' value='{{income.index}}' range='{{income.list}}'>
+          <view class='weui-input'>
+            <text wx:if='{{income.index === -1}}' class='l-text-gray'>请选择</text>
+            <text wx:else>{{income.list[income.index]}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>现住房来源</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <picker id='housingSource' data-picker='house' bindchange='bindInput' value='{{house.index}}' range='{{house.list}}'>
+          <view class='weui-input'>
+            <text wx:if='{{house.index === -1}}' class='l-text-gray'>请选择</text>
+            <text wx:else>{{house.list[house.index]}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>学历</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <picker id='education' data-picker='edu' bindchange='bindInput' value='{{edu.index}}' range='{{edu.list}}'>
+          <view class='weui-input'>
+            <text wx:if='{{edu.index === -1}}' class='l-text-gray'>请选择</text>
+            <text wx:else>{{edu.list[edu.index]}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>驾驶证</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <picker id='isHasDriversLicense' bindchange='bindInput' value='{{customerInfo.isHasDriversLicense}}' range='{{driverLicense}}'>
+          <view class='weui-input'>
+            <text wx:if='{{customerInfo.isHasDriversLicense === ""}}' class='l-text-gray'>请选择</text>
+            <text wx:else>{{driverLicense[customerInfo.isHasDriversLicense]}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">紧急联系人</view>
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>紧急联系人A</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='emergencyAContact' value='{{customerInfo.emergencyAContact}}' bindinput='bindInput'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>与车主关系</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <picker id='emergencyARelationship' data-picker='shipA' bindchange='bindInput' value='{{shipA.index}}' range='{{shipA.list}}'>
+          <view class='weui-input'>
+            <text wx:if='{{shipA.index === -1}}' class='l-text-gray'>请选择</text>
+            <text wx:else>{{shipA.list[shipA.index]}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>联系电话</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='emergencyAPhone' value='{{customerInfo.emergencyAPhone}}' bindinput='bindInput' type='number' maxlength='{{11}}'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>紧急联系人B</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='emergencyBContact' value='{{customerInfo.emergencyBContact}}' bindinput='bindInput'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>与车主关系</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <picker id='emergencyBRelationship' data-picker='shipB' bindchange='bindInput' value='{{shipB.index}}' range='{{shipB.list}}'>
+          <view class='weui-input'>
+            <text wx:if='{{shipB.index === -1}}' class='l-text-gray'>请选择</text>
+            <text wx:else>{{shipB.list[shipB.index]}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>联系电话</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='emergencyBPhone' value='{{customerInfo.emergencyBPhone}}' bindinput='bindInput' type='number' maxlength='{{11}}'/>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">工作信息</view>
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>单位名称</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='workUnit' value='{{customerInfo.workUnit}}' bindinput='bindInput'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>税后年收入（万）</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='annualIncomeAfterTax' value='{{customerInfo.annualIncomeAfterTax}}' bindinput='bindInput' type='digit' maxlength='{{9}}'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>工作地点</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='workingPlace' value='{{customerInfo.workingPlace}}' bindinput='bindInput'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>公司职位</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='position' value='{{customerInfo.position}}' bindinput='bindInput'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>公司电话</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='companyTelephone' value='{{customerInfo.companyTelephone}}' bindinput='bindInput' type='number'/>
+      </view>
+    </view>
+  </view>
+  <view class='l-margin-t'></view>
+  
+  <block wx:if='{{userInfo.orgLevel === 3}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom'>
+      <view class='l-btn-w60 l-margin-tb'>
+        <button class='l-button-main' bindtap='submit'>保存修改</button>
+      </view>
+    </view>
+  </block>
+</view>

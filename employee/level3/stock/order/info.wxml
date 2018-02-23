@@ -1,0 +1,99 @@
+<!--level3/stock/order/info.wxml-->
+<view class='l-page-full'>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>预定车型</view>
+        <view class='weui-cell__ft'>{{info.carsName}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>官方指导价（元）</view>
+        <view class='weui-cell__ft'>{{info.guidingPrice}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>车身颜色</view>
+        <view class='weui-cell__ft'>{{info.colourName}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>内饰颜色</view>
+        <view class='weui-cell__ft'>{{info.interiorName}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>采购数量</view>
+        <view class='weui-cell__ft'>{{info.stockOrderNumber}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>合格证时间</view>
+        <view class='weui-cell__ft'>{{carTime[info.certificateDate-1]}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>物流方式</view>
+        <view class='weui-cell__ft'>
+          {{wuliu[info.logisticsMode - 1]}}
+          {{ info.logisticsOddNumber ? '（单号：'+info.logisticsOddNumber+'）' : '' }}
+        </view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>备注</view>
+        <view class='weui-cell__ft'>{{info.remark}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text class='l-fs-s l-text-gray'>附件照片</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files'>
+              <block wx:for='{{templateImage}}' wx:key='item'>
+                <view class='weui-uploader__file' bindtap='previewImage' id='item'>
+                  <image class='weui-uploader__img' src='{{item}}' mode='aspectFill'/>
+                </view>
+              </block>
+              <view wx:if='{{templateImage.length === 0}}' class='l-text-center l-text-gray'>无</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-margin l-radius l-bg-white' wx:if='{{info.list}}'>
+    <view class='l-padding-btn'>
+      <text class='l-fs-s l-text-gray'>车源信息</text>
+    </view>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell' wx:for='{{info.list}}' wx:key='*this'>
+        <view class='weui-cell__bd'>车架号：{{item.frameNumber}}</view>
+        <view class='weui-cell__ft l-text-theme' data-item='{{item}}' bindtap='viewCar'>查看明细</view>
+      </view>
+      <view wx:if='{{info.list.length === 0}}' class='l-padding l-text-center l-text-gray'>无</view>
+    </view>
+  </view>
+
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text class='l-fs-s l-text-gray'>随车资料</text>
+    </view>
+    <view class='l-padding'>
+      <view class='l-tag-list' wx:if='{{followInformation.length > 0}}'>
+        <view class='_item' wx:for='{{followInformation}}' wx:key='*this'>
+          <text>{{item}}</text>
+        </view>
+      </view>
+      <view wx:else class='l-text-center l-text-gray'>无</view>
+    </view>
+  </view>
+
+  <block wx:if='{{info.stockOrderState < 5 || info.stockOrderState === 9}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom l-padding'>
+      <button class='l-button-main l-btn-w60' bindtap='cancelOrder' wx:if='{{info.stockOrderState < 5}}'>取消订单</button>
+      <button class='l-button-main l-btn-w60' bindtap='signOrder' wx:if='{{info.stockOrderState === 9}}'>签收入库</button>
+    </view>
+  </block>
+</view>

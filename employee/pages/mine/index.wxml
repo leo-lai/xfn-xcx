@@ -4,20 +4,20 @@
     <image mode='aspectFit' class='l-avatar' src='{{userInfo.headPortrait}}'></image>
     <view class='l-h3 l-margin-t'>{{userInfo.realName}}</view>
     <view class='l-text-gray l-margin-t'>{{userInfo.orgName +' / '+ userInfo.roleName}}</view>
-    <view style='margin: 50rpx 0 -160rpx;'><image class='l-circle-icon' src='../../images/data-icon.png'></image></view>
+    <view style='margin: 50rpx 0 -160rpx;'><image class='l-circle-icon' src='/images/data-icon.png'></image></view>
   </view>
   <view class='l-br'></view>
   <view class='l-mine-menu'>
     <navigator class='_item' hover-class='_hover' url='qrcode'>
-      <image class='l-circle-icon' src='../../images/code-icon.png'></image>
+      <image class='l-circle-icon' src='/images/code-icon.png'></image>
       <text>个人二维码</text>
     </navigator>
     <navigator class='_item' hover-class='_hover' url='../mine-pwd/index'>
-      <image class='l-circle-icon' src='../../images/password-icon.png'></image>
+      <image class='l-circle-icon' src='/images/password-icon.png'></image>
       <text>更改密码</text>
     </navigator>
     <item class='_item' hover-class='_hover' bindtap='logout'>
-      <image class='l-circle-icon' src='../../images/exit-icon.png'></image>
+      <image class='l-circle-icon' src='/images/exit-icon.png'></image>
       <text>退出登录</text>
     </item>
   </view>

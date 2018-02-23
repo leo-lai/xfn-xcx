@@ -1,5 +1,5 @@
 <!--level2/customer-list/index.wxml-->
-<import src='../../template/loadmore.wxml' />
+<import src='/template/loadmore.wxml' />
 <view style='padding-top: 100rpx;' class='l-page-full'>
   <view class='l-list-filter' catchtouchmove='noopFn'>
     <view class='_input l-flex-hc'>

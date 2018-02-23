@@ -1,0 +1,21 @@
+<!--pages/car-last-step/index.wxml-->
+<view class='l-page-full'>
+  <navigator url='jing/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding l-text-center'>
+      <image mode='aspectFit' style='width: 174rpx; height: 104rpx;' src='/images/jing-icon.png'></image>
+      <view>精品加装</view>
+    </view>
+  </navigator>
+  <navigator url='license/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding l-text-center'>
+      <image mode='aspectFit' style='width: 174rpx; height: 104rpx;' src='/images/license-icon.png'></image>
+      <view>车辆上牌</view>
+    </view>
+  </navigator>
+  <navigator url='tiemo/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding l-text-center'>
+      <image mode='aspectFit' style='width: 174rpx; height: 104rpx;' src='/images/mo-icon.png'></image>
+      <view>车辆贴膜</view>
+    </view>
+  </navigator>
+</view>

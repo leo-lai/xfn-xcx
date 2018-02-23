@@ -1,0 +1,86 @@
+<!--level3/stock/online/info.wxml-->
+<view class='l-page-full'>
+  <!-- <view class='l-bg-white'>
+    <view class='l-banner-image'>
+      <image mode='widthFix' src='{{info.indexImage}}'></image>
+    </view>
+    <view class='l-padding l-text-center'>
+      <view class='l-h4'>{{info.carsName}}</view>
+      <view class='l-text-gray'>车身颜色：{{info.colourName}}</view>
+      <view class='l-text-gray'>官方指导价：{{info.guidingPriceStr}}</view>
+    </view>
+  </view> -->
+
+  <view class='weui-cells weui-cells_after-title l-margin l-radius'>
+    <view class='weui-cell weui-cell_input l-text-gray'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>车辆型号</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.carsName}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input l-text-gray'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>车身颜色</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.colourName}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input l-text-gray'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>官方指导价（元）</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.guidingPrice}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>优惠金额（元）</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='discountPrice' value='{{formData.discountPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>默认收取定金（元）</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请填写' id='depositPrice' value='{{formData.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>是否在售</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='isOnLine' bindchange='bindInput' value='{{formData.isOnLine}}' range='{{online}}'>
+            <view class='weui-input'>
+              <text wx:if='{{formData.isOnLine === ""}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{online[formData.isOnLine]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+    <view class='weui-cell'>
+      <view class='l-text-center l-text-theme' style='width: 100%; padding: 10rpx;' bindtap='submit'>保存修改</view>
+    </view>
+  </view>
+
+  <view class='weui-cells weui-cells_after-title  l-margin l-radius'>
+    <view class='weui-cell'>
+      <view class='l-text-center l-h4' style='width: 100%; padding: 10rpx;'>
+        当前库存：{{info.number}}辆
+      </view>
+    </view>
+    <view class='weui-cell' wx:for='{{info.list}}' wx:key='stockCarId'>
+      <view class='weui-cell__bd'>车架号：{{item.frameNumber}}</view>
+      <view class='weui-cell__ft'>
+        <text bindtap='viewImages' data-item='{{item}}' wx:if='{{item.stockCarImages}}' class='l-text-link l-fs-s'>查看验车照片</text>
+      </view>
+    </view>
+  </view>
+</view>

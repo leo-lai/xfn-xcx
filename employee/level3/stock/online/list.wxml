@@ -1,0 +1,63 @@
+<!--level3/stock/online/list.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
+    <view style='margin-right: 20rpx;' class='_type' bindtap='showFilter' data-val='online'>
+      <text>{{filter.sltedType.name}}</text>
+      <text class='l-icon-6ac'></text>
+    </view>
+    <view class='_input l-rest l-flex-hc'>
+      <view class='l-rest'>
+        <input data-val='search' bindfocus='showFilter' bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入车型名称' value='{{filter.data.carsName}}' />
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.carsName === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+    <view class='_cont {{filter.visible ? "_active" : ""}}' bindtap='hideFilter'>
+      <view class='weui-cells weui-cells_after-title' hidden='{{filter.type !== "online"}}'>
+        <radio-group bindchange='filterSearch'>
+          <label class='weui-cell weui-check__label' wx:for='{{filter.typeList}}' wx:key='name'>
+            <radio class='weui-check' value='{{item.value}}' checked='{{item.checked}}' />
+            <view class='weui-cell__bd'>{{item.name}}</view>
+            <view class='weui-cell__ft weui-cell__ft_in-radio' wx:if='{{item.checked}}'>
+              <icon class='weui-icon-radio' type='success_no_circle' size='16' color='#fa5539'></icon>
+            </view>
+          </label>
+        </radio-group>
+      </view>
+
+      <!-- 历史记录 -->
+      <view class='_history' hidden='{{filter.type !== "search" || filter.history.length === 0}}' catchtap='noopFn'>
+        <view>
+          <text class='l-fr l-icon-627 l-fs-m' bindtap='clearHistory'></text>
+          <text class='l-fs-m'>历史搜索</text>
+        </view>
+        <view class='_history-list'>
+          <text class='l-text-wrap' wx:for='{{filter.history}}' wx:key='{{index}}' bindtap='searchHistory' data-val='{{item}}'>{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='l-list-car'>
+    <navigator url='info?id={{item.orgCarsConfigureId}}' class='l-flex-h _item' wx:for='{{list.data}}' wx:key='{{index}}'>
+      <image class='l-margin-r' style='width: 180rpx; height: 180rpx;' mode='aspectFit' src='{{item.thumb}}'></image>
+      <view class='l-rest l-fs-s'>
+        <view>
+          <text class='l-fr {{ item.isOnLine === 1 ? "l-text-theme" : "l-text-gray" }}'>{{filter.typeText[item.isOnLine]}}</text>
+          <text>{{item.carsNameBefor}}</text>
+        </view>
+        <view class='l-margin-t-xs l-h4'>{{item.carsNameAfter}}</view>
+        <view class='l-margin-t-xs l-text-gray'>颜色：{{item.colourName}}</view>
+        <view class='l-margin-t-xs l-text-theme'>现有库存：{{item.number}}</view>
+      </view>
+    </navigator>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
+      <button class='l-button-main'>新增在售车辆</button>
+    </navigator>
+  </view>
+</view>

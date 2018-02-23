@@ -28,11 +28,11 @@
   </view>
 
   <view class='l-menu-grid' wx:if='{{userInfo.orgLevel === 3}}'>
-    <navigator class='_item' url='/pages/customer-list/index'>
+    <navigator class='_item' url='/level3/customer/list'>
       <image mode='widthFix' src='/images/customer-icon.png'></image>
       <view class="_txt">客户管理</view>
     </navigator>
-    <navigator class='_item' url='/pages/car-stock/home'>
+    <navigator class='_item' url='/level3/stock/index'>
       <image mode='widthFix' src='/images/stock-icon.png'></image>
       <view class="_txt">库存/出库</view>
     </navigator>
@@ -40,13 +40,9 @@
       <image mode='widthFix' src='/images/daigou-icon.png'></image>
       <view class="_txt">代购管理</view>
     </navigator>
-    <navigator class='_item' url='/pages/car-last-step/index'>
+    <navigator class='_item' url='/level3/parts/index'>
       <image mode='widthFix' src='/images/fix-icon2.png'></image>
       <view class="_txt">加装/上牌</view>
     </navigator>
-    <!-- <navigator class='_item' url='../car-express/index'>
-      <image mode='widthFix' src='/images/express-icon.png'></image>
-      <view class="_txt">车辆托运</view>
-    </navigator> -->
   </view>
 </view>

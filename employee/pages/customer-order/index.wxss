@@ -1,3 +1,0 @@
-/* pages/customer-order/index.wxss */
-.weui-cells._disabled{position: relative; color: #999;}
-.weui-cells._disabled::after{content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 100;}

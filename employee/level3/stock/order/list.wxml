@@ -1,0 +1,64 @@
+<!--level3/stock/order/list.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view style='height: 100rpx;'></view>
+  <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
+    <view style='margin-right: 20rpx;' class='_type' bindtap='showFilter' data-val='online'>
+      <text>{{filter.sltedType.name}}</text>
+      <text class='l-icon-6ac'></text>
+    </view>
+    <view class='_input l-rest l-flex-hc'>
+      <view class='l-rest'>
+        <input data-val='search' bindfocus='showFilter' bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入订单号或车型名称' value='{{filter.data.orderSearch}}' />
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.orderSearch === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+    <view class='_cont {{filter.visible ? "_active" : ""}}' bindtap='hideFilter'>
+      <view class='weui-cells weui-cells_after-title' hidden='{{filter.type !== "online"}}'>
+        <radio-group bindchange='filterSearch'>
+          <label class='weui-cell weui-check__label' wx:for='{{filter.typeList}}' wx:key='name'>
+            <radio class='weui-check' value='{{item.value}}' checked='{{item.checked}}' />
+            <view class='weui-cell__bd'>{{item.name}}</view>
+            <view class='weui-cell__ft weui-cell__ft_in-radio' wx:if='{{item.checked}}'>
+              <icon class='weui-icon-radio' type='success_no_circle' size='16' color='#fa5539'></icon>
+            </view>
+          </label>
+        </radio-group>
+      </view>
+
+      <!-- 历史记录 -->
+      <view class='_history' hidden='{{filter.type !== "search" || filter.history.length === 0}}' catchtap='noopFn'>
+        <view>
+          <text class='l-fr l-icon-627 l-fs-m' bindtap='clearHistory'></text>
+          <text class='l-fs-m'>历史搜索</text>
+        </view>
+        <view class='_history-list'>
+          <text class='l-text-wrap' wx:for='{{filter.history}}' wx:key='{{index}}' bindtap='searchHistory' data-val='{{item}}'>{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <navigator url='info?id={{item.stockOrderId}}' class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list.data}}' wx:key='stockOrderId'>
+    <view class='l-padding-b l-border-b l-fs-s'>
+      <text class='l-text-theme l-fr'>{{item.stateText}}</text>
+      <text>{{item.stockOrderCode}}</text>
+    </view>
+    <view class='l-padding-t l-rel'>
+      <view style="position:absolute; top:30rpx; right:0;color:#999;">{{item.stockOrderNumber}} 辆</view>
+      <view class='l-h4'>{{item.carsNameBefor}}</view>
+      <view>{{item.carsNameAfter}}</view>
+      <view class='l-text-gray l-fs-s'>颜色：{{item.colourName}} | 内饰：{{item.interiorName}}</view>
+      <view class='l-text-gray l-fs-s'>支付状态：{{item.payBrief}}</view>
+      <view class='l-text-gray l-fs-s'>订车时间：{{item.createDate}}</view>
+    </view>
+  </navigator>
+  <template is='loadmore' data='{{...list}}' />
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
+      <button class='l-button-main'>新增订车单</button>
+    </navigator>
+  </view>
+</view>

@@ -1,0 +1,34 @@
+<!--level3/parts/tiemo/list.wxml-->
+<import src='/template/loadmore.wxml' />
+<view style='padding-top: 100rpx;' class='l-page-full {{filter.visible ? "l-no-scroll": ""}}'>
+  <view class='l-list-filter'>
+    <view class='l-filter-date l-flex-hc'>
+      <picker class='l-rest _type {{filter.type === "startDate" ? "_active" : ""}}' mode='date' value='{{filter.data.startDate}}' id='startDate' bindchange='dateChange'>
+        <text>{{filter.data.startDate || '开始时间'}}</text>
+        <text class='l-icon-6ac'></text>
+      </picker>
+      <text>至</text>
+      <picker class='l-rest _type {{filter.type === "endDate" ? "_active" : ""}}' mode='date' value='{{filter.data.endDate}}' id='endDate' bindchange='dateChange'>
+        <text>{{filter.data.endDate || '结束时间'}}</text>
+        <text class='l-icon-6ac'></text>
+      </picker>
+    </view>
+    <view class='_cont {{filter.visible ? "_active" : ""}}' bindtap='hideFilter'></view>
+  </view>
+  <view class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list.data}}' wx:key='customerOrderId'>
+    <view class='l-padding-b l-border-b'>
+      <text>车架号：{{item.customerOrderCode}}</text>
+    </view>
+    <view class='l-padding-t l-rel'>
+      <view class='{{ item.overTheLine === 1 ? "l-text-warn" : "l-text-warn" }}' style='position:absolute; top: 30rpx; right: 0;'>{{overline[item.overTheLine]}}</view>
+      <view class='l-h4'>{{item.carsNameBefor}}</view>
+      <view>{{item.carsNameAfter}}</view>
+      <view class='l-text-gray l-fs-s'>完款时间：{{item.createDate}}</view>
+      <view class='l-margin-t l-text-center'>
+        <button size='mini' class='l-button-main l-btn-w60' bindtap='finish' data-item='{{item}}'>贴膜完成</button>
+      </view>
+    </view>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+</view>
+

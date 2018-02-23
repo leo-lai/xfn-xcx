@@ -1,0 +1,25 @@
+<!--level3/parts/jing/info.wxml-->
+<view class='l-page-full'>
+  <view class='l-margin l-padding-lr l-bg-white l-radius'>
+    <view class='l-padding-tb l-border-b'>
+      车架号：{{info.customerOrderCode}}
+    </view>
+    <view class='l-padding-tb l-rel'>
+      <view class='{{ info.overTheLine === 1 ? "l-text-warn" : "l-text-warn" }}' style='position:absolute; top: 30rpx; right: 0;'>{{overline[info.overTheLine]}}</view>
+      <view class='l-h4'>{{info.carsNameBefor}}</view>
+      <view>{{info.carsNameAfter}}</view>
+      <view class='l-text-gray l-fs-s'>完款时间：{{info.payDate}}</view>
+    </view>
+  </view>
+
+  <view class='weui-cells weui-cells_after-title l-margin l-bg-white l-radius'>
+    <view class='weui-cell l-text-center' wx:for='{{parts}}' wx:key='{{item}}'>
+      <view class='weui-cell__bd'>{{item}}</view>
+    </view>
+  </view>
+
+  <view class='l-br'></view>
+  <view class='l-margin'>
+    <button class='l-button-main' bindtap='finish'>加装完成</button>
+  </view>
+</view>

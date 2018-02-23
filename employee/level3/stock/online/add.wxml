@@ -1,0 +1,61 @@
+<!--level3/stock/online/add.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <navigator url='/pages/car-selector/index' class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>车辆型号</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>
+            <text wx:if='{{formData.carsId}}'>{{formData.carsName}}</text>
+            <text wx:else class='l-text-gray'>请选择</text>  
+          </view>
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>官方指导价（元）</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input disabled='{{true}}' class='weui-input' value='{{formData.guidingPrice}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>车身颜色</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='colourId' data-picker='cheshen' bindchange='bindInput' value='{{cheshen.index}}' range='{{cheshen.list}}' range-key='carColourName'>
+            <view class='weui-input'>
+              <text wx:if='{{cheshen.index === -1}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{cheshen.list[cheshen.index].carColourName}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>优惠金额（元）</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请填写' id='discountPrice' value='{{formData.discountPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>默认收取定金（元）</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请填写' id='depositPrice' value='{{formData.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>

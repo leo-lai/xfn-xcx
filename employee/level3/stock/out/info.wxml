@@ -1,0 +1,88 @@
+<!--level3/stock/out/info.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full {{ carList.visible ? "l-no-scroll" : "" }}'>
+  <!-- <view class='l-margin'>
+    <text class='l-text-theme l-fr'>{{info.number}}辆</text>
+    <text>{{info.carsName}}</text>
+  </view> -->
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>车辆型号</view>
+        <view class='weui-cell__ft'>{{info.carsName}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>出库数量</view>
+        <view class='weui-cell__ft l-text-theme'>{{info.number}}辆</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>车身颜色</view>
+        <view class='weui-cell__ft'>{{info.colourName}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>内饰颜色</view>
+        <view class='weui-cell__ft'>{{info.interiorName}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>订单号</view>
+        <view class='weui-cell__ft'>{{info.customerOrderCode}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>订单类型</view>
+        <view class='weui-cell__ft'>{{orderType[info.customerOrderType-1]}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>下单时间</view>
+        <view class='weui-cell__ft'>{{info.createDate}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>门店名称</view>
+        <view class='weui-cell__ft'>{{info.orgName}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>门店地址</view>
+        <view class='weui-cell__ft'>{{info.address}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>备注</view>
+        <view class='weui-cell__ft'>{{info.remark}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='getCarList'>出库车辆</button>
+  </view>
+
+  <!-- 车辆列表 -->
+  <view class='l-popup-bottom {{carList.visible ? "_show" : ""}}' bindtap='closeCarList' catchtouchmove='noopFn'>
+    <view class='_inner' catchtap='noopFn'>
+      <text class='_close' bindtap='closeCarList'>×</text>
+      <view class='_hd'>
+        <text class='l-h4'>选择出库车辆</text>
+      </view>
+      <scroll-view scroll-y class='_bd' style='max-height: {{carList.height}}px;'>
+        <view class='weui-cells weui-cells_after-title'>
+          <checkbox-group bindchange='sltCarList'>
+            <label class='weui-cell weui-check__label l-padding' wx:for='{{carList.list}}' wx:key='{{stockCarId}}'>
+              <view class='l-margin-r-m'><checkbox value='{{item.stockCarId}}'/></view>
+              <view class='weui-cell__bd'>车架号：{{item.frameNumber}}</view>
+            </label>
+          </checkbox-group>
+          <view class='l-padding l-text-center' wx:if='{{carList.list.length === 0}}'>
+            <view class='l-br'></view>
+            <view class='l-text-gray'>库存不足</view>
+            <!-- <view class='l-margin-t'>
+              <button size='mini' class='l-button-main l-btn-w60' bindtap='gotoOrder'>去订车</button>
+            </view> -->
+            <view class='l-br'></view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class='_ft' wx:if='{{carList.slted.length > 0}}'>
+        <button class='l-button-main' disabled='{{carList.loading}}' loading='{{carList.loading}}' bindtap='outStockOk'>{{ carList.loading ? '出库中...' : '确定出库已选车辆' }}</button>
+      </view>
+    </view>
+  </view>
+</view>
