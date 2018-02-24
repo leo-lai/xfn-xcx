@@ -125,33 +125,36 @@ Page({
     let {
       isDiscount,
       changePrice,
+      guidePrice,
       nakedPrice,
       trafficCompulsoryInsurancePrice,
       commercialInsurancePrice
     } = this.data.formData
 
-    changePrice = Number(changePrice) || 0
-    nakedPrice = Number(nakedPrice) || 0
+    changePrice = isDiscount == 1 ? 0 - changePrice : Number(changePrice)
+
+    guidePrice = Number(guidePrice) || 0
     trafficCompulsoryInsurancePrice = Number(trafficCompulsoryInsurancePrice) || 0
     commercialInsurancePrice = Number(commercialInsurancePrice) || 0
 
+    nakedPrice = guidePrice + changePrice
     let finalPrice = nakedPrice + trafficCompulsoryInsurancePrice + commercialInsurancePrice
-    if (isDiscount == 1) {
-      finalPrice -= changePrice
-    } else {
-      finalPrice += changePrice
-    }
+    
     this.setData({
+      'formData.nakedPrice': nakedPrice,
       'formData.finalPrice': finalPrice
     })
   },
   // 选择车辆
   changeCar: function (carType = {}, family = {}, brand = {}) {
     if (this.data.formData.carsId !== carType.id) {
+      let changePrice = this.data.formData.isDiscount == 1 ?
+        (0 - this.data.formData.changePrice) : Number(this.data.formData.changePrice)
       this.setData({
         'formData.carsId': carType.id,
         'formData.carsName': carType.name,
         'formData.guidePrice': carType.price,
+        'formData.nakedPrice': carType.price + changePrice,
         'formData.colorId': '',
         'formData.colorName': '',
         'formData.interiorId': '',
