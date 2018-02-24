@@ -43,45 +43,37 @@
   <view class='l-text-gray l-fs-s' style='margin: 40rpx 30rpx -20rpx 30rpx;'>车辆信息</view>
   <view class='l-margin l-radius'>
     <view class='weui-cells weui-cells_after-title'>
-      <navigator url='/pages/car-selector/index' class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
+      <navigator url='/pages/car-selector/index' class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>车型</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <view class='weui-input'>
-            <text wx:if='{{carInfo.carsId}}'>{{carInfo.carsName}}</text>
+          <view class='weui-select weui-select_in-select-after'>
+            <text class='l-fs-s' wx:if='{{carInfo.carsId}}'>{{carInfo.carsName}}</text>
             <text wx:else class='l-text-gray'>请选择</text>  
           </view>
         </view>
       </navigator>
-      <view class='weui-cell weui-cell_input l-text-gray'>
-        <view class='weui-cell__hd'>
-          <view class='weui-label'>官方指导价（元）</view>
-        </view>
-        <view class='weui-cell__bd l-text-right'>
-          <input disabled='{{true}}' class='weui-input' value='{{carInfo.guidePrice}}' />
-        </view>
-      </view>
-      <view class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>车身颜色</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='colorId' data-picker='cheshen' bindchange='bindInput' value='{{cheshen.index}}' range='{{cheshen.list}}' range-key='carColourName'>
-            <view class='weui-input'>
+            <view class='weui-select weui-select_in-select-after'>
               <text wx:if='{{cheshen.index === -1}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{cheshen.list[cheshen.index].carColourName}}</text>
             </view>
           </picker>
         </view>
       </view>
-      <view class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>内饰颜色</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='interiorId' data-picker='neishi' bindchange='bindInput' value='{{neishi.index}}' range='{{neishi.list}}' range-key='interiorName'>
-            <view class='weui-input'>
+            <view class='weui-select weui-select_in-select-after'>
               <text wx:if='{{neishi.index === -1}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{neishi.list[neishi.index].interiorName}}</text>
             </view>
@@ -93,15 +85,30 @@
           <view class='weui-label'>数量</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input disabled='{{true}}' class='weui-input' placeholder='请输入购买数量' id='carNum' value='{{carInfo.carNum}}' bindinput='bindInput' type='number' maxlength='{{9}}' />
+          <input class='weui-input' disabled='{{true}}' placeholder='请输入购买数量' id='carNum' value='{{carInfo.carNum}}' bindinput='bindInput' type='number' maxlength='{{9}}' />
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>官方指导价（元）</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input disabled='{{true}}' class='weui-input' value='{{carInfo.guidePrice}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>定金（元）</view>
+          <radio-group id="isDiscount" bindchange='bindInput'>
+            <label class='l-margin-r'>
+              <radio color='#fa5539' value='{{1}}' checked='{{carInfo.isDiscount == 1}}'/>已优惠
+            </label>
+            <label>
+              <radio color='#fa5539' value='{{0}}' checked='{{carInfo.isDiscount == 0}}'/>已加价
+            </label>
+          </radio-group>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入定金金额' id='depositPrice' value='{{carInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+          <input class='weui-input' placeholder='请输入金额' id='changePrice' value='{{carInfo.changePrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -109,7 +116,7 @@
           <view class='weui-label'>裸车价（元）</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入裸车价' id='nakedPrice' value='{{carInfo.nakedPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+          <input disabled='{{true}}' class='weui-input' placeholder='请输入裸车价' id='nakedPrice' value='{{carInfo.nakedPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -130,28 +137,20 @@
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <radio-group id="isDiscount" bindchange='bindInput'>
-            <label class='l-margin-r'>
-              <radio color='#fa5539' value='{{1}}' checked='{{carInfo.isDiscount == 1}}'/>已优惠
-            </label>
-            <label>
-              <radio color='#fa5539' value='{{0}}' checked='{{carInfo.isDiscount == 0}}'/>已加价
-            </label>
-          </radio-group>
+          <view class='weui-label'>最终成交价（元）</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入金额' id='changePrice' value='{{carInfo.changePrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+          <view class='weui-input l-text-theme'>
+            {{carInfo.finalPrice}}
+          </view>
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>最终成交价（元）</view>
+          <view class='weui-label'>应付定金（元）</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <!-- <input class='weui-input' placeholder='请输入成交价' id='finalPrice' value='{{carInfo.finalPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' /> -->
-          <view class='weui-input l-text-theme'>
-            {{carInfo.finalPrice}}
-          </view>
+          <input class='weui-input' placeholder='请输入定金金额' id='depositPrice' value='{{carInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -161,7 +160,6 @@
       </view>
     </view>
   </view>
-  
   <view style='height: 120rpx;'></view>
   <view class='l-fixed-bottom l-padding'>
     <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>

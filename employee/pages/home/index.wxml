@@ -25,6 +25,14 @@
       <image mode='widthFix' src='/images/daigou-icon.png'></image>
       <view class="_txt">{{userInfo.roleName === '仓管主管' ? '代购审核' : '代购管理'}}</view>
     </navigator>
+    <navigator class='_item' url='/level2/stock/index'>
+      <image mode='widthFix' src='/images/express-icon.png'></image>
+      <view class="_txt">物流管理</view>
+    </navigator>
+    <navigator class='_item' url='/level2/stock/index'>
+      <image mode='widthFix' src='/images/wait-for-fix-icon.png'></image>
+      <view class="_txt">运营管理</view>
+    </navigator>
   </view>
 
   <view class='l-menu-grid' wx:if='{{userInfo.orgLevel === 3}}'>
