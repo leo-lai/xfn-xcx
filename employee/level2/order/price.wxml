@@ -15,16 +15,6 @@
       </view>
       <view class='weui-cell weui-cell_input l-text-gray'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>官方指导价（元）</view>
-        </view>
-        <view class='weui-cell__bd l-text-right'>
-          <view class='weui-input'>
-            <text>{{formData.guidePrice}}</text>
-          </view>
-        </view>
-      </view>
-      <view class='weui-cell weui-cell_input l-text-gray'>
-        <view class='weui-cell__hd'>
           <view class='weui-label'>车身颜色</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
@@ -55,12 +45,27 @@
       </view>
       <view class='weui-cell weui-cell_input l-text-gray'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>定金（元）</view>
+          <view class='weui-label'>官方指导价（元）</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-input'>
-            <text>{{formData.depositPrice}}</text>
+            <text>{{formData.guidePrice}}</text>
           </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <radio-group id="isDiscount" bindchange='bindInput'>
+            <label class='l-margin-r'>
+              <radio color='#fa5539' value='{{1}}' checked='{{formData.isDiscount == 1}}'/>已优惠
+            </label>
+            <label>
+              <radio color='#fa5539' value='{{0}}' checked='{{formData.isDiscount == 0}}'/>已加价
+            </label>
+          </radio-group>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入金额' id='changePrice' value='{{formData.changePrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -91,26 +96,21 @@
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <radio-group id="isDiscount" bindchange='bindInput'>
-            <label class='l-margin-r'>
-              <radio color='#fa5539' value='{{1}}' checked='{{formData.isDiscount == 1}}'/>已优惠
-            </label>
-            <label>
-              <radio color='#fa5539' value='{{0}}' checked='{{formData.isDiscount == 0}}'/>已加价
-            </label>
-          </radio-group>
-        </view>
-        <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入金额' id='changePrice' value='{{formData.changePrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
-        </view>
-      </view>
-      <view class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
           <view class='weui-label'>最终成交价（元）</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-input l-text-theme'>
             {{formData.finalPrice}}
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>应付定金（元）</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>
+            <text>{{formData.depositPrice}}</text>
           </view>
         </view>
       </view>

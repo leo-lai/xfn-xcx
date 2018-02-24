@@ -110,32 +110,28 @@ Page({
     let {
       isDiscount,
       changePrice,
+      guidePrice,
       nakedPrice,
       trafficCompulsoryInsurancePrice,
       commercialInsurancePrice
     } = this.data.formData
 
-    changePrice = Number(changePrice) || 0
-    nakedPrice = Number(nakedPrice) || 0
+    changePrice = isDiscount == 1 ? 0 - changePrice : Number(changePrice)
+
+    guidePrice = Number(guidePrice) || 0
     trafficCompulsoryInsurancePrice = Number(trafficCompulsoryInsurancePrice) || 0
     commercialInsurancePrice = Number(commercialInsurancePrice) || 0
 
+    nakedPrice = guidePrice + changePrice
     let finalPrice = nakedPrice + trafficCompulsoryInsurancePrice + commercialInsurancePrice
-    if (isDiscount == 1) {
-      finalPrice -= changePrice
-    } else {
-      finalPrice += changePrice
-    }
+
     this.setData({
+      'formData.nakedPrice': nakedPrice,
       'formData.finalPrice': finalPrice
     })
   },
   // 保存信息
   submit: function () {
-    // if (!(this.data.formData.nakedPrice > 0)) {
-    //   this.showTopTips('请输入裸车价')
-    //   return
-    // }
 
     if (!this.data.formData.changePrice) {
       this.showTopTips('请输入' + (this.data.formData.isDiscount == 1 ? '优惠' : '加价') + '金额')
