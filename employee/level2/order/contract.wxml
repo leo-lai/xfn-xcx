@@ -6,12 +6,12 @@
     <view class='l-margin-t l-indent'>经甲乙双方共同协商一致，乙方愿意全权委托甲方代购指定车辆，双方特立此合同<text>{{info.orderCode}}</text>，以兹共同遵守：</view>
     <view class='l-h4'>一、委托代购事项</view>
     <view style='padding-left: 2em;'>
-      <view class='l-table l-margin-b-m' wx:for='{{info.customers}}'>
+      <view class='l-table l-margin-b-m' wx:for='{{info.customers}}' wx:key='id'>
         <view class='_tr'>
           <text>客户姓名：{{item.userName || ''}}</text>
           <text>手机号码：{{item.userPhone || ''}}</text>
         </view>
-        <view wx:for='{{item.infos}}' wx:for-item='carItem'>
+        <view wx:for='{{item.infos}}' wx:key='id' wx:for-item='carItem'>
           <view class='_tr l-fs-s'>
             <text>车型：{{carItem.carsName}}</text>
           </view>
@@ -30,6 +30,9 @@
           <view class='_tr'>
             <text>商业险：{{carItem.commercialInsurancePrice || 0}}元</text>
             <text>{{carItem.changePrice > 0 ? '加价' : '优惠'}}：{{carItem.changePrice > 0 ? carItem.changePrice : 0 - carItem.changePrice}}元</text>
+          </view>
+          <view class='_tr'>
+            <view>提车地点：{{info.pickCarAddr || ''}}</view>
           </view>
         </view>
       </view>
@@ -57,6 +60,7 @@
     <view class='l-text-gray l-rel' style='padding: 60rpx 0;'>
       盖章处：<image mode='aspectFit' style='position:absolute; width: 200rpx; height: 163rpx; top: 20rpx; opacity: 0.6;' src='{{resURL}}/zang.png'></image>
     </view>
+    <view>客户经理签名：{{info.creator}}</view>
     <view>日期：{{info.createTimeStr}}</view>
   </view>
 </view>

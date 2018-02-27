@@ -42,6 +42,7 @@ Page({
           cars.changePrice2 = Math.abs(cars.changePrice)
           cars.auditNum = 0 // 待审核车辆
           cars.cars && cars.cars.forEach(frame => {
+            frame.isTicket = !!(frame.ticketPic || frame.certificationPic || frame.tciPic || frame.ciPic || frame.expressPic || frame.otherPic)
             if (frame.auditState == 5) {
               cars.auditNum += 1
             }
@@ -226,5 +227,11 @@ Page({
 
     app.storage.setItem('lv2-order-wuliu', formData)
     app.navigateTo('wuliu')
+  },
+  // 票证
+  showTicket: function (event) {
+    let item = event.currentTarget.dataset.item
+    app.storage.setItem('lv2-order-ticket', item)
+    app.navigateTo('ticket')
   }
 })

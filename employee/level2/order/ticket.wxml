@@ -1,0 +1,47 @@
+<!--level2/order/ticket.wxml-->
+<view class='l-page-full l-bg-white'>
+  <view class='l-padding'>{{info.carsName}}</view>
+  <view class='l-padding l-border-t'>
+    <view>车架号：{{info.vin}}</view>
+    <view wx:if='{{info.ticketRemark}}' class='l-text-gray'>票证备注：{{info.ticketRemark}}</view>
+  </view>
+  <view class='l-padding l-ticket-imgs'>
+    
+    <view class='l-flex-h'>
+      <view class='_tit'>车身发票</view>
+      <view class='l-rest'>
+        <image id='{{item}}' data-name='ticketPicArr' wx:for='{{info.ticketPicArr}}' wx:key='*this' src='{{item}}' bindtap='previewImage'></image>
+      </view>
+    </view>
+    <view class='l-flex-h'>
+      <view class='_tit'>合格证</view>
+      <view class='l-rest'>
+        <image id='{{item}}' data-name='certificationPicArr' wx:for='{{info.certificationPicArr}}' wx:key='*this' src='{{item}}' bindtap='previewImage'></image>
+      </view>
+    </view>
+    <view class='l-flex-h'>
+      <view class='_tit'>交强险</view>
+      <view class='l-rest'>
+        <image id='{{item}}' data-name='tciPicArr' wx:for='{{info.tciPicArr}}' wx:key='*this' src='{{item}}' bindtap='previewImage'></image>
+      </view>
+    </view>
+    <view class='l-flex-h'>
+      <view class='_tit'>快递单</view>
+      <view class='l-rest'>
+        <image id='{{item}}' data-name='expressPicArr' wx:for='{{info.expressPicArr}}' wx:key='*this' src='{{item}}' bindtap='previewImage'></image>
+      </view>
+    </view>
+    <view class='l-flex-h'>
+      <view class='_tit'>商业险</view>
+      <view class='l-rest'>
+        <image id='{{item}}' data-name='ciPicArr' wx:for='{{info.ciPicArr}}' wx:key='*this' src='{{item}}' bindtap='previewImage'></image>
+      </view>
+    </view>
+    <view class='l-flex-h'>
+      <view class='_tit'>其他</view>
+      <view class='l-rest'>
+        <image id='{{item}}' data-name='otherPicArr' wx:for='{{info.otherPicArr}}' wx:key='*this' src='{{item}}' bindtap='previewImage'></image>
+      </view>
+    </view>
+  </view>
+</view>

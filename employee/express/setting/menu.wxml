@@ -1,0 +1,21 @@
+<!--level2/setting/menu.wxml-->
+<view class='l-page-full'>
+  <navigator url='/express/dray/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180226001.jpg'></image>
+      <view>板车管理</view>
+    </view>
+  </navigator>
+  <navigator url='/express/driver/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180226002.jpg'></image>
+      <view>司机管理</view>
+    </view>
+  </navigator>
+  <navigator url='/express/freight/index' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180226003.jpg'></image>
+      <view>运费配置</view>
+    </view>
+  </navigator>
+</view>

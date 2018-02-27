@@ -68,7 +68,7 @@ Page({
       this.setData({ 
         'carFrame': data.map(item => {
           item.checkImages = item.checkCarPic ? item.checkCarPic.split(',') : []
-          item.ticketImages = item.ticketPic ? item.ticketPic.split(',') : []
+          item.isTicket = !!(item.ticketPic || item.certificationPic || item.tciPic || item.ciPic || item.expressPic || item.otherPic)
           return item
         }) 
       })
@@ -201,5 +201,11 @@ Page({
     formData.changePrice = Math.abs(this.data.info.changePrice)
     app.storage.setItem('lv2-order-car-price', formData)
     app.navigateTo(`price?id=${this.data.info.id}`)
+  },
+  // 票证
+  showTicket: function (event) {
+    let item = event.currentTarget.dataset.item
+    app.storage.setItem('lv2-order-ticket', item)
+    app.navigateTo('ticket')
   }
 })

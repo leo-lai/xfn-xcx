@@ -1,0 +1,3 @@
+/* express/freight/index.wxss */
+.l-sticky ~ .weui-tab__panel{padding-top: 0;}
+.l-line-ipt ._ipt{display:inline-block; border-bottom: 2rpx solid #eee; width: 120rpx;text-align: center;}

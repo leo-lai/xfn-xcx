@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/index",
+    "express/freight/add",
+    "express/freight/index",
     "level2/order/list",
     "level2/order/add-order",
     "level2/order/add",
@@ -54,7 +56,16 @@
     "pages/mine/qrcode",
     "pages/msg/index",
     "pages/login/index",
-    "pages/region/index"
+    "pages/region/index",
+    "express/menu",
+    "express/setting/menu",
+    "express/driver/list",
+    "express/driver/info",
+    "express/driver/add",
+    "express/dray/list",
+    "express/dray/info",
+    "express/dray/add",
+    "level2/order/ticket"
   ],
   "window": {
     "backgroundColor": "#eee",

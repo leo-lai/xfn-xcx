@@ -27,6 +27,6 @@
 
   <view style='height: 120rpx;'></view>
   <navigator class='l-fixed-bottom l-padding' hover-class='none' url='add'>
-    <button class='l-button-main l-btn-w60'>修改客户信息</button>
+    <button class='l-button-main l-btn-w60'>修改门店信息</button>
   </navigator>
 </view>

@@ -112,12 +112,14 @@
           <button wx:if='{{isAdmin && carItem.auditNum > 0}}' size='mini' class='l-button-main' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>去审核</button>
 
           <button wx:if='{{info.state >= 10}}' class='l-button-border' size='mini' style='margin-left: 20rpx;' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>查看详情</button>
+
         </view>
 
         <!-- 车架号列表 -->
-        <view class='l-fs-s l-margin-t-s' wx:if='{{carItem.cars && carItem.cars.length > 0}}'>
+        <view class='l-fs-s l-margin-t' wx:if='{{carItem.cars && carItem.cars.length > 0}}'>
           <view wx:for='{{carItem.cars}}' wx:for-item='frame' wx:key='id'>
             <view class='l-flec-hc'>
+              <text class='l-btn-link l-fr' wx:if='{{frame.isTicket}}' data-item='{{frame}}' bindtap='showTicket'>查看票证</text>
               <text style='display:inline-block; min-width: 40%; margin-right: 20rpx;'>车架号：{{frame.vin}}</text>
               <text>内饰颜色：{{frame.interiorName}}</text>
             </view>
@@ -189,7 +191,7 @@
         <view>物流单号：{{info.logisticsOrderCode || '--'}}</view>
         <view>
           <text class='l-margin-r'>物流公司：{{info.logisticsCompany || '--'}}</text>
-          <text>运输车车牌：{{info.logisticsPlateNumber || '--'}}</text>
+          <text>运输车牌号：{{info.logisticsPlateNumber || '--'}}</text>
         </view>
         <view>
           <text class='l-margin-r'>司机姓名：{{info.logisticsDriver || '--'}}</text>

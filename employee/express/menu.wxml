@@ -1,0 +1,6 @@
+<!--express/menu.wxml-->
+<view class='l-page-full l-bg-white'>
+  <view class='l-br'></view>
+  <view class='l-text-center l-text-gray'>开发中</view>
+  <view class='l-br'></view>
+</view>

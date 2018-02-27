@@ -1,0 +1,69 @@
+<!--express/freight/add.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>运输类型</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>专线</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>专线名称</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请输入专线名称' confirm-type='next' id='dedicatedLineName' value='{{formData.dedicatedLineName}}' bindinput='bindInput' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>运费/辆（元）</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' type='digit' maxlength='{{11}}' placeholder='请输入运输费用' confirm-type='next' id='amount' value='{{formData.amount}}' bindinput='bindInput' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>出发地点</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请输入出发地点' confirm-type='next' id='startingPointAddress' value='{{formData.startingPointAddress}}' bindinput='bindInput' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>到达地点</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请输入到达地点' confirm-type='next' id='destinationAddress' value='{{formData.destinationAddress}}' bindinput='bindInput' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_select'>
+      <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+        <view class='weui-label'>发车时间</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <picker mode='time' id='departureTime' bindchange='bindInput' value='{{formData.departureTime}}'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text wx:if='{{formData.departureTime}}'>{{formData.departureTime}}</text>
+            <text wx:else class='l-text-gray'>请选择</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__bd' style='padding: 15rpx 0;'>
+        <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注' id='remarks' value='{{formData.remarks}}' bindinput='bindInput'></textarea>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>

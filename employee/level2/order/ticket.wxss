@@ -1,0 +1,3 @@
+/* level2/order/ticket.wxss */
+.l-ticket-imgs ._tit{min-width: 120rpx;}
+.l-ticket-imgs image{width: 100rpx; height: 100rpx; margin:0 0 20rpx 20rpx; background-color: #eee;}

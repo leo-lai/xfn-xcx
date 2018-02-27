@@ -1,0 +1,65 @@
+<!--express/freight/index.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='weui-tab'>
+    <view class='weui-navbar l-bg-white l-sticky'>
+      <block wx:for='{{tabs.tit}}' wx:key='*this'>
+        <view id='{{index}}' class='weui-navbar__item {{tabs.index == index ? "weui-bar__item_on" : ""}}' bindtap='tabClick'>
+          <view class='weui-navbar__title'>{{item}}</view>
+        </view>
+      </block>
+      <view class='weui-navbar__slider' style='left: {{tabs.left}}px; transform: translateX({{tab.offset}}px); -webkit-transform: translateX({{tabs.offset}}px);'></view>
+    </view>
+    <view class='weui-tab__panel'>
+      <view class='weui-tab__content' hidden='{{tabs.index != 0}}'>
+        <view class='l-margin l-padding l-radius l-bg-white'>
+          <view class='l-h4'>起步费用</view>
+          <view class='l-flex-hc l-line-ipt l-margin-t-s'>
+            <text class='_ipt'>0</text>
+            至
+            <input type='digit' maxlength='{{9}}' class='_ipt' id='startingMileage' value='{{formData.startingMileage}}' bindinput='bindInput'></input>
+            km，
+            <input type='digit' maxlength='{{9}}' class='_ipt' id='startPrice' value='{{formData.startPrice}}' bindinput='bindInput'></input>
+            元/辆
+          </view>
+          <view class='l-br'></view>
+          <view class='l-h4'>阶梯费用</view>
+          <view class='l-flex-hc l-line-ipt l-margin-t-s' wx:for='{{gradePrice}}' wx:key='*this'>
+            <input type='digit' maxlength='{{9}}' class='_ipt' value='{{item.minMileage}}' bindinput='gradePriceInput' data-name='minMileage' data-index='{{index}}'></input>
+            至
+            <input type='digit' maxlength='{{9}}' class='_ipt' value='{{item.maxMileage}}' bindinput='gradePriceInput' data-name='maxMileage' data-index='{{index}}'></input>
+            km，
+            <input type='digit' maxlength='{{9}}' class='_ipt' value='{{item.amount}}' bindinput='gradePriceInput' data-name='amount' data-index='{{index}}'></input>
+            元/公里/辆
+          </view>
+          <view class='l-margin-t'>
+            <button size='mini' class='l-btn-min1' bindtap='gradePriceAdd'>新增阶梯</button>
+          </view>
+
+          <view class='l-br'></view>
+          <view class='l-h4'>车辆附加费用</view>
+          <view class='l-flex-hc l-line-ipt l-margin-t-s' wx:for='{{gradeCar}}' wx:key='*this'>
+            车价
+            <text class='_ipt'>{{item.min}}</text>
+            至
+            <text class='_ipt'>{{item.max || '以上'}}</text>
+            万元，
+            <input type='digit' maxlength='{{9}}' class='_ipt' value='{{item.price}}' bindinput='gradeCarInput' data-name='price' data-index='{{index}}'></input>
+            元/辆
+          </view>
+        </view>
+      </view>
+      <view class='weui-tab__content' hidden='{{tabs.index != 1}}'>
+
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit' hidden='{{tabs.index != 0}}'>保存</button>
+    <navigator url='add' hover-class='none'>
+      <button class='l-button-main l-btn-w60' hidden='{{tabs.index != 1}}'>新增专线运费配置</button>
+    </navigator>
+  </view>
+</view>
