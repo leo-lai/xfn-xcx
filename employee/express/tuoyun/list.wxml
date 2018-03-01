@@ -1,4 +1,4 @@
-<!--express/dray/list.wxml-->
+<!--express/tuoyun/list.wxml-->
 <import src='/template/loadmore.wxml' />
 <view class='l-page-full'>
   <view style='height: 100rpx;'></view>

@@ -1,4 +1,4 @@
-// express/driver/list.js
+// express/tuoyun/list.js
 const app = getApp()
 Page({
   noopFn: app.noopFn,
@@ -52,7 +52,7 @@ Page({
       wx.stopPullDownRefresh()
     }
   },
-  // 司机列表
+  // 板车列表
   getList: function (page = 1, callback = app.noopFn) {
     page === 1 && this.setData({ 'list.more': true })
 
@@ -62,7 +62,7 @@ Page({
     }
     this.setData({ 'list.loading': true })
 
-    return app.post(app.config.exp.driverList, {
+    return app.post(app.config.exp.tuoyunList, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
       data.list = data.list.map(item => {
@@ -79,6 +79,11 @@ Page({
       this.setData({ 'list.loading': false })
       callback(this.data.list.data)
     })
+  },
+  showDrayInfo: function (event) {
+    let item = event.currentTarget.dataset.item
+    app.storage.setItem('l-dray-info', item)
+    app.navigateTo('add')
   },
 
 

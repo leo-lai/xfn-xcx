@@ -47,12 +47,10 @@
         <view class='weui-label'>发车时间</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <picker mode='time' id='departureTime' bindchange='bindInput' value='{{formData.departureTime}}'>
-          <view class='weui-select weui-select_in-select-after'>
-            <text wx:if='{{formData.departureTime}}'>{{formData.departureTime}}</text>
-            <text wx:else class='l-text-gray'>请选择</text>
-          </view>
-        </picker>
+        <view class='weui-select weui-select_in-select-after' bindtap='sltSendTime'>
+          <text wx:if='{{formData.departureTime}}'>{{formData.departureTime}}</text>
+          <text wx:else class='l-text-gray'>请选择</text>
+        </view>
       </view>
     </view>
     <view class='weui-cell weui-cell_input'>

@@ -19,7 +19,7 @@
  *                    `=---='
  *
  * .............................................
- *                晶哥坐镇 顺利上线
+ *                佛祖坐镇 顺利上线
  */
 var host = 'http://tomcat.mifengqiche.com'
 var host = 'https://tomcat.xfnauto.com'
@@ -228,6 +228,32 @@ var config = {
   exp: {
     // 非专线运费配置
     freight1: `${baseUrl}/dynamicLineEdit`,
+    // 非专线详情
+    freight1Info: `${baseUrl}/dynamicLineInfo`,
+    // 专线运费列表
+    freight2List: `${baseUrl}/dedicatedLineList`,
+    // 专线运费配置
+    freight2: `${baseUrl}/dedicatedLineEdit`,
+    // 司机列表
+    driverList: `${baseUrl}/driverList`,
+    // 司机详情
+    driverInfo: `${baseUrl}/driverInfo`,
+    // 新增司机
+    driverAdd: `${baseUrl}/driverEdit`,
+    // 删除司机
+    driverDel: `${baseUrl}/driverDisable`,
+    // 板车列表
+    drayList: `${baseUrl}/logisticsCarList`,
+    // 板车新增
+    drayAdd: `${baseUrl}/logisticsCarEdit`,
+    // 板车启用禁用
+    drayEnable: `${baseUrl}/logisticsCarIsEnable`,
+    // 托运单列表
+    tuoyunList: `${baseUrl}/consignmentList`,
+    // 托运单详情
+    tuoyunInfo: `${baseUrl}/consignmentInfo`,
+    // 新增托运单
+    tuoyunAdd: `${baseUrl}/consignmentEdit`,
   },
 
   baseUrl

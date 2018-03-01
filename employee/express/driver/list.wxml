@@ -1,2 +1,31 @@
 <!--express/driver/list.wxml-->
-<text>express/driver/list.wxml</text>
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view style='height: 100rpx;'></view>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入司机姓名或手机号码' value='{{filter.data.keywords}}'/>
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+
+  <navigator url='info?id={{item.driverId}}' class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list.data}}' wx:key='driverId'>
+    <view>
+      <text class='l-fr l-text-theme'>{{item.status == 0 ? '空闲' : '运输中'}}</text>
+      <text class='l-h4'>司机姓名：{{item.realName}}</text>
+    </view>
+    <view class='l-text-gray'>联系电话：{{item.phoneNumber}}</view>
+  </navigator>
+  <template is='loadmore' data='{{...list}}' />
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
+      <button class='l-button-main'>新增司机</button>
+    </navigator>
+  </view>
+</view>
+

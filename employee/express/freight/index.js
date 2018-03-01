@@ -10,10 +10,6 @@ Page({
       offset: 0,
       left: 0
     },
-    // 阶梯费用
-    gradePrice: [
-      { minMileage: '', maxMileage: '', amount: ''}
-    ],
     // 附加费用
     gradeCar: [
       { min: 0 , max: 10, price: '', name: 'gradeFirst'},
@@ -24,6 +20,7 @@ Page({
       { min: 60, max: '', price: '', name: 'gradeSix'}
     ],
     formData: {
+      dynamicLineId: '',
       gradeFirst: '',
       gradeSecond: '',
       gradeThird: '',
@@ -32,7 +29,18 @@ Page({
       gradeSix: '',
       startPrice: '',
       startingMileage: '',
-      lineInfoVoes: ''
+      // 阶梯费用
+      list: [
+        { minMileage: '', maxMileage: '', amount: '' }
+      ]
+    },
+    list: {
+      ajax: false,
+      loading: false,
+      more: true,
+      page: 1,
+      rows: 100,
+      data: []
     }
   },
   onLoad: function () {
@@ -48,17 +56,21 @@ Page({
   },
   onReady: function () {
     app.onLogin(userInfo => {
-      
+      this.getInfo()
     })
   },
   onShow: function () {
     app.checkLogin()
   },
-  tabClick: function (e) {
+  tabClick: function (event) {
     this.setData({
-      'tabs.offset': e.currentTarget.offsetLeft,
-      'tabs.index': e.currentTarget.id
+      'tabs.offset': event.currentTarget.offsetLeft,
+      'tabs.index': event.currentTarget.id
     })
+
+    if (event.currentTarget.id == 1) {
+      this.getList()
+    }
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -78,15 +90,22 @@ Page({
     data['formData.' + id] = value
     this.setData(data)
   },
+  // 阶梯费用
   gradePriceInput: function (event) {
     let { name, index } = event.currentTarget.dataset
     let value = event.detail.value
     console.log(name, index, value)
 
-    let gradePrice = this.data.gradePrice
+    let gradePrice = this.data.formData.list
     gradePrice[index][name] = value
-    this.setData({ gradePrice })
+    this.setData({ 'formData.list': gradePrice })
   },
+  gradePriceAdd: function () {
+    let gradePrice = this.data.formData.list
+    gradePrice.push({ minMileage: '', maxMileage: '', amount: '' })
+    this.setData({ 'formData.list': gradePrice })
+  },
+  // 附加费用
   gradeCarInput: function (event) {
     let { name, index } = event.currentTarget.dataset
     let value = event.detail.value
@@ -100,10 +119,21 @@ Page({
     data['gradeCar'] = gradeCar
     this.setData(data)
   },
-  gradePriceAdd: function () {
-    let gradePrice = this.data.gradePrice
-    gradePrice.push({ minMileage: '', maxMileage: '', amount: '' })
-    this.setData({ gradePrice })
+  // 非专线详情
+  getInfo: function () {
+    wx.showLoading()
+    app.post(app.config.exp.freight1Info).then(({data}) => {
+      console.log(data)
+      this.setData({ 
+        'formData': data,
+        'gradeCar': this.data.gradeCar.map(item => {
+          item.price = data[item.name]
+          return item
+        })
+      })
+    }).finally(_ => {
+      wx.hideLoading()
+    })
   },
   submit: function () {
     if (!this.data.formData.startingMileage) {
@@ -115,14 +145,45 @@ Page({
       return
     }
     let formData = this.data.formData
-    formData.lineInfoVoes = this.data.gradePrice.filter(item => {
-      return item.minMileage !== '' && item.maxMileage !== '' && item.amount !== ''
+    formData.list = formData.list.filter(item => {
+      return item.minMileage !== '' && item.amount !== ''
     })
-    console.log(formData)
 
     wx.showLoading({ mask: true })
     app.json(app.config.exp.freight1, formData).then(({data}) => {
-
+      this.getInfo()
+    }).catch(_ => {
+      wx.hideLoading()
     })
+  },
+  // 专线列表
+  getList: function (page = 1, callback = app.noopFn) {
+    page === 1 && this.setData({ 'list.more': true })
+
+    if (!this.data.list.more || this.data.list.loading) {
+      callback(this.data.list.data)
+      return
+    }
+
+    this.setData({ 'list.loading': true })
+    return app.post(app.config.exp.freight2List, {
+      page,
+      rows: this.data.list.rows
+    }).then(({ data }) => {
+      this.setData({
+        'list.more': data.list.length >= data.rows,
+        'list.page': data.page,
+        'list.data': data.page === 1 ? data.list : this.data.list.data.concat(data.list)
+      })
+    }).finally(_ => {
+      this.setData({ 'list.loading': false })
+      callback(this.data.list.data)
+    })
+  },
+  // 专线详情
+  showFreight2Info: function (event) {
+    let item = event.currentTarget.dataset.item
+    app.storage.setItem('l-freight2-info', item)
+    app.navigateTo('add')
   }
 })

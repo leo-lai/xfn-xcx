@@ -1,2 +1,32 @@
 <!--express/driver/info.wxml-->
-<text>express/driver/info.wxml</text>
+<view class='l-page-full'>
+  <view class='l-margin-tb l-padding l-bg-white'>
+    <view class='l-flex-hc'>
+      <text class='l-h4'>{{info.realName}}</text>
+      <view class='l-rest'></view>
+      <button class='l-btn-min1' size='mini' bindtap='del'>删除</button>
+      <button class='l-btn-min2 l-margin-l-s' size='mini' bindtap='edit'>编辑</button>
+    </view>
+    <view class='l-margin-tb'>
+      <view>联系电话：{{info.phoneNumber}}</view>
+      <view>身份证号码：{{info.cardNo}}</view>
+    </view>
+    <view>
+      <view>身份证照片</view>
+      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
+        <view class='l-text-center l-margin-l'>
+          <view class='l-upload-add' style='width: 250rpx; height: 150rpx;'>
+            <image id='{{info.idcardPicOn}}' bindtap='previewImage' mode='aspectFill' src='{{info.idcardPicOn}}'></image>
+          </view>
+          <view class='l-text-gray l-fs-s'>正面</view> 
+        </view>
+        <view class='l-text-center l-margin-l'>
+          <view class='l-upload-add' style='width: 250rpx; height: 150rpx;'>
+            <image id='{{info.idcardPicOff}}' bindtap='previewImage' mode='aspectFill' src='{{info.idcardPicOff}}'></image>
+          </view>
+          <view class='l-text-gray l-fs-s'>反面</view> 
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

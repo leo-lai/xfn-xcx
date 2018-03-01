@@ -1,4 +1,5 @@
 <!--express/freight/index.wxml-->
+<import src='/template/loadmore.wxml' />
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full'>
   <view class='weui-tab'>
@@ -24,7 +25,7 @@
           </view>
           <view class='l-br'></view>
           <view class='l-h4'>阶梯费用</view>
-          <view class='l-flex-hc l-line-ipt l-margin-t-s' wx:for='{{gradePrice}}' wx:key='*this'>
+          <view class='l-flex-hc l-line-ipt l-margin-t-s' wx:for='{{formData.list}}' wx:key='minMileage'>
             <input type='digit' maxlength='{{9}}' class='_ipt' value='{{item.minMileage}}' bindinput='gradePriceInput' data-name='minMileage' data-index='{{index}}'></input>
             至
             <input type='digit' maxlength='{{9}}' class='_ipt' value='{{item.maxMileage}}' bindinput='gradePriceInput' data-name='maxMileage' data-index='{{index}}'></input>
@@ -38,7 +39,7 @@
 
           <view class='l-br'></view>
           <view class='l-h4'>车辆附加费用</view>
-          <view class='l-flex-hc l-line-ipt l-margin-t-s' wx:for='{{gradeCar}}' wx:key='*this'>
+          <view class='l-flex-hc l-line-ipt l-margin-t-s' wx:for='{{gradeCar}}' wx:key='min'>
             车价
             <text class='_ipt'>{{item.min}}</text>
             至
@@ -50,7 +51,18 @@
         </view>
       </view>
       <view class='weui-tab__content' hidden='{{tabs.index != 1}}'>
-
+        <view class='l-freight2-item l-bg-white l-radius l-margin' wx:for='{{list.data}}' wx:key='dedicatedLineId' bindtap='showFreight2Info' data-item='{{item}}'>
+          <view class='l-padding-btn l-flex-hc l-border-b'>
+            <view class='l-rest'>{{item.dedicatedLineName}}</view>
+            <view class='l-text-theme'>{{item.amount}}元</view>
+          </view>
+          <view class='l-padding-btn l-fs-m'>
+            <view>出发地点：{{item.startingPointAddress}}</view>
+            <view>到达地点：{{item.destinationAddress}}</view>
+            <view>发车时间：{{item.departureTime}}</view>
+          </view>
+        </view>
+        <template is='loadmore' data='{{...list}}' /> 
       </view>
     </view>
   </view>

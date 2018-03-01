@@ -1,66 +1,81 @@
 // express/dray/add.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
+    formData: {
+      logisticsCarId: '',
+      licensePlateNumber: '',
+      logisticsCarVacancy: '',
+      gpsPIN: '',
+      remarks: ''
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    app.storage.getItem('l-dray-info').then(info => {
+      if (info) {
+        this.setData({
+          'formData': info
+        })
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    app.checkLogin()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
-  
+    app.storage.removeItem('l-dray-info')
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
+  // 顶部显示错误信息
+  showTopTips: function (topTips = '') {
+    this.setData({ topTips })
+    clearTimeout(this.toptipTimeid)
+    this.toptipTimeid = setTimeout(() => {
+      this.setData({ topTips: '' })
+    }, 3000)
   },
+  // 表单输入
+  bindInput: function (event) {
+    let data = {}
+    let id = event.target.id
+    let value = event.detail.value
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
+    console.log(id, value)
+    data['formData.' + id] = value
+    this.setData(data)
   },
+  // 保存信息
+  submit: function () {
+    if (!this.data.formData.licensePlateNumber) {
+      this.showTopTips('请输入板车车牌号')
+      return
+    }
+    if (!this.data.formData.logisticsCarVacancy) {
+      this.showTopTips('请输入运输车辆数量')
+      return
+    }
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    wx.showLoading({ mask: true })
+    app.post(app.config.exp.drayAdd, this.data.formData)
+      .then(({ data }) => {
+        app.toast('保存成功', true).then(_ => {
+          app.getPrevPage().then(prevPage => {
+            prevPage.getList && prevPage.getList()
+          })
+        })
+      }).catch(err => {
+        wx.hideLoading()
+      })
   }
 })

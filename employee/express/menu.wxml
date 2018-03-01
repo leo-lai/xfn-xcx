@@ -1,6 +1,15 @@
 <!--express/menu.wxml-->
-<view class='l-page-full l-bg-white'>
-  <view class='l-br'></view>
-  <view class='l-text-center l-text-gray'>开发中</view>
-  <view class='l-br'></view>
+<view class='l-page-full'>
+  <navigator url='/express/wuliu/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180228001.jpg'></image>
+      <view>物流单列表</view>
+    </view>
+  </navigator>
+  <navigator url='/express/tuoyun/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180228002.jpg'></image>
+      <view>托运单列表</view>
+    </view>
+  </navigator>
 </view>

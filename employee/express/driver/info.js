@@ -1,66 +1,74 @@
 // express/driver/info.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
+    info: {
+      driverId: '',
+      realName: '',
+      phoneNumber: '',
+      cardNo: '',
+      idcardPicOn: '',
+      idcardPicOff: ''
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    this.getInfo()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    app.checkLogin()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  getInfo: function () {
+    wx.showLoading()
+    app.post(app.config.exp.driverInfo, {
+      driverId: this.options.id
+    }).then(({data}) => {
+      this.setData({ 'info': data })
+    }).finally(_ => {
+      wx.hideLoading()
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
+  previewImage: function (event) {
+    wx.previewImage({
+      current: event.currentTarget.id, 
+      urls: [this.data.info.idcardPicOn, this.data.info.idcardPicOff]
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
+  del: function () {
+    wx.showModal({
+      content: '是否确定删除司机信息？',
+      success: res => {
+        if(res.confirm) {
+          wx.showLoading({ mask: true })
+          app.post(app.config.exp.driverDel, {
+            driverId: this.data.info.driverId
+          }).then(_ => {
+            app.toast('删除成功', true).then(_ => {
+              app.getPrevPage().then(prevPage => {
+                prevPage.getList && prevPage.getList()
+              })
+            })
+          }).finally(_ => {
+            wx.hideLoading()
+          })
+        }
+      }
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  edit: function () {
+    app.storage.setItem('l-driver-info', this.data.info)
+    app.navigateTo('add')
   }
 })

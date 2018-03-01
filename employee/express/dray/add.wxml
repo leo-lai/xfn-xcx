@@ -1,2 +1,39 @@
 <!--express/dray/add.wxml-->
-<text>express/dray/add.wxml</text>
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>板车车牌</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请输入板车车牌号' maxlength='{{20}}' confirm-type='next' id='licensePlateNumber' value='{{formData.licensePlateNumber}}' bindinput='bindInput' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>运输能力</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' type='number' placeholder='请输入运输车辆数量上限' maxlength='{{11}}' confirm-type='next' id='logisticsCarVacancy' value='{{formData.logisticsCarVacancy}}' bindinput='bindInput' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>绑定定位设备</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请输入定位设备' maxlength='{{50}}' confirm-type='next' id='gpsPIN' value='{{formData.gpsPIN}}' bindinput='bindInput' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__bd' style='padding: 15rpx 0;'>
+        <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注' id='remarks' value='{{formData.remarks}}' bindinput='bindInput'></textarea>
+      </view>
+    </view>
+  </view>
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>
