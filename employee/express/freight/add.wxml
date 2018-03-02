@@ -26,20 +26,26 @@
         <input class='weui-input' type='digit' maxlength='{{11}}' placeholder='请输入运输费用' confirm-type='next' id='amount' value='{{formData.amount}}' bindinput='bindInput' />
       </view>
     </view>
-    <view class='weui-cell weui-cell_input'>
-      <view class='weui-cell__hd'>
-        <view class='weui-label'>出发地点</view>
+    <view class='weui-cell weui-cell_select' id='startingPointAddress' bindtap='chooseLoc'>
+      <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+        <view class='weui-label'>起点</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <input class='weui-input' placeholder='请输入出发地点' confirm-type='next' id='startingPointAddress' value='{{formData.startingPointAddress}}' bindinput='bindInput' />
+        <view class='weui-select weui-select_in-select-after'>
+          <text wx:if='{{!formData.startingPointAddress}}' class='l-text-gray'>请选择</text>
+          <text wx:else>{{formData.startingPointAddress}}</text>
+        </view>
       </view>
     </view>
-    <view class='weui-cell weui-cell_input'>
-      <view class='weui-cell__hd'>
-        <view class='weui-label'>到达地点</view>
+    <view class='weui-cell weui-cell_select' id='destinationAddress' bindtap='chooseLoc'>
+      <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+        <view class='weui-label'>终点</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <input class='weui-input' placeholder='请输入到达地点' confirm-type='next' id='destinationAddress' value='{{formData.destinationAddress}}' bindinput='bindInput' />
+        <view class='weui-select weui-select_in-select-after'>
+          <text wx:if='{{!formData.destinationAddress}}' class='l-text-gray'>请选择</text>
+          <text wx:else>{{formData.destinationAddress}}</text>
+        </view>
       </view>
     </view>
     <view class='weui-cell weui-cell_select'>

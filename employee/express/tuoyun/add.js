@@ -7,27 +7,31 @@ Page({
    */
   data: {
     topTips: '',
-    wuliu: { // 物流方式
-      index: -1,
-      list: app.config.baseData.wuliu
-    },
     formData: {
       orgId: '',
       purchasersName: '',
       purchasersPhone: '',
       consignmentType: '',
-      logisticsType: '',
-      freight: '',
-      pickCarDate: '',
-      pickCarAddr: '',
-      pickers: []
+      consignmentTypeLineId: '',
+      consignmentTypeLineName: '',
+      startingPointAddress: '',
+      startingPointLatitude: '',
+      startingPointLongitude: '',
+      destinationAddress: '',
+      destinationLatitude: '',
+      destinationLongitude: '',
+      amount: 0,         // 总费用
+      grade: 0,          // 附加费用
+      mileage: 0,        // 公里数
+      estimateAmount: 0, // 预测费用
+      initiateRate: 0,   // 起步价
+      overflow: 0,       // 溢出价格
+      appointmentTime: '',
+      leaveTheCarPerson: [],
+      extractTheCarPerson: [],
+      goodsCarVos: []
     },
-    pickerData: {
-      userName: '',
-      userPhone: '',
-      idCardPicOn: '',
-      idCardPicOff: ''
-    }
+    carList: []
   },
   /**
    * 生命周期函数--监听页面加载
@@ -53,33 +57,10 @@ Page({
   bindInput: function (event) {
     let data = {}
     let id = event.target.id
-    let picker = event.target.dataset.picker
     let value = event.detail.value
 
-    if (picker) {
-      value = Number(value)
-      data[picker + '.index'] = value
-      switch (id) {
-        case 'logisticsType':
-          value = value + 1
-          break
-        case 'orgId':
-          value = this.data[picker].list[value][id]
-          break
-        default:
-          value = this.data[picker].list[value]
-          break
-      }
-    }
     console.log(id, value)
-    switch (id) {
-      case 'userName':
-      case 'userPhone':
-        data['pickerData.' + id] = value
-        break
-      default:
-        data['formData.' + id] = value
-    }
+    data['formData.' + id] = value
     this.setData(data)
   },
   // 选择门店
@@ -89,97 +70,136 @@ Page({
       this.setData({
         'formData.orgId': storeInfo.orgId,
         'formData.orgName': storeInfo.shortName,
-        'formData.orgLinker': storeInfo.linkMan,
-        'formData.orgPhone': storeInfo.telePhone
+        'formData.purchasersName': storeInfo.linkMan,
+        'formData.purchasersPhone': storeInfo.telePhone
       })
     }
   },
-  // 选择图片
-  chooseImage: function (event) {
+  // 选择运输方式
+  freightCb: function (info) {
+    if(info) {
+      this.setData({
+        'formData.consignmentType': info.consignmentType,
+        'formData.consignmentTypeLineId': info.consignmentTypeLineId,
+        'formData.consignmentTypeLineName': info.consignmentTypeLineName,
+        'formData.startingPointAddress': info.startingPointAddress,
+        'formData.startingPointLatitude': info.startingPointLatitude,
+        'formData.startingPointLongitude': info.startingPointLongitude,
+        'formData.destinationAddress': info.destinationAddress,
+        'formData.destinationLatitude': info.destinationLatitude,
+        'formData.destinationLongitude': info.destinationLongitude,
+      })
+    }
+  },
+  // 选择地点
+  chooseLoc: function (event) {
     let id = event.currentTarget.id
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
+    wx.chooseLocation({
       success: res => {
-        // 上传图片到服务器
-        wx.showLoading({
-          title: '照片上传中'
-        })
-        wx.uploadFile({
-          url: app.config.uploadFile,
-          filePath: res.tempFiles[0].path,
-          name: 'img_file',
-          success: res => {
-            console.log(res)
-            if (res.statusCode === 200) {
-              if (typeof res.data === 'string') {
-                res.data = JSON.parse(res.data)
-              }
-
-              let tempData = {}
-              tempData['pickerData.' + id] = res.data.data
-              this.setData(tempData)
-              console.log(tempData)
-              wx.hideLoading()
-            } else {
-              wx.showToast({
-                image: '../../images/error.png',
-                title: '上传失败(' + res.statusCode + ')'
-              })
-            }
-          },
-          fail: res => {
-            wx.showToast({
-              image: '../../images/error.png',
-              title: '照片上传失败'
+        console.log(res)
+        switch (id) {
+          case 'startingPointAddress':
+            this.setData({
+              'formData.startingPointAddress': res.address + res.name,
+              'formData.startingPointLatitude': res.latitude,
+              'formData.startingPointLongitude': res.longitude,
             })
-          }
-        })
+            break
+          case 'destinationAddress':
+            this.setData({
+              'formData.destinationAddress': res.address + res.name,
+              'formData.destinationLatitude': res.latitude,
+              'formData.destinationLongitude': res.longitude,
+            })
+            break
+        }
       }
     })
   },
-  // 保存信息
+
+  // 添加托运车辆
+  addCarCb: function (info) {
+    console.log(info)
+    if(info) {
+      this.setData({
+        carList: [...this.data.carList, info]
+      })
+    }
+  },
+  // 删除车辆
+  delCar: function (event) {
+    let guid = event.currentTarget.id
+    this.setData({
+      carList: this.data.carList.filter(item => item.guid !== guid)
+    })
+  },
+
+  // 查询信息
   submit: function () {
     if (!this.data.formData.orgId) {
       this.showTopTips('请选择门店名称')
       return
     }
-    if (!this.data.formData.orgLinker) {
+    if (!this.data.formData.purchasersName) {
       this.showTopTips('请输入联系人姓名')
       return
     }
-    if (!this.data.formData.orgPhone) {
+    if (!this.data.formData.purchasersPhone) {
       this.showTopTips('请输入联系电话')
       return
     }
-    if (!this.data.formData.logisticsType) {
-      this.showTopTips('请选择物流方式')
+    if (!this.data.formData.startingPointAddress) {
+      this.showTopTips('请选择起点')
+      return
+    }
+    if (!this.data.formData.destinationAddress) {
+      this.showTopTips('请选择终点')
       return
     }
 
-    if (this.data.pickerData.userName) {
-      if (!this.data.pickerData.userPhone) {
-        this.showTopTips('请输入提车人手机号')
-        return
-      }
-      if (!this.data.pickerData.idCardPicOn) {
-        this.showTopTips('请上传身份证正面照')
-        return
-      }
-      if (!this.data.pickerData.idCardPicOff) {
-        this.showTopTips('请上传身份证反面照')
-        return
-      }
-      this.data.formData.pickers[0] = this.data.pickerData
+    if (this.data.carList.length <= 0) {
+      this.showTopTips('请添加托运车辆')
+      return
     }
+
+    let carList = []
+    this.data.carList.forEach(item => {
+      let carItem = app.utils.copyObj({
+        carsId: '',
+        carsName: '',
+        colourId: '',
+        colourName: ''
+      }, item)
+      for (let i = 0; i < item.carNum; i++) {
+        carList.push(carItem)
+      }
+    })
+
+    this.setData({
+      'formData.goodsCarVos': carList
+    })
+
+    console.log(carList)
+
+    let formData = app.utils.copyObj({
+      consignmentType: '',
+      consignmentTypeLineId: '',
+      appointmentTime: '',
+      startingPointAddress: '',
+      startingPointLongitude: '',
+      startingPointLatitude: '',
+      destinationAddress: '',
+      destinationLongitude: '',
+      destinationLatitude: '',
+      carsIds: carList.map(item => item.carsId).join(','),
+      number: carList.length
+    }, this.data.formData)
+
     wx.showLoading({ mask: true })
-    app.json(app.config.lv2.orderAdd, this.data.formData).then(({ data }) => {
-      app.storage.setItem('lv2-order-list-refresh', 1)
-      app.toast('保存成功', false).then(_ => {
-        app.navigateTo('info?id=' + data.id)
-      })
-    }).catch(err => {
+    app.post(app.config.exp.tuoyunCount, formData).then(({ data }) => {
+      app.storage.setItem('l-tuoyun-freight', Object.assign({}, formData, data))
+      app.navigateTo('freight')
+    }).finally(err => {
       wx.hideLoading()
     })
   }

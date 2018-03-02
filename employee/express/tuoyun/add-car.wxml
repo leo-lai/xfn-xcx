@@ -1,0 +1,44 @@
+<!--express/tuoyun/add-car.wxml-->
+<view class='l-page-full'>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <navigator class='weui-cell weui-cell_select' url='/pages/car-selector/index'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>车型</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text wx:if='{{formData.carsId}}'>{{formData.carsName}}</text>
+            <text wx:else class='l-text-gray'>请选择</text>  
+          </view>
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>车身颜色</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='colourId' data-picker='cheshen' bindchange='bindInput' value='{{cheshen.index}}' range='{{cheshen.list}}' range-key='carColourName'>
+            <view class='weui-select weui-select_in-select-after'>
+              <text wx:if='{{cheshen.index === -1}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{cheshen.list[cheshen.index].carColourName}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>车辆数量</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' type='number' placeholder='请输入托运车辆数量' maxlength='{{5}}' confirm-type='next' id='carNum' value='{{formData.carNum}}' bindinput='bindInput' />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>确定添加</button>
+  </view>
+</view>

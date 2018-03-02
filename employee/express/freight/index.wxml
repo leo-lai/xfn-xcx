@@ -57,8 +57,8 @@
             <view class='l-text-theme'>{{item.amount}}元</view>
           </view>
           <view class='l-padding-btn l-fs-m'>
-            <view>出发地点：{{item.startingPointAddress}}</view>
-            <view>到达地点：{{item.destinationAddress}}</view>
+            <view>起点：{{item.startingPointAddress}}</view>
+            <view>终点：{{item.destinationAddress}}</view>
             <view>发车时间：{{item.departureTime}}</view>
           </view>
         </view>

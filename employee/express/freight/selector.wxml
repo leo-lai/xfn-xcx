@@ -1,0 +1,64 @@
+<!--express/freight/selector.wxml-->
+<view class='l-page-full'>
+  <view class='l-freight2-item l-bg-white l-radius l-margin' bindtap='sltFreight1'>
+    <view class='l-padding-btn l-flex-hc l-border-b'>
+      <view class='_tag' style='background-color:#00a0ea;'>普通</view>
+      <view class='l-rest'></view>
+      <icon wx:if='{{consignmentType == 1}}' type='success_no_circle' color='#fa5539'></icon>
+      <icon wx:else type='success_no_circle' color='#eee'></icon>
+    </view>
+    <view class='l-padding-btn l-fs-m'>
+      <view class='l-text-gray'>起步费用</view>
+      <view class='l-flex-hc l-line-ipt l-margin-t-s'>
+        <text class='_ipt'>0</text>
+        至
+        <text class='_ipt'>{{formData.startingMileage}}</text>
+        km，
+        <text class='_ipt l-text-theme'>{{formData.startPrice}}</text>
+        元/辆
+      </view>
+
+      <block wx:if='{{formData.list.length > 0}}'>
+        <view class='l-text-gray l-margin-t'>阶梯费用</view>
+        <view class='l-flex-hc l-line-ipt l-margin-t-s' wx:for='{{formData.list}}' wx:key='minMileage'>
+          <text class='_ipt'>{{item.minMileage}}</text>
+          至
+          <text class='_ipt'>{{item.maxMileage}}</text>
+          km，
+          <text class='_ipt  l-text-theme'>{{item.amount}}</text>
+          元/公里/辆
+        </view>
+      </block>
+
+      <view class='l-text-gray l-margin-t'>车辆附加费用</view>
+      <view class='l-flex-hc l-line-ipt l-margin-t-s' wx:for='{{gradeCar}}' wx:key='min'>
+        车价
+        <text class='_ipt'>{{item.min}}</text>
+        至
+        <text class='_ipt'>{{item.max || '以上'}}</text>
+        万元，
+        <text class='_ipt'>{{item.price}}</text>
+        元/辆
+      </view>
+    </view>
+  </view>
+
+  <view class='l-freight2-item l-bg-white l-radius l-margin' wx:for='{{list.data}}' wx:key='dedicatedLineId' data-item='{{item}}' bindtap='sltFreight2' data-item='{{item}}'>
+    <view class='l-padding-btn l-flex-hc l-border-b'>
+      <view class='_tag'>专线</view>
+      <view class='l-rest'>{{item.dedicatedLineName}}</view>
+      <view class='l-text-theme'>{{item.amount}}元</view>
+    </view>
+    <view class='l-padding-btn l-fs-m l-flex-hc'>
+      <view class='l-rest'>
+        <view>起点：{{item.startingPointAddress}}</view>
+        <view>终点：{{item.destinationAddress}}</view>
+        <view>发车时间：{{item.departureTime}}</view>
+      </view>
+      <view>
+        <icon wx:if='{{consignmentType == 2 && consignmentTypeLineId == item.dedicatedLineId}}' type='success_no_circle' color='#fa5539'></icon>
+        <icon wx:else type='success_no_circle' color='#eee'></icon>
+      </view>
+    </view>
+  </view>
+</view>

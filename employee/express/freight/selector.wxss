@@ -1,0 +1,4 @@
+/* express/freight/selector.wxss */
+.l-sticky ~ .weui-tab__panel{padding-top: 0;}
+.l-line-ipt ._ipt{display:inline-block; border-bottom: 2rpx solid #eee; min-width: 100rpx; padding: 0 10rpx; text-align: center;}
+.l-freight2-item ._tag{background-color: #31b069; color: #fff; border-radius: 6rpx; padding: 0 10rpx; font-size: 24rpx; margin-right: 10rpx;}

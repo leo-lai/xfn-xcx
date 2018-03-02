@@ -1,8 +1,14 @@
 {
   "pages": [
-    
+    "express/wuliu/list",
     "pages/home/index",
+    "express/tuoyun/list",
     "express/tuoyun/add",
+    "express/tuoyun/men",
+    "express/tuoyun/freight",
+    "express/tuoyun/add-car",
+    "express/tuoyun/info",
+    "express/freight/selector",
     "express/freight/index",
     "express/freight/add",
     "level2/order/list",
@@ -27,6 +33,7 @@
     "level2/order/frame-list",
     "level2/order/contract",
     "level2/order/price",
+    "level2/order/ticket",
     "level3/customer/list",
     "level3/customer/add",
     "level3/customer/info",
@@ -59,6 +66,7 @@
     "pages/msg/index",
     "pages/login/index",
     "pages/region/index",
+    "pages/week-selector/index",
     "express/menu",
     "express/setting/menu",
     "express/driver/list",
@@ -66,11 +74,7 @@
     "express/driver/add",
     "express/dray/list",
     "express/dray/info",
-    "express/dray/add",
-    "level2/order/ticket",
-    "pages/week-selector/index",
-    "express/wuliu/list",
-    "express/tuoyun/list"
+    "express/dray/add"
   ],
   "window": {
     "backgroundColor": "#eee",

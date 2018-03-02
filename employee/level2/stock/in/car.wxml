@@ -175,11 +175,11 @@
   </view>
 
   <view style='height: 120rpx;'></view>
-  <view class='l-fixed-bottom l-padding l-flex-hc'>
-    <view class='l-btn-w60 l-margin-r' wx:if='{{formData.stockCarId}}'>
+  <view class='l-fixed-bottom l-padding l-flex-hvc'>
+    <view class='l-btn-w60 l-margin-lr-s' wx:if='{{formData.stockCarId}}'>
       <button class='l-button-border' bindtap='delCar'>删除</button>
     </view>
-    <view class='l-btn-w60'>
+    <view class='l-btn-w60 l-margin-lr-s' wx:if='{{!formData.storageId}}'>
       <button class='l-button-main' bindtap='submit'>保存</button>
     </view>
   </view>

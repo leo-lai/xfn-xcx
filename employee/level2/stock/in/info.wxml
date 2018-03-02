@@ -59,9 +59,10 @@
       <view class='weui-cell' wx:for='{{carList}}' wx:key='*this'>
         <view class='weui-cell__bd'>
           <view>{{item.carsName}}</view>
+          <view>车身颜色：{{item.colourName}} | 内饰颜色：{{item.interiorName}}</view>
           <view>指导价：{{item.guidingPrice}}元</view>
           <view>
-            <text class='l-text-theme l-fr' bindtap='viewCar'>查看明细</text>
+            <text data-item='{{item}}' class='l-text-theme l-fr' bindtap='viewCar'>查看明细</text>
             <text>车架号：{{item.frameNumber}}</text>
           </view>
         </view>

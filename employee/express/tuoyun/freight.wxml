@@ -1,0 +1,112 @@
+<!--express/tuoyun/freight.wxml-->
+<view class='l-page-full'>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>运输方式</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>{{consignmentType[info.consignmentType]}}</view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>起点</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input l-fs-s'>{{info.startingPointAddress}}</view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>终点</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input l-fs-s'>{{info.destinationAddress}}</view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>距离（km）</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>{{info.mileage}}</view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>车辆数量</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>{{info.number}}</view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input l-padding-tb'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>总运费（元） <text class='l-text-error'>*</text></view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input l-text-theme' type='digit' placeholder='请填写' maxlength='{{11}}' confirm-type='next' id='amount' value='{{info.amount}}' bindinput='bindInput' />
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view style='width: 100%;' class='l-padding-tb-s'>
+          <view class='weui-label'>
+            <view class='l-h4'>阶梯费用</view>
+            <view class='l-margin-t-s l-fs-s'>
+              <view>
+                <text class='l-fr'>100元/辆</text>
+                <text>起步价（100km以内）</text>
+              </view>
+              <view>
+                <text class='l-fr'>7元/辆</text>
+                <text>100-300km</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view style='width: 100%;' class='l-padding-tb-s'>
+          <view class='weui-label'>
+            <view>车辆附加费</view>
+            <view class='l-margin-t-s l-fs-s'>
+              <view>
+                <text class='l-fr'>100元/辆</text>
+                <text>本体大师傅大势了但是考虑到分手快乐巅峰时刻</text>
+              </view>
+              <view>
+                <text class='l-fr'>100元/辆</text>
+                <text>本体大师傅大势了但是考虑到分手快乐巅峰时刻</text>
+              </view>
+              <view>
+                <text class='l-fr'>100元/辆</text>
+                <text>本体大师傅大势了但是考虑到分手快乐巅峰时刻</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input l-padding-tb'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>总运费 <text class='l-text-error'>*</text></view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' type='digit' placeholder='请填写 (元)' maxlength='{{11}}' confirm-type='next' id='orgPhone' value='{{formData.orgPhone}}' bindinput='bindInput' />
+        </view>
+      </view>
+    </view>
+  </view> 
+  -->
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>确定运费并生成订单</button>
+  </view>
+</view>

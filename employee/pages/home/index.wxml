@@ -25,14 +25,14 @@
       <image mode='widthFix' src='/images/daigou-icon.jpg'></image>
       <view class="_txt">{{userInfo.roleName === '仓管主管' ? '代购审核' : '代购管理'}}</view>
     </navigator>
-    <!-- <navigator class='_item' url='/express/menu'>
+     <navigator class='_item' url='/express/menu'>
       <image mode='widthFix' src='/images/express-icon.jpg'></image>
       <view class="_txt">物流管理</view>
     </navigator>
     <navigator class='_item' url='/express/setting/menu'>
       <image mode='widthFix' src='/images/wait-for-fix-icon.jpg'></image>
       <view class="_txt">运营管理</view>
-    </navigator>  -->
+    </navigator>  
   </view>
 
   <view class='l-menu-grid' wx:if='{{userInfo.orgLevel === 3}}'>

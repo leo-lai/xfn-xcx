@@ -22,7 +22,7 @@
  *                佛祖坐镇 顺利上线
  */
 var host = 'http://tomcat.mifengqiche.com'
-var host = 'https://tomcat.xfnauto.com'
+// var host = 'https://tomcat.xfnauto.com'
 
 var resURL = 'https://res.xfnauto.com'
 var commonUrl = host + '/tauto/common'
@@ -254,6 +254,12 @@ var config = {
     tuoyunInfo: `${baseUrl}/consignmentInfo`,
     // 新增托运单
     tuoyunAdd: `${baseUrl}/consignmentEdit`,
+    // 运费计算
+    tuoyunCount: `${baseUrl}/expensesCount`,
+    // 4s对接人
+    tuoyunMen1: `${baseUrl}/leaveTheCarPersons`,
+    // 提车人
+    tuoyunMen2: `${baseUrl}/extractTheCarPersons`,
   },
 
   baseUrl

@@ -11,7 +11,11 @@ Page({
       dedicatedLineId: '',
       dedicatedLineName: '',
       startingPointAddress: '',
+      startingPointLatitude: '',
+      StartingPointLongitude: '',
       destinationAddress: '',
+      destinationLatitude: '',
+      destinationLongitude: '',
       departureTime: '',
       amount: '',
       remarks: '',
@@ -62,6 +66,31 @@ Page({
       'formData.departureTime': days.join(',')
     })
   },
+  // 选择地点
+  chooseLoc: function (event) {
+    let id = event.currentTarget.id
+    wx.chooseLocation({
+      success: res => {
+        console.log(res)
+        switch(id) {
+          case 'startingPointAddress':
+            this.setData({
+              'formData.startingPointAddress': res.address + res.name,
+              'formData.startingPointLatitude': res.latitude,
+              'formData.StartingPointLongitude': res.longitude,
+            })
+            break
+          case 'destinationAddress':
+            this.setData({
+              'formData.destinationAddress': res.address + res.name,
+              'formData.destinationLatitude': res.latitude,
+              'formData.destinationLongitude': res.longitude,
+            })
+            break
+        }
+      }
+    })
+  },
   // 保存信息
   submit: function () {
     if (!this.data.formData.dedicatedLineName) {
@@ -73,11 +102,11 @@ Page({
       return
     }
     if (!this.data.formData.startingPointAddress) {
-      this.showTopTips('请输入出发地点')
+      this.showTopTips('请输入起点')
       return
     }
     if (!this.data.formData.destinationAddress) {
-      this.showTopTips('请输入到达地点')
+      this.showTopTips('请输入终点')
       return
     }
     if (!this.data.formData.dedicatedLineName) {
