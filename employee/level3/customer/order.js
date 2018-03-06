@@ -249,7 +249,7 @@ Page({
       return
     }
     if (!(this.data.orderInfo.carUnitPrice > 0)) {
-      this.showTopTips('请填写车辆最终成交价')
+      this.showTopTips('请填写实际成交裸车价')
       return
     }
 

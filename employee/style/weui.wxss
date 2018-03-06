@@ -377,7 +377,7 @@ icon {
   /* height: 2.58823529em; */
   /* min-height: 2.58823529em; */
   /* line-height: 2.58823529em; */
-  border-right: 1rpx solid #efefef
+  /* border-right: 1rpx solid #efefef */
 }
 
 .weui-select:before {

@@ -236,6 +236,8 @@ var config = {
     freight2: `${baseUrl}/dedicatedLineEdit`,
     // 司机列表
     driverList: `${baseUrl}/driverList`,
+    // 司机选择列表
+    driverSlt: `${baseUrl}/driverListList`,
     // 司机详情
     driverInfo: `${baseUrl}/driverInfo`,
     // 新增司机
@@ -244,6 +246,8 @@ var config = {
     driverDel: `${baseUrl}/driverDisable`,
     // 板车列表
     drayList: `${baseUrl}/logisticsCarList`,
+    // 板车选择列表
+    draySlt: `${baseUrl}/logisticsCarListList`,
     // 板车新增
     drayAdd: `${baseUrl}/logisticsCarEdit`,
     // 板车启用禁用
@@ -260,6 +264,14 @@ var config = {
     tuoyunMen1: `${baseUrl}/leaveTheCarPersons`,
     // 提车人
     tuoyunMen2: `${baseUrl}/extractTheCarPersons`,
+    // 物流单列表
+    wuliuList: `${baseUrl}/distributionList`,
+    // 物流单新增
+    wuliuAdd: `${baseUrl}/distributionEdit`,
+    // 物流单详情
+    wuliuInfo: `${baseUrl}/distributionInfo`,
+    // 物流单添加托运车辆
+    wuliuAddCar: `${baseUrl}/distributionGoodsCarAdd`,
   },
 
   baseUrl

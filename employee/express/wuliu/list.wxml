@@ -1,2 +1,67 @@
-<!--express/wuliu/list.wxml-->
-<text>express/wuliu/list.wxml</text>
+<!--express/tuoyun/list.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view style='height: 100rpx;'></view>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入物流单号/车型查询' value='{{filter.data.keywords}}'/>
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+
+  <view class='l-tuoyun-item' wx:for='{{list.data}}' wx:key='distributionId'>
+    <view class='l-flex-h'>
+      <text class='_tag' wx:if='{{item.consignmentType == 1}}' style='background-color:#00a0ea;'>普通</text>
+      <text class='_tag' wx:if='{{item.consignmentType == 2}}'>专线</text> 
+      <view class='l-rest'>{{item.distributionCode}}</view>
+      <text class='l-text-theme l-fs-s'>{{item.distributionStateName}}</text>
+    </view>
+    <view class='l-text-gray l-fs-s l-margin-t-s'>
+      <view>板车车牌：{{item.logisticsCar.licensePlateNumber}}</view>
+      <view>
+        <text>司机姓名：{{item.driverName}}</text>
+        <text class='l-margin-l'>联系电话：{{item.driverPhone}}</text>
+      </view>
+    </view>
+    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{item.tuoyunList}}' wx:for-item='tuoyunItem' wx:key='consignmentCode'>
+      <view class='l-text-blod'>
+        <text class='l-fr'>￥{{tuoyunItem.amount}}</text>
+        <text>托运单号：{{tuoyunItem.consignmentCode}}</text>
+      </view>
+      <view class='l-text-gray l-margin-t-s'>
+        <view>起点：{{tuoyunItem.startingPointAddress}}</view>
+        <view>终点：{{tuoyunItem.destinationAddress}}</view>
+      </view>
+      <view class='l-flex-h l-margin-t-s' wx:for='{{tuoyunItem.carList}}' wx:for-item='carItem' wx:key='goodsCarId'>
+        <view class='l-rest'>
+          <view>{{carItem.carsName}}</view>
+          <view>
+            <text>车身颜色：{{carItem.colourName}}</text>
+            <text class='l-margin-l' wx:if='{{carItem.frameNumber}}'>车架号：{{carItem.frameNumber}}</text>
+          </view>
+        </view>
+        <text class='l-text-warn'>{{carItem.goodsCarStateName}}</text>
+      </view>
+    </view>
+    <view class='l-text-center l-margin-t'>
+      <navigator wx:if='{{item.distributionState == 0}}' class='l-inline l-margin-lr-s' url='/express/tuoyun/list?mode=slt&did={{item.distributionId}}&ids={{item.ids}}' hover-class='none'>
+        <button size='mini' class='l-button-main'>添加托运车辆</button>
+      </navigator>
+      <navigator class='l-inline l-margin-lr-s' url='info?id={{item.distributionId}}' hover-class='none'>
+        <button size='mini' class='l-button-border'>查看详情</button>
+      </navigator>
+    </view>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
+      <button class='l-button-main'>新增物流单</button>
+    </navigator>
+  </view>
+</view>
+

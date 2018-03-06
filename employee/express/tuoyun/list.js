@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    mode: 'list', // slt
+    ids: [],
     filter: {
       loading: false,
       visible: false,
@@ -17,16 +19,25 @@ Page({
       ajax: false,
       loading: false,
       more: true,
+      rows: 10,
       page: 1,
       data: []
     }
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数--监听页面初次渲染完成
    */
-  onLoad: function (options) {
+  onReady: function (options) {
     app.onLogin(userInfo => {
+      if (this.options.mode === 'slt') {
+        this.setData({
+          'mode': this.options.mode,
+          'list.rows': 50,
+          'ids': this.options.ids ? this.options.ids.split(',') : []
+        })
+        wx.setNavigationBarTitle({ title: '选择托运单' })
+      }
       this.getList()
     }, this.route)
   },
@@ -37,7 +48,7 @@ Page({
     app.checkLogin().then(_ => {
       app.storage.getItem('exp-tuoyun-list-refresh').then(refresh => {
         if (refresh) {
-          app.storage.removeItem('exp-order-list-refresh')
+          app.storage.removeItem('exp-tuoyun-list-refresh')
           this.getList()
         }
       })
@@ -70,11 +81,13 @@ Page({
     this.setData({ 'list.loading': true })
 
     return app.post(app.config.exp.tuoyunList, {
-      page, ...this.data.filter.data
+      page, rows: this.data.list.rows, 
+      ...this.data.filter.data
     }).then(({ data }) => {
-      data.list = data.list.map(item => {
-        item.thumb = app.utils.formatThumb(item.indexImage, 150)
-        return item
+      data.list.forEach(item => {
+        item.list.forEach(car => {
+          car.checked = this.data.ids.includes(car.goodsCarId + '')
+        })
       })
 
       this.setData({
@@ -93,6 +106,43 @@ Page({
     app.navigateTo('add')
   },
 
+  // 选择托运单
+  sltCar: function (event) {
+    let {index, carIndex} = event.currentTarget.dataset
+    let list = this.data.list.data
+    let item = list[index].list[carIndex]
+    item.checked = !item.checked
+
+    this.setData({
+      'list.data': list
+    })    
+  },
+  sltCarOk: function () {
+    let ids = []
+    this.data.list.data.forEach(item => {
+      item.list.forEach(carItem => {
+        carItem.checked && ids.push(carItem.goodsCarId)
+      })
+    })
+
+    wx.showLoading({ mask: true })
+    app.post(app.config.exp.wuliuAddCar, {
+      distributionId: this.options.did,
+      goodsCarIds: ids.join(',')
+    }).then(_ => {
+      app.getPrevPage().then(prevPage => {
+        if(prevPage.getList) {
+          wx.hideLoading()
+          prevPage.getList()
+        }else if(prevPage.getInfo) {
+          prevPage.getInfo()
+        }
+        app.back()
+      })
+    }).catch(_ => {
+      wx.hideLoading()
+    })
+  },
 
   // 搜索相关=================================================
   // 正在输入

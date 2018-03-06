@@ -1,4 +1,4 @@
-// express/tuoyun/list.js
+// express/dray/selector.js
 const app = getApp()
 Page({
   noopFn: app.noopFn,
@@ -19,13 +19,17 @@ Page({
       more: true,
       page: 1,
       data: []
+    },
+    slted: {
+      logisticsCarId: '',
+      licensePlateNumber: ''
     }
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 生命周期函数--监听页面加载
    */
-  onReady: function (options) {
+  onLoad: function (options) {
     app.onLogin(userInfo => {
       this.getList()
     }, this.route)
@@ -34,14 +38,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin().then(_ => {
-      app.storage.getItem('exp-tuoyun-list-refresh').then(refresh => {
-        if (refresh) {
-          app.storage.removeItem('exp-tuoyun-list-refresh')
-          this.getList()
-        }
-      })
-    })
+    app.checkLogin()
   },
   // 加载更多
   onReachBottom: function () {
@@ -69,38 +66,18 @@ Page({
     }
     this.setData({ 'list.loading': true })
 
-    return app.post(app.config.exp.wuliuList, {
+    return app.post(app.config.exp.draySlt, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
-      data.list.forEach(item => {
-        let ids = []
-        let tuoyunList = {}
-        item.goodsCars.forEach(carItem => {
-          ids.push(carItem.goodsCarId)
-          let {
-            consignmentId,
-            consignmentCode, 
-            startingPointAddress, 
-            destinationAddress
-          } = carItem.consignmentVo
-          let { costsAmount } = carItem.carCostsVo
-          if (tuoyunList[consignmentCode]) {
-            tuoyunList[consignmentCode].amount += costsAmount
-            tuoyunList[consignmentCode].carList.push(carItem)
-          }else {
-            tuoyunList[consignmentCode] = {
-              consignmentId: consignmentId,
-              consignmentCode: consignmentCode,
-              startingPointAddress: startingPointAddress,
-              destinationAddress: destinationAddress,
-              amount: costsAmount,
-              carList: [carItem]
-            }
-          }
-        })
-        item.ids = ids.join(',')
-        item.tuoyunList = tuoyunList
-      })
+      // 兼容非分页返回
+      if (!data.list && data.length >= 0) {
+        data = {
+          rows: 10000,
+          page: 1,
+          total: data.length,
+          list: data
+        }
+      }
 
       this.setData({
         'list.more': data.list.length >= data.rows,
@@ -111,6 +88,27 @@ Page({
       this.setData({ 'list.loading': false })
       callback(this.data.list.data)
     })
+  },
+
+  // 选择板车
+  slt: function (event) {
+    let id = event.currentTarget.id
+    let list = this.data.list.data
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].id == id) {
+        let slted = {
+          logisticsCarId: list[i].id,
+          licensePlateNumber: list[i].name
+        }
+        this.setData({ slted })
+        app.getPrevPage().then(prevPage => {
+          prevPage.drayCb && prevPage.drayCb(slted)
+        })
+
+        app.back()
+        break
+      }
+    }
   },
 
   // 搜索相关=================================================

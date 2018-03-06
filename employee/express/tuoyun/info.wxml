@@ -9,11 +9,15 @@
       <text>门店联系人：{{info.purchasersName}}</text>
       <text class='l-margin-l'>联系电话：{{info.purchasersPhone}}</text>
     </view>
-    <view class='l-border-t l-margin-t l-padding-t l-fs-s'>
-      <view>运输方式：{{consignmentType[info.consignmentType]}}</view>
+    <view class='l-border-t l-margin-t-s l-padding-t-s l-fs-s'>
+      <view class='l-flex-hc'>
+        <text>运输方式：{{consignmentType[info.consignmentType]}}</text>
+        <view class='l-margin-l'>
+          总运费：<text class='l-text-theme'>{{info.amount || 0}}元</text>
+        </view>
+      </view>
       <view>起点：{{info.startingPointAddress}}</view>
       <view>终点：{{info.destinationAddress}}</view>
-      <view>总运费：<text class='l-text-theme'>{{info.amount || 0}}元</text></view>
       <view wx:if='{{info.appointmentTime}}'>预约装车时间：{{info.appointmentTime}}</view>
     </view>
   </view>
@@ -88,7 +92,7 @@
     <view class='l-flex-hc'>
       <text>车辆信息</text>
     </view>
-    <view class='l-border-t l-margin-t-m l-padding-t-m' wx:for='{{info.goodsCarVos}}'>
+    <view class='l-border-t l-margin-t-m l-padding-t-m' wx:for='{{info.goodsCarVos}}' wx:key='goodsCarId'>
       <view class='l-flex-h l-fs-s'>
         <view class='l-rest'>
           <view>{{item.carsName}}</view>

@@ -1,0 +1,26 @@
+<!--express/dray/selector.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view style='height: 100rpx;'></view>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入车牌号' value='{{filter.data.keywords}}'/>
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+
+  <view id='{{item.id}}' bindtap='slt' class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list.data}}' wx:key='id'>
+    <view class='l-flex-hc'>
+      <view class='l-rest'><text class='l-h4'>车牌号：{{item.name}}</text></view>
+      <view>
+        <icon wx:if='{{slted.logisticsCarId === item.id}}' type='success_no_circle' color='#fa5539'></icon> 
+        <icon wx:else type='success_no_circle' color='#eee'></icon>
+      </view>
+    </view>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+</view>
+

@@ -8,9 +8,6 @@ Page({
   data: {
     topTips: '',
     formData: {
-      orgId: '',
-      purchasersName: '',
-      purchasersPhone: '',
       consignmentType: '',
       consignmentTypeLineId: '',
       consignmentTypeLineName: '',
@@ -20,18 +17,10 @@ Page({
       destinationAddress: '',
       destinationLatitude: '',
       destinationLongitude: '',
-      amount: 0,         // 总费用
-      grade: 0,          // 附加费用
-      mileage: 0,        // 公里数
-      estimateAmount: 0, // 预测费用
-      initiateRate: 0,   // 起步价
-      overflow: 0,       // 溢出价格
-      appointmentTime: '',
-      leaveTheCarPerson: [],
-      extractTheCarPerson: [],
-      goodsCarVos: []
-    },
-    carList: []
+      logisticsCarId: '',
+      driverId: '',
+      remarks: ''
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -63,18 +52,7 @@ Page({
     data['formData.' + id] = value
     this.setData(data)
   },
-  // 选择门店
-  changeStore: function (storeInfo) {
-    console.log(storeInfo)
-    if (storeInfo) {
-      this.setData({
-        'formData.orgId': storeInfo.orgId,
-        'formData.orgName': storeInfo.shortName,
-        'formData.purchasersName': storeInfo.linkMan,
-        'formData.purchasersPhone': storeInfo.telePhone
-      })
-    }
-  },
+  
   // 选择运输方式
   freightCb: function (info) {
     if(info) {
@@ -93,8 +71,6 @@ Page({
   },
   // 选择地点
   chooseLoc: function (event) {
-    if (this.data.formData.consignmentType == 2) return
-
     let id = event.currentTarget.id
     wx.chooseLocation({
       success: res => {
@@ -118,36 +94,33 @@ Page({
       }
     })
   },
-
-  // 添加托运车辆
-  addCarCb: function (info) {
-    console.log(info)
-    if(info) {
+  // 选择板车
+  drayCb: function (info) {
+    if (info) {
       this.setData({
-        carList: [...this.data.carList, info]
+        'formData.logisticsCarId': info.logisticsCarId,
+        'formData.licensePlateNumber': info.licensePlateNumber
       })
     }
   },
-  // 删除车辆
-  delCar: function (event) {
-    let guid = event.currentTarget.id
-    this.setData({
-      carList: this.data.carList.filter(item => item.guid !== guid)
-    })
+  // 选择司机
+  driverCb: function (info) {
+    if (info) {
+      this.setData({
+        'formData.driverId': info.driverId,
+        'formData.realName': info.realName,
+        'formData.phoneNumber': info.phoneNumber,
+        'formData.cardNo': info.cardNo,
+        'formData.idcardPicOn': info.idcardPicOn,
+        'formData.idcardPicOff': info.idcardPicOff
+      })
+    }
   },
 
-  // 查询信息
+  // 保存信息
   submit: function () {
-    if (!this.data.formData.orgId) {
-      this.showTopTips('请选择门店名称')
-      return
-    }
-    if (!this.data.formData.purchasersName) {
-      this.showTopTips('请输入联系人姓名')
-      return
-    }
-    if (!this.data.formData.purchasersPhone) {
-      this.showTopTips('请输入联系电话')
+    if (!this.data.formData.consignmentType) {
+      this.showTopTips('请选择运输方式')
       return
     }
     if (!this.data.formData.startingPointAddress) {
@@ -158,49 +131,22 @@ Page({
       this.showTopTips('请选择终点')
       return
     }
-
-    if (this.data.carList.length <= 0) {
-      this.showTopTips('请添加托运车辆')
+    if (!this.data.formData.logisticsCarId) {
+      this.showTopTips('请选择板车')
+      return
+    }
+    if (!this.data.formData.driverId) {
+      this.showTopTips('请选择司机')
       return
     }
 
-    let carList = []
-    this.data.carList.forEach(item => {
-      let carItem = app.utils.copyObj({
-        carsId: '',
-        carsName: '',
-        colourId: '',
-        colourName: ''
-      }, item)
-      for (let i = 0; i < item.carNum; i++) {
-        carList.push(carItem)
-      }
-    })
-
-    this.setData({
-      'formData.goodsCarVos': carList
-    })
-
-    console.log(carList)
-
-    let formData = app.utils.copyObj({
-      consignmentType: '',
-      consignmentTypeLineId: '',
-      appointmentTime: '',
-      startingPointAddress: '',
-      startingPointLongitude: '',
-      startingPointLatitude: '',
-      destinationAddress: '',
-      destinationLongitude: '',
-      destinationLatitude: '',
-      carsIds: carList.map(item => item.carsId).join(','),
-      number: carList.length
-    }, this.data.formData)
-
     wx.showLoading({ mask: true })
-    app.post(app.config.exp.tuoyunCount, formData).then(({ data }) => {
-      app.storage.setItem('l-tuoyun-freight', Object.assign({}, formData, data))
-      app.navigateTo('freight')
+    app.post(app.config.exp.wuliuAdd, this.data.formData).then(({ data }) => {
+      app.toast('保存成功', true).then(_ => {
+        app.getPrevPage().then(prevPage => {
+          prevPage.getList && prevPage.getList()
+        })
+      })
     }).finally(err => {
       wx.hideLoading()
     })

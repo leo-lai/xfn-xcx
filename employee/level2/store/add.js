@@ -62,6 +62,12 @@ Page({
     let id = event.target.id
     let value = event.detail.value
 
+    switch (id) {
+      case 'telePhone':
+        value = value.replace(/[^\d]/g, '')
+        break
+    }
+    
     console.log(id, value)
     data['formData.' + id] = value
     this.setData(data)
@@ -93,6 +99,10 @@ Page({
     }
     if (!this.data.formData.telePhone) {
       this.showTopTips('请输入联系电话')
+      return
+    }
+    if (this.data.formData.telePhone.length !== 11) {
+      this.showTopTips('联系电话必须为11位手机号码')
       return
     }
     if (!(this.data.formData.provinceId && this.data.formData.cityId && this.data.formData.areaId)) {

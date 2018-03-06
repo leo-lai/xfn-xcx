@@ -83,7 +83,7 @@
   <view class='weui-cells weui-cells_after-title'>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>车辆最终成交价 <text class='l-text-theme'>*</text></view>
+        <view class='weui-label'>实际成交裸车价 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='carUnitPrice' value='{{orderInfo.carUnitPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />

@@ -14,9 +14,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    app.onLogin(userInfo => {
-      this.getInfo()
-    }, this.route)
+    this.getInfo()
   },
   onShareAppMessage: function() {
     return {

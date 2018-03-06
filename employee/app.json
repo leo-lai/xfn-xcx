@@ -1,8 +1,11 @@
 {
   "pages": [
-    "express/wuliu/list",
+    
+    "express/menu",
     "pages/home/index",
+    "express/wuliu/list",
     "express/tuoyun/list",
+    "express/wuliu/add",
     "express/tuoyun/add",
     "express/tuoyun/men",
     "express/tuoyun/freight",
@@ -67,14 +70,16 @@
     "pages/login/index",
     "pages/region/index",
     "pages/week-selector/index",
-    "express/menu",
     "express/setting/menu",
     "express/driver/list",
     "express/driver/info",
     "express/driver/add",
     "express/dray/list",
     "express/dray/info",
-    "express/dray/add"
+    "express/dray/add",
+    "express/dray/selector",
+    "express/driver/selector",
+    "express/wuliu/info"
   ],
   "window": {
     "backgroundColor": "#eee",

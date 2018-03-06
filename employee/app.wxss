@@ -246,6 +246,7 @@ button.l-btn-min3::after{display: none;}
 .l-padding-b{padding-bottom: 30rpx;}
 .l-padding-b-m{padding-bottom: 20rpx;}
 .l-padding-tb{padding-top: 30rpx; padding-bottom: 30rpx;}
+.l-padding-tb-m{padding-top: 20rpx; padding-bottom: 20rpx;}
 .l-padding-tb-s{padding-top: 15rpx; padding-bottom: 15rpx;}
 .l-padding-tb-xs{padding-top: 10rpx; padding-bottom: 10rpx;}
 .l-padding-btn{padding: 20rpx 30rpx;}

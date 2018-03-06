@@ -24,7 +24,7 @@
           <view class='weui-label'>联系电话</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' type='number' placeholder='请输入11位手机号码' maxlength='{{11}}' confirm-type='next' id='telePhone' value='{{formData.telePhone}}' bindinput='bindInput' />
+          <input class='weui-input' type='number' placeholder='请输入11位手机号码' maxlength='{{13}}' confirm-type='next' id='telePhone' value='{{formData.telePhone}}' bindinput='bindInput' />
         </view>
       </view>
       <navigator class='weui-cell weui-cell_select' url='/pages/region/index'>

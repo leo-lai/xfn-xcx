@@ -1,0 +1,93 @@
+<!--express/tuoyun/info.wxml-->
+<view class='l-page-full'>
+  <!-- 物流单信息 -->
+  <view class='l-bg-white l-padding l-margin-b'>
+    <view>
+      <text class='l-fr l-text-theme'>{{info.distributionStateName}}</text>
+      <text>{{info.distributionCode}}</text>
+    </view>
+    <view class='l-text-gray l-fs-s'>
+      <text>建单人：{{info.systemUserName}}</text>
+      <text class='l-margin-l'>建单时间：{{info.createDate}}</text>
+    </view>
+    <view class='l-border-t l-margin-t-s l-padding-t-s l-fs-s'>
+      <view class='l-flex-hc'>
+        <text>运输方式：{{consignmentType[info.consignmentType]}}</text>
+        <!-- <view class='l-margin-l'>
+          总运费：<text class='l-text-theme'>{{info.amount || 0}}元</text>
+        </view> -->
+      </view>
+      <view>起点：{{info.startingPointAddress}}</view>
+      <view>终点：{{info.destinationAddress}}</view>
+    </view>
+  </view>
+
+  <!-- 板车信息 -->
+  <view class='l-bg-white l-padding-btn l-margin-b'>
+    <view class='l-flex-hc'>
+      <text>板车车牌号：{{info.logisticsCar.licensePlateNumber}}</text>
+      <view class='l-rest'></view>
+      <navigator url='men?type=1&ids={{info.consignmentId}}' hover-class='none'>
+        <button class='l-btn-min1 l-margin-l-s' size='mini'>查看位置</button>
+      </navigator>
+    </view>
+    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s'>
+      <view><text>司机姓名：{{info.logisticsDriver.realName}}</text></view>
+      <view><text>联系电话：{{info.logisticsDriver.phoneNumber}}</text></view>
+      <view><text>身份证号：{{info.logisticsDriver.cardNo}}</text></view>
+      <view>身份证照片：</view>
+      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
+        <view class='l-text-center l-margin-l'>
+          <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
+            <image id='{{info.logisticsDriver.idcardPicOn}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{info.logisticsDriver.idcardPicOn}}'></image>
+          </view>
+          <view class='l-text-gray l-fs-s'>正面</view> 
+        </view>
+        <view class='l-text-center l-margin-l'>
+          <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
+            <image id='{{info.logisticsDriver.idcardPicOff}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{info.logisticsDriver.idcardPicOff}}'></image>
+          </view>
+          <view class='l-text-gray l-fs-s'>反面</view> 
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 托运单信息 -->
+  <view class='l-bg-white l-padding-btn l-margin-b'>
+    <view class='l-flex-hc'>
+      <text>托运单信息</text>
+      <view class='l-rest'></view>
+      <navigator wx:if='{{info.distributionState == 0}}' class='l-margin-l-s' url='/express/tuoyun/list?mode=slt&did={{info.distributionId}}&ids={{info.ids}}' hover-class='none'>
+        <button class='l-btn-min1' size='mini'>添加托运车辆</button>
+      </navigator>
+    </view>
+    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.tuoyunList}}' wx:for-item='tuoyunItem' wx:key='consignmentCode'>
+      <view class='l-text-blod'>
+        <text class='l-fr'>￥{{tuoyunItem.amount}}</text>
+        <text>托运单号：{{tuoyunItem.consignmentCode}}</text>
+      </view>
+      <view class='l-text-gray'>
+        <view>起点：{{tuoyunItem.startingPointAddress}}</view>
+        <view>终点：{{tuoyunItem.destinationAddress}}</view>
+      </view>
+      <view class='l-flex-h l-margin-t-s' wx:for='{{tuoyunItem.carList}}' wx:for-item='carItem' wx:key='goodsCarId'>
+        <view class='l-rest'>
+          <view>{{carItem.carsName}}</view>
+          <view>
+            <text>车身颜色：{{carItem.colourName}}</text>
+            <text class='l-margin-l' wx:if='{{carItem.frameNumber}}'>车架号：{{carItem.frameNumber}}</text>
+          </view>
+        </view>
+        <text class='l-text-warn'>{{carItem.goodsCarStateName}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
+      <button class='l-button-main'>派单</button>
+    </navigator> 
+  </view>
+</view>

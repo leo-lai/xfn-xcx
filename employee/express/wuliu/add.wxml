@@ -1,0 +1,127 @@
+<!--express/tuoyun/add.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-text-gray l-fs-s' style='margin: 30rpx 30rpx -20rpx 30rpx;'>物流单信息</view>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <navigator class='weui-cell weui-cell_select' url='/express/freight/selector'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>运输方式</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text wx:if='{{formData.consignmentTypeLineId == ""}}' class='l-text-gray'>请选择</text>
+            <block wx:else>
+              <text wx:if='{{formData.consignmentType == 1}}'>普通</text>
+              <text wx:if='{{formData.consignmentType == 2}}'>专线 ({{formData.consignmentTypeLineName}})</text>
+            </block>
+          </view>
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_select' id='startingPointAddress' bindtap='chooseLoc'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>起点</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text wx:if='{{!formData.startingPointAddress}}' class='l-text-gray'>请选择</text>
+            <text class='l-fs-s' wx:else>{{formData.startingPointAddress}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_select' id='destinationAddress' bindtap='chooseLoc'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>终点</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text wx:if='{{!formData.destinationAddress}}' class='l-text-gray'>请选择</text>
+            <text class='l-fs-s' wx:else>{{formData.destinationAddress}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__bd' style='padding: 15rpx 0;'>
+          <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注（选填）' id='remarks' value='{{formData.remarks}}' bindinput='bindInput'></textarea>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-text-gray l-fs-s l-flex-hc' style='margin: 40rpx 30rpx -15rpx 30rpx;'>
+    <text>板车信息</text>
+    <view class='l-rest'></view>
+  </view>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <navigator url='/express/dray/selector?id={{formData.logisticsCarId}}' class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>运输板车</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text wx:if='{{formData.logisticsCarId}}'>{{formData.licensePlateNumber}}</text>
+            <text wx:else class='l-text-gray'>请选择</text>
+          </view>
+        </view>
+      </navigator>
+      <navigator url='/express/driver/selector?id={{formData.driverId}}' class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>运输司机</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text wx:if='{{formData.driverId}}'>{{formData.realName}}</text>
+            <text wx:else class='l-text-gray'>请选择</text>
+          </view>
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>司机姓名</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>{{formData.realName}}</view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>司机手机号</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>{{formData.phoneNumber}}</view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>司机身份证号</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>{{formData.cardNo}}</view>
+        </view>
+      </view>
+      <view class='weui-cell'>
+        <view>上传身份证照片</view>
+      </view>
+      <view class='l-flex-hc l-padding-b'>
+        <view id='idcardPicOn' class='l-text-center l-margin-l'>
+          <view class='l-upload-add'>
+            <image mode='aspectFill' src='{{formData.idcardPicOn}}'></image>
+          </view>
+          <view class='l-text-gray l-fs-s'>正面</view> 
+        </view>
+        <view id='idcardPicOff' class='l-text-center l-margin-l'>
+          <view class='l-upload-add'>
+            <image mode='aspectFill' src='{{formData.idcardPicOff}}'></image>
+          </view>
+          <view class='l-text-gray l-fs-s'>反面</view> 
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>

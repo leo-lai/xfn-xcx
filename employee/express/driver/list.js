@@ -65,11 +65,6 @@ Page({
     return app.post(app.config.exp.driverList, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
-      data.list = data.list.map(item => {
-        item.thumb = app.utils.formatThumb(item.indexImage, 150)
-        return item
-      })
-
       this.setData({
         'list.more': data.list.length >= data.rows,
         'list.page': data.page,
