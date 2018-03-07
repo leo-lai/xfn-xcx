@@ -196,10 +196,10 @@ Page({
       this.showTopTips('请输入购买数量')
       return
     }
-    if (!(this.data.formData.depositPrice > 0)) {
-      this.showTopTips('请输入定金金额')
-      return
-    }
+    // if (!(this.data.formData.depositPrice > 0)) {
+    //   this.showTopTips('请输入定金金额')
+    //   return
+    // }
     if (!(this.data.formData.nakedPrice > 0)) {
       this.showTopTips('请输入裸车价')
       return

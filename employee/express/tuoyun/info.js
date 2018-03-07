@@ -7,6 +7,7 @@ Page({
    */
   data: {
     consignmentType: ['','普通','专线'],
+    cars: [],
     info: null
   },
 
@@ -15,8 +16,11 @@ Page({
    */
   onReady: function () {
     app.onLogin(userInfo => {
+      this.setData({
+        cars: this.options.cars ? this.options.cars.split(',') : []
+      })
       this.getInfo()
-    })
+    }, this.route)
   },
 
   /**
@@ -31,6 +35,9 @@ Page({
     app.post(app.config.exp.tuoyunInfo, { 
       consignmentId: this.options.id
     }).then(({data}) => {
+      data.goodsCarVos.forEach(item => {
+        item.isShow = this.data.cars.length === 0 || this.data.cars.includes(item.goodsCarId + '')
+      })
       this.setData({
         info: data
       })
@@ -46,6 +53,13 @@ Page({
 
     app.storage.setItem('exp-tuoyun-customer', item)
     app.navigateTo(`men?type=${menType}&ids=${this.data.info.consignmentId}`)
-  }
+  },
 
+  previewImage: function (event) {
+    let item = event.currentTarget.dataset.item
+    wx.previewImage({
+      current: event.currentTarget.id,
+      urls: [item.idCardPicOn, item.idCardPicOff]
+    })
+  }
 })

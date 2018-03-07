@@ -25,13 +25,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onReady: function (options) {
-    app.storage.getItem('l-freight2-info').then(info => {
-      if(info) {
-        this.setData({
-          'formData': app.utils.copyObj(this.data.formData, info)
-        })
-      }
-    })
+    app.onLogin(userInfo => {
+      app.storage.getItem('l-freight2-info').then(info => {
+        if (info) {
+          this.setData({
+            'formData': app.utils.copyObj(this.data.formData, info)
+          })
+        }
+      })
+    }, this.route)
   },
   /**
    * 生命周期函数--监听页面显示

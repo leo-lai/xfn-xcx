@@ -47,9 +47,14 @@
       </view>
     </view>
     <view class='l-text-center l-margin-t'>
-      <navigator wx:if='{{item.distributionState == 0}}' class='l-inline l-margin-lr-s' url='/express/tuoyun/list?mode=slt&did={{item.distributionId}}&ids={{item.ids}}' hover-class='none'>
-        <button size='mini' class='l-button-main'>添加托运车辆</button>
-      </navigator>
+      <block wx:if='{{item.distributionState == 0}}'>
+        <navigator class='l-inline l-margin-lr-s' url='/express/tuoyun/list?mode=slt&did={{item.distributionId}}&ids={{item.ids}}' hover-class='none'>
+          <button size='mini' class='l-button-main'>添加托运车辆</button>
+        </navigator>
+        <view bindtap='paidan' id='{{item.distributionId}}' wx:if='{{item.goodsCars.length > 0}}' class='l-inline l-margin-lr-s'>
+          <button size='mini' class='l-button-main'>派单</button>
+        </view>
+      </block>
       <navigator class='l-inline l-margin-lr-s' url='info?id={{item.distributionId}}' hover-class='none'>
         <button size='mini' class='l-button-border'>查看详情</button>
       </navigator>

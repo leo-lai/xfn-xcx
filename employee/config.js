@@ -272,6 +272,10 @@ var config = {
     wuliuInfo: `${baseUrl}/distributionInfo`,
     // 物流单添加托运车辆
     wuliuAddCar: `${baseUrl}/distributionGoodsCarAdd`,
+    // 物流派单
+    wuliuPai: `${baseUrl}/distributionDelivery`,
+    // 物流GPS
+    wuliuGPS: `${baseUrl}/logisticsDistributionGPS`,
   },
 
   baseUrl

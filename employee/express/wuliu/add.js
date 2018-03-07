@@ -8,6 +8,7 @@ Page({
   data: {
     topTips: '',
     formData: {
+      distributionId: '',
       consignmentType: '',
       consignmentTypeLineId: '',
       consignmentTypeLineName: '',
@@ -18,7 +19,13 @@ Page({
       destinationLatitude: '',
       destinationLongitude: '',
       logisticsCarId: '',
+      licensePlateNumber: '',
       driverId: '',
+      realName: '',
+      phoneNumber: '',
+      cardNo: '',
+      idcardPicOn: '',
+      idcardPicOff: '',
       remarks: ''
     }
   },
@@ -26,13 +33,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onReady: function (options) {
-
+    app.onLogin(userInfo => {
+      app.storage.getItem('exp-wuliu-info').then(info => {
+        if (info) {
+          this.setData({
+            'formData': app.utils.copyObj(this.data.formData, info)
+          })
+        }
+      })
+    }, this.route)
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     app.checkLogin()
+  },
+  onUnload: function () {
+    app.storage.removeItem('exp-wuliu-info')
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -144,10 +162,15 @@ Page({
     app.post(app.config.exp.wuliuAdd, this.data.formData).then(({ data }) => {
       app.toast('保存成功', true).then(_ => {
         app.getPrevPage().then(prevPage => {
-          prevPage.getList && prevPage.getList()
+          if (this.data.formData.distributionId) {
+            prevPage.getInfo && prevPage.getInfo()
+          }else{
+            wx.hideLoading()
+            prevPage.getList && prevPage.getList()
+          }
         })
       })
-    }).finally(err => {
+    }).catch(err => {
       wx.hideLoading()
     })
   }

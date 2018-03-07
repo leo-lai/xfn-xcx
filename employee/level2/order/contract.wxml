@@ -32,11 +32,14 @@
             <text>{{carItem.changePrice > 0 ? '加价' : '优惠'}}：{{carItem.changePrice > 0 ? carItem.changePrice : 0 - carItem.changePrice}}元</text>
           </view>
           <view class='_tr'>
-            <view>提车地点：{{info.pickCarAddr || ''}}</view>
+            <view>备注：{{carItem.remark || '无'}}</view>
           </view>
         </view>
       </view>
       <view class='l-table'>
+        <view class='_tr'>
+          <view>提车地点：{{info.pickCarAddr || ''}}</view>
+        </view>
         <view class='_tr'>
           <view>物流费用：{{info.freight || 0}}元</view>
           <view>定金总额：{{info.totalDepositPrice || 0}}元</view>

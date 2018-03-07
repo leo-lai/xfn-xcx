@@ -111,6 +111,9 @@ Page({
     let {index, carIndex} = event.currentTarget.dataset
     let list = this.data.list.data
     let item = list[index].list[carIndex]
+
+    if (item.goodsCarState > 0) return
+
     item.checked = !item.checked
 
     this.setData({

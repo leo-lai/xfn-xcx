@@ -10,10 +10,10 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-select weui-select_in-select-after'>
-            <text wx:if='{{formData.consignmentTypeLineId == ""}}' class='l-text-gray'>请选择</text>
+            <text wx:if='{{!formData.consignmentType}}' class='l-text-gray'>请选择</text>
             <block wx:else>
               <text wx:if='{{formData.consignmentType == 1}}'>普通</text>
-              <text wx:if='{{formData.consignmentType == 2}}'>专线 ({{formData.consignmentTypeLineName}})</text>
+              <text wx:if='{{formData.consignmentType == 2}}'>专线</text>
             </block>
           </view>
         </view>

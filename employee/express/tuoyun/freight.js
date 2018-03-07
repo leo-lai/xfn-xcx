@@ -20,7 +20,7 @@ Page({
           this.setData({ info })
         }
       })
-    })
+    }, this.route)
   },
 
   /**

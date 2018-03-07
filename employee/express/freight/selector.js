@@ -51,7 +51,7 @@ Page({
       this.getList().then(_ => {
         this.getInfo()
       })
-    })
+    }, this.route)
   },
   onShow: function () {
     app.checkLogin()

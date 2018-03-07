@@ -2,9 +2,11 @@
 <view class='l-page-full'>
   <!-- 物流单信息 -->
   <view class='l-bg-white l-padding l-margin-b'>
-    <view>
-      <text class='l-fr l-text-theme'>{{info.distributionStateName}}</text>
+    <view class='l-flex-hc'>
       <text>{{info.distributionCode}}</text>
+      <button wx:if='{{info.distributionState == 0}}' class='l-btn-min1 l-margin-l-s' size='mini' bindtap='eidtInfo'>编辑</button>
+      <view class='l-rest'></view>
+      <text class='l-fr l-text-theme'>{{info.distributionStateName}}</text>
     </view>
     <view class='l-text-gray l-fs-s'>
       <text>建单人：{{info.systemUserName}}</text>
@@ -27,7 +29,7 @@
     <view class='l-flex-hc'>
       <text>板车车牌号：{{info.logisticsCar.licensePlateNumber}}</text>
       <view class='l-rest'></view>
-      <navigator url='men?type=1&ids={{info.consignmentId}}' hover-class='none'>
+      <navigator hover-class='none' url='map?id={{info.distributionId}}'>
         <button class='l-btn-min1 l-margin-l-s' size='mini'>查看位置</button>
       </navigator>
     </view>
@@ -39,13 +41,13 @@
       <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
-            <image id='{{info.logisticsDriver.idcardPicOn}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{info.logisticsDriver.idcardPicOn}}'></image>
+            <image id='{{info.logisticsDriver.idcardPicOn}}' bindtap='previewImage' mode='aspectFill' src='{{info.logisticsDriver.idcardPicOn}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>正面</view> 
         </view>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
-            <image id='{{info.logisticsDriver.idcardPicOff}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{info.logisticsDriver.idcardPicOff}}'></image>
+            <image id='{{info.logisticsDriver.idcardPicOff}}' bindtap='previewImage' mode='aspectFill' src='{{info.logisticsDriver.idcardPicOff}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>反面</view> 
         </view>
@@ -65,7 +67,7 @@
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.tuoyunList}}' wx:for-item='tuoyunItem' wx:key='consignmentCode'>
       <view class='l-text-blod'>
         <text class='l-fr'>￥{{tuoyunItem.amount}}</text>
-        <text>托运单号：{{tuoyunItem.consignmentCode}}</text>
+        <text>{{tuoyunItem.consignmentCode}}</text>
       </view>
       <view class='l-text-gray'>
         <view>起点：{{tuoyunItem.startingPointAddress}}</view>
@@ -81,13 +83,19 @@
         </view>
         <text class='l-text-warn'>{{carItem.goodsCarStateName}}</text>
       </view>
+
+      <view class='l-margin-t-s'>
+        <navigator url='/express/tuoyun/info?id={{tuoyunItem.consignmentId}}&cars={{info.ids}}' class='l-btn-link' hover-class='none'>查看托运单</navigator>
+      </view>
     </view>
   </view>
 
-  <view style='height: 120rpx;'></view>
-  <view class='l-fixed-bottom'>
-    <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
-      <button class='l-button-main'>派单</button>
-    </navigator> 
-  </view>
+  <block wx:if='{{info.distributionState == 0}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom'>
+      <view class='l-btn-w60 l-margin-tb' bindtap='paidan'>
+        <button class='l-button-main'>派单</button>
+      </view> 
+    </view>
+  </block>
 </view>

@@ -244,10 +244,10 @@ Page({
       this.showTopTips('请选择内饰颜色')
       return
     }
-    if (!(this.data.orderInfo.depositPrice > 0)) {
-      this.showTopTips('请填写收取定金')
-      return
-    }
+    // if (!(this.data.orderInfo.depositPrice > 0)) {
+    //   this.showTopTips('请填写收取定金')
+    //   return
+    // }
     if (!(this.data.orderInfo.carUnitPrice > 0)) {
       this.showTopTips('请填写实际成交裸车价')
       return

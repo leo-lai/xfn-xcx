@@ -1,8 +1,7 @@
 {
   "pages": [
-    
-    "express/menu",
     "pages/home/index",
+    "express/menu",
     "express/wuliu/list",
     "express/tuoyun/list",
     "express/wuliu/add",
@@ -79,7 +78,8 @@
     "express/dray/add",
     "express/dray/selector",
     "express/driver/selector",
-    "express/wuliu/info"
+    "express/wuliu/info",
+    "express/wuliu/map"
   ],
   "window": {
     "backgroundColor": "#eee",

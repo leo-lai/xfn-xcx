@@ -105,10 +105,10 @@ Page({
       this.showTopTips('请填写优惠金额')
       return
     }
-    if (this.data.formData.depositPrice === '') {
-      this.showTopTips('请填写默认收取定金')
-      return
-    }
+    // if (this.data.formData.depositPrice === '') {
+    //   this.showTopTips('请填写默认收取定金')
+    //   return
+    // }
 
     wx.showLoading({ mask: true })
     app.post(app.config.carStockAdd, this.data.formData).then(({ data }) => {

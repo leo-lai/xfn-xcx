@@ -112,6 +112,25 @@ Page({
       callback(this.data.list.data)
     })
   },
+  paidan: function (event) {
+    let distributionId = event.currentTarget.id
+    wx.showModal({
+      content: '派单后物流单信息不可再更改，请确定物流单信息是否正确？',
+      confirmText: '确定派单',
+      success: res => {
+        if(res.confirm) {
+          wx.showLoading({ mask: true })
+          app.post(app.config.exp.wuliuPai, { distributionId }).then(_ => {
+            app.toast('派单成功').then(_ => {
+              this.getList()
+            })
+          }).finally(_ => {
+            wx.hideLoading()
+          })
+        }
+      }
+    })
+  },
 
   // 搜索相关=================================================
   // 正在输入

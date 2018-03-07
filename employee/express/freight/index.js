@@ -57,7 +57,7 @@ Page({
   onReady: function () {
     app.onLogin(userInfo => {
       this.getInfo()
-    })
+    }, this.route)
   },
   onShow: function () {
     app.checkLogin()
