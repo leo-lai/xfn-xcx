@@ -6,8 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mode: 'list', // slt
-    ids: [],
     filter: {
       loading: false,
       visible: false,
@@ -19,7 +17,6 @@ Page({
       ajax: false,
       loading: false,
       more: true,
-      rows: 10,
       page: 1,
       data: []
     }
@@ -30,14 +27,6 @@ Page({
    */
   onReady: function (options) {
     app.onLogin(userInfo => {
-      if (this.options.mode === 'slt') {
-        this.setData({
-          'mode': this.options.mode,
-          'list.rows': 50,
-          'ids': this.options.ids ? this.options.ids.split(',') : []
-        })
-        wx.setNavigationBarTitle({ title: '选择托运单' })
-      }
       this.getList()
     }, this.route)
   },
@@ -80,19 +69,46 @@ Page({
     }
     this.setData({ 'list.loading': true })
 
-    return app.post(app.config.exp.tuoyunList, {
-      page, rows: this.data.list.rows, 
-      ...this.data.filter.data
+    return app.post(app.config.wuliuList, {
+      page, ...this.data.filter.data
     }).then(({ data }) => {
+      // 兼容非分页返回
+      if (!data.list && data.length >= 0) {
+        data = {
+          rows: 10000,
+          page: 1,
+          total: data.length,
+          list: data
+        }
+      }
       data.list.forEach(item => {
-        item.list.forEach(car => {
-          car.checked = this.data.ids.includes(car.goodsCarId + '')
-          if (car.checked || car.goodsCarState == 0) {
-            car.disabled = false
+        let ids = []
+        let tuoyunList = {}
+        item.goodsCars.forEach(carItem => {
+          ids.push(carItem.goodsCarId)
+          let {
+            consignmentId,
+            consignmentCode, 
+            startingPointAddress, 
+            destinationAddress
+          } = carItem.consignmentVo
+          let { costsAmount } = carItem.carCostsVo
+          if (tuoyunList[consignmentCode]) {
+            tuoyunList[consignmentCode].amount += costsAmount
+            tuoyunList[consignmentCode].carList.push(carItem)
           }else {
-            car.disabled = true
+            tuoyunList[consignmentCode] = {
+              consignmentId: consignmentId,
+              consignmentCode: consignmentCode,
+              startingPointAddress: startingPointAddress,
+              destinationAddress: destinationAddress,
+              amount: costsAmount,
+              carList: [carItem]
+            }
           }
         })
+        item.ids = ids.join(',')
+        item.tuoyunList = tuoyunList
       })
 
       this.setData({
@@ -105,45 +121,14 @@ Page({
       callback(this.data.list.data)
     })
   },
-  showDrayInfo: function (event) {
-    let item = event.currentTarget.dataset.item
-    app.storage.setItem('l-dray-info', item)
-    app.navigateTo('add')
-  },
-
-  // 选择托运单
-  sltCar: function (event) {
-    let {index, carIndex} = event.currentTarget.dataset
-    let list = this.data.list.data
-    let item = list[index].list[carIndex]
-    if (item.disabled) return
-
-    item.checked = !item.checked
-    this.setData({ 'list.data': list })
-  },
-  sltCarOk: function () {
-    let ids = []
-    this.data.list.data.forEach(item => {
-      item.list.forEach(carItem => {
-        carItem.checked && ids.push(carItem.goodsCarId)
-      })
-    })
-
+  jiedan: function (event) {
+    let distributionId = event.currentTarget.id
     wx.showLoading({ mask: true })
-    app.post(app.config.exp.wuliuAddCar, {
-      distributionId: this.options.did,
-      goodsCarIds: ids.join(',')
-    }).then(_ => {
-      app.getPrevPage().then(prevPage => {
-        if(prevPage.getList) {
-          wx.hideLoading()
-          prevPage.getList()
-        }else if(prevPage.getInfo) {
-          prevPage.getInfo()
-        }
-        app.back()
+    app.post(app.config.wuliuJie, { distributionId }).then(_ => {
+      app.toast('接单成功').then(_ => {
+        this.getList()
       })
-    }).catch(_ => {
+    }).finally(_ => {
       wx.hideLoading()
     })
   },

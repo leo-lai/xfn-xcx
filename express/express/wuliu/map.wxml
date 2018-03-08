@@ -1,0 +1,4 @@
+<!--express/wuliu/map.wxml-->
+<view class='l-h100 l-bg-white'>
+  <map id='map' longitude='{{map.lng}}' latitude='{{map.lat}}' scale='{{map.scale}}' show-location='{{true}}' style='width: 100%; height: 100%;'></map>
+</view>

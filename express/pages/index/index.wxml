@@ -1,7 +1,0 @@
-<!--pages/index/index.wxml-->
-<view class='l-page-full'>
-  <view class='l-banner-image'>
-    <image mode='widthFix' src='https://placeholdit.imgix.net/~text?txtsize=16&bg=999&txtclr=fff&txt=%E5%9B%BE%E7%89%87%E7%BC%BA%E5%A4%B1&w=300&h=150'></image>
-  </view>
-
-</view>

@@ -35,6 +35,9 @@
       <view class='l-flex-hc'>
         <view class='l-text-wrap1'>{{tuoyunItem.consignmentCode}}</view>
         <view class='l-rest l-text-theme' style='margin: 0 10rpx 0 20rpx;'>￥{{tuoyunItem.amount}}</view>
+        <view wx:if='{{item.distributionState == 2}}'>
+          <button class='l-btn-min1 l-margin-l-s' size='mini'>装车</button>
+        </view>
       </view>
       <view class='l-text-gray l-margin-t-s'>
         <view>起点：{{tuoyunItem.startingPointAddress}}</view>
@@ -52,26 +55,17 @@
       </view>
     </view>
     <view class='l-text-center l-margin-t'>
-      <block wx:if='{{item.distributionState == 0}}'>
-        <navigator class='l-inline l-margin-lr-s' url='/express/tuoyun/list?mode=slt&did={{item.distributionId}}&ids={{item.ids}}' hover-class='none'>
-          <button size='mini' class='l-button-main'>添加托运车辆</button>
-        </navigator>
-        <view bindtap='paidan' id='{{item.distributionId}}' wx:if='{{item.goodsCars.length > 0}}' class='l-inline l-margin-lr-s'>
-          <button size='mini' class='l-button-main'>派单</button>
-        </view>
-      </block>
+      <view wx:if='{{item.distributionState == 1}}' bindtap='jiedan' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
+        <button size='mini' class='l-button-main'>接单</button>
+      </view>
+      <view wx:if='{{item.distributionState == 2}}' bindtap='jiedan' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
+        <button size='mini' class='l-button-main'>全部装车完成</button>
+      </view>
       <navigator class='l-inline l-margin-lr-s' url='info?id={{item.distributionId}}' hover-class='none'>
         <button size='mini' class='l-button-border'>查看详情</button>
       </navigator>
     </view>
   </view>
   <template is='loadmore' data='{{...list}}' />
-
-  <view style='height: 120rpx;'></view>
-  <view class='l-fixed-bottom'>
-    <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
-      <button class='l-button-main'>新增物流单</button>
-    </navigator>
-  </view>
 </view>
 

@@ -93,7 +93,7 @@ Page({
     this.setData(data)
     this.getList()
   },
-  dateChange: function (event) {
+  dateChange2: function (event) {
     let slted = event.currentTarget.dataset.item
     slted.estimateDate = event.detail.value
     wx.showNavigationBarLoading()

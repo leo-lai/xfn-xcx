@@ -1,0 +1,19 @@
+<!--pages/login/index.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full l-bg-white'>
+  <view class='l-banner-image'>
+    <image mode='widthFix' src='{{images.banner}}'></image>
+  </view>
+  <view class='l-margin l-padding l-form'>
+    <view class='_ipt'>
+      <input type='number' placeholder='输入手机号码' maxlength='{{11}}' confirm-type='next' id='phoneNumber' value='{{formData.phoneNumber}}' bindinput='bindInput'></input>
+    </view>
+    <view class='_ipt'>
+      <input password='{{true}}' placeholder='输入密码'  maxlength='{{50}}' confirm-type='done' id='password' value='{{formData.password}}' bindinput='bindInput' bindconfirm='submit'></input>
+    </view>
+    <view class='l-br'></view>
+    <view class='l-padding'>
+      <button class='l-button-main' bindtap='submit'>登录</button>
+    </view>
+  </view>
+</view>

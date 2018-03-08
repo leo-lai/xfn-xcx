@@ -3,7 +3,6 @@ import utils from '/script/utils'
 import config from 'config'
 
 const noopFn = function () { }
-
 // 缓存函数
 const storage_prefix = 'express_'
 const storage = {
@@ -38,9 +37,10 @@ const navigateTo = event => {
   if (typeof event === 'string') {
     wx.navigateTo({ url: event })
   } else if (typeof event === 'object') {
-    wx.navigateTo({ url:  event.currentTarget.dataset.url })
+    wx.navigateTo({ url: event.currentTarget.dataset.url })
   }
 }
+// 返回
 const back = (delta = 1) => {
   wx.navigateBack({ delta })
 }
@@ -74,7 +74,6 @@ const getPrevPage = _ => {
 App({
   utils, config, storage, noopFn, toast, navigateTo, back, getPrevPage,
   onLaunch: function () {
-    // 获取用户信息
     // storage.getItem('userInfo').then(userInfo => {
     //   this.globalData.userInfo = userInfo
     // })
@@ -87,7 +86,7 @@ App({
         delete formData.sessionId
       }
 
-      reqParams = {
+      let reqParams = {
         url,
         method: 'POST',
         data: formData,
@@ -100,20 +99,15 @@ App({
         ...reqParams,
         success: ({ data }) => {
           if (data.resultCode === 200) {
-            this.globalData.loginTimes = 0
             return resolve(data)
           }
-
           // session失效
           if (data.resultCode === 4002) {
-            storage.removeItem('userInfo')
-
-            if (++this.globalData.loginTimes < 3) {
-              this.login() // 重新登录
-            }
-            return reject('登录失效')
+            toast('登录失效').then(_ => {
+              this.logout()
+            })
+            return reject(data)
           }
-
           // 其他错误码处理
           switch (data.resultCode) {
             case 4008:
@@ -121,15 +115,13 @@ App({
             case 4005:
               break
           }
-
           wx.hideLoading()
           reject(data)
 
           showErr && wx.showModal({
             showCancel: false,
-            content: data.message || '接口请求出错'
+            content: data.message || '服务器繁忙，请稍后再试。'
           })
-
         },
         fail: err => {
           wx.showModal({
@@ -170,84 +162,20 @@ App({
       }
     })
   },
-  // 登录，获取用户信息
-  login: function () {
-    return new Promise((resolve, reject) => {
-      wx.showLoading()
-      wx.login({
-        success: loginRes => { // 获取授权code，可以到后台换取 openId, sessionKey, unionId
-          wx.getUserInfo({ // 小程序授权获取用户信息（头像，昵称等）
-            withCredentials: true,
-            success: userInfoRes => { // 可以将 userInfoRes 发送给后台解码出 unionId
-              let formData = {
-                code: '',
-                rawData: '',
-                signature: '',
-                encryptedData: '',
-                iv: ''
-              }
-              utils.copyObj(formData, userInfoRes, loginRes)
-              this.post(config.login, formData).then(apiRes => {
-                if (apiRes.data) {
-                  wx.hideLoading()
-                  // 由于获取用户信息是网络请求，可能会在 Page.onLoad 之后才返回
-                  // 所以此处触发回调函数
-                  this.updateUserInfo(apiRes.data)
-                }
-                resolve(apiRes)
-              }).catch(err => {
-                wx.hideLoading()
-                reject(err)
-              })
-            },
-            fail: err => {
-              // 用户不授权弹出重新授权页面
-              wx.hideLoading()
-              reject(err)
-              wx.showModal({
-                title: '授权失败',
-                content: '小程序需要您的登录授权',
-                confirmText: '去授权',
-                success: res => {
-                  if(res.confirm) {
-                    wx.openSetting({
-                      success: (res) => {
-                        if (res.authSetting['scope.userInfo']) {
-                          this.login()
-                        }
-                      }
-                    })
-                  }
-                }
-              })
-            }
-          })
-        },
-        fail: err => {
-          wx.hideLoading()
-          reject(err)
-        }
-      })
-    })
+  // 登出
+  logout: function () {
+    this.globalData.userInfo = null
+    storage.removeItem('userInfo')
+    navigateTo('/pages/login/index')
   },
-  // 刷新个人信息
-  refreshUserInfo: function () {
-    let promise = this.post(config.userInfo)
-    wx.showNavigationBarLoading()
-    promise.then(({ data }) => {
-      this.updateUserInfo(data)
-    }).finally(() => {
-      wx.hideNavigationBarLoading()
-    })
-    return promise
-  },
-  updateUserInfo: function (userInfo = {}, isCallback = true) {
-    if(userInfo.avatarUrl) {
-      userInfo.avatarThumb = utils.formatHead(userInfo.avatarUrl)  
+  // 更新用户信息
+  updateUserInfo: function (userInfo = {}) {
+    if (userInfo.headPortrait) {
+      userInfo.avatarThumb = utils.formatHead(userInfo.headPortrait)
     }
     this.globalData.userInfo = Object.assign({}, this.globalData.userInfo, userInfo)
     storage.setItem('userInfo', this.globalData.userInfo)
-    isCallback && this.runLoginCbs(this.globalData.userInfo)
+    this.runLoginCbs(this.globalData.userInfo)
   },
   runLoginCbs: function (userInfo) {
     getCurrentPages().forEach(page => {
@@ -264,7 +192,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    loginCbs: {}, // 页面登录回调
-    loginTimes: 0 // 登录失败次数
+    loginCbs: {}  // 页面登录回调
   }
 })

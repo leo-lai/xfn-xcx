@@ -1,0 +1,56 @@
+<!--pages/home/index.wxml-->
+<view class='l-page-full'>
+  <view class='l-banner-image' style='position:relative;'>
+    <image mode='widthFix' src='{{images.banner}}'></image>
+    <view style="position:absolute; top: 25%; left:0; right:0; text-align:center;">
+      <block wx:if='{{userInfo && userInfo.realName}}'>
+        <text class='l-text-gray l-fs-m'>欢迎登录</text>
+        <view class='l-margin-t'><text class='l-fs-20'>{{ userInfo.realName }}</text></view>
+      </block>
+      <block wx:else>
+        <view class='l-margin-t'><text class='l-fs-20'>未登录</text></view>
+      </block>
+    </view>
+  </view>
+  <view class='l-menu-grid' wx:if='{{userInfo.orgLevel === 2}}'>
+    <navigator class='_item' url='/level2/store/list'>
+      <image mode='widthFix' src='/images/customer-icon.jpg'></image>
+      <view class="_txt">汽贸店管理</view>
+    </navigator>
+    <navigator class='_item' url='/level2/stock/index'>
+      <image mode='widthFix' src='/images/stock-icon.jpg'></image>
+      <view class="_txt">库存/出库</view>
+    </navigator>
+    <navigator class='_item' url='/level2/order/list'>
+      <image mode='widthFix' src='/images/daigou-icon.jpg'></image>
+      <view class="_txt">{{userInfo.roleName === '仓管主管' ? '代购审核' : '代购管理'}}</view>
+    </navigator>
+    <navigator class='_item' url='/express/menu'>
+      <image mode='widthFix' src='/images/express-icon.jpg'></image>
+      <view class="_txt">物流管理</view>
+    </navigator>
+    <navigator class='_item' url='/express/setting/menu'>
+      <image mode='widthFix' src='/images/wait-for-fix-icon.jpg'></image>
+      <view class="_txt">运营管理</view>
+    </navigator>  
+  </view>
+
+  <view class='l-menu-grid' wx:if='{{userInfo.orgLevel === 3}}'>
+    <navigator class='_item' url='/level3/customer/list'>
+      <image mode='widthFix' src='/images/customer-icon.jpg'></image>
+      <view class="_txt">客户管理</view>
+    </navigator>
+    <navigator class='_item' url='/level3/stock/index'>
+      <image mode='widthFix' src='/images/stock-icon.jpg'></image>
+      <view class="_txt">库存/出库</view>
+    </navigator>
+    <navigator class='_item' url='/level2/order/list'>
+      <image mode='widthFix' src='/images/daigou-icon.jpg'></image>
+      <view class="_txt">代购管理</view>
+    </navigator>
+    <navigator class='_item' url='/level3/parts/index'>
+      <image mode='widthFix' src='/images/fix-icon2.jpg'></image>
+      <view class="_txt">加装/上牌</view>
+    </navigator>
+  </view>
+</view>

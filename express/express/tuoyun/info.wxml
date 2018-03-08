@@ -26,14 +26,10 @@
     <view class='l-flex-hc'>
       <text>4S店对接人信息</text>
       <view class='l-rest'></view>
-      <navigator wx:if='{{cars.length === 0}}' url='men?type=1&ids={{info.consignmentId}}' hover-class='none'>
-        <button class='l-btn-min1 l-margin-l-s' size='mini'>添加对接人</button>
-      </navigator>
     </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.leaveTheCarPerson}}' wx:key='id'>
       <view>
         <text>提车人姓名：{{item.userName}}</text>
-        <text wx:if='{{cars.length === 0}}' class='l-btn-link l-margin-l' data-type='1' data-item='{{item}}' bindtap='editMen'>编辑</text>
       </view>
       <view><text>联系电话：{{item.userPhone}}</text></view>
       <view><text>身份证号：{{item.idCard}}</text></view>
@@ -59,14 +55,10 @@
     <view class='l-flex-hc'>
       <text>提车人信息</text>
       <view class='l-rest'></view>
-      <navigator wx:if='{{cars.length === 0}}' url='men?type=2&ids={{info.consignmentId}}' hover-class='none'>
-        <button class='l-btn-min1 l-margin-l-s' size='mini'>添加提车人</button>
-      </navigator>
     </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.extractTheCarPerson}}' wx:key='id'>
       <view>
         <text>提车人姓名：{{item.userName}}</text>
-        <text wx:if='{{cars.length === 0}}' class='l-btn-link l-margin-l' data-type='2' data-item='{{item}}' bindtap='editMen'>编辑</text>
       </view>
       <view><text>联系电话：{{item.userPhone}}</text></view>
       <view><text>身份证号：{{item.idCard}}</text></view>

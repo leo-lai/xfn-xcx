@@ -1,9 +1,12 @@
 {
   "pages": [
-    "pages/bespeak/index",
-    "pages/tracking/index",
-    "pages/index/index",
-    "pages/about/index"
+    "express/wuliu/list",
+    "express/wuliu/info",
+    "express/wuliu/map",
+    "express/tuoyun/info",
+    "pages/mine/index",
+    "pages/mine/pwd",
+    "pages/login/index"
   ],
   "window": {
     "backgroundColor": "#eee",
@@ -13,20 +16,19 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "selectedColor": "#4395ff",
+    "selectedColor": "#fa5539",
     "list": [
       {
-        "pagePath": "pages/bespeak/index",
-        "text": "预约托运",
-        "iconPath": "images/bespeak.png",
-        "selectedIconPath": "images/bespeak-slted.png"
-        
+        "pagePath": "express/wuliu/list",
+        "text": "首页",
+        "iconPath": "images/home-unselected.png",
+        "selectedIconPath": "images/home-selected.png"
       },
       {
-        "pagePath": "pages/tracking/index",
-        "text": "订单跟踪",
-        "iconPath": "images/tracking.png",
-        "selectedIconPath": "images/tracking-slted.png"
+        "pagePath": "pages/mine/index",
+        "text": "我的",
+        "iconPath": "images/mine-unselected.png",
+        "selectedIconPath": "images/mine-selected.png"
       }
     ]
   }

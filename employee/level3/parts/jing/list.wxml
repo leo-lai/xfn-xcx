@@ -22,14 +22,14 @@
       <view class='{{ item.overTheLine === 1 ? "l-text-warn" : "l-text-warn" }}' style='position:absolute; top: 30rpx; right: 0;'>{{overline[item.overTheLine]}}</view>
       <view class='l-h4'>{{item.carsNameBefor}}</view>
       <view>{{item.carsNameAfter}}</view>
-      <view class='l-text-gray l-fs-s'>完款时间：{{item.payDate}}</view>
+      <!-- <view class='l-text-gray l-fs-s'>完款时间：{{item.payDate}}</view> -->
     </view>
-    <view wx:if='{{!item.estimateDate}}' catchtap='noopFn'>
-      <picker class='l-padding-tb l-border-t l-text-center l-text-theme' mode='date' value='{{item.estimateDate}}' data-item='{{item}}' bindchange='dateChange'>
+    <!-- <view wx:if='{{!item.estimateDate}}' catchtap='noopFn'>
+      <picker class='l-padding-tb l-border-t l-text-center l-text-theme' mode='date' value='{{item.estimateDate}}' data-item='{{item}}' bindchange='dateChange2'>
         <text>添加预计完成时间</text>
       </picker>
     </view>
-    <view wx:else class='l-padding-tb l-border-t'>预计完成时间：{{item.estimateDate}}</view>
+    <view wx:else class='l-padding-tb l-border-t'>预计完成时间：{{item.estimateDate}}</view> -->
   </navigator>
   <template is='loadmore' data='{{...list}}' />
 </view>

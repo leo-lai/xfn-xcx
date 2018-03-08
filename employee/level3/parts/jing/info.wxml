@@ -8,7 +8,7 @@
       <view class='{{ info.overTheLine === 1 ? "l-text-warn" : "l-text-warn" }}' style='position:absolute; top: 30rpx; right: 0;'>{{overline[info.overTheLine]}}</view>
       <view class='l-h4'>{{info.carsNameBefor}}</view>
       <view>{{info.carsNameAfter}}</view>
-      <view class='l-text-gray l-fs-s'>完款时间：{{info.payDate}}</view>
+      <!-- <view class='l-text-gray l-fs-s'>完款时间：{{info.payDate}}</view> -->
     </view>
   </view>
 

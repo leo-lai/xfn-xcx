@@ -1,0 +1,16 @@
+<!--pages/mine/pwd.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full l-bg-white l-padding'>
+  <view class='l-padding l-form'>
+    <view class='_ipt'>
+      <input password='{{true}}' auto-focus placeholder='输入旧密码' maxlength='{{50}}' confirm-type='next' id='passwordOld' value='{{formData.passwordOld}}' bindinput='bindInput'></input>
+    </view>
+    <view class='_ipt'>
+      <input password='{{true}}' placeholder='输入新密码'  maxlength='{{50}}' confirm-type='done' id='password' value='{{formData.password}}' bindinput='bindInput'></input>
+    </view>
+    <view class='l-br'></view>
+    <view class='l-padding'>
+      <button class='l-button-main' bindtap='submit'>确定更改</button>
+    </view>
+  </view>
+</view>

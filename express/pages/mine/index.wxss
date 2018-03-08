@@ -1,0 +1,4 @@
+/* pages/user/index.wxss */
+.l-page-full{background-color: #f3f8f9;}
+.l-mine{ background-color: #fff; border-radius: 15rpx; box-shadow: 0 0 10rpx 5rpx #eee; margin: -45% 5% 5% 5%; padding: 30rpx;}
+.l-mine .l-avatar{background-color: #eee; margin-top: -23%; width: 150rpx; height: 150rpx; border: 10rpx solid #f6b7a9;}

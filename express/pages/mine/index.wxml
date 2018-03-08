@@ -1,0 +1,44 @@
+<!--pages/user/index.wxml-->
+<view class='l-page-full l-bg-white'>
+  <image style='display:block; width: 100%;' src='/images/20180307001.jpg'></image>
+  <view class='l-mine'>
+    <view class='l-text-center'>
+      <image class='l-avatar' src='{{userInfo.avatarThumb}}'></image>
+      <view class='l-h3'>{{userInfo.realName}}</view>
+      <view>{{userInfo.phoneNumber}}</view>
+      <view class='l-margin-t'>
+        <navigator url='/pages/mine/pwd' hover-class='none' class='l-inline l-text-link'>修改密码</navigator>
+        <text class='l-margin-lr l-text-gray'>|</text>
+        <text class='l-text-link' bindtap='logout'>退出登录</text>
+      </view>
+    </view>
+
+    <view class='l-padding'>
+      <!-- <view class='l-padding l-border-b'>
+        <view class='l-text-gray'>
+          <text>板车车牌</text>
+        </view>
+        <view class='l-margin-t-s'>
+          <text class='l-h4'>无</text>
+        </view>
+      </view> -->
+      <view class='l-padding l-border-b'>
+        <view class='l-text-gray'>
+          <text>身份证号</text>
+        </view>
+        <view class='l-margin-t-s'>
+          <text class='l-h4'>{{userInfo.cardNo}}</text>
+        </view>
+      </view>
+      <view class='l-padding' style='padding-bottom:0;'>
+        <view class='l-text-gray'>
+          <text>身份证照片</text>
+        </view>
+        <view class='l-margin-t-s'>
+          <image src='{{userInfo.idcardPicOn}}' id='{{userInfo.idcardPicOn}}' bindtap='previewImage' style='width: 48%; height: 150rpx; background-color:#f3f8f9;'></image>
+          <image src='{{userInfo.idcardPicOff}}' id='{{userInfo.idcardPicOff}}' bindtap='previewImage' style='width: 48%; height: 150rpx; background-color:#f3f8f9; margin-left: 4%;'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

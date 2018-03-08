@@ -25,7 +25,7 @@
     </view>
 
     <view class='l-border-t l-fs-s' style='margin-top: 20rpx; padding: 10rpx 0 20rpx;'>
-      <view class='l-flex-h l-margin-t-s {{ (mode == "slt" && carItem.goodsCarState > 0) ? "_disabled" : ""}}' wx:for='{{item.list}}' wx:key='goodsCarId' wx:for-item='carItem'  wx:for-index='carIndex' bindtap='sltCar' data-index='{{index}}' data-car-index='{{carIndex}}'>
+      <view class='l-flex-h l-margin-t-s {{ carItem.disabled ? "_disabled" : ""}}' wx:for='{{item.list}}' wx:key='goodsCarId' wx:for-item='carItem'  wx:for-index='carIndex' bindtap='sltCar' data-index='{{index}}' data-car-index='{{carIndex}}'>
         <view hidden='{{mode != "slt"}}' style='width: 50rpx;'>
           <icon wx:if='{{carItem.checked}}' type='success' size='16' color='#fa5539'/>
           <icon wx:else type='success' size='16' color='#ddd' />
