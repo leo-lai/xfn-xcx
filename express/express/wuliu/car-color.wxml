@@ -1,0 +1,12 @@
+<!--express/wuliu/car-color.wxml-->
+<view class='l-page-full'>
+  <view id='{{item.carColourId}}' bindtap='slt' class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list}}' wx:key='carColourId'>
+    <view class='l-flex-hc'>
+      <view class='l-rest'>{{item.carColourName}}</view>
+      <view>
+        <icon wx:if='{{slted.carColourId === item.carColourId}}' type='success_no_circle' color='#fa5539'></icon> 
+        <icon wx:else type='success_no_circle' color='#eee'></icon>
+      </view>
+    </view>
+  </view>
+</view>

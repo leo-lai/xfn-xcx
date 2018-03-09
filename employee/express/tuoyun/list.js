@@ -87,7 +87,7 @@ Page({
       data.list.forEach(item => {
         item.list.forEach(car => {
           car.checked = this.data.ids.includes(car.goodsCarId + '')
-          if (car.checked || car.goodsCarState == 0) {
+          if (this.data.mode == 'list' || car.checked || car.goodsCarState == 0) {
             car.disabled = false
           }else {
             car.disabled = true

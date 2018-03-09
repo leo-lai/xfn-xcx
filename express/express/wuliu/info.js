@@ -58,10 +58,8 @@ Page({
       })
       data.ids = ids.join(',')
       data.tuoyunList = tuoyunList
-      console.log(data)
-      this.setData({
-        info: data
-      })
+
+      this.setData({ info: data })
     }).finally(_ => {
       wx.hideLoading()
     })
@@ -102,7 +100,7 @@ Page({
       app.toast('接单成功').then(_ => {
         this.getInfo()
       })
-    }).finally(_ => {
+    }).catch(_ => {
       wx.hideLoading()
     })
   },

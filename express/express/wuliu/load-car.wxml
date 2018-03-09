@@ -1,0 +1,98 @@
+<!--express/wuliu/upcar.wxml-->
+<view class='l-page-full'>
+  <view class='l-bg-white l-padding l-margin-b'>
+    <view>
+      <text class='l-fr l-text-theme'>{{info.consignmentStateName}}</text>
+      <text>{{info.orgName}}</text>
+    </view>
+    <view class='l-text-gray l-fs-s'>
+      <text>门店联系人：{{info.purchasersName}}</text>
+      <text class='l-margin-l'>联系电话：{{info.purchasersPhone}}</text>
+    </view>
+  </view>
+
+  <view class='l-bg-white l-margin-tb' wx:for='{{info.goodsCarVos}}' wx:key='goodsCarId'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view class='l-padding-tb-m'>{{item.carsName}}</view>
+      </view>
+      <navigator url='car-color?id={{item.familyId}}&gid={{item.goodsCarId}}&cid={{item.colourId}}' class='weui-cell weui-cell_select' hover-class='none'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>车身颜色</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text wx:if='{{!item.colourId}}' class='l-text-gray'>请选择</text>
+            <text wx:else>{{item.colourName}}</text>
+          </view>
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>车架号</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入车架号' value='{{frames[index]}}' bindinput='frameInput' data-index='{{index}}' maxlength='{{50}}'/>
+        </view>
+      </view>
+      
+      <view class='weui-cell' style='display:block;'>
+        <view>上传装车照片</view>
+        <view class='weui-uploader l-margin-t-m'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files'>
+              <block wx:for='{{images[index]}}' wx:for-item='img' wx:for-index='imgIndex' wx:key='tick'>
+                <view class='weui-uploader__file {{ (img.loading || img.error) ? "weui-uploader__file_status" : "" }}' bindtap='previewImage' id='{{img.path}}' data-index='{{index}}'>
+                  <image class='weui-uploader__img' src='{{img.path}}' mode='aspectFill' data-index='{{index}}' data-val='{{img.tick}}' bindlongpress='longDelImage'/>
+                  <view wx:if='{{img.loading}}' class='weui-uploader__file-content'>{{img.progress}}%</view>
+                  <view wx:if='{{img.error}}' class='weui-uploader__file-content'>
+                    <icon type='warn' size='23' color='#F43530'></icon>
+                  </view>
+                </view>
+              </block>
+            </view>
+            <view class='weui-uploader__input-box'>
+              <view class='weui-uploader__input' data-index='{{index}}' bindtap='chooseImage'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 4S店对接人信息 -->
+  <view class='l-bg-white l-padding-btn l-margin-tb'>
+    <view class='l-flex-hc'>
+      <text>4S店对接人信息</text>
+    </view>
+    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.leaveTheCarPerson}}' wx:key='id'>
+      <view>
+        <text>提车人姓名：{{item.userName}}</text>
+      </view>
+      <view><text>联系电话：{{item.userPhone}}</text></view>
+      <view><text>身份证号：{{item.idCard}}</text></view>
+      <view>身份证照片：</view>
+      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
+        <view class='l-text-center l-margin-l'>
+          <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
+            <image id='{{item.idCardPicOn}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
+          </view>
+          <view class='l-text-gray l-fs-s'>正面</view> 
+        </view>
+        <view class='l-text-center l-margin-l'>
+          <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
+            <image id='{{item.idCardPicOff}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
+          </view>
+          <view class='l-text-gray l-fs-s'>反面</view> 
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <view class='l-btn-w60 l-margin-tb'>
+      <button class='l-button-main' bindtap='submit'>保存</button>
+    </view>
+  </view>
+</view>

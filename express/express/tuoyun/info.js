@@ -35,31 +35,12 @@ Page({
     app.post(app.config.tuoyunInfo, { 
       consignmentId: this.options.id
     }).then(({data}) => {
-      data.goodsCarVos.forEach(item => {
-        item.isShow = this.data.cars.length === 0 || this.data.cars.includes(item.goodsCarId + '')
+      data.goodsCarVos = data.goodsCarVos.filter(item => {
+        return this.data.cars.length === 0 || this.data.cars.includes(item.goodsCarId + '')
       })
-      this.setData({
-        info: data
-      })
+      this.setData({ info: data })
     }).finally(_ => {
       wx.hideLoading()
-    })
-  },
-
-  // 编辑对接人，提车人信息
-  editMen: function (event) {
-    let menType = event.currentTarget.dataset.type
-    let item = event.currentTarget.dataset.item
-
-    app.storage.setItem('exp-tuoyun-customer', item)
-    app.navigateTo(`men?type=${menType}&ids=${this.data.info.consignmentId}`)
-  },
-
-  previewImage: function (event) {
-    let item = event.currentTarget.dataset.item
-    wx.previewImage({
-      current: event.currentTarget.id,
-      urls: [item.idCardPicOn, item.idCardPicOff]
     })
   }
 })

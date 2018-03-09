@@ -121,6 +121,7 @@ Page({
       callback(this.data.list.data)
     })
   },
+  // 接单
   jiedan: function (event) {
     let distributionId = event.currentTarget.id
     wx.showLoading({ mask: true })
@@ -128,7 +129,33 @@ Page({
       app.toast('接单成功').then(_ => {
         this.getList()
       })
-    }).finally(_ => {
+    }).catch(_ => {
+      wx.hideLoading()
+    })
+  },
+  // 全部装车完成
+  changeState: function (event) {
+    let distributionId = event.currentTarget.id
+    let state = event.currentTarget.dataset.state
+    let msg = ''
+
+    switch(state) {
+      case '3':
+        msg = '装车成功'
+        break
+      case '4':
+        msg = '已开始运输'
+        break
+    }
+
+    wx.showLoading({ mask: true })
+    app.post(app.config.wuliuState, {
+      distributionId, state
+    }).then(_ => {
+      app.toast(msg).then(_ => {
+        this.getList()
+      })
+    }).catch(_ => {
       wx.hideLoading()
     })
   },

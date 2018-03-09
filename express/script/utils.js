@@ -109,7 +109,7 @@ if (!Date.prototype.format) {
 }
 
 // 货币格式 100000.11 -> 100,000.11
-if (!Number.prototype.currency){
+if (!Number.prototype.currency) {
   Number.prototype.currency = function (places, symbol = '', thousand = ',', decimal = '.') {
     places = !isNaN(places = Math.abs(places)) ? places : 2
     var number = this,
@@ -136,7 +136,7 @@ const formatTime2chs = (dateStr = '', fmt) => {
   let date = str2date(dateStr)
   let dateMs = date.getTime()
   let nowDate = new Date()
-  
+
   let diffMs = nowDate.getTime() - dateMs
   let minute = 1000 * 60
   let hour = minute * 60
@@ -219,7 +219,7 @@ const timer = endDate => {
   hours = number2(hours)
   minutes = number2(minutes)
   seconds = number2(seconds)
-  
+
   return [days, hours, minutes, seconds]
 }
 
@@ -333,7 +333,18 @@ const setArgs = (url, name, value) => {
   return url
 }
 
+const guid = function () {
+  var d = new Date().getTime()
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (d + Math.random() * 16) % 16 | 0
+    d = Math.floor(d / 16)
+    return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16)
+  })
+  return uuid
+}
+
 module.exports = {
+  guid,
   timer,
   getArgs,
   setArgs,

@@ -6,7 +6,9 @@
     "express/tuoyun/info",
     "pages/mine/index",
     "pages/mine/pwd",
-    "pages/login/index"
+    "pages/login/index",
+    "express/wuliu/load-car",
+    "express/wuliu/car-color"
   ],
   "window": {
     "backgroundColor": "#eee",

@@ -44,6 +44,12 @@ var config = {
   familyList: `${commonUrl}/carsFamilyList`,
   // 车类型(品牌，车系，年款，高低配等)
   carTypeList: `${commonUrl}/carsListList`,
+  // 车身颜色
+  cheshen: `${commonUrl}/carColourList`,
+  // 内饰颜色
+  neishi: `${commonUrl}/carInteriorList`,
+  // 上传图片
+  uploadFile: `${commonUrl}/uploadFile`,
 
   // 注册/登录 返回用户信息
   login: `${baseUrl}/login`,
@@ -59,6 +65,10 @@ var config = {
   wuliuGPS: `${baseUrl}/logisticsDistributionGPS`,
   // 托运单详情
   tuoyunInfo: `${baseUrl}/consignmentInfo`,
+  // 装车
+  loadCar: `${baseUrl}/loadCar`,
+  // 物流单状态
+  wuliuState: `${baseUrl}/updateDistributionState`,
   
   // 下面的地址配合云端 Server 工作
   baseUrl

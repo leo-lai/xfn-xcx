@@ -31,13 +31,14 @@
         <text class='l-margin-l'>联系电话：{{item.driverPhone}}</text>
       </view>
     </view>
-    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{item.tuoyunList}}' wx:for-item='tuoyunItem' wx:key='consignmentCode'>
+    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{item.tuoyunList}}' wx:for-item='tuoyunItem' wx:for-index='tuoyunIndex' wx:key='consignmentCode'>
       <view class='l-flex-hc'>
         <view class='l-text-wrap1'>{{tuoyunItem.consignmentCode}}</view>
         <view class='l-rest l-text-theme' style='margin: 0 10rpx 0 20rpx;'>￥{{tuoyunItem.amount}}</view>
-        <view wx:if='{{item.distributionState == 2}}'>
+
+        <navigator wx:if='{{item.distributionState == 2}}' url='load-car?id={{tuoyunItem.consignmentId}}&cars={{item.ids}}' hover-class='none'>
           <button class='l-btn-min1 l-margin-l-s' size='mini'>装车</button>
-        </view>
+        </navigator>
       </view>
       <view class='l-text-gray l-margin-t-s'>
         <view>起点：{{tuoyunItem.startingPointAddress}}</view>
@@ -58,8 +59,11 @@
       <view wx:if='{{item.distributionState == 1}}' bindtap='jiedan' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
         <button size='mini' class='l-button-main'>接单</button>
       </view>
-      <view wx:if='{{item.distributionState == 2}}' bindtap='jiedan' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
+      <view wx:if='{{item.distributionState == 2}}' bindtap='changeState' data-state='3' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
         <button size='mini' class='l-button-main'>全部装车完成</button>
+      </view>
+      <view wx:if='{{item.distributionState == 3}}' bindtap='changeState' data-state='4' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
+        <button size='mini' class='l-button-main'>开始运输</button>
       </view>
       <navigator class='l-inline l-margin-lr-s' url='info?id={{item.distributionId}}' hover-class='none'>
         <button size='mini' class='l-button-border'>查看详情</button>

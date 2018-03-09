@@ -25,7 +25,6 @@
   <view class='l-bg-white l-padding-btn l-margin-b'>
     <view class='l-flex-hc'>
       <text>4S店对接人信息</text>
-      <view class='l-rest'></view>
     </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.leaveTheCarPerson}}' wx:key='id'>
       <view>
@@ -84,7 +83,7 @@
     <view class='l-flex-hc'>
       <text>车辆信息</text>
     </view>
-    <view class='l-border-t l-margin-t-m l-padding-t-m' wx:for='{{info.goodsCarVos}}' wx:key='goodsCarId' wx:if='{{item.isShow}}'>
+    <view class='l-border-t l-margin-t-m l-padding-t-m' wx:for='{{info.goodsCarVos}}' wx:key='goodsCarId'>
       <view class='l-flex-h l-fs-s'>
         <view class='l-rest'>
           <view>{{item.carsName}}</view>

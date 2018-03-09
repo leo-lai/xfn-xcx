@@ -16,8 +16,8 @@
       <view class='l-text-gray'>
         <view>物流方式：{{wuliu[info.logisticsType - 1]}}</view>
         <view>物流费用：{{info.freight || 0}}元</view>
-        <view>提车日期：{{info.pickCarDate}}</view>
-        <view>提车地点：{{info.pickCarAddr}}</view>
+        <view>提车日期：{{info.pickCarDate || ''}}</view>
+        <view>提车地点：{{info.pickCarAddr || ''}}</view>
       </view>
       <view>
         <view class='l-margin-r'>定金总额：{{info.totalDepositPrice}}元</view>
@@ -58,13 +58,13 @@
         <view>身份证照片：</view>
         <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
           <view class='l-text-center l-margin-l'>
-            <view class='l-upload-add'>
+            <view class='l-upload-add' style='width: 250rpx; height: 150rpx;'>
               <image id='{{item.idCardPicOn}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
             </view>
             <view class='l-text-gray l-fs-s'>正面</view> 
           </view>
           <view class='l-text-center l-margin-l'>
-            <view class='l-upload-add'>
+            <view class='l-upload-add' style='width: 250rpx; height: 150rpx;'>
               <image id='{{item.idCardPicOff}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
             </view>
             <view class='l-text-gray l-fs-s'>反面</view> 

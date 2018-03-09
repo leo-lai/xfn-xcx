@@ -181,12 +181,13 @@ Page({
         wx.showLoading({
           title: '照片上传中'
         })
+        console.log(res)
         wx.uploadFile({
           url: app.config.uploadFile,
           filePath: res.tempFiles[0].path,
           name: 'img_file',
           success: res => {
-            console.log(res)
+            
             if (res.statusCode === 200) {
               if (typeof res.data === 'string') {
                 res.data = JSON.parse(res.data)
