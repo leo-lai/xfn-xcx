@@ -114,6 +114,9 @@ Page({
           item.loading = true
           item.progress = 0
           item.tick = Date.now()
+
+          
+
           // 上传图片到服务器
           item.uploadTask = wx.uploadFile({
             url: app.config.uploadFile,
@@ -130,6 +133,8 @@ Page({
               item.src = res.data.data
               item.uploadTask = null
               this.syncView(item)
+
+              console.log(item)
             },
             fail: res => {
               item.done = false
@@ -139,8 +144,10 @@ Page({
           })
           // 上传进度
           item.uploadTask.onProgressUpdate(res => {
-            item.progress = res.progress
-            this.syncView(item)
+            if (res.progress < 100) {
+              item.progress = res.progress
+              this.syncView(item)
+            }
           })
           return item
         })

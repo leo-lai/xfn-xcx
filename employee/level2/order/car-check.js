@@ -111,8 +111,10 @@ Page({
           })
           // 上传进度
           item.uploadTask.onProgressUpdate(res => {
-            item.progress = res.progress
-            this.syncView(item)
+            if (res.progress < 100) {
+              item.progress = res.progress
+              this.syncView(item)
+            }
           })
           return item
         })
