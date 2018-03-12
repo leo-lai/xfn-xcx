@@ -194,12 +194,12 @@ button.l-button-main._border{ background-color: #fff; color: #666; border-radius
 button.l-button-main.button-hover{  background-color:#e65138;}
 button.l-button-main[disabled] { background-color:#fa5539 !important; opacity: 0.3; color: #fff;}
 
-button.l-button-border{background-color: #fff;border: 2rpx solid #e65138; color:#e65138;}
+button.l-button-border{background-color: #fff;border: 2rpx solid #fa5539; color:#fa5539;}
 button.l-button-border::after{display: none;}
 button.l-button-border.button-hover{  background-color:#fff;}
 button[size='mini']{ display:inline-block; line-height: 2; font-size: 24rpx; padding:0 30rpx; vertical-align: middle;}
 
-.l-btn-min1{border: 2rpx solid #15b6f2; color: #15b6f2;background-color: #fff;}
+.l-btn-min1{border: 2rpx solid #15b6f2; color: #15b6f2;background-color: #fff; white-space: nowrap;}
 button.l-btn-min1[size='mini']{line-height: 1.6; padding: 0 20rpx; font-size: 24rpx;}
 button.l-btn-min1::after{display: none;}
 .l-btn-min2{border: 2rpx solid #15b6f2; color: #fff; background-color: #15b6f2;}

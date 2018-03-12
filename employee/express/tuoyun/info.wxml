@@ -32,7 +32,7 @@
     </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.leaveTheCarPerson}}' wx:key='id'>
       <view>
-        <text>提车人姓名：{{item.userName}}</text>
+        <text>对接人姓名：{{item.userName}}</text>
         <text wx:if='{{cars.length === 0}}' class='l-btn-link l-margin-l' data-type='1' data-item='{{item}}' bindtap='editMen'>编辑</text>
       </view>
       <view><text>联系电话：{{item.userPhone}}</text></view>

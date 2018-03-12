@@ -31,10 +31,10 @@ Page({
     app.post(app.config.wuliuInfo, { 
       distributionId: this.options.id
     }).then(({data}) => {
-      let ids = []
+      let cars = []
       let tuoyunList = {}
       data.goodsCars.forEach(carItem => {
-        ids.push(carItem.goodsCarId)
+        cars.push(carItem.goodsCarId)
         let {
           consignmentId,
           consignmentCode,
@@ -56,7 +56,7 @@ Page({
           }
         }
       })
-      data.ids = ids.join(',')
+      data.cars = cars.join(',')
       data.tuoyunList = tuoyunList
 
       this.setData({ info: data })

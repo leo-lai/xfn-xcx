@@ -67,8 +67,16 @@ var config = {
   tuoyunInfo: `${baseUrl}/consignmentInfo`,
   // 装车
   loadCar: `${baseUrl}/loadCar`,
+  // 卸车
+  unloadCar: `${baseUrl}/unloadCar`,
   // 物流单状态
   wuliuState: `${baseUrl}/updateDistributionState`,
+  // 到达目的地
+  wuliuArrival: `${baseUrl}/makeCarArrived`,
+  // 签收
+  wuliuSign: `${baseUrl}/signCar`,
+  // 收钱
+  wuliuMoney: `${baseUrl}/logisticsInPayPOS`,
   
   // 下面的地址配合云端 Server 工作
   baseUrl

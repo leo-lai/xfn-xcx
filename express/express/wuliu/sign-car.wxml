@@ -1,0 +1,31 @@
+<!--express/wuliu/sign-car.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-bg-white l-margin-tb'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>签收人</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入签收人姓名' id='signName' bindinput='bindInput' maxlength='{{50}}' />
+        </view>
+      </view>
+    </view>
+    <view id='sign-box' class='l-sign-box'>
+      <canvas canvas-id='sign-canvas' bindtouchmove='move' bindtouchstart='start' bindtouchend='end' bindtouchcancel='cancel' bindlongtap='tap' disable-scroll='true' binderror='error'></canvas>
+
+      <view class='_tip' hidden='{{!showTip}}'>请在此区域手写签名</view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding l-flex-hvc'>
+    <view class='l-btn-w60 l-margin-lr-s'>
+      <button class='l-button-main _border' bindtap='clear'>重新签名</button>
+    </view>
+    <view class='l-btn-w60 l-margin-lr-s'>
+      <button class='l-button-main' bindtap='submit'>确定签收</button>
+    </view>
+  </view>
+</view>

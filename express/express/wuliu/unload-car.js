@@ -7,7 +7,6 @@ Page({
    */
   data: {
     cars: [],
-    frames: [],
     images: [],
     info: null
   },
@@ -35,10 +34,10 @@ Page({
     app.post(app.config.tuoyunInfo, {
       consignmentId: this.options.id
     }).then(({ data }) => {
-      let frames = [], images = [], image = null
+      let images = [], image = null
       data.goodsCarVos = data.goodsCarVos.filter(item => {
         if (this.data.cars.length === 0 || this.data.cars.includes(item.goodsCarId + '')) {
-          image = item.acceptImage ? item.acceptImage.split(',').map(img => {
+          image = item.deliverToImage ? item.deliverToImage.split(',').map(img => {
             return {
               path: img,
               src: img,
@@ -50,41 +49,20 @@ Page({
           }) : []
 
           images.push(image)
-          frames.push(item.frameNumber)
+          item.acceptImageArr = item.acceptImage ? item.acceptImage.split(',') : []
           return item
         }
       })
       
       this.setData({ 
         info: data,
-        frames,
         images
       })
     }).finally(_ => {
       wx.hideLoading()
     })
   },
-  // 选择车身颜色
-  chechenCb: function (info) {
-    if(info) {
-      let carList = this.data.info.goodsCarVos
-      let carItem = carList.filter(item => item.goodsCarId == info.goodsCarId)[0]
-      carItem.colourId = info.carColourId
-      carItem.colourName = info.carColourName
-      this.setData({
-        'info.goodsCarVos': carList
-      })
-    }
-  },
-  // 输入车架号
-  frameInput: function (event) {
-    let index = event.currentTarget.dataset.index
-    let value = event.detail.value
-    let frames = this.data.frames
-    frames[index] = value
-    this.setData({ frames })
-  },
-  // 上传装车照片
+  // 上传卸车照片
   chooseImage: function (event) {
     let index = event.currentTarget.dataset.index
     wx.chooseImage({
@@ -181,15 +159,16 @@ Page({
   },
   previewImage: function (event) {
     let item = event.currentTarget.dataset.item
+    let imgType = event.currentTarget.dataset.type
     let index = event.currentTarget.dataset.index
     let urls = []
     if(item) {
       urls = [item.idCardPicOn, item.idCardPicOff]
-    }else {
+    } else if (imgType == 1) {
+      urls = this.data.info.goodsCarVos[index].acceptImageArr
+    } else {
       urls = this.data.images[index].map(item => item.path)
     }
-    console.log(event.currentTarget.id)
-    console.log(urls)
     wx.previewImage({
       current: event.currentTarget.id,
       urls
@@ -204,14 +183,12 @@ Page({
     this.data.info.goodsCarVos.forEach((item, index) => {
       formData.cars.push({
         goodsCarId: item.goodsCarId,
-        colorId: item.colourId,
-        vin: frames[index],
         acceptImage: images[index].map(item => item.src).join(',')
       })
     })
 
     wx.showLoading({ mask: true })
-    app.json(app.config.loadCar, formData).then(({ data }) => {
+    app.json(app.config.unloadCar, formData).then(({ data }) => {
       app.toast('保存成功', true).then(_ => {
         app.getPrevPage().then(prevPage => {
           if (prevPage.getInfo) {

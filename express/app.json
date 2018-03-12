@@ -8,7 +8,10 @@
     "pages/mine/pwd",
     "pages/login/index",
     "express/wuliu/load-car",
-    "express/wuliu/car-color"
+    "express/wuliu/unload-car",
+    "express/wuliu/car-color",
+    "express/wuliu/sign-car",
+    "express/wuliu/money"
   ],
   "window": {
     "backgroundColor": "#eee",

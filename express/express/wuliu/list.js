@@ -82,34 +82,43 @@ Page({
         }
       }
       data.list.forEach(item => {
-        let ids = []
-        let tuoyunList = {}
+        let cars = []
+        let tempObj = {}
+        let tuoyunList = []
         item.goodsCars.forEach(carItem => {
-          ids.push(carItem.goodsCarId)
+          cars.push(carItem.goodsCarId)
           let {
             consignmentId,
             consignmentCode, 
             startingPointAddress, 
-            destinationAddress
+            destinationAddress,
           } = carItem.consignmentVo
           let { costsAmount } = carItem.carCostsVo
-          if (tuoyunList[consignmentCode]) {
-            tuoyunList[consignmentCode].amount += costsAmount
-            tuoyunList[consignmentCode].carList.push(carItem)
+
+          if (tempObj[consignmentCode] >= 0) {
+            tuoyunList[tempObj[consignmentCode]].amount += costsAmount
+            tuoyunList[tempObj[consignmentCode]].carList.push(carItem)
           }else {
-            tuoyunList[consignmentCode] = {
-              consignmentId: consignmentId,
-              consignmentCode: consignmentCode,
-              startingPointAddress: startingPointAddress,
-              destinationAddress: destinationAddress,
+            tuoyunList.push({
+              consignmentId,
+              consignmentCode,
+              startingPointAddress,
+              destinationAddress,
+              goodsCarState: carItem.goodsCarState,
               amount: costsAmount,
               carList: [carItem]
-            }
+            })
+            tempObj[consignmentCode] = tuoyunList.length - 1
           }
         })
-        item.ids = ids.join(',')
-        item.tuoyunList = tuoyunList
+        item.cars = cars.join(',')
+        item.tuoyunList = tuoyunList.map(tuoyunItem => {
+          tuoyunItem.cars = tuoyunItem.carList.map(carItem => carItem.goodsCarId).join(',')
+          return tuoyunItem
+        })
       })
+
+      console.log(data.list)
 
       this.setData({
         'list.more': data.list.length >= data.rows,
@@ -133,18 +142,15 @@ Page({
       wx.hideLoading()
     })
   },
-  // 全部装车完成
+  // 全部装车完成/开始运输
   changeState: function (event) {
     let distributionId = event.currentTarget.id
-    let state = event.currentTarget.dataset.state
-    let msg = ''
+    let state = event.target.dataset.state
+    let msg = '操作成功'
 
     switch(state) {
       case '3':
         msg = '装车成功'
-        break
-      case '4':
-        msg = '已开始运输'
         break
     }
 
@@ -159,6 +165,26 @@ Page({
       wx.hideLoading()
     })
   },
+
+  // 到达目的地
+  arrival: function (event) {
+    let ids = event.currentTarget.dataset.ids
+        ids = ids ? ids.split(',') : []
+    let distributionId = ids[0] || ''
+    let consignmentId = ids[1] || ''
+
+    wx.showLoading({ mask: true })
+    app.post(app.config.wuliuArrival, {
+      distributionId, consignmentId
+    }).then(_ => {
+      app.toast('操作成功').then(_ => {
+        this.getList()
+      })
+    }).catch(_ => {
+      wx.hideLoading()
+    })
+  },
+
 
   // 搜索相关=================================================
   // 正在输入

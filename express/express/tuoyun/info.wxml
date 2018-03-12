@@ -26,9 +26,9 @@
     <view class='l-flex-hc'>
       <text>4S店对接人信息</text>
     </view>
-    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.leaveTheCarPerson}}' wx:key='id'>
+    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.extractTheCarPerson}}' wx:key='id'>
       <view>
-        <text>提车人姓名：{{item.userName}}</text>
+        <text>对接人姓名：{{item.userName}}</text>
       </view>
       <view><text>联系电话：{{item.userPhone}}</text></view>
       <view><text>身份证号：{{item.idCard}}</text></view>
