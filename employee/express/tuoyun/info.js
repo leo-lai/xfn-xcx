@@ -56,10 +56,8 @@ Page({
   },
 
   previewImage: function (event) {
-    let item = event.currentTarget.dataset.item
-    wx.previewImage({
-      current: event.currentTarget.id,
-      urls: [item.idCardPicOn, item.idCardPicOff]
-    })
+    let urls = event.currentTarget.dataset.urls
+    let current = event.target.id
+    wx.previewImage({ current, urls })
   }
 })

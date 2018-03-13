@@ -38,16 +38,17 @@
       <view><text>联系电话：{{item.userPhone}}</text></view>
       <view><text>身份证号：{{item.idCard}}</text></view>
       <view>身份证照片：</view>
-      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
+      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;' 
+        data-urls='{{[item.idCardPicOn, item.idCardPicOff]}}' bindtap='previewImage'>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
-            <image id='{{item.idCardPicOn}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
+            <image id='{{item.idCardPicOn}}'  mode='aspectFill' src='{{item.idCardPicOn}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>正面</view> 
         </view>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
-            <image id='{{item.idCardPicOff}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
+            <image id='{{item.idCardPicOff}}' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>反面</view> 
         </view>
@@ -71,16 +72,17 @@
       <view><text>联系电话：{{item.userPhone}}</text></view>
       <view><text>身份证号：{{item.idCard}}</text></view>
       <view>身份证照片：</view>
-      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
+      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;' 
+        data-urls='{{[item.idCardPicOn, item.idCardPicOff]}}' bindtap='previewImage'>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
-            <image id='{{item.idCardPicOn}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
+            <image id='{{item.idCardPicOn}}' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>正面</view> 
         </view>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
-            <image id='{{item.idCardPicOff}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
+            <image id='{{item.idCardPicOff}}' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>反面</view> 
         </view>
