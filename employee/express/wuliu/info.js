@@ -25,7 +25,7 @@ Page({
   onShow: function () {
     app.checkLogin()
   },
-
+  // 获取详情
   getInfo: function () {
     wx.showLoading({ mask: true })
     app.post(app.config.exp.wuliuInfo, { 
@@ -66,7 +66,7 @@ Page({
       wx.hideLoading()
     })
   },
-
+  // 编辑
   eidtInfo: function () {
     let formData = app.utils.copyObj({
       distributionId: '',
@@ -94,7 +94,7 @@ Page({
     app.storage.setItem('exp-wuliu-info', formData)
     app.navigateTo('add')
   },
-
+  // 派单
   paidan: function (event) {
     let distributionId = this.data.info.distributionId
     wx.showModal({
@@ -114,7 +114,7 @@ Page({
       }
     })
   },
-
+  // 预览图片
   previewImage: function (event) {
     let item = this.data.info.logisticsDriver
     wx.previewImage({

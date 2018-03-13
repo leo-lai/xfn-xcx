@@ -18,7 +18,6 @@
         <text class='_tag' wx:if='{{item.consignmentType == 1}}' style='background-color:#00a0ea;'>普通</text>
       <text class='_tag' wx:if='{{item.consignmentType == 2}}'>专线</text> 
       </view>
-      <text>物流单号</text>
       <view class='l-rest' style='margin: 0 10rpx;'>
         <view class='l-text-wrap1'>{{item.distributionCode}}</view>
       </view>

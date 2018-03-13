@@ -25,46 +25,53 @@ Page({
   onShow: function () {
     app.checkLogin()
   },
-
+  // 获取详情
   getInfo: function () {
     wx.showLoading({ mask: true })
     app.post(app.config.wuliuInfo, { 
       distributionId: this.options.id
     }).then(({data}) => {
       let cars = []
-      let tuoyunList = {}
+      let tempObj = {}
+      let tuoyunList = []
       data.goodsCars.forEach(carItem => {
         cars.push(carItem.goodsCarId)
         let {
-          consignmentId,
+            consignmentId,
           consignmentCode,
           startingPointAddress,
-          destinationAddress
+          destinationAddress,
           } = carItem.consignmentVo
         let { costsAmount } = carItem.carCostsVo
-        if (tuoyunList[consignmentCode]) {
-          tuoyunList[consignmentCode].amount += costsAmount
-          tuoyunList[consignmentCode].carList.push(carItem)
+
+        if (tempObj[consignmentCode] >= 0) {
+          tuoyunList[tempObj[consignmentCode]].amount += costsAmount
+          tuoyunList[tempObj[consignmentCode]].carList.push(carItem)
         } else {
-          tuoyunList[consignmentCode] = {
-            consignmentId: consignmentId,
-            consignmentCode: consignmentCode,
-            startingPointAddress: startingPointAddress,
-            destinationAddress: destinationAddress,
+          tuoyunList.push({
+            consignmentId,
+            consignmentCode,
+            startingPointAddress,
+            destinationAddress,
+            goodsCarState: carItem.goodsCarState,
             amount: costsAmount,
             carList: [carItem]
-          }
+          })
+          tempObj[consignmentCode] = tuoyunList.length - 1
         }
       })
       data.cars = cars.join(',')
-      data.tuoyunList = tuoyunList
+      data.tuoyunList = tuoyunList.map(tuoyunItem => {
+        tuoyunItem.cars = tuoyunItem.carList.map(carItem => carItem.goodsCarId).join(',')
+        return tuoyunItem
+      })
 
       this.setData({ info: data })
     }).finally(_ => {
       wx.hideLoading()
     })
   },
-
+  // 编辑
   eidtInfo: function () {
     let formData = app.utils.copyObj({
       distributionId: '',
@@ -92,11 +99,12 @@ Page({
     app.storage.setItem('exp-wuliu-info', formData)
     app.navigateTo('add')
   },
-
+  // 接单
   jiedan: function (event) {
     let distributionId = this.data.info.distributionId
     wx.showLoading({ mask: true })
     app.post(app.config.wuliuJie, { distributionId }).then(_ => {
+      app.storage.setItem('exp-tuoyun-list-refresh', 1)
       app.toast('接单成功').then(_ => {
         this.getInfo()
       })
@@ -104,7 +112,49 @@ Page({
       wx.hideLoading()
     })
   },
+  // 更改订单状态
+  changeState: function (event) {
+    let distributionId = event.currentTarget.id
+    let state = event.target.dataset.state
+    let msg = '操作成功'
 
+    switch (state) {
+      case '3':
+        msg = '装车成功'
+        break
+    }
+    wx.showLoading({ mask: true })
+    app.post(app.config.wuliuState, {
+      distributionId, state
+    }).then(_ => {
+      app.storage.setItem('exp-tuoyun-list-refresh', 1)
+      app.toast(msg).then(_ => {
+        this.getInfo()
+      })
+    }).catch(_ => {
+      wx.hideLoading()
+    })
+  },
+  // 到达目的地
+  arrival: function (event) {
+    let ids = event.currentTarget.dataset.ids
+    ids = ids ? ids.split(',') : []
+    let distributionId = ids[0] || ''
+    let consignmentId = ids[1] || ''
+
+    wx.showLoading({ mask: true })
+    app.post(app.config.wuliuArrival, {
+      distributionId, consignmentId
+    }).then(_ => {
+      app.storage.setItem('exp-tuoyun-list-refresh', 1)
+      app.toast('操作成功').then(_ => {
+        this.getInfo()
+      })
+    }).catch(_ => {
+      wx.hideLoading()
+    })
+  },
+  // 预览图片
   previewImage: function (event) {
     let item = this.data.info.logisticsDriver
     wx.previewImage({

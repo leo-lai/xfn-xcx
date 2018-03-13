@@ -84,15 +84,21 @@ Page({
       page, rows: this.data.list.rows, 
       ...this.data.filter.data
     }).then(({ data }) => {
-      data.list.forEach(item => {
-        item.list.forEach(car => {
-          car.checked = this.data.ids.includes(car.goodsCarId + '')
-          if (this.data.mode == 'list' || car.checked || car.goodsCarState == 0) {
-            car.disabled = false
-          }else {
-            car.disabled = true
-          }
-        })
+
+      data.list = data.list.filter(item => {
+        if(this.data.mode == 'slt') { // 返回可选择的托运单
+          let hasCanChoose = item.consignmentState == 0
+
+          item.list.forEach(car => {
+            car.checked = this.data.ids.includes(car.goodsCarId + '')
+            car.disabled = !car.checked && car.goodsCarState > 0
+          })
+
+          hasCanChoose = item.list.filter(car => !car.disabled).length > 0
+          return hasCanChoose
+        }else {
+          return true
+        }
       })
 
       this.setData({

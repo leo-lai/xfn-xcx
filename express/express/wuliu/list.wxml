@@ -18,9 +18,8 @@
         <text class='_tag' wx:if='{{item.consignmentType == 1}}' style='background-color:#00a0ea;'>普通</text>
       <text class='_tag' wx:if='{{item.consignmentType == 2}}'>专线</text> 
       </view>
-      <text>物流单号</text>
       <view class='l-rest' style='margin: 0 10rpx;'>
-        <view class='l-text-wrap1'>{{item.distributionCode}}</view>
+        <navigator class='l-text-wrap1' url='info?id={{item.distributionId}}' hover-class='none'>{{item.distributionCode}}</navigator>
       </view>
       <text class='l-text-theme'>{{item.distributionStateName}}</text>
     </view>
@@ -33,24 +32,39 @@
     </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{item.tuoyunList}}' wx:for-item='tuoyunItem' wx:for-index='tuoyunIndex' wx:key='consignmentCode'>
       <view class='l-flex-hc'>
-        <view class='l-text-wrap1'>{{tuoyunItem.consignmentCode}}</view>
+        <navigator class='l-text-wrap1 l-btn-link' url='/express/tuoyun/info?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>{{tuoyunItem.consignmentCode}}</navigator>
+
         <view class='l-rest l-text-theme' style='margin: 0 10rpx 0 20rpx;'>￥{{tuoyunItem.amount}}</view>
         
         <navigator wx:if='{{item.distributionState == 2}}' url='load-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}' hover-class='none'>
-          <button class='l-btn-min1 l-margin-l-s' size='mini'>装车</button>
+          <button class='l-btn-min1' size='mini'>装车</button>
         </navigator>
+        <button wx:if='{{item.consignmentType == 1 && tuoyunItem.goodsCarState == 4}}' class='l-btn-min1' size='mini' data-ids='{{item.distributionId}},{{tuoyunItem.consignmentId}}' bindtap='arrival'>到达目的地</button>
         
-        <button wx:if='{{item.consignmentType == 1 && tuoyunItem.goodsCarState == 4}}' class='l-btn-min1 l-margin-l-s' size='mini' data-ids='{{item.distributionId}},{{tuoyunItem.consignmentId}}' bindtap='arrival'>到达目的地</button>
-        
-        <navigator wx:if='{{tuoyunItem.goodsCarState == 5}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}' hover-class='none'>
-          <button class='l-btn-min1 l-margin-l-s' size='mini'>卸车</button>
-        </navigator>
-        <navigator wx:if='{{tuoyunItem.goodsCarState == 6}}' url='sign-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
-          <button class='l-btn-min1 l-margin-l-s' size='mini'>签收</button>
-        </navigator>
-        <navigator wx:if='{{tuoyunItem.goodsCarState == 7}}' url='money?id={{item.distributionId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
-          <button class='l-btn-min1 l-margin-l-s' size='mini'>收钱</button>
-        </navigator>
+        <!-- 专线运输 -->
+        <block wx:if='{{item.consignmentType == 2}}'>
+          <navigator wx:if='{{item.distributionState == 5}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}' hover-class='none'>
+            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 5 ? "_disabled" : ""}}' size='mini'>卸车</button>
+          </navigator>
+          <navigator wx:if='{{item.distributionState == 6}}' url='sign-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
+            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 6 ? "_disabled" : ""}}' size='mini'>签收</button>
+          </navigator>
+          <navigator wx:if='{{item.distributionState == 7}}' url='money?id={{item.distributionId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
+            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 7 ? "_disabled" : ""}}' size='mini'>收钱</button>
+          </navigator>
+        </block>
+        <!-- 普通运输 -->
+        <block wx:else>
+          <navigator wx:if='{{tuoyunItem.goodsCarState == 5}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}' hover-class='none'>
+            <button class='l-btn-min1' size='mini'>卸车</button>
+          </navigator>
+          <navigator wx:if='{{tuoyunItem.goodsCarState == 6}}' url='sign-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
+            <button class='l-btn-min1' size='mini'>签收</button>
+          </navigator>
+          <navigator wx:if='{{tuoyunItem.goodsCarState == 7}}' url='money?id={{item.distributionId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
+            <button class='l-btn-min1' size='mini'>收钱</button>
+          </navigator>
+        </block>
       </view>
       <view class='l-text-gray l-margin-t-s'>
         <view>起点：{{tuoyunItem.startingPointAddress}} </view>
@@ -71,18 +85,24 @@
       <view wx:if='{{item.distributionState == 1}}' bindtap='jiedan' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
         <button size='mini' class='l-button-main'>接单</button>
       </view>
-      <view bindtap='changeState' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
+      <view wx:elif='{{item.distributionState < 8}}' bindtap='changeState' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
         <button wx:if='{{item.distributionState == 2}}' data-state='3' size='mini' class='l-button-main'>
-        全部装车完成</button>
+        全部已装车</button>
         <button wx:if='{{item.distributionState == 3}}' data-state='4' size='mini' class='l-button-main'>
         开始运输</button>
-        <button wx:if='{{item.distributionState == 4 && item.consignmentType == 2}}' data-state='5' size='mini' class='l-button-main'>
-        到达目的地</button>
-
-        <button wx:if='{{item.distributionState >= 4 && item.distributionState < 8 && item.consignmentType == 1}}' data-state='8' size='mini' class='l-button-main'>
+        <button wx:if='{{item.distributionState >= 4 && item.consignmentType == 1}}' data-state='8' size='mini' class='l-button-main'>
         订单结束</button>
+        <block wx:if='{{item.consignmentType == 2}}'>
+          <button wx:if='{{item.distributionState == 4}}' data-state='5' size='mini' class='l-button-main'>
+          到达目的地</button>
+          <button wx:if='{{item.distributionState == 5}}' data-state='6' size='mini' class='l-button-main'>
+          全部已卸完</button>
+          <button wx:if='{{item.distributionState == 6}}' data-state='7' size='mini' class='l-button-main'>
+          全部已签收</button>
+          <button wx:if='{{item.distributionState == 7}}' data-state='8' size='mini' class='l-button-main'>
+          全部已收钱</button>
+        </block>
       </view>
-
       <navigator class='l-inline l-margin-lr-s' url='info?id={{item.distributionId}}' hover-class='none'>
         <button size='mini' class='l-button-border'>查看详情</button>
       </navigator>

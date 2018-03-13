@@ -36,6 +36,9 @@ Page({
       consignmentId: this.options.id
     }).then(({data}) => {
       data.goodsCarVos = data.goodsCarVos.filter(item => {
+        item.acceptImageArr = item.acceptImage ? item.acceptImage.split(',') : []
+        item.deliverToImageArr = item.deliverToImage ? item.deliverToImage.split(',') : []
+
         return this.data.cars.length === 0 || this.data.cars.includes(item.goodsCarId + '')
       })
       this.setData({ info: data })

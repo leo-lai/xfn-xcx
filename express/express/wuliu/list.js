@@ -119,7 +119,6 @@ Page({
       })
 
       console.log(data.list)
-
       this.setData({
         'list.more': data.list.length >= data.rows,
         'list.page': data.page,
@@ -142,7 +141,7 @@ Page({
       wx.hideLoading()
     })
   },
-  // 全部装车完成/开始运输
+  // 更改订单状态
   changeState: function (event) {
     let distributionId = event.currentTarget.id
     let state = event.target.dataset.state

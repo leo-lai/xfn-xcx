@@ -94,6 +94,25 @@
         </view>
         <text class='l-text-warn'>{{item.goodsCarStateName}}</text>
       </view>
+
+      <block wx:if='{{item.acceptImageArr.length > 0}}'>
+        <view class='l-margin-t-s l-text-gray'>装车照片：</view>
+        <view>
+          <image style='width: 150rpx; height: 150rpx; margin: 10rpx 10rpx 0 0;' wx:for='{{item.acceptImageArr}}' wx:for-item='img' wx:key='*this' src='{{img}}'></image>
+        </view>
+      </block>
+
+      <block wx:if='{{item.deliverToImageArr.length > 0}}'>
+        <view class='l-margin-t-s l-text-gray'>卸车照片：</view>
+        <view>
+          <image style='width: 150rpx; height: 150rpx; margin: 10rpx 10rpx 0 0;' wx:for='{{item.deliverToImageArr}}' wx:for-item='img' wx:key='*this' src='{{img}}'></image>
+        </view>
+      </block>
+
+      <block wx:if='{{item.signPic}}'>
+        <view class='l-margin-t-s l-text-gray'>签收人：</view>
+        <image style='width: 250rpx; height: 150rpx; margin: 10rpx 10rpx 0 0;' src='{{item.signPic}}'></image>
+      </block>
     </view>
   </view>
 </view>
