@@ -31,34 +31,41 @@ Page({
     app.post(app.config.exp.wuliuInfo, { 
       distributionId: this.options.id
     }).then(({data}) => {
-      let ids = []
-      let tuoyunList = {}
+      let cars = []
+      let tempObj = {}
+      let tuoyunList = []
       data.goodsCars.forEach(carItem => {
-        ids.push(carItem.goodsCarId)
+        cars.push(carItem.goodsCarId)
         let {
-          consignmentId,
+            consignmentId,
           consignmentCode,
           startingPointAddress,
-          destinationAddress
+          destinationAddress,
           } = carItem.consignmentVo
         let { costsAmount } = carItem.carCostsVo
-        if (tuoyunList[consignmentCode]) {
-          tuoyunList[consignmentCode].amount += costsAmount
-          tuoyunList[consignmentCode].carList.push(carItem)
+
+        if (tempObj[consignmentCode] >= 0) {
+          tuoyunList[tempObj[consignmentCode]].amount += costsAmount
+          tuoyunList[tempObj[consignmentCode]].carList.push(carItem)
         } else {
-          tuoyunList[consignmentCode] = {
-            consignmentId: consignmentId,
-            consignmentCode: consignmentCode,
-            startingPointAddress: startingPointAddress,
-            destinationAddress: destinationAddress,
+          tuoyunList.push({
+            consignmentId,
+            consignmentCode,
+            startingPointAddress,
+            destinationAddress,
+            goodsCarState: carItem.goodsCarState,
             amount: costsAmount,
             carList: [carItem]
-          }
+          })
+          tempObj[consignmentCode] = tuoyunList.length - 1
         }
       })
-      data.ids = ids.join(',')
-      data.tuoyunList = tuoyunList
-      console.log(data)
+      data.cars = cars.join(',')
+      data.tuoyunList = tuoyunList.map(tuoyunItem => {
+        tuoyunItem.cars = tuoyunItem.carList.map(carItem => carItem.goodsCarId).join(',')
+        return tuoyunItem
+      })
+      
       this.setData({
         info: data
       })

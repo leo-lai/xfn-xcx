@@ -7,7 +7,7 @@ Page({
    */
   data: {
     mode: 'list', // slt
-    ids: [],
+    cars: [],
     filter: {
       loading: false,
       visible: false,
@@ -34,7 +34,7 @@ Page({
         this.setData({
           'mode': this.options.mode,
           'list.rows': 50,
-          'ids': this.options.ids ? this.options.ids.split(',') : []
+          'cars': this.options.cars ? this.options.cars.split(',') : []
         })
         wx.setNavigationBarTitle({ title: '选择托运单' })
       }
@@ -90,7 +90,7 @@ Page({
           let hasCanChoose = item.consignmentState == 0
 
           item.list.forEach(car => {
-            car.checked = this.data.ids.includes(car.goodsCarId + '')
+            car.checked = this.data.cars.includes(car.goodsCarId + '')
             car.disabled = !car.checked && car.goodsCarState > 0
           })
 
@@ -128,17 +128,17 @@ Page({
     this.setData({ 'list.data': list })
   },
   sltCarOk: function () {
-    let ids = []
+    let cars = []
     this.data.list.data.forEach(item => {
       item.list.forEach(carItem => {
-        carItem.checked && ids.push(carItem.goodsCarId)
+        carItem.checked && cars.push(carItem.goodsCarId)
       })
     })
 
     wx.showLoading({ mask: true })
     app.post(app.config.exp.wuliuAddCar, {
-      distributionId: this.options.did,
-      goodsCarIds: ids.join(',')
+      distributionId: this.options.id,
+      goodsCarIds: cars.join(',')
     }).then(_ => {
       app.getPrevPage().then(prevPage => {
         if(prevPage.getList) {

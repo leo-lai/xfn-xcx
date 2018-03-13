@@ -60,16 +60,16 @@
     <view class='l-flex-hc'>
       <text>托运单信息</text>
       <view class='l-rest'></view>
-      <navigator wx:if='{{info.distributionState == 0}}' class='l-margin-l-s' url='/express/tuoyun/list?mode=slt&did={{info.distributionId}}&ids={{info.ids}}' hover-class='none'>
+      <navigator wx:if='{{info.distributionState == 0}}' class='l-margin-l-s' url='/express/tuoyun/list?mode=slt&id={{info.distributionId}}&cars={{info.cars}}' hover-class='none'>
         <button class='l-btn-min1' size='mini'>添加托运车辆</button>
       </navigator>
     </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.tuoyunList}}' wx:for-item='tuoyunItem' wx:key='consignmentCode'>
-      <view class='l-flex-hc'>
+      <navigator class='l-flex-hc' url='/express/tuoyun/info?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
         <view class='l-text-wrap1'>{{tuoyunItem.consignmentCode}}</view>
         <view class='l-rest l-text-theme' style='margin: 0 10rpx 0 20rpx;'>￥{{tuoyunItem.amount}}</view>
-        <navigator url='/express/tuoyun/info?id={{tuoyunItem.consignmentId}}&cars={{info.ids}}' class='l-btn-link' hover-class='none'>查看</navigator>
-      </view>
+        <text class='l-btn-link'>查看</text>
+      </navigator>
       <view class='l-text-gray l-margin-t-s'>
         <view>起点：{{tuoyunItem.startingPointAddress}}</view>
         <view>终点：{{tuoyunItem.destinationAddress}}</view>

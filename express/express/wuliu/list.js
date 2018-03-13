@@ -118,7 +118,6 @@ Page({
         })
       })
 
-      console.log(data.list)
       this.setData({
         'list.more': data.list.length >= data.rows,
         'list.page': data.page,

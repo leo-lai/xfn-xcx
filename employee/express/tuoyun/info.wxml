@@ -92,8 +92,8 @@
     <view class='l-flex-hc'>
       <text>车辆信息</text>
     </view>
-    <view class='l-border-t l-margin-t-m l-padding-t-m' wx:for='{{info.goodsCarVos}}' wx:key='goodsCarId' wx:if='{{item.isShow}}'>
-      <view class='l-flex-h l-fs-s'>
+    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.goodsCarVos}}' wx:key='goodsCarId' wx:if='{{item.isShow}}'>
+      <view class='l-flex-h'>
         <view class='l-rest'>
           <view>{{item.carsName}}</view>
           <view>
@@ -102,6 +102,40 @@
           </view>
         </view>
         <text class='l-text-warn'>{{item.goodsCarStateName}}</text>
+      </view>
+
+      <block wx:if='{{item.acceptImageArr.length > 0}}'>
+        <view class='l-margin-t-s l-text-gray'>装车照片：</view>
+        <view data-urls='{{item.acceptImageArr}}' bindtap='previewImage'>
+          <image id='{{img}}' class='l-img-item' mode='aspectFill' wx:for='{{item.acceptImageArr}}' wx:for-item='img' wx:key='*this' src='{{img}}'></image>
+        </view>
+      </block>
+
+      <block wx:if='{{item.deliverToImageArr.length > 0}}'>
+        <view class='l-margin-t-s l-text-gray'>卸车照片：</view>
+        <view data-urls='{{item.deliverToImageArr}}' bindtap='previewImage'>
+          <image id='{{img}}' class='l-img-item' mode='aspectFill' wx:for='{{item.deliverToImageArr}}' wx:for-item='img' wx:key='*this' src='{{img}}'></image>
+        </view>
+      </block>
+
+      <block wx:if='{{item.signPic}}'>
+        <view class='l-margin-t-s l-text-gray'>签收人：</view>
+        <image id='{{item.signPic}}' data-urls='{{[item.signPic]}}' bindtap='previewImage' class='l-img-item' style='width: 250rpx; height: 150rpx;' mode='aspectFill' src='{{item.signPic}}'></image>
+      </block>
+
+      <view class='l-driver-info' wx:if='{{item.distributionVo}}'>
+        <view data-urls='{{[item.distributionVo.logisticsDriverVo.idcardPicOn, item.distributionVo.logisticsDriverVo.idcardPicOff]}}' bindtap='previewImage'>
+          <text class='l-btn-link l-fr' style='min-width: auto;'>查看身份证照片</text>
+          <text>物流单号：{{item.distributionVo.distributionCode}}</text>
+        </view>
+        <view>
+          <text>运输板车：{{item.distributionVo.distributionLicensePlate}}</text>
+          <text>身份证号：{{item.distributionVo.logisticsDriverVo.cardNo}}</text>
+        </view>
+        <view>
+          <text>司机姓名：{{item.distributionVo.driverName}}</text>
+          <text>联系电话：{{item.distributionVo.driverPhone}}</text>
+        </view>
       </view>
     </view>
   </view>

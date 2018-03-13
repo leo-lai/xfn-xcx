@@ -73,33 +73,40 @@ Page({
       page, ...this.data.filter.data
     }).then(({ data }) => {
       data.list.forEach(item => {
-        let ids = []
-        let tuoyunList = {}
+        let cars = []
+        let tempObj = {}
+        let tuoyunList = []
         item.goodsCars.forEach(carItem => {
-          ids.push(carItem.goodsCarId)
+          cars.push(carItem.goodsCarId)
           let {
             consignmentId,
-            consignmentCode, 
-            startingPointAddress, 
-            destinationAddress
+            consignmentCode,
+            startingPointAddress,
+            destinationAddress,
           } = carItem.consignmentVo
           let { costsAmount } = carItem.carCostsVo
-          if (tuoyunList[consignmentCode]) {
-            tuoyunList[consignmentCode].amount += costsAmount
-            tuoyunList[consignmentCode].carList.push(carItem)
-          }else {
-            tuoyunList[consignmentCode] = {
-              consignmentId: consignmentId,
-              consignmentCode: consignmentCode,
-              startingPointAddress: startingPointAddress,
-              destinationAddress: destinationAddress,
+
+          if (tempObj[consignmentCode] >= 0) {
+            tuoyunList[tempObj[consignmentCode]].amount += costsAmount
+            tuoyunList[tempObj[consignmentCode]].carList.push(carItem)
+          } else {
+            tuoyunList.push({
+              consignmentId,
+              consignmentCode,
+              startingPointAddress,
+              destinationAddress,
+              goodsCarState: carItem.goodsCarState,
               amount: costsAmount,
               carList: [carItem]
-            }
+            })
+            tempObj[consignmentCode] = tuoyunList.length - 1
           }
         })
-        item.ids = ids.join(',')
-        item.tuoyunList = tuoyunList
+        item.cars = cars.join(',')
+        item.tuoyunList = tuoyunList.map(tuoyunItem => {
+          tuoyunItem.cars = tuoyunItem.carList.map(carItem => carItem.goodsCarId).join(',')
+          return tuoyunItem
+        })
       })
 
       this.setData({

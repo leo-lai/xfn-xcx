@@ -26,23 +26,24 @@
     <view class='l-flex-hc'>
       <text>4S店对接人信息</text>
     </view>
-    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.extractTheCarPerson}}' wx:key='id'>
+    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.leaveTheCarPerson}}' wx:key='id'>
       <view>
         <text>对接人姓名：{{item.userName}}</text>
       </view>
       <view><text>联系电话：{{item.userPhone}}</text></view>
       <view><text>身份证号：{{item.idCard}}</text></view>
       <view>身份证照片：</view>
-      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
+      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;' 
+        data-urls='{{[item.idCardPicOn, item.idCardPicOff]}}' bindtap='previewImage'>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
-            <image id='{{item.idCardPicOn}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
+            <image id='{{item.idCardPicOn}}' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>正面</view> 
         </view>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
-            <image id='{{item.idCardPicOff}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
+            <image id='{{item.idCardPicOff}}' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>反面</view> 
         </view>
@@ -62,16 +63,17 @@
       <view><text>联系电话：{{item.userPhone}}</text></view>
       <view><text>身份证号：{{item.idCard}}</text></view>
       <view>身份证照片：</view>
-      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
+      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;' 
+        data-urls='{{[item.idCardPicOn, item.idCardPicOff]}}' bindtap='previewImage'>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
-            <image id='{{item.idCardPicOn}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
+            <image id='{{item.idCardPicOn}}' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>正面</view> 
         </view>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
-            <image id='{{item.idCardPicOff}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
+            <image id='{{item.idCardPicOff}}' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>反面</view> 
         </view>
@@ -83,8 +85,8 @@
     <view class='l-flex-hc'>
       <text>车辆信息</text>
     </view>
-    <view class='l-border-t l-margin-t-m l-padding-t-m' wx:for='{{info.goodsCarVos}}' wx:key='goodsCarId'>
-      <view class='l-flex-h l-fs-s'>
+    <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.goodsCarVos}}' wx:key='goodsCarId'>
+      <view class='l-flex-h'>
         <view class='l-rest'>
           <view>{{item.carsName}}</view>
           <view>
@@ -97,22 +99,38 @@
 
       <block wx:if='{{item.acceptImageArr.length > 0}}'>
         <view class='l-margin-t-s l-text-gray'>装车照片：</view>
-        <view>
-          <image style='width: 150rpx; height: 150rpx; margin: 10rpx 10rpx 0 0;' wx:for='{{item.acceptImageArr}}' wx:for-item='img' wx:key='*this' src='{{img}}'></image>
+        <view data-urls='{{item.acceptImageArr}}' bindtap='previewImage'>
+          <image id='{{img}}' class='l-img-item' mode='aspectFill' wx:for='{{item.acceptImageArr}}' wx:for-item='img' wx:key='*this' src='{{img}}'></image>
         </view>
       </block>
 
       <block wx:if='{{item.deliverToImageArr.length > 0}}'>
         <view class='l-margin-t-s l-text-gray'>卸车照片：</view>
-        <view>
-          <image style='width: 150rpx; height: 150rpx; margin: 10rpx 10rpx 0 0;' wx:for='{{item.deliverToImageArr}}' wx:for-item='img' wx:key='*this' src='{{img}}'></image>
+        <view data-urls='{{item.deliverToImageArr}}' bindtap='previewImage'>
+          <image id='{{img}}' class='l-img-item' mode='aspectFill' wx:for='{{item.deliverToImageArr}}' wx:for-item='img' wx:key='*this' src='{{img}}'></image>
         </view>
       </block>
 
       <block wx:if='{{item.signPic}}'>
         <view class='l-margin-t-s l-text-gray'>签收人：</view>
-        <image style='width: 250rpx; height: 150rpx; margin: 10rpx 10rpx 0 0;' src='{{item.signPic}}'></image>
+        <image id='{{item.signPic}}' data-urls='{{[item.signPic]}}' bindtap='previewImage' class='l-img-item' style='width: 250rpx; height: 150rpx;' mode='aspectFill' src='{{item.signPic}}'></image>
       </block>
+
+      <view class='l-driver-info' wx:if='{{item.distributionVo}}'>
+        <view data-urls='{{[item.distributionVo.logisticsDriverVo.idcardPicOn, item.distributionVo.logisticsDriverVo.idcardPicOff]}}' bindtap='previewImage'>
+          <text class='l-btn-link l-fr' style='min-width: auto;'>查看身份证照片</text>
+          <text>物流单号：{{item.distributionVo.distributionCode}}</text>
+        </view>
+        <view>
+          <text>运输板车：{{item.distributionVo.distributionLicensePlate}}</text>
+          <text>身份证号：{{item.distributionVo.logisticsDriverVo.cardNo}}</text>
+        </view>
+        <view>
+          <text>司机姓名：{{item.distributionVo.driverName}}</text>
+          <text>联系电话：{{item.distributionVo.driverPhone}}</text>
+        </view>
+      </view>
+      
     </view>
   </view>
 </view>

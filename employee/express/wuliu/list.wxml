@@ -19,7 +19,9 @@
       <text class='_tag' wx:if='{{item.consignmentType == 2}}'>专线</text> 
       </view>
       <view class='l-rest' style='margin: 0 10rpx;'>
-        <view class='l-text-wrap1'>{{item.distributionCode}}</view>
+        <navigator class='l-text-wrap1' url='info?id={{item.distributionId}}' hover-class='none'>
+          {{item.distributionCode}}
+        </navigator>
       </view>
       <text class='l-text-theme'>{{item.distributionStateName}}</text>
     </view>
@@ -32,7 +34,7 @@
     </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{item.tuoyunList}}' wx:for-item='tuoyunItem' wx:key='consignmentCode'>
       <view class='l-flex-hc'>
-        <view class='l-text-wrap1'>{{tuoyunItem.consignmentCode}}</view>
+        <navigator url='/express/tuoyun/info?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' class='l-text-wrap1 l-btn-link' hover-class='none'>{{tuoyunItem.consignmentCode}}</navigator>
         <view class='l-rest l-text-theme' style='margin: 0 10rpx 0 20rpx;'>￥{{tuoyunItem.amount}}</view>
       </view>
       <view class='l-text-gray l-margin-t-s'>
@@ -52,7 +54,7 @@
     </view>
     <view class='l-text-center l-margin-t'>
       <block wx:if='{{item.distributionState == 0}}'>
-        <navigator class='l-inline l-margin-lr-s' url='/express/tuoyun/list?mode=slt&did={{item.distributionId}}&ids={{item.ids}}' hover-class='none'>
+        <navigator class='l-inline l-margin-lr-s' url='/express/tuoyun/list?mode=slt&id={{item.distributionId}}&cars={{item.cars}}' hover-class='none'>
           <button size='mini' class='l-button-main'>添加托运车辆</button>
         </navigator>
         <view bindtap='paidan' id='{{item.distributionId}}' wx:if='{{item.goodsCars.length > 0}}' class='l-inline l-margin-lr-s'>

@@ -37,7 +37,7 @@ Page({
             this.setData({ imagePath: res.tempFilePath })
           }
         })
-      }, 50)
+      }, 1000)
     }).finally(_ => {
       wx.hideLoading()
     })

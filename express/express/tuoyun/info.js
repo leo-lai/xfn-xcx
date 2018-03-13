@@ -45,5 +45,12 @@ Page({
     }).finally(_ => {
       wx.hideLoading()
     })
+  },
+
+  // 预览图片
+  previewImage: function (event) {
+    let urls = event.currentTarget.dataset.urls
+    let current = event.target.id
+    wx.previewImage({ current, urls })
   }
 })

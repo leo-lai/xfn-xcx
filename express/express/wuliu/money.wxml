@@ -2,8 +2,8 @@
 <view class='l-page-full'>
   <view class='l-padding l-text-center l-bg-white'>
     <image style='width: 300rpx; height: 300rpx; background:#eee;' src='{{imagePath}}'></image>
-    <view style='height: 0; overflow: hidden;'>
-      <canvas style='width: 300rpx; height: 300rpx;' canvas-id='qr-canvas'/>
+    <view style='height: 0; overflow: hidden; position: relative; opacity:0;'>
+      <canvas style='width: 300rpx; height: 300rpx; position: absolute;' canvas-id='qr-canvas'/>
     </view>
     <view class='l-margin-t-s l-text-gray'>请扫二维码支付运费</view>
     <view class='l-fs-17 l-text-error'>￥{{info.amount}}</view>
