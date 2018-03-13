@@ -176,6 +176,7 @@ Page({
   },
   submit: function () {
     let formData = {
+      distributionId: this.options.did,
       cars: []
     }
     let frames = this.data.frames

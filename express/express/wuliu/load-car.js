@@ -188,15 +188,15 @@ Page({
     }else {
       urls = this.data.images[index].map(item => item.path)
     }
-    console.log(event.currentTarget.id)
-    console.log(urls)
     wx.previewImage({
       current: event.currentTarget.id,
       urls
     })
   },
+
   submit: function () {
     let formData = {
+      distributionId: this.options.did,
       cars: []
     }
     let frames = this.data.frames

@@ -36,14 +36,14 @@
 
         <view class='l-rest l-text-theme' style='margin: 0 10rpx 0 20rpx;'>￥{{tuoyunItem.amount}}</view>
         
-        <navigator wx:if='{{item.distributionState == 2}}' url='load-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}' hover-class='none'>
+        <navigator wx:if='{{item.distributionState == 2}}' url='load-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}&did={{item.distributionId}}' hover-class='none'>
           <button class='l-btn-min1' size='mini'>装车</button>
         </navigator>
         <button wx:if='{{item.consignmentType == 1 && tuoyunItem.goodsCarState == 4}}' class='l-btn-min1' size='mini' data-ids='{{item.distributionId}},{{tuoyunItem.consignmentId}}' bindtap='arrival'>到达目的地</button>
         
         <!-- 专线运输 -->
         <block wx:if='{{item.consignmentType == 2}}'>
-          <navigator wx:if='{{item.distributionState == 5}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}' hover-class='none'>
+          <navigator wx:if='{{item.distributionState == 5}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}&did={{item.distributionId}}' hover-class='none'>
             <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 5 ? "_disabled" : ""}}' size='mini'>卸车</button>
           </navigator>
           <navigator wx:if='{{item.distributionState == 6}}' url='sign-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
@@ -55,7 +55,7 @@
         </block>
         <!-- 普通运输 -->
         <block wx:else>
-          <navigator wx:if='{{tuoyunItem.goodsCarState == 5}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}' hover-class='none'>
+          <navigator wx:if='{{tuoyunItem.goodsCarState == 5}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}&did={{item.distributionId}}' hover-class='none'>
             <button class='l-btn-min1' size='mini'>卸车</button>
           </navigator>
           <navigator wx:if='{{tuoyunItem.goodsCarState == 6}}' url='sign-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
