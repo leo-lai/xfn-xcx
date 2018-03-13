@@ -13,20 +13,15 @@ Page({
   data: {
     topTips: '',
     showTip: true,
+    winWidth: 375,
     signName: '',
     signPic: ''
   },
+  onReachBottom: function () { },
   /**
  * 生命周期函数--监听页面加载
  */
   onLoad: function (options) {
-
-    wx.createSelectorQuery().select('#sign-box')
-    .boundingClientRect(rect => {
-      canvasw = rect.width
-      canvash = rect.height
-    }).exec()
-
     //获得Canvas的上下文
     content = wx.createCanvasContext('sign-canvas')
     //设置线的颜色
@@ -37,10 +32,12 @@ Page({
     content.setLineCap('round')
     //设置两条线连接处更加圆润
     content.setLineJoin('round')
-  },
 
-  onReachBottom: function () {
-
+    wx.createSelectorQuery().select('#sign-box').boundingClientRect(rect => {
+      canvasw = canvash = rect.width
+      this.setData({ winWidth: canvasw })
+      this.initCanvas()
+    }).exec()
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -60,6 +57,11 @@ Page({
     this.setData(data)
   },
 
+  initCanvas: function () {
+    content.setFillStyle('#ffffff')
+    content.fillRect(0, 0, canvasw, canvash)
+    content.draw(true)
+  },
   // 画布的触摸移动开始手势响应
   start: function (event) {
     //获取触摸开始的 x,y
@@ -114,6 +116,7 @@ Page({
   clear: function () {
     //清除画布
     content.clearRect(0, 0, canvasw, canvash)
+    this.initCanvas()
     content.draw(true)
   },
   // 确定签收
@@ -131,6 +134,7 @@ Page({
     wx.canvasToTempFilePath({
       canvasId: 'sign-canvas',
       success: res => {
+        console.log(res.tempFilePath)
         // 上传签名图片
         wx.showLoading({ title: '正在上传图片' })
         wx.uploadFile({

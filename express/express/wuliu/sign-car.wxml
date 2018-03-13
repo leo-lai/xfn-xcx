@@ -10,7 +10,7 @@
         <input class='weui-input' placeholder='请输入签收人姓名' id='signName' bindinput='bindInput' maxlength='{{50}}' />
       </view>
     </view>
-    <view id='sign-box' class='l-sign-box l-border-t'>
+    <view id='sign-box' class='l-sign-box l-border-t' style='height: {{winWidth}}px'>
       <canvas canvas-id='sign-canvas' bindtouchmove='move' bindtouchstart='start' bindtouchend='end' bindtouchcancel='cancel' bindlongtap='tap' disable-scroll='true' binderror='error'></canvas>
 
       <view class='_tip' hidden='{{!showTip}}'>请在此区域手写签名</view>
