@@ -66,28 +66,28 @@
         <navigator wx:if='{{info.distributionState == 2}}' url='load-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}&did={{info.distributionId}}' hover-class='none'>
           <button class='l-btn-min1 l-margin-l-s' size='mini'>装车</button>
         </navigator>
-        <button wx:if='{{info.consignmentType == 1 && tuoyunItem.goodsCarState == 4}}' class='l-btn-min1 l-margin-l-s' size='mini' data-ids='{{info.distributionId}},{{tuoyunItem.consignmentId}}' bindtap='arrival'>到达目的地</button>
+        <button wx:if='{{info.consignmentType == 1 && tuoyunItem.goodsCarState == 5}}' class='l-btn-min1 l-margin-l-s' size='mini' data-ids='{{info.distributionId}},{{tuoyunItem.consignmentId}}' bindtap='arrival'>到达目的地</button>
         <!-- 专线运输 -->
         <block wx:if='{{info.consignmentType == 2}}'>
           <navigator wx:if='{{info.distributionState == 5}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}&did={{info.distributionId}}' hover-class='none'>
-            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 5 ? "_disabled" : ""}}' size='mini'>卸车</button>
+            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 6 ? "_disabled" : ""}}' size='mini'>卸车</button>
           </navigator>
           <navigator wx:if='{{info.distributionState == 6}}' url='sign-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
-            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 6 ? "_disabled" : ""}}' size='mini'>签收</button>
+            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 7 ? "_disabled" : ""}}' size='mini'>签收</button>
           </navigator>
           <navigator wx:if='{{info.distributionState == 7}}' url='money?id={{info.distributionId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
-            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 7 ? "_disabled" : ""}}' size='mini'>收钱</button>
+            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 8 ? "_disabled" : ""}}' size='mini'>收钱</button>
           </navigator>
         </block>
         <!-- 普通运输 -->
         <block wx:else>
-          <navigator wx:if='{{tuoyunItem.goodsCarState == 5}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}&did={{info.distributionId}}' hover-class='none'>
+          <navigator wx:if='{{tuoyunItem.goodsCarState == 6}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}&did={{info.distributionId}}' hover-class='none'>
             <button class='l-btn-min1' size='mini'>卸车</button>
           </navigator>
-          <navigator wx:if='{{tuoyunItem.goodsCarState == 6}}' url='sign-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
+          <navigator wx:if='{{tuoyunItem.goodsCarState == 7}}' url='sign-car?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
             <button class='l-btn-min1' size='mini'>签收</button>
           </navigator>
-          <navigator wx:if='{{tuoyunItem.goodsCarState == 7}}' url='money?id={{info.distributionId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
+          <navigator wx:if='{{tuoyunItem.goodsCarState == 8}}' url='money?id={{info.distributionId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
             <button class='l-btn-min1' size='mini'>收钱</button>
           </navigator>
         </block>
