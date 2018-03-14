@@ -12,7 +12,7 @@ Page({
       dedicatedLineName: '',
       startingPointAddress: '',
       startingPointLatitude: '',
-      StartingPointLongitude: '',
+      startingPointLongitude: '',
       destinationAddress: '',
       destinationLatitude: '',
       destinationLongitude: '',
@@ -79,7 +79,7 @@ Page({
             this.setData({
               'formData.startingPointAddress': res.address + res.name,
               'formData.startingPointLatitude': res.latitude,
-              'formData.StartingPointLongitude': res.longitude,
+              'formData.startingPointLongitude': res.longitude,
             })
             break
           case 'destinationAddress':

@@ -7,6 +7,7 @@ Page({
    */
   data: {
     resURL: app.config.resURL,
+    wuliu: app.config.baseData.wuliu,
     info: null
   },
 

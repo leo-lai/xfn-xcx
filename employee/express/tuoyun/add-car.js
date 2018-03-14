@@ -13,6 +13,7 @@ Page({
     formData: {
       carsId: '',
       carsName: '',
+      guidePrice: '',
       carNum: 1,
       colourId: '',
       colourName: ''
@@ -60,6 +61,7 @@ Page({
       this.setData({
         'formData.carsId': carType.id,
         'formData.carsName': carType.name,
+        'formData.guidePrice': (carType.price / 10000).toFixed(2),
         'formData.colourId': '',
         'formData.colourName': ''
       })

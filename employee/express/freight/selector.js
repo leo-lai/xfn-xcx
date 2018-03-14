@@ -133,7 +133,7 @@ Page({
       consignmentTypeLineName: '',
       startingPointAddress: '',
       startingPointLatitude: '',
-      StartingPointLongitude: '',
+      startingPointLongitude: '',
       destinationAddress: '',
       destinationLatitude: '',
       destinationLongitude: '',

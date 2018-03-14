@@ -94,7 +94,11 @@
     <view class='l-padding l-flex-hc l-fs-s l-border-b' wx:for='{{carList}}' wx:key='guid'>
       <view class='l-rest'>
         <view>{{item.carsName}}</view>
-        <view>车身颜色：{{item.colourName}}<text class='l-margin-lr'>|</text>车辆数量：{{item.carNum}}</view>
+        <view class='l-text-gray'>
+          <text wx:if='{{item.colourName}}' class='l-margin-r'>车身颜色：{{item.colourName}}</text>
+          <text class='l-margin-r'>数量：{{item.carNum}}</text>
+          <text class='l-margin-r'>指导价：{{item.guidePrice}}万元</text>
+        </view>
       </view>
       <view id='{{item.guid}}' bindtap='delCar'>
         <icon type='cancel'></icon>
