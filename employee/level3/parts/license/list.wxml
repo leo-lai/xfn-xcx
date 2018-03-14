@@ -16,20 +16,22 @@
     <view class='_cont {{filter.visible ? "_active" : ""}}' bindtap='hideFilter'></view>
   </view>
   <view class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list.data}}' wx:key='customerOrderId'>
-    <view class='l-padding-b l-border-b'>
+    <view class='l-padding-b-m l-border-b'>
       <text>车架号：{{item.customerOrderCode}}</text>
     </view>
-    <view class='l-padding-t l-rel'>
-      <view class='{{ item.overTheLine === 1 ? "l-text-warn" : "l-text-warn" }}' style='position:absolute; top: 30rpx; right: 0;'>{{overline[item.overTheLine]}}</view>
+    <view class='l-padding-t-m l-rel'>
+      <view class='l-text-warn l-fr'>{{overline[item.overTheLine]}}</view>
       <view class='l-h4'>{{item.carsNameBefor}}</view>
       <view>{{item.carsNameAfter}}</view>
-      <view class='l-text-gray l-fs-s'>完款时间：{{item.createDate}}</view>
-      <view class='l-text-gray l-fs-s'>抵押类型：{{item.isMortgage ? '抵押' : '不抵押'}}</view>
-      <view class='l-margin-t l-text-center'>
-        <button size='mini' class='l-button-main l-btn-w60' bindtap='finish' data-item='{{item}}'>上牌完成</button>
+      <view class='l-text-gray l-fs-s'>
+        <!-- <view>完款时间：{{item.createDate}}</view> -->
+        <view>抵押类型：{{item.isMortgage ? '抵押' : '不抵押'}}</view>
+        <view>销售顾问：{{item.systemUserName}}</view>
+        <view>手机号码：{{item.systemUserPhone}}</view>
       </view>
-      <view class='l-margin-t l-text-center' wx:if='{{item.overTheLine === 0}}'>
-        <button size='mini' class='l-button-border l-btn-w60' bindtap='tickOverline' data-item='{{item}}'>标记为已过线检查</button>
+      <view class='l-margin-t l-text-center'>
+        <button wx:if='{{item.overTheLine === 0}}' size='mini' class='l-button-border l-margin-lr-s' bindtap='tickOverline' data-item='{{item}}'>标记为已过线检查</button>
+        <button size='mini' class='l-button-main l-margin-lr-s' bindtap='finish' data-item='{{item}}'>上牌完成</button>
       </view>
     </view>
   </view>

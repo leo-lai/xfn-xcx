@@ -37,6 +37,7 @@ Page({
     app.post(app.config.lv2.orderInfo, { 
       orderId: this.options.id 
     }).then(({ data }) => {
+      // 客户信息
       data.customers.forEach(customer => {
         customer.infos.forEach(cars => {
           cars.changePrice2 = Math.abs(cars.changePrice)
@@ -49,6 +50,21 @@ Page({
           })
         })
       })
+
+      // 支付信息
+      let pay1Image = [], pay2Image = []
+      data.orderPaymentVOs.forEach(pay => {
+        if (pay.voucher) {
+          if (pay.type == 1) {
+            pay1Image = pay1Image.concat(pay.voucher.split(','))
+          } else if(pay.type == 2) {
+            pay2Image = pay2Image.concat(pay.voucher.split(','))
+          }
+        }
+      })
+
+      data.pay1Image = pay1Image
+      data.pay2Image = pay2Image
 
       this.setData({ info: data })
 
@@ -82,12 +98,9 @@ Page({
   },
   // 预览图片
   previewImage: function (event) {
-    if (!event.currentTarget.id) return
-    let item = event.currentTarget.dataset.item
-    wx.previewImage({
-      current: event.currentTarget.id,
-      urls: [item.idCardPicOn, item.idCardPicOff]
-    })
+    let urls = event.currentTarget.dataset.urls
+    let current = event.target.id
+    wx.previewImage({ current, urls })
   },
   // 提车人tab
   tabLinkMan: function (event) {

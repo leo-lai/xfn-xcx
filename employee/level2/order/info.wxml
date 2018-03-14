@@ -20,9 +20,13 @@
         <view>提车地点：{{info.pickCarAddr || ''}}</view>
       </view>
       <view>
-        <view class='l-margin-r'>定金总额：{{info.totalDepositPrice}}元</view>
-        <view>成交价总额：<text class='l-text-theme'>{{info.totalFinalPrice}}元</text></view>
-      </view> 
+        <text wx:if='{{info.pay1Image.length > 0}}' class='l-margin-l l-btn-link l-fr' data-urls='{{info.pay1Image}}' bindtap='previewImage'>定金支付凭证</text>
+        <text>定金总额：{{info.totalDepositPrice}}元</text>
+      </view>
+      <view>
+        <text wx:if='{{info.pay2Image.length > 0}}' class='l-margin-l l-btn-link l-fr'data-urls='{{info.pay2Image}}' bindtap='previewImage'>尾款支付凭证</text>
+        成交价总额：<text class='l-text-theme'>{{info.totalFinalPrice}}元</text>
+      </view>
     </view>
   </view>
 
@@ -56,16 +60,17 @@
         <view><text>客户姓名：{{item.userName}}</text></view>
         <view><text>联系电话：{{item.userPhone}}</text></view>
         <view>身份证照片：</view>
-        <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
+        <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'
+          data-urls='{{[item.idCardPicOn, item.idCardPicOff]}}' bindtap='previewImage'>
           <view class='l-text-center l-margin-l'>
             <view class='l-upload-add' style='width: 250rpx; height: 150rpx;'>
-              <image id='{{item.idCardPicOn}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
+              <image id='{{item.idCardPicOn}}' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
             </view>
             <view class='l-text-gray l-fs-s'>正面</view> 
           </view>
           <view class='l-text-center l-margin-l'>
             <view class='l-upload-add' style='width: 250rpx; height: 150rpx;'>
-              <image id='{{item.idCardPicOff}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
+              <image id='{{item.idCardPicOff}}' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
             </view>
             <view class='l-text-gray l-fs-s'>反面</view> 
           </view>
@@ -158,16 +163,17 @@
         <text>姓名：{{item.userName}}</text>
       </view>
       <view>身份证照片：</view>
-      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
+      <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;' 
+        data-urls='{{[item.idCardPicOn, item.idCardPicOff]}}' bindtap='previewImage'>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add'>
-            <image id='{{item.idCardPicOn}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
+            <image id='{{item.idCardPicOn}}' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>正面</view> 
         </view>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add'>
-            <image id='{{item.idCardPicOff}}' data-item='{{item}}' bindtap='previewImage' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
+            <image id='{{item.idCardPicOff}}' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>反面</view> 
         </view>

@@ -24,11 +24,12 @@
     </view>
   </view>
   <navigator url='info?id={{item.customerOrderId}}' class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list.data}}' wx:key='customerOrderId'>
-    <view class='l-padding-b l-border-b'>
-      <text class='l-text-theme l-fr'>数量：{{item.number}}</text>
+    <view class='l-padding-b-m l-border-b'>
+      <text class='l-text-theme l-fr'>待出库数量：{{item.number}}</text>
       <text>{{item.customerOrderCode}}</text>
     </view>
-    <view class='l-padding-t'>
+    <view class='l-padding-t-m'>
+      <text class='l-fr l-text-warn'>库存数量：{{item.stockCarNumber}}</text>
       <view class='l-h4'>{{item.carsNameBefor}}</view>
       <view>{{item.carsNameAfter}}</view>
       <view class='l-text-gray l-fs-s'>颜色：{{item.colourName}} | 内饰：{{item.interiorName}}</view>

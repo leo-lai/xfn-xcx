@@ -57,6 +57,14 @@ Page({
       more: true,
       page: 1,
       data: []
+    },
+    visit: {
+      loading: false,
+      visible: false,
+      data: {
+        customerOrderId: '',
+        visitContent: ''
+      }
     }
   },
 
@@ -143,6 +151,39 @@ Page({
       callback(this.data.list.data)
     })
   },
+  // 表单输入
+  bindInput: function (event) {
+    let data = {}
+    data['visit.data.' + event.target.id] = event.detail.value
+    this.setData(data)
+  },
+  // 回访备注
+  visitShow: function (event) {
+    this.setData({
+      'visit.data.customerOrderId': event.currentTarget.id,
+      'visit.visible': true
+    })
+  },
+  visitClose: function () {
+    this.setData({
+      'visit.visible': false
+    })
+  },
+  visitSubmit: function () {
+    if (!this.data.visit.data.visitContent) {
+      this.showTopTips('请输入回访备注')
+      return
+    }
+
+    this.setData({ 'visit.loading': true })
+    app.post(app.config.orderVisit, this.data.visit.data).then(({ data }) => {
+      app.toast('操作成功').then(_ => {
+        this.getList()
+      })
+    }).catch(_ => {
+      this.setData({ 'visit.loading': false })
+    })
+  },
   // 选择销售顾问
   sltSaler: function (event) {
     let item = event.currentTarget.dataset.item
@@ -153,7 +194,8 @@ Page({
     if(saler) {
       wx.showLoading()
       app.post(app.config.changeSales, {
-        customerUsersOrgId: this.sltedSaler.customerUsersOrgId,
+        customerUsersId: this.sltedSaler.customerUsersId,
+        customerUsersOrgId: this.sltedSaler.customerUsersOrgId || '',
         systemUserId: saler.systemUserId
       }).then(_ => {
         this.setData({

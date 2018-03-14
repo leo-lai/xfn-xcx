@@ -17,19 +17,26 @@
     </view>
   </view>
   <navigator url='info?id={{item.customerOrderId}}' class='l-margin-m l-bg-white l-padding-lr l-radius' wx:for='{{list.data}}' wx:key='customerOrderId'>
-    <view class='l-padding-tb l-border-b'>订单号：{{item.customerOrderCode}}</view>
-    <view class='l-padding-tb l-rel'>
-      <view class='{{ item.overTheLine === 1 ? "l-text-warn" : "l-text-warn" }}' style='position:absolute; top: 30rpx; right: 0;'>{{overline[item.overTheLine]}}</view>
+    <view class='l-padding-tb-m l-border-b'>
+      订单号：{{item.customerOrderCode}}
+      <text class='l-icon-6a8 l-fr'></text>
+    </view>
+    <view class='l-padding-tb-m l-rel'>
+      <view class='l-fr l-text-warn'>{{overline[item.overTheLine]}}</view>
       <view class='l-h4'>{{item.carsNameBefor}}</view>
       <view>{{item.carsNameAfter}}</view>
-      <!-- <view class='l-text-gray l-fs-s'>完款时间：{{item.payDate}}</view> -->
+      <view class='l-text-gray l-fs-s'>
+        <view>销售顾问：{{item.systemUserName}}</view>
+        <view>手机号码：{{item.systemUserPhone}}</view>
+      </view>
+      <!-- <view wx:if='{{item.estimateDate}}'>预计完成时间：{{item.estimateDate}}</view> -->
     </view>
-    <!-- <view wx:if='{{!item.estimateDate}}' catchtap='noopFn'>
-      <picker class='l-padding-tb l-border-t l-text-center l-text-theme' mode='date' value='{{item.estimateDate}}' data-item='{{item}}' bindchange='dateChange2'>
-        <text>添加预计完成时间</text>
-      </picker>
+    <view class='l-border-t l-padding-tb l-text-center' catchtap='noopFn' wx:if='{{item.overTheLine == 0}}'>
+      <!-- <picker  wx:if='{{!item.estimateDate}}' mode='date' value='{{item.estimateDate}}' data-item='{{item}}' bindchange='dateChange2'>
+        <button class='l-button-border' size='mini'>添加预计完成时间</button>
+      </picker> -->
+      <button class='l-button-border' size='mini' bindtap='tickOverline' data-item='{{item}}'>标记为已过线检查</button>
     </view>
-    <view wx:else class='l-padding-tb l-border-t'>预计完成时间：{{item.estimateDate}}</view> -->
   </navigator>
   <template is='loadmore' data='{{...list}}' />
 </view>

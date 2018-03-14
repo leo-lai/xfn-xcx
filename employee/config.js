@@ -139,6 +139,8 @@ var config = {
   bankNotPass: `${baseUrl}/changeFullPayment`,
   // 标记为过线检查
   overTheLine: `${baseUrl}/overTheLine`,
+  // 回访备注
+  orderVisit: `${baseUrl}/orderVisit`,
 
   // 三级订车--------------------------------
   // 订车单列表

@@ -105,6 +105,7 @@ Page({
       wx.hideLoading()
     })
   },
+  // 过线检查
   tickOverline: function (event) {
     let item = event.currentTarget.dataset.item
     wx.showLoading()

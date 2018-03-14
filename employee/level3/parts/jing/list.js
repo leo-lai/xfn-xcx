@@ -25,18 +25,11 @@ Page({
       data: []
     }
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  onReady: function (options) {
     app.onLogin(userInfo => {
       this.getList()
     }, this.route)
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     app.checkLogin()
   },
@@ -112,6 +105,19 @@ Page({
       })
     }).catch(_ => {
       wx.hideNavigationBarLoading()
+    })
+  },
+  // 过线检查
+  tickOverline: function (event) {
+    let item = event.currentTarget.dataset.item
+    wx.showLoading()
+    app.post(app.config.overTheLine, {
+      customerOrderId: item.customerOrderId
+    }).then(_ => {
+      this.getList()
+      app.toast('操作成功')
+    }).catch(_ => {
+      wx.hideLoading()
     })
   }
 })
