@@ -38,9 +38,14 @@
       </view>
       <view class='l-table'>
         <view class='_tr'>
-          <view>物流方式：{{wuliu[info.logisticsType - 1]}}</view>
           <view>提车地点：{{info.pickCarAddr || '无'}}</view>
+          <view>提车时间：{{info.pickCarDate || '无'}}</view>
+        </view>
+        <view class='_tr'>
+          <view>物流方式：{{wuliu[info.logisticsType - 1]}}</view>
           <view>物流费用：{{info.freight || 0}}元</view>
+        </view>
+        <view class='_tr'>
           <view>定金总额：{{info.totalDepositPrice || 0}}元</view>
           <view>尾款总额：{{info.totalRestPrice || 0}}元</view>
         </view>

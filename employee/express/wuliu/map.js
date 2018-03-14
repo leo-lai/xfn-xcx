@@ -17,10 +17,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getGPS()
     this.timeid = setInterval(_ => {
       this.getGPS()
     }, 10000)
+    this.getGPS()
   },
   onHide: function () {
     clearInterval(this.timeid)
@@ -35,14 +35,19 @@ Page({
     app.post(app.config.exp.wuliuGPS, {
       distributionId: this.options.id
     }).then(({ data }) => {
-      this.setData({
-        'map.lng': data.longitude,
-        'map.lat': data.latitude
-      })
-    }).finally(_ => {
-      wx.setNavigationBarTitle({
-        title: '板车当前位置'
-      })
+      if (data.longitude && data.latitude) {
+        wx.setNavigationBarTitle({ title: '板车当前位置' })
+        this.setData({
+          'map.lng': data.longitude,
+          'map.lat': data.latitude
+        })
+      }else {
+        clearInterval(this.timeid)
+        wx.setNavigationBarTitle({ title: '获取板车位置失败' })
+      }
+    }).catch(_ => {
+      wx.setNavigationBarTitle({ title: '获取板车位置失败' })
+      clearInterval(this.timeid)
     })
   }
 })
