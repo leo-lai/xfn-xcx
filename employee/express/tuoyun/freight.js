@@ -7,7 +7,8 @@ Page({
    */
   data: {
     consignmentType: ['', '普通', '专线'],
-    info: {}
+    info: {},
+    carList: []
   },
 
   /**
@@ -15,9 +16,14 @@ Page({
    */
   onReady: function () {
     app.onLogin(userInfo => {
-      app.storage.getItem('l-tuoyun-freight').then(info => {
+      app.storage.getItem('exp-tuoyun-freight').then(info => {
         if(info) {
           this.setData({ info })
+          app.getPrevPage().then(prevPage => {
+            this.setData({
+              carList: prevPage.data.carList
+            })
+          })
         }
       })
     }, this.route)

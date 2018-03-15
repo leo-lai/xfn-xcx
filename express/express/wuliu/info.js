@@ -104,7 +104,7 @@ Page({
     let distributionId = this.data.info.distributionId
     wx.showLoading({ mask: true })
     app.post(app.config.wuliuJie, { distributionId }).then(_ => {
-      app.storage.setItem('exp-tuoyun-list-refresh', 1)
+      app.storage.setItem('exp-wuliu-list-refresh', 1)
       app.toast('接单成功').then(_ => {
         this.getInfo()
       })
@@ -127,7 +127,7 @@ Page({
     app.post(app.config.wuliuState, {
       distributionId, state
     }).then(_ => {
-      app.storage.setItem('exp-tuoyun-list-refresh', 1)
+      app.storage.setItem('exp-wuliu-list-refresh', 1)
       app.toast(msg).then(_ => {
         this.getInfo()
       })
@@ -146,7 +146,7 @@ Page({
     app.post(app.config.wuliuArrival, {
       distributionId, consignmentId
     }).then(_ => {
-      app.storage.setItem('exp-tuoyun-list-refresh', 1)
+      app.storage.setItem('exp-wuliu-list-refresh', 1)
       app.toast('操作成功').then(_ => {
         this.getInfo()
       })

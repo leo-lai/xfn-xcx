@@ -69,12 +69,12 @@
   </view>
   
   <!-- 银行审核备注 -->
-  <view class='l-margin l-radius' wx:if='{{info.overLoanRefuse == 1}}'>
+  <view class='l-margin l-radius' wx:if='{{bankResult.overLoanRefuse == 1}}'>
     <view class='weui-panel'>
       <view class='l-flex-hc l-padding-btn l-border-b'>
         <view class='l-rest l-h4'>银行审核备注</view>
       </view>
-      <view class='weui-panel__bd l-padding'>{{info.loanRefuseRemarks}}</view>
+      <view class='weui-panel__bd l-padding'>{{bankResult.loanRefuseRemarks}}</view>
     </view>
   </view>
 

@@ -36,7 +36,7 @@
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>车辆数量</view>
+          <view class='weui-label'>车辆总数</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-input'>{{info.number}}</view>
@@ -52,6 +52,23 @@
       </view>
     </view>
   </view>
+
+  <view class='l-text-gray l-fs-s l-flex-hc' style='margin: 40rpx 30rpx -15rpx 30rpx;'>
+    <text>托运车辆信息</text>
+  </view>
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-padding l-flex-hc l-fs-s l-border-b' wx:for='{{carList}}' wx:key='guid'>
+      <view class='l-rest'>
+        <view>{{item.carsName}}</view>
+        <view class='l-text-gray'>
+          <text wx:if='{{item.colourName}}' class='l-margin-r'>车身颜色：{{item.colourName}}</text>
+          <text class='l-margin-r'>数量：{{item.carNum}}</text>
+          <text class='l-margin-r'>指导价：{{item.guidePrice}}万元</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
   <!-- 
   <view class='l-margin l-radius'>
     <view class='weui-cells weui-cells_after-title'>

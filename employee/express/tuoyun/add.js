@@ -199,7 +199,7 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.exp.tuoyunCount, formData).then(({ data }) => {
-      app.storage.setItem('l-tuoyun-freight', Object.assign({}, formData, data))
+      app.storage.setItem('exp-tuoyun-freight', Object.assign({}, formData, data))
       app.navigateTo('freight')
     }).finally(err => {
       wx.hideLoading()

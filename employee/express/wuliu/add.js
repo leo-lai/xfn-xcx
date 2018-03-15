@@ -117,7 +117,8 @@ Page({
     if (info) {
       this.setData({
         'formData.logisticsCarId': info.logisticsCarId,
-        'formData.licensePlateNumber': info.licensePlateNumber
+        'formData.licensePlateNumber': info.licensePlateNumber,
+        'formData.logisticsCarVacancy': info.logisticsCarVacancy
       })
     }
   },

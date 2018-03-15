@@ -76,6 +76,10 @@ Page({
           app.utils.formatHead(data.customerMap.headPortrait) : app.config.avatar
         this.setData({
           'isNull': false,
+          'bankResult': {
+            loanRefuseRemarks: data.loanRefuseRemarks,
+            overLoanRefuse: data.overLoanRefuse
+          },
           'appointInfo.data': data.appointmentMap,
           'orderInfo': data.orderMap,
           'customerInfo': data.customerMap,

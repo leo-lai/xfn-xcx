@@ -22,7 +22,8 @@ Page({
     },
     slted: {
       logisticsCarId: '',
-      licensePlateNumber: ''
+      licensePlateNumber: '',
+      logisticsCarVacancy: ''
     }
   },
   onReady: function (options) {
@@ -92,7 +93,8 @@ Page({
       if (list[i].id == id) {
         let slted = {
           logisticsCarId: list[i].id,
-          licensePlateNumber: list[i].name
+          licensePlateNumber: list[i].name,
+          logisticsCarVacancy: list[i].number
         }
         this.setData({ slted })
         app.getPrevPage().then(prevPage => {

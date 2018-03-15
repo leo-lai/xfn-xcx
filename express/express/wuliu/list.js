@@ -35,9 +35,9 @@ Page({
    */
   onShow: function () {
     app.checkLogin().then(_ => {
-      app.storage.getItem('exp-tuoyun-list-refresh').then(refresh => {
+      app.storage.getItem('exp-wuliu-list-refresh').then(refresh => {
         if (refresh) {
-          app.storage.removeItem('exp-tuoyun-list-refresh')
+          app.storage.removeItem('exp-wuliu-list-refresh')
           this.getList()
         }
       })

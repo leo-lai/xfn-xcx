@@ -17,7 +17,7 @@
       <text class='_tag' wx:if='{{item.consignmentType == 1}}' style='background-color:#00a0ea;'>普通</text>
       <text class='_tag' wx:if='{{item.consignmentType == 2}}'>专线</text>
       <view class='l-rest'>{{item.consignmentCode}}</view>
-      <text class='l-text-theme l-fs-s'>{{item.consignmentStateName}}</text>
+      <!-- <text class='l-text-theme l-fs-s'>{{item.consignmentStateName}}</text> -->
     </view>
     <view class='l-text-gray l-fs-s l-margin-t-s'>
       <view>起点：{{item.startingPointAddress}}</view>

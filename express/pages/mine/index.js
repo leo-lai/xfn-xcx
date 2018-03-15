@@ -21,6 +21,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    app.storage.setItem('exp-wuliu-list-refresh', 1)
     app.checkLogin()
   },
   previewImage: function () {

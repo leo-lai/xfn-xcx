@@ -84,7 +84,7 @@
   </view>
 
   <view class='l-text-gray l-fs-s l-flex-hc' style='margin: 40rpx 30rpx -15rpx 30rpx;'>
-    <text>车辆信息</text>
+    <text>托运车辆信息</text>
     <view class='l-rest'></view>
     <navigator url='add-car'>
       <button class='l-btn-min2' size='mini'>添加托运车辆</button>
