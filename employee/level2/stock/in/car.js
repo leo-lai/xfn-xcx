@@ -185,6 +185,52 @@ Page({
     app.storage.setItem('stock-add-car-parts', this.data.carParts.list)
     app.navigateTo('parts')
   },
+  // 图片文字识别
+  showError: function (msg = '操作错误') {
+    wx.showToast({
+      image: '../../images/error.png',
+      title: msg
+    })
+  },
+  image2text: function () {
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => {
+        // 上传图片到服务器
+        wx.showLoading({ title: '图片上传中' })
+        wx.uploadFile({
+          url: app.config.uploadFile,
+          filePath: res.tempFiles[0].path,
+          name: 'img_file',
+          success: res => {
+            if (res.statusCode === 200) {
+              if (typeof res.data === 'string') {
+                res.data = JSON.parse(res.data)
+              }
+              // 图片文字识别
+              wx.showLoading({ title: '图片识别中' })
+              app.post(app.config.image2text, {
+                url: res.data.data
+              }).then(({data}) => {
+                this.setData({
+                  'formData.frameNumber': data
+                })
+              }).finally(_ => {
+                wx.hideLoading()
+              })
+            } else {
+              this.showError('图片上传失败')
+            }
+          },
+          fail: res => {
+            this.showError('图片上传失败')
+          }
+        })
+      }
+    })
+  },
   // 选择图片
   chooseImage: function (event) {
     wx.chooseImage({

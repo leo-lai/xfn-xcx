@@ -33,8 +33,9 @@ Page({
       index: -1,
       list: []
     },
-    carParts: { // 精品
-      list: []
+    carParts: { 
+      list1: [],   // 赠送精品
+      list2: [],  // 加装精品
     },
     orderPay: '0.00',
     orderInfo: {
@@ -55,11 +56,19 @@ Page({
         this.getSales()
         this.getOrderPay()
         let followInformation = this.data.orderInfo.followInformation ? this.data.orderInfo.followInformation.split(',') : []
+        let boutiqueInformation = this.data.orderInfo.boutiqueInformation ? this.data.orderInfo.boutiqueInformation.split(',') : []
         this.setData({
-          'carParts.list': app.config.baseData.carParts.map((item, index) => {
+          'carParts.list1': app.config.baseData.carParts.map((item, index) => {
             return {
               id: index + 1,
               checked: followInformation.includes(item),
+              name: item
+            }
+          }),
+          'carParts.list2': app.config.baseData.carParts.map((item, index) => {
+            return {
+              id: index + 1,
+              checked: boutiqueInformation.includes(item),
               name: item
             }
           })
@@ -223,9 +232,10 @@ Page({
       })
     })
   },
-  showCarParts: function () {
-    app.storage.setItem('customer_order_jing', this.data.carParts.list)
-    app.navigateTo('jing')
+  showCarParts: function (event) {
+    let _type = event.currentTarget.dataset.type
+    app.storage.setItem('customer_order_jing', this.data.carParts['list' + _type])
+    app.navigateTo('jing?type=' + _type)
   },
   submit: function () {
     if (!this.data.orderInfo.customerUserCard) {
@@ -271,6 +281,7 @@ Page({
       licensePlatePriace: '',
       insurancePriace: '',
       followInformation: '',
+      boutiqueInformation: '',
       remark: '',
       purchaseTaxPriace: '',
       boutiquePriace: '',

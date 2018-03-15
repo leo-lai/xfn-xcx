@@ -58,12 +58,17 @@
 
   <view class='l-margin l-radius'>
     <view class='weui-cells weui-cells_after-title'>
-      <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell weui-cell_input weui-cell_vcode'>
         <view class='weui-cell__hd'>
           <view class='weui-label'>车架号 <text class='l-text-theme'>*</text></view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请填写' id='frameNumber' value='{{formData.frameNumber}}' bindinput='bindInput' type='text' maxlength='{{20}}' />
+          <input class='weui-input' placeholder='请填写' id='frameNumber' value='{{formData.frameNumber}}' bindinput='bindInput' type='text' maxlength='{{17}}' />
+        </view>
+        <view class='weui-cell__ft'>
+          <view class='weui-vcode-btn' bindtap='image2text'>
+            <text class='l-icon-626'></text>
+          </view>
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -73,6 +78,7 @@
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请填写' id='engineNumber' value='{{formData.engineNumber}}' bindinput='bindInput' type='text' maxlength='{{20}}' />
         </view>
+
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>

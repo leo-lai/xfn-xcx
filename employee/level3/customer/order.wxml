@@ -220,16 +220,33 @@
   </view>
   <view class='l-padding l-bg-white'>
     <view class='l-tag-list'>
-      <view class='_item' wx:for='{{carParts.list}}' wx:key='id' wx:if='{{item.checked}}'>
+      <view class='_item' wx:for='{{carParts.list1}}' wx:key='id' wx:if='{{item.checked}}'>
         <text>{{item.name}}</text>
         <!-- <icon size='16' type='clear' color='#ccc'></icon> -->
       </view>
-      <view class='_item _add' bindtap='showCarParts' wx:if='{{orderInfo.customerOrderState != 17}}'>
-        <text>选择精品</text>
+      <view class='_item _add' bindtap='showCarParts' data-type='1' wx:if='{{orderInfo.customerOrderState != 17}}'>
+        <text>选择赠送精品</text>
       </view>
     </view>
   </view>
   <!-- 赠送精品 end-->
+
+  <!-- 加装精品 -->
+  <view class='weui-cells__title'>
+    <text>加装精品</text>
+  </view>
+  <view class='l-padding l-bg-white'>
+    <view class='l-tag-list'>
+      <view class='_item' wx:for='{{carParts.list2}}' wx:key='id' wx:if='{{item.checked}}'>
+        <text>{{item.name}}</text>
+        <!-- <icon size='16' type='clear' color='#ccc'></icon> -->
+      </view>
+      <view class='_item _add' bindtap='showCarParts' data-type='2' wx:if='{{orderInfo.customerOrderState != 17}}'>
+        <text>选择加装精品</text>
+      </view>
+    </view>
+  </view>
+  <!-- 加装精品 end-->
 
   <view class='weui-cells__title'>订单备注</view>
   <view class='l-padding l-bg-white'>

@@ -7,7 +7,7 @@ Page({
    */
   data: {
     list: [],
-    followInformation: ''
+    slted: ''
   },
 
   /**
@@ -27,15 +27,23 @@ Page({
 
     this.setData({
       'list': list,
-      'followInformation': value.join(',')
+      'slted': value.join(',')
     })
   },
   submit: function () {
     app.getPrevPage().then(prevPage => {
-      prevPage.setData({
-        'carParts.list': this.data.list,
-        'orderInfo.followInformation': this.data.followInformation
-      })
+      let _type = this.options.type
+      if (_type == 1) {
+        prevPage.setData({
+          'carParts.list1': this.data.list,
+          'orderInfo.followInformation': this.data.slted
+        })
+      } else if (_type == 2) {
+        prevPage.setData({
+          'carParts.list2': this.data.list,
+          'orderInfo.boutiqueInformation': this.data.slted
+        })
+      }
       app.back()
     })
   }

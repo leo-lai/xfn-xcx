@@ -54,6 +54,8 @@ var config = {
   familyList: `${commonUrl}/carsFamilyList`,
   // 车类型(品牌，车系，年款，高低配等)
   carTypeList: `${commonUrl}/carsListList`,
+  // 图片文字识别
+  image2text: `${commonUrl}/imageRecognition`,
 
   // 上传文件
   uploadFile: `${baseUrl}/uploadFile`,

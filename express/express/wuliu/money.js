@@ -30,14 +30,15 @@ Page({
 
       // 生成二维码
       QR.api.draw(data.payCode, 'qr-canvas', 150, 150)
-      setTimeout(_ => {
-        wx.canvasToTempFilePath({
-          canvasId: 'qr-canvas',
-          success: res => {
-            this.setData({ imagePath: res.tempFilePath })
-          }
-        })
-      }, 1000)
+      // setTimeout(_ => {
+      //   wx.canvasToTempFilePath({
+      //     canvasId: 'qr-canvas',
+      //     success: res => {
+      //       console.log(res.tempFilePath)
+      //       this.setData({ imagePath: res.tempFilePath })
+      //     }
+      //   })
+      // }, 1000)
     }).finally(_ => {
       wx.hideLoading()
     })

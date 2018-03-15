@@ -33,8 +33,8 @@
       <image class='l-avatar' mode='aspectFit' style='width: 80rpx; height: 80rpx; margin-right: 30rpx;' src='{{item.thumb}}'></image>
       <view class='l-rest'>
         <view class='l-h4'>{{item.customerUsersName}}</view>
-        <view catchtap='noopFn'>
-          <view data-val='{{item.phoneNumber}}' bindtap='callPhone' bindtap='callPhone'>
+        <view class='l-inline' catchtap='noopFn'>
+          <view class='l-inline' data-val='{{item.phoneNumber}}' bindtap='callPhone' bindtap='callPhone'>
             <text class='l-fs-m'>{{item.phoneNumber}}</text>
             <text class='l-icon-649 l-text-theme'></text>
           </view>
