@@ -18,6 +18,7 @@
         <text class='l-h4'>车牌号：{{item.name}}</text>
         <view>运输能力：{{item.number}}</view>
       </view>
+      <view class='l-text-theme l-margin-lr'>{{item.stateName}}</view>
       <view>
         <icon wx:if='{{slted.logisticsCarId === item.id}}' type='success_no_circle' color='#fa5539'></icon> 
         <icon wx:else type='success_no_circle' color='#eee'></icon>

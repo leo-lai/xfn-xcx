@@ -15,6 +15,7 @@
   <view id='{{item.driverId}}' bindtap='slt' class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list.data}}' wx:key='driverId'>
     <view class='l-flex-hc'>
       <view class='l-rest'><text class='l-h4'>司机姓名：{{item.realName}}</text></view>
+      <view class='l-text-theme l-margin-lr'>{{item.statusName}}</view>
       <view>
         <icon wx:if='{{slted.driverId === item.id}}' type='success_no_circle' color='#fa5539'></icon> 
         <icon wx:else type='success_no_circle' color='#eee'></icon>

@@ -91,6 +91,7 @@ Page({
 
     formData.logisticsCarId = this.data.info.logisticsCar.logisticsCarId
     formData.licensePlateNumber = this.data.info.logisticsCar.licensePlateNumber
+    formData.logisticsCarVacancy = this.data.info.logisticsCar.logisticsCarVacancy
     formData.driverId = this.data.info.logisticsDriver.driverId
     formData.realName = this.data.info.logisticsDriver.realName
     formData.phoneNumber = this.data.info.logisticsDriver.phoneNumber

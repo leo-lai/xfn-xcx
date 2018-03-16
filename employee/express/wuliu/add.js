@@ -20,6 +20,7 @@ Page({
       destinationLongitude: '',
       logisticsCarId: '',
       licensePlateNumber: '',
+      logisticsCarVacancy: '',
       driverId: '',
       realName: '',
       phoneNumber: '',
