@@ -75,7 +75,7 @@ var config = {
   wuliuArrival: `${baseUrl}/makeCarArrived`,
   // 签收
   wuliuSign: `${baseUrl}/signCar`,
-  // 收钱
+  // 收款
   wuliuMoney: `${baseUrl}/logisticsInPayPOS`,
   
   // 下面的地址配合云端 Server 工作

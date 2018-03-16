@@ -1,0 +1,46 @@
+<!--express/tuoyun/contract.wxml-->
+<view class='l-page-full l-bg-white'>
+  <view class='l-padding'>
+    <view>甲方（承运方）：{{info.partyA}}</view>
+    <view>乙方（委托方）：<text>{{info.orgName}}</text></view>
+    <view class='l-margin-t l-indent'>经甲乙双方共同协商一致，乙方愿意全权委托甲方代购指定车辆，双方特立此合同 {{info.consignmentCode}}，以兹共同遵守：</view>
+    <view class='l-h4'>一、委托代购事项</view>
+    <view style='padding-left: 2em;'>
+      <view class='l-table l-margin-b-m'>
+        <view class='_tr'>
+          <view>起运地：{{info.startingPointAddress || '无'}}</view>
+          <view>目的地：{{info.destinationAddress || '无'}}</view>
+          <view>运输日期：{{info.appointmentTimeDate || '无'}}</view>
+          <view>运输类型：{{consignmentType[info.consignmentType]}}</view>
+        </view>
+
+        <view class='l-margin-t-s'>托运车辆：</view>
+        <view wx:for='{{info.goodsCarVos}}' wx:key='id' wx:for-item='carItem'>
+          <view class='_tr l-fs-s'>
+            <text>车型：{{carItem.carsName}}</text>
+          </view>
+          <view class='_tr'>
+            <text wx:if='{{carItem.colorName}}'>车身颜色：{{carItem.colorName}}</text>
+            <text>数量：1</text>
+            <text>运费：￥{{carItem.carCostsVo.costsAmount}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='l-table'>
+        <view class='_tr'>
+          <view>总运费：{{info.amount || ''}}元</view>
+          <view>备注：{{info.remarks || '无'}}</view>
+        </view>
+      </view>
+    </view>
+    <view class='l-h4'>二、款项及支付方式</view>
+    <view class='l-indent'>1、本合同签订时则代表乙方完全同意合同 {{info.consignmentCode}} 中的所有订单信息，并且乙方根据合同 {{info.consignmentCode}} 中的总运费要向甲方支付 ￥{{info.amount}}；</view>
+    <view class='l-indent'>2、乙方必须在甲方通知提车当天内付清合同 {{info.consignmentCode}} 的全款，如乙方未能在规定期限内付清全款，逾期7天未付甲方有权单方面解除合同，同时甲方有权处置乙方所定车辆；</view>
+    <view class='l-h4'>三、免责条款：协议生效后，因不可抗力的情况下（如因生产商停车，4S店发车时间、价格变动、4S店交通运输延误）而导致甲方无法履行合同，甲方有权解除本合约并退还所收定金；</view>
+    <view class='l-text-gray l-rel' style='padding: 60rpx 0;'>
+      盖章处：<image mode='aspectFit' style='position:absolute; width: 200rpx; height: 163rpx; top: 10rpx;' src='{{resURL}}/zang.png'></image>
+    </view>
+    <view>客户经理签名：{{info.creator}}</view>
+    <view>日期：{{info.createTimeStr}}</view>
+  </view>
+</view>

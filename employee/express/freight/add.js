@@ -41,6 +41,9 @@ Page({
   onShow: function () {
     app.checkLogin()
   },
+  onUnload: function () {
+    app.storage.removeItem('l-freight2-info')
+  },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
     this.setData({ topTips })

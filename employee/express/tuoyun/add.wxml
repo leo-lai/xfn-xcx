@@ -6,7 +6,7 @@
     <view class='weui-cells weui-cells_after-title'>
       <navigator url='/level2/store/list?mode=slt&rows=50&id={{formData.orgId}}' class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>门店名称 <text class='l-text-error'>*</text></view>
+          <view class='weui-label'>门店名称</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-select weui-select_in-select-after'>
@@ -69,7 +69,7 @@
       </view>
       <view class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>预约装车时间</view>
+          <view class='weui-label'>预约装车时间 <text class='l-text-error'>*</text></view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker mode='date' id='appointmentTime' bindchange='bindInput' value='{{formData.appointmentTime}}'>

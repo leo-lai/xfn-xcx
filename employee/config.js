@@ -280,6 +280,8 @@ var config = {
     wuliuPai: `${baseUrl}/distributionDelivery`,
     // 物流GPS
     wuliuGPS: `${baseUrl}/logisticsDistributionGPS`,
+    // 合同信息
+    contract: `${baseUrl}/consignmentContract`,
   },
 
   baseUrl

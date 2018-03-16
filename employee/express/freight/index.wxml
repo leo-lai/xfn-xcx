@@ -56,10 +56,19 @@
             <view class='l-rest'>{{item.dedicatedLineName}}</view>
             <view class='l-text-theme'>{{item.amount}}元</view>
           </view>
-          <view class='l-padding-btn l-fs-m'>
-            <view>起点：{{item.startingPointAddress}}</view>
-            <view>终点：{{item.destinationAddress}}</view>
-            <view>发车时间：{{item.departureTime}}</view>
+          <view class='l-padding-btn l-fs-s'>
+            <view class='l-flex-h'>
+              <text style='min-width: 120rpx;'>起点：</text>
+              <view class='l-rest'>{{item.startingPointAddress}}</view>
+            </view>
+            <view class='l-flex-h'>
+              <text style='min-width: 120rpx;'>终点：</text>
+              <view class='l-rest'>{{item.destinationAddress}}</view>
+            </view>
+            <view class='l-flex-h'>
+              <text style='min-width: 120rpx;'>发车时间：</text>
+              <view class='l-rest'>{{item.departureTime}}</view>
+            </view>
           </view>
         </view>
         <template is='loadmore' data='{{...list}}' /> 

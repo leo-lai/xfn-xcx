@@ -83,6 +83,7 @@ Page({
             consignmentCode,
             startingPointAddress,
             destinationAddress,
+            appointmentTime
           } = carItem.consignmentVo
           let { costsAmount } = carItem.carCostsVo
 
@@ -95,6 +96,7 @@ Page({
               consignmentCode,
               startingPointAddress,
               destinationAddress,
+              appointmentTime,
               goodsCarState: carItem.goodsCarState,
               amount: costsAmount,
               carList: [carItem]

@@ -111,10 +111,11 @@ Page({
       callback(this.data.list.data)
     })
   },
-  showDrayInfo: function (event) {
-    let item = event.currentTarget.dataset.item
-    app.storage.setItem('l-dray-info', item)
-    app.navigateTo('add')
+  showInfo: function (event) {
+    if(this.data.mode != 'slt') {
+      let id = event.currentTarget.id
+      app.navigateTo(`info?id=${id}`)
+    }
   },
 
   // 选择托运单

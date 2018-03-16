@@ -76,7 +76,7 @@
             <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 7 ? "_disabled" : ""}}' size='mini'>签收</button>
           </navigator>
           <navigator wx:if='{{info.distributionState == 7}}' url='money?id={{info.distributionId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
-            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 8 ? "_disabled" : ""}}' size='mini'>收钱</button>
+            <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 8 ? "_disabled" : ""}}' size='mini'>收款</button>
           </navigator>
         </block>
         <!-- 普通运输 -->
@@ -88,13 +88,14 @@
             <button class='l-btn-min1' size='mini'>签收</button>
           </navigator>
           <navigator wx:if='{{tuoyunItem.goodsCarState == 8}}' url='money?id={{info.distributionId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
-            <button class='l-btn-min1' size='mini'>收钱</button>
+            <button class='l-btn-min1' size='mini'>收款</button>
           </navigator>
         </block>
       </view>
       <view class='l-text-gray l-margin-t-s'>
         <view>起点：{{tuoyunItem.startingPointAddress}}</view>
         <view>终点：{{tuoyunItem.destinationAddress}}</view>
+        <view wx:if='{{tuoyunItem.appointmentTime}}'>预约装车时间：{{tuoyunItem.appointmentTime}}</view>
       </view>
       <view class='l-flex-h l-margin-t-s' wx:for='{{tuoyunItem.carList}}' wx:for-item='carItem' wx:key='goodsCarId'>
         <view class='l-rest'>
@@ -128,7 +129,7 @@
           <button wx:if='{{info.distributionState == 6}}' data-state='7' class='l-button-main'>
           全部已签收</button>
           <button wx:if='{{info.distributionState == 7}}' data-state='8' class='l-button-main'>
-          全部已收钱</button>
+          全部已收款</button>
         </block>
       </view>
     </view>

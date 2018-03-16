@@ -1,0 +1,5 @@
+/* express/tuoyun/contract.wxss */
+view{font-size: 28rpx; word-break: break-all; text-align:justify; text-justify: inter-word;}
+.l-h4{font-size: 28rpx; margin-top: 30rpx;}
+.l-indent{text-indent: 2em;}
+.l-table text{display: inline-block; min-width: 20%; margin-right: 2%; white-space: nowrap; font-size: 28rpx;}

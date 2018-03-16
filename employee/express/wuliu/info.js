@@ -37,11 +37,12 @@ Page({
       data.goodsCars.forEach(carItem => {
         cars.push(carItem.goodsCarId)
         let {
-            consignmentId,
+          consignmentId,
           consignmentCode,
           startingPointAddress,
           destinationAddress,
-          } = carItem.consignmentVo
+          appointmentTime
+        } = carItem.consignmentVo
         let { costsAmount } = carItem.carCostsVo
 
         if (tempObj[consignmentCode] >= 0) {
@@ -53,6 +54,7 @@ Page({
             consignmentCode,
             startingPointAddress,
             destinationAddress,
+            appointmentTime,
             goodsCarState: carItem.goodsCarState,
             amount: costsAmount,
             carList: [carItem]

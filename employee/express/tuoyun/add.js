@@ -138,10 +138,10 @@ Page({
 
   // 查询信息
   submit: function () {
-    if (!this.data.formData.orgId) {
-      this.showTopTips('请选择门店名称')
-      return
-    }
+    // if (!this.data.formData.orgId) {
+    //   this.showTopTips('请选择门店名称')
+    //   return
+    // }
     if (!this.data.formData.purchasersName) {
       this.showTopTips('请输入联系人姓名')
       return
