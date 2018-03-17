@@ -25,7 +25,7 @@
       <view class='l-text-gray l-fs-s l-margin-t-s'>
         <view>起点：{{item.startingPointAddress}}</view>
         <view>终点：{{item.destinationAddress}}</view>
-        <view wx:if='{{info.appointmentTime}}'>预约装车时间：{{info.appointmentTime}}</view>
+        <view wx:if='{{item.appointmentTimeDate}}'>预约装车时间：{{item.appointmentTimeDate}}</view>
       </view>
     </view>
 
@@ -38,8 +38,8 @@
         <view class='l-rest'>
           <view>{{carItem.carsName}}</view>
           <view>
-            <text>车身颜色：{{carItem.colourName}}</text>
-            <text class='l-margin-l' wx:if='{{carItem.frameNumber}}'>车架号：{{carItem.frameNumber}}</text>
+            <text wx:if='{{carItem.colourName}}' class='l-margin-r'>车身颜色：{{carItem.colourName}}</text>
+            <text wx:if='{{carItem.frameNumber}}'>车架号：{{carItem.frameNumber}}</text>
           </view>
         </view>
         <text class='l-text-warn'>{{carItem.goodsCarStateName}}</text>

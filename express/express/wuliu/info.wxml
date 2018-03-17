@@ -95,7 +95,7 @@
       <view class='l-text-gray l-margin-t-s'>
         <view>起点：{{tuoyunItem.startingPointAddress}}</view>
         <view>终点：{{tuoyunItem.destinationAddress}}</view>
-        <view wx:if='{{tuoyunItem.appointmentTime}}'>预约装车时间：{{tuoyunItem.appointmentTime}}</view>
+        <view wx:if='{{tuoyunItem.appointmentTimeDate}}'>预约装车时间：{{tuoyunItem.appointmentTimeDate}}</view>
       </view>
       <view class='l-flex-h l-margin-t-s' wx:for='{{tuoyunItem.carList}}' wx:for-item='carItem' wx:key='goodsCarId'>
         <view class='l-rest'>

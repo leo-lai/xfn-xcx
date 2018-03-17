@@ -1,0 +1,20 @@
+/* pages/datetime/index.wxss */
+
+.time-title {
+  width: 20%;
+  text-align: center;
+}
+
+.picker-text {
+  text-align: center;
+}
+.picker-text view{
+  line-height: 50px;
+}
+
+/*mask*/
+.time_screens {
+  width: 100%;
+  bottom: 0;
+  overflow: hidden;
+}

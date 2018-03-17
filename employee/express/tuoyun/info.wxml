@@ -1,7 +1,7 @@
 <!--express/tuoyun/info.wxml-->
 <view class='l-page-full'>
   <view class='l-bg-white l-padding l-margin-b'>
-    <view>
+    <view wx:if='{{info.orgName}}'>
       <text class='l-fr l-text-theme'>{{info.consignmentStateName}}</text>
       <text>{{info.orgName}}</text>
     </view>
@@ -18,7 +18,7 @@
       </view>
       <view>起点：{{info.startingPointAddress}}</view>
       <view>终点：{{info.destinationAddress}}</view>
-      <view wx:if='{{info.appointmentTime}}'>预约装车时间：{{info.appointmentTime}}</view>
+      <view wx:if='{{info.appointmentTimeDate}}'>预约装车时间：{{info.appointmentTimeDate}}</view>
     </view>
   </view>
 

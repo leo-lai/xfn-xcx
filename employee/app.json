@@ -1,9 +1,13 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/datetime/index",
+    "express/tuoyun/list",
+    
+    
     "express/menu",
     "express/wuliu/list",
-    "express/tuoyun/list",
+    
     "express/wuliu/add",
     "express/tuoyun/add",
     "express/tuoyun/men",

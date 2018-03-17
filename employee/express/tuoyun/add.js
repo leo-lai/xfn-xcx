@@ -197,6 +197,10 @@ Page({
       number: carList.length
     }, this.data.formData)
 
+    if(formData.appointmentTime) {
+      formData.appointmentTime += ' 08:00'
+    }
+
     wx.showLoading({ mask: true })
     app.post(app.config.exp.tuoyunCount, formData).then(({ data }) => {
       app.storage.setItem('exp-tuoyun-freight', Object.assign({}, formData, data))

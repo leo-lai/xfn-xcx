@@ -2,8 +2,8 @@
 <view class='l-page-full l-bg-white'>
   <view class='l-padding'>
     <view>甲方（承运方）：{{info.partyA}}</view>
-    <view>乙方（委托方）：<text>{{info.orgName}}</text></view>
-    <view class='l-margin-t l-indent'>经甲乙双方共同协商一致，乙方愿意全权委托甲方代购指定车辆，双方特立此合同 {{info.consignmentCode}}，以兹共同遵守：</view>
+    <view>乙方（委托方）：<text>{{info.purchasersName}}</text></view>
+    <view class='l-margin-t l-indent'>经甲乙双方共同协商一致，乙方愿意全权委托甲方运输指定车辆，双方特立此合同 {{info.consignmentCode}}，以兹共同遵守：</view>
     <view class='l-h4'>一、委托代购事项</view>
     <view style='padding-left: 2em;'>
       <view class='l-table l-margin-b-m'>
@@ -40,7 +40,7 @@
     <view class='l-text-gray l-rel' style='padding: 60rpx 0;'>
       盖章处：<image mode='aspectFit' style='position:absolute; width: 200rpx; height: 163rpx; top: 10rpx;' src='{{resURL}}/zang.png'></image>
     </view>
-    <view>客户经理签名：{{info.creator}}</view>
+    <view>客户经理签名：{{info.systemUserName}}</view>
     <view>日期：{{info.createTimeStr}}</view>
   </view>
 </view>

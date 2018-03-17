@@ -28,7 +28,7 @@ Page({
     app.post(app.config.exp.contract, {
       consignmentId: this.options.id
     }).then(({ data }) => {
-      data.createTimeStr = app.utils.str2date(data.createTime).format('yyyy年MM月dd日')
+      // data.createTimeStr = app.utils.str2date(data.createTime).format('yyyy年MM月dd日')
       this.setData({ info: data })
     }).finally(_ => {
       wx.hideLoading()

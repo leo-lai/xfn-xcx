@@ -48,6 +48,7 @@ Page({
   },
   onReady: function () {
     app.onLogin(userInfo => {
+      wx.showLoading()
       this.getList().then(_ => {
         this.getInfo()
       })
@@ -58,9 +59,7 @@ Page({
   },
   // 非专线详情
   getInfo: function () {
-    wx.showLoading()
     app.post(app.config.exp.freight1Info).then(({ data }) => {
-      console.log(data)
       this.setData({
         'formData': data,
         'gradeCar': this.data.gradeCar.map(item => {
@@ -116,6 +115,8 @@ Page({
         'list.page': data.page,
         'list.data': data.page === 1 ? data.list : this.data.list.data.concat(data.list)
       })
+    }).catch(_ => {
+      wx.hideLoading()
     }).finally(_ => {
       this.setData({ 'list.loading': false })
       callback(this.data.list.data)
