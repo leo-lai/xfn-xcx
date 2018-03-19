@@ -39,7 +39,6 @@
         <navigator wx:if='{{item.distributionState == 2}}' url='load-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}&did={{item.distributionId}}' hover-class='none'>
           <button class='l-btn-min1' size='mini'>装车</button>
         </navigator>
-        <button wx:if='{{item.consignmentType == 1 && tuoyunItem.goodsCarState == 5}}' class='l-btn-min1' size='mini' data-ids='{{item.distributionId}},{{tuoyunItem.consignmentId}}' bindtap='arrival'>到达目的地</button>
         
         <!-- 专线运输 -->
         <block wx:if='{{item.consignmentType == 2}}'>
@@ -53,8 +52,11 @@
             <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 8 ? "_disabled" : ""}}' size='mini'>收款</button>
           </navigator>
         </block>
+        <!-- 专线运输 end-->
+
         <!-- 普通运输 -->
         <block wx:else>
+          <button wx:if='{{tuoyunItem.goodsCarState == 5}}' class='l-btn-min1' size='mini' data-ids='{{item.distributionId}},{{tuoyunItem.consignmentId}}' bindtap='arrival'>到达目的地</button>
           <navigator wx:if='{{tuoyunItem.goodsCarState == 6}}' url='unload-car?id={{tuoyunItem.consignmentId}}&cars={{item.cars}}&did={{item.distributionId}}' hover-class='none'>
             <button class='l-btn-min1' size='mini'>卸车</button>
           </navigator>
@@ -65,6 +67,7 @@
             <button class='l-btn-min1' size='mini'>收款</button>
           </navigator>
         </block>
+        <!-- 普通运输 end-->
       </view>
       <view class='l-text-gray l-margin-t-s'>
         <view>起点：{{tuoyunItem.startingPointAddress}} </view>
@@ -91,8 +94,8 @@
         全部已装车</button>
         <button wx:if='{{item.distributionState == 3}}' data-state='4' size='mini' class='l-button-main'>
         开始运输</button>
-        <button wx:if='{{item.distributionState >= 4 && item.consignmentType == 1}}' data-state='8' size='mini' class='l-button-main'>
-        订单结束</button>
+        
+        <!-- 专线运输 -->
         <block wx:if='{{item.consignmentType == 2}}'>
           <button wx:if='{{item.distributionState == 4}}' data-state='5' size='mini' class='l-button-main'>
           到达目的地</button>
@@ -103,6 +106,14 @@
           <button wx:if='{{item.distributionState == 7}}' data-state='8' size='mini' class='l-button-main'>
           全部已收款</button>
         </block>
+        <!-- 专线运输 end-->
+
+        <!-- 普通运输 -->
+        <block wx:else>
+          <button wx:if='{{item.distributionState >= 4}}' data-state='8' size='mini' class='l-button-main'>
+        订单结束</button>
+        </block>
+        <!-- 普通运输 end-->
       </view>
       <navigator class='l-inline l-margin-lr-s' url='info?id={{item.distributionId}}' hover-class='none'>
         <button size='mini' class='l-button-border'>查看详情</button>

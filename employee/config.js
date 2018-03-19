@@ -22,7 +22,7 @@
  *                佛祖坐镇 顺利上线
  */
 var host = 'http://tomcat.mifengqiche.com'
-var host = 'https://tomcat.xfnauto.com'
+// var host = 'https://tomcat.xfnauto.com'
 
 var resURL = 'https://res.xfnauto.com'
 var commonUrl = host + '/tauto/common'
@@ -282,6 +282,10 @@ var config = {
     wuliuGPS: `${baseUrl}/logisticsDistributionGPS`,
     // 合同信息
     contract: `${baseUrl}/consignmentContract`,
+    // 收款
+    wuliuMoney: `${baseUrl}/logisticsInPayPOS`,
+    // 物流单状态
+    wuliuState: `${baseUrl}/updateDistributionState`,
   },
 
   baseUrl

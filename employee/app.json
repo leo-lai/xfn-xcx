@@ -1,28 +1,36 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/datetime/index",
-    "express/tuoyun/list",
-    
-    
+
     "express/menu",
     "express/wuliu/list",
-    
     "express/wuliu/add",
+    "express/wuliu/info",
+    "express/wuliu/map",
+    "express/wuliu/money",
+
+    "express/tuoyun/list",
     "express/tuoyun/add",
     "express/tuoyun/men",
     "express/tuoyun/freight",
     "express/tuoyun/add-car",
     "express/tuoyun/info",
+    "express/tuoyun/contract",
+
+    "express/setting/menu",
     "express/freight/selector",
     "express/freight/index",
     "express/freight/add",
-    "level2/order/list",
-    "level2/order/add-order",
-    "level2/order/add",
-    "level2/order/men",
-    "level2/order/info-edit",
-    "level2/order/info",
+    "express/driver/list",
+    "express/driver/info",
+    "express/driver/add",
+    "express/dray/list",
+    "express/dray/info",
+    "express/dray/add",
+    "express/dray/selector",
+    "express/driver/selector",
+
+    
     "level2/store/add",
     "level2/store/list",
     "level2/store/view",
@@ -32,6 +40,13 @@
     "level2/stock/in/car",
     "level2/stock/in/info",
     "level2/stock/in/parts",
+
+    "level2/order/list",
+    "level2/order/add-order",
+    "level2/order/add",
+    "level2/order/men",
+    "level2/order/info-edit",
+    "level2/order/info",
     "level2/order/car",
     "level2/order/car-match",
     "level2/order/car-check",
@@ -40,6 +55,7 @@
     "level2/order/contract",
     "level2/order/price",
     "level2/order/ticket",
+    
     "level3/customer/list",
     "level3/customer/add",
     "level3/customer/info",
@@ -47,6 +63,7 @@
     "level3/customer/jing",
     "level3/customer/details",
     "level3/customer/jiaoche",
+
     "level3/stock/index",
     "level3/stock/online/list",
     "level3/stock/online/info",
@@ -62,6 +79,8 @@
     "level3/parts/jing/info",
     "level3/parts/license/list",
     "level3/parts/tiemo/list",
+
+    "pages/datetime/index",
     "pages/car-selector/index",
     "pages/bank-uploader/index",
     "pages/bank-uploader/view",
@@ -72,19 +91,7 @@
     "pages/msg/index",
     "pages/login/index",
     "pages/region/index",
-    "pages/week-selector/index",
-    "express/setting/menu",
-    "express/driver/list",
-    "express/driver/info",
-    "express/driver/add",
-    "express/dray/list",
-    "express/dray/info",
-    "express/dray/add",
-    "express/dray/selector",
-    "express/driver/selector",
-    "express/wuliu/info",
-    "express/wuliu/map",
-    "express/tuoyun/contract"
+    "pages/week-selector/index"
   ],
   "window": {
     "backgroundColor": "#eee",

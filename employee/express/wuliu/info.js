@@ -15,6 +15,10 @@ Page({
    */
   onReady: function () {
     app.onLogin(userInfo => {
+      this.setData({
+        userInfo,
+        'isAdmin': ['仓管主管', '仓管'].includes(userInfo.roleName)
+      })
       this.getInfo()
     }, this.route)
   },
@@ -122,6 +126,29 @@ Page({
           })
         }
       }
+    })
+  },
+  // 更改订单状态
+  changeState: function (event) {
+    let distributionId = event.currentTarget.id
+    let state = event.target.dataset.state
+    let msg = '操作成功'
+
+    switch (state) {
+      case '3':
+        msg = '装车成功'
+        break
+    }
+    wx.showLoading({ mask: true })
+    app.post(app.config.exp.wuliuState, {
+      distributionId, state
+    }).then(_ => {
+      app.storage.setItem('exp-wuliu-list-refresh', 1)
+      app.toast(msg).then(_ => {
+        this.getInfo()
+      })
+    }).catch(_ => {
+      wx.hideLoading()
     })
   },
   // 预览图片

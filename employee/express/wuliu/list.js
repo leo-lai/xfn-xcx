@@ -27,6 +27,10 @@ Page({
    */
   onReady: function (options) {
     app.onLogin(userInfo => {
+      this.setData({
+        userInfo,
+        'isAdmin': ['仓管主管', '仓管'].includes(userInfo.roleName)
+      })
       this.getList()
     }, this.route)
   },
@@ -121,6 +125,7 @@ Page({
       callback(this.data.list.data)
     })
   },
+  // 派单
   paidan: function (event) {
     let distributionId = event.currentTarget.id
     wx.showModal({
@@ -138,6 +143,29 @@ Page({
           })
         }
       }
+    })
+  },
+  // 更改订单状态
+  changeState: function (event) {
+    let distributionId = event.currentTarget.id
+    let state = event.target.dataset.state
+    let msg = '操作成功'
+
+    switch (state) {
+      case '3':
+        msg = '装车成功'
+        break
+    }
+
+    wx.showLoading({ mask: true })
+    app.post(app.config.exp.wuliuState, {
+      distributionId, state
+    }).then(_ => {
+      app.toast(msg).then(_ => {
+        this.getList()
+      })
+    }).catch(_ => {
+      wx.hideLoading()
     })
   },
 

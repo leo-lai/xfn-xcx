@@ -1,0 +1,60 @@
+<!--express/wuliu/money.wxml-->
+<view class='l-page-full'>
+  <view class='l-padding l-text-center l-bg-white'>
+    <!-- <image style='width: 300rpx; height: 300rpx; background:#eee;' src='{{imagePath}}'></image> -->
+    <canvas style='display:inline-block; width: 300rpx; height: 300rpx;' canvas-id='qr-canvas'/>
+    <view class='l-margin-t-s l-text-gray'>请扫二维码支付运费</view>
+    <view class='l-fs-17 l-text-error'>￥{{info.amount}}</view>
+  </view>
+
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>运输类型</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{consignmentType[info.consignmentType]}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>起点</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input l-fs-s'>{{info.startingPointAddress}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>终点</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input l-fs-s'>{{info.destinationAddress}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>距离</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.mileage || ''}} km</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>车辆数量</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.number || ''}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>运费/辆</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.unitPrice || ''}} 元</view>
+      </view>
+    </view>
+  </view>
+</view>

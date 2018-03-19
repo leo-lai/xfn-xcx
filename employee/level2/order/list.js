@@ -32,7 +32,7 @@ Page({
       this.setData({ 
         userInfo,
         'isAdmin': userInfo.roleName == '仓管主管',
-        'showEdit': userInfo.roleName != '仓管主管' && userInfo.orgLevel == 2 
+        'showEdit': userInfo.roleName != '仓管主管' && userInfo.orgLevel == 2
       })
       this.getList()
     }, this.route)

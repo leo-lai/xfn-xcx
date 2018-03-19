@@ -151,7 +151,7 @@ Page({
         msg = '装车成功'
         break
     }
-
+    
     wx.showLoading({ mask: true })
     app.post(app.config.wuliuState, {
       distributionId, state

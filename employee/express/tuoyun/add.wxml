@@ -67,7 +67,7 @@
           </view>
         </view>
       </view>
-      <view class='weui-cell weui-cell_select'>
+      <!-- <view class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>预约装车时间 <text class='l-text-error'>*</text></view>
         </view>
@@ -79,7 +79,18 @@
             </view>
           </picker>
         </view>
-      </view>
+      </view> -->
+      <navigator class='weui-cell weui-cell_select' url='/pages/datetime/index?date={{formData.appointmentTime}}'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>预约装车时间 <text class='l-text-error'>*</text></view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text wx:if='{{formData.appointmentTime}}'>{{formData.appointmentTime}}</text>
+            <text wx:else class='l-text-gray'>请选择</text>
+          </view>
+        </view>
+      </navigator>
     </view>
   </view>
 

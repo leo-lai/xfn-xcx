@@ -118,7 +118,14 @@ Page({
       }
     })
   },
-
+  // 选择时间
+  onDatetime: function (datetime) {
+    if (datetime) {
+      this.setData({
+        'formData.appointmentTime': `${datetime[0]}-${datetime[1]}-${datetime[2]} ${datetime[3]}:${datetime[4]}`
+      })
+    }
+  },
   // 添加托运车辆
   addCarCb: function (info) {
     console.log(info)
@@ -197,9 +204,6 @@ Page({
       number: carList.length
     }, this.data.formData)
 
-    if(formData.appointmentTime) {
-      formData.appointmentTime += ' 08:00'
-    }
 
     wx.showLoading({ mask: true })
     app.post(app.config.exp.tuoyunCount, formData).then(({ data }) => {

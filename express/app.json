@@ -3,15 +3,15 @@
     "express/wuliu/list",
     "express/wuliu/info",
     "express/wuliu/map",
-    "express/tuoyun/info",
-    "pages/mine/index",
-    "pages/mine/pwd",
-    "pages/login/index",
     "express/wuliu/load-car",
     "express/wuliu/unload-car",
     "express/wuliu/car-color",
     "express/wuliu/sign-car",
-    "express/wuliu/money"
+    "express/wuliu/money",
+    "express/tuoyun/info",
+    "pages/mine/index",
+    "pages/mine/pwd",
+    "pages/login/index"
   ],
   "window": {
     "backgroundColor": "#eee",
