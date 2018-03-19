@@ -201,6 +201,26 @@ Page({
       })
     }
   },
+  // 取消
+  cancel: function (event) {
+    wx.showModal({
+      content: '是否确定取消该订购单？',
+      success: res => {
+        if (res.confirm) {
+          wx.showLoading({ mask: true })
+          app.post(app.config.lv2.orderCancel, {
+            id: event.currentTarget.id
+          }).then(_ => {
+            app.toast('取消成功').then(_ => {
+              this.getList()
+            })
+          }).finally(_ => {
+            wx.hideLoading()
+          })
+        }
+      }
+    })
+  },
 
   // 搜索相关=================================================
   // 正在输入

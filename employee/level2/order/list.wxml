@@ -13,10 +13,13 @@
 
   <!-- 订购单列表 -->
   <view class='l-order-list-item' wx:for='{{list.data}}' wx:key='{{orderCode}}'>
-    <view class='_hd'>
-      <text class='l-fr l-text-theme'>{{item.orderStateName}}</text>
-      <text>订单号 {{item.orderCode}}</text>
-    </view>
+    <navigator class='_hd l-flex-hc' url='info?id={{item.id}}' hover-class='none'>
+      <text class='l-margin-r-s'>订单号</text>
+      <view class='l-btn-link l-rest'>{{item.orderCode}}</view>
+      <text class='l-text-theme'>{{item.orderStateName}}</text>
+      <view><text class='l-icon-6a8'></text></view>
+    </navigator>
+
     <view class='_bd' wx:if='{{item.infos.length > 0}}'>
       <view class='_car' wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
         <view>{{carItem.carsName}}</view>
@@ -47,12 +50,15 @@
         <button size='mini' class='l-button-border'>电子合同</button>
       </navigator>
 
-      <navigator url='info?id={{item.id}}' hover-class='none'>
+      <!-- <navigator url='info?id={{item.id}}' hover-class='none'>
         <button size='mini' class='l-button-border'>查看详情</button>
-      </navigator>
+      </navigator> -->
 
       <!-- 非主管二级 -->
       <block wx:if='{{showEdit}}'>
+        <!-- 取消订单 -->
+        <button id='{{item.id}}' bindtap='cancel' wx:if='{{item.state < 10}}' size='mini' class='l-button-border'>取消</button>
+        
         <!-- 新建购车单 -->
         <navigator wx:if='{{item.state < 10}}' url='add-order?id={{item.id}}' hover-class='none'>
           <button size='mini' class='l-button-main'>新增订购信息</button>

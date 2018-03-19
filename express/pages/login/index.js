@@ -7,7 +7,7 @@ Page({
    */
   data: {
     images: {
-      banner: app.config.resURL + '/20180308001.jpg'
+      banner: app.config.resURL + '/20180319001.jpg'
     },
     topTips: '',
     formData: {

@@ -212,6 +212,8 @@ var config = {
     contract: `${baseUrl}/consumerOrder/getContractInfo`,
     // 协商价格
     changeCarPrice: `${baseUrl}/consumerOrderInfo/changePrice`,
+    // 取消订单
+    orderCancel: `${baseUrl}/consumerOrder/cancel`,
   },
   // 采购员列表
   buyerList: `${baseUrl}/orgOneSelfList`,
