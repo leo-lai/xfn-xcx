@@ -29,7 +29,7 @@
       <image mode='widthFix' src='/images/express-icon.jpg'></image>
       <view class="_txt">物流管理</view>
     </navigator>
-    <navigator class='_item' url='/express/setting/menu'>
+    <navigator wx:if='{{userInfo.roleName === "仓管主管"}}' class='_item' url='/express/setting/menu'>
       <image mode='widthFix' src='/images/wait-for-fix-icon.jpg'></image>
       <view class="_txt">运营管理</view>
     </navigator>  

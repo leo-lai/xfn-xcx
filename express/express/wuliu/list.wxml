@@ -86,6 +86,10 @@
       </view>
     </view>
     <view class='l-text-center l-margin-t'>
+      <navigator class='l-inline l-margin-lr-s' url='info?id={{item.distributionId}}' hover-class='none'>
+        <button size='mini' class='l-button-border'>查看详情</button>
+      </navigator>
+      
       <view wx:if='{{item.distributionState == 1}}' bindtap='jiedan' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
         <button size='mini' class='l-button-main'>接单</button>
       </view>
@@ -115,9 +119,7 @@
         </block>
         <!-- 普通运输 end-->
       </view>
-      <navigator class='l-inline l-margin-lr-s' url='info?id={{item.distributionId}}' hover-class='none'>
-        <button size='mini' class='l-button-border'>查看详情</button>
-      </navigator>
+      
     </view>
   </view>
   <template is='loadmore' data='{{...list}}' />

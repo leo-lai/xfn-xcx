@@ -87,50 +87,55 @@
       </view>
       <view class='l-margin-t-m {{index < item.infos.length - 1? "l-border-b l-padding-b" : ""}}' wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
         <view>{{carItem.carsName}}</view>
-        <view class='l-fs-s'>
-          <view class='l-text-gray'>
-            <text class='l-margin-r'>车身颜色：{{carItem.colorName}}</text>
-            <text class='l-margin-r'>指导价：{{carItem.guidePrice}}元</text>
-          </view>
-
-          <view class='l-margin-t-s'>购买数量：{{carItem.carNum}}</view>
-          <view class='l-margin-r'>裸车价：{{carItem.nakedPrice}}元</view>
-          <view class='l-margin-r'>交强险：{{carItem.trafficCompulsoryInsurancePrice || 0}}元</view>
-          <view class='l-margin-r'>商业险：{{carItem.commercialInsurancePrice || 0}}元</view>
-          <view class='l-margin-r'>应付定金：{{carItem.depositPrice}}元</view>
-          <view>{{carItem.changePrice > 0 ? '加价金额' : '优惠金额'}}：{{carItem.changePrice2}}元</view>
-          <view wx:if='{{carItem.remark}}' class='l-margin-t-s l-text-gray'>备注：{{carItem.remark}}</view>
+        <view class='l-text-gray l-fs-s'>
+          <text class='l-margin-r'>车身颜色：{{carItem.colorName}}</text>
+          <text class='l-margin-r'>指导价：{{carItem.guidePrice}}元</text>
         </view>
 
-        <view class='l-fr' style='margin-top: -50rpx;'>
-          <block wx:if='{{showEdit}}'>
-            <view class='l-inline' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>
-              <button wx:if='{{info.state == 10}}' class='l-button-main' size='mini'>去配车</button>
-              <button wx:if='{{info.state == 15}}' class='l-button-main' size='mini'>去验车</button>
-            </view>
-            <view class='l-inline' wx:if='{{info.state < 10}}'>
-              <button class='l-button-border' size='mini' data-ids='{{[info.id, item.id, carItem.id]}}' bindtap='carDel'>删除</button>
-              <button class='l-button-border' size='mini' style='margin-left: 20rpx;' data-url='car?ids={{info.id}},{{item.id}}' data-item='{{carItem}}' bindtap='carEdit'>编辑</button>
-            </view>
-          </block>
+        <view class='l-margin-t-s l-fs-s'>
+          <view>
+            <text class='l-dmr'>裸车价：{{carItem.nakedPrice}}元</text>
+            <text>购买数量：{{carItem.carNum}}</text>
+          </view>
+          <view>
+            <text class='l-dmr'>交强险：{{carItem.trafficCompulsoryInsurancePrice || 0}}元</text>
+            <text>商业险：{{carItem.commercialInsurancePrice || 0}}元</text>
+          </view>
+          <view>
+            <text class='l-dmr'>应付定金：{{carItem.depositPrice}}元</text>
+            <text>{{carItem.changePrice > 0 ? '加价金额' : '优惠金额'}}：{{carItem.changePrice2}}元</text>
+          </view>
+        </view>
 
-          <button wx:if='{{isAdmin && carItem.auditNum > 0}}' size='mini' class='l-button-main' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>去审核</button>
-
-          <button wx:if='{{info.state >= 10}}' class='l-button-border' size='mini' style='margin-left: 20rpx;' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>查看详情</button>
-
+        <view class='l-margin-t-s l-text-gray l-fs-s' wx:if='{{carItem.remark}}'>
+          备注：{{carItem.remark}}
         </view>
 
         <!-- 车架号列表 -->
-        <view class='l-fs-s l-margin-t' wx:if='{{carItem.cars && carItem.cars.length > 0}}'>
+        <view class='l-margin-t-s l-fs-s' wx:if='{{carItem.cars && carItem.cars.length > 0}}'>
           <view wx:for='{{carItem.cars}}' wx:for-item='frame' wx:key='id'>
             <view class='l-flec-hc'>
               <text class='l-btn-link l-fr' wx:if='{{frame.isTicket}}' data-item='{{frame}}' bindtap='showTicket'>查看票证</text>
-              <text style='display:inline-block; min-width: 40%; margin-right: 20rpx;'>车架号：{{frame.vin}}</text>
+              <text class='l-dmr'>车架号：{{frame.vin}}</text>
               <text>内饰颜色：{{frame.interiorName}}</text>
             </view>
           </view>
         </view>
 
+        <view class='l-text-center l-margin-t'>
+          <block wx:if='{{showEdit}}'>
+            <view class='l-inline' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>
+              <button wx:if='{{info.state == 10}}' class='l-button-main l-margin-lr-s' size='mini'>去配车</button>
+              <button wx:if='{{info.state == 15}}' class='l-button-main l-margin-lr-s' size='mini'>去验车</button>
+            </view>
+            <button wx:if='{{info.state < 10}}' class='l-button-border l-margin-lr-s' size='mini' data-ids='{{[info.id, item.id, carItem.id]}}' bindtap='carDel'>删除</button>
+            <button wx:if='{{info.state < 30}}' class='l-button-border l-margin-lr-s' size='mini' data-url='car?ids={{info.id}},{{item.id}}' data-item='{{carItem}}' bindtap='carEdit'>编辑</button>
+          </block>
+
+          <button wx:if='{{isAdmin && carItem.auditNum > 0}}' class='l-button-main l-margin-lr-s' size='mini' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>去审核</button>
+
+          <button wx:if='{{info.state >= 10}}' class='l-button-border l-margin-lr-s' size='mini' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>查看详情</button>
+        </view>
       </view>
     </view>
   </view>

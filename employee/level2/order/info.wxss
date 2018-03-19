@@ -11,3 +11,4 @@
 .l-list-tab-tit ._add{display: inline-block; background-color: #d9d9d9; color: #fff; padding: 5rpx 30rpx;}
 .l-list-tab-cont{background-color: #fff; border-radius: 0 0 10rpx 10rpx; display: none;}
 .l-list-tab-cont._slted{display: block;}
+.l-dmr{display:inline-block; min-width: 40%; margin-right: 20rpx;}

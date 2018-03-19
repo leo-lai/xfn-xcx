@@ -63,6 +63,10 @@
       </view>
     </view>
     <view class='l-text-center l-margin-t'>
+      <navigator class='l-inline l-margin-lr-s' url='info?id={{item.distributionId}}' hover-class='none'>
+        <button size='mini' class='l-button-border'>查看详情</button>
+      </navigator>
+
       <block wx:if='{{item.distributionState == 0}}'>
         <navigator class='l-inline l-margin-lr-s' url='/express/tuoyun/list?mode=slt&id={{item.distributionId}}&cars={{item.cars}}' hover-class='none'>
           <button size='mini' class='l-button-main'>添加托运车辆</button>
@@ -79,9 +83,6 @@
         </block>
         <!-- 专线运输 end-->
       </view>
-      <navigator class='l-inline l-margin-lr-s' url='info?id={{item.distributionId}}' hover-class='none'>
-        <button size='mini' class='l-button-border'>查看详情</button>
-      </navigator>
     </view>
   </view>
   <template is='loadmore' data='{{...list}}' />
