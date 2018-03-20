@@ -21,7 +21,7 @@
       订单号：{{item.customerOrderCode}}
       <text class='l-icon-6a8 l-fr'></text>
     </view>
-    <view class='l-padding-tb-m l-rel'>
+    <view class='l-padding-tb-m'>
       <view class='l-fr l-text-warn'>{{overline[item.overTheLine]}}</view>
       <view class='l-h4'>{{item.carsNameBefor}}</view>
       <view>{{item.carsNameAfter}}</view>

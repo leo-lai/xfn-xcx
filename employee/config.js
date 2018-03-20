@@ -231,6 +231,10 @@ var config = {
   stockInAddCar: `${baseUrl}/storageCarEdit`,
   // 入库单删除车辆
   stockInDelCar: `${baseUrl}/storageCarDelete`,
+  // 入库单删除
+  stockInDel: `${baseUrl}/storageDelete`,
+  // 全部已入库
+  stockInSure: `${baseUrl}/storageOverSure`,
 
   // 物流接口
   exp: {

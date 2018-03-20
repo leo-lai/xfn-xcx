@@ -82,6 +82,47 @@ Page({
           })
   },
 
+  // 删除入库单
+  del: function (event) {
+    wx.showModal({
+      content: '是否确定删除该入库单？',
+      success: res => {
+        if (res.confirm) {
+          wx.showLoading({ mask: true })
+          app.post(app.config.stockInDel, {
+            storageId: event.currentTarget.id
+          }).then(_ => {
+            app.toast('删除成功').then(_ => {
+              this.getList()
+            })
+          }).finally(_ => {
+            wx.hideLoading()
+          })
+        }
+      }
+    })
+  },
+  // 确认全部已入库
+  sure: function (event) {
+    wx.showModal({
+      title: '确定全部车辆入库提示',
+      content: '请仔细检查入库车辆信息是否正确，确定后将不可再更改，是否确定？',
+      success: res => {
+        if (res.confirm) {
+          wx.showLoading({ mask: true })
+          app.post(app.config.stockInSure, {
+            storageId: event.currentTarget.id
+          }).then(_ => {
+            app.toast('全部入库成功').then(_ => {
+              this.getList()
+            })
+          }).finally(_ => {
+            wx.hideLoading()
+          })
+        }
+      }
+    })
+  },
 
   // 搜索相关=================================================
   // 正在输入

@@ -381,12 +381,15 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.stockInAddCar, formData).then(({ data }) => {
+      app.toast('保存成功')
       app.getPrevPage().then(prevPage => {
-        if (formData.stockCarId) {
+        if (prevPage.route == 'level2/stock/in/info') {
           prevPage.getInfo()
-          app.toast('保存成功', true)
+          app.back()
+        } else if (prevPage.route == 'level2/stock/in/list') {
+          prevPage.getList()
+          app.back()
         }else{
-          wx.hideLoading()
           this.setData({
             'formData.frameNumber': '',
             'formData.engineNumber': '',

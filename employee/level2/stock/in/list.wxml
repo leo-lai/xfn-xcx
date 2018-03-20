@@ -12,19 +12,25 @@
     </view>
   </view>
 
-  <navigator url='info?id={{item.storageId}}' class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list.data}}' wx:key='storageId'>
-    <view class='l-padding-b l-border-b'>
-      <text class='l-fs-s'>入库单号：{{item.storageCode}}</text>
-    </view>
-    <view class='l-padding-tb l-rel'>
-      <view style='position:absolute; top: 30rpx; right:0; color:#999;'>{{item.carsNumber}}辆</view>
+  <view class='l-margin-m l-bg-white l-padding-lr l-radius' wx:for='{{list.data}}' wx:key='storageId'>
+    <navigator class='l-padding-tb-m l-border-b' url='info?id={{item.storageId}}' hover-class='none'>
+      入库单号：
+      <text class='l-btn-link'>{{item.storageCode}}</text>
+      <text class='l-icon-6a8 l-fr'></text>
+    </navigator>
+    <view class='l-padding-tb-m'>
+      <view class='l-fr'>{{item.carsNumber}}辆</view>
       <view>入库时间：{{item.createDate}}</view>
-      <view class='l-text-gray'>采购人员：{{item.systemUserName}}</view>
+      <view>采购人员：{{item.systemUserName}}</view>
     </view>
-    <view catchtap='noopFn'>
-      <navigator url='car?id={{item.storageId}}' style='margin-bottom: -30rpx;' class='l-padding-tb l-border-t l-text-center l-text-theme' hover-class='none'>添加入库车辆</navigator>
+    <view class='l-border-t l-padding-tb l-text-center' catchtap='noopFn'>
+      <button class='l-button-border l-margin-lr-s' size='mini' id='{{item.storageId}}' bindtap='del'>删除入库单</button>
+      <navigator class='l-inline' url='car?id={{item.storageId}}' hover-class='none'>
+        <button class='l-button-border l-margin-lr-s' size='mini'>添加车辆</button>
+      </navigator>
+      <button class='l-button-main l-margin-lr-s' size='mini' id='{{item.storageId}}' bindtap='sure'>全部已入库</button>
     </view>
-  </navigator>
+  </view>
   <template is='loadmore' data='{{...list}}' />
 
   <view style='height: 120rpx;'></view>
