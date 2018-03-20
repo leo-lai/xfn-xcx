@@ -1,4 +1,4 @@
-// level2/stock/in/add.js
+// level2/order/refund.js
 const app = getApp()
 Page({
 
@@ -7,32 +7,23 @@ Page({
    */
   data: {
     topTips: '',
-    carSource: ['资源采购', '4S店出货'],
     uploadImages: [],
-    sales: { // 供应商
-      index: -1,
-      list: []
-    },
-    supplier: { // 采购人员
-      index: -1,
-      list: []
-    },
     formData: {
-      storageId: '',
-      storageSource: '',
-      supplierId: '',
-      systemUserId: '',
-      logisticsCost: '',
-      remarks: '',
-      contractImage: ''
+      id: '',
+      orderCode: '',
+      countermandReason: '',
+      countermandPic: ''
     }
   },
-  onReady: function (options) {
-    app.onLogin(userInfo => {
-      this.getSupplier()
-      this.getSales()
-    }, this.route)
+  onLoad: function (options) {
+    this.setData({
+      'formData.id': options.id,
+      'formData.orderCode': options.code
+    })
   },
+  /**
+   * 生命周期函数--监听页面显示
+   */
   onShow: function () {
     app.checkLogin()
   },
@@ -52,47 +43,11 @@ Page({
   bindInput: function (event) {
     let data = {}
     let id = event.target.id
-    let picker = event.target.dataset.picker
     let value = event.detail.value
-
-    if (picker) {
-      value = Number(value)
-      data[picker + '.index'] = value
-      switch (id) {
-        case 'supplierId':
-          value = this.data[picker].list[value].id
-          break
-        case 'systemUserId':
-          value = this.data[picker].list[value][id]
-          break
-        default:
-          value = this.data[picker].list[value]
-          if (app.utils.isObject(value)) {
-            value = value.name
-          }
-          break
-      }
-    }
 
     console.log(id, value)
     data['formData.' + id] = value
     this.setData(data)
-  },
-  getSupplier: function () { // 获取供应商列表
-    app.post(app.config.supplierList).then(({ data }) => {
-      this.setData({
-        'supplier.index': -1,
-        'supplier.list': data
-      })
-    })
-  },
-  getSales: function () { // 获取采购员列表
-    app.post(app.config.buyerList).then(({ data }) => {
-      this.setData({
-        'sales.index': -1,
-        'sales.list': data
-      })
-    })
   },
   // 选择图片
   chooseImage: function (event) {
@@ -109,7 +64,7 @@ Page({
           item.progress = 0
           item.tick = Date.now()
 
-          
+
 
           // 上传图片到服务器
           item.uploadTask = wx.uploadFile({
@@ -193,30 +148,21 @@ Page({
     }
   },
   submit: function () {
-    if (!this.data.formData.storageSource) {
-      this.showTopTips('请选择车辆来源')
-      return
-    }
-    if (!this.data.formData.supplierId) {
-      this.showTopTips('请选择供应商')
-      return
-    }
-    if (!this.data.formData.systemUserId) {
-      this.showTopTips('请选择采购员')
+    if (!this.data.formData.countermandReason) {
+      this.showTopTips('请输入退款原因')
       return
     }
 
     let formData = Object.assign({}, this.data.formData)
-
-    formData.storageSource = Number(this.data.formData.storageSource) + 1
-    formData.contractImage = this.data.uploadImages.map(item => item.src).join(',')
+    formData.countermandPic = this.data.uploadImages.map(item => item.src).join(',')
 
     wx.showLoading({ mask: true })
-    app.post(app.config.stockInAdd, formData).then(({ data }) => {
-      app.getPrevPage().then(prevPage => {
-        prevPage.getList()
+    app.post(app.config.lv2.refund, formData).then(({ data }) => {
+      app.toast('提交成功', true).then(_ => {
+        app.getPrevPage().then(prevPage => {
+          prevPage.getList()
+        })
       })
-      app.toast('提交成功', true)
     }).catch(err => {
       wx.hideLoading()
     })

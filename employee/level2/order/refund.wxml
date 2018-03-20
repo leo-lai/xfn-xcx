@@ -1,0 +1,52 @@
+<!--level2/order/refund.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>订单号</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{formData.orderCode}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__bd' style='padding: 15rpx 0;'>
+        <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入退款原因' id='countermandReason' value='{{formData.countermandReason}}' bindinput='bindInput'></textarea>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text class='l-fs-s l-text-gray'>合同照片</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files'>
+              <block wx:for='{{uploadImages}}' wx:key='tick'>
+                <view class='weui-uploader__file {{ (item.loading || item.error) ? "weui-uploader__file_status" : "" }}' bindtap='previewImage' id='{{item.path}}'>
+                  <image class='weui-uploader__img' src='{{item.path}}' mode='aspectFill' data-val='{{item.tick}}' bindlongpress='longDelImage'/>
+                  <view wx:if='{{item.loading}}' class='weui-uploader__file-content'>{{item.progress}}%</view>
+                  <view wx:if='{{item.error}}' class='weui-uploader__file-content'>
+                    <icon type='warn' size='23' color='#F43530'></icon>
+                  </view>
+                </view>
+              </block>
+            </view>
+            <view class='weui-uploader__input-box'>
+              <view class='weui-uploader__input' bindtap='chooseImage'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>提交</button>
+  </view>
+</view>

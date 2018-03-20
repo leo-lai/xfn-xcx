@@ -214,6 +214,8 @@ var config = {
     changeCarPrice: `${baseUrl}/consumerOrderInfo/changePrice`,
     // 取消订单
     orderCancel: `${baseUrl}/consumerOrder/cancel`,
+    // 退款
+    refund: `${baseUrl}/consumerOrder/countermand`,
   },
   // 采购员列表
   buyerList: `${baseUrl}/orgOneSelfList`,
