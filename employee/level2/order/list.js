@@ -92,6 +92,7 @@ Page({
       }
 
       data.list.forEach(item => {
+        item.showEdit = this.data.showEdit && !item.countermandApply && item.state != 37
         item.infos.forEach(cars => {
           cars.changePrice2 = Math.abs(cars.changePrice)
           cars.auditNum = 0 // 待审核车辆
@@ -121,7 +122,7 @@ Page({
 
     carItem.orderState = item.state
     app.storage.setItem('lv2-order-car-info', carItem)
-    app.navigateTo('car-match?edit=' + (item.countermandApply ? 0 : 1))
+    app.navigateTo('car-match?edit=' + (item.showEdit ? 1 : 0))
   },
   // 配车/验车完成
   carMatchOk: function (event) {

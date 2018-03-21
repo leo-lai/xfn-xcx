@@ -3,7 +3,7 @@
   <view class='l-padding l-bg-white'>
     <view class='l-flex-hc'>
       <text class='l-h4 l-margin-r-m'>{{info.orgName}}</text>
-      <button wx:if='{{showEdit}}' class='l-btn-min1' size='mini' bindtap='eidtInfo'>编辑</button>
+      <button wx:if='{{info.showEdit}}' class='l-btn-min1' size='mini' bindtap='eidtInfo'>编辑</button>
       <view class='l-rest'></view>
       <view class='l-text-theme'>{{info.orderStateName}}</view>
     </view>
@@ -42,7 +42,7 @@
           </view>
         </view>
       </view>
-      <view class='l-margin-l l-padding-t' wx:if='{{showEdit && info.state < 10}}'>
+      <view class='l-margin-l l-padding-t' wx:if='{{info.showEdit && info.state < 10}}'>
         <navigator url='add-order?id={{info.id}}' class='_add'>新增</navigator>
       </view>
     </view> 
@@ -51,7 +51,7 @@
       <view class='l-flex-hc'>
         <text class='l-h4'>客户信息</text>
         <view class='l-rest'></view>
-        <block wx:if='{{showEdit}}'>
+        <block wx:if='{{info.showEdit}}'>
           <button wx:if='{{info.state < 10}}' class='l-btn-min1' size='mini' data-index='{{index}}' bindtap='customerDel'>删除</button>
           <button class='l-btn-min2 l-margin-l-s' size='mini' data-index='{{index}}' bindtap='customerEdit'>编辑</button>
         </block>
@@ -81,7 +81,7 @@
       <view class='l-flex-hc l-border-t l-margin-t l-padding-t'>
         <text class='l-h4'>车辆信息</text>
         <view class='l-rest'></view>
-        <navigator wx:if='{{showEdit && info.state < 10}}' url='car?ids={{info.id}},{{item.id}}' hover-class='none'>
+        <navigator wx:if='{{info.showEdit && info.state < 10}}' url='car?ids={{info.id}},{{item.id}}' hover-class='none'>
           <button class='l-btn-min1' size='mini'>添加车辆</button>
         </navigator>
       </view>
@@ -123,7 +123,7 @@
         </view>
 
         <view class='l-text-center l-margin-t'>
-          <block wx:if='{{showEdit}}'>
+          <block wx:if='{{info.showEdit}}'>
             <view class='l-inline' data-item='{{carItem}}' bindtap='carMatch'>
               <button wx:if='{{info.state == 10}}' class='l-button-main l-margin-lr-s' size='mini'>去配车</button>
               <button wx:if='{{info.state == 15}}' class='l-button-main l-margin-lr-s' size='mini'>去验车</button>
@@ -159,7 +159,7 @@
         </view>
       </view>
       <view class='l-margin-l l-padding-t'>
-        <navigator wx:if='{{showEdit}}' url='men?ids={{info.id}}&type=2' class='_add'>新增</navigator>
+        <navigator wx:if='{{info.showEdit}}' url='men?ids={{info.id}}&type=2' class='_add'>新增</navigator>
       </view>
     </view> 
     <view class='l-list-tab-cont l-padding {{item.checked ? "_slted" : ""}}' wx:for='{{info.pickers}}' wx:key='id'>
@@ -185,7 +185,7 @@
       </view>
     </view>
   </view>
-  <navigator wx:if='{{showEdit && info.pickers.length === 0}}' url='men?ids={{info.id}}&type=2' class='l-btn-w60 l-margin-tb' hover-class='none'>
+  <navigator wx:if='{{info.showEdit && info.pickers.length === 0}}' url='men?ids={{info.id}}&type=2' class='l-btn-w60 l-margin-tb' hover-class='none'>
     <button class='l-button-main'>新增提车人</button>
   </navigator>
   <!-- 提车人 end-->

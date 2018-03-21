@@ -23,12 +23,12 @@
       <view>入库时间：{{item.createDate}}</view>
       <view>采购人员：{{item.systemUserName}}</view>
     </view>
-    <view class='l-border-t l-padding-tb l-text-center' catchtap='noopFn'>
+    <view wx:if='{{item.overSure != 1}}' class='l-border-t l-padding-tb l-text-center' catchtap='noopFn'>
       <button class='l-button-border l-margin-lr-s' size='mini' id='{{item.storageId}}' bindtap='del'>删除入库单</button>
       <navigator class='l-inline' url='car?id={{item.storageId}}' hover-class='none'>
         <button class='l-button-border l-margin-lr-s' size='mini'>添加车辆</button>
       </navigator>
-      <button wx:if='{{item.overSure != 1}}' class='l-button-main l-margin-lr-s' size='mini' id='{{item.storageId}}' bindtap='sure'>全部已入库</button>
+      <button class='l-button-main l-margin-lr-s' size='mini' id='{{item.storageId}}' bindtap='sure'>全部已入库</button>
     </view>
   </view>
   <template is='loadmore' data='{{...list}}' />

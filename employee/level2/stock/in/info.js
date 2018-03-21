@@ -56,8 +56,9 @@ Page({
   // 查看车辆明细
   viewCar: function (event) {
     let item = event.currentTarget.dataset.item
+    let edit = this.data.info.overSure != 1 ? 1 : 0
     app.storage.setItem('stock-in-info-car', item)
-    app.navigateTo('car?id=' + this.data.info.storageId)
+    app.navigateTo(`car?id=${this.data.info.storageId}&edit=${edit}`)
   },
   previewImage: function (event) {
     wx.previewImage({

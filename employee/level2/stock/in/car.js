@@ -60,6 +60,7 @@ Page({
           formData.certificateDate = formData.certificateDate ? formData.certificateDate - 1 : ''
           this.setData({ 
             formData,
+            'showEdit': this.options.edit !== '0',
             'uploadImages': info.stockCarImages ? info.stockCarImages.split(',').map(item => {
               return {
                 path: item,

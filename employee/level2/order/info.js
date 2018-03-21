@@ -65,6 +65,8 @@ Page({
       data.pay1Image = pay1Image
       data.pay2Image = pay2Image
 
+      data.showEdit = this.data.userInfo.roleName != '仓管主管' && this.data.userInfo.orgLevel == 2 && !data.countermandApply && data.state != 37
+
       this.setData({ info: data })
 
       if (data.pickers.length > 0) {
@@ -75,9 +77,7 @@ Page({
         this.tabCustomer(data.customers[0].id)
       }
 
-      this.setData({
-        'showEdit': this.data.userInfo.roleName != '仓管主管' && this.data.userInfo.orgLevel == 2 && !data.countermandApply
-      })
+      
       
     }).finally(_ => {
       wx.hideLoading()
@@ -229,8 +229,7 @@ Page({
     let item = this.data.info
     carItem.orderState = item.state
     app.storage.setItem('lv2-order-car-info', carItem)
-    console.log(item)
-    app.navigateTo('car-match?edit=' + (item.countermandApply ? 0 : 1))
+    app.navigateTo('car-match?edit=' + (item.showEdit ? 1 : 0))
   },
   // 编辑物流信息
   editWuliu: function () {

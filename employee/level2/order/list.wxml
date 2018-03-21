@@ -55,7 +55,7 @@
       </navigator> -->
 
       <!-- 非主管二级 -->
-      <block wx:if='{{showEdit && !item.countermandApply}}'>
+      <block wx:if='{{item.showEdit}}'>
         <!-- 取消订单 -->
         <button id='{{item.id}}' bindtap='cancel' wx:if='{{item.state < 10}}' size='mini' class='l-button-border'>取消</button>
         

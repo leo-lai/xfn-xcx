@@ -1,6 +1,6 @@
 <!--pages/car-stock-in-info/car.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
-<view class='l-page-full'>
+<view class='l-page-full {{showEdit ? "" : "l-page-disabled"}}'>
   <view class='l-margin l-radius'>
     <view class='weui-cells weui-cells_after-title'>
       <view class='weui-cell weui-cell_select'>
@@ -180,15 +180,17 @@
     </view>
   </view>
 
-  <view style='height: 120rpx;'></view>
-  <view class='l-fixed-bottom l-padding l-flex-hvc'>
-    <view class='l-btn-w60 l-margin-lr-s' wx:if='{{formData.stockCarId}}'>
-      <button class='l-button-border' bindtap='delCar'>删除</button>
+  <block wx:if='{{showEdit}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom l-padding l-flex-hvc'>
+      <view class='l-btn-w60 l-margin-lr-s' wx:if='{{formData.stockCarId}}'>
+        <button class='l-button-border' bindtap='delCar'>删除</button>
+      </view>
+      <view class='l-btn-w60 l-margin-lr-s'>
+        <button class='l-button-main' bindtap='submit'>保存</button>
+      </view>
     </view>
-    <view class='l-btn-w60 l-margin-lr-s'>
-      <button class='l-button-main' bindtap='submit'>保存</button>
-    </view>
-  </view>
+  </block>
 
   <!-- 保存成功提示 -->
   <view catchtouchmove='noopFn' class='l-popup-center l-flex-vhc' wx:if='{{result.visible}}'>

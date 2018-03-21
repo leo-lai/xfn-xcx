@@ -55,7 +55,7 @@
     <view class='l-padding-btn l-flex-hc'>
       <text class='l-fs-s l-text-gray'>入库车辆</text>
       <view class='l-rest'></view>
-      <navigator class='l-inline' url='car?id={{info.storageId}}' hover-class='none'>
+      <navigator wx:if='{{info.overSure != 1}}' class='l-inline' url='car?id={{info.storageId}}' hover-class='none'>
         <button class='l-btn-min2' size='mini'>添加车辆</button>
       </navigator>
     </view>
@@ -78,13 +78,15 @@
     </view>
   </view>
 
-  <view style='height: 120rpx;'></view>
-  <view class='l-fixed-bottom l-padding l-flex-hvc'>
-    <view class='l-btn-w60 l-margin-lr-s'>
-      <button class='l-button-border' bindtap='del' id='{{info.storageId}}'>删除入库单</button>
+  <block wx:if='{{info.overSure != 1}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom l-padding l-flex-hvc'>
+      <view class='l-btn-w60 l-margin-lr-s'>
+        <button class='l-button-border' bindtap='del' id='{{info.storageId}}'>删除入库单</button>
+      </view>
+      <view class='l-btn-w60 l-margin-lr-s' wx:if='{{carList.length > 0}}'>
+        <button class='l-button-main' bindtap='sure' id='{{info.storageId}}'>全部已入库</button>
+      </view>
     </view>
-    <view class='l-btn-w60 l-margin-lr-s' wx:if='{{info.overSure != 1 && carList.length > 0}}'>
-      <button class='l-button-main' bindtap='sure' id='{{info.storageId}}'>全部已入库</button>
-    </view>
-  </view>
+  </block>
 </view>

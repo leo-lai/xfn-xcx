@@ -36,7 +36,7 @@ Page({
       this.setData({
         userInfo,
         'isAdmin': userInfo.roleName == '仓管主管',
-        'showEdit': this.options.edit !== '0' && userInfo.roleName != '仓管主管' && userInfo.orgLevel == 2
+        'showEdit': this.options.edit !== '0'
       })
 
       app.storage.getItem('lv2-order-car-info').then(info => {
