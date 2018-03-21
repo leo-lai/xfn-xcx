@@ -28,7 +28,7 @@
       <navigator class='l-inline' url='car?id={{item.storageId}}' hover-class='none'>
         <button class='l-button-border l-margin-lr-s' size='mini'>添加车辆</button>
       </navigator>
-      <button class='l-button-main l-margin-lr-s' size='mini' id='{{item.storageId}}' bindtap='sure'>全部已入库</button>
+      <button wx:if='{{item.overSure != 1}}' class='l-button-main l-margin-lr-s' size='mini' id='{{item.storageId}}' bindtap='sure'>全部已入库</button>
     </view>
   </view>
   <template is='loadmore' data='{{...list}}' />

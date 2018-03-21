@@ -83,7 +83,7 @@
     <view class='l-btn-w60 l-margin-lr-s'>
       <button class='l-button-border' bindtap='del' id='{{info.storageId}}'>删除入库单</button>
     </view>
-    <view class='l-btn-w60 l-margin-lr-s' wx:if='{{carList.length > 0}}'>
+    <view class='l-btn-w60 l-margin-lr-s' wx:if='{{info.overSure != 1 && carList.length > 0}}'>
       <button class='l-button-main' bindtap='sure' id='{{info.storageId}}'>全部已入库</button>
     </view>
   </view>
