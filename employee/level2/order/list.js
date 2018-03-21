@@ -115,11 +115,13 @@ Page({
   },
   // 配车/验车
   carMatch: function (event) {
-    let item = event.currentTarget.dataset.item
-    let state = event.currentTarget.dataset.state
-    item.orderState = state
-    app.storage.setItem('lv2-order-car-info', item)
-    app.navigateTo('car-match')
+    let carItem = event.currentTarget.dataset.item
+    let index = event.currentTarget.dataset.index
+    let item = this.data.list.data[index]
+
+    carItem.orderState = item.state
+    app.storage.setItem('lv2-order-car-info', carItem)
+    app.navigateTo('car-match?edit=' + (item.countermandApply ? 0 : 1))
   },
   // 配车/验车完成
   carMatchOk: function (event) {

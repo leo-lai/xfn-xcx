@@ -19,7 +19,7 @@
 
   <view class='l-margin l-radius l-bg-white'>
     <view class='l-padding-btn l-border-b'>
-      <text class='l-fs-s l-text-gray'>合同照片</text>
+      <text class='l-fs-s l-text-gray'>退款附件</text>
     </view>
     <view class='l-padding'>
       <view class='weui-cell__bd'>

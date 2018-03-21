@@ -17,8 +17,7 @@ Page({
     app.onLogin(userInfo => {
       this.setData({
         userInfo,
-        'isAdmin': userInfo.roleName == '仓管主管',
-        'showEdit': userInfo.roleName != '仓管主管' && userInfo.orgLevel == 2
+        'isAdmin': userInfo.roleName == '仓管主管'
       })
       this.getInfo()
     }, this.route)
@@ -75,6 +74,10 @@ Page({
       if (data.customers.length > 0) {
         this.tabCustomer(data.customers[0].id)
       }
+
+      this.setData({
+        'showEdit': this.data.userInfo.roleName != '仓管主管' && this.data.userInfo.orgLevel == 2 && !data.countermandApply
+      })
       
     }).finally(_ => {
       wx.hideLoading()
@@ -222,11 +225,12 @@ Page({
   },
   // 配车/验车
   carMatch: function (event) {
-    let item = event.currentTarget.dataset.item
-    let state = event.currentTarget.dataset.state
-    item.orderState = state
-    app.storage.setItem('lv2-order-car-info', item)
-    app.navigateTo('car-match')
+    let carItem = event.currentTarget.dataset.item
+    let item = this.data.info
+    carItem.orderState = item.state
+    app.storage.setItem('lv2-order-car-info', carItem)
+    console.log(item)
+    app.navigateTo('car-match?edit=' + (item.countermandApply ? 0 : 1))
   },
   // 编辑物流信息
   editWuliu: function () {

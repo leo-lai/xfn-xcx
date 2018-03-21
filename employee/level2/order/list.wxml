@@ -29,8 +29,8 @@
             <text>数量：{{carItem.carNum}}</text>
           </view>
 
-          <block wx:if='{{showEdit}}'>
-            <view data-item='{{carItem}}' data-state='{{item.state}}' bindtap='carMatch'>
+          <block wx:if='{{showEdit && !item.countermandApply}}'>
+            <view data-item='{{carItem}}' data-index='{{index}}' bindtap='carMatch'>
               <text wx:if='{{item.state == 10}}' class='l-btn-link'>去配车</text>
               <text wx:if='{{item.state == 15}}' class='l-btn-link'>去验车</text>
             </view>
@@ -38,7 +38,7 @@
 
           <!-- 主管审核换车申请 -->
           <block wx:if='{{isAdmin && carItem.auditNum > 0}}'>
-            <view data-item='{{carItem}}' data-state='{{item.state}}' bindtap='carMatch'>
+            <view data-item='{{carItem}}' data-index='{{index}}' bindtap='carMatch'>
               <text class='l-btn-link'>去审核</text>
             </view>
           </block>
@@ -55,7 +55,7 @@
       </navigator> -->
 
       <!-- 非主管二级 -->
-      <block wx:if='{{showEdit}}'>
+      <block wx:if='{{showEdit && !item.countermandApply}}'>
         <!-- 取消订单 -->
         <button id='{{item.id}}' bindtap='cancel' wx:if='{{item.state < 10}}' size='mini' class='l-button-border'>取消</button>
         

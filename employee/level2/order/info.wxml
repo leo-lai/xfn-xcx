@@ -124,7 +124,7 @@
 
         <view class='l-text-center l-margin-t'>
           <block wx:if='{{showEdit}}'>
-            <view class='l-inline' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>
+            <view class='l-inline' data-item='{{carItem}}' bindtap='carMatch'>
               <button wx:if='{{info.state == 10}}' class='l-button-main l-margin-lr-s' size='mini'>去配车</button>
               <button wx:if='{{info.state == 15}}' class='l-button-main l-margin-lr-s' size='mini'>去验车</button>
             </view>
@@ -132,9 +132,9 @@
             <button wx:if='{{info.state < 30}}' class='l-button-border l-margin-lr-s' size='mini' data-url='car?ids={{info.id}},{{item.id}}' data-item='{{carItem}}' bindtap='carEdit'>编辑</button>
           </block>
 
-          <button wx:if='{{isAdmin && carItem.auditNum > 0}}' class='l-button-main l-margin-lr-s' size='mini' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>去审核</button>
+          <button wx:if='{{isAdmin && carItem.auditNum > 0}}' class='l-button-main l-margin-lr-s' size='mini' data-item='{{carItem}}' bindtap='carMatch'>去审核</button>
 
-          <button wx:if='{{info.state >= 10}}' class='l-button-border l-margin-lr-s' size='mini' data-item='{{carItem}}' data-state='{{info.state}}' bindtap='carMatch'>查看详情</button>
+          <button wx:if='{{info.state >= 10}}' class='l-button-border l-margin-lr-s' size='mini' data-item='{{carItem}}' bindtap='carMatch'>查看详情</button>
         </view>
       </view>
     </view>
