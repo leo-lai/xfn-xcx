@@ -40,7 +40,7 @@ Page({
   },
   // 入库单详情
   getInfo: function () {
-    wx.showNavigationBarLoading()
+    wx.showLoading({ mask: true })
     app.post(app.config.stockInInfo, {
       storageId: this.options.id
     }).then(({ data }) => {
@@ -50,7 +50,7 @@ Page({
         'carList': data.list
       })
     }).finally(_ => {
-      wx.hideNavigationBarLoading()
+      wx.hideLoading()
     })
   },
   // 查看车辆明细

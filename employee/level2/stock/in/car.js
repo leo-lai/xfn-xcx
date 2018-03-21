@@ -8,6 +8,7 @@ Page({
    */
   data: {
     topTips: '',
+    showEdit: true,
     result: {
       visible: false
     },
