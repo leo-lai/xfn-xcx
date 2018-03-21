@@ -92,10 +92,11 @@ Page({
           app.post(app.config.stockInDel, {
             storageId: event.currentTarget.id
           }).then(_ => {
+            wx.hideLoading()
             app.toast('删除成功').then(_ => {
               this.getList()
             })
-          }).finally(_ => {
+          }).catch(_ => {
             wx.hideLoading()
           })
         }
@@ -113,10 +114,11 @@ Page({
           app.post(app.config.stockInSure, {
             storageId: event.currentTarget.id
           }).then(_ => {
+            wx.hideLoading()
             app.toast('全部入库成功').then(_ => {
               this.getList()
             })
-          }).finally(_ => {
+          }).catch(_ => {
             wx.hideLoading()
           })
         }

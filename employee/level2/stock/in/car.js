@@ -333,7 +333,10 @@ Page({
           app.post(app.config.stockInDelCar, {
             stockCarId: this.data.formData.stockCarId
           }).then(_ => {
-            app.toast('删除成功', true)
+            wx.hideLoading()
+            app.toast('删除成功').then(_ => {
+              this.backPage()
+            })
           }).catch(_ => {
             wx.hideLoading()
           })
@@ -346,11 +349,15 @@ Page({
       'result.visible': false
     })
   },
-  backList: function () {
+  backPage: function () {
     app.getPrevPage().then(prevPage => {
-      prevPage.getList()
+      if (prevPage.route == 'level2/stock/in/info') {
+        prevPage.getInfo()
+      } else if (prevPage.route == 'level2/stock/in/list') {
+        prevPage.getList()
+      }
+      app.back()
     })
-    app.back()
   },
   submit: function () { // 保存信息
     if (!this.data.formData.warehouseId) {
@@ -381,15 +388,14 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.stockInAddCar, formData).then(({ data }) => {
-      app.toast('保存成功')
-      app.getPrevPage().then(prevPage => {
-        if (prevPage.route == 'level2/stock/in/info') {
-          prevPage.getInfo()
-          app.back()
-        } else if (prevPage.route == 'level2/stock/in/list') {
-          prevPage.getList()
-          app.back()
-        }else{
+      wx.hideLoading()
+      app.toast('保存成功').then(_ => {
+        if (formData.storageId) {
+          app.getPrevPage().then(prevPage => {
+            prevPage.getInfo ? prevPage.getInfo() : prevPage.getList()
+            app.back()
+          })
+        }else {
           this.setData({
             'formData.frameNumber': '',
             'formData.engineNumber': '',

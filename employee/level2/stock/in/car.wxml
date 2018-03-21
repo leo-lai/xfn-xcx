@@ -203,7 +203,7 @@
         <view class='weui-msg__opr-area'>
           <view class='weui-btn-area l-btn-w80'>
             <button class='l-button-main' bindtap='anginAdd'>继续添加车辆</button>
-            <button class='l-button-border l-margin-t' bindtap='backList'>返回上一页</button>
+            <button class='l-button-border l-margin-t' bindtap='backPage'>返回上一页</button>
           </view>
         </view>
       </view>
