@@ -1,1 +1,2 @@
 /* level2/order/info-edit.wxss */
+radio{transform: scale(0.8); margin: 0 -10rpx 0 0;}

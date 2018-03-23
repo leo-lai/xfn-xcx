@@ -39,11 +39,11 @@
           <view class='weui-input' style='padding-right: 30rpx;'>
             <radio-group id='orderType' bindchange='bindInput'>
               <label>
-                <radio color='#fa5539' value='1' checked='{{formData.orderType == 1}}'/>
+                <radio color='#fa5539' value='{{1}}' checked='{{formData.orderType == 1}}'/>
                 <text class='l-margin-l-s'>常规单</text>
               </label>
               <label class='l-margin-l'>
-                <radio color='#fa5539' value='2' checked='{{formData.orderType == 2}}'/>
+                <radio color='#fa5539' value='{{2}}' checked='{{formData.orderType == 2}}'/>
                 <text class='l-margin-l-s'>炒车单</text>
               </label>
             </radio-group>

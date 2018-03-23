@@ -92,6 +92,7 @@ Page({
       orgName: '',
       orgLinker: '',
       orgPhone: '',
+      orderType: '',
       logisticsType: '',
       pickCarDate: '',
       pickCarAddr: ''

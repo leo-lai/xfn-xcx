@@ -33,6 +33,25 @@
       </view>
       <view class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>订单类型</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input' style='padding-right: 30rpx;'>
+            <radio-group id='orderType' bindchange='bindInput'>
+              <label>
+                <radio color='#fa5539' value='{{1}}' checked='{{formData.orderType == 1}}'/>
+                <text class='l-margin-l-s'>常规单</text>
+              </label>
+              <label class='l-margin-l'>
+                <radio color='#fa5539' value='{{2}}' checked='{{formData.orderType == 2}}'/>
+                <text class='l-margin-l-s'>炒车单</text>
+              </label>
+            </radio-group>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>物流方式</view>
         </view>
         <view class='weui-cell__bd l-text-right'>

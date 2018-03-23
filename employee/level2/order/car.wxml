@@ -75,7 +75,7 @@
           <view class='weui-label'>数量</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' disabled='{{true}}' placeholder='请输入购买数量' id='carNum' value='{{formData.carNum}}' bindinput='bindInput' type='number' maxlength='{{9}}' />
+          <input class='weui-input' placeholder='请输入购买数量' id='carNum' value='{{formData.carNum}}' bindinput='bindInput' type='number' maxlength='{{9}}' />
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>

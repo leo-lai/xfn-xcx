@@ -23,12 +23,12 @@
       </view>
       <view>提车地点：{{info.pickCarAddr || ''}}</view>
       <view>
-        <text wx:if='{{info.pay1Image.length > 0}}' class='l-margin-l l-btn-link l-fr' data-urls='{{info.pay1Image}}' bindtap='previewImage'>定金支付凭证</text>
-        <text>定金总额：{{info.totalDepositPrice}}元</text>
+        <text class='l-dmr'>定金总额：{{info.totalDepositPrice}}元</text>
+        <text wx:if='{{info.pay1Image.length > 0}}' class='l-btn-link' data-urls='{{info.pay1Image}}' bindtap='previewImage'>定金支付凭证</text>
       </view>
       <view>
-        <text wx:if='{{info.pay2Image.length > 0}}' class='l-margin-l l-btn-link l-fr'data-urls='{{info.pay2Image}}' bindtap='previewImage'>尾款支付凭证</text>
-        成交总额：<text class='l-text-theme'>{{info.totalFinalPrice}}元</text>
+        <view class='l-dmr'>成交总额：<text class='l-text-theme'>{{info.totalFinalPrice}}元</text></view>
+        <text wx:if='{{info.pay2Image.length > 0}}' class='l-btn-link'data-urls='{{info.pay2Image}}' bindtap='previewImage'>尾款支付凭证</text>
       </view>
     </view>
   </view>
@@ -60,8 +60,10 @@
         </block>
       </view>
       <view class='l-margin-t-m'>
-        <view><text>客户姓名：{{item.userName}}</text></view>
-        <view><text>联系电话：{{item.userPhone}}</text></view>
+        <view>
+          <text class='l-dmr'>客户姓名：{{item.userName}}</text>
+          <text>联系电话：{{item.userPhone}}</text>
+        </view>
         <view>身份证照片：</view>
         <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'
           data-urls='{{[item.idCardPicOn, item.idCardPicOff]}}' bindtap='previewImage'>
@@ -91,8 +93,8 @@
       <view class='l-margin-t-m {{index < item.infos.length - 1? "l-border-b l-padding-b" : ""}}' wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
         <view>{{carItem.carsName}}</view>
         <view class='l-text-gray l-fs-s'>
-          <text class='l-margin-r'>车身颜色：{{carItem.colorName}}</text>
-          <text class='l-margin-r'>指导价：{{carItem.guidePrice}}元</text>
+          <text class='l-dmr'>车身颜色：{{carItem.colorName}}</text>
+          <text>指导价：{{carItem.guidePrice}}元</text>
         </view>
 
         <view class='l-margin-t-s l-fs-s'>
