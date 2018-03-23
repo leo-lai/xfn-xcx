@@ -7,6 +7,7 @@ Page({
    */
   data: {
     wuliu: app.config.baseData.wuliu,
+    orderType: ['常规单', '炒车单'],
     info: null
   },
 

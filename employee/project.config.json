@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.7.2",
+	"libVersion": "1.9.93",
 	"appid": "wx8925785b341446d8",
 	"projectname": "%E6%B7%98%E8%BD%A6%E5%BF%AB%E5%91%98%E5%B7%A5%E7%AB%AF%20-%20%E6%AD%A3%E5%BC%8F",
 	"condition": {
@@ -20,13 +20,25 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "模拟更新",
+					"pathName": "pages/home/index",
+					"query": "",
+					"scene": "1005"
+				}
+			]
 		}
 	}
 }

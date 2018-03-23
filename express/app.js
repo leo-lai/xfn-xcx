@@ -1,4 +1,31 @@
 //app.js
+// 检查新版本，立即更新
+if (wx.getUpdateManager) {
+  const updateManager = wx.getUpdateManager()
+  updateManager.onCheckForUpdate(function (res) {
+    if (res.hasUpdate) {
+      console.log('有新版可下载...')
+    }
+  })
+  updateManager.onUpdateReady(function () {
+    console.log('新的版本已经下载好，重启应用新版本')
+    wx.showModal({
+      title: '温馨提示',
+      content: '系统已发布新版本，可以更新使用咯~',
+      showCancel: false,
+      confirmText: '重启更新',
+      success: res => {
+        if (res.confirm) {
+          updateManager.applyUpdate()
+        }
+      }
+    })
+  })
+  updateManager.onUpdateFailed(function () {
+    console.log('新的版本下载失败')
+  })
+}
+
 import utils from '/script/utils'
 import config from 'config'
 

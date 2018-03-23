@@ -8,24 +8,27 @@
       <view class='l-text-theme'>{{info.orderStateName}}</view>
     </view>
     <view class='l-text-gray l-margin-t-s'>
-      <text class='l-fr'>联系电话：{{info.orgPhone}}</text>
-      <text>联系人：{{info.orgLinker}}</text>
+      <text class='l-dmr'>联系人：{{info.orgLinker}}</text>
+      <text>联系电话：{{info.orgPhone}}</text>
     </view>
 
     <view class='l-border-t l-margin-t-s l-padding-tb-s'>
-      <view class='l-text-gray'>
-        <view>物流方式：{{wuliu[info.logisticsType - 1]}}</view>
-        <view>物流费用：{{info.freight || 0}}元</view>
-        <view>提车日期：{{info.pickCarDate || ''}}</view>
-        <view>提车地点：{{info.pickCarAddr || ''}}</view>
+      <view>
+        <text class='l-dmr'>订单类型：{{orderType[info.orderType - 1]}}</text>
+        <text>物流方式：{{wuliu[info.logisticsType - 1]}}</text>
       </view>
+      <view>
+        <text class='l-dmr'>提车日期：{{info.pickCarDate || ''}}</text>
+        <text>物流费用：{{info.freight || 0}}元</text>
+      </view>
+      <view>提车地点：{{info.pickCarAddr || ''}}</view>
       <view>
         <text wx:if='{{info.pay1Image.length > 0}}' class='l-margin-l l-btn-link l-fr' data-urls='{{info.pay1Image}}' bindtap='previewImage'>定金支付凭证</text>
         <text>定金总额：{{info.totalDepositPrice}}元</text>
       </view>
       <view>
         <text wx:if='{{info.pay2Image.length > 0}}' class='l-margin-l l-btn-link l-fr'data-urls='{{info.pay2Image}}' bindtap='previewImage'>尾款支付凭证</text>
-        成交价总额：<text class='l-text-theme'>{{info.totalFinalPrice}}元</text>
+        成交总额：<text class='l-text-theme'>{{info.totalFinalPrice}}元</text>
       </view>
     </view>
   </view>
@@ -198,14 +201,14 @@
         <button class='l-btn-min1' size='mini' bindtap='editWuliu'>编辑</button>
         <view class='l-rest'></view>
       </view>
-      <view class='l-margin-t-m'>
+      <view class='l-margin-t-m l-fs-s'>
         <view>物流单号：{{info.logisticsOrderCode || '--'}}</view>
         <view>
-          <text class='l-margin-r'>物流公司：{{info.logisticsCompany || '--'}}</text>
+          <text class='l-dmr'>物流公司：{{info.logisticsCompany || '--'}}</text>
           <text>运输车牌号：{{info.logisticsPlateNumber || '--'}}</text>
         </view>
         <view>
-          <text class='l-margin-r'>司机姓名：{{info.logisticsDriver || '--'}}</text>
+          <text class='l-dmr'>司机姓名：{{info.logisticsDriver || '--'}}</text>
           <text>联系电话：{{info.logisticsDriverPhone || '--'}}</text>
         </view>
       </view>

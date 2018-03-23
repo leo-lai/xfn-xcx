@@ -16,6 +16,7 @@ Page({
       orgName: '',
       orgLinker: '',
       orgPhone: '',
+      orderType: '1',
       logisticsType: '',
       freight: '',
       pickCarDate: '',
