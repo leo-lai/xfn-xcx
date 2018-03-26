@@ -1,0 +1,54 @@
+<!--pages/mine/report.wxml-->
+<view class='l-page-full'>
+  <picker mode='date' fields='month' value='{{queryDate}}' bindchange='bindPicker'>
+    <view class='l-padding l-sticky l-bg-white l-text-center'>
+      {{queryDate}}
+      <text class='l-icon-6ac'></text>
+    </view>
+  </picker>
+
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>分配客户数量</view>
+        <view class='weui-cell__ft'>{{info.customerNum}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>售车数量</view>
+        <view class='weui-cell__ft l-fs-s'>{{info.saledCarNum}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>成交率</view>
+        <view class='weui-cell__ft l-fs-s'>{{info.turnoverRate}}%</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>单台平均毛利</view>
+        <view class='weui-cell__ft l-fs-s'>￥{{info.averageGrossProfit}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>按揭台次</view>
+        <view class='weui-cell__ft l-fs-s'>{{info.mortgageCarNum}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>按揭比例</view>
+        <view class='weui-cell__ft l-fs-s'>{{info.mortgageRate}}%</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>精品加装产值</view>
+        <view class='weui-cell__ft l-fs-s'>￥{{info.totalBoutiquePrice}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>单台精品加装产值</view>
+        <view class='weui-cell__ft l-fs-s'>￥{{info.perBoutiquePrice}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>保险产值</view>
+        <view class='weui-cell__ft l-fs-s'>￥{{info.totalInsurancePrice}}</view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>单台保险产值</view>
+        <view class='weui-cell__ft l-fs-s'>￥{{info.perInsurancePrice}}</view>
+      </view>
+    </view>
+  </view>
+</view>

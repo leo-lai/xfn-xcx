@@ -143,6 +143,8 @@ var config = {
   overTheLine: `${baseUrl}/overTheLine`,
   // 回访备注
   orderVisit: `${baseUrl}/orderVisit`,
+  // 业绩查询
+  salerReport: `${baseUrl}/querySalesPerformance`,
 
   // 三级订车--------------------------------
   // 订车单列表

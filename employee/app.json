@@ -79,6 +79,7 @@
     "pages/mine/index",
     "pages/mine-pwd/index",
     "pages/mine/qrcode",
+    "pages/mine/report",
     "pages/msg/index",
     "pages/login/index",
     "pages/region/index",
