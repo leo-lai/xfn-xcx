@@ -22,7 +22,7 @@
  *                佛祖坐镇 顺利上线
  */
 var host = 'http://tomcat.mifengqiche.com'
-var host = 'https://tomcat.xfnauto.com'
+// var host = 'https://tomcat.xfnauto.com'
 
 var resURL = 'https://res.xfnauto.com'
 var commonUrl = host + '/tauto/common'

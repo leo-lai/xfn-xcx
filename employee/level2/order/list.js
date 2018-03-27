@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showEdit: false,
     mode: 'list', // slt
     filter: {
       loading: false,
@@ -119,7 +118,6 @@ Page({
     let carItem = event.currentTarget.dataset.item
     let index = event.currentTarget.dataset.index
     let item = this.data.list.data[index]
-
     carItem.orderState = item.state
     app.storage.setItem('lv2-order-car-info', carItem)
     app.navigateTo('car-match?edit=' + (item.showEdit ? 1 : 0))

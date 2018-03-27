@@ -21,7 +21,7 @@
     </navigator>
 
     <view class='_bd' wx:if='{{item.infos.length > 0}}'>
-      <view class='_car' wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
+      <view class='_car' wx:for='{{item.infos}}' wx:for-item='carItem' wx:for-index='carIndex' wx:key='id'>
         <view>{{carItem.carsName}}</view>
         <view class='l-flex-hc'>
           <view class='l-rest l-text-gray'>
@@ -29,7 +29,7 @@
             <text>数量：{{carItem.carNum}}</text>
           </view>
 
-          <block wx:if='{{showEdit && !item.countermandApply}}'>
+          <block wx:if='{{item.showEdit}}'>
             <view data-item='{{carItem}}' data-index='{{index}}' bindtap='carMatch'>
               <text wx:if='{{item.state == 10}}' class='l-btn-link'>去配车</text>
               <text wx:if='{{item.state == 15}}' class='l-btn-link'>去验车</text>

@@ -39,9 +39,10 @@ Page({
         'showEdit': this.options.edit !== '0'
       })
 
+      console.log(this.data.showEdit)
+
       app.storage.getItem('lv2-order-car-info').then(info => {
         if (info) {
-          console.log(info)
           this.setData({ info })
           this.getCarFrame()
         }
