@@ -197,8 +197,8 @@ Page({
   openLocation: function (event) {
     let {name, lng, lat} = event.currentTarget.dataset
     wx.openLocation({
-      latitude: lat,
-      longitude: lng,
+      latitude: lat * 1,
+      longitude: lng * 1,
       name: '导航目的地',
       address: name
     })

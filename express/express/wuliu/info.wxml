@@ -157,7 +157,7 @@
         <!-- 专线运输 end-->
 
         <!-- 普通运输 -->
-        <block>
+        <block wx:else>
           <button wx:if='{{info.distributionState >= 4}}' data-state='8' class='l-button-main'>
         订单结束</button>
         </block>
