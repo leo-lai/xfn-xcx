@@ -16,7 +16,7 @@
         <view class='weui-input'>{{consignmentType[info.consignmentType]}}</view>
       </view>
     </view>
-    <view class='weui-cell weui-cell_input'>
+    <!-- <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
         <view class='weui-label'>装车地点</view>
       </view>
@@ -31,7 +31,7 @@
       <view class='weui-cell__bd l-text-right'>
         <view class='weui-input l-fs-s'>{{info.destinationAddress}}</view>
       </view>
-    </view>
+    </view> -->
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
         <view class='weui-label'>距离</view>

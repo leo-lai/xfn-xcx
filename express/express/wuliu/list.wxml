@@ -74,7 +74,7 @@
           <view class='l-rest'>{{tuoyunItem.startingPointAddress}}</view>
           <text class='l-icon-66c l-text-link'></text>
         </view>
-        <view class='l-flex-h' bindtap='openLocation' data-name='{{tuoyunItem.startingPointAddress}}' data-lng='{{tuoyunItem.destinationLongitude}}' data-lat='{{tuoyunItem.destinationLatitude}}'>
+        <view class='l-flex-h' bindtap='openLocation' data-name='{{tuoyunItem.destinationAddress}}' data-lng='{{tuoyunItem.destinationLongitude}}' data-lat='{{tuoyunItem.destinationLatitude}}'>
           <text>卸车地点：</text>
           <view class='l-rest'>{{tuoyunItem.destinationAddress}}</view>
           <text class='l-icon-66c l-text-link'></text>

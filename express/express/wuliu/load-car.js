@@ -64,13 +64,19 @@ Page({
       wx.hideLoading()
     })
   },
-  // 选择车身颜色
-  chechenCb: function (info) {
+  // 选择车身和内饰颜色
+  carColorCb: function (info) {
     if(info) {
       let carList = this.data.info.goodsCarVos
       let carItem = carList.filter(item => item.goodsCarId == info.goodsCarId)[0]
-      carItem.colourId = info.carColourId
-      carItem.colourName = info.carColourName
+      if (info.type == 'neishi') {
+        carItem.interiorId = info.id
+        carItem.interiorName = info.name
+      }else {
+        carItem.colourId = info.id
+        carItem.colourName = info.name
+      }
+      
       this.setData({
         'info.goodsCarVos': carList
       })
