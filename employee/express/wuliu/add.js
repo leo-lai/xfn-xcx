@@ -120,6 +120,7 @@ Page({
       this.setData({
         'formData.logisticsCarId': info.logisticsCarId,
         'formData.licensePlateNumber': info.licensePlateNumber,
+        'formData.consignmentType': info.consignmentType,
         'formData.logisticsCarVacancy': info.logisticsCarVacancy
       })
     }

@@ -78,7 +78,7 @@
           <view class='weui-label'>运输类型</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <view class='weui-input'>{{consignmentType[formData.consignmentType]}}</view>
+          <view class='weui-input'>{{consignmentType[formData.consignmentType-1]}}</view>
         </view>
       </view>
       <navigator url='/express/driver/selector?id={{formData.driverId}}' class='weui-cell weui-cell_select'>
