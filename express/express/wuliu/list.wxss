@@ -2,3 +2,5 @@
 .l-button-main{min-width: 160rpx;}
 .l-tuoyun-item{margin: 20rpx; background-color: #fff; padding: 30rpx; border-radius: 10rpx;}
 .l-tuoyun-item ._tag{background-color: #31b069; color: #fff; border-radius: 6rpx; padding: 2rpx 10rpx; font-size: 24rpx; margin-right: 10rpx;}
+.l-icon-66c{font-size: 0.8rem;margin-left: 10rpx;}
+.l-icon-6a8{margin-right: -10rpx;}

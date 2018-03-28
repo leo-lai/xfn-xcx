@@ -16,8 +16,8 @@
           总运费：<text class='l-text-theme'>{{info.amount || 0}}元</text>
         </view>
       </view>
-      <view>起点：{{info.startingPointAddress}}</view>
-      <view>终点：{{info.destinationAddress}}</view>
+      <view>装车地点：{{info.startingPointAddress}}</view>
+      <view>卸车地点：{{info.destinationAddress}}</view>
       <view wx:if='{{info.appointmentTimeDate}}'>预约装车时间：{{info.appointmentTimeDate}}</view>
     </view>
   </view>

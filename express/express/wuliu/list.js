@@ -90,8 +90,13 @@ Page({
           let {
             consignmentId,
             consignmentCode, 
-            startingPointAddress, 
+            startingPointAddress,
+            startingPointLatitude,
+            startingPointLongitude,
             destinationAddress,
+            destinationLatitude,
+            destinationLongitude,
+            appointmentTimeDate
           } = carItem.consignmentVo
           let { costsAmount } = carItem.carCostsVo
 
@@ -103,7 +108,12 @@ Page({
               consignmentId,
               consignmentCode,
               startingPointAddress,
+              startingPointLatitude,
+              startingPointLongitude,
               destinationAddress,
+              destinationLatitude,
+              destinationLongitude,
+              appointmentTimeDate,
               goodsCarState: carItem.goodsCarState,
               amount: costsAmount,
               carList: [carItem]
@@ -183,6 +193,16 @@ Page({
     })
   },
 
+  // 导航
+  openLocation: function (event) {
+    let {name, lng, lat} = event.currentTarget.dataset
+    wx.openLocation({
+      latitude: lat,
+      longitude: lng,
+      name: '导航目的地',
+      address: name
+    })
+  },
 
   // 搜索相关=================================================
   // 正在输入

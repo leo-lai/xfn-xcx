@@ -11,16 +11,24 @@
       <text>建单人：{{info.systemUserName}}</text>
       <text class='l-margin-l'>建单时间：{{info.createDate}}</text>
     </view>
-    <view class='l-border-t l-margin-t-s l-padding-t-s l-fs-s'>
+    <!-- <view class='l-border-t l-margin-t-s l-padding-t-s l-fs-s'>
       <view class='l-flex-hc'>
         <text>运输方式：{{consignmentType[info.consignmentType]}}</text>
-        <!-- <view class='l-margin-l'>
+        <view class='l-margin-l'>
           总运费：<text class='l-text-theme'>{{info.amount || 0}}元</text>
-        </view> -->
+        </view> 
       </view>
-      <view>起点：{{info.startingPointAddress}}</view>
-      <view>终点：{{info.destinationAddress}}</view>
-    </view>
+      <view class='l-flex-h>
+        <text>装车地点：</text>
+        <view class='l-rest'>{{info.startingPointAddress}}</view>
+        <text class='l-icon-66c l-text-link'></text>
+      </view>
+      <view class='l-flex-h'>
+        <text>卸车地点：</text>
+        <view class='l-rest'>{{info.destinationAddress}}</view>
+        <text class='l-icon-66c l-text-link'></text>
+      </view>
+    </view> -->
   </view>
 
   <!-- 板车信息 -->
@@ -100,8 +108,16 @@
         <!-- 普通运输 end-->
       </view>
       <view class='l-text-gray l-margin-t-s'>
-        <view>起点：{{tuoyunItem.startingPointAddress}}</view>
-        <view>终点：{{tuoyunItem.destinationAddress}}</view>
+        <view class='l-flex-h' bindtap='openLocation' data-name='{{tuoyunItem.startingPointAddress}}' data-lng='{{tuoyunItem.startingPointLongitude}}' data-lat='{{tuoyunItem.startingPointLatitude}}'>
+          <text>装车地点：</text>
+          <view class='l-rest'>{{tuoyunItem.startingPointAddress}}</view>
+          <text class='l-icon-66c l-text-link'></text>
+        </view>
+        <view class='l-flex-h' bindtap='openLocation' data-name='{{tuoyunItem.startingPointAddress}}' data-lng='{{tuoyunItem.destinationLongitude}}' data-lat='{{tuoyunItem.destinationLatitude}}'>
+          <text>卸车地点：</text>
+          <view class='l-rest'>{{tuoyunItem.destinationAddress}}</view>
+          <text class='l-icon-66c l-text-link'></text>
+        </view>
         <view wx:if='{{tuoyunItem.appointmentTimeDate}}'>预约装车时间：{{tuoyunItem.appointmentTimeDate}}</view>
       </view>
       <view class='l-flex-h l-margin-t-s' wx:for='{{tuoyunItem.carList}}' wx:for-item='carItem' wx:key='goodsCarId'>

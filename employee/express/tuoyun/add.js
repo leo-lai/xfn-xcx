@@ -128,7 +128,6 @@ Page({
   },
   // 添加托运车辆
   addCarCb: function (info) {
-    console.log(info)
     if(info) {
       this.setData({
         carList: [...this.data.carList, info]
@@ -158,11 +157,11 @@ Page({
       return
     }
     if (!this.data.formData.startingPointAddress) {
-      this.showTopTips('请选择起点')
+      this.showTopTips('请选择装车地点')
       return
     }
     if (!this.data.formData.destinationAddress) {
-      this.showTopTips('请选择终点')
+      this.showTopTips('请选择卸车地点')
       return
     }
 
@@ -177,7 +176,9 @@ Page({
         carsId: '',
         carsName: '',
         colourId: '',
-        colourName: ''
+        colourName: '',
+        interiorId: '',
+        interiorName: '',
       }, item)
       for (let i = 0; i < item.carNum; i++) {
         carList.push(carItem)

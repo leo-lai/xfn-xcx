@@ -91,6 +91,8 @@ Page({
       }
 
       data.list.forEach(item => {
+        // countermandApply 是否退款中
+        // 37 已退款
         item.showEdit = this.data.showEdit && !item.countermandApply && item.state != 37
         item.infos.forEach(cars => {
           cars.changePrice2 = Math.abs(cars.changePrice)

@@ -22,6 +22,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    app.storage.getItem('phoneNumber').then(val => {
+      if(val) {
+        this.setData({
+          'formData.phoneNumber': val
+        })
+      }
+    })
     this.getLoginInfo()
   },
   // 顶部显示错误信息
@@ -90,6 +97,7 @@ Page({
     app.post(app.config.login, this.data.formData).then(({data}) => {
       // 由于获取用户信息是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处触发回调函数
+      app.storage.setItem('phoneNumber', this.data.formData.phoneNumber)
       app.updateUserInfo(data)
       app.toast('登录成功', true)
     }).catch(err => {

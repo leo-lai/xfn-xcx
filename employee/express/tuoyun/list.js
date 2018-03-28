@@ -12,6 +12,7 @@ Page({
       loading: false,
       visible: false,
       data: {
+        consignmentType: '',
         keywords: ''
       }
     },
@@ -32,6 +33,7 @@ Page({
     app.onLogin(userInfo => {
       if (this.options.mode === 'slt') {
         this.setData({
+          'filter.data.consignmentType': this.options.type,
           'mode': this.options.mode,
           'list.rows': 50,
           'cars': this.options.cars ? this.options.cars.split(',') : []

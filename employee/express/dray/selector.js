@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    consignmentType: ['普通', '专线'],
     filter: {
       loading: false,
       visible: false,
@@ -23,6 +24,7 @@ Page({
     slted: {
       logisticsCarId: '',
       licensePlateNumber: '',
+      consignmentType: '',
       logisticsCarVacancy: ''
     }
   },
@@ -94,7 +96,8 @@ Page({
         let slted = {
           logisticsCarId: list[i].id,
           licensePlateNumber: list[i].name,
-          logisticsCarVacancy: list[i].number
+          logisticsCarVacancy: list[i].number,
+          consignmentType: list[i].consignmentType,
         }
         this.setData({ slted })
         app.getPrevPage().then(prevPage => {

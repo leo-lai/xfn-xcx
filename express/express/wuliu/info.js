@@ -40,7 +40,11 @@ Page({
           consignmentId,
           consignmentCode,
           startingPointAddress,
+          startingPointLatitude,
+          startingPointLongitude,
           destinationAddress,
+          destinationLatitude,
+          destinationLongitude,
           appointmentTimeDate
         } = carItem.consignmentVo
         let { costsAmount } = carItem.carCostsVo
@@ -53,7 +57,11 @@ Page({
             consignmentId,
             consignmentCode,
             startingPointAddress,
+            startingPointLatitude,
+            startingPointLongitude,
             destinationAddress,
+            destinationLatitude,
+            destinationLongitude,
             appointmentTimeDate,
             goodsCarState: carItem.goodsCarState,
             amount: costsAmount,
@@ -156,6 +164,18 @@ Page({
       wx.hideLoading()
     })
   },
+
+  // 导航
+  openLocation: function (event) {
+    let { name, lng, lat } = event.currentTarget.dataset
+    wx.openLocation({
+      latitude: lat,
+      longitude: lng,
+      name: '导航目的地',
+      address: name
+    })
+  },
+
   // 预览图片
   previewImage: function (event) {
     let item = this.data.info.logisticsDriver

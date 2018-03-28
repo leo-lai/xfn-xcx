@@ -51,8 +51,8 @@
     </view>
     <view class='l-padding-btn l-fs-m l-flex-hc'>
       <view class='l-rest'>
-        <view>起点：{{item.startingPointAddress}}</view>
-        <view>终点：{{item.destinationAddress}}</view>
+        <view>装车地点：{{item.startingPointAddress}}</view>
+        <view>卸车地点：{{item.destinationAddress}}</view>
         <view>发车时间：{{item.departureTime}}</view>
       </view>
       <view>

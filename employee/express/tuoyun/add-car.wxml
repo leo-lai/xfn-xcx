@@ -34,6 +34,19 @@
           </picker>
         </view>
       </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>内饰颜色</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='interiorId' data-picker='neishi' bindchange='bindInput' value='{{neishi.index}}' range='{{neishi.list}}' range-key='interiorName'>
+            <view class='weui-select weui-select_in-select-after'>
+              <text wx:if='{{neishi.index === -1}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{neishi.list[neishi.index].interiorName}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
           <view class='weui-label'>车辆数量</view>

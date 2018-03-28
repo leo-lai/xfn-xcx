@@ -58,11 +58,11 @@
           </view>
           <view class='l-padding-btn l-fs-s'>
             <view class='l-flex-h'>
-              <text style='min-width: 120rpx;'>起点：</text>
+              <text style='min-width: 120rpx;'>装车地点：</text>
               <view class='l-rest'>{{item.startingPointAddress}}</view>
             </view>
             <view class='l-flex-h'>
-              <text style='min-width: 120rpx;'>终点：</text>
+              <text style='min-width: 120rpx;'>卸车地点：</text>
               <view class='l-rest'>{{item.destinationAddress}}</view>
             </view>
             <view class='l-flex-h'>

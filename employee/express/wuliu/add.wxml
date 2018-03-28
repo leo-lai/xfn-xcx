@@ -1,7 +1,7 @@
 <!--express/tuoyun/add.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full'>
-  <view class='l-text-gray l-fs-s' style='margin: 30rpx 30rpx -20rpx 30rpx;'>物流单信息</view>
+  <!-- <view class='l-text-gray l-fs-s' style='margin: 30rpx 30rpx -20rpx 30rpx;'>物流单信息</view>
   <view class='l-margin l-radius'>
     <view class='weui-cells weui-cells_after-title'>
       <navigator class='weui-cell weui-cell_select' url='/express/freight/selector'>
@@ -20,7 +20,7 @@
       </navigator>
       <view class='weui-cell weui-cell_select' id='startingPointAddress' bindtap='chooseLoc'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>起点</view>
+          <view class='weui-label'>装车地点</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-select weui-select_in-select-after'>
@@ -31,7 +31,7 @@
       </view>
       <view class='weui-cell weui-cell_select' id='destinationAddress' bindtap='chooseLoc'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>终点</view>
+          <view class='weui-label'>卸车地点</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-select weui-select_in-select-after'>
@@ -46,12 +46,12 @@
         </view>
       </view>
     </view>
-  </view>
+  </view> -->
 
-  <view class='l-text-gray l-fs-s l-flex-hc' style='margin: 40rpx 30rpx -15rpx 30rpx;'>
+  <!-- <view class='l-text-gray l-fs-s l-flex-hc' style='margin: 40rpx 30rpx -15rpx 30rpx;'>
     <text>板车信息</text>
     <view class='l-rest'></view>
-  </view>
+  </view> -->
   <view class='l-margin l-radius'>
     <view class='weui-cells weui-cells_after-title'>
       <navigator url='/express/dray/selector?id={{formData.logisticsCarId}}' class='weui-cell weui-cell_select'>
@@ -67,10 +67,18 @@
       </navigator>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>板车运输能力</view>
+          <view class='weui-label'>运输能力</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-input'>{{formData.logisticsCarVacancy}} 辆</view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>运输类型</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>{{consignmentType[formData.consignmentType]}}</view>
         </view>
       </view>
       <navigator url='/express/driver/selector?id={{formData.driverId}}' class='weui-cell weui-cell_select'>

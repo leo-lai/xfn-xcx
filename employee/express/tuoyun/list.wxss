@@ -2,3 +2,4 @@
 .l-tuoyun-item{margin: 20rpx; background-color: #fff; padding: 30rpx; border-radius: 10rpx;}
 .l-tuoyun-item ._tag{background-color: #31b069; color: #fff; border-radius: 6rpx; padding: 0 10rpx; font-size: 24rpx; margin-right: 10rpx;}
 .l-tuoyun-item ._disabled{opacity: 0.3;}
+.l-icon-6a8{margin-right: -10rpx;}

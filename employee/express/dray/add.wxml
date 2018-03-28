@@ -12,10 +12,29 @@
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>运输能力</view>
+        <view class='weui-label'>运输能力（辆）</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' type='number' placeholder='请输入运输车辆数量上限' maxlength='{{11}}' confirm-type='next' id='logisticsCarVacancy' value='{{formData.logisticsCarVacancy}}' bindinput='bindInput' />
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>运输类型</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>
+          <radio-group id='consignmentType' bindchange='bindInput'>
+            <label>
+              <radio color='#fa5539' value='{{1}}' checked='{{formData.consignmentType == 1}}'/>
+              <text class='l-margin-l-s'>普通</text>
+            </label>
+            <label class='l-margin-l'>
+              <radio color='#fa5539' value='{{2}}' checked='{{formData.consignmentType == 2}}'/>
+              <text class='l-margin-l-s'>专线</text>
+            </label>
+          </radio-group>
+        </view>
       </view>
     </view>
     <view class='weui-cell weui-cell_input'>

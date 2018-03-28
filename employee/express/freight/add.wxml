@@ -28,7 +28,7 @@
     </view>
     <view class='weui-cell weui-cell_select' id='startingPointAddress' bindtap='chooseLoc'>
       <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-        <view class='weui-label'>起点</view>
+        <view class='weui-label'>装车地点</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <view class='weui-select weui-select_in-select-after'>
@@ -39,7 +39,7 @@
     </view>
     <view class='weui-cell weui-cell_select' id='destinationAddress' bindtap='chooseLoc'>
       <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-        <view class='weui-label'>终点</view>
+        <view class='weui-label'>卸车地点</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <view class='weui-select weui-select_in-select-after'>

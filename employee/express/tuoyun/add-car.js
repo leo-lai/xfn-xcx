@@ -10,13 +10,19 @@ Page({
       index: -1,
       list: []
     },
+    neishi: { // 内饰颜色
+      index: -1,
+      list: []
+    },
     formData: {
       carsId: '',
       carsName: '',
       guidePrice: '',
       carNum: 1,
       colourId: '',
-      colourName: ''
+      colourName: '',
+      interiorId: '',
+      interiorName: '',
     }
   },
 
@@ -50,6 +56,10 @@ Page({
           data['formData.colourName'] = this.data[picker].list[value].carColourName
           value = this.data[picker].list[value].carColourId
           break
+        case 'interiorId':
+          data['formData.interiorName'] = this.data[picker].list[value].interiorName
+          value = this.data[picker].list[value].interiorId
+          break
       }
     }
     console.log(id, value)
@@ -63,9 +73,12 @@ Page({
         'formData.carsName': carType.name,
         'formData.guidePrice': (carType.price / 10000).toFixed(2),
         'formData.colourId': '',
-        'formData.colourName': ''
+        'formData.colourName': '',
+        'carInfo.interiorId': '',
+        'carInfo.interiorName': ''
       })
       this.getCheshen(family.id)
+      this.getNeishi(family.id)
     }
   },
   getCheshen: function (familyId = '') { // 获取车身颜色列表
@@ -77,7 +90,15 @@ Page({
       })
     })
   },
-
+  getNeishi: function (familyId = '') { // 获取内饰颜色列表
+    if (!familyId) return
+    app.post(app.config.neishi, { familyId }).then(({ data }) => {
+      this.setData({
+        'neishi.index': data.findIndex(item => item.interiorId === this.data.carInfo.interiorId),
+        'neishi.list': data
+      })
+    })
+  },
   submit: function () {
     if(!this.data.formData.carsId){
       wx.showModal({

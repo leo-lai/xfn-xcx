@@ -23,8 +23,8 @@
         <text hidden='{{mode == "slt"}}' class='l-icon-6a8'></text>
       </view>
       <view class='l-text-gray l-fs-s l-margin-t-s'>
-        <view>起点：{{item.startingPointAddress}}</view>
-        <view>终点：{{item.destinationAddress}}</view>
+        <view>装车地点：{{item.startingPointAddress}}</view>
+        <view>卸车地点：{{item.destinationAddress}}</view>
         <view wx:if='{{item.appointmentTimeDate}}'>预约装车时间：{{item.appointmentTimeDate}}</view>
       </view>
     </view>

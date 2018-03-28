@@ -9,6 +9,7 @@ Page({
     formData: {
       logisticsCarId: '',
       licensePlateNumber: '',
+      consignmentType: 1,
       logisticsCarVacancy: '',
       gpsPIN: '',
       remarks: ''
@@ -59,6 +60,10 @@ Page({
   submit: function () {
     if (!this.data.formData.licensePlateNumber) {
       this.showTopTips('请输入板车车牌号')
+      return
+    }
+    if (!this.data.formData.consignmentType) {
+      this.showTopTips('请选择运输类型')
       return
     }
     if (!this.data.formData.logisticsCarVacancy) {

@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    consignmentType: ['普通', '专线'],
     filter: {
       loading: false,
       visible: false,

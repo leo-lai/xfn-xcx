@@ -12,16 +12,16 @@
       <text>建单人：{{info.systemUserName}}</text>
       <text class='l-margin-l'>建单时间：{{info.createDate}}</text>
     </view>
-    <view class='l-border-t l-margin-t-s l-padding-t-s l-fs-s'>
+    <!-- <view class='l-border-t l-margin-t-s l-padding-t-s l-fs-s'>
       <view class='l-flex-hc'>
         <text>运输方式：{{consignmentType[info.consignmentType]}}</text>
-        <!-- <view class='l-margin-l'>
+        <view class='l-margin-l'>
           总运费：<text class='l-text-theme'>{{info.amount || 0}}元</text>
-        </view> -->
+        </view> 
       </view>
-      <view>起点：{{info.startingPointAddress}}</view>
-      <view>终点：{{info.destinationAddress}}</view>
-    </view>
+      <view>装车地点：{{info.startingPointAddress}}</view>
+      <view>卸车地点：{{info.destinationAddress}}</view>
+    </view> -->
   </view>
 
   <!-- 板车信息 -->
@@ -60,7 +60,7 @@
     <view class='l-flex-hc'>
       <text>托运单信息</text>
       <view class='l-rest'></view>
-      <navigator wx:if='{{info.distributionState == 0}}' class='l-margin-l-s' url='/express/tuoyun/list?mode=slt&id={{info.distributionId}}&cars={{info.cars}}' hover-class='none'>
+      <navigator wx:if='{{info.distributionState == 0}}' class='l-margin-l-s' url='/express/tuoyun/list?mode=slt&id={{info.distributionId}}&cars={{info.cars}}&type={{info.consignmentType}}' hover-class='none'>
         <button class='l-btn-min1' size='mini'>添加托运车辆</button>
       </navigator>
     </view>
@@ -78,8 +78,8 @@
         <!-- 专线运输 end-->
       </view>
       <view class='l-text-gray l-margin-t-s'>
-        <view>起点：{{tuoyunItem.startingPointAddress}}</view>
-        <view>终点：{{tuoyunItem.destinationAddress}}</view>
+        <view>装车地点：{{tuoyunItem.startingPointAddress}}</view>
+        <view>卸车地点：{{tuoyunItem.destinationAddress}}</view>
         <view wx:if='{{tuoyunItem.appointmentTimeDate}}'>预约装车时间：{{tuoyunItem.appointmentTimeDate}}</view>
       </view>
       <view class='l-flex-h l-margin-t-s' wx:for='{{tuoyunItem.carList}}' wx:for-item='carItem' wx:key='goodsCarId'>

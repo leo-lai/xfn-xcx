@@ -18,7 +18,7 @@
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>起点</view>
+        <view class='weui-label'>装车地点</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <view class='weui-input l-fs-s'>{{info.startingPointAddress}}</view>
@@ -26,7 +26,7 @@
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>终点</view>
+        <view class='weui-label'>卸车地点</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <view class='weui-input l-fs-s'>{{info.destinationAddress}}</view>

@@ -107,11 +107,11 @@ Page({
       return
     }
     if (!this.data.formData.startingPointAddress) {
-      this.showTopTips('请输入起点')
+      this.showTopTips('请输入装车地点')
       return
     }
     if (!this.data.formData.destinationAddress) {
-      this.showTopTips('请输入终点')
+      this.showTopTips('请输入卸车地点')
       return
     }
     if (!this.data.formData.dedicatedLineName) {

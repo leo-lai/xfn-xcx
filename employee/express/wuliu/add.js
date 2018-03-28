@@ -7,6 +7,7 @@ Page({
    */
   data: {
     topTips: '',
+    consignmentType: ['普通', '专线'],
     formData: {
       distributionId: '',
       consignmentType: '',
@@ -139,18 +140,18 @@ Page({
 
   // 保存信息
   submit: function () {
-    if (!this.data.formData.consignmentType) {
-      this.showTopTips('请选择运输方式')
-      return
-    }
-    if (!this.data.formData.startingPointAddress) {
-      this.showTopTips('请选择起点')
-      return
-    }
-    if (!this.data.formData.destinationAddress) {
-      this.showTopTips('请选择终点')
-      return
-    }
+    // if (!this.data.formData.consignmentType) {
+    //   this.showTopTips('请选择运输方式')
+    //   return
+    // }
+    // if (!this.data.formData.startingPointAddress) {
+    //   this.showTopTips('请选择装车地点')
+    //   return
+    // }
+    // if (!this.data.formData.destinationAddress) {
+    //   this.showTopTips('请选择卸车地点')
+    //   return
+    // }
     if (!this.data.formData.logisticsCarId) {
       this.showTopTips('请选择板车')
       return

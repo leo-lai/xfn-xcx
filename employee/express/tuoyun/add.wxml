@@ -47,7 +47,7 @@
       </navigator>
       <view class='weui-cell weui-cell_select' id='startingPointAddress' bindtap='chooseLoc'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>起点 <text class='l-text-error'>*</text></view>
+          <view class='weui-label'>装车地点 <text class='l-text-error'>*</text></view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-select weui-select_in-select-after'>
@@ -58,7 +58,7 @@
       </view>
       <view class='weui-cell weui-cell_select' id='destinationAddress' bindtap='chooseLoc'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>终点 <text class='l-text-error'>*</text></view>
+          <view class='weui-label'>卸车地点 <text class='l-text-error'>*</text></view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-select weui-select_in-select-after'>
@@ -102,13 +102,16 @@
     </navigator>
   </view>
   <view class='l-margin l-radius l-bg-white'>
-    <view class='l-padding l-flex-hc l-fs-s l-border-b' wx:for='{{carList}}' wx:key='guid'>
+    <view class='l-padding l-flex-h l-fs-s l-border-b' wx:for='{{carList}}' wx:key='guid'>
       <view class='l-rest'>
         <view>{{item.carsName}}</view>
         <view class='l-text-gray'>
           <text wx:if='{{item.colourName}}' class='l-margin-r'>车身颜色：{{item.colourName}}</text>
-          <text class='l-margin-r'>数量：{{item.carNum}}</text>
+          <text wx:if='{{item.interiorName}}'>内饰颜色：{{item.interiorName}}</text>
+        </view>
+        <view class='l-text-gray'>
           <text class='l-margin-r'>指导价：{{item.guidePrice}}万元</text>
+          <text>数量：{{item.carNum}}</text>
         </view>
       </view>
       <view id='{{item.guid}}' bindtap='delCar'>
