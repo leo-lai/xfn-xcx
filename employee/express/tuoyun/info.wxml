@@ -1,9 +1,9 @@
 <!--express/tuoyun/info.wxml-->
 <view class='l-page-full'>
   <view class='l-bg-white l-padding l-margin-b'>
-    <view wx:if='{{info.orgName}}'>
+    <view>
       <text class='l-fr l-text-theme'>{{info.consignmentStateName}}</text>
-      <text>{{info.orgName}}</text>
+      <text>{{info.orgName || '--'}}</text>
     </view>
     <view class='l-text-gray l-fs-s'>
       <text>门店联系人：{{info.purchasersName}}</text>
@@ -18,7 +18,7 @@
       </view>
       <view>装车地点：{{info.startingPointAddress}}</view>
       <view>卸车地点：{{info.destinationAddress}}</view>
-      <view wx:if='{{info.appointmentTimeDate}}'>预约装车时间：{{info.appointmentTimeDate}}</view>
+      <view>预约时间：{{info.appointmentTimeDate || '--'}}</view>
     </view>
   </view>
 
@@ -95,15 +95,14 @@
       <text>车辆信息</text>
     </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.goodsCarVos}}' wx:key='goodsCarId' wx:if='{{item.isShow}}'>
-      <view class='l-flex-h'>
-        <view class='l-rest'>
-          <view>{{item.carsName}}</view>
-          <view>
-            <text>车身颜色：{{item.colourName}}</text>
-            <text class='l-margin-l' wx:if='{{item.frameNumber}}'>车架号：{{item.frameNumber}}</text>
-          </view>
-        </view>
-        <text class='l-text-warn'>{{item.goodsCarStateName}}</text>
+      <view>
+        <text class='l-text-warn l-fr'>{{item.goodsCarStateName}}</text>
+        <text class='l-text-wrap1'>{{item.carsName}}</text>
+      </view>
+      <view class='l-text-gray'>
+        <text>车身：{{item.colourName || '--'}}</text>
+        <text class='l-margin-l'>内饰：{{item.interiorName || '--'}}</text>
+        <text class='l-margin-l'>车架号：{{item.frameNumber || '--'}}</text>
       </view>
 
       <block wx:if='{{item.acceptImageArr.length > 0}}'>

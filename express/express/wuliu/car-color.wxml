@@ -1,6 +1,6 @@
 <!--express/wuliu/car-color.wxml-->
 <view class='l-page-full'>
-  <view id='{{item.carColourId}}' bindtap='slt' class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list}}' wx:key='carColourId'>
+  <view id='{{item.id}}' bindtap='slt' class='l-margin-m l-bg-white l-padding l-radius' wx:for='{{list}}' wx:key='id'>
     <view class='l-flex-hc'>
       <view class='l-rest'>{{item.name}}</view>
       <view>

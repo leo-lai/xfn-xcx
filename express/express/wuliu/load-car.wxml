@@ -3,7 +3,7 @@
   <view class='l-bg-white l-padding l-margin-b'>
     <view>
       <text class='l-fr l-text-theme'>{{info.consignmentStateName}}</text>
-      <text>{{info.orgName}}</text>
+      <text>{{info.orgName || '--'}}</text>
     </view>
     <view class='l-text-gray l-fs-s'>
       <text>门店联系人：{{info.purchasersName}}</text>
@@ -14,7 +14,7 @@
   <view class='l-bg-white l-margin-tb' wx:for='{{info.goodsCarVos}}' wx:key='goodsCarId'>
     <view class='weui-cells weui-cells_after-title'>
       <view class='weui-cell weui-cell_input'>
-        <view class='l-padding-tb-m'>{{item.carsName}}</view>
+        <view class='l-padding-tb-m l-h4'>{{item.carsName}}</view>
       </view>
       <navigator url='car-color?type=cheshen&id={{item.familyId}}&gid={{item.goodsCarId}}&cid={{item.colourId}}' class='weui-cell weui-cell_select' hover-class='none'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
@@ -22,7 +22,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-select weui-select_in-select-after'>
-            <text wx:if='{{!item.colourId}}' class='l-text-gray'>请选择</text>
+            <text wx:if='{{!item.colourName}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{item.colourName}}</text>
           </view>
         </view>
@@ -33,7 +33,7 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-select weui-select_in-select-after'>
-            <text wx:if='{{!item.interiorId}}' class='l-text-gray'>请选择</text>
+            <text wx:if='{{!item.interiorName}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{item.interiorName}}</text>
           </view>
         </view>

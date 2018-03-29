@@ -211,7 +211,8 @@ Page({
       formData.cars.push({
         goodsCarId: item.goodsCarId,
         colorId: item.colourId,
-        vin: frames[index],
+        interiorId: item.interiorId || '',
+        vin: frames[index] || '',
         acceptImage: images[index].map(item => item.src).join(',')
       })
     })

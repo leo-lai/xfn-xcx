@@ -13,22 +13,24 @@
   </view>
 
   <view class='l-tuoyun-item' wx:for='{{list.data}}' wx:key='distributionId'>
-    <navigator class='l-flex-hc' url='info?id={{item.distributionId}}' hover-class='none'>
-      <view>
-        <text class='_tag' wx:if='{{item.consignmentType == 1}}' style='background-color:#00a0ea;'>普通</text>
-      <text class='_tag' wx:if='{{item.consignmentType == 2}}'>专线</text> 
+    <navigator url='info?id={{item.distributionId}}' hover-class='none'>
+      <view class='l-flex-hc'>
+        <view>
+          <text class='_tag' wx:if='{{item.consignmentType == 1}}' style='background-color:#00a0ea;'>普通</text>
+          <text class='_tag' wx:if='{{item.consignmentType == 2}}'>专线</text> 
+        </view>
+        <view class='l-rest l-text-wrap1' style='margin: 0 10rpx;'>{{item.distributionCode}}</view>
+        <text class='l-text-theme'>{{item.distributionStateName}}</text>
+        <text class='l-icon-6a8'></text>
       </view>
-      <view class='l-rest l-text-wrap1' style='margin: 0 10rpx;'>{{item.distributionCode}}</view>
-      <text class='l-text-theme'>{{item.distributionStateName}}</text>
-      <text class='l-icon-6a8'></text>
+      <view class='l-text-gray l-fs-s l-margin-t-s'>
+        <view>板车车牌：{{item.logisticsCar.licensePlateNumber}}</view>
+        <view>
+          <text>司机姓名：{{item.driverName}}</text>
+          <text class='l-margin-l'>联系电话：{{item.driverPhone}}</text>
+        </view>
+      </view>
     </navigator>
-    <view class='l-text-gray l-fs-s l-margin-t-s'>
-      <view>板车车牌：{{item.logisticsCar.licensePlateNumber}}</view>
-      <view>
-        <text>司机姓名：{{item.driverName}}</text>
-        <text class='l-margin-l'>联系电话：{{item.driverPhone}}</text>
-      </view>
-    </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{item.tuoyunList}}' wx:for-item='tuoyunItem' wx:for-index='tuoyunIndex' wx:key='consignmentCode'>
       <view class='l-flex-hc'>
         <navigator class='l-text-wrap1 l-btn-link' url='/express/tuoyun/info?id={{tuoyunItem.consignmentId}}&cars={{tuoyunItem.cars}}' hover-class='none'>{{tuoyunItem.consignmentCode}}</navigator>
@@ -79,17 +81,18 @@
           <view class='l-rest'>{{tuoyunItem.destinationAddress}}</view>
           <text class='l-icon-66c l-text-link'></text>
         </view>
-        <view wx:if='{{tuoyunItem.appointmentTimeDate}}'>预约装车时间：{{tuoyunItem.appointmentTimeDate}}</view>
+        <view>预约时间：{{tuoyunItem.appointmentTimeDate || '--'}}</view>
       </view>
-      <view class='l-flex-h l-margin-t-s' wx:for='{{tuoyunItem.carList}}' wx:for-item='carItem' wx:key='goodsCarId'>
-        <view class='l-rest'>
-          <view>{{carItem.carsName}}</view>
-          <view>
-            <text>车身颜色：{{carItem.colourName}}</text>
-            <text class='l-margin-l' wx:if='{{carItem.frameNumber}}'>车架号：{{carItem.frameNumber}}</text>
-          </view>
+      <view class='l-margin-t-s' wx:for='{{tuoyunItem.carList}}' wx:for-item='carItem' wx:key='goodsCarId'>
+        <view>
+          <text class='l-text-warn l-fr'>{{carItem.goodsCarStateName}}</text>
+          <text class='l-text-wrap1'>{{carItem.carsName}}</text>
         </view>
-        <text class='l-text-warn'>{{carItem.goodsCarStateName}}</text>
+        <view class='l-text-gray'>
+          <text>车身：{{carItem.colourName || '--'}}</text>
+          <text class='l-margin-l'>内饰：{{carItem.interiorName || '--'}}</text>
+          <text class='l-margin-l'>车架号：{{carItem.frameNumber || '--'}}</text>
+        </view>
       </view>
     </view>
     <view class='l-text-center l-margin-t'>

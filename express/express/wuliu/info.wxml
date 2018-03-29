@@ -41,22 +41,23 @@
       </navigator>
     </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s'>
-      <view><text>司机姓名：{{info.logisticsDriver.realName}}</text></view>
-      <view><text>联系电话：{{info.logisticsDriver.phoneNumber}}</text></view>
+      <view>
+        <text>司机姓名：{{info.logisticsDriver.realName}}</text>
+        <text class='l-margin-l'>联系电话：{{info.logisticsDriver.phoneNumber}}</text>
+      </view>
       <view><text>身份证号：{{info.logisticsDriver.cardNo}}</text></view>
-      <view>身份证照片：</view>
       <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;'>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
             <image id='{{info.logisticsDriver.idcardPicOn}}' bindtap='previewImage' mode='aspectFill' src='{{info.logisticsDriver.idcardPicOn}}'></image>
           </view>
-          <view class='l-text-gray l-fs-s'>正面</view> 
+          <view class='l-text-gray l-fs-s'>身份证正面</view> 
         </view>
         <view class='l-text-center l-margin-l'>
           <view class='l-upload-add' style='width:250rpx; height: 150rpx;'>
             <image id='{{info.logisticsDriver.idcardPicOff}}' bindtap='previewImage' mode='aspectFill' src='{{info.logisticsDriver.idcardPicOff}}'></image>
           </view>
-          <view class='l-text-gray l-fs-s'>反面</view> 
+          <view class='l-text-gray l-fs-s'>身份证反面</view> 
         </view>
       </view>
     </view>
@@ -118,17 +119,18 @@
           <view class='l-rest'>{{tuoyunItem.destinationAddress}}</view>
           <text class='l-icon-66c l-text-link'></text>
         </view>
-        <view wx:if='{{tuoyunItem.appointmentTimeDate}}'>预约装车时间：{{tuoyunItem.appointmentTimeDate}}</view>
+        <view>预约时间：{{tuoyunItem.appointmentTimeDate || '--'}}</view>
       </view>
-      <view class='l-flex-h l-margin-t-s' wx:for='{{tuoyunItem.carList}}' wx:for-item='carItem' wx:key='goodsCarId'>
-        <view class='l-rest'>
-          <view>{{carItem.carsName}}</view>
-          <view>
-            <text>车身颜色：{{carItem.colourName}}</text>
-            <text class='l-margin-l' wx:if='{{carItem.frameNumber}}'>车架号：{{carItem.frameNumber}}</text>
-          </view>
+      <view class='l-margin-t-s' wx:for='{{tuoyunItem.carList}}' wx:for-item='carItem' wx:key='goodsCarId'>
+        <view>
+          <text class='l-text-warn l-fr'>{{carItem.goodsCarStateName}}</text>
+          <text>{{carItem.carsName}}</text>
         </view>
-        <text class='l-text-warn'>{{carItem.goodsCarStateName}}</text>
+        <view class='l-text-gray'>
+          <text>车身：{{carItem.colourName || '--'}}</text>
+          <text class='l-margin-l'>内饰：{{carItem.interiorName || '--'}}</text>
+          <text class='l-margin-l'>车架号：{{carItem.frameNumber || '--'}}</text>
+        </view>
       </view>
     </view>
   </view>

@@ -48,7 +48,7 @@ Page({
         return temp
       })
       this.setData({ 
-        slted: data.filter(item => item.id == this.options.cid)[0],
+        slted: data.filter(item => item.id == this.options.cid)[0] || '',
         list: data 
       })
     }).finally(_ => {
@@ -57,9 +57,8 @@ Page({
   },
   slt: function (event) {
     let slted = this.data.list.filter(item => item.id == event.currentTarget.id)[0]
-    this.setData( slted )
-
     if (slted) {
+      this.setData(slted)
       slted.goodsCarId = this.options.gid
       slted.type = this.options.type
       app.getPrevPage().then(prevPage => {
