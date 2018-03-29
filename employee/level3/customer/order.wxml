@@ -1,7 +1,7 @@
 <!--level3/customer/order.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full {{ orderInfo.customerOrderState == 17 ? "l-page-disabled" : "" }}'>
-  <view class='weui-cells__title'>订单基本信息</view>
+  <view class='weui-cells__title'>订单基本信息（金额单位：元）</view>
   <view class='weui-cells weui-cells_after-title'>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
@@ -24,10 +24,18 @@
     </navigator>
     <view class='weui-cell weui-cell_input l-text-gray'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>官方指导价（元）</view>
+        <view class='weui-label'>官方指导价</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <input disabled='{{true}}' class='weui-input' type='number' value='{{orderInfo.guidingPrice}}'/>
+        <input disabled='{{true}}' class='weui-input' type='number' value='{{orderInfo.guidingPrice}} 元'/>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input l-text-gray'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>车架号</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input disabled='{{true}}' class='weui-input' value='{{orderInfo.frameNumber || "--"}}' />
       </view>
     </view>
     <view class='weui-cell weui-cell_input'>
@@ -58,7 +66,7 @@
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>收取定金 <text class='l-text-theme'>*</text>（元）</view>
+        <view class='weui-label'>收取定金 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <input disabled='{{orderInfo.customerOrderState > 1}}' class='weui-input' placeholder='请填写' id='depositPrice' value='{{orderInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
@@ -79,7 +87,7 @@
     </view>
   </view>
 
-  <view class='weui-cells__title'>订单金额（元）</view>
+  <view class='weui-cells__title'>订单费用（金额单位：元）</view>
   <view class='weui-cells weui-cells_after-title'>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>

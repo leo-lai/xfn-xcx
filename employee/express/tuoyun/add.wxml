@@ -82,7 +82,7 @@
       </view> -->
       <navigator class='weui-cell weui-cell_select' url='/pages/datetime/index?date={{formData.appointmentTime}}'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>预约装车时间 <text class='l-text-error'>*</text></view>
+          <view class='weui-label'>预约时间 <text class='l-text-error'>*</text></view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <view class='weui-select weui-select_in-select-after'>
@@ -106,12 +106,12 @@
       <view class='l-rest'>
         <view>{{item.carsName}}</view>
         <view class='l-text-gray'>
-          <text wx:if='{{item.colourName}}' class='l-margin-r'>车身颜色：{{item.colourName}}</text>
-          <text wx:if='{{item.interiorName}}'>内饰颜色：{{item.interiorName}}</text>
+          <text class='l-dmr'>车身颜色：{{item.colourName || '--'}}</text>
+          <text>内饰颜色：{{item.interiorName || '--'}}</text>
         </view>
         <view class='l-text-gray'>
-          <text class='l-margin-r'>指导价：{{item.guidePrice}}万元</text>
-          <text>数量：{{item.carNum}}</text>
+          <text class='l-dmr'>指导价：{{item.guidePrice || '--'}}万元</text>
+          <text>数量：{{item.carNum || '--'}}</text>
         </view>
       </view>
       <view id='{{item.guid}}' bindtap='delCar'>

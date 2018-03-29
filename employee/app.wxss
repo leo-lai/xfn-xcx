@@ -364,3 +364,5 @@ image{max-width: 100%;}
 
 .l-upload-add{display: inline-block; width: 150rpx; height: 150rpx; background-color: #eee; }
 .l-upload-add image{width: 100%; height: 100%; display: block;}
+
+.l-dmr{display:inline-block; min-width: 45%; margin-right: 10rpx;}
