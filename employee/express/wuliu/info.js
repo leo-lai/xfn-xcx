@@ -118,10 +118,11 @@ Page({
         if (res.confirm) {
           wx.showLoading({ mask: true })
           app.post(app.config.exp.wuliuPai, { distributionId }).then(_ => {
+            wx.hideLoading()
             app.toast('派单成功').then(_ => {
               this.getInfo()
             })
-          }).finally(_ => {
+          }).catch(_ => {
             wx.hideLoading()
           })
         }
@@ -144,6 +145,7 @@ Page({
       distributionId, state
     }).then(_ => {
       app.storage.setItem('exp-wuliu-list-refresh', 1)
+      wx.hideLoading()
       app.toast(msg).then(_ => {
         this.getInfo()
       })

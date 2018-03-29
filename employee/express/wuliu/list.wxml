@@ -81,14 +81,13 @@
           <button size='mini' class='l-button-main'>派单</button>
         </view>
       </block>
-      <view wx:elif='{{item.distributionState < 8}}' bindtap='changeState' id='{{item.distributionId}}' class='l-inline l-margin-lr-s'>
-        <!-- 专线运输 -->
-        <block wx:if='{{isAdmin && item.consignmentType == 2}}'>
-          <button wx:if='{{item.distributionState == 7}}' data-state='8' size='mini' class='l-button-main'>
-          全部已收款</button>
-        </block>
-        <!-- 专线运输 end-->
+
+      <!-- 专线运输 -->
+      <view wx:elif='{{item.distributionState == 7 && isAdmin && item.consignmentType == 2}}' class='l-inline l-margin-lr-s' bindtap='changeState' id='{{item.distributionId}}'>
+        <button data-state='8' size='mini' class='l-button-main'>
+        全部已收款</button>
       </view>
+      <!-- 专线运输 end-->
     </view>
   </view>
   <template is='loadmore' data='{{...list}}' />

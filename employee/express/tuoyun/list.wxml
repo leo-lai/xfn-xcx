@@ -42,11 +42,11 @@
           <icon wx:else type='success' size='16' color='#ddd' />
         </view>
         <view class='l-rest'>
-          <view>
+          <view style='overflow:hidden;'>
             <text class='l-text-warn l-fr'>{{carItem.goodsCarStateName}}</text>
             <text class='l-text-wrap1'>{{carItem.carsName}}</text>
           </view>
-          <view class='l-text-gray'>
+          <view class='l-text-gray l-text-wrap1'>
             <text>车身：{{carItem.colourName || '--'}}</text>
             <text class='l-margin-l'>内饰：{{carItem.interiorName || '--'}}</text>
             <text class='l-margin-l'>车架号：{{carItem.frameNumber || '--'}}</text>

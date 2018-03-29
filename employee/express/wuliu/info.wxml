@@ -103,20 +103,23 @@
     </view>
   </view>
 
-  <view style='height: 120rpx;'></view>
-  <view class='l-fixed-bottom'>
-    <view class='l-btn-w60 l-margin-tb'>
-      <block wx:if='{{info.distributionState == 0}}'>
-        <button class='l-button-main' wx:if='{{info.goodsCars.length > 0}}' bindtap='paidan'>派单</button>
-      </block> 
-      <view wx:elif='{{isAdmin && info.distributionState < 8}}' bindtap='changeState' id='{{info.distributionId}}' class='l-inline'>
-        <!-- 专线运输 -->
-        <block wx:if='{{info.consignmentType == 2}}'>
-          <button wx:if='{{info.distributionState == 7}}' data-state='8' class='l-button-main'>
-          全部已收款</button>
-        </block>
-        <!-- 专线运输 end-->
+  <block wx:if='{{info.distributionState == 0 && info.goodsCars.length > 0}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom'>
+      <view class='l-btn-w60 l-margin-tb'>
+        <button class='l-button-main' bindtap='paidan'>派单</button>
       </view>
     </view>
-  </view>
+  </block>
+
+  <!-- 专线运输 -->
+  <block wx:if='{{info.distributionState == 7 && isAdmin && info.consignmentType == 2}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom'>
+      <view class='l-btn-w60 l-margin-tb' bindtap='changeState' id='{{info.distributionId}}'>
+        <button data-state='8' class='l-button-main' bindtap='paidan'>全部已收款</button>
+      </view>
+    </view>
+  </block>
+  <!-- 专线运输 end-->
 </view>
