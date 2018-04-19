@@ -20,38 +20,7 @@ Page({
       carsImages: '',
     },
     goodsInfo: {
-      goodsCarsId: '',
-      carsId: '',
-      carsName: '',
-      guidingPrice: '',
-      colourId: '',
-      colourName: '',
-      interiorId: '',
-      interiorName: '',
-      saleingNumber: '',
-      onlineDis: 1,          // 线上优惠or加价
-      discountPriceOnLine: '',
-      underLineDis: 1,       // 线下优惠or加价
-      discountPriceUnderLine: '',
-      overInsurance: 1,
-      bareCarPriceOnLine: '',
-      depositPrice: '',
-      bareCarPriceUnderLine: '',
-      invoicePrice: '',
-      provinceId: '',
-      provinceName: '',
-      cityId: '',
-      cityName: '',
-      areaId: '',
-      areaName: '',
-      warehouseId: '',
-      logisticsCycle: '',
-      logisticsPrice: '',
-      invoiceCycle: '',
-      dateOfManufacture: '',
-      remarks: '',
-      carsImage: '',
-      carsImages: '',
+      
     }
   },
   /**
@@ -61,8 +30,18 @@ Page({
     app.onLogin(userInfo => {
       app.storage.getItem('shop-active-info').then(info => {
         if(info) {
+          info.onlineDis = info.discountPriceOnLine > 0 ? 0 : 1
+          info.underLineDis = info.discountPriceUnderLine > 0 ? 0 : 1
+          info.discountPriceOnLine = Math.abs(info.discountPriceOnLine)
+          info.discountPriceUnderLine = Math.abs(info.discountPriceUnderLine)
+
+          info.saleingPriceStr = info.bareCarPriceOnLine ? (info.bareCarPriceOnLine / 10000).toFixed(2) : '0.00'
+          info.guidingPriceStr = info.guidingPrice ? (info.guidingPrice / 10000).toFixed(2) : '0.00'
+          info.thumb = app.utils.formatThumb(info.image, 150, 150)
+
+          console.log(info)
           let formData = app.utils.copyObj(this.data.formData, info)
-          let goodsInfo = app.utils.copyObj(this.data.goodsInfo, info)
+          let goodsInfo = Object.assign({}, info)
           let uploadImages1 = formData.carsImages ? formData.carsImages.split(',').map(item => {
             return {
               path: item,

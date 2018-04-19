@@ -1,10 +1,10 @@
-<!--shop/online/selector.wxml-->
+<!--shop/order/list.wxml-->
 <import src='/template/loadmore.wxml' />
 <view class='l-page-full'>
   <view class='l-list-filter' catchtouchmove='noopFn'>
     <view class='_input l-flex-hc'>
       <view class='l-rest'>
-        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入车型查询' value='{{filter.data.keywords}}' />
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='查询购车订单' value='{{filter.data.keywords}}' />
       </view>
       <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
       <icon type='search' size='18' color='#555' bindtap='search'></icon>

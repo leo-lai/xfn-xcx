@@ -247,6 +247,7 @@ var config = {
     activeList: `${baseUrl}/shop/orgActivityList`,
     activeUpOff: `${baseUrl}/shop/activityShelves`,
     activeEdit: `${baseUrl}/shop/activityEdit`,
+    orderList: `${baseUrl}/shop/orgAdvanceOrderList`,
   },
   // 物流接口
   exp: {

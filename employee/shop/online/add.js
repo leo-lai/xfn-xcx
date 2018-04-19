@@ -26,6 +26,7 @@ Page({
       carsId: '',
       carsName: '',
       guidingPrice: '',
+      familyId: '',
       colourId: '',
       colourName: '',
       interiorId: '',
@@ -65,6 +66,8 @@ Page({
         if(info) {
           info.onlineDis = info.discountPriceOnLine > 0 ? 0 : 1
           info.underLineDis = info.discountPriceUnderLine > 0 ? 0 : 1
+          info.discountPriceOnLine = Math.abs(info.discountPriceOnLine)
+          info.discountPriceUnderLine = Math.abs(info.discountPriceUnderLine)
 
           let formData = app.utils.copyObj(this.data.formData, info)
           let uploadImages1 = formData.carsImages ? formData.carsImages.split(',').map(item => {
@@ -168,7 +171,7 @@ Page({
     if (!familyId) return
     app.post(app.config.cheshen, { familyId }).then(({ data }) => {
       this.setData({
-        'cheshen.index': data.findIndex(item => item.carcolourId === this.data.formData.colourId),
+        'cheshen.index': data.findIndex(item => item.carColourId == this.data.formData.colourId),
         'cheshen.list': data
       })
     })
@@ -177,7 +180,7 @@ Page({
     if (!familyId) return
     app.post(app.config.neishi, { familyId }).then(({ data }) => {
       this.setData({
-        'neishi.index': data.findIndex(item => item.interiorId === this.data.formData.interiorId),
+        'neishi.index': data.findIndex(item => item.interiorId == this.data.formData.interiorId),
         'neishi.list': data
       })
     })

@@ -56,7 +56,11 @@ Page({
       app.storage.getItem('shop-active-list-refresh').then(refresh => {
         if (refresh) {
           app.storage.removeItem('shop-active-list-refresh')
-          this.getList()
+          if (this.data.tabs.index == 1) {
+            this.getList2()
+          } else {
+            this.getList1()
+          }
         }
       })
     })

@@ -30,7 +30,7 @@
       <view>寻车管理</view>
     </view>
   </navigator>
-  <navigator url='' class='l-margin l-bg-white l-padding l-radius'>
+  <navigator url='/shop/order/list' class='l-margin l-bg-white l-padding l-radius'>
     <view class='l-padding-btn l-text-center'>
       <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417012.png'></image>
       <view>预约购车</view>
