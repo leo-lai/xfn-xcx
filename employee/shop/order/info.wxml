@@ -1,0 +1,80 @@
+<!--shop/order/info.wxml-->
+<view class='l-page-full'>
+  <view class='l-bg-white'>
+    <view class='l-flex-hc l-padding-btn l-border-b'>
+      <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{carInfo.thumb}}'></image>
+      <view class='l-rest'>
+        <view class='l-h4'>{{carInfo.carsName}}</view>
+        <view class='l-text-gray l-fs-s'>
+          <text>车身：{{carInfo.colourName}}</text>
+          <text class='l-margin-l'>内饰：{{carInfo.interiorName}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='l-padding'>
+      <view class='l-flex-hc'>
+        <text class='l-text-gray'>指导价</text>
+        <view class='l-rest l-text-right l-text-theme l-fs-13'>￥{{carInfo.guidingPriceStr}}万</view>
+      </view>
+      <view class='l-flex-hc'>
+        <text class='l-text-gray'>购买数量</text>
+        <view class='l-rest l-text-right'>{{info.orderInfoVos.length}}辆</view>
+      </view>
+      <view class='l-flex-hc'>
+        <text class='l-text-gray'>裸车价</text>
+        <view class='l-rest l-text-right'>￥{{carInfo.saleingPrice}}</view>
+      </view>
+      <view class='l-flex-hc' wx:if='{{carInfo.discountPriceOnLine > 0}}'>
+        <text class='l-text-gray'>已加价</text>
+        <view class='l-rest l-text-right'>￥{{carInfo.discountPriceOnLineStr}}</view>
+      </view>
+      <view class='l-flex-hc' wx:else>
+        <text class='l-text-gray'>已优惠</text>
+        <view class='l-rest l-text-right'>￥{{0-carInfo.discountPriceOnLineStr}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-bg-white l-margin-t l-padding'>
+    <view class='l-flex-hc'>
+      <text class='l-text-gray'>购车方式</text>
+      <view class='l-rest l-text-right'>{{expectBuyWay[info.expectBuyWay]}}</view>
+    </view>
+    <view class='l-flex-hc'>
+      <text class='l-text-gray'>定金支付方式</text>
+      <view class='l-rest l-text-right'>{{expectPayWay[info.expectPayWay]}}</view>
+    </view>
+  </view>
+
+  <view class='l-bg-white l-margin-t l-padding'>
+    <view class='l-flex-hc'>
+      <text class='l-text-gray'>客户姓名</text>
+      <view class='l-rest l-text-right'>{{info.realName}}</view>
+    </view>
+    <view class='l-flex-hc'>
+      <text class='l-text-gray'>联系电话</text>
+      <view class='l-rest l-text-right'>{{info.phoneNumber}}</view>
+    </view>
+    <view class='l-flex-hc'>
+      <text class='l-text-gray'>预约到店日期</text>
+      <view class='l-rest l-text-right'>{{info.timeOfAppointmentDate}}</view>
+    </view>
+    <view class='l-flex-h' wx:if='{{info.remarks}}'>
+      <text class='l-text-gray'>车辆备注</text>
+      <view class='l-rest l-text-right'>{{info.remarks}}</view>
+    </view>
+  </view>
+
+  <view class='l-fixed-bottom l-flex-hc l-bg-white' wx:if='{{info.overCatch && info.realOrderId}}'>
+    <view class='l-rest l-padding'>
+      该预约单已开单
+    </view>
+    <navigator class='_btn' bindtap='viewInfo'>查看订单详情</navigator>
+  </view>
+  <view class='l-fixed-bottom l-flex-hc l-bg-white' wx:else>
+    <view class='l-rest l-padding'>
+      需收定金：<text class='l-text-theme'>￥{{info.depositPrice}}</text>，请开单
+    </view>
+    <view class='_btn' bindtap='createOrder'>马上开单</view>
+  </view>
+</view>

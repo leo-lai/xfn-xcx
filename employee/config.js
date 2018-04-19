@@ -239,15 +239,20 @@ var config = {
   stockInSure: `${baseUrl}/storageOverSure`,
   // 商城接口
   shop: {
+    // 仓库列表
     cangList: `${baseUrl}/shop/organizationWarehouseList`,
+    // 在售列表
     goodsList: `${baseUrl}/shop/orgShopGoodsCarsList`,
     goodsEdit: `${baseUrl}/shop/shopGoodsCarsEdit`,
     goodsInfo: `${baseUrl}/shop/shopGoodsCarsInfo`,
     goodsUpOff: `${baseUrl}/shop/shopGoodsCarsShelves`,
+    // 活动列表
     activeList: `${baseUrl}/shop/orgActivityList`,
     activeUpOff: `${baseUrl}/shop/activityShelves`,
     activeEdit: `${baseUrl}/shop/activityEdit`,
+    // 预约单列表
     orderList: `${baseUrl}/shop/orgAdvanceOrderList`,
+    orderInfo: `${baseUrl}/shop/orgAdvanceOrderInfo`,
   },
   // 物流接口
   exp: {

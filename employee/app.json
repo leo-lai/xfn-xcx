@@ -1,8 +1,8 @@
 {
   "pages": [
-    
     "pages/home/index",
     "shop/order/list",
+    "shop/order/info",
     "shop/active/list",
     "shop/active/add",
     "shop/online/list",

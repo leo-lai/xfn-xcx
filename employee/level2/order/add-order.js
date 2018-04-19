@@ -25,26 +25,66 @@ Page({
       carsId: '',
       carsName: '',
       guidePrice: '',
+      familyId: '',
       colorId: '',
       colorName: '',
       interiorId: '',
       interiorName: '',
       carNum: 1,
-      depositPrice: '',
-      finalPrice: '',
       isDiscount: 1,
       changePrice: '',
-      remark: '',
       nakedPrice: '', // 裸车价
       trafficCompulsoryInsurancePrice: '', //交强险
-      commercialInsurancePrice: '' // 商业险
+      commercialInsurancePrice: '', // 商业险
+      depositPrice: '',
+      finalPrice: '',
+      remark: '',
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onReady: function (options) {
+    if (this.options.aid) {
+      app.storage.getItem('shop-order-info').then(info => {
+        if (info && info.orderInfoVos[0]) {
+          let orderCarInfo = info.orderInfoVos[0]
+          let carInfo = app.utils.copyObj(this.data.carInfo, orderCarInfo) 
+          carInfo.guidePrice = orderCarInfo.guidingPrice
+          carInfo.nakedPrice = orderCarInfo.bareCarPriceOnLine
+          carInfo.carNum = info.orderInfoVos.length
+          carInfo.isDiscount = info.discountPriceOnLine > 0 ? 0 : 1
+          carInfo.changePrice = Math.abs(info.discountPriceOnLine)
 
+          this.setData({ carInfo })
+
+          this.priceId = setTimeout(_ => {
+            this.finalPrice()
+            app.storage.setItem('shop-order-car-' + this.options.id, this.data.carInfo)
+          }, 50)
+
+          this.getCheshen(carInfo.familyId)
+          this.getNeishi(carInfo.familyId)
+        }
+      })
+    }else {
+      app.storage.getItem('shop-order-car-' + this.options.id).then(info => {
+        if (info) {
+          this.setData({ 
+            carInfo: app.utils.copyObj(this.data.carInfo, info)
+          })
+          this.priceId = setTimeout(_ => {
+            this.finalPrice()
+          }, 50)
+
+          this.getCheshen(info.familyId)
+          this.getNeishi(info.familyId)
+        }
+      })
+    }
+  },
+  onUnload: function() {
+    app.storage.removeItem('shop-order-info')
   },
   /**
    * 生命周期函数--监听页面显示
@@ -102,7 +142,7 @@ Page({
         clearTimeout(this.priceId)
         this.priceId = setTimeout(_ => {
           this.finalPrice()
-        }, 300)
+        }, 50)
       default:
         data['carInfo.' + id] = value
     }
@@ -147,6 +187,11 @@ Page({
         'carInfo.interiorId': '',
         'carInfo.interiorName': ''
       })
+
+      this.priceId = setTimeout(_ => {
+        this.finalPrice()
+      }, 50)
+
       this.getCheshen(family.id)
       this.getNeishi(family.id)
     }
@@ -238,10 +283,11 @@ Page({
       return
     }
 
-    if (!this.data.carInfo.changePrice) {
-      this.showTopTips('请输入' + (this.data.carInfo.isDiscount == 1 ? '优惠' : '加价') + '金额')
-      return
-    }
+    // if (!this.data.carInfo.changePrice) {
+    //   this.showTopTips('请输入' + (this.data.carInfo.isDiscount == 1 ? '优惠' : '加价') + '金额')
+    //   return
+    // }
+
     let changePrice = this.data.carInfo.isDiscount == 1 ? 
       (0 - this.data.carInfo.changePrice) : this.data.carInfo.changePrice
     let carInfo = Object.assign({}, this.data.carInfo, { changePrice: changePrice })
@@ -253,6 +299,7 @@ Page({
     
     wx.showLoading({ mask: true })
     app.json(app.config.lv2.orderAddOrder, formData).then(({ data }) => {
+      app.storage.removeItem('shop-order-car-' + this.options.id)
       app.toast('保存成功', true).then(_ => {
         app.getPrevPage().then(prevPage => {
           if (prevPage.route === 'level2/order/list') { // 列表进来

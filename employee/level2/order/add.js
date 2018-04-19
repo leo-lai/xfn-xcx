@@ -34,7 +34,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onReady: function (options) {
-    
+    if (this.options.aid) {
+      this.data.formData.advanceOrderId = this.options.aid
+      app.storage.getItem('shop-order-info').then(info => {
+        if (info) {
+          let formData = {
+            orgId: info.orgId,
+            orgName: info.orgName,
+            orgLinker: info.orgLinker,
+            orgPhone: info.orgPhone,
+            freight: info.logisticsPrice
+          }
+          let pickerData = {
+            userName: info.realName,
+            userPhone: info.phoneNumber,
+            idCardPicOn: info.idCardPicOn,
+            idCardPicOff: info.idCardPicOff
+          }
+          this.setData({
+            formData: app.utils.copyObj(this.data.formData, formData),
+            pickerData: app.utils.copyObj(this.data.pickerData, pickerData)
+          })
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面显示
@@ -85,7 +108,6 @@ Page({
   },
   // 选择门店
   changeStore: function (storeInfo) {
-    console.log(storeInfo)
     if (storeInfo) {
       this.setData({
         'formData.orgId': storeInfo.orgId,
@@ -174,11 +196,16 @@ Page({
       }
       this.data.formData.pickers[0] = this.data.pickerData
     }
+
     wx.showLoading({ mask: true })
     app.json(app.config.lv2.orderAdd, this.data.formData).then(({ data }) => {
       app.storage.setItem('lv2-order-list-refresh', 1)
       app.toast('保存成功', false).then(_ => {
-        app.navigateTo('info?id=' + data.id)
+        if (this.data.formData.advanceOrderId) {
+          app.navigateTo(`add-order?id=${data.id}&aid=${this.data.formData.advanceOrderId}`)
+        }else{
+          app.navigateTo('info?id=' + data.id)
+        }
       })
     }).catch(err => {
       wx.hideLoading()

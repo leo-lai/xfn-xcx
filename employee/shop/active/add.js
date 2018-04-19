@@ -39,7 +39,6 @@ Page({
           info.guidingPriceStr = info.guidingPrice ? (info.guidingPrice / 10000).toFixed(2) : '0.00'
           info.thumb = app.utils.formatThumb(info.image, 150, 150)
 
-          console.log(info)
           let formData = app.utils.copyObj(this.data.formData, info)
           let goodsInfo = Object.assign({}, info)
           let uploadImages1 = formData.carsImages ? formData.carsImages.split(',').map(item => {

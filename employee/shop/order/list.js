@@ -61,9 +61,12 @@ Page({
       rows: this.data.list.rows
     }).then(({ data }) => {
       data.list = data.list.map(item => {
-        item.saleingPriceStr = item.bareCarPriceOnLine ? (item.bareCarPriceOnLine / 10000).toFixed(2) : '0.00'
-        item.guidingPriceStr = item.guidingPrice ? (item.guidingPrice / 10000).toFixed(2) : '0.00'
-        item.thumb = app.utils.formatThumb(item.image, 150, 150)
+        if (item.orderInfoVos && item.orderInfoVos.length > 0) {
+          let carInfo = item.orderInfoVos[0]
+          carInfo.thumb = app.utils.formatThumb(carInfo.image, 100, 100)
+          carInfo.guidancePriceStr = (carInfo.guidancePrice / 10000).toFixed(2)
+          item.carInfo = carInfo
+        }
         return item
       })
       this.setData({
