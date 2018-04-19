@@ -1,0 +1,39 @@
+<!--shop/menu.wxml-->
+<view class='l-page-full'>
+  <navigator url='/shop/online/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417007.png'></image>
+      <view>在售车辆</view>
+    </view>
+  </navigator>
+  <navigator url='/shop/active/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417008.png'></image>
+      <view>热销活动</view>
+    </view>
+  </navigator>
+  <navigator url='' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417009.png'></image>
+      <view>门店审核</view>
+    </view>
+  </navigator>
+  <navigator url='' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417010.png'></image>
+      <view>贷款审核</view>
+    </view>
+  </navigator>
+  <navigator url='' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417011.png'></image>
+      <view>寻车管理</view>
+    </view>
+  </navigator>
+  <navigator url='' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417012.png'></image>
+      <view>预约购车</view>
+    </view>
+  </navigator>
+</view>

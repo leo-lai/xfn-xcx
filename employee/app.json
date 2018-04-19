@@ -1,6 +1,11 @@
 {
   "pages": [
     "pages/home/index",
+    "shop/active/list",
+    "shop/active/add",
+    "shop/online/list",
+    "shop/online/add",
+    "shop/online/selector",
     "express/menu",
     "express/wuliu/list",
     "express/wuliu/add",
@@ -84,7 +89,8 @@
     "pages/login/index",
     "pages/region/index",
     "pages/week-selector/index",
-    "level2/order/refund"
+    "level2/order/refund",
+    "shop/menu"
   ],
   "window": {
     "backgroundColor": "#eee",

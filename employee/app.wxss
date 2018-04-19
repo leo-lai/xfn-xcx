@@ -322,11 +322,15 @@ image{max-width: 100%;}
 .l-popup-center ._close{color: #fff; font-size: 50rpx; margin-top: 30rpx;}
 
 /* ========================== */
+.l-cell-right{margin-left: 10rpx;}
+.l-cell-radio{transform: scale(0.7); vertical-align: 2rpx; margin-left: -4rpx;}
+.l-fixed-right{position: fixed; right: 30rpx; bottom: 30rpx; text-align: center; opacity: 0.9; color: #fba452; font-size: 24rpx;}
+.l-fixed-right image{width: 80rpx; height: 80rpx; display: block; margin:auto;}
 .l-radius{border-radius: 10rpx; overflow: hidden;}
 .l-menu-grid{padding: 0 30rpx 30rpx 30rpx; box-sizing: border-box; overflow: hidden; }
 .l-menu-grid ._item{ display: inline-block; vertical-align: top; width: 48%; padding: 30rpx; background-color: #fff; border-radius: 10rpx;  text-align: center; box-sizing: border-box; margin-top: 4%;}
-.l-menu-grid ._item image{ width: 100%; }
-.l-menu-grid ._item ._txt{ margin-top: -60rpx; }
+.l-menu-grid ._item image{ display: block; width: 80%; margin: auto;}
+.l-menu-grid ._item ._txt{ margin-top: 0; }
  .l-menu-grid ._item:nth-of-type(even){ margin-left: 4%;} 
 
 .l-search-box{ position: fixed; top:0; left: 0; right: 0; z-index: 1000;}

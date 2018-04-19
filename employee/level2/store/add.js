@@ -73,7 +73,7 @@ Page({
     this.setData(data)
   },
   // 选择省市区
-  changeRegion: function (area, city, province) {
+  onRegion: function (area, city, province) {
     if (area && city && province) {
       this.setData({
         'formData.provinceId': province.value,

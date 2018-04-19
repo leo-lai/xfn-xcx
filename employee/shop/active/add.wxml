@@ -1,0 +1,160 @@
+<!--shop/online/add.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  
+  <view class='weui-cells weui-cells_after-title'>
+    <navigator url='/shop/online/selector?id={{formData.goodsCarsId}}' class='weui-cell weui-cell_select'>
+      <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+        <view class='weui-label'>请选择活动车辆</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-select weui-select_in-select-after l-text-wrap1'>
+          <text class='l-fs-s' wx:if='{{goodsInfo.carsName}}'>{{goodsInfo.carsName}}</text>
+          <text wx:else class='l-text-gray'>请选择</text>  
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <view class='l-bg-white' wx:if='{{goodsInfo.goodsCarsId}}'>
+    <view class='l-flex-hc l-padding-btn l-border-b'>
+      <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{goodsInfo.thumb}}'></image>
+      <view class='l-rest'>
+        <view class='l-h4'>{{goodsInfo.carsName}}</view>
+        <view class='l-text-gray l-fs-s'>
+          <text>车身：{{goodsInfo.colourName}}</text>
+          <text class='l-margin-l'>内饰：{{goodsInfo.interiorName}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='l-padding'>
+      <view class='l-flex-hc'>
+        <text class='l-text-gray'>指导价</text>
+        <view class='l-rest l-text-right l-text-theme l-fs-13'>￥{{goodsInfo.guidingPriceStr}}万</view>
+      </view>
+      <view class='l-flex-hc'>
+        <text class='l-text-gray'>可售数量</text>
+        <view class='l-rest l-text-right'>{{goodsInfo.saleingNumber}}辆</view>
+      </view>
+      <view class='l-flex-hc'>
+        <text class='l-text-gray'>裸车价</text>
+        <view class='l-rest l-text-right'>￥{{goodsInfo.saleingPriceStr}}万</view>
+      </view>
+      <view class='l-flex-hc'>
+        <text class='l-text-gray'>{{goodsInfo.discountPriceOnLine > 0 ? '已加价' : '已优惠'}}</text>
+        <view class='l-rest l-text-right'>￥{{goodsInfo.discountPriceOnLineStr}}</view>
+      </view>
+      <view class='l-flex-hc'>
+        <text class='l-text-gray'>生产日期</text>
+        <view class='l-rest l-text-right'>{{goodsInfo.dateOfManufacture}}</view>
+      </view>
+      <view class='l-flex-hc'>
+        <text class='l-text-gray'>物流周期</text>
+        <view class='l-rest l-text-right'>{{goodsInfo.logisticsCycle}}天</view>
+      </view>
+      <view class='l-flex-hc'>
+        <text class='l-text-gray'>开票周期</text>
+        <view class='l-rest l-text-right'>{{goodsInfo.invoiceCycle}}天</view>
+      </view>
+      <view class='l-flex-h' wx:if='{{goodsInfo.remarks}}'>
+        <text class='l-text-gray'>车辆备注</text>
+        <view class='l-rest l-text-right'>{{goodsInfo.remarks}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='weui-cells weui-cells_after-title l-margin-t'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <text class='weui-label'>活动数量</text>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请输入活动车辆数量' id='saleingNumber' value='{{formData.saleingNumber}}' bindinput='bindInput' type='number' maxlength='{{9}}' />
+      </view>
+      <view class='l-cell-right'>辆</view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <text class='weui-label'>活动价格</text>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请输入车辆活动价格' id='activityPrice' value='{{formData.activityPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+      </view>
+      <view class='l-cell-right'>元</view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <text class='weui-label'>定金金额</text>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input class='weui-input' placeholder='请输入定金金额' id='depositPrice' value='{{formData.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+      </view>
+      <view class='l-cell-right'>元</view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__bd' style='padding: 15rpx 0;'>
+        <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入活动描述' id='remarks' value='{{formData.remarks}}' bindinput='bindInput'></textarea>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-bg-white l-margin-t'>
+    <view class='l-padding-btn l-border-b'>
+      <text>活动轮播图片(640*400)</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files'>
+              <block wx:for='{{uploadImages1}}' wx:key='tick'>
+                <view class='weui-uploader__file {{ (item.loading || item.error) ? "weui-uploader__file_status" : "" }}' bindtap='previewImage' id='{{item.path}}' data-imgs='{{uploadImages1}}'>
+                  <image class='weui-uploader__img' src='{{item.path}}' mode='aspectFill' data-val='{{item.tick}}' bindlongpress='longDelImage' data-name='uploadImages1'/>
+                  <view wx:if='{{item.loading}}' class='weui-uploader__file-content'>{{item.progress}}%</view>
+                  <view wx:if='{{item.error}}' class='weui-uploader__file-content'>
+                    <icon type='warn' size='23' color='#F43530'></icon>
+                  </view>
+                </view>
+              </block>
+            </view>
+            <view class='weui-uploader__input-box'>
+              <view class='weui-uploader__input' bindtap='chooseImage' data-name='uploadImages1'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-bg-white l-margin-t'>
+    <view class='l-padding-btn l-border-b'>
+      <text>活动详情图片</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files'>
+              <block wx:for='{{uploadImages2}}' wx:key='tick'>
+                <view class='weui-uploader__file {{ (item.loading || item.error) ? "weui-uploader__file_status" : "" }}' bindtap='previewImage' id='{{item.path}}' data-imgs='uploadImages2'>
+                  <image class='weui-uploader__img' src='{{item.path}}' mode='aspectFill' data-val='{{item.tick}}' bindlongpress='longDelImage' data-name='uploadImages2'/>
+                  <view wx:if='{{item.loading}}' class='weui-uploader__file-content'>{{item.progress}}%</view>
+                  <view wx:if='{{item.error}}' class='weui-uploader__file-content'>
+                    <icon type='warn' size='23' color='#F43530'></icon>
+                  </view>
+                </view>
+              </block>
+            </view>
+            <view class='weui-uploader__input-box'>
+              <view class='weui-uploader__input' bindtap='chooseImage' data-name='uploadImages2'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>

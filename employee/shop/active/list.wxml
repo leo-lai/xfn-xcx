@@ -1,0 +1,71 @@
+<!--shop/online/list.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view class='weui-tab'>
+    <view class='weui-navbar l-bg-white l-sticky'>
+      <block wx:for='{{tabs.tit}}' wx:key='*this'>
+        <view id='{{index}}' class='weui-navbar__item {{tabs.index == index ? "weui-bar__item_on" : ""}}' bindtap='tabClick'>
+          <view class='weui-navbar__title'>{{item}}</view>
+        </view>
+      </block>
+      <view class='weui-navbar__slider' style='left: {{tabs.left}}px; transform: translateX({{tab.offset}}px); -webkit-transform: translateX({{tabs.offset}}px);'></view>
+    </view>
+
+    <view class='l-list-filter' catchtouchmove='noopFn' style='top: 102rpx;'>
+      <view class='_input l-flex-hc'>
+        <view class='l-rest'>
+          <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入车型查询' value='{{filter.data.keywords}}'/>
+        </view>
+        <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+        <icon type='search' size='18' color='#555' bindtap='search'></icon>
+      </view>
+    </view>
+    <view style='height: 120rpx;'></view>
+
+    <view class='weui-tab__panel'>
+      <view class='weui-tab__content' hidden='{{tabs.index != 0}}'>
+        <view>
+          <view class='l-flex-h l-bg-white l-padding l-border-b' wx:for='{{list1.data}}' wx:key="goodsCarsActivityId" bindtap='edit' data-item='{{item}}'>
+            <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{item.thumb}}'></image>
+            <view class='l-rest'>
+              <view class='l-h4 l-text-wrap1'>{{item.carsName}}</view>
+              <view class='l-margin-t-s'>
+                <text class='l-text-theme'>￥{{item.saleingPriceStr}}万</text>
+                <text class='l-margin-l l-fs-s'>指导价：￥{{item.guidingPriceStr}}万</text>
+              </view>
+              <view class='l-margin-t-s' catchtap='noopFn'>
+                <button class='l-fr' size="mini" bindtap='upOff' id="{{item.goodsCarsActivityId}}" data-val='1'>下架</button>
+                <text class='l-fs-s l-text-gray'>{{item.saleingNumber}}辆</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <template is='loadmore' data='{{...list1}}' />
+      </view>
+      <view class='weui-tab__content' hidden='{{tabs.index != 1}}'>
+        <view>
+          <view class='l-flex-h l-bg-white l-padding l-border-b' wx:for='{{list2.data}}' wx:key="goodsCarsActivityId" bindtap='edit' data-item='{{item}}'>
+            <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{item.thumb}}'></image>
+            <view class='l-rest'>
+              <view class='l-h4 l-text-wrap1'>{{item.carsName}}</view>
+              <view class='l-margin-t-s'>
+                <text class='l-text-theme'>￥{{item.saleingPriceStr}}万</text>
+                <text class='l-margin-l l-fs-s'>指导价：￥{{item.guidingPriceStr}}万</text>
+              </view>
+              <view class='l-margin-t-s' catchtap='noopFn'>
+                <button class='l-fr' size="mini" bindtap='upOff' id="{{item.goodsCarsActivityId}}" data-val='0'>上架</button>
+                <text class='l-fs-s l-text-gray'>{{item.saleingNumber}}辆</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <template is='loadmore' data='{{...list2}}' />
+      </view>
+    </view>
+  </view>
+
+  <navigator url='add' class='l-fixed-right' hover-class='none'>
+    <image src='/images/20180417015.png'></image>
+    <text>新增热销活动</text>
+  </navigator>
+</view>

@@ -1,6 +1,6 @@
 <!--level2/order/list.wxml-->
 <import src='/template/loadmore.wxml' />
-<view style='padding-top: 100rpx;' class='l-page-full'>
+<view class='l-page-full'>
   <view class='l-list-filter' catchtouchmove='noopFn'>
     <view class='_input l-flex-hc'>
       <view class='l-rest'>
@@ -10,6 +10,7 @@
       <icon type='search' size='18' color='#555' bindtap='search'></icon>
     </view>
   </view>
+  <view style='height: 100rpx;'></view>
 
   <!-- 订购单列表 -->
   <view class='l-order-list-item' wx:for='{{list.data}}' wx:key='{{orderCode}}'>

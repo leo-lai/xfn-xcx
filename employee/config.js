@@ -22,7 +22,7 @@
  *                佛祖坐镇 顺利上线
  */
 var host = 'http://tomcat.mifengqiche.com'
-var host = 'https://tomcat.xfnauto.com'
+// var host = 'https://tomcat.xfnauto.com'
 
 var resURL = 'https://res.xfnauto.com'
 var commonUrl = host + '/tauto/common'
@@ -237,7 +237,17 @@ var config = {
   stockInDel: `${baseUrl}/storageDelete`,
   // 全部已入库
   stockInSure: `${baseUrl}/storageOverSure`,
-
+  // 商城接口
+  shop: {
+    cangList: `${baseUrl}/shop/organizationWarehouseList`,
+    goodsList: `${baseUrl}/shop/orgShopGoodsCarsList`,
+    goodsEdit: `${baseUrl}/shop/shopGoodsCarsEdit`,
+    goodsInfo: `${baseUrl}/shop/shopGoodsCarsInfo`,
+    goodsUpOff: `${baseUrl}/shop/shopGoodsCarsShelves`,
+    activeList: `${baseUrl}/shop/orgActivityList`,
+    activeUpOff: `${baseUrl}/shop/activityShelves`,
+    activeEdit: `${baseUrl}/shop/activityEdit`,
+  },
   // 物流接口
   exp: {
     // 非专线运费配置

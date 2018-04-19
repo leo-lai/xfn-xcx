@@ -1,7 +1,7 @@
 ﻿export let regionData = [
   {
     "text": "北京市",
-    "value": "100000",
+    "value": "110000",
     "children": [{
       "text": "北京市",
       "value": "110100",

@@ -36,7 +36,7 @@ Page({
                 done: true,
                 loading: false,
                 progress: 100,
-                tick: Date.now()
+                tick: app.utils.guid()
               }
             }) : []
           })

@@ -49,8 +49,8 @@ Page({
     let item = event.currentTarget.dataset.item
     this.setData({ 'area.slted': item })
     app.getPrevPage().then(prevPage => {
-      if (prevPage.changeRegion) {
-        prevPage.changeRegion({
+      if (prevPage.onRegion) {
+        prevPage.onRegion({
           text: item.text,
           value: item.value
         }, {

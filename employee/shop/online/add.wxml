@@ -1,0 +1,293 @@
+<!--shop/online/add.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-text-gray l-fs-s' style='margin: 40rpx 30rpx -20rpx 30rpx;'>车辆信息</view>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <navigator url='/pages/car-selector/index' class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>车型</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-select weui-select_in-select-after'>
+            <text class='l-fs-s' wx:if='{{formData.carsId}}'>{{formData.carsName}}</text>
+            <text wx:else class='l-text-gray'>请选择</text>  
+          </view>
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>车身颜色</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='colourId' data-picker='cheshen' bindchange='bindInput' value='{{cheshen.index}}' range='{{cheshen.list}}' range-key='carColourName'>
+            <view class='weui-select weui-select_in-select-after'>
+              <text wx:if='{{cheshen.index === -1}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{cheshen.list[cheshen.index].carColourName}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>内饰颜色</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='interiorId' data-picker='neishi' bindchange='bindInput' value='{{neishi.index}}' range='{{neishi.list}}' range-key='interiorName'>
+            <view class='weui-select weui-select_in-select-after'>
+              <text wx:if='{{neishi.index === -1}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{neishi.list[neishi.index].interiorName}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>可售数量</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入可售数量' id='saleingNumber' value='{{formData.saleingNumber}}' bindinput='bindInput' type='number' maxlength='{{9}}' />
+        </view>
+        <view class='l-cell-right'>辆</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-text-gray l-fs-s' style='margin: 40rpx 30rpx -20rpx 30rpx;'>价格信息</view>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>官方指导价</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input'>{{formData.guidingPrice}}</view>
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <text class='weui-label'>线上优惠</text>
+          <radio-group class="l-inline l-margin-l l-text-gray" id="onlineDis" bindchange='bindInput'>
+            <label>
+              <radio class='l-cell-radio' color='#fa5539' value='{{1}}' checked='{{formData.onlineDis == 1}}'/>优惠
+            </label>
+            <label class='l-margin-l'>
+              <radio class='l-cell-radio' color='#fa5539' value='{{0}}' checked='{{formData.onlineDis == 0}}'/>加价
+            </label>
+          </radio-group>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入金额' id='discountPriceOnLine' value='{{formData.discountPriceOnLine}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <text class='weui-label'>线下优惠</text>
+          <radio-group class="l-inline l-margin-l l-text-gray" id="underLineDis" bindchange='bindInput'>
+            <label>
+              <radio class='l-cell-radio' color='#fa5539' value='{{1}}' checked='{{formData.underLineDis == 1}}'/>优惠
+            </label>
+            <label class='l-margin-l'>
+              <radio class='l-cell-radio' color='#fa5539' value='{{0}}' checked='{{formData.underLineDis == 0}}'/>加价
+            </label>
+          </radio-group>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入金额' id='discountPriceUnderLine' value='{{formData.discountPriceUnderLine}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>是否带交强险</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view class='weui-input' style='padding-right: 30rpx;'>
+            <radio-group id='overInsurance' bindchange='bindInput'>
+              <label>
+                <radio class='l-cell-radio' color='#fa5539' value='{{1}}' checked='{{formData.overInsurance == 1}}'/>
+                <text>是</text>
+              </label>
+              <label class='l-margin-l'>
+                <radio class='l-cell-radio' color='#fa5539' value='{{2}}' checked='{{formData.overInsurance == 0}}'/>
+                <text>否</text>
+              </label>
+            </radio-group>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <text class='weui-label'>线上裸车价</text>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入金额' id='bareCarPriceOnLine' value='{{formData.bareCarPriceOnLine}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <text class='weui-label'>定金金额</text>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入金额' id='depositPrice' value='{{formData.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <text class='weui-label'>线下裸车价</text>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入金额' id='bareCarPriceUnderLine' value='{{formData.bareCarPriceUnderLine}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <text class='weui-label'>开票价</text>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入金额' id='invoicePrice' value='{{formData.invoicePrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-text-gray l-fs-s' style='margin: 30rpx 30rpx -20rpx 30rpx;'>其他信息</view>
+  <view class='l-margin l-radius'>
+    <view class='weui-cells weui-cells_after-title'>
+      <navigator class='weui-cell weui-cell_select' url='/pages/region/index'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>车辆所属区域</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <view wx:if='{{formData.cityName}}' class='weui-select weui-select_in-select-after'>{{formData.cityName}}</view>
+          <view wx:else class='weui-select weui-select_in-select-after l-text-gray'>请选择</view>  
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>仓库</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='warehouseId' data-picker='cang' bindchange='bindInput' value='{{cang.index}}' range='{{cang.list}}' range-key='warehouseName'>
+            <view class='weui-select weui-select_in-select-after'>
+              <text wx:if='{{cang.index === -1}}' class='l-text-gray'>请选择</text>
+              <text wx:else>{{cang.list[cang.index].warehouseName}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>物流周期</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' type='number' placeholder='请填写' maxlength='{{11}}' confirm-type='next' id='logisticsCycle' value='{{formData.logisticsCycle}}' bindinput='bindInput' />
+        </view>
+        <view class='l-cell-right'>天</view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>物流费用</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' type='digit' placeholder='请输入物流费用' maxlength='{{11}}' confirm-type='next' id='logisticsPrice' value='{{formData.logisticsPrice}}' bindinput='bindInput' />
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>开票周期</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' type='number' placeholder='请填写' maxlength='{{11}}' confirm-type='next' id='invoiceCycle' value='{{formData.invoiceCycle}}' bindinput='bindInput' />
+        </view>
+        <view class='l-cell-right'>天</view>
+      </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>生产日期</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker mode='date' id='dateOfManufacture' bindchange='bindInput' value='{{formData.dateOfManufacture}}'>
+            <view class='weui-select weui-select_in-select-after'>
+              <text wx:if='{{formData.dateOfManufacture}}'>{{formData.dateOfManufacture}}</text>
+              <text wx:else class='l-text-gray'>请选择</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__bd' style='padding: 15rpx 0;'>
+          <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注' id='remarks' value='{{formData.remarks}}' bindinput='bindInput'></textarea>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text>车辆轮播图片(640*400)</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files'>
+              <block wx:for='{{uploadImages1}}' wx:key='tick'>
+                <view class='weui-uploader__file {{ (item.loading || item.error) ? "weui-uploader__file_status" : "" }}' bindtap='previewImage' id='{{item.path}}' data-imgs='{{uploadImages1}}'>
+                  <image class='weui-uploader__img' src='{{item.path}}' mode='aspectFill' data-val='{{item.tick}}' bindlongpress='longDelImage' data-name='uploadImages1'/>
+                  <view wx:if='{{item.loading}}' class='weui-uploader__file-content'>{{item.progress}}%</view>
+                  <view wx:if='{{item.error}}' class='weui-uploader__file-content'>
+                    <icon type='warn' size='23' color='#F43530'></icon>
+                  </view>
+                </view>
+              </block>
+            </view>
+            <view class='weui-uploader__input-box'>
+              <view class='weui-uploader__input' bindtap='chooseImage' data-name='uploadImages1'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-margin l-radius l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text>车辆详情图片</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files'>
+              <block wx:for='{{uploadImages2}}' wx:key='tick'>
+                <view class='weui-uploader__file {{ (item.loading || item.error) ? "weui-uploader__file_status" : "" }}' bindtap='previewImage' id='{{item.path}}' data-imgs='uploadImages2'>
+                  <image class='weui-uploader__img' src='{{item.path}}' mode='aspectFill' data-val='{{item.tick}}' bindlongpress='longDelImage' data-name='uploadImages2'/>
+                  <view wx:if='{{item.loading}}' class='weui-uploader__file-content'>{{item.progress}}%</view>
+                  <view wx:if='{{item.error}}' class='weui-uploader__file-content'>
+                    <icon type='warn' size='23' color='#F43530'></icon>
+                  </view>
+                </view>
+              </block>
+            </view>
+            <view class='weui-uploader__input-box'>
+              <view class='weui-uploader__input' bindtap='chooseImage' data-name='uploadImages2'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>

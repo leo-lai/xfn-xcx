@@ -1,0 +1,33 @@
+<!--shop/online/selector.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入车型查询' value='{{filter.data.keywords}}' />
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+  <view style='height: 120rpx;'></view>
+
+  <view>
+    <view class='l-flex-h l-bg-white l-padding l-border-b' wx:for='{{list.data}}' wx:key="goodsCarsId" bindtap='slt' data-item='{{item}}'>
+      <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{item.thumb}}'></image>
+      <view class='l-rest'>
+        <view class='l-h4 l-text-wrap1'>{{item.carsName}}</view>
+        <view class='l-margin-t-s'>
+          <text class='l-text-theme'>￥{{item.saleingPriceStr}}万</text>
+          <text class='l-margin-l l-fs-s'>指导价：￥{{item.guidingPriceStr}}万</text>
+        </view>
+        <view class='l-margin-t-s'>
+          <icon class='l-fr' size='20' type='success' color='#fa5539' wx:if='{{slted.goodsCarsId == item.goodsCarsId}}'/>
+          <text class='l-fs-s l-text-gray'>{{item.saleingNumber}}辆</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+</view>

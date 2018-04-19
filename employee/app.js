@@ -162,7 +162,7 @@ App({
     })
   },
   // post 表单请求
-  post: function (url = '', formData = {}, showErr = true) {
+  post: function (url = '', formData = {}, showErr = true) {    
     return this.ajax('POST', url, formData, showErr = true)
   },
   // post JSON请求
