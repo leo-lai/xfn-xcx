@@ -1,0 +1,90 @@
+<!--shop/seek/info.wxml-->
+<view class='l-page-full'>
+  <view class='l-bg-white'>
+    <view class='l-flex-hc l-padding-btn l-margin-b'>
+      <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{info.thumb}}'></image>
+      <view class='l-rest'>
+        <view class='l-h4'>{{info.carsName}}</view>
+        <view class='l-text-gray l-fs-s'>
+          <text class='l-text-theme'>期望价：￥{{info.expectationAmount}}万</text>
+          <text class='l-margin-l'>指导价：￥{{info.guidancePriceStr}}万 </text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='weui-cells weui-cells_after-title l-margin-tb'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>发布人</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.shopUserName}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>发布日期</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.createDate}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>车身颜色：</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.colourName}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>内饰颜色：</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{(info.interiorName)}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>上牌城市：</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.signCity}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>寻车人：</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.linkmanName}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>联系电话：</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.linkmanPhone}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>备注信息：</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.remarks}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 104rpx;'></view>
+  <view class='l-fixed-bottom l-flex-hc l-bg-white'>
+    <view class='l-rest l-padding'>
+      请对该寻车单报价
+    </view>
+    <navigator url='offer?id={{info.findTheCarId}}' class='_btn1'>报价</navigator>
+  </view>
+</view>

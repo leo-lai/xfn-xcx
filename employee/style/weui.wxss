@@ -197,6 +197,7 @@ icon {
   /* padding-bottom: 17rpx; */
   margin-top: 17rpx;
   margin-bottom: 17rpx;
+  word-break: break-all;
 }
 
 .weui-toptips {

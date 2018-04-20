@@ -81,8 +81,8 @@ const toast = (msg, isBack) => {
     })
     clearTimeout(toastTimeid)
     toastTimeid = setTimeout(_ => {
-      isBack && back()
       resolve()
+      isBack && back()
     }, 1500)
   })
 }

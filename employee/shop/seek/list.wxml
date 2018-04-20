@@ -1,2 +1,38 @@
 <!--shop/seek/list.wxml-->
-<text>shop/seek/list.wxml</text>
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入车型查询' value='{{filter.data.keywords}}' />
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+  <view style='height: 120rpx;'></view>
+
+  <view bindtap='viewInfo' url='info?id={{item.findTheCarId}}' class='l-order-item l-padding l-bg-white l-border-b l-margin-b' wx:for='{{list.data}}' wx:key="findTheCarId" data-item='{{item}}'>
+    <view class='_hd l-flex-hc'>
+      <view class='l-rest'>期望价：￥{{item.expectationAmount}}万</view>
+      <text class="{{stateClass[0]}}">{{'寻车中'}}</text>
+      <text class='l-icon-6a8'></text>
+    </view>
+    <view class='_bd l-flex-hc'>
+      <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{item.thumb}}'></image>
+      <view class='l-rest'>
+        <view class='l-h4 l-text-wrap1'>{{item.carsName}}</view>
+        <view class='l-margin-t-s l-txt-gray'>
+          <text>车身：{{item.colourName}}</text>
+          <text class='l-margin-l'>内饰：{{item.interiorName}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='l-flex-hc l-padding-t'>
+      <text class='l-text-gray'>{{item.createDate}}</text>
+      <view class='l-rest'></view>
+      <button size='mini' class='l-button-main'>去报价</button>
+    </view>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+</view>

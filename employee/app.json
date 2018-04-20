@@ -97,7 +97,9 @@
     "pages/msg/index",
     "pages/login/index",
     "pages/region/index",
-    "pages/week-selector/index"
+    "pages/week-selector/index",
+    "shop/seek/info",
+    "shop/seek/offer"
   ],
   "window": {
     "backgroundColor": "#eee",

@@ -259,6 +259,10 @@ var config = {
     // 门店审核
     storeList: `${baseUrl}/shop/shopOrgList`,
     storeAudit: `${baseUrl}/shop/shopOrgAudit`,
+    // 寻车列表
+    seekList: `${baseUrl}/shop/shopFindCarList`,
+    seekInfo: `${baseUrl}/shop/shopFindCarInfo`,
+    seekOffer: `${baseUrl}/shop/shopFindCarOffer`,
   },
   // 物流接口
   exp: {

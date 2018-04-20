@@ -1,7 +1,6 @@
 <!--shop/online/add.wxml-->
 <view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full'>
-  
   <view class='weui-cells weui-cells_after-title'>
     <navigator url='/shop/online/selector?id={{formData.goodsCarsId}}' class='weui-cell weui-cell_select'>
       <view class='weui-cell__hd weui-cell__hd_in-select-after'>
