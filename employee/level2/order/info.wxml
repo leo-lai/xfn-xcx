@@ -169,20 +169,21 @@
     </view> 
     <view class='l-list-tab-cont l-padding {{item.checked ? "_slted" : ""}}' wx:for='{{info.pickers}}' wx:key='id'>
       <view>
-        <text class='l-fr'>联系电话：{{item.userPhone}}</text>
-        <text>姓名：{{item.userName}}</text>
+        
+        <text class='l-dmr'>提车人姓名：{{item.userName}}</text>
+        <text>联系电话：{{item.userPhone}}</text>
       </view>
       <view>身份证照片：</view>
       <view class='l-flex-hc' style='margin: 10rpx 0 0 -30rpx;' 
         data-urls='{{[item.idCardPicOn, item.idCardPicOff]}}' bindtap='previewImage'>
         <view class='l-text-center l-margin-l'>
-          <view class='l-upload-add'>
+          <view class='l-upload-add' style='width: 250rpx; height: 150rpx;'>
             <image id='{{item.idCardPicOn}}' mode='aspectFill' src='{{item.idCardPicOn}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>正面</view> 
         </view>
         <view class='l-text-center l-margin-l'>
-          <view class='l-upload-add'>
+          <view class='l-upload-add' style='width: 250rpx; height: 150rpx;'>
             <image id='{{item.idCardPicOff}}' mode='aspectFill' src='{{item.idCardPicOff}}'></image>
           </view>
           <view class='l-text-gray l-fs-s'>反面</view> 

@@ -1,6 +1,6 @@
 /* level2/order/info.wxss */
 /* 提车人 */
-.l-list-tab-tit{white-space: nowrap; display: none;}
+.l-list-tab-tit{white-space: nowrap;}
 .l-list-tab-tit ._item{display: inline-block; background-color: #fa5539; color: #fff; padding: 5rpx 20rpx; margin-right: 4rpx; opacity: 0.3;}
 .l-list-tab-tit ._item._slted{
   border-radius: 15rpx 0 0 0; margin-right: 10rpx; padding-right: 30rpx;

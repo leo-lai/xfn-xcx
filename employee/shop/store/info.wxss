@@ -1,0 +1,10 @@
+/* shop/store/info.wxss */
+.l-fixed-bottom ._btn1{
+  color: #fff; padding: 30rpx; min-width: 140rpx; text-align: center;
+  background-image: linear-gradient(135deg, #f98937, #eb6100);
+}
+
+.l-fixed-bottom ._btn2{
+  padding: 30rpx; min-width: 140rpx; text-align: center;
+  background-color: #eef3f6;
+}

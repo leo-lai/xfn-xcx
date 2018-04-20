@@ -111,14 +111,18 @@ Page({
     })
   },
   createOrder: function () {
+    app.storage.setItem('shop-order-info', this.data.info)
     if (this.data.info.userType == 2) {
-      app.storage.setItem('shop-order-info', this.data.info)
       app.navigateTo('/level2/order/add?aid=' + this.data.info.advanceOrderId)
+    }else{
+      app.navigateTo('/level3/customer/add?aid=' + this.data.info.advanceOrderId)
     }
   },
   viewInfo: function () {
     if (this.data.info.userType == 2) {
       app.navigateTo('/level2/order/info?id=' + this.data.info.realOrderId)
+    }else{
+      app.navigateTo('/level3/customer/info?ids=' + this.data.info.realOrderId)
     }
   }
 })

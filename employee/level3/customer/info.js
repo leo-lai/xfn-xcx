@@ -167,12 +167,10 @@ Page({
   },
   // 显示购车单信息
   showCustomerOrder: function () {
-    let url = 'order?ids=' + this.data.customerInfo.customerUsersId
-    if (this.data.orderInfo.customerOrderId) {
-      url += ',' + this.data.orderInfo.customerOrderId
-    }
     this.closeBankPass()
-    app.navigateTo(url)
+    let customerUsersId = this.data.customerInfo.customerUsersId || ''
+    let customerOrderId = this.data.customerInfo.customerOrderId || ''
+    app.navigateTo(`order?ids=${customerUsersId},${customerOrderId}`)
   },
   // 银行审核
   bankPass: function (event) {

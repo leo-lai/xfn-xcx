@@ -1,8 +1,10 @@
-// shop/order/list.js
+// shop/loan/list.js
 const app = getApp()
 Page({
   noopFn: app.noopFn,
   data: {
+    state: ['申请中', '已通过', '已拒绝'],
+    stateClass: ['l-text-theme', 'l-text-green', 'l-text-error'],
     filter: {
       loading: false,
       visible: false,
@@ -28,7 +30,14 @@ Page({
     }, this.route)
   },
   onShow: function () {
-    app.checkLogin()
+    app.checkLogin().then(_ => {
+      app.storage.getItem('shop-loan-list-refresh').then(refresh => {
+        if (refresh) {
+          app.storage.removeItem('shop-loan-list-refresh')
+          this.getList()
+        }
+      })
+    })
   },
   // 加载更多
   onReachBottom: function () {
@@ -56,17 +65,13 @@ Page({
     }
 
     this.setData({ 'list.loading': true })
-    return app.post(app.config.shop.orderList, {
+    return app.post(app.config.shop.loanList, {
       page, ...this.data.filter.data,
       rows: this.data.list.rows
     }).then(({ data }) => {
       data.list = data.list.map(item => {
-        if (item.orderInfoVos && item.orderInfoVos.length > 0) {
-          let carInfo = item.orderInfoVos[0]
-          carInfo.thumb = app.utils.formatThumb(carInfo.image, 100, 100)
-          carInfo.guidancePriceStr = (carInfo.guidancePrice / 10000).toFixed(2)
-          item.carInfo = carInfo
-        }
+        item.thumb = app.utils.formatThumb(item.image, 100, 100)
+        item.guidancePriceStr = (item.guidancePrice / 10000).toFixed(2)
         return item
       })
       this.setData({
@@ -78,6 +83,11 @@ Page({
       this.setData({ 'list.loading': false })
       callback(this.data.list.data)
     })
+  },
+  viewInfo: function (event) {
+    let item = event.currentTarget.dataset.item
+    app.storage.setItem('shop-loan-info', item)
+    app.navigateTo('info?id=' + item.applyLoanId)
   },
 
   // 搜索相关=================================================

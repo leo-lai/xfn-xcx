@@ -1,6 +1,12 @@
 {
   "pages": [
+    "shop/menu",
+    "shop/seek/list",
+    "shop/loan/list",
+    "shop/loan/info",
     "pages/home/index",
+    "shop/store/list",
+    "shop/store/info",
     "shop/order/list",
     "shop/order/info",
     "shop/active/list",
@@ -56,6 +62,7 @@
     "level2/order/contract",
     "level2/order/price",
     "level2/order/ticket",
+    "level2/order/refund",
     "level3/customer/list",
     "level3/customer/add",
     "level3/customer/info",
@@ -90,9 +97,7 @@
     "pages/msg/index",
     "pages/login/index",
     "pages/region/index",
-    "pages/week-selector/index",
-    "level2/order/refund",
-    "shop/menu"
+    "pages/week-selector/index"
   ],
   "window": {
     "backgroundColor": "#eee",

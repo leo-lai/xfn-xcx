@@ -1,0 +1,122 @@
+<!--shop/store/info.wxml-->
+<view class='l-page-full'>
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>申请人</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.linkMan}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>申请日期</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.createDate}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>店铺名称</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.shortName}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>店铺地址</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.fullAddress}}</view>
+      </view>
+    </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>店铺描述</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='weui-input'>{{info.introduce}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-margin-tb l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text class='l-fs-s l-text-gray'>法人身份证</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files' bindtap='previewImage' data-urls='{{[info.idCardPicOn, info.idCardPicOff]}}'>
+              <view class='weui-uploader__file' >
+                <image style='width: 250rpx; height: 150rpx;' class='weui-uploader__img' id='{{info.idCardPicOn}}' src='{{info.idCardPicOn}}' mode='aspectFill'/>
+              </view>
+              <view class='weui-uploader__file'>
+                <image style='width: 250rpx; height: 150rpx;' class='weui-uploader__img' id='{{info.idCardPicOff}}' src='{{info.idCardPicOff}}' mode='aspectFill'/>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-margin-tb l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text class='l-fs-s l-text-gray'>营业执照</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files' bindtap='previewImage' data-urls='{{info.businessLicenseArr}}'>
+              <view class='weui-uploader__file' wx:for='{{info.businessLicenseArr}}' wx:key='*this'>
+                <image class='weui-uploader__img' id='{{item}}' src='{{item}}' mode='aspectFill'/>
+              </view>
+            </view>
+            <view wx:if='{{info.businessLicenseArr.length === 0}}' class='l-text-center l-text-gray'>无</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='l-margin-tb l-bg-white'>
+    <view class='l-padding-btn l-border-b'>
+      <text class='l-fs-s l-text-gray'>店铺照片</text>
+    </view>
+    <view class='l-padding'>
+      <view class='weui-cell__bd'>
+        <view class='weui-uploader'>
+          <view class='weui-uploader__bd'>
+            <view class='weui-uploader__files' bindtap='previewImage' data-urls='{{info.imageArr}}'>
+              <view class='weui-uploader__file' wx:for='{{info.imageArr}}' wx:key='*this'>
+                <image class='weui-uploader__img' id='{{item}}' src='{{item}}' mode='aspectFill'/>
+              </view>
+            </view>
+            <view wx:if='{{info.imageArr.length === 0}}' class='l-text-center l-text-gray'>无</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height: 104rpx;'></view>
+  <view class='l-fixed-bottom l-flex-hc l-bg-white' wx:if='{{info.status == 3}}'>
+    <view class='l-rest l-padding'>
+      请审核门店信息
+    </view>
+    <view class='_btn2' bindtap='pass' data-val='{{0}}'>不通过</view>
+    <view class='_btn1' bindtap='pass' data-val='{{1}}'>通过</view>
+  </view>
+  <view class='l-fixed-bottom l-bg-white' wx:else>
+    <view class='l-padding l-text-center'>
+      <text class='l-text-green' wx:if='{{info.status == 1}}'>已审核通过</text>
+      <text class='l-text-error' wx:if='{{info.status == 2}}'>已审核拒绝</text>
+    </view>
+  </view>
+</view>

@@ -47,10 +47,10 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onReady: function (options) {
+  onReady: function () {
     app.onLogin(userInfo => {
       this.$params = {
-        ids: options.ids ? options.ids.split(',') : ['', '']
+        ids: this.options.ids ? this.options.ids.split(',') : ['', '']
       }
       this.getInfo().then(_ => {
         this.getSales()

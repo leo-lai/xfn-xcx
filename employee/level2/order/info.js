@@ -77,9 +77,6 @@ Page({
       if (data.customers.length > 0) {
         this.tabCustomer(data.customers[0].id)
       }
-
-      
-      
     }).finally(_ => {
       wx.hideLoading()
     })

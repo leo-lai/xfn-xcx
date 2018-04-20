@@ -12,7 +12,7 @@
   </view>
   <view style='height: 120rpx;'></view>
 
-  <navigator url='info?id={{item.advanceOrderId}}' class='l-order-item l-padding l-bg-white l-border-b' wx:for='{{list.data}}' wx:key="advanceOrderId" data-item='{{item}}'>
+  <navigator url='info?id={{item.advanceOrderId}}' class='l-order-item l-padding l-bg-white l-border-b l-margin-b' wx:for='{{list.data}}' wx:key="advanceOrderId" data-item='{{item}}'>
     <view class='_hd l-flex-hc'>
       <view class='l-rest'>预约单号：{{item.orderCode}}</view>
       <text class="l-text-theme">{{item.overCatch ? '已开单' : '未开单'}}</text>

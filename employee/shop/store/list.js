@@ -1,8 +1,10 @@
-// shop/order/list.js
+// shop/store/list.js
 const app = getApp()
 Page({
   noopFn: app.noopFn,
   data: {
+    storeStatus: ['审核通过', '审核不通过', '审核中'],
+    statusClass: ['l-text-green', 'l-text-error', 'l-text-theme'],
     filter: {
       loading: false,
       visible: false,
@@ -10,6 +12,7 @@ Page({
         keywords: ''
       }
     },
+    slted: null,
     list: {
       ajax: false,
       loading: false,
@@ -24,11 +27,21 @@ Page({
    */
   onReady: function () {
     app.onLogin(userInfo => {
+      this.setData({
+        slted: { goodsCarsId: this.options.id }
+      })
       this.getList()
     }, this.route)
   },
   onShow: function () {
-    app.checkLogin()
+    app.checkLogin().then(_ => {
+      app.storage.getItem('shop-store-list-refresh').then(refresh => {
+        if (refresh) {
+          app.storage.removeItem('shop-store-list-refresh')
+          this.getList()
+        }
+      })
+    })
   },
   // 加载更多
   onReachBottom: function () {
@@ -46,7 +59,7 @@ Page({
       wx.stopPullDownRefresh()
     }
   },
-  // 商品列表-上架
+  // 门店列表
   getList: function (page = 1, callback = app.noopFn) {
     page === 1 && this.setData({ 'list.more': true })
 
@@ -56,17 +69,13 @@ Page({
     }
 
     this.setData({ 'list.loading': true })
-    return app.post(app.config.shop.orderList, {
+    return app.post(app.config.shop.storeList, {
       page, ...this.data.filter.data,
       rows: this.data.list.rows
     }).then(({ data }) => {
       data.list = data.list.map(item => {
-        if (item.orderInfoVos && item.orderInfoVos.length > 0) {
-          let carInfo = item.orderInfoVos[0]
-          carInfo.thumb = app.utils.formatThumb(carInfo.image, 100, 100)
-          carInfo.guidancePriceStr = (carInfo.guidancePrice / 10000).toFixed(2)
-          item.carInfo = carInfo
-        }
+        item.imageArr = item.imageUrl ? item.imageUrl.split(',') : []
+        item.thumb = app.utils.formatThumb(item.imageArr[0], 150, 150)
         return item
       })
       this.setData({
@@ -78,6 +87,11 @@ Page({
       this.setData({ 'list.loading': false })
       callback(this.data.list.data)
     })
+  },
+  viewInfo: function (event) {
+    let item = event.currentTarget.dataset.item
+    app.storage.setItem('shop-store-info', item)
+    app.navigateTo('info?id=' + item.orgId)
   },
 
   // 搜索相关=================================================

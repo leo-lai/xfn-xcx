@@ -35,7 +35,9 @@ Page({
    */
   onReady: function (options) {
     if (this.options.aid) {
-      this.data.formData.advanceOrderId = this.options.aid
+      this.setData({
+        'formData.advanceOrderId': this.options.aid
+      })
       app.storage.getItem('shop-order-info').then(info => {
         if (info) {
           let formData = {

@@ -11,12 +11,12 @@
         <input class='weui-input' placeholder='请填写' id='customerUserCard' value='{{orderInfo.customerUserCard}}' bindinput='bindInput' type='idcard' maxlength='{{18}}'/>
       </view>
     </view>
-    <navigator url='/pages/car-selector/index' class='weui-cell weui-cell_input'>
-      <view class='weui-cell__hd'>
+    <navigator url='/pages/car-selector/index' class='weui-cell weui-cell_select'>
+      <view class='weui-cell__hd weui-cell__hd_in-select-after'>
         <view class='weui-label'>订购车辆 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <view class='weui-input'>
+        <view class='weui-select weui-select_in-select-after'>
           <text wx:if='{{orderInfo.carsId}}'>{{orderInfo.carsName}}</text>
           <text wx:else class='l-text-gray'>请选择</text>
         </view>
@@ -38,26 +38,26 @@
         <input disabled='{{true}}' class='weui-input' value='{{orderInfo.frameNumber || "--"}}' />
       </view>
     </view>
-    <view class='weui-cell weui-cell_input'>
-      <view class='weui-cell__hd'>
+    <view class='weui-cell weui-cell_select'>
+      <view class='weui-cell__hd weui-cell__hd_in-select-after'>
         <view class='weui-label'>车身颜色 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='colourId' data-picker='cheshen' bindchange='bindInput' value='{{cheshen.index}}' range='{{cheshen.list}}' range-key='carColourName'>
-          <view class='weui-input'>
+          <view class='weui-select weui-select_in-select-after'>
             <text wx:if='{{cheshen.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{cheshen.list[cheshen.index].carColourName}}</text>
           </view>
         </picker>
       </view>
     </view>
-    <view class='weui-cell weui-cell_input'>
-      <view class='weui-cell__hd'>
+    <view class='weui-cell weui-cell_select'>
+      <view class='weui-cell__hd weui-cell__hd_in-select-after'>
         <view class='weui-label'>内饰颜色 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='interiorId' data-picker='neishi' bindchange='bindInput' value='{{neishi.index}}' range='{{neishi.list}}' range-key='interiorName'>
-          <view class='weui-input'>
+          <view class='weui-select weui-select_in-select-after'>
             <text wx:if='{{neishi.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{neishi.list[neishi.index].interiorName}}</text>
           </view>
@@ -72,13 +72,13 @@
         <input disabled='{{orderInfo.customerOrderState > 1}}' class='weui-input' placeholder='请填写' id='depositPrice' value='{{orderInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
     </view>
-    <view class='weui-cell weui-cell_input'>
-      <view class='weui-cell__hd'>
+    <view class='weui-cell weui-cell_select'>
+      <view class='weui-cell__hd weui-cell__hd_in-select-after'>
         <view class='weui-label'>销售顾问</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <picker id='systemUserId' data-picker='sales' bindchange='bindInput' value='{{sales.index}}' range='{{sales.list}}' range-key='systemUserName'>
-          <view class='weui-input'>
+          <view class='weui-select weui-select_in-select-after'>
             <text wx:if='{{sales.index === -1}}' class='l-text-gray'>请选择</text>
             <text wx:else>{{sales.list[sales.index].systemUserName}}</text>
           </view>

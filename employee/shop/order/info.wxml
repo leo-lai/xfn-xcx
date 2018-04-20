@@ -35,7 +35,7 @@
     </view>
   </view>
 
-  <view class='l-bg-white l-margin-t l-padding'>
+  <view class='l-bg-white l-margin-tb l-padding'>
     <view class='l-flex-hc'>
       <text class='l-text-gray'>购车方式</text>
       <view class='l-rest l-text-right'>{{expectBuyWay[info.expectBuyWay]}}</view>
@@ -46,7 +46,7 @@
     </view>
   </view>
 
-  <view class='l-bg-white l-margin-t l-padding'>
+  <view class='l-bg-white l-margin-tb l-padding'>
     <view class='l-flex-hc'>
       <text class='l-text-gray'>客户姓名</text>
       <view class='l-rest l-text-right'>{{info.realName}}</view>
@@ -65,6 +65,7 @@
     </view>
   </view>
 
+  <view style='height: 104rpx;'></view>
   <view class='l-fixed-bottom l-flex-hc l-bg-white' wx:if='{{info.overCatch && info.realOrderId}}'>
     <view class='l-rest l-padding'>
       该预约单已开单

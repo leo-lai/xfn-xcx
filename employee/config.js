@@ -32,7 +32,7 @@ var config = {
   baseData: {
     carTime: ['随车', '3个工作日内', '7个工作日内', '10个工作日内', '15个工作日内'],
     buyTime: ['3天内', '7天内'],
-    buyWay: ['全款', '分期'],
+    buyWay: ['全款', '分期付款'],
     wuliu: ['自提', '其他', '送车'],
     orderType: ['客户订车', '门店订车'],
     carParts: ['防爆膜', '底盘漆', '地毯', '灭火器', '车头锁', '头枕', '抱枕', '香水', '导航', '全车座椅拉皮', '行车记录仪（单向）', '行车记录仪（双向）', '行车记录仪（隐藏式）', '行车记录仪（高清）', '晴雨挡', '挡泥板', '全车隔音', '倒车雷达（4探）', '倒车雷达（6探）'],
@@ -253,6 +253,12 @@ var config = {
     // 预约单列表
     orderList: `${baseUrl}/shop/orgAdvanceOrderList`,
     orderInfo: `${baseUrl}/shop/orgAdvanceOrderInfo`,
+    // 贷款审核
+    loanList: `${baseUrl}/shop/applyLoanList`,
+    loanAudit: `${baseUrl}/shop/applyLoanAudit`, 
+    // 门店审核
+    storeList: `${baseUrl}/shop/shopOrgList`,
+    storeAudit: `${baseUrl}/shop/shopOrgAudit`,
   },
   // 物流接口
   exp: {

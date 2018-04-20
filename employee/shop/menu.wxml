@@ -12,19 +12,19 @@
       <view>热销活动</view>
     </view>
   </navigator>
-  <navigator url='' class='l-margin l-bg-white l-padding l-radius'>
+  <navigator url='/shop/store/list' class='l-margin l-bg-white l-padding l-radius'>
     <view class='l-padding-btn l-text-center'>
       <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417009.png'></image>
       <view>门店审核</view>
     </view>
   </navigator>
-  <navigator url='' class='l-margin l-bg-white l-padding l-radius'>
+  <navigator url='/shop/loan/list' class='l-margin l-bg-white l-padding l-radius'>
     <view class='l-padding-btn l-text-center'>
       <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417010.png'></image>
       <view>贷款审核</view>
     </view>
   </navigator>
-  <navigator url='' class='l-margin l-bg-white l-padding l-radius'>
+  <navigator url='/shop/seek/list' class='l-margin l-bg-white l-padding l-radius'>
     <view class='l-padding-btn l-text-center'>
       <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417011.png'></image>
       <view>寻车管理</view>

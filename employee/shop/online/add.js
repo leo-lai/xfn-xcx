@@ -263,7 +263,7 @@ Page({
   },
   previewImage: function (event) {
     let current = event.currentTarget.id
-    let url = event.currentTarget.dataset.imgs.map(item => item.path)
+    let urls = event.currentTarget.dataset.imgs.map(item => item.path)
     wx.previewImage({ current, urls })
   },
   longDelImage: function (event) {

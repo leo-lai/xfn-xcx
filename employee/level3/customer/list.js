@@ -87,7 +87,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin()
+    app.checkLogin().then(_ => {
+      app.storage.getItem('lv3-customer-list-refresh').then(refresh => {
+        if (refresh) {
+          app.storage.removeItem('lv3-customer-list-refresh')
+          this.getList()
+        }
+      })
+    })
   },
   // 加载更多
   // onReachBottom: function () {

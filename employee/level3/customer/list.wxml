@@ -59,9 +59,11 @@
         <text>{{item.systemUserName || '无'}}</text>
       </view>
     </view>
-    <view class='l-border-t l-padding-t l-margin-t l-text-center' catchtap='noopFn'>
-      <button wx:if='{{item.orderState == 17}}' size='mini' class='l-button-border l-margin-lr-s' id='{{item.customerOrderId}}' bindtap='visitShow'>回访备注</button>
-      <button wx:if='{{!item.customerUsersOrgId}}' data-item='{{item}}' bindtap='sltSaler' size='mini' class='l-button-border l-margin-lr-s'>分配销售顾问</button>
+    <view wx:if='{{item.orderState == 17}}' class='l-border-t l-padding-t l-margin-t l-text-center' catchtap='noopFn'>
+      <button size='mini' class='l-button-border l-margin-lr-s' id='{{item.customerOrderId}}' bindtap='visitShow'>回访备注</button>
+    </view>
+    <view wx:if='{{!item.customerUsersOrgId}}' class='l-border-t l-padding-t l-margin-t l-text-center' catchtap='noopFn'>
+      <button data-item='{{item}}' bindtap='sltSaler' size='mini' class='l-button-border l-margin-lr-s'>分配销售顾问</button>
     </view>
    </navigator>
    <template is='loadmore' data='{{...list}}' /> 

@@ -16,9 +16,10 @@ Page({
     buyWay: app.config.baseData.buyWay,
     buyTime: app.config.baseData.buyTime,
     formData: {
+      advanceOrderId: '',
       customerUsersName: '',
       phoneNumber: '',
-      appointmentDate: todayStr,
+      appointmentDate: '',
       timeOfAppointment: '',
       carsName: '',
       intentionCarId: '',
@@ -30,8 +31,28 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onReady: function (options) {
+    if (this.options.aid) {
+      this.setData({
+        'formData.advanceOrderId': this.options.aid
+      })
+      app.storage.getItem('shop-order-info').then(info => {
+        if (info) {
+          let formData = {
+            customerUsersName: info.realName,
+            phoneNumber: info.phoneNumber,
+            appointmentDate: info.timeOfAppointmentDate ? info.timeOfAppointmentDate.split(' ')[0] : '',
+            carsName: info.orderInfoVos[0].carsName,
+            intentionCarId: info.orderInfoVos[0].carsId,
+            expectWayId: info.expectBuyWay - 1,
+            remarks: info.remarks
+          }
+          this.setData({
+            formData: app.utils.copyObj(this.data.formData, formData),
+          })
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面显示
@@ -104,10 +125,17 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.customerAdd, formData).then(({ data }) => {
-      app.toast('新增成功', true).then(_ => {
-        app.getPrevPage().then(prevPage => {
-          prevPage.getList && prevPage.getList()
-        })
+      app.storage.setItem('lv3-customer-list-refresh', 1)
+      app.toast('保存成功', false).then(_ => {
+        if(data) {
+          if (this.data.formData.advanceOrderId) {
+            app.navigateTo(`order?ids=${data.customerUsersId}&aid=${this.data.formData.advanceOrderId}`)
+          } else {
+            app.navigateTo(`info?ids=${data.customerUsersId},${data.customerUsersOrgId}`)
+          }
+        }else{
+          app.back()
+        }
       })
     }).catch(err => {
       wx.hideLoading()

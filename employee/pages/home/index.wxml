@@ -45,16 +45,20 @@
       <view class="_txt">客户管理</view>
     </navigator>
     <navigator class='_item' url='/level3/stock/index'>
-      <image mode='widthFix' src='/images/stock-icon.jpg'></image>
+      <image mode='widthFix' src='/images/20180417002.png'></image>
       <view class="_txt">库存/出库</view>
     </navigator>
     <navigator class='_item' url='/level2/order/list'>
-      <image mode='widthFix' src='/images/daigou-icon.jpg'></image>
+      <image mode='widthFix' src='/images/20180417001.png'></image>
       <view class="_txt">代购管理</view>
     </navigator>
     <navigator class='_item' url='/level3/parts/index'>
       <image mode='widthFix' src='/images/20180417014.png'></image>
       <view class="_txt">加装/上牌</view>
+    </navigator>
+    <navigator class='_item' url='/shop/menu'>
+      <image mode='widthFix' src='/images/20180417005.png'></image>
+      <view class="_txt">淘车快管理</view>
     </navigator>
   </view>
 </view>
