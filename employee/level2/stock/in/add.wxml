@@ -49,6 +49,7 @@
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请填写' id='logisticsCost' value='{{formData.logisticsCost}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
+        <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__bd' style='padding: 15rpx 0;'>

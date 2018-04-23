@@ -96,6 +96,7 @@
                   <text class='l-margin-r'>车身颜色：{{item.colourName}}</text>
                   <text>内饰颜色：{{item.interiorName}}</text>
                 </view>
+                <view class='l-fs-s'>车辆出厂日期：{{item.factoryOut}}</view>
               </view>
             </label>
           </checkbox-group>

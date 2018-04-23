@@ -71,10 +71,10 @@
     </view>
   </view>
 
-  <!-- 4S店对接人信息 -->
+  <!-- 4S/汽贸店对接人信息 -->
   <view class='l-bg-white l-padding-btn l-margin-tb'>
     <view class='l-flex-hc'>
-      <text>4S店对接人信息</text>
+      <text>4S/汽贸店对接人信息</text>
     </view>
     <view class='l-border-t l-margin-t-m l-padding-t-m l-fs-s' wx:for='{{info.leaveTheCarPerson}}' wx:key='id'>
       <view>

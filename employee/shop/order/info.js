@@ -115,7 +115,7 @@ Page({
     if (this.data.info.userType == 2) {
       app.navigateTo('/level2/order/add?aid=' + this.data.info.advanceOrderId)
     }else{
-      app.navigateTo('/level3/customer/add?aid=' + this.data.info.advanceOrderId)
+      app.navigateTo('/level3/customer/order?aid=' + this.data.info.advanceOrderId)
     }
   },
   viewInfo: function () {

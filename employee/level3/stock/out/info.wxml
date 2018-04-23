@@ -67,7 +67,10 @@
           <checkbox-group bindchange='sltCarList'>
             <label class='weui-cell weui-check__label l-padding' wx:for='{{carList.list}}' wx:key='{{stockCarId}}'>
               <view class='l-margin-r-m'><checkbox value='{{item.stockCarId}}'/></view>
-              <view class='weui-cell__bd'>车架号：{{item.frameNumber}}</view>
+              <view class='weui-cell__bd'>
+                <view>车架号：{{item.frameNumber}}</view>
+                <view>出厂日期：{{item.factoryOut}}</view>
+              </view>
             </label>
           </checkbox-group>
           <view class='l-padding l-text-center' wx:if='{{carList.list.length === 0}}'>

@@ -40,16 +40,22 @@
         <view class='weui-cell__ft l-fs-s'>{{orderInfo.paymentWayInfo}}</view>
       </view>
       <view class='l-padding l-text-center l-border-t' wx:if='{{orderInfo.customerOrderState == 3 || orderInfo.customerOrderState == 4}}'>
-        <view wx:if='{{orderInfo.loanBank != 4 || orderInfo.customerOrderState == 4}}'>
+        <view wx:if='{{orderInfo.customerOrderState == 4}}'>
+          <button class='l-button-border' bindtap='showBankPass'>请重新选择贷款方案</button>
+        </view>
+        <view class='l-margin-t-m'>
+          <button bindtap='bankPass' data-val='1' class='l-button-main'>银行审核通过</button>
+        </view>
+
+        <!-- <view wx:if='{{orderInfo.loanBank != 4 || orderInfo.customerOrderState == 4}}'>
           <button class='l-button-border' bindtap='showBankPass'>请重新选择贷款方案</button>
         </view>
         <view wx:if='{{orderInfo.loanBank != 4}}' class='l-margin-t-m'>
           <button bindtap='bankPass' data-val='1' class='l-button-main'>银行审核通过</button>
         </view>
-
         <view  wx:if='{{orderInfo.loanBank == 4 && orderInfo.customerOrderState == 3}}'>
           <button class='l-button-main' bindtap='bankUpload'>上传资料</button>
-        </view>
+        </view> -->
       </view>
 
       <view class='weui-cell l-text-center' wx:if='{{orderInfo.customerOrderState == 13}}'>
@@ -78,23 +84,23 @@
     </view>
   </view>
 
-  <!-- 客户备注 -->
+  <!-- 客户记录 -->
   <view class='l-margin l-radius'>
     <view class='weui-panel'>
       <view class='l-flex-hc l-padding-btn l-border-b'>
-        <view class='l-rest l-h4'>客户备注</view>
-        <text class='l-text-theme l-fs-s' bindtap='showRemarkPop' wx:if='{{userInfo.orgLevel === 3}}'>添加备注</text>
+        <view class='l-rest l-h4'>客户记录</view>
+        <text class='l-text-theme l-fs-s' bindtap='showRemarkPop' wx:if='{{userInfo.orgLevel === 3}}'>添加记录</text>
       </view>
       <view class='weui-panel__bd l-scroll' style='max-height: 600rpx;'>
         <view class='weui-media-box weui-media-box_text' wx:for='{{remarkInfo.list}}' wx:key='remarksId'>
-          <view class='weui-media-box__desc'>{{item.remarksContent}}</view>
+          <view>{{item.remarksContent}}</view>
           <view class='weui-media-box__info'>
             <view class='weui-media-box__info__meta'>{{item.systemUserName}}</view>
             <view class='weui-media-box__info__meta weui-media-box__info__meta_extra'>{{item.createDate}}</view>
           </view>
         </view>
         <view class='weui-cell' wx:if='{{remarkInfo._list.length === 0}}'>
-          <view class='weui-cell__bd l-text-center l-text-gray'>暂无备注信息</view>
+          <view class='weui-cell__bd l-text-center l-text-gray'>暂无记录信息</view>
         </view>
       </view>
       <view class='weui-panel__ft' wx:if='{{remarkInfo._list.length > 1}}'>
@@ -107,15 +113,15 @@
   <view class='l-popup-center l-flex-vh' wx:if='{{remarkInfo.visible}}' catchtouchmove='noopFn'>
     <view class='_inner' style='width: 80%; margin-top: 10%;'>
       <view class='l-padding'>
-        <textarea style='width:100%; height: 240rpx;' fixed='{{true}}' auto-focus='{{true}}' placeholder='输入备注内容' id='remarksContent' bindinput='bindInput' value='{{remarkInfo.data.remarksContent}}'></textarea>
+        <textarea style='width:100%; height: 240rpx;' fixed='{{true}}' auto-focus='{{true}}' placeholder='输入记录内容' id='remarksContent' bindinput='bindInput' value='{{remarkInfo.data.remarksContent}}'></textarea>
         <view class='l-margin-t l-text-center' bindtap='addRemark'>
-          <button loading='{{remarkInfo.loading}}' disabled='{{remarkInfo.loading}}' class='l-button-main'>{{remarkInfo.loading ? '提交中' : '提交备注'}}</button>
+          <button loading='{{remarkInfo.loading}}' disabled='{{remarkInfo.loading}}' class='l-button-main'>{{remarkInfo.loading ? '提交中' : '提交记录'}}</button>
         </view>
       </view>
     </view>
     <text class='l-icon-61a _close' bindtap='closeRemarkPop'></text>
   </view>
-  <!-- 客户备注 end-->
+  <!-- 客户记录 end-->
 
   <!-- 预约信息 -->
   <view class='l-margin l-radius l-bg-white'>

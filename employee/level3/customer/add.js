@@ -13,6 +13,14 @@ Page({
       index: -1,
       list: ['08:00-09:00', '09:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-13:00', '13:00-14:00', '14:00-15:00', '15:00-16:00', '16:00-17:00', '17:00-18:00']
     },
+    intensity: {
+      index: -1,
+      list: ['高', '中', '低']
+    },
+    makeSource: {
+      index: -1,
+      list: ['4S店', '微信', '朋友介绍', '公众号', '直接到店', '其他']
+    },
     buyWay: app.config.baseData.buyWay,
     buyTime: app.config.baseData.buyTime,
     formData: {
@@ -25,6 +33,8 @@ Page({
       intentionCarId: '',
       expectWayId: '',
       carPurchaseIntention: '',
+      intensity: '',    // 客户强度
+      makeSource: '',   // 客户来源
       remarks: ''
     }
   },

@@ -24,7 +24,7 @@
 
   <view class='l-bg-white l-padding-btn l-margin-b'>
     <view class='l-flex-hc'>
-      <text>4S店对接人信息</text>
+      <text>4S/汽贸店对接人信息</text>
       <view class='l-rest'></view>
       <navigator wx:if='{{cars.length === 0}}' url='men?type=1&ids={{info.consignmentId}}' hover-class='none'>
         <button class='l-btn-min1 l-margin-l-s' size='mini'>添加对接人</button>

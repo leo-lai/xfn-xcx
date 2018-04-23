@@ -40,6 +40,7 @@ Page({
       unitPrice: '',
       frameNumber: '',
       engineNumber: '',
+      factoryOut: '',
       certificateNumber: '',
       certificateDate: '',
       warehouseId: '',

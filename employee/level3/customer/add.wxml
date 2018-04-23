@@ -72,6 +72,36 @@
           </picker>
         </view>
       </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>客户强度</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='intensity' data-picker='intensity' bindchange='bindInput' value='{{intensity.index}}' range='{{intensity.list}}'>
+            <view wx:if='{{intensity.index !== -1}}' class='weui-select weui-select_in-select-after'>{{intensity.list[intensity.index]}}</view>
+            <view wx:else class='weui-select weui-select_in-select-after l-text-gray'>请选择</view>
+          </picker>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+          <view class='weui-label'>客户强度</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <picker id='makeSource' data-picker='makeSource' bindchange='bindInput' value='{{makeSource.index}}' range='{{makeSource.list}}'>
+            <view wx:if='{{makeSource.index !== -1}}' class='weui-select weui-select_in-select-after'>{{makeSource.list[makeSource.index]}}</view>
+            <view wx:else class='weui-select weui-select_in-select-after l-text-gray'>请选择</view>
+          </picker>
+        </view>
+      </view>
+      <!-- <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>客户来源</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入客户来源' confirm-type='next' id='makeSource' value='{{formData.makeSource}}' bindinput='bindInput' />
+        </view>
+      </view> -->
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__bd' style='padding: 15rpx 0;'>
           <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注' id='remarks' value='{{formData.remarks}}' bindinput='bindInput'></textarea>

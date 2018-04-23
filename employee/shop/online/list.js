@@ -36,19 +36,15 @@ Page({
     }
   },
   onLoad: function () {
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          'tabs.left': (res.windowWidth / that.data.tabs.tit.length - sliderWidth) / 2,
-          'tabs.offset': res.windowWidth / that.data.tabs.tit.length * that.data.tabs.index
-        })
-      }
+    let sysInfo = wx.getSystemInfoSync()
+    this.setData({
+      'tabs.left': (sysInfo.windowWidth / this.data.tabs.tit.length - sliderWidth) / 2,
+      'tabs.offset': sysInfo.windowWidth / this.data.tabs.tit.length * this.data.tabs.index
     })
   },
   onReady: function () {
     app.onLogin(userInfo => {
-      this.getList1()
+      this.tabClick(0)
     }, this.route)
   },
   onShow: function () {
@@ -149,12 +145,23 @@ Page({
     })
   },
   tabClick: function (event) {
-    this.setData({
-      'tabs.offset': event.currentTarget.offsetLeft,
-      'tabs.index': event.currentTarget.id
-    })
-
-    if (event.currentTarget.id == 1) {
+    let index
+    if (event && event.currentTarget) {
+      index = event.currentTarget.id
+      this.setData({
+        'tabs.offset': event.currentTarget.offsetLeft,
+        'tabs.index': event.currentTarget.id
+      })
+    }else {
+      index = event
+      let sysInfo = wx.getSystemInfoSync()
+      this.setData({
+        'tabs.index': index,
+        'tabs.left': (sysInfo.windowWidth / this.data.tabs.tit.length - sliderWidth) / 2,
+        'tabs.offset': sysInfo.windowWidth / this.data.tabs.tit.length * index
+      })
+    }
+    if (index == 1) {
       this.data.list2.data.length === 0 && this.getList2()
     }else {
       this.data.list1.data.length === 0 && this.getList1()
