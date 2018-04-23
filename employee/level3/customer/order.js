@@ -147,13 +147,38 @@ Page({
     data['orderInfo.' + id] = value
     this.setData(data)
   },
+  getBeforeInfo: function() {
+    if(this.options.aid) {
+      return app.storage.getItem('shop-order-info').then(info => {
+        let orderInfo = info
+        if (info) {
+          let carInfo = info.orderInfoVos[0]
+          orderInfo = {
+            advanceOrderId: this.options.aid,
+            brandId: carInfo.brandId,
+            familyId: carInfo.familyId,
+            carsId: carInfo.carsId,
+            carsName: carInfo.carsName,
+            colourId: carInfo.colourId,
+            interiorId: carInfo.interiorId,
+            guidingPrice: carInfo.guidingPrice,
+            depositPrice: carInfo.depositPrice
+          }
+        }
+        return { data: orderInfo }
+      })
+    }else{
+      return app.post(app.config.customerOrderBefore, {
+        customerUsersId: this.$params.ids[0]
+      })
+    }
+  },
   getInfo: function () {
     return new Promise((resolve, reject) => {
       wx.showNavigationBarLoading()
-      app.post(app.config.customerOrderBefore, {
-        customerUsersId: this.$params.ids[0]
-      }).then(({ data }) => {
+      this.getBeforeInfo().then(({data}) => {
         let orderInfo = Object.assign({}, this.data.orderInfo, data)
+
         if (this.$params.ids[1]) {
           app.post(app.config.customerOrderInfo, {
             customerOrderId: this.$params.ids[1]
