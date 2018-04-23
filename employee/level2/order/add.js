@@ -39,6 +39,7 @@ Page({
         'formData.advanceOrderId': this.options.aid
       })
       app.storage.getItem('shop-order-info').then(info => {
+        console.log(info)
         if (info) {
           let formData = {
             orgId: info.orgId,

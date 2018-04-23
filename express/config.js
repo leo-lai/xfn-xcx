@@ -22,13 +22,18 @@
  *                佛祖坐镇 顺利上线
  */
 var host = 'http://tomcat.mifengqiche.com'
-var host = 'https://tomcat.xfnauto.com'
+// var host = 'https://tomcat.xfnauto.com'
 
 var resURL = 'https://res.xfnauto.com'
 var commonUrl = host + '/tauto/common'
 var baseUrl = host + '/tauto/driver'
 
 var config = {
+  baseData: {
+    // 随车资料
+    incarParts: ['车辆统一发明票', '用户手册', '保养手册', '合格证', '天线', '随车地毯', '三包凭证', '点烟器', '一致证书', '工具、备胎', '主匙', '备匙', '反光衣', '首保凭证', '档位盖']
+  },
+
   // 静态资源服务器
   resURL,
   

@@ -9,6 +9,7 @@ Page({
     cars: [],
     frames: [],
     images: [],
+    carParts: [],
     info: null
   },
 
@@ -35,7 +36,8 @@ Page({
     app.post(app.config.tuoyunInfo, {
       consignmentId: this.options.id
     }).then(({ data }) => {
-      let frames = [], images = [], image = null
+      let frames = [], images = [], carParts = []
+      let image = null, carPart = null
       data.goodsCarVos = data.goodsCarVos.filter(item => {
         if (this.data.cars.length === 0 || this.data.cars.includes(item.goodsCarId + '')) {
           image = item.acceptImage ? item.acceptImage.split(',').map(img => {
@@ -49,8 +51,11 @@ Page({
             }
           }) : []
 
+          carPart = item.followInformation ? item.followInformation.split(',') : []
+
           images.push(image)
           frames.push(item.frameNumber)
+          carParts.push(carPart)
           return item
         }
       })
@@ -58,7 +63,8 @@ Page({
       this.setData({ 
         info: data,
         frames,
-        images
+        images,
+        carParts
       })
     }).finally(_ => {
       wx.hideLoading()
@@ -199,6 +205,21 @@ Page({
       urls
     })
   },
+  // 选择随车资料
+  showCarParts: function (event) {
+    let index = event.currentTarget.dataset.index
+    let carParts = this.data.carParts[index]
+    app.storage.setItem('load-car-parts', { index, list: carParts })
+    app.navigateTo('car-parts')
+  },
+  onCarPartsCb: function(carParts) {
+    if(carParts) {
+      this.data.carParts[carParts.index] = carParts.list
+      this.setData({
+        carParts: this.data.carParts
+      })
+    }
+  },
 
   submit: function () {
     let formData = {
@@ -207,13 +228,15 @@ Page({
     }
     let frames = this.data.frames
     let images = this.data.images
+    let carParts = this.data.carParts
     this.data.info.goodsCarVos.forEach((item, index) => {
       formData.cars.push({
         goodsCarId: item.goodsCarId,
         colorId: item.colourId,
         interiorId: item.interiorId || '',
         vin: frames[index] || '',
-        acceptImage: images[index].map(item => item.src).join(',')
+        acceptImage: images[index].map(item => item.src).join(','),
+        followInformation: carParts[index].join(',')
       })
     })
 

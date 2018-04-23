@@ -136,16 +136,16 @@ Page({
     wx.showLoading({ mask: true })
     app.post(app.config.customerAdd, formData).then(({ data }) => {
       app.storage.setItem('lv3-customer-list-refresh', 1)
-      app.toast('保存成功', false).then(_ => {
-        if(data) {
-          if (this.data.formData.advanceOrderId) {
-            app.navigateTo(`order?ids=${data.customerUsersId}&aid=${this.data.formData.advanceOrderId}`)
-          } else {
-            app.navigateTo(`info?ids=${data.customerUsersId},${data.customerUsersOrgId}`)
-          }
-        }else{
-          app.back()
-        }
+      app.toast('保存成功', true).then(_ => {
+        // if(data) {
+        //   if (this.data.formData.advanceOrderId) {
+        //     app.navigateTo(`order?ids=${data.customerUsersId}&aid=${this.data.formData.advanceOrderId}`)
+        //   } else {
+        //     app.navigateTo(`info?ids=${data.customerUsersId},${data.customerUsersOrgId}`)
+        //   }
+        // }else{
+        //   app.back()
+        // }
       })
     }).catch(err => {
       wx.hideLoading()

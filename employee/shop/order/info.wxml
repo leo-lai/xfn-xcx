@@ -26,11 +26,11 @@
       </view>
       <view class='l-flex-hc' wx:if='{{carInfo.discountPriceOnLine > 0}}'>
         <text class='l-text-gray'>已加价</text>
-        <view class='l-rest l-text-right'>￥{{carInfo.discountPriceOnLineStr}}</view>
+        <view class='l-rest l-text-right'>￥{{carInfo.discountPriceOnLine}}</view>
       </view>
       <view class='l-flex-hc' wx:else>
         <text class='l-text-gray'>已优惠</text>
-        <view class='l-rest l-text-right'>￥{{0-carInfo.discountPriceOnLineStr}}</view>
+        <view class='l-rest l-text-right'>￥{{0-carInfo.discountPriceOnLine}}</view>
       </view>
     </view>
   </view>

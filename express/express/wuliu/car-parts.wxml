@@ -1,4 +1,4 @@
-<!--pages/car-stock-in-info/parst.wxml-->
+<!--express/wuliu/car-parts.wxml-->
 <view class='l-page-full'>
   <view class='weui-cells weui-cells_after-title l-bg-white'>
     <checkbox-group bindchange='sltcarParts'>

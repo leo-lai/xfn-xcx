@@ -21,7 +21,7 @@
           <view class='weui-label'>申请人</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <view class='weui-input'>{{info.loanPeopleName}}</view>
+          <view class='weui-input'>{{storeInfo.linkMan || ''}}</view>
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>
@@ -29,7 +29,7 @@
           <view class='weui-label'>联系电话</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <view class='weui-input'>{{info.loanPeoplePhone}}</view>
+          <view class='weui-input'>{{storeInfo.telePhone || ''}}</view>
         </view>
       </view>
       <view class='weui-cell weui-cell_input'>

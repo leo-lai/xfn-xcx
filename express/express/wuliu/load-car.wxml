@@ -68,6 +68,20 @@
           </view>
         </view>
       </view>
+      <view class='weui-cell' style='display:block;'>
+        <view class='l-flex-hc' style='margin: 2rpx 0;' data-index='{{index}}' bindtap='showCarParts'>
+          <view class='l-rest'>随车资料</view>
+          <view class='l-text-gray'>请选择</view>
+          <text class='l-icon-622'></text>
+        </view>
+        <view class='l-margin-t-m'>
+          <view class='l-tag-list'>
+            <view class='_item' wx:for='{{carParts[index]}}' wx:for-item='carPart' wx:key='*this' wx:if='{{carPart}}'>
+              <text>{{carPart}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 

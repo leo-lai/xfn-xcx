@@ -37,7 +37,8 @@ Page({
         info.guidancePriceStr = (info.guidancePrice / 10000).toFixed(2)
         info.annualIncomeImageArr = info.annualIncomeImage ? info.annualIncomeImage.split(',') : []
 
-        let storeInfo = info.organizationVo
+
+        let storeInfo = info.organizationVo || {}
         storeInfo.imageArr = storeInfo.imageUrl ? storeInfo.imageUrl.split(',') : []
         storeInfo.businessLicenseArr = storeInfo.businessLicense ? storeInfo.businessLicense.split(',') : []
         storeInfo.fullAddress = storeInfo.provinceName

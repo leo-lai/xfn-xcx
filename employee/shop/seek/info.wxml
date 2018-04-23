@@ -67,7 +67,7 @@
         <view class='weui-label'>备注信息：</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <view class='weui-input'>{{info.remarks}}</view>
+        <view class='weui-input'>{{info.remarks || ''}}</view>
       </view>
     </view>
   </view>
