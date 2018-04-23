@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/home/index",
     "shop/menu",
     "shop/seek/list",
     "shop/loan/list",
     "shop/loan/info",
-    "pages/home/index",
     "shop/store/list",
     "shop/store/info",
     "shop/order/list",

@@ -7,7 +7,7 @@
         <view class='weui-label'>联系人</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <input class='weui-input' type='text' placeholder='请填写' maxlength='{{50}}' confirm-type='next' id='linkMan' value='{{formData.linkMan}}' bindinput='bindInput' />
+        <view class='weui-input'>{{userInfo.realName}}</view>
       </view>
     </view>
     <view class='weui-cell weui-cell_input'>
@@ -15,7 +15,7 @@
         <view class='weui-label'>联系电话</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <input class='weui-input' type='tel' placeholder='请填写' maxlength='{{11}}' confirm-type='next' id='linkPhone' value='{{formData.linkPhone}}' bindinput='bindInput' />
+        <view class='weui-input'>{{userInfo.phoneNumber}}</view>
       </view>
     </view>
     <view class='weui-cell weui-cell_input'>
@@ -23,7 +23,7 @@
         <view class='weui-label'>公司名称</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <input class='weui-input' type='text' placeholder='请填写' maxlength='{{200}}' confirm-type='next' id='company' value='{{formData.company}}' bindinput='bindInput' />
+        <view class='weui-input'>{{userInfo.orgName}}</view>
       </view>
     </view>
     <navigator class='weui-cell weui-cell_select' url='/pages/region/index'>

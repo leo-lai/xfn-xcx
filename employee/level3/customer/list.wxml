@@ -58,6 +58,10 @@
         <text class='l-margin-r-s l-text-gray'>销售顾问</text>
         <text>{{item.systemUserName || '无'}}</text>
       </view>
+      <view>
+        <text class='l-margin-r-s l-text-gray'>登记时间</text>
+        <text>{{item.timeOfAppointmentDate || '无'}}</text>
+      </view>
     </view>
     <view wx:if='{{item.orderState == 17}}' class='l-border-t l-padding-t l-margin-t l-text-center' catchtap='noopFn'>
       <button size='mini' class='l-button-border l-margin-lr-s' id='{{item.customerOrderId}}' bindtap='visitShow'>回访备注</button>

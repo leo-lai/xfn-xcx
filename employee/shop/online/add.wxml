@@ -111,7 +111,7 @@
                 <text>是</text>
               </label>
               <label class='l-margin-l'>
-                <radio class='l-cell-radio' color='#fa5539' value='{{2}}' checked='{{formData.overInsurance == 0}}'/>
+                <radio class='l-cell-radio' color='#fa5539' value='{{0}}' checked='{{formData.overInsurance == 0}}'/>
                 <text>否</text>
               </label>
             </radio-group>
@@ -211,7 +211,7 @@
       </view>
       <view class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>生产日期</view>
+          <view class='weui-label'>出厂日期</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker mode='date' id='dateOfManufacture' bindchange='bindInput' value='{{formData.dateOfManufacture}}'>

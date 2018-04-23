@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: null,
     formData: {
       offerAmount: '',
       overdueDate: '',
@@ -17,7 +18,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    app.onLogin(userInfo => {
+      this.setData({ userInfo })
+    }, this.route)
   },
 
   /**
