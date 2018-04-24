@@ -226,11 +226,7 @@ Page({
   // 保存信息
   submit: function () {
     let formData = Object.assign({}, this.data.formData)
-    if (!formData.goodsCarsId) {
-      this.showTopTips('请选择活动车辆')
-      return
-    }
-
+    
     formData.carsImages = this.data.uploadImages1.map(item => item.src).join(',')
     formData.carsImage = this.data.uploadImages2.map(item => item.src).join(',')
 
