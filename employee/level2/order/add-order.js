@@ -293,6 +293,7 @@ Page({
     let changePrice = this.data.carInfo.isDiscount == 1 ? 
       (0 - this.data.carInfo.changePrice) : this.data.carInfo.changePrice
     let carInfo = Object.assign({}, this.data.carInfo, { changePrice: changePrice })
+
     let formData = {
       orderId: this.options.id,
       customer: Object.assign({}, this.data.customerInfo),

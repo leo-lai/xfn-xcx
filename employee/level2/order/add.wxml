@@ -4,17 +4,18 @@
   <view class='l-text-gray l-fs-s' style='margin: 30rpx 30rpx -20rpx 30rpx;'>订购信息</view>
   <view class='l-margin l-radius'>
     <view class='weui-cells weui-cells_after-title'>
-      <view class='weui-cell weui-cell_select' wx:if="{{formData.advanceOrderId}}">
-        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+      <!-- <view class='weui-cell weui-cell_input' wx:if="{{formData.advanceOrderId}}">
+        <view class='weui-cell__hd'>
           <view class='weui-label'>门店名称</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <view class='weui-select weui-select_in-select-after'>
-            <text>{{formData.orgName}}</text>
+          <view class='weui-input'>
+            <text wx:if='{{formData.orgId}}'>{{formData.orgName}}</text>
+            <text wx:else class='l-text-gray'>无</text>
           </view>
         </view>
-      </view>
-      <navigator wx:else url='/level2/store/list?mode=slt&rows=50&id={{formData.orgId}}' class='weui-cell weui-cell_select'>
+      </view> -->
+      <navigator url='/level2/store/list?mode=slt&rows=50&id={{formData.orgId}}' class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>门店名称</view>
         </view>
