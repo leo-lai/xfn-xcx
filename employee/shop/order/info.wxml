@@ -70,7 +70,7 @@
     <view class='l-rest l-padding'>
       该预约单已开单
     </view>
-    <navigator class='_btn' bindtap='viewInfo'>查看订单详情</navigator>
+    <view class='_btn' bindtap='viewInfo'>查看订单详情</view>
   </view>
   <view class='l-fixed-bottom l-flex-hc l-bg-white' wx:else>
     <view class='l-rest l-padding'>

@@ -122,7 +122,7 @@ Page({
     if (this.data.info.userType == 2) {
       app.navigateTo('/level2/order/info?id=' + this.data.info.realOrderId)
     }else{
-      app.navigateTo('/level3/customer/info?ids=' + this.data.info.realOrderId)
+      app.navigateTo('/level3/customer/order?ids=,' + this.data.info.realOrderId)
     }
   }
 })

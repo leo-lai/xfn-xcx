@@ -170,13 +170,13 @@
       </view>
     </view>
     <block wx:if='{{orderInfo.paymentWay == 2}}'>
-      <view class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>贷款银行</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='loanBank' data-picker='bank' bindchange='bindInput' value='{{bank.index}}' range='{{bank.list}}' range-key='name'>
-            <view class='weui-input'>
+            <view class='weui-select weui-select_in-select-after'>
               <text wx:if='{{bank.index === -1}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{bank.list[bank.index].name}}</text>
             </view>
@@ -207,13 +207,13 @@
           <input class='weui-input' placeholder='请填写' id='loanPayBackStages' value='{{orderInfo.loanPayBackStages}}' bindinput='bindInput' type='number' maxlength='{{3}}' />
         </view>
       </view>
-      <view class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
+      <view class='weui-cell weui-cell_select'>
+        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>是否抵押车辆</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='isMortgage' bindchange='bindInput' value='{{orderInfo.isMortgage}}' range='{{diya}}'>
-            <view class='weui-input'>
+            <view class='weui-select weui-select_in-select-after'>
               <text wx:if='{{orderInfo.isMortgage === ""}}' class='l-text-gray'>请选择</text>
               <text wx:else>{{diya[orderInfo.isMortgage]}}</text>
             </view>

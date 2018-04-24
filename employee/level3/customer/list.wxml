@@ -40,27 +40,25 @@
           </view>
         </view>
       </view>
-      <view>
-        <text class='l-text-theme l-fs-s'>{{item.orderStateName}}</text>
-        <text class='l-icon-6a8'></text>
-      </view>
+      <text class='l-text-theme l-fs-s'>{{item.orderStateName}}</text>
+      <text class='l-icon-622'></text>
     </view>
     <view class='l-border-t l-padding-t l-margin-t l-fs-s'>
-      <view>
+      <view class='l-flex-h'>
         <text class='l-margin-r-s l-text-gray'>购置车辆</text>
-        <text>{{item.carsName}}</text>
+        <text class='l-rest'>{{item.carsName}}</text>
       </view>
-      <view>
+      <view class='l-flex-h'>
         <text class='l-margin-r-s l-text-gray'>购车方案</text>
-        <text>{{buyWay[item.paymentWay - 1]}}</text>
+        <text class='l-rest'>{{buyWay[item.paymentWay - 1]}}</text>
       </view>
-      <view>
+      <view class='l-flex-h'>
         <text class='l-margin-r-s l-text-gray'>销售顾问</text>
-        <text>{{item.systemUserName || '无'}}</text>
+        <text class='l-rest'>{{item.systemUserName || '无'}}</text>
       </view>
-      <view>
+      <view class='l-flex-h'>
         <text class='l-margin-r-s l-text-gray'>登记时间</text>
-        <text>{{item.timeOfAppointmentDate || '无'}}</text>
+        <text class='l-rest'>{{item.timeOfAppointmentDate || '无'}}</text>
       </view>
     </view>
     <view wx:if='{{item.orderState == 17}}' class='l-border-t l-padding-t l-margin-t l-text-center' catchtap='noopFn'>

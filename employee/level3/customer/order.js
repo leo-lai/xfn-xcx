@@ -168,9 +168,13 @@ Page({
         return { data: orderInfo }
       })
     }else{
-      return app.post(app.config.customerOrderBefore, {
-        customerUsersId: this.$params.ids[0]
-      })
+      if (this.$params.ids[0]) {
+        return app.post(app.config.customerOrderBefore, {
+          customerUsersId: this.$params.ids[0]
+        })
+      }else{
+        return Promise.resolve({data: null})
+      }
     }
   },
   getInfo: function () {
@@ -289,6 +293,7 @@ Page({
     }
 
     let formData = app.utils.copyObj({
+      advanceOrderId: '',
       customerUsersId: '',
       customerOrderId: '',
       customerUserCard: '',
@@ -322,10 +327,11 @@ Page({
     }
     wx.showLoading({ mask: true })
     app.post(app.config.customerOrderAdd, formData).then(({ data }) => {
-      app.getPrevPage().then(prevPage => {
-        prevPage.getInfo()
+      app.toast('保存成功', true).then(_ => {
+        app.getPrevPage().then(prevPage => {
+          prevPage.getInfo && prevPage.getInfo()
+        })
       })
-      app.toast('保存成功', true)
     }).catch(err => {
       wx.hideLoading()
     })

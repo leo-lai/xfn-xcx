@@ -68,8 +68,8 @@ Page({
   // 客户详情
   getInfo: function () {
     return app.post(app.config.customerInfo, {
-      customerUsersId: this.$params.ids[0],
-      customerUsersOrgId: this.$params.ids[1]
+      customerUsersId: this.$params.ids[0] || '',
+      customerUsersOrgId: this.$params.ids[1] || ''
     }).then(({ data }) => {
       if (data) {
         data.customerMap.thumb = data.customerMap.headPortrait ?
@@ -169,7 +169,7 @@ Page({
   showCustomerOrder: function () {
     this.closeBankPass()
     let customerUsersId = this.data.customerInfo.customerUsersId || ''
-    let customerOrderId = this.data.customerInfo.customerOrderId || ''
+    let customerOrderId = this.data.orderInfo.customerOrderId || ''
     app.navigateTo(`order?ids=${customerUsersId},${customerOrderId}`)
   },
   // 银行审核

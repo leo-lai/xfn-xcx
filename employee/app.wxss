@@ -1,11 +1,11 @@
 @import 'style/weui.wxss';
 @font-face {
   font-family: 'l-iconfont';  /* project id 189309 */
-  src: url('//at.alicdn.com/t/font_189309_znx3q0vi996bt9.eot');
-  src: url('//at.alicdn.com/t/font_189309_znx3q0vi996bt9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_189309_znx3q0vi996bt9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_189309_znx3q0vi996bt9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_189309_znx3q0vi996bt9.svg#l-iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_189309_lic5i16kj0xusor.eot');
+  src: url('//at.alicdn.com/t/font_189309_lic5i16kj0xusor.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_189309_lic5i16kj0xusor.woff') format('woff'),
+  url('//at.alicdn.com/t/font_189309_lic5i16kj0xusor.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_189309_lic5i16kj0xusor.svg#l-iconfont') format('svg');
 }
 [class*='l-icon']{
   font-family: 'l-iconfont' !important;
@@ -46,9 +46,10 @@
 .l-icon-613::before{ content: '\e613';}
 .l-icon-649::before{ content: '\e649';}
 .l-icon-60f::before{ content: '\e60f';}
-.l-icon-6a8{color:#ccc;vertical-align:middle;}
+.l-icon-6a8{color:#ccc; vertical-align:middle; margin-right: -8rpx;}
 .l-icon-6a8::before{ content: '\e6a8';}
-
+.l-icon-622{color:#ccc; font-size: 34rpx; line-height: 1.2; margin-right: -8rpx;}
+.l-icon-622::before{ content: '\e622'; }
 /*
   http://www.css88.com/book/css/ 
   弹性布局===================

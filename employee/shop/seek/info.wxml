@@ -72,11 +72,32 @@
     </view>
   </view>
 
-  <view style='height: 104rpx;'></view>
-  <view class='l-fixed-bottom l-flex-hc l-bg-white'>
-    <view class='l-rest l-padding'>
-      请对该寻车单报价
+  <view class='l-margin-tb l-bg-white' wx:if='{{isOffer}}'>
+    <view class='l-padding-btn l-border-b'>
+      <text>我的报价</text>
     </view>
-    <navigator url='offer?id={{info.findTheCarId}}' class='_btn1'>报价</navigator>
+    <view class='l-padding' wx:for='{{info.findCarOffers}}'>
+      <view class='l-flex-hc'>
+        <text class='l-text-theme'>我</text>
+        <view style='height: 20rpx;' class='l-margin-lr-s l-border-l'></view>
+        <text>{{item.orgName}}</text>
+        <view class='l-rest'></view>
+        <text>报价：￥{{item.offerAmount}}万</text>
+      </view>
+      <view class='l-margin-t-m l-text-gray l-fs-s'>
+        <view>车辆所在地：{{item.location}}</view>
+        <view>有效期至：{{item.overdueDate}}</view>
+      </view>
+    </view>
   </view>
+
+  <block wx:if='{{!isOffer}}'>
+    <view style='height: 104rpx;'></view>
+    <view class='l-fixed-bottom l-flex-hc l-bg-white'>
+      <view class='l-rest l-padding'>
+        请对该寻车单报价
+      </view>
+      <navigator url='offer?id={{info.findTheCarId}}' class='_btn1'>报价</navigator>
+    </view>
+  </block>
 </view>

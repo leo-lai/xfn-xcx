@@ -265,6 +265,8 @@ var config = {
     seekList: `${baseUrl}/shop/shopFindCarList`,
     seekInfo: `${baseUrl}/shop/shopFindCarInfo`,
     seekOffer: `${baseUrl}/shop/shopFindCarOffer`,
+    mySeekList: `${baseUrl}/shop/myShopFindCarOfferList`,
+    mySeekInfo: `${baseUrl}/shop/shopFindCarOfferInfo`,
   },
   // 物流接口
   exp: {

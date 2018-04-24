@@ -175,7 +175,7 @@ Page({
       rows: this.data.list1.rows
     }).then(({ data }) => {
       data.list = data.list.map(item => {
-        item.saleingPriceStr = item.bareCarPriceOnLine ? (item.bareCarPriceOnLine/10000).toFixed(2) : '0.00'
+        item.saleingPriceStr = item.activityPrice ? (item.activityPrice/10000).toFixed(2) : '0.00'
         item.guidingPriceStr = item.guidingPrice ? (item.guidingPrice/10000).toFixed(2) : '0.00'
         item.thumb = app.utils.formatThumb(item.image, 150)
         return item
@@ -204,6 +204,13 @@ Page({
       overOffShelf: 1,
       rows: this.data.list2.rows
     }).then(({ data }) => {
+      data.list = data.list.map(item => {
+        item.saleingPriceStr = item.activityPrice ? (item.activityPrice / 10000).toFixed(2) : '0.00'
+        item.guidingPriceStr = item.guidingPrice ? (item.guidingPrice / 10000).toFixed(2) : '0.00'
+        item.thumb = app.utils.formatThumb(item.image, 150)
+        return item
+      })
+      
       this.setData({
         'list2.more': data.list.length >= data.rows,
         'list2.page': data.page,

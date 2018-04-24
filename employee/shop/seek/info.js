@@ -6,9 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    state: ['申请中', '已通过', '已拒绝'],
+    isOffer: false,
     info: null,
-    storeInfo: null
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -31,22 +30,33 @@ Page({
     app.storage.removeItem('shop-seek-info')
   },
   getInfo: function () {
-    app.storage.getItem('shop-seek-info').then(info => {
-      if (info) {
-        console.log(info)
+    app.storage.getItem('shop-seek-info').then(seekInfo => {
+      if (seekInfo) {
+        let info = null, isOffer = false
+        if (seekInfo.findCarOfferId) {
+          isOffer = true
+          info = seekInfo.shopFindCar
+          info.findCarOffers = [app.utils.copyObj({
+            createDate: '',
+            findCarId: '',
+            findCarOfferId: '',
+            location: '',
+            offerAmount: '',
+            offerState: '',
+            orgId: '',
+            orgName: '',
+            overdueDate: '',
+            systemUserId: '',
+            systemUserName: '',
+            systemUserPhone: '',
+          }, seekInfo)]
+        }else {
+          info = seekInfo
+        }
+
         info.guidancePriceStr = (info.guidancePrice / 10000).toFixed(2)
-
-        this.setData({ info })
+        this.setData({ isOffer, info })
       }
-    })
-
-    // app.post(app.config.shop.seekInfo, { findTheCarId: this.options.id })
-  },
-  previewImage: function (event) {
-    let current = event.target.id
-    let urls = event.currentTarget.dataset.urls
-    wx.previewImage({
-      current, urls
     })
   }
 })
