@@ -15,8 +15,17 @@
     </view>
   </view>
 
+
+  <view class='l-text-gray l-fs-s' style='margin: 30rpx 30rpx -20rpx 30rpx;'>赠送精品</view>
   <view class='weui-cells weui-cells_after-title l-margin l-bg-white l-radius'>
     <view class='weui-cell l-text-center' wx:for='{{parts}}' wx:key='{{item}}'>
+      <view class='weui-cell__bd'>{{item}}</view>
+    </view>
+  </view>
+
+  <view class='l-text-gray l-fs-s' style='margin: 30rpx 30rpx -20rpx 30rpx;'>加装精品</view>
+  <view class='weui-cells weui-cells_after-title l-margin l-bg-white l-radius'>
+    <view class='weui-cell l-text-center' wx:for='{{parts2}}' wx:key='{{item}}'>
       <view class='weui-cell__bd'>{{item}}</view>
     </view>
   </view>

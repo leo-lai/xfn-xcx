@@ -8,7 +8,8 @@ Page({
   data: {
     overline: ['未过线检车', '已过线检查'],
     info: null,
-    parts: []
+    parts: [],
+    parts2: []
   },
 
   /**
@@ -32,7 +33,8 @@ Page({
     }).then(({ data }) => {
       this.setData({
         'info': data,
-        'parts': data.followInformation ? data.followInformation.split(',') : []
+        'parts': data.followInformation ? data.followInformation.split(',') : [],
+        'parts2': data.boutiqueInformation ? data.boutiqueInformation.split(',') : []
       })
     }).finally(_ => {
       wx.hideNavigationBarLoading()

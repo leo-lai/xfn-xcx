@@ -40,14 +40,12 @@
         <view class='weui-cell__ft l-fs-s'>{{orderInfo.paymentWayInfo}}</view>
       </view>
       <view class='l-padding l-text-center l-border-t' wx:if='{{orderInfo.customerOrderState == 3 || orderInfo.customerOrderState == 4}}'>
-        <view wx:if='{{orderInfo.customerOrderState == 4}}'>
-          <button class='l-button-border' bindtap='showBankPass'>请重新选择贷款方案</button>
-        </view>
-        <view class='l-margin-t-m'>
-          <button bindtap='bankPass' data-val='1' class='l-button-main'>银行审核通过</button>
-        </view>
+        
+        <button size='mini' class='l-button-border l-margin-lr-s' bindtap='showBankPass'>重新选择贷款方案</button>
+        <button size='mini' class='l-button-main l-margin-lr-s' bindtap='bankPass' data-val='1'>银行审核通过</button>
 
-        <!-- <view wx:if='{{orderInfo.loanBank != 4 || orderInfo.customerOrderState == 4}}'>
+        <!-- 
+        <view wx:if='{{orderInfo.loanBank != 4 || orderInfo.customerOrderState == 4}}'>
           <button class='l-button-border' bindtap='showBankPass'>请重新选择贷款方案</button>
         </view>
         <view wx:if='{{orderInfo.loanBank != 4}}' class='l-margin-t-m'>
@@ -55,7 +53,8 @@
         </view>
         <view  wx:if='{{orderInfo.loanBank == 4 && orderInfo.customerOrderState == 3}}'>
           <button class='l-button-main' bindtap='bankUpload'>上传资料</button>
-        </view> -->
+        </view> 
+        -->
       </view>
 
       <view class='weui-cell l-text-center' wx:if='{{orderInfo.customerOrderState == 13}}'>

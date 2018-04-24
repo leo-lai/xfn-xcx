@@ -42,10 +42,10 @@ Page({
         console.log(info)
         if (info) {
           let formData = {
-            orgId: info.orgId,
-            orgName: info.orgName,
-            orgLinker: info.orgLinker,
-            orgPhone: info.orgPhone,
+            orgId: info.organizationVo.orgId,
+            orgName: info.organizationVo.shortName,
+            orgLinker: info.organizationVo.linkMan,
+            orgPhone: info.organizationVo.telePhone,
             freight: info.logisticsPrice
           }
           let pickerData = {
