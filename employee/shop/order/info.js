@@ -10,7 +10,8 @@ Page({
     expectPayWay: ['', '线上支付', '到店支付'],
     topTips: '',
     info: null,
-    carInfo: null
+    carInfo: null,
+    userInfo: null
   },
 
   /**
@@ -18,6 +19,7 @@ Page({
    */
   onReady: function (options) {
     app.onLogin(userInfo => {
+      this.setData({ userInfo })
       this.getInfo()
     }, this.route)
   },
@@ -112,14 +114,14 @@ Page({
   },
   createOrder: function () {
     app.storage.setItem('shop-order-info', this.data.info)
-    if (this.data.info.userType == 2) {
+    if (this.data.userInfo.orgLevel === 2) {
       app.navigateTo('/level2/order/add?aid=' + this.data.info.advanceOrderId)
     }else{
       app.navigateTo('/level3/customer/order?aid=' + this.data.info.advanceOrderId)
     }
   },
   viewInfo: function () {
-    if (this.data.info.userType == 2) {
+    if (this.data.userInfo.orgLevel === 2) {
       app.navigateTo('/level2/order/info?id=' + this.data.info.realOrderId)
     }else{
       app.navigateTo('/level3/customer/order?ids=,' + this.data.info.realOrderId)

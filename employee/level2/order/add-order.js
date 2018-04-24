@@ -47,6 +47,7 @@ Page({
   onReady: function (options) {
     if (this.options.aid) {
       app.storage.getItem('shop-order-info').then(info => {
+        console.log(info)
         if (info && info.orderInfoVos[0]) {
           let orderCarInfo = info.orderInfoVos[0]
           let carInfo = app.utils.copyObj(this.data.carInfo, orderCarInfo) 
@@ -69,6 +70,7 @@ Page({
       })
     }else {
       app.storage.getItem('shop-order-car-' + this.options.id).then(info => {
+        console.log(info)
         if (info) {
           this.setData({ 
             carInfo: app.utils.copyObj(this.data.carInfo, info)
