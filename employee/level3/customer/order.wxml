@@ -88,7 +88,7 @@
     </view>
   </view>
 
-  <view class='weui-cells__title'>订单费用（金额单位：元）</view>
+  <view class='weui-cells__title'>订单费用</view>
   <view class='weui-cells weui-cells_after-title'>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
@@ -97,6 +97,7 @@
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='carUnitPrice' value='{{orderInfo.carUnitPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
+      <view class='l-cell-right'>元</view>
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
@@ -105,6 +106,7 @@
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='purchaseTaxPriace' value='{{orderInfo.purchaseTaxPriace}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
+      <view class='l-cell-right'>元</view>
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
@@ -113,6 +115,7 @@
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='licensePlatePriace' value='{{orderInfo.licensePlatePriace}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
+      <view class='l-cell-right'>元</view>
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
@@ -121,6 +124,7 @@
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='insurancePriace' value='{{orderInfo.insurancePriace}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
+      <view class='l-cell-right'>元</view>
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
@@ -129,6 +133,7 @@
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='mortgagePriace' value='{{orderInfo.mortgagePriace}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
+      <view class='l-cell-right'>元</view>
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
@@ -137,6 +142,7 @@
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='boutiquePriace' value='{{orderInfo.boutiquePriace}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
+      <view class='l-cell-right'>元</view>
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
@@ -145,6 +151,7 @@
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='vehicleAndVesselTax' value='{{orderInfo.vehicleAndVesselTax}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
+      <view class='l-cell-right'>元</view>
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__bd l-text-center l-padding-btn'>
@@ -156,17 +163,22 @@
   <view class='weui-cells__title'>购车方案</view>
   <view class='weui-cells weui-cells_after-title {{orderInfo.customerOrderState >= 5 ? "_disabled" : ""}}'>
     <view class='weui-cell weui-cell_input'>
-      <view class='weui-cell__bd l-padding-tb'>
-        <radio-group id='paymentWay' bindchange='bindInput'>
-          <label>
-            <radio disabled='{{orderInfo.customerOrderState > 1}}' color='#fa5539' value='1' checked='{{orderInfo.paymentWay == 1}}'/>
-            <text class='l-margin-l-s'>全款购车</text>
-          </label>
-          <label class='l-margin-l'>
-            <radio disabled='{{orderInfo.customerOrderState > 1}}' color='#fa5539' value='2' checked='{{orderInfo.paymentWay == 2}}'/>
-            <text class='l-margin-l-s'>贷款购车</text>
-          </label>
-        </radio-group>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>购车方式</view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <view class='l-padding-tb-m'>
+          <radio-group id='paymentWay' bindchange='bindInput'>
+            <label>
+              <radio class='l-cell-radio' disabled='{{orderInfo.customerOrderState > 1}}' color='#fa5539' value='1' checked='{{orderInfo.paymentWay == 1}}'/>
+              <text class='l-margin-l-s'>全款购车</text>
+            </label>
+            <label class='l-margin-l'>
+              <radio class='l-cell-radio' disabled='{{orderInfo.customerOrderState > 1}}' color='#fa5539' value='2' checked='{{orderInfo.paymentWay == 2}}'/>
+              <text class='l-margin-l-s'>贷款购车</text>
+            </label>
+          </radio-group>
+        </view>
       </view>
     </view>
     <block wx:if='{{orderInfo.paymentWay == 2}}'>
@@ -185,19 +197,21 @@
       </view>
       <view class='weui-cell weui-cell_input l-text-gray'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>首付金额（元）</view>
+          <view class='weui-label'>首付金额</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input disabled='{{true}}' class='weui-input' id='downPayments' value='{{orderInfo.downPayments}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
+        <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>贷款金额（元）</view>
+          <view class='weui-label'>贷款金额</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请填写' id='loan' value='{{orderInfo.loan}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
+        <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
