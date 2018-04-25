@@ -66,7 +66,7 @@ Page({
       data.pay1Image = pay1Image
       data.pay2Image = pay2Image
 
-      data.showEdit = this.data.userInfo.roleName != '仓管主管' && this.data.userInfo.orgLevel == 2 && !data.countermandApply && data.state != 37
+      data.showEdit = this.data.userInfo.roleName != '仓管主管' && !data.countermandApply && data.state != 37
 
       this.setData({ info: data })
 
