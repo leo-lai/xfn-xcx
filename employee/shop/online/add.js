@@ -34,12 +34,12 @@ Page({
       saleingNumber: '',
       onlineDis: 1,          // 线上优惠or加价
       discountPriceOnLine: '',
+      bareCarPriceOnLine: '',
       underLineDis: 1,       // 线下优惠or加价
       discountPriceUnderLine: '',
-      overInsurance: 1,
-      bareCarPriceOnLine: '',
-      depositPrice: '',
       bareCarPriceUnderLine: '',
+      overInsurance: 1,
+      depositPrice: '',
       invoicePrice: '',
       provinceId: '',
       provinceName: '',
@@ -147,6 +147,55 @@ Page({
           break
       }
     }
+
+    let dis = 0, discountPrice = 0, bareCarPrice = 0
+    switch (id) {
+      case 'onlineDis':
+      case 'discountPriceOnLine':
+        if (id == 'onlineDis') {
+          dis = Number(value)
+          discountPrice = Number(this.data.formData.discountPriceOnLine)
+        }else {
+          dis = Number(this.data.formData.onlineDis)
+          discountPrice = Number(value) || 0
+        }
+
+        if (this.data.formData.guidingPrice) {
+          bareCarPrice = this.data.formData.guidingPrice
+          if (dis == 1) {
+            bareCarPrice -= discountPrice
+          }else{
+            bareCarPrice += discountPrice
+          }
+          this.setData({
+            'formData.bareCarPriceOnLine': bareCarPrice
+          })
+        }
+        break
+      case 'underLineDis':
+      case 'discountPriceUnderLine':
+        if (id == 'underLineDis') {
+          dis = Number(value)
+          discountPrice = Number(this.data.formData.discountPriceUnderLine)
+        }else{
+          dis = Number(this.data.formData.underLineDis)
+          discountPrice = Number(value) || 0
+        }
+        
+        if (this.data.formData.guidingPrice) {
+          bareCarPrice = this.data.formData.guidingPrice
+          if (dis == 1) {
+            bareCarPrice -= discountPrice
+          } else {
+            bareCarPrice += discountPrice
+          }
+          this.setData({
+            'formData.bareCarPriceUnderLine': bareCarPrice
+          })
+        }
+        break
+    }
+
     console.log(id, value)
     data['formData.' + id] = value
     this.setData(data)

@@ -233,7 +233,14 @@ Page({
     wx.showLoading({ mask: true })
     app.post(app.config.shop.activeEdit, formData).then(({ data }) => {
       app.storage.setItem('shop-active-list-refresh', 1)
-      app.toast('保存成功', true)
+      if (!formData.goodsCarsActivityId) { // 新增
+        app.getPrevPage().then(prevPage => {
+          prevPage.tabClick && prevPage.tabClick(1)
+          app.back()
+        })
+      } else {
+        app.back()
+      }
     }).catch(err => {
       wx.hideLoading()
     })

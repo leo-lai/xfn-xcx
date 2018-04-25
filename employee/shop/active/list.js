@@ -35,20 +35,9 @@ Page({
       data: []
     }
   },
-  onLoad: function () {
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          'tabs.left': (res.windowWidth / that.data.tabs.tit.length - sliderWidth) / 2,
-          'tabs.offset': res.windowWidth / that.data.tabs.tit.length * that.data.tabs.index
-        })
-      }
-    })
-  },
   onReady: function () {
     app.onLogin(userInfo => {
-      this.getList1()
+      this.tabClick(0)
     }, this.route)
   },
   onShow: function () {
@@ -56,11 +45,7 @@ Page({
       app.storage.getItem('shop-active-list-refresh').then(refresh => {
         if (refresh) {
           app.storage.removeItem('shop-active-list-refresh')
-          if (this.data.tabs.index == 1) {
-            this.getList2()
-          } else {
-            this.getList1()
-          }
+          this.getList()
         }
       })
     })
@@ -78,17 +63,100 @@ Page({
   // 下拉刷新
   onPullDownRefresh: function () {
     if (app.globalData.userInfo) {
-      if (this.data.tabs.index == 1) {
-        this.getList2(1, _ => {
-          wx.stopPullDownRefresh()
-        })
-      } else {
-        this.getList1(1, _ => {
-          wx.stopPullDownRefresh()
-        })
-      }
+      this.getList(1, _ => {
+        wx.stopPullDownRefresh()
+      })
     } else {
       wx.stopPullDownRefresh()
+    }
+  },
+  // 活动列表-上架
+  getList1: function (page = 1, callback = app.noopFn) {
+    page === 1 && this.setData({ 'list1.more': true })
+
+    if (!this.data.list1.more || this.data.list1.loading) {
+      callback(this.data.list1.data)
+      return
+    }
+    this.setData({ 'list1.loading': true })
+    return app.post(app.config.shop.activeList, {
+      page, ...this.data.filter.data,
+      overOffShelf: 0,
+      rows: this.data.list1.rows
+    }).then(({ data }) => {
+      data.list = data.list.map(item => {
+        item.saleingPriceStr = item.activityPrice ? (item.activityPrice / 10000).toFixed(2) : '0.00'
+        item.guidingPriceStr = item.guidingPrice ? (item.guidingPrice / 10000).toFixed(2) : '0.00'
+        item.thumb = app.utils.formatThumb(item.image, 150)
+        return item
+      })
+      this.setData({
+        'list1.more': data.list.length >= data.rows,
+        'list1.page': data.page,
+        'list1.data': data.page === 1 ? data.list : this.data.list1.data.concat(data.list)
+      })
+    }).finally(_ => {
+      this.setData({ 'list1.loading': false })
+      callback(this.data.list1.data)
+    })
+  },
+  // 活动列表-下架
+  getList2: function (page = 1, callback = app.noopFn) {
+    page === 1 && this.setData({ 'list2.more': true })
+
+    if (!this.data.list2.more || this.data.list2.loading) {
+      callback(this.data.list2.data)
+      return
+    }
+    this.setData({ 'list2.loading': true })
+    return app.post(app.config.shop.activeList, {
+      page, ...this.data.filter.data,
+      overOffShelf: 1,
+      rows: this.data.list2.rows
+    }).then(({ data }) => {
+      data.list = data.list.map(item => {
+        item.saleingPriceStr = item.activityPrice ? (item.activityPrice / 10000).toFixed(2) : '0.00'
+        item.guidingPriceStr = item.guidingPrice ? (item.guidingPrice / 10000).toFixed(2) : '0.00'
+        item.thumb = app.utils.formatThumb(item.image, 150)
+        return item
+      })
+
+      this.setData({
+        'list2.more': data.list.length >= data.rows,
+        'list2.page': data.page,
+        'list2.data': data.page === 1 ? data.list : this.data.list2.data.concat(data.list)
+      })
+    }).finally(_ => {
+      this.setData({ 'list2.loading': false })
+      callback(this.data.list2.data)
+    })
+  },
+  getList: function () {
+    let getList = this.data.tabs.index == 1 ? this.getList2 : this.getList1
+    return getList.apply(this, arguments)
+  },
+  tabClick: function (event) {
+    let index
+    if (event && event.currentTarget) {
+      index = event.currentTarget.id
+      this.setData({
+        'tabs.offset': event.currentTarget.offsetLeft,
+        'tabs.index': event.currentTarget.id
+      })
+    } else {
+      index = event
+      let windowWidth = wx.getSystemInfoSync().windowWidth
+      this.setData({
+        'tabs.index': index,
+        'tabs.left': (windowWidth / this.data.tabs.tit.length - sliderWidth) / 2,
+        'tabs.offset': windowWidth / this.data.tabs.tit.length * index
+      })
+    }
+
+    if (index == 1) {
+      this.data.list2.data.length === 0 && this.getList2()
+    } else {
+      this.data.list1.data.length === 0 && this.getList1()
     }
   },
   edit: function(event) { // 编辑商品
@@ -148,79 +216,7 @@ Page({
       wx.hideLoading()
     })
   },
-  tabClick: function (event) {
-    this.setData({
-      'tabs.offset': event.currentTarget.offsetLeft,
-      'tabs.index': event.currentTarget.id
-    })
-
-    if (event.currentTarget.id == 1) {
-      this.data.list2.data.length === 0 && this.getList2()
-    }else {
-      this.data.list1.data.length === 0 && this.getList1()
-    }
-  },
-  // 活动列表-上架
-  getList1: function (page = 1, callback = app.noopFn) {
-    page === 1 && this.setData({ 'list1.more': true })
-
-    if (!this.data.list1.more || this.data.list1.loading) {
-      callback(this.data.list1.data)
-      return
-    }
-    this.setData({ 'list1.loading': true })
-    return app.post(app.config.shop.activeList, {
-      page, ...this.data.filter.data,
-      overOffShelf: 0,
-      rows: this.data.list1.rows
-    }).then(({ data }) => {
-      data.list = data.list.map(item => {
-        item.saleingPriceStr = item.activityPrice ? (item.activityPrice/10000).toFixed(2) : '0.00'
-        item.guidingPriceStr = item.guidingPrice ? (item.guidingPrice/10000).toFixed(2) : '0.00'
-        item.thumb = app.utils.formatThumb(item.image, 150)
-        return item
-      })
-      this.setData({
-        'list1.more': data.list.length >= data.rows,
-        'list1.page': data.page,
-        'list1.data': data.page === 1 ? data.list : this.data.list1.data.concat(data.list)
-      })
-    }).finally(_ => {
-      this.setData({ 'list1.loading': false })
-      callback(this.data.list1.data)
-    })
-  },
-  // 活动列表-下架
-  getList2: function (page = 1, callback = app.noopFn) {
-    page === 1 && this.setData({ 'list2.more': true })
-
-    if (!this.data.list2.more || this.data.list2.loading) {
-      callback(this.data.list2.data)
-      return
-    }
-    this.setData({ 'list2.loading': true })
-    return app.post(app.config.shop.activeList, {
-      page, ...this.data.filter.data,
-      overOffShelf: 1,
-      rows: this.data.list2.rows
-    }).then(({ data }) => {
-      data.list = data.list.map(item => {
-        item.saleingPriceStr = item.activityPrice ? (item.activityPrice / 10000).toFixed(2) : '0.00'
-        item.guidingPriceStr = item.guidingPrice ? (item.guidingPrice / 10000).toFixed(2) : '0.00'
-        item.thumb = app.utils.formatThumb(item.image, 150)
-        return item
-      })
-      
-      this.setData({
-        'list2.more': data.list.length >= data.rows,
-        'list2.page': data.page,
-        'list2.data': data.page === 1 ? data.list : this.data.list2.data.concat(data.list)
-      })
-    }).finally(_ => {
-      this.setData({ 'list2.loading': false })
-      callback(this.data.list2.data)
-    })
-  },
+  
 
   // 搜索相关=================================================
   // 正在输入
@@ -239,14 +235,8 @@ Page({
   search: function () {
     clearTimeout(this.typingId)
     wx.showLoading()
-    if (this.data.tabs.index == 1) {
-      this.getList2().finally(_ => {
-        wx.hideLoading()
-      })
-    } else {
-      this.getList1().finally(_ => {
-        wx.hideLoading()
-      })
-    }
+    this.getList().finally(_ => {
+      wx.hideLoading()
+    })
   }
 })

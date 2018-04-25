@@ -65,6 +65,7 @@
         </view>
         <view class='l-cell-right'>元</view>
       </view>
+      
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
           <text class='weui-label'>线上优惠</text>
@@ -84,6 +85,15 @@
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
+          <text class='weui-label'>线上裸车价</text>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入金额' id='bareCarPriceOnLine' value='{{formData.bareCarPriceOnLine}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
           <text class='weui-label'>线下优惠</text>
           <radio-group class="l-inline l-margin-l l-text-gray" id="underLineDis" bindchange='bindInput'>
             <label>
@@ -96,6 +106,15 @@
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请输入金额' id='discountPriceUnderLine' value='{{formData.discountPriceUnderLine}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+      <view class='weui-cell weui-cell_input'>
+        <view class='weui-cell__hd'>
+          <text class='weui-label'>线下裸车价</text>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input class='weui-input' placeholder='请输入金额' id='bareCarPriceUnderLine' value='{{formData.bareCarPriceUnderLine}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
         <view class='l-cell-right'>元</view>
       </view>
@@ -120,28 +139,10 @@
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <text class='weui-label'>线上裸车价</text>
-        </view>
-        <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入金额' id='bareCarPriceOnLine' value='{{formData.bareCarPriceOnLine}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
-        </view>
-        <view class='l-cell-right'>元</view>
-      </view>
-      <view class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
           <text class='weui-label'>定金金额</text>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请输入金额' id='depositPrice' value='{{formData.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
-        </view>
-        <view class='l-cell-right'>元</view>
-      </view>
-      <view class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
-          <text class='weui-label'>线下裸车价</text>
-        </view>
-        <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入金额' id='bareCarPriceUnderLine' value='{{formData.bareCarPriceUnderLine}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
         <view class='l-cell-right'>元</view>
       </view>

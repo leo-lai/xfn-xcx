@@ -4,45 +4,62 @@
   <view class='l-text-gray l-fs-s' style='margin: 30rpx 30rpx -20rpx 30rpx;'>订购信息</view>
   <view class='l-margin l-radius'>
     <view class='weui-cells weui-cells_after-title'>
-      <view class='weui-cell weui-cell_input' wx:if="{{formData.advanceOrderId}}">
-        <view class='weui-cell__hd'>
-          <view class='weui-label'>门店名称</view>
-        </view>
-        <view class='weui-cell__bd l-text-right'>
-          <view class='weui-input'>
-            <text wx:if='{{formData.orgId}}'>{{formData.orgName}}</text>
-            <text wx:else class='l-text-gray'>无</text>
+      <block wx:if="{{formData.advanceOrderId}}">
+        <view class='weui-cell weui-cell_input'>
+          <view class='weui-cell__hd'>
+            <view class='weui-label'>门店名称</view>
+          </view>
+          <view class='weui-cell__bd l-text-right'>
+            <view class='weui-input'>{{formData.orgName || '无'}}</view>
           </view>
         </view>
-      </view>
-      <navigator wx:else url='/level2/store/list?mode=slt&rows=50&id={{formData.orgId}}' class='weui-cell weui-cell_select'>
-        <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>门店名称</view>
-        </view>
-        <view class='weui-cell__bd l-text-right'>
-          <view class='weui-select weui-select_in-select-after'>
-            <text wx:if='{{formData.orgId}}'>{{formData.orgName}}</text>
-            <text wx:else class='l-text-gray'>请选择</text>
+        <view class='weui-cell weui-cell_input'>
+          <view class='weui-cell__hd'>
+            <view class='weui-label'>联系人</view>
+          </view>
+          <view class='weui-cell__bd l-text-right'>
+            <view class='weui-input'>{{formData.orgLinker || '无'}}</view>
           </view>
         </view>
-      </navigator>
-
-      <view class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
-          <view class='weui-label'>联系人</view>
+        <view class='weui-cell weui-cell_input'>
+          <view class='weui-cell__hd'>
+            <view class='weui-label'>联系电话</view>
+          </view>
+          <view class='weui-cell__bd l-text-right'>
+            <view class='weui-input'>{{formData.orgPhone || '无'}}</view>
+          </view>
         </view>
-        <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入联系人姓名' maxlength='{{20}}' confirm-type='next' id='orgLinker' value='{{formData.orgLinker}}' bindinput='bindInput' />
+      </block>
+      <block wx:else>
+        <navigator url='/level2/store/list?mode=slt&rows=50&id={{formData.orgId}}' class='weui-cell weui-cell_select'>
+          <view class='weui-cell__hd weui-cell__hd_in-select-after'>
+            <view class='weui-label'>门店名称</view>
+          </view>
+          <view class='weui-cell__bd l-text-right'>
+            <view class='weui-select weui-select_in-select-after'>
+              <text wx:if='{{formData.orgId}}'>{{formData.orgName}}</text>
+              <text wx:else class='l-text-gray'>请选择</text>
+            </view>
+          </view>
+        </navigator>
+        <view class='weui-cell weui-cell_input'>
+          <view class='weui-cell__hd'>
+            <view class='weui-label'>联系人</view>
+          </view>
+          <view class='weui-cell__bd l-text-right'>
+            <input class='weui-input' placeholder='请输入联系人姓名' maxlength='{{20}}' confirm-type='next' id='orgLinker' value='{{formData.orgLinker}}' bindinput='bindInput' />
+          </view>
         </view>
-      </view>
-      <view class='weui-cell weui-cell_input'>
-        <view class='weui-cell__hd'>
-          <view class='weui-label'>联系电话</view>
+        <view class='weui-cell weui-cell_input'>
+          <view class='weui-cell__hd'>
+            <view class='weui-label'>联系电话</view>
+          </view>
+          <view class='weui-cell__bd l-text-right'>
+            <input class='weui-input' type='number' placeholder='请输入11位手机号码' maxlength='{{11}}' confirm-type='next' id='orgPhone' value='{{formData.orgPhone}}' bindinput='bindInput' />
+          </view>
         </view>
-        <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' type='number' placeholder='请输入11位手机号码' maxlength='{{11}}' confirm-type='next' id='orgPhone' value='{{formData.orgPhone}}' bindinput='bindInput' />
-        </view>
-      </view>
+      </block>
+      
       <view class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
           <view class='weui-label'>订单类型</view>
