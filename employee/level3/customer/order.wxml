@@ -27,7 +27,7 @@
         <view class='weui-label'>官方指导价</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <view class='weui-input'>{{orderInfo.guidingPrice}}</view>
+        <input disabled='{{true}}' class='weui-input' value='{{orderInfo.guidingPrice}}'/>
       </view>
       <view class='l-cell-right'>元</view>
     </view>
@@ -63,14 +63,6 @@
             <text wx:else>{{neishi.list[neishi.index].interiorName}}</text>
           </view>
         </picker>
-      </view>
-    </view>
-    <view class='weui-cell weui-cell_input'>
-      <view class='weui-cell__hd'>
-        <view class='weui-label'>收取定金 <text class='l-text-theme'>*</text></view>
-      </view>
-      <view class='weui-cell__bd l-text-right'>
-        <input disabled='{{orderInfo.customerOrderState > 1}}' class='weui-input' placeholder='请填写' id='depositPrice' value='{{orderInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
     </view>
     <view class='weui-cell weui-cell_select'>
@@ -154,10 +146,24 @@
       <view class='l-cell-right'>元</view>
     </view>
     <view class='weui-cell weui-cell_input'>
-      <view class='weui-cell__bd l-text-center l-padding-btn'>
-        <text class='l-text-theme'>合计应付费用：￥{{orderPay}}</text>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>合计总费用 <text class='l-text-theme'>*</text></view>
       </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input disabled='{{true}}' class='weui-input l-text-theme' value='{{orderPay}}'/>
+      </view>
+      <view class='l-cell-right l-text-theme'>元</view>
     </view>
+    <view class='weui-cell weui-cell_input'>
+      <view class='weui-cell__hd'>
+        <view class='weui-label'>收取定金 <text class='l-text-theme'>*</text></view>
+      </view>
+      <view class='weui-cell__bd l-text-right'>
+        <input disabled='{{orderInfo.customerOrderState > 1}}' class='weui-input' placeholder='请填写' id='depositPrice' value='{{orderInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+      </view>
+      <view class='l-cell-right'>元</view>
+    </view>
+    
   </view>
 
   <view class='weui-cells__title'>购车方案</view>
@@ -195,21 +201,21 @@
           </picker>
         </view>
       </view>
-      <view class='weui-cell weui-cell_input l-text-gray'>
-        <view class='weui-cell__hd'>
-          <view class='weui-label'>首付金额</view>
-        </view>
-        <view class='weui-cell__bd l-text-right'>
-          <input disabled='{{true}}' class='weui-input' id='downPayments' value='{{orderInfo.downPayments}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
-        </view>
-        <view class='l-cell-right'>元</view>
-      </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
           <view class='weui-label'>贷款金额</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请填写' id='loan' value='{{orderInfo.loan}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        </view>
+        <view class='l-cell-right'>元</view>
+      </view>
+      <view class='weui-cell weui-cell_input l-text-gray'>
+        <view class='weui-cell__hd'>
+          <view class='weui-label'>首付金额</view>
+        </view>
+        <view class='weui-cell__bd l-text-right'>
+          <input disabled='{{true}}' class='weui-input' id='downPayments' value='{{orderInfo.downPayments}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
         <view class='l-cell-right'>元</view>
       </view>
@@ -271,10 +277,13 @@
   </view>
   <!-- 加装精品 end-->
 
-  <view class='weui-cells__title'>订单备注</view>
-  <view class='l-padding l-bg-white'>
-    <textarea style='width: 100%; min-height: 2em;' auto-height='{{true}}' maxlength='{{500}}' placeholder='请填写备注' id='remark' bindinput='bindInput' value='{{orderInfo.remark}}'></textarea>
-  </view>
+  <block wx:if='{{orderInfo.remark || orderInfo.customerOrderState != 17}}'>
+    <view class='weui-cells__title'>订单备注</view>
+    <view class='l-padding l-bg-white'>
+      <textarea style='width: 100%; min-height: 2em;' auto-height='{{true}}' maxlength='{{500}}' placeholder='请填写备注' id='remark' bindinput='bindInput' value='{{orderInfo.remark}}'></textarea>
+    </view>
+  </block>
+
   <view class='l-margin-t'></view>
   <block wx:if='{{orderInfo.customerOrderState != 17}}'>
     <view style='height: 120rpx;'></view>

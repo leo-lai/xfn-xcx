@@ -56,7 +56,6 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.password, this.data.formData).then(({ data }) => {
-      wx.hideLoading()
       app.updateUserInfo({ sessionId: data.sessionId })
       app.toast('更改成功', true)
     }).catch(err => {

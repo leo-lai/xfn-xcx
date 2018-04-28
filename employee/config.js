@@ -59,6 +59,8 @@ var config = {
   // 图片文字识别
   image2text: `${commonUrl}/imageRecognition`,
 
+  // 上传个人微信二维码
+  wxQrImage: `${baseUrl}/weixinQrImage`,
   // 上传文件
   uploadFile: `${baseUrl}/uploadFile`,
   // 注册/登录

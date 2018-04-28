@@ -11,6 +11,7 @@
       <view bindtap='showCustomerDetails'>
         <text class='l-text-theme l-fs-s'>查看资料</text>
       </view>
+      <text style='margin-top:4rpx;' class='l-icon-622'></text>
     </view>
   </view>
 
@@ -18,8 +19,9 @@
     <view class='l-flex-hc l-padding-btn'>
       <view class='l-rest l-h4'>购车信息</view>
       <view wx:if='{{orderInfo.customerOrderId}}' bindtap='showCustomerOrder'>
-        <text class='l-text-theme l-fs-s' >查看明细</text>
+        <text class='l-text-theme l-fs-s' >查看订单列表</text>
       </view>
+      <text class='l-icon-622'></text>
     </view>
     <!-- 购车单信息 -->
     <view wx:if='{{orderInfo.customerOrderId}}' class='weui-cells weui-cells_after-title'>
@@ -136,7 +138,7 @@
       </view>
       <view class='weui-cell'>
         <view class='weui-cell__bd'>打算购车方案</view>
-        <view class='weui-cell__ft'>{{buyWay[appointInfo.data.expectWayId-1]}}</view>
+        <view class='weui-cell__ft'>{{buyWay[appointInfo.data.expectWayId-1] || '--'}}</view>
       </view>
       <view class='weui-cell'>
         <view class='weui-cell__bd'>打算购车时间</view>
@@ -144,7 +146,7 @@
       </view>
       <view class='weui-cell'>
         <view class='weui-cell__bd'>预约到店时间</view>
-        <view class='weui-cell__ft'>{{appointInfo.data.appointmentDate}} {{appointInfo.data.timeOfAppointment}}</view>
+        <view class='weui-cell__ft'>{{appointInfo.data.appointmentDate}} {{appointInfo.data.timeOfAppointment || '--'}}</view>
       </view>
       <view class='weui-cell'>
         <view class='weui-cell__bd'>销售顾问</view>
