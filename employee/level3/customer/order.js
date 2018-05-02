@@ -329,7 +329,7 @@ Page({
     app.post(app.config.customerOrderAdd, formData).then(({ data }) => {
       app.toast('保存成功', true).then(_ => {
         app.getPrevPage().then(prevPage => {
-          prevPage.getInfo && prevPage.getInfo()
+          prevPage.getList && prevPage.getList()
         })
       })
     }).catch(err => {

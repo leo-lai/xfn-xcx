@@ -61,10 +61,6 @@
         <text class='l-rest'>{{item.timeOfAppointmentDate || '无'}}</text>
       </view>
     </view>
-
-    <!-- <view wx:if='{{item.orderState == 17}}' class='l-border-t l-padding-t l-margin-t l-text-center' catchtap='noopFn'>
-      <button size='mini' class='l-button-border l-margin-lr-s' id='{{item.customerOrderId}}' bindtap='visitShow'>回访备注</button>
-    </view> -->
     
     <view wx:if='{{!item.customerUsersOrgId}}' class='l-border-t l-padding-t l-margin-t l-text-center' catchtap='noopFn'>
       <button data-item='{{item}}' bindtap='sltSaler' size='mini' class='l-button-border l-margin-lr-s'>分配销售顾问</button>
@@ -78,19 +74,6 @@
       <button class='l-button-main'>新增客户</button>
     </navigator>
   </view>
-</view>
-
-<!-- 回访备注 -->
-<view class='l-popup-center l-flex-vh' wx:if='{{visit.visible}}' catchtouchmove='noopFn'>
-  <view class='_inner' style='width: 80%; margin-top: 10%;'>
-    <view class='l-padding'>
-      <textarea style='width:100%; height: 240rpx;' fixed='{{true}}' auto-focus='{{true}}' placeholder='输入回访备注' id='visitContent' bindinput='bindInput' value='{{visit.data.visitContent}}'></textarea>
-      <view class='l-margin-t l-text-center' bindtap='visitSubmit'>
-        <button loading='{{visit.loading}}' disabled='{{visit.loading}}' class='l-button-main'>{{visit.loading ? '保存中' : '保存'}}</button>
-      </view>
-    </view>
-  </view>
-  <text class='l-icon-61a _close' bindtap='visitClose'></text>
 </view>
 
 <!-- 搜索筛选 -->

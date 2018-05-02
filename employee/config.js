@@ -101,6 +101,8 @@ var config = {
   customerOrderBefore: `${baseUrl}/createOrderBefor`,
   // 客户开单
   customerOrderAdd: `${baseUrl}/editCustomerOrder`,
+  // 客户订单列表
+  customerOrderList: `${baseUrl}/myCustomerOrderList`,
   // 车身颜色列表
   cheshen: `${baseUrl}/carColourList`,
   // 内饰颜色

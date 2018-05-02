@@ -1,0 +1,63 @@
+<!--level3/customer/order-list.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
+<view class='l-page-full'>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='按订单号或车型查询' value='{{filter.data.keywords}}'/>
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+  <view style='height: 100rpx;'></view>
+
+  <!-- 订购单列表 -->
+  <view class='l-order-list-item' wx:for='{{list.data}}' wx:key='{{orderCode}}'>
+    <navigator class='_hd l-flex-hc' url='order?ids=,{{item.customerOrderId}}' hover-class='none'>
+      <text class='l-margin-r-s'>订单号</text>
+      <view class='l-btn-link l-rest'>{{item.customerOrderCode}}</view>
+      <text class='l-text-theme'>{{item.customerOrderStateName}}</text>
+      <view><text class='l-icon-6a8'></text></view>
+    </navigator>
+
+    <view class='_bd'>
+      <view class='_car l-fs-s'>
+        <view>{{item.carsName}}</view>
+        <!-- <view class='l-text-gray'>
+          <text class='l-margin-r'>车身：{{item.colorName || '--'}}</text>
+          <text class='l-margin-r'>内饰：{{item.interiorName || '--'}}</text>
+        </view> -->
+        <view class='l-text-gray'>
+          <text class='l-margin-r'>开单时间：{{item.createDate || '--'}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='_ft' catchtap='noopFn' wx:if='{{item.orderState == 17}}'>
+      <button size='mini' class='l-button-border l-margin-lr-s' id='{{item.customerOrderId}}' bindtap='visitShow'>回访备注</button>
+    </view>
+  </view>
+  <template is='loadmore' data='{{...list}}' /> 
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <navigator url='order?ids={{customerUsersId}}' class='l-btn-w60 l-margin-tb' hover-class='none'>
+      <button class='l-button-main'>新增客户订单</button>
+    </navigator>
+  </view>
+</view>
+
+
+<!-- 回访备注 -->
+<view class='l-popup-center l-flex-vh' wx:if='{{visit.visible}}' catchtouchmove='noopFn'>
+  <view class='_inner' style='width: 80%; margin-top: 10%;'>
+    <view class='l-padding'>
+      <textarea style='width:100%; height: 240rpx;' fixed='{{true}}' auto-focus='{{true}}' placeholder='输入回访备注' id='visitContent' bindinput='bindInput' value='{{visit.data.visitContent}}'></textarea>
+      <view class='l-margin-t l-text-center' bindtap='visitSubmit'>
+        <button loading='{{visit.loading}}' disabled='{{visit.loading}}' class='l-button-main'>{{visit.loading ? '保存中' : '保存'}}</button>
+      </view>
+    </view>
+  </view>
+  <text class='l-icon-61a _close' bindtap='visitClose'></text>
+</view>

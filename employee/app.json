@@ -99,7 +99,8 @@
     "pages/region/index",
     "pages/week-selector/index",
     "shop/seek/info",
-    "shop/seek/offer"
+    "shop/seek/offer",
+    "level3/customer/order-list"
   ],
   "window": {
     "backgroundColor": "#eee",

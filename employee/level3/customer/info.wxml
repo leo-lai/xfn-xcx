@@ -18,9 +18,7 @@
   <view class='l-margin l-radius l-bg-white'>
     <view class='l-flex-hc l-padding-btn'>
       <view class='l-rest l-h4'>购车信息</view>
-      <view wx:if='{{orderInfo.customerOrderId}}' bindtap='showCustomerOrder'>
-        <text class='l-text-theme l-fs-s' >查看订单列表</text>
-      </view>
+      <navigator class='l-text-theme l-fs-s' hover-class='none' url='order-list?id={{customerInfo.customerUsersId}}'>查看购车单列表</navigator>
       <text class='l-icon-622'></text>
     </view>
     <!-- 购车单信息 -->
