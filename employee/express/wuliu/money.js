@@ -1,5 +1,5 @@
 // express/wuliu/money.js
-var QR = require('../../script/qrcode.js');
+var QR = require('../../script/qrcode.js')
 const app = getApp()
 Page({
 

@@ -40,6 +40,8 @@ var config = {
     // 随车资料
     incarParts: ['车辆统一发明票', '用户手册', '保养手册', '合格证', '天线', '随车地毯', '三包凭证', '点烟器', '一致证书', '工具、备胎', '主匙', '备匙', '反光衣', '首保凭证', '档位盖']
   },
+  // 商城地址
+  shopURL: 'http://shop.mifengqiche.com',
   // 静态资源服务器
   resURL,
   avatar: resURL + '/avatar.png',

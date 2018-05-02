@@ -100,7 +100,8 @@
     "pages/week-selector/index",
     "shop/seek/info",
     "shop/seek/offer",
-    "level3/customer/order-list"
+    "level3/customer/order-list",
+    "shop/qrcode"
   ],
   "window": {
     "backgroundColor": "#eee",

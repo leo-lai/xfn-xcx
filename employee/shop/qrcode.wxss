@@ -1,0 +1,6 @@
+/* shop/qrcode.wxss */
+.l-qrcode{
+  width: 400rpx; height: 400rpx; margin:50rpx auto;
+  border: 2rpx solid #eee; background-color: #eee;
+}
+.l-qrcode image{width: 100%; height: 100%;}

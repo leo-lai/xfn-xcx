@@ -1,0 +1,12 @@
+<!--shop/qrcode.wxml-->
+<view class='l-page-full l-bg-white'>
+  <view class='l-br'></view>
+  <view class='l-text-center'>
+    <view class='l-qrcode l-flex-vhc'>
+      <canvas style='display:inline-block; width: 400rpx; height: 400rpx;' canvas-id='qr-canvas'/>
+    </view>
+    <view class='l-margin-t'>
+      <button open-type='share' size='mini' type='primary'>分享我的商城二维码</button>
+    </view>
+  </view>
+</view>
