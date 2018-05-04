@@ -162,7 +162,10 @@ Page({
             colourId: carInfo.colourId,
             interiorId: carInfo.interiorId,
             guidingPrice: carInfo.guidingPrice,
-            depositPrice: info.depositPrice
+            depositPrice: info.depositPrice,
+            systemUserId: info.systemUserId,
+            systemUserName: info.systemUserName,
+            paymentWay: info.expectBuyWay
           }
         }
         return { data: orderInfo }
