@@ -273,6 +273,8 @@ var config = {
     seekOffer: `${baseUrl}/shop/shopFindCarOffer`,
     mySeekList: `${baseUrl}/shop/myShopFindCarOfferList`,
     mySeekInfo: `${baseUrl}/shop/shopFindCarOfferInfo`,
+    // 配置支付信息
+    storePayInfo: `${baseUrl}/shop/allInPayConfigure`,
   },
   // 物流接口
   exp: {

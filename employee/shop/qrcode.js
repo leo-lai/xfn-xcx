@@ -14,10 +14,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onReady: function () {
+    let url = app.config.shopURL + '/?sc=' + this.options.sc
+
     this.setData({
-      qrcode: this.options.sc
+      qrcode: url
     })
-    QR.api.draw( app.config.shopURL + '/?sc=' + this.options.sc, 'qr-canvas', 200, 200)
+    QR.api.draw(url, 'qr-canvas', 200, 200)
   },
 
   /**
@@ -26,7 +28,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '扫一扫进入我的商城',
-      path: '/shop/qrcode?sc=' + this.options.code
+      path: '/shop/qrcode?sc=' + this.options.sc
     }
   }
 })

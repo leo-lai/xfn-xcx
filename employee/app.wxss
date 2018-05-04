@@ -197,6 +197,10 @@ button.l-button-main._border{ background-color: #fff; color: #666; border-radius
 button.l-button-main.button-hover{  background-color:#e65138;}
 button.l-button-main[disabled] { background-color:#fa5539 !important; opacity: 0.3; color: #fff;}
 
+button.l-button-green{ background-color: #09bb07; color: #fff; border-radius: 60rpx; padding:0 20rpx;}
+button.l-button-green.button-hover{  background-color:#09bb07;}
+button.l-button-green[disabled] { background-color:#09bb07 !important; opacity: 0.3; color: #fff;}
+
 button.l-button-border{background-color: #fff;border: 2rpx solid #e65138; color:#e65138;}
 button.l-button-border::after{display: none;}
 button.l-button-border.button-hover{  background-color:#fff;}
@@ -292,6 +296,7 @@ image{max-width: 100%;}
 .l-scroll-x::-webkit-scrollbar{display: none;}
 .l-zoom{overflow: hidden;}
 .l-sticky{ position: relative; position: -webkit-sticky; position: sticky; top: 0; z-index: 20;}
+.l-sticky ~ .weui-tab__panel{padding-top: 0;}
 .l-fl{float: left;}
 .l-fr{float: right;}
 .l-rel{position: relative;}
@@ -371,3 +376,4 @@ image{max-width: 100%;}
 .l-upload-add image{width: 100%; height: 100%; display: block;}
 
 .l-dmr{display:inline-block; min-width: 45%; margin-right: 10rpx;}
+

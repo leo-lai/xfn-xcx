@@ -101,7 +101,8 @@
     "shop/seek/info",
     "shop/seek/offer",
     "level3/customer/order-list",
-    "shop/qrcode"
+    "shop/qrcode",
+    "shop/store/pay"
   ],
   "window": {
     "backgroundColor": "#eee",

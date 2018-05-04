@@ -44,6 +44,11 @@
       <text class='l-text-gray'>定金支付方式</text>
       <view class='l-rest l-text-right'>{{expectPayWay[info.expectPayWay]}}</view>
     </view>
+    <view class='l-flex-hc'>
+      <text class='l-text-gray'>定金支付状态</text>
+      <view class='l-rest l-text-error l-text-right'>{{info.overPay ? '已支付' : '未支付'}}</view>
+    </view>
+    
   </view>
 
   <view class='l-bg-white l-margin-tb l-padding'>
