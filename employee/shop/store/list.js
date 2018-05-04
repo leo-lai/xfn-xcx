@@ -120,21 +120,24 @@ Page({
     }
 
     let status = -1
+    
     switch(index) {
       case 0:
         status = 3 // 审核中
+        break
       case 1:
         status = 1 // 审核通过
+        break
       case 2:
         status = 2 // 审核不通过
+        break
     }
-
-    // if (this.data.filter.data.status !== (status)){
-      this.setData({
-        'filter.data.status': status
-      })
-      this.getList(1)
-    // }
+    
+    this.setData({
+      'filter.data.status': status
+    })
+    this.getList(1)
+      
   },
 
   // 搜索相关=================================================
