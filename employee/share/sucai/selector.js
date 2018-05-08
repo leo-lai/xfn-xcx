@@ -1,12 +1,14 @@
-// shop/order/list.js
+// share/sucai/selector.js
 const app = getApp()
 Page({
   noopFn: app.noopFn,
   data: {
+    slted: null,
     filter: {
       loading: false,
       visible: false,
       data: {
+        overShelf: 1,
         keywords: ''
       }
     },
@@ -24,6 +26,11 @@ Page({
    */
   onReady: function () {
     app.onLogin(userInfo => {
+      this.setData({
+        slted: {
+          materialId: this.options.id || ''
+        }
+      })
       this.getList()
     }, this.route)
   },
@@ -46,7 +53,7 @@ Page({
       wx.stopPullDownRefresh()
     }
   },
-  // 预约单列表
+  // 分享列表
   getList: function (page = 1, callback = app.noopFn) {
     page === 1 && this.setData({ 'list.more': true })
 
@@ -56,19 +63,16 @@ Page({
     }
 
     this.setData({ 'list.loading': true })
-    return app.post(app.config.shop.orderList, {
+    return app.post(app.config.share.sucaiList, {
       page, ...this.data.filter.data,
       rows: this.data.list.rows
     }).then(({ data }) => {
       data.list = data.list.map(item => {
-        if (item.orderInfoVos && item.orderInfoVos.length > 0) {
-          let carInfo = item.orderInfoVos[0]
-          carInfo.thumb = app.utils.formatThumb(carInfo.image, 100, 100)
-          carInfo.guidancePriceStr = (carInfo.guidancePrice / 10000).toFixed(2)
-          item.carInfo = carInfo
-        }
+        item.imageArr = item.image ? item.image.split(',') : []
+        item.thumb = app.utils.formatThumb(item.imageArr[0], 150)
         return item
       })
+
       this.setData({
         'list.more': data.list.length >= data.rows,
         'list.page': data.page,
@@ -77,6 +81,16 @@ Page({
     }).finally(_ => {
       this.setData({ 'list.loading': false })
       callback(this.data.list.data)
+    })
+  },
+  slt: function (event) {
+    let item = event.currentTarget.dataset.item
+    this.setData({
+      slted: item
+    })
+    app.getPrevPage().then(prevPage => {
+      prevPage.onSucaiCb && prevPage.onSucaiCb(item)
+      app.back()
     })
   },
 

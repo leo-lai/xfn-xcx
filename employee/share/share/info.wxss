@@ -1,0 +1,2 @@
+/* share/share/info.wxss */
+.l-images image{display: block; width: 100%;}

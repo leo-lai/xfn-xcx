@@ -1,0 +1,25 @@
+<!--share/share/info.wxml-->
+<view class='l-page-full'>
+  <view class='l-bg-white l-images'>
+    <image wx:for='{{info.imageArr}}' wx:key='*this' src='{{item}}'></image>
+  </view>
+  <view class='l-bg-white l-padding'>
+    <view>
+      <text class='l-fr'>{{info.systemUsersVo.realName}}</text>
+      <text class='l-text-gray'>客户经理</text>
+    </view>
+    <view>
+      <text class='l-fr'>{{info.systemUsersVo.phoneNumber}}</text>
+      <text class='l-text-gray'>联系电话</text>
+    </view>
+    <view>
+      <text class='l-fr'>{{info.systemUsersVo.orgName}}</text>
+      <text class='l-text-gray'>门店名称</text>
+    </view>
+    <view class='l-zoom'>
+      <image class='l-fr' style='width: 100rpx; height: 100rpx;' src='{{info.systemUsersVo.headPortrait}}'></image>
+      <text class='l-text-gray'>客户经理照片</text>
+    </view>
+    <view wx:if='{{info.remarks}}' class='l-margin-t' style='background-color:#eee; padding: 30rpx; border-radius: 10rpx;'>{{info.remarks}}</view>
+  </view>
+</view>

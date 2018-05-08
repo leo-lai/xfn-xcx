@@ -1,6 +1,14 @@
 {
   "pages": [
     "pages/home/index",
+    "share/menu",
+    "share/share/list",
+    "share/share/info",
+    "share/share/add",
+    "share/sucai/selector",
+    "share/sucai/list",
+    "share/sucai/info",
+    "share/sucai/add",
     "shop/menu",
     "shop/seek/list",
     "shop/loan/list",
@@ -14,6 +22,10 @@
     "shop/online/list",
     "shop/online/add",
     "shop/online/selector",
+    "shop/seek/info",
+    "shop/seek/offer",
+    "shop/qrcode",
+    "shop/store/pay",
     "express/menu",
     "express/wuliu/list",
     "express/wuliu/add",
@@ -85,6 +97,7 @@
     "level3/parts/jing/info",
     "level3/parts/license/list",
     "level3/parts/tiemo/list",
+    "level3/customer/order-list",
     "pages/datetime/index",
     "pages/car-selector/index",
     "pages/bank-uploader/index",
@@ -97,12 +110,7 @@
     "pages/msg/index",
     "pages/login/index",
     "pages/region/index",
-    "pages/week-selector/index",
-    "shop/seek/info",
-    "shop/seek/offer",
-    "level3/customer/order-list",
-    "shop/qrcode",
-    "shop/store/pay"
+    "pages/week-selector/index"
   ],
   "window": {
     "backgroundColor": "#eee",

@@ -23,6 +23,9 @@
  */
 var host = 'http://tomcat.mifengqiche.com'
 // var host = 'https://tomcat.xfnauto.com'
+// 商城地址
+// var shopURL = 'http://shop.mifengqiche.com'
+var shopURL = 'https://shop.xfnauto.com'
 
 var resURL = 'https://res.xfnauto.com'
 var commonUrl = host + '/tauto/common'
@@ -41,7 +44,7 @@ var config = {
     incarParts: ['车辆统一发明票', '用户手册', '保养手册', '合格证', '天线', '随车地毯', '三包凭证', '点烟器', '一致证书', '工具、备胎', '主匙', '备匙', '反光衣', '首保凭证', '档位盖']
   },
   // 商城地址
-  shopURL: 'http://shop.mifengqiche.com',
+  shopURL,
   // 静态资源服务器
   resURL,
   avatar: resURL + '/avatar.png',
@@ -275,6 +278,18 @@ var config = {
     mySeekInfo: `${baseUrl}/shop/shopFindCarOfferInfo`,
     // 配置支付信息
     storePayInfo: `${baseUrl}/shop/allInPayConfigure`,
+  },
+  // 素材分享
+  share: {
+    // 素材列表
+    sucaiList: `${baseUrl}/shop/myShareMaterialList`,
+    sucaiAdd: `${baseUrl}/shop/shareMaterialEdit`,
+    sucaiInfo: `${baseUrl}/shop/shareMaterialInfo`,
+    sucaiUpOff: `${baseUrl}/shop/shareMaterialOverShelf`,
+    shareList: `${baseUrl}/shop/myShareMaterialInfoList`,
+    shareAdd: `${baseUrl}/shop/shareMaterialInfoEdit`,
+    shareInfo: `${baseUrl}/shop/shareMaterialInfoInfo`,
+    shareLink: `${baseUrl}/shop/shareMaterialInfoShar`,
   },
   // 物流接口
   exp: {

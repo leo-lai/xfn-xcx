@@ -1,0 +1,15 @@
+<!--share/menu.wxml-->
+<view class='l-page-full'>
+  <navigator url='/share/sucai/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417017.png'></image>
+      <view>素材模板列表</view>
+    </view>
+  </navigator>
+  <navigator url='/share/share/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/20180417018.png'></image>
+      <view>我的分享列表</view>
+    </view>
+  </navigator>
+</view>

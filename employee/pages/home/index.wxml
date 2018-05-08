@@ -37,6 +37,10 @@
       <image mode='widthFix' src='/images/20180417005.png'></image>
       <view class="_txt">淘车快管理</view>
     </navigator>
+    <navigator class='_item' url='/share/menu'>
+      <image mode='widthFix' src='/images/20180417006.png'></image>
+      <view class="_txt">素材/分享管理</view>
+    </navigator>
   </view>
 
   <view class='l-menu-grid' wx:if='{{userInfo.orgLevel === 3}}'>
@@ -56,9 +60,9 @@
       <image mode='widthFix' src='/images/20180417014.png'></image>
       <view class="_txt">加装/上牌</view>
     </navigator>
-    <navigator class='_item' url='/shop/menu'>
-      <image mode='widthFix' src='/images/20180417005.png'></image>
-      <view class="_txt">淘车快管理</view>
+    <navigator class='_item' url='/share/menu'>
+      <image mode='widthFix' src='/images/20180417006.png'></image>
+      <view class="_txt">素材/分享管理</view>
     </navigator>
   </view>
 </view>

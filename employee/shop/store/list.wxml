@@ -24,27 +24,29 @@
 
     <view class='weui-tab__panel'>
       <view class='weui-tab__content'>
-        <view bindtap='viewInfo' class='l-order-item l-padding l-bg-white l-margin-b' 
-          wx:for='{{list.data}}' wx:key='orgId' data-item='{{item}}' data-url='info?id={{item.orgId}}'>
-          <view class='_hd l-flex-hc'>
-            <view class='l-rest'>{{item.shortName}}</view>
-            <text class="{{statusClass[item.status-1]}}">{{storeStatus[item.status-1]}}</text>
-            <text class='l-icon-6a8'></text>
-          </view>
-          <view class='_bd l-flex-hc'>
-            <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{item.thumb}}'></image>
-            <view class='l-rest'>
-              <view class='l-h4 l-text-wrap1'>店长姓名：{{item.linkMan}}</view>
-              <view class='l-margin-t-s l-txt-gray'>
-                <text>店长电话：{{item.telePhone}}</text>
+        <view>
+          <view bindtap='viewInfo' class='l-order-item l-padding l-bg-white l-margin-b' 
+            wx:for='{{list.data}}' wx:key='orgId' data-item='{{item}}' data-url='info?id={{item.orgId}}'>
+            <view class='_hd l-flex-hc'>
+              <view class='l-rest'>{{item.shortName}}</view>
+              <text class="{{statusClass[item.status-1]}}">{{storeStatus[item.status-1]}}</text>
+              <text class='l-icon-6a8'></text>
+            </view>
+            <view class='_bd l-flex-hc'>
+              <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{item.thumb}}'></image>
+              <view class='l-rest'>
+                <view class='l-h4 l-text-wrap1'>店长姓名：{{item.linkMan}}</view>
+                <view class='l-margin-t-s l-txt-gray'>
+                  <text>店长电话：{{item.telePhone}}</text>
+                </view>
               </view>
             </view>
-          </view>
-          <view class='l-flex-hc l-padding-t'>
-            <text class='l-text-gray'>申请日期：{{item.createDateStr}}</text>
-            <view class='l-rest'></view>
-            <button wx:if='{{item.status === 3}}' size='mini' class='l-button-main'>去审核</button>
-            <button wx:elif='{{item.status === 1}}' data-url='pay?id={{item.orgId}}' size='mini' class='l-button-main'>{{item.allInPayAppId ? '修改支付配置' : '配置支付信息'}}</button>
+            <view class='l-flex-hc l-padding-t'>
+              <text class='l-text-gray'>申请日期：{{item.createDateStr}}</text>
+              <view class='l-rest'></view>
+              <button wx:if='{{item.status === 3}}' size='mini' class='l-button-main'>去审核</button>
+              <button wx:elif='{{item.status === 1}}' data-url='pay?id={{item.orgId}}' size='mini' class='l-button-main'>{{item.allInPayAppId ? '修改支付配置' : '配置支付信息'}}</button>
+            </view>
           </view>
         </view>
         <template is='loadmore' data='{{...list}}' />

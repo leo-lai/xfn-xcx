@@ -1,0 +1,33 @@
+<!--share/sucai/selector.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入素材名称查询' value='{{filter.data.keywords}}' />
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+  <view style='height: 120rpx;'></view>
+
+  <view class='l-flex-h l-bg-white l-padding l-border-b' wx:for='{{list.data}}' wx:key='materialId' bindtap='slt' data-item='{{item}}'>
+    <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{item.thumb}}'></image>
+    <view class='l-rest'>
+      <view class='l-h4 l-text-wrap1'>{{item.materialName}}</view>
+      <view class='l-margin-t-s'>
+        <view wx:if='{{userInfo.orgLevel === 2}}' class='l-inline' catchtap='noopFn' >
+          <button wx:if='{{!item.overShelf}}' class='l-fr' size="mini" bindtap='upOff' id="{{item.materialId}}" data-val='1'>上架</button>
+          <button wx:else class='l-fr' size="mini" bindtap='upOff' id="{{item.materialId}}" data-val='0'>下架</button>
+        </view>
+        <text class='l-fs-s l-text-gray'>海报素材 {{item.imageArr.length}}张</text>
+      </view>
+    </view>
+    <view>
+      <icon wx:if='{{slted.materialId == item.materialId}}' type='success_no_circle' color='#fa5539'></icon>
+      <icon wx:else type='success_no_circle' color='#eee'></icon>
+    </view>
+  </view>
+  <template is='loadmore' data='{{...list}}' />
+</view>

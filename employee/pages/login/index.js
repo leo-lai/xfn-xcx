@@ -68,7 +68,7 @@ Page({
               success: res => {
                 if (res.confirm) {
                   wx.openSetting({
-                    success: (res) => {
+                    success: res => {
                       if (res.authSetting['scope.userInfo']) {
                         this.getLoginInfo()
                       }

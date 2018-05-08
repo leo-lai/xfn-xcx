@@ -1,0 +1,3 @@
+/* share/share/list.wxss */
+.l-tag1{background-color: #fe5045; font-size: 22rpx; padding: 4rpx 10rpx; border-radius: 10rpx; color: #fff;}
+.l-tag2{background-color: #8fc320; font-size: 22rpx; padding: 4rpx 10rpx; border-radius: 10rpx; color: #fff;}

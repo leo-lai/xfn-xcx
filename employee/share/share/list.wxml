@@ -1,0 +1,46 @@
+<!--share/share/list.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <view class='l-list-filter' catchtouchmove='noopFn'>
+    <view class='_input l-flex-hc'>
+      <view class='l-rest'>
+        <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入素材名称查询' value='{{filter.data.keywords}}' />
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+  <view style='height: 120rpx;'></view>
+
+  <navigator url='info?id={{item.materialInfoId}}' class='l-flex-h l-bg-white l-padding l-border-b' wx:for='{{list.data}}' wx:key='materialInfoId' >
+    <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{item.thumb}}'></image>
+    <view class='l-rest'>
+      <view class='l-h4 l-text-wrap2'>
+        <text class='l-tag2' wx:if='{{item.overShare}}'>已分享</text>
+        <text class='l-tag1' wx:else>未分享</text>
+        {{item.materialName}}
+      </view>
+      <view class='l-margin-t-s'>
+        <view class='l-inline' catchtap='noopFn' >
+          <button class='l-fr' size='mini' id='{{item.materialInfoId}}' bindtap='share'>分享</button>
+        </view>
+        <text class='l-fs-s l-text-gray'>海报素材 {{item.imageArr.length}}张</text>
+      </view>
+    </view>
+  </navigator>
+  <template is='loadmore' data='{{...list}}' />
+
+  <navigator url='add' class='l-fixed-right' hover-class='none'>
+    <image src='/images/20180417015.png'></image>
+    <text>创建分享</text>
+  </navigator>
+
+  <view class='l-popup-center l-flex-vhc' wx:if='{{share.visible}}' bindtap='closeShare'>
+    <view class='_inner'>
+      <image mode='top' style='display:block; width: 500rpx; height: 600rpx;' src='{{share.data}}'></image>
+    </view>
+    <view class='l-margin-t' catchtap='noopFn'>
+      <button class='l-button-main' size='mini' bindtap='shareImage'>分享到朋友圈</button>
+    </view>
+  </view> 
+</view>
