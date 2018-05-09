@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/offer/index",
+    
     "share/menu",
     "share/share/list",
     "share/share/info",
