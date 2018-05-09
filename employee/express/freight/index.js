@@ -125,7 +125,7 @@ Page({
     app.post(app.config.exp.freight1Info).then(({data}) => {
       console.log(data)
       this.setData({ 
-        'formData': data,
+        'formData': app.utils.copyObj(this.data.formData, data),
         'gradeCar': this.data.gradeCar.map(item => {
           item.price = data[item.name]
           return item
