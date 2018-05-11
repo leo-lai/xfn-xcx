@@ -22,7 +22,7 @@
       </view>
       <view class='l-margin-t-s'>
         <view class='l-inline' catchtap='noopFn' >
-          <button class='l-fr' size='mini' id='{{item.materialInfoId}}' bindtap='share'>分享</button>
+          <button class='l-fr' size='mini' id='{{item.materialInfoId}}' bindtap='share'>分享到朋友圈</button>
         </view>
         <text class='l-fs-s l-text-gray'>海报素材 {{item.imageArr.length}}张</text>
       </view>
@@ -42,5 +42,5 @@
     <view class='l-margin-t' catchtap='noopFn'>
       <button class='l-button-main' size='mini' bindtap='shareImage'>保存到手机</button>
     </view>
-  </view> 
+  </view>
 </view>

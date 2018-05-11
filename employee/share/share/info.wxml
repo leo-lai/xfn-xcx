@@ -1,10 +1,10 @@
 <!--share/share/info.wxml-->
 <view class='l-page-full'>
-  <view wx:if='{{info.remarks}}' style='background-color:#eee; padding: 30rpx; border-radius: 10rpx;'>{{info.remarks}}</view>
+  <view wx:if='{{info.remarks}}' style='background-color:#eee; padding: 30rpx;'>{{info.remarks}}</view>
   <view class='l-bg-white l-images'>
     <image wx:for='{{info.imageArr}}' wx:key='*this' src='{{item}}'></image>
   </view>
-  <view class='l-bg-white l-padding'>
+  <view class='l-bg-white l-padding l-margin-b'>
     <view>
       <text class='l-fr'>{{info.systemUsersVo.realName}}</text>
       <text class='l-text-gray'>客户经理</text>
@@ -20,6 +20,23 @@
     <view class='l-zoom'>
       <image class='l-fr' style='width: 100rpx; height: 100rpx;' src='{{info.systemUsersVo.headPortrait}}'></image>
       <text class='l-text-gray'>客户经理照片</text>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' id='{{info.materialInfoId}}' bindtap='share'>
+      <image src='/images/share.png'></image> 
+      分享到朋友圈
+    </button>
+  </view>
+
+  <view class='l-popup-center l-flex-vhc' wx:if='{{share.visible}}' bindtap='closeShare'>
+    <view class='_inner l-scroll' style='width: 600rpx; height: 800rpx;'>
+      <image mode='widthFix' style='display:block; width:100%;' src='{{share.data}}'></image>
+    </view>
+    <view class='l-margin-t' catchtap='noopFn'>
+      <button class='l-button-main' size='mini' bindtap='shareImage'>保存到手机</button>
     </view>
   </view>
 </view>

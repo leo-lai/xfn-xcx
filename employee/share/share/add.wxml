@@ -50,7 +50,7 @@
     -->
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__bd' style='padding: 15rpx 0;'>
-        <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入自定义分享描述(500字以内)' id='remarks' value='{{formData.remarks}}' bindinput='bindInput'></textarea>
+        <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入自定义分享描述' id='remarks' value='{{formData.remarks}}' maxlength='{{-1}}' bindinput='bindInput'></textarea>
       </view>
     </view>
     <view class='weui-cell' style='display:block;'>
