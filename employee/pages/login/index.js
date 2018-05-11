@@ -29,7 +29,7 @@ Page({
         })
       }
     })
-    this.getLoginInfo()
+    // this.getLoginInfo()
   },
   // 顶部显示错误信息
   showTopTips: function (topTips = '') {
@@ -45,42 +45,61 @@ Page({
     data['formData.' + event.target.id] = event.detail.value
     this.setData(data)
   },
-  getLoginInfo() {
-    wx.login({
-      success: loginRes => { // 获取授权code，可以到后台换取 openId, sessionKey, unionId
-        wx.getUserInfo({ // 小程序授权获取用户信息（头像，昵称等）
-          withCredentials: true,
-          success: userInfoRes => { // 可以将 userInfoRes 发送给后台解码出 unionId
-            this.data.formData.code = loginRes.code
-            this.data.formData.rawData = userInfoRes.rawData
-            this.data.formData.signature = userInfoRes.signature
-            this.data.formData.encryptedData = userInfoRes.encryptedData
-            this.data.formData.iv = userInfoRes.iv
-            this.data.formData.nikeName = userInfoRes.userInfo.nickName
-            this.data.formData.headPortrait = userInfoRes.userInfo.avatarUrl
-          },
-          fail: err => {
-            // 用户不授权弹出重新授权页面
-            wx.showModal({
-              title: '授权失败',
-              content: '小程序需要您的登录授权',
-              confirmText: '去授权',
-              success: res => {
-                if (res.confirm) {
-                  wx.openSetting({
-                    success: res => {
-                      if (res.authSetting['scope.userInfo']) {
-                        this.getLoginInfo()
-                      }
-                    }
-                  })
-                }
-              }
-            })
-          }
-        })
-      }
-    })
+  getLoginInfo: function(res) {
+    console.log(res)
+    if (res.detail.errMsg === 'getUserInfo:ok'){
+      this.data.formData.rawData = res.detail.rawData
+      this.data.formData.signature = res.detail.signature
+      this.data.formData.encryptedData = res.detail.encryptedData
+      this.data.formData.iv = res.detail.iv
+      this.data.formData.nikeName = res.detail.userInfo.nickName
+      this.data.formData.headPortrait = res.detail.userInfo.avatarUrl
+      this.submit()
+    }
+    // if (this.data.formData.code) {
+    //   this.submit()
+    //   return
+    // }
+    // wx.login({
+    //   success: loginRes => { // 获取授权code，可以到后台换取 openId, sessionKey, unionId
+    //     wx.getUserInfo({ // 小程序授权获取用户信息（头像，昵称等）
+    //       withCredentials: true,
+    //       success: userInfoRes => { // 可以将 userInfoRes 发送给后台解码出 unionId
+    //         this.data.formData.code = loginRes.code
+    //         this.data.formData.rawData = userInfoRes.rawData
+    //         this.data.formData.signature = userInfoRes.signature
+    //         this.data.formData.encryptedData = userInfoRes.encryptedData
+    //         this.data.formData.iv = userInfoRes.iv
+    //         this.data.formData.nikeName = userInfoRes.userInfo.nickName
+    //         this.data.formData.headPortrait = userInfoRes.userInfo.avatarUrl
+
+    //         this.submit()
+    //       },
+    //       fail: res => {
+    //         console.log(res)
+    //         if (res.errMsg !== 'getUserInfo:fail scope unauthorized') {
+    //           // 用户不授权弹出重新授权页面
+    //           wx.showModal({
+    //             title: '授权失败',
+    //             content: '小程序需要您的登录授权',
+    //             confirmText: '去授权',
+    //             success: res => {
+    //               if (res.confirm) {
+    //                 wx.openSetting({
+    //                   success: res => {
+    //                     if (res.authSetting['scope.userInfo']) {
+    //                       this.getLoginInfo()
+    //                     }
+    //                   }
+    //                 })
+    //               }
+    //             }
+    //           })
+    //         }
+    //       }
+    //     })
+    //   }
+    // })
   },
   // 登录
   submit() {

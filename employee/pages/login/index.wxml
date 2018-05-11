@@ -13,7 +13,7 @@
     </view>
     <view class='l-br'></view>
     <view class='l-padding'>
-      <button class='l-button-main' bindtap='submit'>登录</button>
+      <button open-type='getUserInfo' bindgetuserinfo='getLoginInfo' class='l-button-main'>登录</button>
     </view>
   </view>
 </view>
