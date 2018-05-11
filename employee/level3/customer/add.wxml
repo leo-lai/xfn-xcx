@@ -85,7 +85,7 @@
       </view>
       <view class='weui-cell weui-cell_select'>
         <view class='weui-cell__hd weui-cell__hd_in-select-after'>
-          <view class='weui-label'>客户强度</view>
+          <view class='weui-label'>客户来源</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <picker id='makeSource' data-picker='makeSource' bindchange='bindInput' value='{{makeSource.index}}' range='{{makeSource.list}}'>

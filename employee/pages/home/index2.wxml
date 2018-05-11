@@ -89,18 +89,18 @@
           <view class='{{customer.undelivery > 0 ? "_num2" : "_num"}}'>{{customer.undelivery}}</view>
           <view class='_txt'>待出库</view>
         </navigator>
-        <navigator class='_item' url='/level3/customer/list?sta=7,9' hover-class='none'>
+        <navigator class='_item _rest' url='/level3/customer/list?sta=7,9,11' hover-class='none'>
           <view class='{{customer.others > 0 ? "_num2" : "_num"}}'>{{customer.others}}</view>
-          <view class='_txt'>加装/上牌</view>
+          <view class='_txt'>加装/上牌/贴膜</view>
         </navigator>
         <navigator class='_item' url='/level3/customer/list?sta=13' hover-class='none'>
           <view class='{{customer.finished > 0 ? "_num2" : "_num"}}'>{{customer.finished}}</view>
           <view class='_txt'>已完款可放行</view>
         </navigator>
-        <view class='_item'>
-          <!-- <view class='{{customer.unfinished > 0 ? "_num2" : "_num"}}'>{{customer.unfinished}}</view>
-          <view class='_txt'>待完款</view> -->
-        </view>
+        <!-- <view class='_item'>
+          <view class='{{customer.unfinished > 0 ? "_num2" : "_num"}}'>{{customer.unfinished}}</view>
+          <view class='_txt'>待完款</view> 
+        </view> -->
       </view>
       <view class='l-grid-menu'>
         <view class='_item'>
@@ -129,47 +129,47 @@
   <view class='l-bg-white l-margin-b'>
     <view class='l-grid-menu'>
       <navigator class='_item' url='/level2/order/list?sta=1' hover-class='none'>
-        <view class='{{customer.placeOrder > 0 ? "_num2" : "_num"}}'>{{consumer.placeOrder}}</view>
+        <view class='{{consumer.placeOrder > 0 ? "_num2" : "_num"}}'>{{consumer.placeOrder}}</view>
         <view class='_txt'>开单</view>
       </navigator>
       <navigator class='_item' url='/level2/order/list' hover-class='none'>
-        <view class='{{customer.total > 0 ? "_num2" : "_num"}}'>{{consumer.total}}</view>
+        <view class='{{consumer.total > 0 ? "_num2" : "_num"}}'>{{consumer.total}}</view>
         <view class='_txt'>本月总订单</view>
       </navigator>
       <navigator class='_item' url='/level2/order/list?sta=5' hover-class='none'>
-        <view class='{{customer.unpayDeposit > 0 ? "_num2" : "_num"}}'>{{consumer.unpayDeposit}}</view>
+        <view class='{{consumer.unpayDeposit > 0 ? "_num2" : "_num"}}'>{{consumer.unpayDeposit}}</view>
         <view class='_txt'>待收定金</view>
       </navigator>
       <navigator class='_item' url='/level2/order/list?sta=35' hover-class='none'>
-        <view class='{{customer.finnalprice > 0 ? "_num2" : "_num"}}'>{{consumer.finnalprice}}</view>
+        <view class='{{consumer.finnalprice > 0 ? "_num2" : "_num"}}'>{{consumer.finnalprice}}</view>
         <view class='_txt'>待收尾款</view>
       </navigator>
     </view>
     <view class='l-grid-menu'>
       <navigator class='_item' url='/level2/order/list?sta=35' hover-class='none'>
-        <view class='{{customer.carMatch > 0 ? "_num2" : "_num"}}'>{{consumer.carMatch}}</view>
+        <view class='{{consumer.carMatch > 0 ? "_num2" : "_num"}}'>{{consumer.carMatch}}</view>
         <view class='_txt'>待配车</view>
       </navigator>
       <navigator class='_item' url='/level2/order/list?sta=15' hover-class='none'>
-        <view class='{{customer.carCheck > 0 ? "_num2" : "_num"}}'>{{consumer.carCheck}}</view>
+        <view class='{{consumer.carCheck > 0 ? "_num2" : "_num"}}'>{{consumer.carCheck}}</view>
         <view class='_txt'>待验车</view>
       </navigator>
       <navigator class='_item' url='/level2/order/list?sta=40' hover-class='none'>
-        <view class='{{customer.outStock > 0 ? "_num2" : "_num"}}'>{{consumer.outStock}}</view>
+        <view class='{{consumer.outStock > 0 ? "_num2" : "_num"}}'>{{consumer.outStock}}</view>
         <view class='_txt'>待出库</view>
       </navigator>
       <navigator class='_item' url='/level2/order/list?sta=45' hover-class='none'>
-        <view class='{{customer.tickitUploading > 0 ? "_num2" : "_num"}}'>{{consumer.tickitUploading}}</view>
+        <view class='{{consumer.tickitUploading > 0 ? "_num2" : "_num"}}'>{{consumer.tickitUploading}}</view>
         <view class='_txt'>待上传票证</view>
       </navigator>
     </view>
     <view class='l-grid-menu'>
       <view class='_item'>
-        <view class='{{customer.commercial > 0 ? "_num2" : "_num"}}'>{{consumer.commercial}}</view>
+        <view class='{{consumer.commercial > 0 ? "_num2" : "_num"}}'>{{consumer.commercial}}</view>
         <view class='_txt'>商业保险</view>
       </view>
       <view class='_item'>
-        <view class='{{customer.traffic > 0 ? "_num2" : "_num"}}'>{{consumer.traffic}}</view>
+        <view class='{{consumer.traffic > 0 ? "_num2" : "_num"}}'>{{consumer.traffic}}</view>
         <view class='_txt'>交强险</view>
       </view>
       <view class='_item'>
@@ -187,11 +187,11 @@
       <view class='l-grid-menu'>
         <navigator class='_item2' url='/level3/customer/list' hover-class='none'>
           <text class='_txt'>今日回访</text>
-          <text class='{{customer.returnVisit > 0 ? "_num2" : "_num"}}'>{{commission.returnVisit}}</text>
+          <text class='{{commission.returnVisit > 0 ? "_num2" : "_num"}}'>{{commission.returnVisit}}</text>
         </navigator>
         <navigator class='_item2' url='/level3/customer/list' hover-class='none'>
           <text class='_txt'>今日预计到店</text>
-          <text class='{{customer.appointment > 0 ? "_num2" : "_num"}}'>{{commission.appointment}}</text>
+          <text class='{{commission.appointment > 0 ? "_num2" : "_num"}}'>{{commission.appointment}}</text>
         </navigator>
       </view>
     </view>

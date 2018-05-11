@@ -45,9 +45,9 @@ Page({
    */
   onShow: function () {
     app.checkLogin().then(_ => {
-      app.storage.getItem('lv2-customer-info-refresh').then(refresh => {
+      app.storage.getItem('lv2-customer-list-refresh').then(refresh => {
         if(refresh) {
-          app.storage.removeItem('lv2-customer-info-refresh')
+          app.storage.removeItem('lv2-customer-list-refresh')
           this.getList()
         }
       })

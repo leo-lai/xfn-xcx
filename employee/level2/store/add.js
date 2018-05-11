@@ -31,14 +31,14 @@ Page({
   onReady: function (options) {
     app.storage.getItem('lv2-customer-info').then(info => {
       if (info) {
-        wx.setNavigationBarTitle({ title: '修改客户信息' })
+        wx.setNavigationBarTitle({ title: '修改汽贸店信息' })
         let formData = app.utils.copyObj(this.data.formData, info)
         this.setData({ 
           formData,
           'regionName': info.provinceName === info.cityName ? (info.provinceName + info.areaName) : (info.provinceName + info.cityName + info.areaName)
         })
       } else {
-        wx.setNavigationBarTitle({ title: '新增客户' })
+        wx.setNavigationBarTitle({ title: '新增汽贸店' })
       }
     })
   },
@@ -120,9 +120,7 @@ Page({
         app.storage.setItem('lv2-customer-info', this.data.formData)
         app.storage.setItem('lv2-customer-info-refresh', 1)
       }else{
-        app.getPrevPage().then(prevPage => {
-          prevPage.getList && prevPage.getList()
-        })
+        app.storage.setItem('lv2-customer-list-refresh', 1)
       }
       app.toast('保存成功', true)
       
