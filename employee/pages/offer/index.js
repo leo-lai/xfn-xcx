@@ -155,10 +155,10 @@ Page({
       annual_rate = Number(annual_rate) || 0
 
       // 首付金额
-      let down_payment_money = down_payment_money = total_fee * (down_payment_rate / 100 / 100)
+      let down_payment_money = down_payment_money = total_fee * (down_payment_rate / 100)
 
       if (periods && annual_rate) {
-        monthly_supply = (total_fee - down_payment_money) * (annual_rate / periods)
+        monthly_supply = (total_fee - down_payment_money) * (annual_rate / 100 / periods)
       }
 
       total_fee = down_payment_money
