@@ -294,7 +294,7 @@ var config = {
     shareList: `${baseUrl}/shop/myShareMaterialInfoList`,
     shareAdd: `${baseUrl}/shop/shareMaterialInfoEdit`,
     shareInfo: `${baseUrl}/shop/shareMaterialInfoInfo`,
-    shareLink: `${baseUrl}/shop/shareMaterialInfoShar`,
+    shareLink: `${baseUrl2}/publics_v1/createImage`,
   },
   // 物流接口
   exp: {

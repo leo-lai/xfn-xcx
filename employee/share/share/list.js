@@ -83,10 +83,10 @@ Page({
     })
   },
   share: function (event) {
-    let materialInfoId = event.target.id
+    let id = event.target.id
     wx.showLoading()
-    app.post(app.config.share.shareLink, {
-      materialInfoId
+    app.ajax(app.config.share.shareLink, {
+      id
     }).then(({data}) => {
       this.setData({
         'share.visible': true,
