@@ -21,17 +21,24 @@
  * .............................................
  *                佛祖坐镇 顺利上线
  */
-var host = 'http://tomcat.mifengqiche.com'
-// var host = 'https://tomcat.xfnauto.com'
-// 商城地址
-// var shopURL = 'http://shop.mifengqiche.com'
-var shopURL = 'https://shop.xfnauto.com'
+var env = 'dev'
+// var env = 'prod'
+var getHost = (domainName = 'api') => env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
+
+var hosts = [getHost('tomcat'), getHost('api'), getHost('shop')]
 
 var resURL = 'https://res.xfnauto.com'
-var commonUrl = host + '/tauto/common'
-var baseUrl = host + '/tauto/emInterface/employee'
+var commonUrl = hosts[0] + '/tauto/common'
+var baseUrl = hosts[0] + '/tauto/emInterface/employee'
+var baseUrl2 = hosts[1]
 
 var config = {
+  // 商城地址
+  shopURL: hosts[2],
+  // 静态资源服务器
+  resURL,
+  avatar: resURL + '/avatar.png',
+  // 基础数据
   baseData: {
     carTime: ['随车', '3个工作日内', '7个工作日内', '10个工作日内', '15个工作日内'],
     buyTime: ['3天内', '7天内'],
@@ -43,18 +50,16 @@ var config = {
     // 随车资料
     incarParts: ['车辆统一发明票', '用户手册', '保养手册', '合格证', '天线', '随车地毯', '三包凭证', '点烟器', '一致证书', '工具、备胎', '主匙', '备匙', '反光衣', '首保凭证', '档位盖']
   },
-  // 商城地址
-  shopURL,
-  // 静态资源服务器
-  resURL,
-  avatar: resURL + '/avatar.png',
 
-  // 野狗配置
-  wilddog: {
-    syncURL: 'https://wd5822510528sjwblr.wilddogio.com',
-    authDomain: '<wd5822510528sjwblr.wilddog.com>'
+  // ================================================
+  // 首页
+  index: {
+    data: `${baseUrl2}/ucenter_v1/index`,
   },
-
+  // 报价单
+  offerPrice: `${baseUrl2}/ucenter_v1/quotation`,
+  offerInfo: `${baseUrl2}/ucenter_v1/quotationDetail`,
+  
   // 车辆品牌
   brandList: `${commonUrl}/carsBrandList`,
   // 车系

@@ -25,20 +25,14 @@ Page({
       list: []
     }
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    app.onLogin(userInfo => {
-      this.getBrandList()
-    }, this.route)
-  },
+  
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.checkLogin()
+    app.checkLogin().then(_ => {
+      this.getBrandList()
+    })
   },
   // 品牌列表
   getBrandList: function () {

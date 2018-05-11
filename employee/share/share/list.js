@@ -136,6 +136,7 @@ Page({
           })
         },
         fail: res => {
+          console.log(res)
           // 用户不授权弹出重新授权页面
           if (res.errMsg === 'saveImageToPhotosAlbum:fail auth deny') {
             wx.showModal({
@@ -157,11 +158,13 @@ Page({
               }
             })
           } else {
-            reject()
-            wx.showToast({
-              image: '../../images/error.png',
-              title: '保存图片失败'
-            })
+            reject('保存图片失败')
+            if (res.errMsg !== 'saveImageToPhotosAlbum:fail cancel'){
+              wx.showToast({
+                image: '../../images/error.png',
+                title: '保存图片失败'
+              })
+            }
           }
         }
       })

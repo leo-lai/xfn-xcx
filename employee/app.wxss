@@ -189,6 +189,7 @@ button[type=primary] {background-color:#ef5b45;}
 button.button-hover[type=primary] { color:rgba(255, 255, 255, 0.6); background-color:#ce4d39;}
 button[type=primary][disabled] { background-color:#ef5b45 !important; opacity: 0.3;}
 
+.l-button-main image{width: 30rpx; height: 30rpx; margin-right: 10rpx; vertical-align: -2rpx;}
 button.l-button-main, button.l-button-border{border-radius: 60rpx;padding:0 20rpx;}
 button.l-button-main{ background-color: #fa5539; color: #fff;  border: 2rpx solid #fa5539; box-shadow: 0 10rpx 20rpx rgba(230, 81, 56, 0.3); }
 button.l-button-main::after{display: none;}

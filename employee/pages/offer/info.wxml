@@ -1,0 +1,110 @@
+<!--pages/offer/info.wxml-->
+<view class='l-page-full'>
+  <view class='l-bg-white l-padding l-margin-b'>
+    <view>{{info.user.username}}的报价单</view>
+    <view bindtap='callPhone' data-val='{{info.user.phone}}'>联系电话：<text>{{info.user.phone}}</text></view>
+    <view class='l-margin-tb' style='border-top: 1rpx dashed #eee;'></view>
+    <view>购车方式：{{buyWay[info.type]}}</view>
+    <view>车型：{{info.carName}}</view>
+    <view class='l-margin-t'>
+      <text class='l-dmr'>指导价</text>
+      <text>{{info.price}}</text>
+      <text>元</text>
+    </view>
+    <view>
+      <text class='l-dmr'>{{info.mode == 1 ? '已优惠' : '已加价'}}</text>
+      <text>{{info.change_price}}</text>
+      <text>元</text>
+    </view>
+    <view>
+      <text class='l-dmr'>裸车价</text>
+      <text>{{info.bareCarPrice}}</text>
+      <text>元</text>
+    </view>
+    <block wx:if='{{info.type == 2}}'>
+      <view class='l-margin-t'>
+        <text class='l-dmr'>首付比例</text>
+        <text>{{info.down_payment_rate}}</text>
+        <text>%</text>
+      </view>
+      <view>
+        <text class='l-dmr'>贷款期数</text>
+        <text>{{info.periods}}</text>
+        <text>个月</text>
+      </view>
+      <view>
+        <text class='l-dmr'>年利率</text>
+        <text>{{info.annual_rate}}</text>
+        <text>%</text>
+      </view>
+      <view>
+        <text class='l-dmr'>按揭费用</text>
+        <text>{{info.mortgage}}</text>
+        <text>元</text>
+      </view>
+    </block>
+    <view class='l-margin-t'>
+      <text class='l-dmr'>购置税</text>
+      <text>{{info.purchase_tax}}</text>
+      <text>元</text>
+    </view>
+    <view>
+      <text class='l-dmr'>上牌费用</text>
+      <text>{{info.license_plate_priace}}</text>
+      <text>元</text>
+    </view>
+    <view>
+      <text class='l-dmr'>车船税</text>
+      <text>{{info.vehicle_vessel_tax}}</text>
+      <text>元</text>
+    </view>
+    <view>
+      <text class='l-dmr'>商业保险</text>
+      <text>{{info.insurance_price}}</text>
+      <text>元</text>
+    </view>
+    <view>
+      <text class='l-dmr'>交强险</text>
+      <text>{{info.traffic_insurance_price}}</text>
+      <text>元</text>
+    </view>
+    <view class='l-margin-t'>
+      <text class='l-dmr'>精品加装费用</text>
+      <text>{{info.boutique_priace}}</text>
+      <text>元</text>
+    </view>
+    <view>
+      <text class='l-dmr'>质保费用</text>
+      <text>{{info.quality_assurance}}</text>
+      <text>元</text>
+    </view>
+    <view>
+      <text class='l-dmr'>其他费用</text>
+      <text>{{info.other}}</text>
+      <text>元</text>
+    </view>
+    <view class='l-margin-tb' style='border-top: 1rpx dashed #eee;'></view>
+    <view>
+      <text class='l-dmr'>预计付费总额</text>
+      <text>{{info.total_fee}}</text>
+      <text>元</text>
+    </view>
+    <view wx:if='{{info.type == 2}}'>
+      <text class='l-dmr'>每月还款</text>
+      <text>{{info.monthly_supply}}</text>
+      <text>元</text>
+    </view>
+
+    <view style='margin-top: 60rpx;'>
+      此结果仅供参考，如有需要请联系我
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button open-type='share' class='l-button-main l-btn-w60'>
+      <image src='/images/share.png'></image> 
+      分享报价单
+    </button>
+  </view>
+</view>

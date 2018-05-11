@@ -106,7 +106,7 @@ App({
     // })
     
   },
-  ajax: function (type = 'JSON', url = '', formData = {}, showErr = true) {
+  ajax: function (url = '', formData = {}, type = 'GET', showErr = true) {
     return new Promise((resolve, reject) => {
       if (this.globalData.userInfo) {
         formData.sessionId = this.globalData.userInfo.sessionId
@@ -116,11 +116,19 @@ App({
 
       let reqParams = {
         url,
-        method: 'POST',
         data: formData,
-        header: {
-          'content-type': type === 'POST' ? 'application/x-www-form-urlencoded' : 'application/json'
-        }
+        header: {}
+      }
+
+      switch(type) {
+        case 'POST':
+          reqParams.method = 'POST'
+          reqParams.header['content-type'] = 'application/x-www-form-urlencoded'
+          break
+        case 'JSON':
+          reqParams.method = 'POST'
+          reqParams.header['content-type'] = 'application/json'
+          break
       }
       
       wx.request({
@@ -138,9 +146,10 @@ App({
           }
           // 其他错误码处理
           switch (data.resultCode) {
-            case 4008:
             case 4004:
             case 4005:
+            case 4008:
+            case 201:
               break
           }
           wx.hideLoading()
@@ -162,12 +171,12 @@ App({
     })
   },
   // post 表单请求
-  post: function (url = '', formData = {}, showErr = true) {    
-    return this.ajax('POST', url, formData, showErr = true)
+  post: function (url = '', formData = {}, showErr = true) {
+    return this.ajax(url, formData, 'POST')
   },
   // post JSON请求
   json: function (url = '', formData = {}, showErr = true) {
-    return this.ajax('JSON', url, formData, showErr = true)
+    return this.ajax(url, formData, 'JSON')
   },
   // 检测是否登录
   checkLogin() {

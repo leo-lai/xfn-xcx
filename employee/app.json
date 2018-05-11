@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/home/index",
+    "pages/home/index2",
+    "pages/offer/info",
     "pages/offer/index",
-    
+    "pages/home/index",
     "share/menu",
     "share/share/list",
     "share/share/info",
@@ -127,7 +128,7 @@
       {
         "iconPath": "images/home-unselected.png",
         "selectedIconPath": "images/home-selected.png",
-        "pagePath": "pages/home/index",
+        "pagePath": "pages/home/index2",
         "text": "首页"
       },
       {

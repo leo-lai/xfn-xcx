@@ -4,94 +4,99 @@ const sliderWidth = 96 // 需要设置slider的宽度，用于计算中间位置
 Page({
   noopFn: app.noopFn,
   data: {
+    topTips: '',
+    rate: { // 首付比例
+      index: -1,
+      list: [
+        { label: '10%', value: 10 },
+        { label: '20%', value: 20 },
+        { label: '30%', value: 30 },
+        { label: '40%', value: 40 },
+      ]
+    },
     tabs: {
       tit: ['全款', '按揭'],
       index: 0,
       offset: 0,
       left: 0
     },
-    filter: {
-      loading: false,
-      visible: false,
-      data: {
-        overShelf: 1,
-        keywords: ''
-      }
+    info: {
+      carName: '',
     },
-    slted: null,
-    list: {
-      ajax: false,
-      loading: false,
-      more: true,
-      page: 1,
-      rows: 50,
-      data: []
+    formData: {
+      carId: '',
+      type: '',               // 1全款，2按揭
+      mode: 1,                // 1优惠，2加价
+      change_price: '',
+      total_fee: '0.00',      // 总费用
+      monthly_supply: '0.00', // 每月还款
+
+      price: '',
+      bareCarPrice: '',
+      purchase_tax: '',
+      license_plate_priace: '',
+      vehicle_vessel_tax: '',
+      insurance_price: '',
+      traffic_insurance_price: '',
+      boutique_priace: '',
+      quality_assurance: '',
+      other: '',
+      down_payment_rate: '',
+      periods: '',
+      annual_rate: '',
+      mortgage: ''
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onReady: function () {
-    app.onLogin(userInfo => {
-      this.setData({ userInfo })
-      this.tabClick(0)
-    }, this.route)
+    this.tabClick(0)
   },
-  onShow: function () {
-    app.checkLogin().then(_ => {
-      app.storage.getItem('share-sucai-list-refresh').then(refresh => {
-        if (refresh) {
-          app.storage.removeItem('share-sucai-list-refresh')
-          this.getList()
-        }
-      })
+  // 顶部显示错误信息
+  showTopTips: function (topTips = '') {
+    this.setData({
+      topTips
     })
-  },
-  // 加载更多
-  onReachBottom: function () {
-    if (app.globalData.userInfo) {
-      this.getList(this.data.list.data.length > 0 ? this.data.list.page + 1 : 1)
-    }
-  },
-  // 下拉刷新
-  onPullDownRefresh: function () {
-    if (app.globalData.userInfo) {
-      this.getList(1, _ => {
-        wx.stopPullDownRefresh()
-      })
-    } else {
-      wx.stopPullDownRefresh()
-    }
-  },
-  // 素材列表
-  getList: function (page = 1, callback = app.noopFn) {
-    page === 1 && this.setData({ 'list.more': true })
-
-    if (!this.data.list.more || this.data.list.loading) {
-      callback(this.data.list.data)
-      return
-    }
-
-    this.setData({ 'list.loading': true })
-    return app.post(app.config.share.sucaiList, {
-      page, ...this.data.filter.data,
-      rows: this.data.list.rows
-    }).then(({ data }) => {
-      data.list = data.list.map(item => {
-        item.imageArr = item.image ? item.image.split(',') : []
-        item.thumb = app.utils.formatThumb(item.imageArr[0], 150)
-        return item
-      })
-
+    clearTimeout(this.toptipTimeid)
+    this.toptipTimeid = setTimeout(() => {
       this.setData({
-        'list.more': data.list.length >= data.rows,
-        'list.page': data.page,
-        'list.data': data.page === 1 ? data.list : this.data.list.data.concat(data.list)
+        topTips: ''
       })
-    }).finally(_ => {
-      this.setData({ 'list.loading': false })
-      callback(this.data.list.data)
-    })
+    }, 3000)
+  },
+  // 表单输入
+  bindInput: function (event) {
+    let data = {}
+    let id = event.target.id
+    let picker = event.target.dataset.picker
+    let value = event.detail.value
+
+    if (picker) {
+      value = Number(value)
+      data[picker + '.index'] = value
+      value = this.data[picker].list[value]
+      if (app.utils.isObject(value)) {
+        value = value.value
+      }
+    }
+
+    console.log(id, value)
+    data['formData.' + id] = value
+    this.setData(data)
+
+    setTimeout(this.getTotal, 50)
+  },
+  // 选择车辆
+  changeCar: function (carType = {}, family = {}, brand = {}) {
+    if (this.data.formData.carsId !== carType.id) {
+      this.setData({
+        'formData.carId': carType.id,
+        'info.carName': carType.name,
+        'formData.price': carType.price
+      })
+      setTimeout(this.getTotal, 50)
+    }
   },
   tabClick: function (event) {
     let index
@@ -111,56 +116,83 @@ Page({
       })
     }
 
-    let overShelf = 1
+    this.setData({
+      'formData.type': index + 1
+    })
+  },
+  getTotal: function () {
+    let {
+      type = 1, price = 0, bareCarPrice = 0, mode = 1, change_price = 0,
+      purchase_tax = 0, license_plate_priace = 0, vehicle_vessel_tax = 0, 
+      insurance_price = 0, traffic_insurance_price = 0,
+      boutique_priace = 0, quality_assurance = 0, other = 0,
+      down_payment_rate = 0, periods = 0, annual_rate = 0
+    } = this.data.formData
 
-    switch (index) {
-      case 0:
-        overShelf = 1 // 上架
-        break
-      case 1:
-        overShelf = 0 // 下架
-        break
+    let total_fee = 0, monthly_supply = 0
+
+    bareCarPrice = Number(price) || 0
+    change_price = Number(change_price) || 0
+
+    if (bareCarPrice > 0) {
+      bareCarPrice = bareCarPrice + (mode == 1 ? -change_price : change_price)
+    }
+    total_fee += bareCarPrice
+    total_fee += Number(purchase_tax)
+    total_fee += Number(license_plate_priace)
+    total_fee += Number(vehicle_vessel_tax)
+    total_fee += Number(insurance_price)
+    total_fee += Number(traffic_insurance_price)
+    total_fee += Number(boutique_priace)
+    total_fee += Number(quality_assurance)
+    total_fee += Number(other)
+    
+    if(type == 2){
+      down_payment_rate = Number(down_payment_rate) || 100
+      periods = Number(periods) || 0
+      annual_rate = Number(annual_rate) || 0
+
+      // 首付金额
+      let down_payment_money = down_payment_money = total_fee * (down_payment_rate / 100)
+
+      if (periods && annual_rate) {
+        monthly_supply = (total_fee - down_payment_money) * (annual_rate / periods)
+      }
+
+      total_fee = down_payment_money
+    }
+    this.setData({
+      'formData.bareCarPrice': bareCarPrice,
+      'formData.total_fee': total_fee.toFixed(2),
+      'formData.monthly_supply': monthly_supply.toFixed(2),
+    })
+  },
+
+  submit: function () {
+    if (!this.data.formData.carId) {
+      this.showTopTips('请选择车型')
+      return
     }
 
-    this.setData({
-      'filter.data.overShelf': overShelf
-    })
-    this.getList(1)
-  },
-  // 上架下架
-  upOff: function (event) {
-    let overShelf = event.currentTarget.dataset.val
-    let materialId = event.currentTarget.id
-    wx.showLoading()
-    app.post(app.config.share.sucaiUpOff, {
-      materialId, overShelf
-    }).then(_ => {
-      app.toast(overShelf == 1 ? '上架成功' : '下架成功').then(_ => {
-        this.getList(1)
-      })
-    }).catch(_ => {
-      wx.hideLoading()
-    })
-  },
+    if(this.data.formData.type == 2) {
+      if (!this.data.formData.down_payment_rate) {
+        this.showTopTips('请选择首付比例')
+        return
+      }
+      if (!this.data.formData.periods) {
+        this.showTopTips('请输入贷款期数')
+        return
+      }
+      if (!this.data.formData.annual_rate) {
+        this.showTopTips('请输入年利率')
+        return
+      }
+    }
 
-  // 搜索相关=================================================
-  // 正在输入
-  filterTyping(event) {
-    event.detail.value === '' && this.setData({ 'list.ajax': false })
-    this.setData({ 'filter.data.keywords': event.detail.value })
-    clearTimeout(this.typingId)
-    this.typingId = setTimeout(this.search, 1000)
-  },
-  // 清楚输入
-  clearTyping() {
-    this.setData({ 'filter.data.keywords': '' })
-    this.search()
-  },
-  // 搜索
-  search: function () {
-    clearTimeout(this.typingId)
-    wx.showLoading()
-    this.getList().finally(_ => {
+    wx.showLoading({ mask: true })
+    app.post(app.config.offerPrice, this.data.formData).then(({ data }) => {
+      app.navigateTo('info?id=' + data.id)
+    }).catch(err => {
       wx.hideLoading()
     })
   }

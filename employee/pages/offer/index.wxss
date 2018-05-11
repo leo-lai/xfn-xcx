@@ -5,7 +5,7 @@
   color: #fff;
   background: #fda855 linear-gradient(150deg, #fbb56f 40%, #fbb56f 41%, #fab268 41%, #fbac5f 45%, #fda855) no-repeat;
   margin: 30rpx;
-  padding: 50rpx 60rpx 100rpx 60rpx;
+  padding: 50rpx 30rpx 100rpx;
   font-size: 32rpx;
   overflow: hidden;
 }
@@ -17,4 +17,8 @@
   text-align: center;
   padding: 15rpx;
   font-size: 24rpx;
+}
+
+.l-full-pay._green{
+  background-image: linear-gradient(150deg, #65e199 40%, #65e199 41%, #55de90 41%, #55de90 45%, #4cdb89)
 }

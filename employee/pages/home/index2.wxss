@@ -1,0 +1,21 @@
+/* pages/home/index2.wxss */
+.l-index-menu{display: flex; flex-wrap: wrap; padding: 20rpx;}
+.l-index-menu ._item{width: 25%; text-align: center; margin:20rpx 0; box-sizing: border-box; font-size: 24rpx;
+white-space: nowrap;}
+.l-index-menu image{
+  width: 100rpx; height: 100rpx;
+}
+
+.l-img-tit image{display: block; width: 100%;}
+
+.l-grid-menu{display: flex; flex-wrap: wrap; border-top: 1rpx solid #eee; margin-top: -1rpx;}
+.l-grid-menu ._item,
+.l-grid-menu ._item2{width: 25%; text-align: center; overflow: hidden; box-sizing: border-box; border-left: 1rpx solid #eee; padding: 20rpx 0;}
+.l-grid-menu ._item:first-child,
+.l-grid-menu ._item2:first-child{border-left: none;}
+.l-grid-menu ._item2{flex: 1;}
+
+.l-grid-menu ._num, .l-grid-menu ._num2{font-size: 44rpx; margin: 10rpx; vertical-align: -4rpx;}
+.l-grid-menu ._num{color: #fe6462;}
+.l-grid-menu ._num2{color: #fe6462;}
+.l-grid-menu ._txt{font-size: 26rpx; margin: 10rpx 0; }
