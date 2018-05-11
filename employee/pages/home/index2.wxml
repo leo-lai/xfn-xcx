@@ -146,7 +146,7 @@
       </navigator>
     </view>
     <view class='l-grid-menu'>
-      <navigator class='_item' url='/level2/order/list?sta=35' hover-class='none'>
+      <navigator class='_item' url='/level2/order/list?sta=10' hover-class='none'>
         <view class='{{consumer.carMatch > 0 ? "_num2" : "_num"}}'>{{consumer.carMatch}}</view>
         <view class='_txt'>待配车</view>
       </navigator>
