@@ -126,7 +126,7 @@ Page({
       purchase_tax = 0, license_plate_priace = 0, vehicle_vessel_tax = 0, 
       insurance_price = 0, traffic_insurance_price = 0,
       boutique_priace = 0, quality_assurance = 0, other = 0,
-      down_payment_rate = 0, periods = 0, annual_rate = 0
+      down_payment_rate = 0, periods = 0, annual_rate = 0, mortgage = 0
     } = this.data.formData
 
     let total_fee = 0, monthly_supply = 0
@@ -148,6 +148,8 @@ Page({
     total_fee += Number(other)
     
     if(type == 2){
+      total_fee += Number(mortgage)
+
       down_payment_rate = Number(down_payment_rate) || 100
       periods = Number(periods) || 0
       annual_rate = Number(annual_rate) || 0
