@@ -20,7 +20,7 @@ Page({
           checked: false
         }, {
           value: 3,
-          name: '待银行放贷',
+          name: '待银行审核',
           checked: false
         }, {
           value: 5,
@@ -68,11 +68,17 @@ Page({
       // 获取搜索历史记录
       app.storage.getItem('customer_history').then(list => {
         this.setData({
+          'filter.state': this.data.filter.state.map(item => {
+            let states = this.options.sta ? this.options.sta.split(',') : []
+            item.checked = states.includes(item.value + '')
+            return item
+          }),
+          'filter.data.orderStates': this.options.sta || '',
           'filter.history': list || []
         })
       })
 
-      this.getList()
+      setTimeout(this.getList, 50)
     }, this.route)
   },
   /**

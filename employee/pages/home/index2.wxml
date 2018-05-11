@@ -56,67 +56,67 @@
   </view>
 
   <block wx:if='{{userInfo.orgLevel === 3}}'>
-    <view class='l-bg-white l-padding-btn l-flex-hc l-margin-tb'>
+    <navigator class='l-bg-white l-padding-btn l-flex-hc l-margin-tb' url='/level3/customer/list' hover-class='none'>
       <image style='width: 60rpx; height: 60rpx;' src='/images/20180510024.png'></image>
       <view class='l-margin-l l-fs-13 l-rest'>总共 <text class='l-text-theme l-fs-17'>{{intensityCount}}</text> 位重点客户</view>
       <text class='l-icon-622'></text>
-    </view>
+    </navigator>
   
     <view class='l-img-tit l-margin-t'>
       <image mode='widthFix' src='/images/20180510021.png'></image>
     </view>
     <view class='l-bg-white l-margin-b'>
       <view class='l-grid-menu'>
-        <view class='_item'>
-          <view class='_num'>{{customer.userCount}}</view>
+        <navigator class='_item' url='/level3/customer/list' hover-class='none'>
+          <view class='{{customer.userCount > 0 ? "_num2" : "_num"}}'>{{customer.userCount}}</view>
           <view class='_txt'>新增预约客户</view>
-        </view>
-        <view class='_item'>
-          <view class='_num'>{{customer.total}}</view>
+        </navigator>
+        <navigator class='_item' url='/level3/customer/list' hover-class='none'>
+          <view class='{{customer.total > 0 ? "_num2" : "_num"}}'>{{customer.total}}</view>
           <view class='_txt'>本月总订单</view>
-        </view>
-        <view class='_item'>
-          <view class='_num'>{{customer.unpayDeposit}}</view>
+        </navigator>
+        <navigator class='_item' url='/level3/customer/list?sta=1' hover-class='none'>
+          <view class='{{customer.unpayDeposit > 0 ? "_num2" : "_num"}}'>{{customer.unpayDeposit}}</view>
           <view class='_txt'>待收定金</view>
-        </view>
-        <view class='_item'>
-          <view class='_num'>{{customer.bankAudit}}</view>
+        </navigator>
+        <navigator class='_item' url='/level3/customer/list?sta=3' hover-class='none'>
+          <view class='{{customer.bankAudit > 0 ? "_num2" : "_num"}}'>{{customer.bankAudit}}</view>
           <view class='_txt'>待银行审核</view>
-        </view>
+        </navigator>
       </view>
       <view class='l-grid-menu'>
-        <view class='_item'>
-          <view class='_num'>{{customer.undelivery}}</view>
+        <navigator class='_item' url='/level3/customer/list?sta=5' hover-class='none'>
+          <view class='{{customer.undelivery > 0 ? "_num2" : "_num"}}'>{{customer.undelivery}}</view>
           <view class='_txt'>待出库</view>
-        </view>
-        <view class='_item'>
-          <view class='_num'>{{customer.others}}</view>
+        </navigator>
+        <navigator class='_item' url='/level3/customer/list?sta=7,9' hover-class='none'>
+          <view class='{{customer.others > 0 ? "_num2" : "_num"}}'>{{customer.others}}</view>
           <view class='_txt'>加装/上牌</view>
-        </view>
-        <view class='_item'>
-          <view class='_num'>{{customer.unfinished}}</view>
+        </navigator>
+        <navigator class='_item' url='/level3/customer/list?sta=15' hover-class='none'>
+          <view class='{{customer.unfinished > 0 ? "_num2" : "_num"}}'>{{customer.unfinished}}</view>
           <view class='_txt'>待完款</view>
-        </view>
-        <view class='_item'>
-          <view class='_num'>{{customer.finished}}</view>
+        </navigator>
+        <navigator class='_item' url='/level3/customer/list?sta=13' hover-class='none'>
+          <view class='{{customer.finished > 0 ? "_num2" : "_num"}}'>{{customer.finished}}</view>
           <view class='_txt'>已完款可放行</view>
-        </view>
+        </navigator>
       </view>
       <view class='l-grid-menu'>
         <view class='_item'>
-          <view class='_num'>{{customer.insurance}}</view>
+          <view class='{{customer.insurance > 0 ? "_num2" : "_num"}}'>{{customer.insurance}}</view>
           <view class='_txt'>商业保险</view>
         </view>
         <view class='_item'>
-          <view class='_num'>{{customer.mortgage}}</view>
+          <view class='{{customer.mortgage > 0 ? "_num2" : "_num"}}'>{{customer.mortgage}}</view>
           <view class='_txt'>按揭费用</view>
         </view>
         <view class='_item'>
-          <view class='_num'>{{customer.boutique}}</view>
+          <view class='{{customer.boutique > 0 ? "_num2" : "_num"}}'>{{customer.boutique}}</view>
           <view class='_txt'>精品费用</view>
         </view>
         <view class='_item'>
-          <view class='_num'>{{customer.license}}</view>
+          <view class='{{customer.license > 0 ? "_num2" : "_num"}}'>{{customer.license}}</view>
           <view class='_txt'>上牌费用</view>
         </view>
       </view>
@@ -128,48 +128,48 @@
   </view>
   <view class='l-bg-white l-margin-b'>
     <view class='l-grid-menu'>
-      <view class='_item'>
-        <view class='_num'>{{consumer.placeOrder}}</view>
+      <navigator class='_item' url='/level2/order/list?sta=1' hover-class='none'>
+        <view class='{{customer.placeOrder > 0 ? "_num2" : "_num"}}'>{{consumer.placeOrder}}</view>
         <view class='_txt'>开单</view>
-      </view>
-      <view class='_item'>
-        <view class='_num'>{{consumer.total}}</view>
+      </navigator>
+      <navigator class='_item' url='/level2/order/list' hover-class='none'>
+        <view class='{{customer.total > 0 ? "_num2" : "_num"}}'>{{consumer.total}}</view>
         <view class='_txt'>本月总订单</view>
-      </view>
-      <view class='_item'>
-        <view class='_num'>{{consumer.unpayDeposit}}</view>
+      </navigator>
+      <navigator class='_item' url='/level2/order/list?sta=5' hover-class='none'>
+        <view class='{{customer.unpayDeposit > 0 ? "_num2" : "_num"}}'>{{consumer.unpayDeposit}}</view>
         <view class='_txt'>待收定金</view>
-      </view>
-      <view class='_item'>
-        <view class='_num'>{{consumer.unpayfinalpayment}}</view>
+      </navigator>
+      <navigator class='_item' url='/level2/order/list?sta=35' hover-class='none'>
+        <view class='{{customer.unpayfinalpayment > 0 ? "_num2" : "_num"}}'>{{consumer.unpayfinalpayment}}</view>
         <view class='_txt'>待收尾款</view>
-      </view>
+      </navigator>
     </view>
     <view class='l-grid-menu'>
-      <view class='_item'>
-        <view class='_num'>{{consumer.carMatch}}</view>
+      <navigator class='_item' url='/level2/order/list?sta=35' hover-class='none'>
+        <view class='{{customer.carMatch > 0 ? "_num2" : "_num"}}'>{{consumer.carMatch}}</view>
         <view class='_txt'>待配车</view>
-      </view>
-      <view class='_item'>
-        <view class='_num'>{{consumer.carCheck}}</view>
+      </navigator>
+      <navigator class='_item' url='/level2/order/list?sta=15' hover-class='none'>
+        <view class='{{customer.carCheck > 0 ? "_num2" : "_num"}}'>{{consumer.carCheck}}</view>
         <view class='_txt'>待验车</view>
-      </view>
-      <view class='_item'>
-        <view class='_num'>{{consumer.outStock}}</view>
+      </navigator>
+      <navigator class='_item' url='/level2/order/list?sta=40' hover-class='none'>
+        <view class='{{customer.outStock > 0 ? "_num2" : "_num"}}'>{{consumer.outStock}}</view>
         <view class='_txt'>待出库</view>
-      </view>
-      <view class='_item'>
-        <view class='_num'>{{consumer.uploadTicket}}</view>
+      </navigator>
+      <navigator class='_item' url='/level2/order/list?sta=45' hover-class='none'>
+        <view class='{{customer.uploadTicket > 0 ? "_num2" : "_num"}}'>{{consumer.uploadTicket}}</view>
         <view class='_txt'>待上传票证</view>
-      </view>
+      </navigator>
     </view>
     <view class='l-grid-menu'>
       <view class='_item'>
-        <view class='_num'>{{consumer.commercial}}</view>
+        <view class='{{customer.commercial > 0 ? "_num2" : "_num"}}'>{{consumer.commercial}}</view>
         <view class='_txt'>商业保险</view>
       </view>
       <view class='_item'>
-        <view class='_num'>{{consumer.traffic}}</view>
+        <view class='{{customer.traffic > 0 ? "_num2" : "_num"}}'>{{consumer.traffic}}</view>
         <view class='_txt'>交强险</view>
       </view>
       <view class='_item'>
@@ -185,14 +185,14 @@
     </view>
     <view class='l-bg-white l-margin-b'>
       <view class='l-grid-menu'>
-        <view class='_item2'>
+        <navigator class='_item2' url='/level3/customer/list' hover-class='none'>
           <text class='_txt'>今日回访</text>
-          <text class='_num'>{{commission.returnVisit}}</text>
-        </view>
-        <view class='_item2'>
+          <text class='{{customer.returnVisit > 0 ? "_num2" : "_num"}}'>{{commission.returnVisit}}</text>
+        </navigator>
+        <navigator class='_item2' url='/level3/customer/list' hover-class='none'>
           <text class='_txt'>今日预计到店</text>
-          <text class='_num'>{{commission.appointment}}</text>
-        </view>
+          <text class='{{customer.appointment > 0 ? "_num2" : "_num"}}'>{{commission.appointment}}</text>
+        </navigator>
       </view>
     </view>
   </block>

@@ -16,6 +16,6 @@ white-space: nowrap;}
 .l-grid-menu ._item2{flex: 1;}
 
 .l-grid-menu ._num, .l-grid-menu ._num2{font-size: 44rpx; margin: 10rpx; vertical-align: -4rpx;}
-.l-grid-menu ._num{color: #fe6462;}
+.l-grid-menu ._num{color: #999;}
 .l-grid-menu ._num2{color: #fe6462;}
 .l-grid-menu ._txt{font-size: 26rpx; margin: 10rpx 0; }

@@ -11,7 +11,8 @@ Page({
       loading: false,
       visible: false,
       data: {
-        keywords: ''
+        keywords: '',
+        state: ''
       }
     },
     list: {
@@ -30,10 +31,12 @@ Page({
     app.onLogin(userInfo => {
       this.setData({ 
         userInfo,
+        'filter.data.state': this.options.sta || '',
         'isAdmin': userInfo.roleName == '仓管主管',
         'showEdit': userInfo.roleName != '仓管主管'
       })
-      this.getList()
+
+      setTimeout(this.getList, 50)
     }, this.route)
   },
   /**
