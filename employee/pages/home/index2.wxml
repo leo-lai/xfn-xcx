@@ -141,7 +141,7 @@
         <view class='_txt'>待收定金</view>
       </navigator>
       <navigator class='_item' url='/level2/order/list?sta=35' hover-class='none'>
-        <view class='{{customer.unpayfinalpayment > 0 ? "_num2" : "_num"}}'>{{consumer.unpayfinalpayment}}</view>
+        <view class='{{customer.finnalprice > 0 ? "_num2" : "_num"}}'>{{consumer.finnalprice}}</view>
         <view class='_txt'>待收尾款</view>
       </navigator>
     </view>
@@ -159,7 +159,7 @@
         <view class='_txt'>待出库</view>
       </navigator>
       <navigator class='_item' url='/level2/order/list?sta=45' hover-class='none'>
-        <view class='{{customer.uploadTicket > 0 ? "_num2" : "_num"}}'>{{consumer.uploadTicket}}</view>
+        <view class='{{customer.tickitUploading > 0 ? "_num2" : "_num"}}'>{{consumer.tickitUploading}}</view>
         <view class='_txt'>待上传票证</view>
       </navigator>
     </view>
