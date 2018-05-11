@@ -93,14 +93,14 @@
           <view class='{{customer.others > 0 ? "_num2" : "_num"}}'>{{customer.others}}</view>
           <view class='_txt'>加装/上牌</view>
         </navigator>
-        <navigator class='_item' url='/level3/customer/list?sta=15' hover-class='none'>
-          <view class='{{customer.unfinished > 0 ? "_num2" : "_num"}}'>{{customer.unfinished}}</view>
-          <view class='_txt'>待完款</view>
-        </navigator>
         <navigator class='_item' url='/level3/customer/list?sta=13' hover-class='none'>
           <view class='{{customer.finished > 0 ? "_num2" : "_num"}}'>{{customer.finished}}</view>
           <view class='_txt'>已完款可放行</view>
         </navigator>
+        <view class='_item'>
+          <!-- <view class='{{customer.unfinished > 0 ? "_num2" : "_num"}}'>{{customer.unfinished}}</view>
+          <view class='_txt'>待完款</view> -->
+        </view>
       </view>
       <view class='l-grid-menu'>
         <view class='_item'>
