@@ -16,8 +16,8 @@
     <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{item.thumb}}'></image>
     <view class='l-rest'>
       <view class='l-h4 l-text-wrap2'>
-        <text class='l-tag2' wx:if='{{item.overShare}}'>已分享</text>
-        <text class='l-tag1' wx:else>未分享</text>
+        <!-- <text class='l-tag2' wx:if='{{item.overShare}}'>已分享</text>
+        <text class='l-tag1' wx:else>未分享</text> -->
         {{item.materialName}}
       </view>
       <view class='l-margin-t-s'>
@@ -36,11 +36,11 @@
   </navigator>
 
   <view class='l-popup-center l-flex-vhc' wx:if='{{share.visible}}' bindtap='closeShare'>
-    <view class='_inner'>
-      <image mode='top' style='display:block; width: 500rpx; height: 600rpx;' src='{{share.data}}'></image>
+    <view class='_inner l-scroll' style='width: 600rpx; height: 800rpx;'>
+      <image mode='widthFix' style='display:block; width:100%;' src='{{share.data}}'></image>
     </view>
     <view class='l-margin-t' catchtap='noopFn'>
-      <button class='l-button-main' size='mini' bindtap='shareImage'>分享到朋友圈</button>
+      <button class='l-button-main' size='mini' bindtap='shareImage'>保存到手机</button>
     </view>
   </view> 
 </view>
