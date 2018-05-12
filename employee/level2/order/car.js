@@ -215,7 +215,7 @@ Page({
 
     let ids = this.options.ids ? this.options.ids.split(',') : []
     if (!ids[0]) {
-      this.showTopTips('订购单ID为空')
+      this.showTopTips('资源订单ID为空')
       return
     }
     if (!ids[1]) {

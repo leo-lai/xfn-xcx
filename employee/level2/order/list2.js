@@ -1,4 +1,4 @@
-// level2/order/index.js
+// level2/order/list2.js
 const app = getApp()
 Page({
   noopFn: app.noopFn,
@@ -6,10 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mode: 'list', // slt
     filter: {
       loading: false,
-      visible: false,
       data: {
         keywords: '',
         state: ''
@@ -29,7 +27,7 @@ Page({
    */
   onReady: function () {
     app.onLogin(userInfo => {
-      this.setData({ 
+      this.setData({
         userInfo,
         'filter.data.state': this.options.sta || '',
         'isAdmin': userInfo.roleName == '仓管主管',
@@ -79,8 +77,7 @@ Page({
     }
 
     this.setData({ 'list.loading': true })
-    let url = this.data.isAdmin ? app.config.lv2.orderList2 : app.config.lv2.orderList
-    return app.post(url, {
+    return app.ajax(app.config.consumer.orderList, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
       // 兼容非分页返回
@@ -100,6 +97,7 @@ Page({
         item.infos.forEach(cars => {
           cars.changePrice2 = Math.abs(cars.changePrice)
           cars.auditNum = 0 // 待审核车辆
+          cars.cars = []
           cars.cars && cars.cars.forEach(frame => {
             if (frame.auditState == 5) {
               cars.auditNum += 1
@@ -110,8 +108,8 @@ Page({
 
       this.setData({
         'list.more': data.list.length >= data.rows,
-        'list.page': data.page,
-        'list.data': data.page === 1 ? data.list : this.data.list.data.concat(data.list)
+        'list.page': page,
+        'list.data': page === 1 ? data.list : this.data.list.data.concat(data.list)
       })
     }).finally(_ => {
       this.setData({ 'list.loading': false })
@@ -134,8 +132,8 @@ Page({
     let content = ''
     let msg = ''
 
-    if(!state) return
-    switch(state) {
+    if (!state) return
+    switch (state) {
       case '15':
         content = '配车完成后，将不可再配车，是否确定？'
         msg = '配车已完成'
@@ -149,7 +147,7 @@ Page({
       title: '确认提示',
       content,
       success: res => {
-        if(res.confirm) {
+        if (res.confirm) {
           wx.showLoading()
           app.post(app.config.lv2.orderState, {
             orderId, state
@@ -185,7 +183,7 @@ Page({
           app.navigateTo('wuliu')
         }
       })
-    }else{
+    } else {
       wx.showModal({
         title: '确认提示',
         content: '出库前是核实是否收齐尾款，是否确定？',
@@ -210,7 +208,7 @@ Page({
   // 取消
   cancel: function (event) {
     wx.showModal({
-      content: '是否确定取消该资源订单？',
+      content: '是否确定取消该订购单？',
       success: res => {
         if (res.confirm) {
           wx.showLoading({ mask: true })

@@ -1,0 +1,50 @@
+<!--level3/customer/list2.wxml-->
+<import src='/template/loadmore.wxml' />
+<view style='padding-top: 100rpx;' class='l-page-full {{ filter.panel ? "l-no-scroll" : "" }}'>
+  <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
+    <view class='_input l-rest l-flex-hc'>
+      <view class='l-rest'>
+        <input data-val='search' bindfocus='showFilter' bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入客户名称或电话' value='{{filter.data.keywords}}'/>
+      </view>
+      <icon class='l-margin-r-m' hidden='{{filter.data.keywords === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
+      <icon type='search' size='18' color='#555' bindtap='search'></icon>
+    </view>
+  </view>
+
+  <!-- 客户列表 -->
+  <navigator url='info?ids={{item.id}},{{item.orgId}}' class=' l-padding l-bg-white l-margin-m l-radius' wx:for='{{list.data}}' wx:key='{{id}}'>
+    <view class='l-flex-h'>
+      <image class='l-avatar' mode='aspectFit' style='width: 80rpx; height: 80rpx; margin-right: 30rpx;' src='{{item.thumb}}'></image>
+      <view class='l-rest'>
+        <view class='l-h4'>{{item.username}}</view>
+        <view class='l-inline' catchtap='noopFn'>
+          <view class='l-inline' data-val='{{item.phone}}' bindtap='callPhone' bindtap='callPhone'>
+            <text class='l-fs-m'>{{item.phone}}</text>
+            <text class='l-icon-649 l-text-theme' style='font-size: 30rpx; margin-left: 10rpx;'></text>
+          </view>
+        </view>
+      </view>
+      <!-- <text class='l-text-theme l-fs-s'>{{item.orderStateName}}</text> -->
+      <text class='l-icon-622'></text>
+    </view>
+    <view class='l-border-t l-padding-t l-margin-t l-fs-s'>
+      <view class='l-flex-h'>
+        <text class='l-margin-r-s l-text-gray'>购置车辆</text>
+        <text class='l-rest'>{{item.carName}}</text>
+      </view>
+      <view class='l-flex-h'>
+        <text class='l-margin-r-s l-text-gray'>购车方案</text>
+        <text class='l-rest'>{{buyWay[item.expectWay - 1]}}</text>
+      </view>
+      <view class='l-flex-h'>
+        <text class='l-margin-r-s l-text-gray'>销售顾问</text>
+        <text class='l-rest'>{{item.systemUsername || '--'}}</text>
+      </view>
+      <view class='l-flex-h'>
+        <text class='l-margin-r-s l-text-gray'>登记时间</text>
+        <text class='l-rest'>{{item.timeOfAppointmentDate || '--'}}</text>
+      </view>
+    </view>
+   </navigator>
+   <template is='loadmore' data='{{...list}}' /> 
+</view>

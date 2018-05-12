@@ -1,0 +1,11 @@
+/* level3/customer/list-order.wxss */
+.l-order-list-item{background-color: #fff;padding: 20rpx;margin: 20rpx;border-radius: 10rpx;}
+.l-order-list-item .l-icon-6a8{vertical-align: -14rpx;margin-right: -10rpx;}
+.l-order-list-item ._bd{border-top: 2rpx solid #eee; padding-top: 20rpx; margin-top: 20rpx;font-size: 28rpx;}
+.l-order-list-item ._car{margin-top: 15rpx;}
+.l-order-list-item ._car:first-child{margin-top: 0;}
+.l-order-list-item ._ft{border-top: 2rpx solid #eee; padding-top: 20rpx; margin-top: 20rpx;text-align: center}
+.l-order-list-item ._ft navigator,
+.l-order-list-item ._ft button{display: inline-block; vertical-align: top; margin: 0 8rpx;}
+
+button.l-button-main[size]{min-width: 160rpx;}

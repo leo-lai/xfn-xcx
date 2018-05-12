@@ -59,6 +59,22 @@ var config = {
   // 报价单
   offerPrice: `${baseUrl2}/ucenter_v1/quotation`,
   offerInfo: `${baseUrl2}/ucenter_v1/quotationDetail`,
+
+  // 客户管理
+  customer: {
+    // 重点客户，新增预约客户，今日预计到店
+    list: `${baseUrl2}/ucenter_v1/customers`,
+    // 今日回访
+    visitList: `${baseUrl2}/ucenter_v1/visit`,
+    // 用户订单列表
+    orderList: `${baseUrl2}/ucenter_v1/customerlist`,
+  },
+
+  // 资源管理
+  consumer: {
+    // 资源订单列表
+    orderList: `${baseUrl2}/ucenter_v1/consumerlist`,
+  },
   
   // 车辆品牌
   brandList: `${commonUrl}/carsBrandList`,
