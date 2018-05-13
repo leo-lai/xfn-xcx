@@ -93,7 +93,7 @@
           <view class='{{customer.others > 0 ? "_num2" : "_num"}}'>{{customer.others}}</view>
           <view class='_txt'>加装/上牌/贴膜</view>
         </navigator>
-        <navigator class='_item' url='/level3/customer/list-order?sta=13' hover-class='none'>
+        <navigator class='_item' url='/level3/customer/list-order?sta=17' hover-class='none'>
           <view class='{{customer.finished > 0 ? "_num2" : "_num"}}'>{{customer.finished}}</view>
           <view class='_txt'>已完款可放行</view>
         </navigator>
