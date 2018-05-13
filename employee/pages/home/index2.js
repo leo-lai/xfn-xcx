@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    month: '',
   },
 
   /**
@@ -14,7 +14,8 @@ Page({
    */
   onShow: function () {
     app.checkLogin().then(userInfo => {
-      this.setData({ userInfo })
+      let month = new Date().format('yyyy-MM')
+      this.setData({ userInfo, month })
       this.getInfo()
     })
   },

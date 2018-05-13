@@ -84,12 +84,12 @@
   </view>
   <template is='loadmore' data='{{...list}}' /> 
 
-  <!-- <block wx:if='{{showEdit}}'>
+  <block wx:if='{{showEdit}}'>
     <view style='height: 120rpx;'></view>
     <view class='l-fixed-bottom'>
       <navigator url='add' class='l-btn-w60 l-margin-tb' hover-class='none'>
         <button class='l-button-main'>新增资源订单</button>
       </navigator>
     </view>
-  </block> -->
+  </block> 
 </view>

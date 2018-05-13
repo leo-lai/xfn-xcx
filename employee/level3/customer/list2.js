@@ -86,9 +86,9 @@ Page({
   },
   // 客户列表
   getList: function (page = 1, callback = app.noopFn) {
-    if (page === 1) {
-      this.setData({ 'list.more': true })
-    }
+    let rows = this.data.list.rows || 10
+    page === 1 && this.setData({ 'list.more': true })
+
     if (!this.data.list.more || this.data.list.loading) {
       callback(this.data.list.data)
       return
@@ -101,15 +101,14 @@ Page({
     }
 
     return app.ajax(url, {
-      rows: this.data.list.rows,
-      page, ...this.data.filter.data
+      page, rows,
+      ...this.data.filter.data
     }).then(({ data }) => {
-      data = data || []
       // 兼容非分页返回
+      data = data || []
       if (!data.list && data.length >= 0) {
+        rows = 10000
         data = {
-          rows: 10000,
-          page: 1,
           total: data.length,
           list: data
         }
@@ -121,7 +120,7 @@ Page({
       })
 
       this.setData({
-        'list.more': data.list.length >= data.rows,
+        'list.more': data.list.length >= rows,
         'list.page': page,
         'list.data': page === 1 ? data.list : this.data.list.data.concat(data.list)
       })

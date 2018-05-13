@@ -37,7 +37,7 @@
         <view>加装/上牌</view>
       </navigator>
     </block>
-    <navigator class='_item' url='/level2/order/list' hover-class='none'>
+    <navigator class='_item' url='/level2/order/list2' hover-class='none'>
       <image src='/images/20180510005.png'></image>
       <view>资源订单</view>
     </navigator>
@@ -128,7 +128,7 @@
   </view>
   <view class='l-bg-white l-margin-b'>
     <view class='l-grid-menu'>
-      <navigator class='_item' url='/level2/order/list2?sta=1' hover-class='none'>
+      <navigator class='_item' url='/level2/order/list2?month={{month}}&sta=1' hover-class='none'>
         <view class='{{consumer.placeOrder > 0 ? "_num2" : "_num"}}'>{{consumer.placeOrder}}</view>
         <view class='_txt'>开单</view>
       </navigator>
@@ -136,29 +136,29 @@
         <view class='{{consumer.total > 0 ? "_num2" : "_num"}}'>{{consumer.total}}</view>
         <view class='_txt'>本月总订单</view>
       </navigator>
-      <navigator class='_item' url='/level2/order/list2?sta=5' hover-class='none'>
+      <navigator class='_item' url='/level2/order/list2?month={{month}}&sta=5' hover-class='none'>
         <view class='{{consumer.unpayDeposit > 0 ? "_num2" : "_num"}}'>{{consumer.unpayDeposit}}</view>
         <view class='_txt'>待收定金</view>
       </navigator>
-      <navigator class='_item' url='/level2/order/list2?sta=35' hover-class='none'>
+      <navigator class='_item' url='/level2/order/list2?month={{month}}&sta=35' hover-class='none'>
         <view class='{{consumer.finnalprice > 0 ? "_num2" : "_num"}}'>{{consumer.finnalprice}}</view>
         <view class='_txt'>待收尾款</view>
       </navigator>
     </view>
     <view class='l-grid-menu'>
-      <navigator class='_item' url='/level2/order/list2?sta=10' hover-class='none'>
+      <navigator class='_item' url='/level2/order/list2?month={{month}}&sta=10' hover-class='none'>
         <view class='{{consumer.carMatch > 0 ? "_num2" : "_num"}}'>{{consumer.carMatch}}</view>
         <view class='_txt'>待配车</view>
       </navigator>
-      <navigator class='_item' url='/level2/order/list2?sta=15' hover-class='none'>
+      <navigator class='_item' url='/level2/order/list2?month={{month}}&sta=15' hover-class='none'>
         <view class='{{consumer.carCheck > 0 ? "_num2" : "_num"}}'>{{consumer.carCheck}}</view>
         <view class='_txt'>待验车</view>
       </navigator>
-      <navigator class='_item' url='/level2/order/list2?sta=40' hover-class='none'>
+      <navigator class='_item' url='/level2/order/list2?month={{month}}&sta=40' hover-class='none'>
         <view class='{{consumer.outStock > 0 ? "_num2" : "_num"}}'>{{consumer.outStock}}</view>
         <view class='_txt'>待出库</view>
       </navigator>
-      <navigator class='_item' url='/level2/order/list2?sta=45' hover-class='none'>
+      <navigator class='_item' url='/level2/order/list2?month={{month}}&sta=45' hover-class='none'>
         <view class='{{consumer.tickitUploading > 0 ? "_num2" : "_num"}}'>{{consumer.tickitUploading}}</view>
         <view class='_txt'>待上传票证</view>
       </navigator>

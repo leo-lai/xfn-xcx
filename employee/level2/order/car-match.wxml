@@ -23,7 +23,7 @@
           <text class='l-h4'>车架号：{{item.vin || '--'}}</text>
         </view>
         <view>
-          <text class='l-margin-r'>发动机号：{{item.stockCar ? (item.stockCar.engineNumber || '--') : '--'}}</text>
+           <text class='l-margin-r'>发动机号：{{item.engine_number || '--'}}</text> 
           <text>内饰颜色：{{item.interiorName}}</text>
         </view>
         <view wx:if='{{item.auditRemark}}' class='l-text-gray'>换车申请备注：{{item.auditRemark}}</view>

@@ -10,7 +10,8 @@ Page({
       loading: false,
       data: {
         keywords: '',
-        state: ''
+        state: '',
+        month: ''
       }
     },
     list: {
@@ -18,6 +19,7 @@ Page({
       loading: false,
       more: true,
       page: 1,
+      rows: 50,
       data: []
     }
   },
@@ -30,6 +32,7 @@ Page({
       this.setData({
         userInfo,
         'filter.data.state': this.options.sta || '',
+        'filter.data.month': this.options.month || '',
         'isAdmin': userInfo.roleName == '仓管主管',
         'showEdit': userInfo.roleName != '仓管主管'
       })
@@ -69,6 +72,7 @@ Page({
   },
   // 订单列表
   getList: function (page = 1, callback = app.noopFn) {
+    let rows = this.data.list.rows || 10
     page === 1 && this.setData({ 'list.more': true })
 
     if (!this.data.list.more || this.data.list.loading) {
@@ -78,13 +82,14 @@ Page({
 
     this.setData({ 'list.loading': true })
     return app.ajax(app.config.consumer.orderList, {
-      page, ...this.data.filter.data
+      page, rows,
+      ...this.data.filter.data
     }).then(({ data }) => {
       // 兼容非分页返回
+      data = data || []
       if (!data.list && data.length >= 0) {
+        rows = 10000
         data = {
-          rows: 10000,
-          page: 1,
           total: data.length,
           list: data
         }
@@ -107,7 +112,7 @@ Page({
       })
 
       this.setData({
-        'list.more': data.list.length >= data.rows,
+        'list.more': data.list.length >= rows,
         'list.page': page,
         'list.data': page === 1 ? data.list : this.data.list.data.concat(data.list)
       })
