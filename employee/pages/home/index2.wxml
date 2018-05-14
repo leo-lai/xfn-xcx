@@ -132,7 +132,7 @@
         <view class='{{consumer.placeOrder > 0 ? "_num2" : "_num"}}'>{{consumer.placeOrder}}</view>
         <view class='_txt'>开单</view>
       </navigator>
-      <navigator class='_item' url='/level2/order/list2' hover-class='none'>
+      <navigator class='_item' url='/level2/order/list2?month={{month}}' hover-class='none'>
         <view class='{{consumer.total > 0 ? "_num2" : "_num"}}'>{{consumer.total}}</view>
         <view class='_txt'>本月总订单</view>
       </navigator>

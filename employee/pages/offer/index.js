@@ -28,16 +28,16 @@ Page({
       type: '',               // 1全款，2按揭
       mode: 1,                // 1优惠，2加价
       change_price: '',
-      total_fee: '0.00',      // 总费用
-      monthly_supply: '0.00', // 每月还款
+      total_fee: '0',      // 总费用
+      monthly_supply: '0', // 每月还款
 
       price: '',
       bareCarPrice: '',
       purchase_tax: '',
-      license_plate_priace: '',
-      vehicle_vessel_tax: '',
+      license_plate_priace: '500',
+      vehicle_vessel_tax: '420',
+      traffic_insurance_price: '950',
       insurance_price: '',
-      traffic_insurance_price: '',
       boutique_priace: '',
       quality_assurance: '',
       other: '',
@@ -131,18 +131,36 @@ Page({
 
     let total_fee = 0, monthly_supply = 0
 
-    bareCarPrice = Number(price) || 0
+    price = Number(price) || 0
     change_price = Number(change_price) || 0
+    purchase_tax = Number(purchase_tax) || 0
+    insurance_price = Number(insurance_price) || 0
 
-    if (bareCarPrice > 0) {
-      bareCarPrice = bareCarPrice + (mode == 1 ? -change_price : change_price)
+    if (price > 0) {
+      change_price = Math.max(0, change_price) // 大于0
+      if (mode == 1) { // 优惠不能大于指导价
+        change_price = Math.min(price, change_price)
+      }
+      
+      // 裸车价
+      bareCarPrice = price + (mode == 1 ? -change_price : change_price)
+      // 购置税
+      purchase_tax = bareCarPrice / (1 + 0.17) * 0.1
+      // 商业保险
+      insurance_price = 924 + 458.76 + price * 1.088 / 100
+      insurance_price += 101.88 + price * 0.0045
+      insurance_price += price * 0.25 / 100
+      insurance_price += price * 0.15 / 100
+      insurance_price += (924 + 458.76 + price * 1.088 / 100) * 20 / 100
+      insurance_price += 6 * 50
+      insurance_price += 400
     }
     total_fee += bareCarPrice
-    total_fee += Number(purchase_tax)
+    total_fee += purchase_tax
     total_fee += Number(license_plate_priace)
     total_fee += Number(vehicle_vessel_tax)
-    total_fee += Number(insurance_price)
     total_fee += Number(traffic_insurance_price)
+    total_fee += insurance_price
     total_fee += Number(boutique_priace)
     total_fee += Number(quality_assurance)
     total_fee += Number(other)
@@ -164,9 +182,12 @@ Page({
       total_fee = down_payment_money
     }
     this.setData({
+      'formData.change_price': change_price,
       'formData.bareCarPrice': bareCarPrice,
-      'formData.total_fee': total_fee.toFixed(2),
-      'formData.monthly_supply': monthly_supply.toFixed(2),
+      'formData.purchase_tax': Math.ceil(purchase_tax),
+      'formData.insurance_price': Math.ceil(insurance_price),
+      'formData.total_fee': Math.ceil(total_fee).toFixed(2),
+      'formData.monthly_supply': Math.ceil(monthly_supply).toFixed(2)
     })
   },
 

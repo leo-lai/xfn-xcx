@@ -88,7 +88,7 @@ Page({
       // 兼容非分页返回
       data = data || []
       if (!data.list && data.length >= 0) {
-        rows = 10000
+        //rows = 10000
         data = {
           total: data.length,
           list: data

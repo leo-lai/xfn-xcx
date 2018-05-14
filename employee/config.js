@@ -21,8 +21,8 @@
  * .............................................
  *                佛祖坐镇 顺利上线
  */
-var env = 'dev'  // 测试
-// var env = 'prod' // 正式
+// var env = 'dev'  // 测试
+var env = 'prod' // 正式
 var getHost = (domainName = 'api') => env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
 
 var hosts = [getHost('tomcat'), getHost('api'), getHost('shop')]

@@ -2,7 +2,7 @@
 <view class='l-page-full'>
   <view wx:if='{{info.remarks}}' style='background-color:#eee; padding: 30rpx;'>{{info.remarks}}</view>
   <view class='l-bg-white l-images'>
-    <image wx:for='{{info.imageArr}}' wx:key='*this' src='{{item}}'></image>
+    <image mode='widthFix' wx:for='{{info.imageArr}}' wx:key='*this' src='{{item}}'></image>
   </view>
   <view class='l-bg-white l-padding l-margin-b'>
     <view>

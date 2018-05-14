@@ -81,12 +81,13 @@ Page({
 
     this.setData({ 'list.loading': true })
     return app.ajax(app.config.customer.orderList, {
-      page, ...this.data.filter.data
+      page, rows,
+      ...this.data.filter.data
     }).then(({ data }) => {
       // 兼容非分页返回
       data = data || []
       if (!data.list && data.length >= 0) {
-        rows = 10000
+        //rows = 10000
         data = {
           total: data.length,
           list: data

@@ -148,19 +148,19 @@
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>商业保险</view>
+          <view class='weui-label'>交强险</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' type='digit' maxlength='{{11}}' placeholder='请填写' confirm-type='next' id='insurance_price' value='{{formData.insurance_price}}' bindinput='bindInput' />
+          <input class='weui-input' type='digit' maxlength='{{11}}' placeholder='请填写' confirm-type='next' id='traffic_insurance_price' value='{{formData.traffic_insurance_price}}' bindinput='bindInput' />
         </view>
         <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>交强险</view>
+          <view class='weui-label'>商业保险</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' type='digit' maxlength='{{11}}' placeholder='请填写' confirm-type='next' id='traffic_insurance_price' value='{{formData.traffic_insurance_price}}' bindinput='bindInput' />
+          <input class='weui-input' type='digit' maxlength='{{11}}' placeholder='请填写' confirm-type='next' id='insurance_price' value='{{formData.insurance_price}}' bindinput='bindInput' />
         </view>
         <view class='l-cell-right'>元</view>
       </view>

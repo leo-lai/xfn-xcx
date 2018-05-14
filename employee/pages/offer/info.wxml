@@ -59,13 +59,13 @@
       <text>元</text>
     </view>
     <view>
-      <text class='l-dmr'>商业保险</text>
-      <text>{{info.insurance_price}}</text>
+      <text class='l-dmr'>交强险</text>
+      <text>{{info.traffic_insurance_price}}</text>
       <text>元</text>
     </view>
     <view>
-      <text class='l-dmr'>交强险</text>
-      <text>{{info.traffic_insurance_price}}</text>
+      <text class='l-dmr'>商业保险</text>
+      <text>{{info.insurance_price}}</text>
       <text>元</text>
     </view>
     <view class='l-margin-t'>
