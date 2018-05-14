@@ -34,9 +34,9 @@ Page({
       price: '',
       bareCarPrice: '',
       purchase_tax: '',
-      license_plate_priace: '500',
-      vehicle_vessel_tax: '420',
-      traffic_insurance_price: '950',
+      license_plate_priace: '',
+      vehicle_vessel_tax: '',
+      traffic_insurance_price: '',
       insurance_price: '',
       boutique_priace: '',
       quality_assurance: '',
@@ -99,7 +99,10 @@ Page({
       this.setData({
         'formData.carId': carType.id,
         'info.carName': carType.name,
-        'formData.price': carType.price
+        'formData.price': carType.price,
+        'formData.license_plate_priace': '500',
+        'formData.vehicle_vessel_tax': '420',
+        'formData.traffic_insurance_price': '950',
       })
       setTimeout(this.getCost)
       setTimeout(this.getTotal, 50)
