@@ -21,18 +21,18 @@
  * .............................................
  *                佛祖坐镇 顺利上线
  */
-// var env = 'dev'  // 测试
-var env = 'prod' // 正式
-var getHost = (domainName = 'api') => env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
+var env = 'dev'  // 测试
+// var env = 'prod' // 正式
+let getHost = (domainName = 'api') => env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
 
-var hosts = [getHost('tomcat'), getHost('api'), getHost('shop')]
+let hosts = [getHost('tomcat'), getHost('api'), getHost('shop')]
 
-var resURL = 'https://res.xfnauto.com'
-var commonUrl = hosts[0] + '/tauto/common'
-var baseUrl = hosts[0] + '/tauto/emInterface/employee'
-var baseUrl2 = hosts[1]
+let resURL = 'https://res.xfnauto.com'
+let commonUrl = hosts[0] + '/tauto/common'
+let baseUrl = hosts[0] + '/tauto/emInterface/employee'
+let baseUrl2 = hosts[1]
 
-var config = {
+let config = {
   // 商城地址
   shopURL: hosts[2],
   // 静态资源服务器
@@ -371,8 +371,6 @@ var config = {
     // 物流单状态
     wuliuState: `${baseUrl}/updateDistributionState`,
   },
-
-  baseUrl
 }
 
 module.exports = config

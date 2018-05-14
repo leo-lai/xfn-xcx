@@ -85,6 +85,12 @@ Page({
     data['formData.' + id] = value
     this.setData(data)
 
+    switch (id) {
+      case 'mode':
+      case 'change_price':
+        setTimeout(this.getCost)
+        break
+    }
     setTimeout(this.getTotal, 50)
   },
   // 选择车辆
@@ -95,6 +101,7 @@ Page({
         'info.carName': carType.name,
         'formData.price': carType.price
       })
+      setTimeout(this.getCost)
       setTimeout(this.getTotal, 50)
     }
   },
@@ -119,29 +126,21 @@ Page({
     this.setData({
       'formData.type': index + 1
     })
+
+    this.getTotal()
   },
-  getTotal: function () {
+  getCost: function () {
     let {
-      type = 1, price = 0, bareCarPrice = 0, mode = 1, change_price = 0,
-      purchase_tax = 0, license_plate_priace = 0, vehicle_vessel_tax = 0, 
-      insurance_price = 0, traffic_insurance_price = 0,
-      boutique_priace = 0, quality_assurance = 0, other = 0,
-      down_payment_rate = 0, periods = 0, annual_rate = 0, mortgage = 0
+      price = 0, bareCarPrice = 0, mode = 1, change_price = 0,
+      purchase_tax = 0, insurance_price = 0, 
     } = this.data.formData
-
-    let total_fee = 0, monthly_supply = 0
-
-    price = Number(price) || 0
-    change_price = Number(change_price) || 0
-    purchase_tax = Number(purchase_tax) || 0
-    insurance_price = Number(insurance_price) || 0
 
     if (price > 0) {
       change_price = Math.max(0, change_price) // 大于0
       if (mode == 1) { // 优惠不能大于指导价
         change_price = Math.min(price, change_price)
       }
-      
+
       // 裸车价
       bareCarPrice = price + (mode == 1 ? -change_price : change_price)
       // 购置税
@@ -155,12 +154,31 @@ Page({
       insurance_price += 6 * 50
       insurance_price += 400
     }
-    total_fee += bareCarPrice
-    total_fee += purchase_tax
+    
+    this.setData({
+      'formData.change_price': change_price,
+      'formData.bareCarPrice': bareCarPrice,
+      'formData.purchase_tax': Math.ceil(purchase_tax),
+      'formData.insurance_price': Math.ceil(insurance_price)
+    })
+  },
+  getTotal: function () {
+    let {
+      type = 1, price = 0, bareCarPrice = 0, mode = 1, change_price = 0,
+      purchase_tax = 0, license_plate_priace = 0, vehicle_vessel_tax = 0, 
+      insurance_price = 0, traffic_insurance_price = 0,
+      boutique_priace = 0, quality_assurance = 0, other = 0,
+      down_payment_rate = 0, periods = 0, annual_rate = 0, mortgage = 0
+    } = this.data.formData
+
+    let total_fee = 0, monthly_supply = 0
+
+    total_fee += Number(bareCarPrice)
+    total_fee += Number(purchase_tax)
     total_fee += Number(license_plate_priace)
     total_fee += Number(vehicle_vessel_tax)
     total_fee += Number(traffic_insurance_price)
-    total_fee += insurance_price
+    total_fee += Number(insurance_price)
     total_fee += Number(boutique_priace)
     total_fee += Number(quality_assurance)
     total_fee += Number(other)
@@ -182,10 +200,6 @@ Page({
       total_fee = down_payment_money
     }
     this.setData({
-      'formData.change_price': change_price,
-      'formData.bareCarPrice': bareCarPrice,
-      'formData.purchase_tax': Math.ceil(purchase_tax),
-      'formData.insurance_price': Math.ceil(insurance_price),
       'formData.total_fee': Math.ceil(total_fee).toFixed(2),
       'formData.monthly_supply': Math.ceil(monthly_supply).toFixed(2)
     })
