@@ -159,7 +159,7 @@
         <view class='weui-label'>收取定金 <text class='l-text-theme'>*</text></view>
       </view>
       <view class='weui-cell__bd l-text-right'>
-        <input disabled='{{orderInfo.customerOrderState > 1}}' class='weui-input' placeholder='请填写' id='depositPrice' value='{{orderInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+        <input disabled='{{orderInfo.customerOrderState > 1 || isPayDeposit}}' class='weui-input' placeholder='请填写' id='depositPrice' value='{{orderInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
       </view>
       <view class='l-cell-right'>元</view>
     </view>

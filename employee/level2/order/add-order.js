@@ -15,6 +15,7 @@ Page({
       index: -1,
       list: []
     },
+    isPayDeposit: false,
     customerInfo: {
       userName: '',
       userPhone: '',
@@ -49,6 +50,9 @@ Page({
       app.storage.getItem('shop-order-info').then(info => {
         console.log(info)
         if (info && info.orderInfoVos[0]) {
+          this.setData({
+            isPayDeposit: info.overPay
+          })
           let orderCarInfo = info.orderInfoVos[0]
           let carInfo = app.utils.copyObj(this.data.carInfo, orderCarInfo) 
           carInfo.guidePrice = orderCarInfo.guidingPrice

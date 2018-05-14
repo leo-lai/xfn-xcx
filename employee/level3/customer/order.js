@@ -38,6 +38,7 @@ Page({
       list1: [],   // 赠送精品
       list2: [],  // 加装精品
     },
+    isPayDeposit: false,
     orderPay: '0.00',
     orderInfo: {
       customerOrderId: '',
@@ -153,6 +154,10 @@ Page({
       return app.storage.getItem('shop-order-info').then(info => {
         let orderInfo = info
         if (info) {
+          // 是否已交定金
+          this.setData({
+            isPayDeposit: info.overPay
+          })
           let carInfo = info.orderInfoVos[0]
           orderInfo = {
             advanceOrderId: this.options.aid,

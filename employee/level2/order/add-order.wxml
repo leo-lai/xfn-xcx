@@ -87,14 +87,16 @@
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请输入购买数量' id='carNum' value='{{carInfo.carNum}}' bindinput='bindInput' type='number' maxlength='{{9}}' />
         </view>
+        <view class='l-cell-right'>辆</view>
       </view>
-      <view class='weui-cell weui-cell_input l-text-gray'>
+      <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>官方指导价（元）</view>
+          <view class='weui-label'>官方指导价</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input disabled='{{true}}' class='weui-input' value='{{carInfo.guidePrice}}' />
         </view>
+        <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
@@ -110,48 +112,52 @@
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请输入金额' id='changePrice' value='{{carInfo.changePrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
+        <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>裸车价（元）</view>
+          <view class='weui-label'>裸车价</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input disabled='{{true}}' class='weui-input' placeholder='请输入裸车价' id='nakedPrice' value='{{carInfo.nakedPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
+        <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>交强险（元）</view>
+          <view class='weui-label'>交强险</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请输入交强险费用' id='trafficCompulsoryInsurancePrice' value='{{carInfo.trafficCompulsoryInsurancePrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
+        <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>商业险（元）</view>
+          <view class='weui-label'>商业保险</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
           <input class='weui-input' placeholder='请输入商业险费用' id='commercialInsurancePrice' value='{{carInfo.commercialInsurancePrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
+        <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>最终成交价（元）</view>
+          <view class='weui-label'>最终成交价</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <view class='weui-input l-text-theme'>
-            {{carInfo.finalPrice}}
-          </view>
+          <input disabled='{{true}}' class='weui-input l-text-theme' value='{{carInfo.finalPrice}}' />
         </view>
+        <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__hd'>
-          <view class='weui-label'>应付定金（元）</view>
+          <view class='weui-label'>应付定金</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <input class='weui-input' placeholder='请输入定金金额' id='depositPrice' value='{{carInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
+          <input disabled='{{isPayDeposit}}' class='weui-input' placeholder='请输入定金金额' id='depositPrice' value='{{carInfo.depositPrice}}' bindinput='bindInput' type='digit' maxlength='{{9}}' />
         </view>
+        <view class='l-cell-right'>元</view>
       </view>
       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__bd' style='padding: 15rpx 0;'>
