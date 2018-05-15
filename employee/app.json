@@ -115,7 +115,8 @@
     "pages/msg/index",
     "pages/login/index",
     "pages/region/index",
-    "pages/week-selector/index"
+    "pages/week-selector/index",
+    "pages/guide/index"
   ],
   "window": {
     "backgroundColor": "#eee",

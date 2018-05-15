@@ -1,0 +1,7 @@
+<!--pages/guide/index.wxml-->
+<view class='l-page-full l-video-bg' style='background-image:url({{resURL}}/employee/20180515004.jpg)'>
+  <image mode='widthFix' style='display:block;width: 100%;' src='{{resURL}}/employee/20180515003.png'></image>
+  <view class='l-video-box'>
+    <video src='http://ugcws.video.gtimg.com/e0543zn3q3w.mp4?sdtfrom=v1010&guid=4371f30324d680391dfe0bbb4a96141f&vkey=39E1647DEB63BF6750567767E208C38603987AC88D7FDEEAD65DF65C8A372D69A6D02CD832AA209C3E43444A8377A209807EA8548B1B8EE3F4E1A856E29E111D976DED67F90AC9B1C4E214F5E51943D89A82D09D9314CA1B310E432DF69EB3E8192C9BEF8EAE287E8DE7CCDAA34D0D8A7C3361F0F7FBD188'></video>
+  </view>
+</view>

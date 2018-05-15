@@ -55,6 +55,16 @@
     </navigator>
   </view>
 
+  <view class='l-margin l-flex-hc'>
+    <navigator class='l-rest'>
+      <image mode='widthFix' style='display:block;width: 100%;' src='{{resURL}}/employee/20180515001.png'></image>
+    </navigator>
+    <view class='l-margin-l'></view>
+    <navigator class='l-rest' url='/pages/guide/index'>
+      <image mode='widthFix' style='display:block;width: 100%;' src='{{resURL}}/employee/20180515002.png'></image>
+    </navigator>
+  </view>
+
   <block wx:if='{{userInfo.orgLevel === 3}}'>
     <navigator class='l-bg-white l-padding-btn l-flex-hc l-margin-tb' url='/level3/customer/list2?tp=intensity' hover-class='none'>
       <image style='width: 60rpx; height: 60rpx;' src='/images/20180510024.png'></image>
@@ -63,7 +73,7 @@
     </navigator>
   
     <view class='l-img-tit l-margin-t'>
-      <image mode='widthFix' src='/images/20180510021.png'></image>
+      <image mode='widthFix' src='{{resURL}}/employee/20180510021.png'></image>
     </view>
     <view class='l-bg-white l-margin-b'>
       <view class='l-grid-menu'>
@@ -124,7 +134,7 @@
   </block>
 
   <view class='l-img-tit l-margin-t'>
-    <image mode='widthFix' src='/images/20180510022.png'></image>
+    <image mode='widthFix' src='{{resURL}}/employee/20180510022.png'></image>
   </view>
   <view class='l-bg-white l-margin-b'>
     <view class='l-grid-menu'>
@@ -181,7 +191,7 @@
 
   <block wx:if='{{userInfo.orgLevel === 3}}'>
     <view class='l-img-tit l-margin-t'>
-      <image mode='widthFix' src='/images/20180510023.png'></image>
+      <image mode='widthFix' src='{{resURL}}/employee/20180510023.png'></image>
     </view>
     <view class='l-bg-white l-margin-b'>
       <view class='l-grid-menu'>

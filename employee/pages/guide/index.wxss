@@ -1,0 +1,7 @@
+/* pages/guide/index.wxss */
+.l-video-bg{background: #98c4c7 no-repeat center bottom; background-size: 100%;}
+.l-video-box{
+  background-color: #eff9fa; border-radius: 20rpx; padding: 30rpx;
+}
+
+.l-video-box video{width: 100%;}
