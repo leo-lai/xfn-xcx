@@ -56,14 +56,14 @@
   </view>
 
   <view class='l-margin l-flex-hc'>
-    <navigator class='l-rest'>
-      <image mode='widthFix' style='display:block;width: 100%;' src='{{resURL}}/employee/20180515001.png'></image>
+    <navigator url='/pages/school/list' class='l-rest'>
+      <image mode='widthFix' style='display:block;width: 100%; border-radius: 10rpx;' src='{{resURL}}/employee/20180515005.png'></image>
     </navigator>
-    <view class='l-margin-l'></view>
+    <!-- <view class='l-margin-l'></view>
     <navigator class='l-rest' url='/pages/guide/index'>
       <image mode='widthFix' style='display:block;width: 100%;' src='{{resURL}}/employee/20180515002.png'></image>
-    </navigator>
-  </view>
+    </navigator> -->
+  </view> 
 
   <block wx:if='{{userInfo.orgLevel === 3}}'>
     <navigator class='l-bg-white l-padding-btn l-flex-hc l-margin-tb' url='/level3/customer/list2?tp=intensity' hover-class='none'>

@@ -116,7 +116,9 @@
     "pages/login/index",
     "pages/region/index",
     "pages/week-selector/index",
-    "pages/guide/index"
+    "pages/guide/index",
+    "pages/school/list",
+    "pages/school/info"
   ],
   "window": {
     "backgroundColor": "#eee",

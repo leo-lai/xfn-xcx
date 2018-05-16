@@ -1,0 +1,22 @@
+<!--pages/school/list.wxml-->
+<import src='/template/loadmore.wxml' />
+<view class='l-page-full'>
+  <image mode='widthFix' style='display:block;width: 100%;' src='{{resURL}}/employee/20180515005.png'></image>
+  <navigator url='info?id={{item.id}}' class='l-bg-white l-margin-b' wx:for='{{list.data}}' wx:key='id' >
+    <view class='l-flex-h l-padding-btn l-border-b'>
+      <image wx:if='{{item.thumb}}' class='l-margin-r' style='width: 120rpx; height: 80rpx;' src='{{item.thumb}}'></image>
+      <view class='l-rest'>
+        <view class='l-h4 l-text-wrap2'>{{item.title}}</view>
+      </view>
+    </view>
+    <view class='l-flex-h l-padding-btn'>
+      <text>{{item.publishedTime}}</text>
+      <view class='l-rest'></view>
+      <text class='l-text-theme'>去学习</text>
+      <text class='l-text-theme l-icon-622' style='margin-top: 2rpx;'></text>
+    </view>
+    
+  </navigator>
+
+  <template is='loadmore' data='{{...list}}' />
+</view>

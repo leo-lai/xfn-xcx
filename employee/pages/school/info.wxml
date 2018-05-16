@@ -1,0 +1,14 @@
+<!--pages/school/info.wxml-->
+<import src='../../template/wxParse/wxParse.wxml' />
+<view class='l-page-full l-bg-white'>
+  <view style='margin: 0 30rpx 30rpx;'>
+    <view class='l-h3'>{{info.title}}</view>
+    <view class='l-fs-12 l-text-gray l-margin-t-m'>
+      <text class='l-margin-r'>{{info.source}}</text>
+      <text>{{info.publishedTime}}</text>
+    </view>
+  </view>
+  <view class='l-margin'>
+    <template is='wxParse' data='{{wxParseData:content.nodes}}' />
+  </view>
+</view>

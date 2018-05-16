@@ -75,6 +75,12 @@ let config = {
     // 资源订单列表
     orderList: `${baseUrl2}/ucenter_v1/consumerlist`,
   },
+
+  // 学堂
+  school: {
+    list: `${baseUrl2}/article_v1/index`,
+    info: `${baseUrl2}/article_v1/detail`,
+  },
   
   // 车辆品牌
   brandList: `${commonUrl}/carsBrandList`,

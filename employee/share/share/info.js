@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    noopFn: app.noopFn,
     share: {
       visible: false,
       data: null

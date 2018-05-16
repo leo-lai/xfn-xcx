@@ -197,7 +197,7 @@ Page({
       let down_payment_money = down_payment_money = total_fee * (down_payment_rate / 100)
 
       if (periods && annual_rate) {
-        monthly_supply = (total_fee - down_payment_money) * (annual_rate / 100 / periods)
+        monthly_supply = (total_fee - down_payment_money) * (100 + annual_rate) / 100 / periods
       }
 
       total_fee = down_payment_money

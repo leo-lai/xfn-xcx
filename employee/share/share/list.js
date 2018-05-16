@@ -2,11 +2,11 @@
 const app = getApp()
 Page({
   noopFn: app.noopFn,
-  share: {
-    visible: false,
-    data: null
-  },
   data: {
+    share: {
+      visible: false,
+      data: null
+    },
     filter: {
       loading: false,
       visible: false,
@@ -113,6 +113,7 @@ Page({
         })
       },
       fail: res => {
+        console.log(res)
         wx.hideLoading()
         wx.showToast({
           image: '../../images/error.png',
