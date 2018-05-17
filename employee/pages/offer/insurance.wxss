@@ -1,0 +1,29 @@
+/* pages/offer/insurance.wxss */
+._yuan{margin-left: 15rpx;}
+._checker{ margin-right: 15rpx; vertical-align: -4rpx;}
+._input{background-color: #eee; display: inline-block; width: 150rpx; text-align: center;}
+._picker{width: 50rpx;}
+.l-icon-622{padding-left:  15rpx; vertical-align: -2rpx;}
+.l-full-pay{
+  border-radius: 20rpx;
+  position: relative;
+  color: #fff;
+  background: #fda855 linear-gradient(150deg, #fbb56f 40%, #fbb56f 41%, #fab268 41%, #fbac5f 45%, #fda855) no-repeat;
+  margin: 30rpx;
+  padding: 50rpx 30rpx 100rpx;
+  font-size: 32rpx;
+  overflow: hidden;
+}
+.l-full-pay ._money{font-weight: 500; font-size: 40rpx;}
+.l-full-pay ._bottom{
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 15rpx;
+  font-size: 24rpx;
+}
+
+.l-full-pay._green{
+  background-image: linear-gradient(150deg, #65e199 40%, #65e199 41%, #55de90 41%, #55de90 45%, #4cdb89)
+}

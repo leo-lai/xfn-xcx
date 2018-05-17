@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/home/index2",
-    "pages/offer/info",
     "pages/offer/index",
+    "pages/offer/insurance",
+    "pages/offer/info",
     "share/menu",
     "share/share/list",
     "share/share/info",

@@ -1,0 +1,76 @@
+<!--pages/offer/insurance.wxml-->
+<view class='l-page-full'>
+  <view class='l-full-pay l-flex-hc'>
+    <view class='l-margin-l'>
+      <view>保险原价（元）</view>
+      <view class='_money'>{{price1}}</view>
+    </view>
+    <view class='l-margin-l'>
+      <view>折扣价（元）</view>
+      <view class='_money'>{{price2}}</view>
+    </view>
+    <view class='_bottom'>本结果仅供参考，实际费用以当地缴费为准</view>
+  </view>
+
+  <view class='l-bg-white l-padding-btn l-margin-tb l-flex-hc'>
+    <text>裸车价</text>
+    <view class='l-rest'></view>
+    <text>{{bareCarPrice}}</text>
+    <text class='_yuan'>元</text>
+  </view>
+
+  <view class='l-bg-white l-padding-btn l-flex-hc l-border-b l-margin-t'>
+    <text>交强险</text>
+    <view class='l-rest'></view>
+    <text>{{guige.list[guige.index].value}}</text>
+    <text class='_yuan'>元</text>
+  </view>
+  <view class='l-bg-white l-padding-btn l-flex-hc'>
+    <text>规格</text>
+    <view class='l-rest l-text-right'>
+      <picker id='guige' data-picker='guige' bindchange='bindInput' value='{{guige.index}}' range='{{guige.list}}' range-key='label'>
+        <text wx:if='{{guige.index === -1}}' class='l-text-gray'>请选择</text>
+        <text wx:else>{{guige.list[guige.index].label}}</text>
+        <text class='l-icon-622'></text>
+      </picker>
+    </view>
+  </view>
+
+  <view class='l-bg-white l-padding-btn l-flex-hc l-margin-t'>
+    <text>商业险</text>
+    <view class='l-rest'></view>
+    <text>{{insurance}}</text>
+    <text class='_yuan'>元</text>
+  </view>
+  <view class='l-bg-white l-padding-btn l-flex-hc l-border-t' wx:for='{{insuranceList}}' wx:key='name'>
+    <view bindtap='toggleCheck' data-index='{{index}}'>
+      <icon wx:if='{{item.checked}}' class='_checker' type='success' size='18' color='#fa5539'></icon>
+      <icon wx:else class='_checker' type='success' size='18' color='#eee'></icon>
+      <text>{{item.name}}</text>
+    </view>
+    <view class='l-rest l-text-right'>
+      <input id='{{index}}' class='_input' bindinput='bindInput' value='{{insuranceList[index].value}}' type='number'></input>
+    </view>
+    <view class='_picker'>
+      <picker wx:if='{{item.picker}}' data-picker='{{index}}' bindchange='bindPicker' value='{{item.picker.index}}' range='{{item.picker.list}}' range-key='label'>
+        <text class='l-icon-622'></text>
+      </picker>
+    </view>
+  </view>
+
+  <view class='l-bg-white l-padding-btn l-flex-hc l-margin-tb'>
+    <text>折扣</text>
+    <view class='l-rest l-text-right'>
+      <picker id='zhekou' data-picker='zhekou' bindchange='bindInput' value='{{zhekou.index}}' range='{{zhekou.list}}' range-key='label'>
+        <text wx:if='{{zhekou.index === -1}}' class='l-text-gray'>请选择</text>
+        <text wx:else>{{zhekou.list[zhekou.index].label}}</text>
+        <text class='l-icon-622'></text>
+      </picker>
+    </view>
+  </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存</button>
+  </view>
+</view>

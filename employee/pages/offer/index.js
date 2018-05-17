@@ -102,7 +102,7 @@ Page({
         'formData.price': carType.price,
         'formData.license_plate_priace': '500',
         'formData.vehicle_vessel_tax': '420',
-        'formData.traffic_insurance_price': '950',
+        // 'formData.traffic_insurance_price': '950',
       })
       setTimeout(this.getCost)
       setTimeout(this.getTotal, 50)
@@ -138,6 +138,13 @@ Page({
       purchase_tax = 0, insurance_price = 0, 
     } = this.data.formData
 
+    if (insurance_price > 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '请重新计算商业保险'
+      })
+    }
+
     if (price > 0) {
       change_price = Math.max(0, change_price) // 大于0
       if (mode == 1) { // 优惠不能大于指导价
@@ -162,7 +169,7 @@ Page({
       'formData.change_price': change_price,
       'formData.bareCarPrice': bareCarPrice,
       'formData.purchase_tax': Math.ceil(purchase_tax),
-      'formData.insurance_price': Math.ceil(insurance_price)
+      'formData.insurance_price': 0
     })
   },
   getTotal: function () {
@@ -206,6 +213,24 @@ Page({
       'formData.total_fee': Math.ceil(total_fee).toFixed(2),
       'formData.monthly_supply': Math.ceil(monthly_supply).toFixed(2)
     })
+  },
+  // 商业保险
+  insuranceInfo: function () {
+    if (this.data.formData.bareCarPrice) {
+      app.navigateTo('insurance?price=' + this.data.formData.bareCarPrice)
+    }else{
+      wx.showToast({
+        icon: 'none',
+        title: '请先选择车型'
+      })
+    }
+  },
+  onInsuranceCb: function (price) {
+    this.setData({ 
+      'formData.insurance_price': price
+    })
+
+    setTimeout(this.getTotal, 50)
   },
 
   submit: function () {
