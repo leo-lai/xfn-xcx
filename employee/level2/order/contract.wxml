@@ -70,4 +70,9 @@
     <view>客户经理签名：{{info.creator}}</view>
     <view>日期：{{info.createTimeStr}}</view>
   </view>
+
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='submit'>保存电子合同</button>
+  </view>
 </view>

@@ -74,6 +74,9 @@ let config = {
   consumer: {
     // 资源订单列表
     orderList: `${baseUrl2}/ucenter_v1/consumerlist`,
+    // 资源订单详情
+    orderInfo: `${baseUrl2}/ucenter_v1/consumerDetail`,
+    contractImage: `${baseUrl2}/publics_v1/contract`,
   },
 
   // 学堂
