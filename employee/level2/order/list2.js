@@ -98,7 +98,7 @@ Page({
       data.list.forEach(item => {
         // countermandApply 是否退款中
         // 37 已退款
-        item.showEdit = this.data.showEdit && !item.countermandApply && item.state != 37
+        item.showEdit = this.data.showEdit && !item.countermandApply && item.orderState != 37
         item.infos.forEach(cars => {
           cars.changePrice2 = Math.abs(cars.changePrice)
           cars.auditNum = 0 // 待审核车辆
@@ -126,7 +126,7 @@ Page({
     let carItem = event.currentTarget.dataset.item
     let index = event.currentTarget.dataset.index
     let item = this.data.list.data[index]
-    carItem.orderState = item.state
+    carItem.orderState = item.orderState
     app.storage.setItem('lv2-order-car-info', carItem)
     app.navigateTo('car-match?edit=' + (item.showEdit ? 1 : 0))
   },

@@ -39,13 +39,15 @@ Page({
         'showEdit': this.options.edit !== '0'
       })
 
-      console.log(this.data.showEdit)
-
+      let title = '配车'
       app.storage.getItem('lv2-order-car-info').then(info => {
         if (info) {
+          if(info.orderState == '15') title = '验车'
           this.setData({ info })
           this.getCarFrame()
         }
+
+        wx.setNavigationBarTitle({ title })
       })
     }, this.route)
   },
