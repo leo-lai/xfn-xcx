@@ -31,6 +31,11 @@ Page({
   onShow: function () {
     // app.checkLogin()
   },
+  onShareAppMessage: function() {
+    return {
+      title: this.data.info.title
+    }
+  },
 
   getInfo: function() {
     wx.showLoading()

@@ -77,6 +77,8 @@ let config = {
     // 资源订单详情
     orderInfo: `${baseUrl2}/ucenter_v1/consumerDetail`,
     contractImage: `${baseUrl2}/publics_v1/contract`,
+    // 资源单出库
+    outStock: `${baseUrl2}/ucenter_v1/stockOut`,
   },
 
   // 学堂
