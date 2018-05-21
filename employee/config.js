@@ -21,8 +21,8 @@
  * .............................................
  *                佛祖坐镇 顺利上线
  */
-var env = 'dev'  // 测试
-// var env = 'prod' // 正式
+// var env = 'dev'  // 测试
+var env = 'prod' // 正式
 let getHost = (domainName = 'api') => env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
 
 let hosts = [getHost('tomcat'), getHost('api'), getHost('shop')]
@@ -78,7 +78,7 @@ let config = {
     orderInfo: `${baseUrl2}/ucenter_v1/consumerDetail`,
     contractImage: `${baseUrl2}/publics_v1/contract`,
     // 资源单出库
-    outStock: `${baseUrl2}/ucenter_v1/stockOut`,
+    outStock: `${baseUrl2}/ucenter_v1/stockout`,
   },
 
   // 学堂

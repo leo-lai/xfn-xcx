@@ -52,6 +52,7 @@ Page({
       page, rows
     }).then(({ data }) => {
       // 兼容非分页返回
+      data = data || []
       if (!data.list && data.length >= 0) {
         data = {
           total: data.length,
