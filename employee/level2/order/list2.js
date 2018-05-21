@@ -195,7 +195,7 @@ Page({
         success: res => {
           if (res.confirm) {
             wx.showLoading()
-            app.post(app.config.consumer.outStock, {
+            app.ajax(app.config.consumer.outStock, {
               orderId: item.id,
               state: 45
             }).then(_ => {
