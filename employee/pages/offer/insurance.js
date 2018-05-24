@@ -160,7 +160,8 @@ Page({
     })
 
     // 商业险总价 + 交强险
-    price1 = insurance + this.data.guige.list[this.data.guige.index].value
+    // price1 = insurance + this.data.guige.list[this.data.guige.index].value
+    price1 = insurance
     price2 = price1 * this.data.zhekou.list[this.data.zhekou.index].value
 
     this.setData({

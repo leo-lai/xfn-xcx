@@ -36,8 +36,8 @@ Page({
       purchase_tax: '',
       license_plate_priace: '',
       vehicle_vessel_tax: '',
-      traffic_insurance_price: '',
-      insurance_price: '',
+      traffic_insurance_price: '',  // 交强险
+      insurance_price: '',          // 商业险
       boutique_priace: '',
       quality_assurance: '',
       other: '',
@@ -102,7 +102,7 @@ Page({
         'formData.price': carType.price,
         'formData.license_plate_priace': '500',
         'formData.vehicle_vessel_tax': '420',
-        // 'formData.traffic_insurance_price': '950',
+        'formData.traffic_insurance_price': '950',
       })
       setTimeout(this.getCost)
       setTimeout(this.getTotal, 50)
