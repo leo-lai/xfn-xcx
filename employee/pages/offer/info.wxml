@@ -2,7 +2,10 @@
 <view class='l-page-full'>
   <view class='l-bg-white l-padding l-margin-b'>
     <view>{{info.user.username}}的报价单</view>
-    <view bindtap='callPhone' data-val='{{info.user.phone}}'>联系电话：<text>{{info.user.phone}}</text></view>
+    <view bindtap='callPhone' data-val='{{info.user.phone}}'>
+      联系电话：<text>{{info.user.phone}}</text>
+      <text class='l-icon-649 l-text-theme'></text>
+    </view>
     <view class='l-margin-tb' style='border-top: 1rpx dashed #eee;'></view>
     <view>购车方式：{{buyWay[info.type]}}</view>
     <view>车型：{{info.carName}}</view>
