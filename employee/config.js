@@ -21,8 +21,8 @@
  * .............................................
  *                佛祖坐镇 顺利上线
  */
-// var env = 'dev'  // 测试
-var env = 'prod' // 正式
+var env = 'dev'  // 测试
+// var env = 'prod' // 正式
 let getHost = (domainName = 'api') => env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
 
 let hosts = [getHost('tomcat'), getHost('api'), getHost('shop')]
@@ -62,6 +62,10 @@ let config = {
 
   // 客户管理
   customer: {
+    // 客户列表
+    allList: `${baseUrl2}/ucenter_v1/userlist`,
+    // 客户基本详情（预约及记录信息）
+    info: `${baseUrl2}/ucenter_v1/userdetail`,
     // 重点客户，新增预约客户，今日预计到店
     list: `${baseUrl2}/ucenter_v1/customers`,
     // 今日回访
@@ -72,6 +76,8 @@ let config = {
 
   // 资源管理
   consumer: {
+    // 门店列表
+    storeList: `${baseUrl2}/ucenter_v1/organizationlist`,
     // 资源订单列表
     orderList: `${baseUrl2}/ucenter_v1/consumerlist`,
     // 资源订单详情
@@ -85,6 +91,40 @@ let config = {
   school: {
     list: `${baseUrl2}/article_v1/index`,
     info: `${baseUrl2}/article_v1/detail`,
+  },
+
+  // 商城接口
+  shop: {
+    // 仓库列表
+    cangList: `${baseUrl}/shop/organizationWarehouseList`,
+    // 在售列表
+    // goodsList: `${baseUrl}/shop/orgShopGoodsCarsList`,
+    goodsList: `${baseUrl2}/ucenter_v1/shop`,
+    goodsEdit: `${baseUrl}/shop/shopGoodsCarsEdit`,
+    goodsInfo: `${baseUrl}/shop/shopGoodsCarsInfo`,
+    goodsUpOff: `${baseUrl}/shop/shopGoodsCarsShelves`,
+    // 活动列表
+    // activeList: `${baseUrl}/shop/orgActivityList`,
+    activeList: `${baseUrl2}/ucenter_v1/shop/activity`,
+    activeUpOff: `${baseUrl}/shop/activityShelves`,
+    activeEdit: `${baseUrl}/shop/activityEdit`,
+    // 预约单列表
+    orderList: `${baseUrl}/shop/orgAdvanceOrderList`,
+    orderInfo: `${baseUrl}/shop/orgAdvanceOrderInfo`,
+    // 贷款审核
+    loanList: `${baseUrl}/shop/applyLoanList`,
+    loanAudit: `${baseUrl}/shop/applyLoanAudit`,
+    // 门店审核
+    storeList: `${baseUrl}/shop/shopOrgList`,
+    storeAudit: `${baseUrl}/shop/shopOrgAudit`,
+    // 寻车列表
+    seekList: `${baseUrl}/shop/shopFindCarList`,
+    seekInfo: `${baseUrl}/shop/shopFindCarInfo`,
+    seekOffer: `${baseUrl}/shop/shopFindCarOffer`,
+    mySeekList: `${baseUrl}/shop/myShopFindCarOfferList`,
+    mySeekInfo: `${baseUrl}/shop/shopFindCarOfferInfo`,
+    // 配置支付信息
+    storePayInfo: `${baseUrl}/shop/allInPayConfigure`,
   },
   
   // 车辆品牌
@@ -280,37 +320,7 @@ let config = {
   stockInDel: `${baseUrl}/storageDelete`,
   // 全部已入库
   stockInSure: `${baseUrl}/storageOverSure`,
-  // 商城接口
-  shop: {
-    // 仓库列表
-    cangList: `${baseUrl}/shop/organizationWarehouseList`,
-    // 在售列表
-    goodsList: `${baseUrl}/shop/orgShopGoodsCarsList`,
-    goodsEdit: `${baseUrl}/shop/shopGoodsCarsEdit`,
-    goodsInfo: `${baseUrl}/shop/shopGoodsCarsInfo`,
-    goodsUpOff: `${baseUrl}/shop/shopGoodsCarsShelves`,
-    // 活动列表
-    activeList: `${baseUrl}/shop/orgActivityList`,
-    activeUpOff: `${baseUrl}/shop/activityShelves`,
-    activeEdit: `${baseUrl}/shop/activityEdit`,
-    // 预约单列表
-    orderList: `${baseUrl}/shop/orgAdvanceOrderList`,
-    orderInfo: `${baseUrl}/shop/orgAdvanceOrderInfo`,
-    // 贷款审核
-    loanList: `${baseUrl}/shop/applyLoanList`,
-    loanAudit: `${baseUrl}/shop/applyLoanAudit`, 
-    // 门店审核
-    storeList: `${baseUrl}/shop/shopOrgList`,
-    storeAudit: `${baseUrl}/shop/shopOrgAudit`,
-    // 寻车列表
-    seekList: `${baseUrl}/shop/shopFindCarList`,
-    seekInfo: `${baseUrl}/shop/shopFindCarInfo`,
-    seekOffer: `${baseUrl}/shop/shopFindCarOffer`,
-    mySeekList: `${baseUrl}/shop/myShopFindCarOfferList`,
-    mySeekInfo: `${baseUrl}/shop/shopFindCarOfferInfo`,
-    // 配置支付信息
-    storePayInfo: `${baseUrl}/shop/allInPayConfigure`,
-  },
+  
   // 素材分享
   share: {
     // 素材列表

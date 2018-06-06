@@ -60,14 +60,15 @@ Page({
     }
     
     this.setData({ 'list.loading': true })
-    return app.post(app.config.shop.goodsList, {
+    return app.ajax(app.config.shop.goodsList, {
       page, ...this.data.filter.data,
       rows: this.data.list.rows
     }).then(({ data }) => {
       data.list = data.list.map(item => {
         item.saleingPriceStr = item.bareCarPriceOnLine ? (item.bareCarPriceOnLine / 10000).toFixed(2) : '0.00'
         item.guidingPriceStr = item.guidingPrice ? (item.guidingPrice / 10000).toFixed(2) : '0.00'
-        item.thumb = app.utils.formatThumb(item.image, 150, 150)
+        item.carsImagesArr = item.carsImages ? item.carsImages.split(',') : []
+        item.thumb = app.utils.formatThumb(item.image || item.carsImagesArr[0], 150, 150)
         return item
       })
       this.setData({

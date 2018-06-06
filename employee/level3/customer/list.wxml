@@ -2,10 +2,10 @@
 <import src='/template/loadmore.wxml' />
 <view style='padding-top: 100rpx;' class='l-page-full {{ filter.panel ? "l-no-scroll" : "" }}'>
   <view class='l-list-filter l-flex-hc' catchtouchmove='noopFn'>
-    <view style='margin-right: 20rpx;' class='_type' bindtap='toggleFilterPanel'>
+    <!-- <view style='margin-right: 20rpx;' class='_type' bindtap='toggleFilterPanel'>
       <text>筛选</text>
       <text class='l-icon-6ac'></text>
-    </view>
+    </view> -->
     <view class='_input l-rest l-flex-hc'>
       <view class='l-rest'>
         <input data-val='search' bindfocus='showFilter' bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入客户名称或电话' value='{{filter.data.customerUsersSearch}}'/>
@@ -13,8 +13,9 @@
       <icon class='l-margin-r-m' hidden='{{filter.data.customerUsersSearch === ""}}' type='cancel' color='#ccc' size='20' bindtap='clearTyping'></icon>
       <icon type='search' size='18' color='#555' bindtap='search'></icon>
     </view>
-    <view class='_cont {{filter.visible ? "_active" : ""}}' bindtap='hideFilter'>
-      <!-- 历史记录 -->
+
+    <!-- 历史记录 -->
+    <!-- <view class='_cont {{filter.visible ? "_active" : ""}}' bindtap='hideFilter'>
       <view class='_history' hidden='{{filter.type !== "search" || filter.history.length === 0}}' catchtap='noopFn'>
         <view>
           <text class='l-fr l-icon-627 l-fs-m'  bindtap='clearHistory'></text>
@@ -24,7 +25,7 @@
           <text class='l-text-wrap' wx:for='{{filter.history}}' wx:key='{{index}}' bindtap='searchHistory' data-val='{{item}}'>{{item}}</text>
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
 
   <!-- 客户列表 -->
@@ -40,7 +41,7 @@
           </view>
         </view>
       </view>
-      <text class='l-text-theme l-fs-s'>{{item.orderStateName}}</text>
+      <!-- <text class='l-text-theme l-fs-s'>{{item.orderStateName}}</text> -->
       <text class='l-icon-622'></text>
     </view>
     <view class='l-border-t l-padding-t l-margin-t l-fs-s'>
@@ -62,9 +63,9 @@
       </view>
     </view>
     
-    <view wx:if='{{!item.customerUsersOrgId}}' class='l-border-t l-padding-t l-margin-t l-text-center' catchtap='noopFn'>
+    <!-- <view wx:if='{{!item.customerUsersOrgId}}' class='l-border-t l-padding-t l-margin-t l-text-center' catchtap='noopFn'>
       <button data-item='{{item}}' bindtap='sltSaler' size='mini' class='l-button-border l-margin-lr-s'>分配销售顾问</button>
-    </view>
+    </view> -->
    </navigator>
    <template is='loadmore' data='{{...list}}' /> 
 

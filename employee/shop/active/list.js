@@ -79,7 +79,7 @@ Page({
       return
     }
     this.setData({ 'list1.loading': true })
-    return app.post(app.config.shop.activeList, {
+    return app.ajax(app.config.shop.activeList, {
       page, ...this.data.filter.data,
       overOffShelf: 0,
       rows: this.data.list1.rows
@@ -87,7 +87,8 @@ Page({
       data.list = data.list.map(item => {
         item.saleingPriceStr = item.activityPrice ? (item.activityPrice / 10000).toFixed(2) : '0.00'
         item.guidingPriceStr = item.guidingPrice ? (item.guidingPrice / 10000).toFixed(2) : '0.00'
-        item.thumb = app.utils.formatThumb(item.image, 150)
+        item.carsImagesArr = item.carsImages ? item.carsImages.split(',') : []
+        item.thumb = app.utils.formatThumb(item.image || item.carsImagesArr[0], 150, 150)
         return item
       })
       this.setData({
@@ -109,7 +110,7 @@ Page({
       return
     }
     this.setData({ 'list2.loading': true })
-    return app.post(app.config.shop.activeList, {
+    return app.ajax(app.config.shop.activeList, {
       page, ...this.data.filter.data,
       overOffShelf: 1,
       rows: this.data.list2.rows
@@ -117,7 +118,8 @@ Page({
       data.list = data.list.map(item => {
         item.saleingPriceStr = item.activityPrice ? (item.activityPrice / 10000).toFixed(2) : '0.00'
         item.guidingPriceStr = item.guidingPrice ? (item.guidingPrice / 10000).toFixed(2) : '0.00'
-        item.thumb = app.utils.formatThumb(item.image, 150)
+        item.carsImagesArr = item.carsImages ? item.carsImages.split(',') : []
+        item.thumb = app.utils.formatThumb(item.image || item.carsImagesArr[0], 150, 150)
         return item
       })
 

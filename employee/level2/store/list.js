@@ -80,7 +80,7 @@ Page({
     }
 
     this.setData({ 'list.loading': true })
-    return app.post(app.config.lv2.storeList, {
+    return app.ajax(app.config.consumer.storeList, {
           page, 
           rows: this.data.list.rows,
           ...this.data.filter.data

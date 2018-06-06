@@ -20,7 +20,7 @@
       </view>
     </view>
 
-    <view class='l-padding l-text-theme2'>
+    <view wx:if='{{info.remarks}}' class='l-padding l-text-theme2'>
       备注：{{info.remarks}}
     </view>
   </view>

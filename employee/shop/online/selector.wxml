@@ -13,8 +13,8 @@
   <view style='height: 120rpx;'></view>
 
   <view>
-    <view class='l-flex-h l-bg-white l-padding l-border-b' wx:for='{{list.data}}' wx:key="goodsCarsId" bindtap='slt' data-item='{{item}}'>
-      <image class='l-margin-r' style='width: 120rpx; height: 120rpx;' src='{{item.thumb}}'></image>
+    <view class='l-flex-h l-bg-white l-padding-m l-border-b' wx:for='{{list.data}}' wx:key="goodsCarsId" bindtap='slt' data-item='{{item}}'>
+      <image class='l-margin-r-m' style='width: 160rpx; height: 160rpx;' src='{{item.thumb}}'></image>
       <view class='l-rest'>
         <view class='l-h4 l-text-wrap1'>{{item.carsName}}</view>
         <view class='l-margin-t-s'>

@@ -35,9 +35,9 @@ Page({
           info.discountPriceOnLine = Math.abs(info.discountPriceOnLine)
           info.discountPriceUnderLine = Math.abs(info.discountPriceUnderLine)
 
+          info.dateOfManufacture = info.dateOfManufacture ? info.dateOfManufacture.split(' ')[0] : ''
           info.saleingPriceStr = info.bareCarPriceOnLine ? (info.bareCarPriceOnLine / 10000).toFixed(2) : '0.00'
           info.guidingPriceStr = info.guidingPrice ? (info.guidingPrice / 10000).toFixed(2) : '0.00'
-          info.thumb = app.utils.formatThumb(info.image, 150, 150)
 
           let formData = app.utils.copyObj(this.data.formData, info)
           let goodsInfo = Object.assign({}, info)
@@ -61,6 +61,12 @@ Page({
               tick: app.utils.guid()
             }
           }) : []
+
+          if (uploadImages1[0]) {
+            goodsInfo.image = goodsInfo.image || uploadImages1[0].src
+          }
+          
+          goodsInfo.thumb = app.utils.formatThumb(goodsInfo.image , 150, 150)
           this.setData({ formData, goodsInfo, uploadImages1, uploadImages2 })
         }
       })
@@ -120,6 +126,7 @@ Page({
   // 选择活动车辆
   onGoodsSlted: function (goodsInfo) {
     if(goodsInfo) {
+      goodsInfo.dateOfManufacture = goodsInfo.dateOfManufacture ? goodsInfo.dateOfManufacture.split(' ')[0] : ''
       goodsInfo.discountPriceOnLineStr = Math.abs(goodsInfo.discountPriceOnLine)
       this.setData({
         goodsInfo,

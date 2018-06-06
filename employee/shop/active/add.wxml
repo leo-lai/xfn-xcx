@@ -38,21 +38,21 @@
         <text class='l-text-gray'>裸车价</text>
         <view class='l-rest l-text-right'>￥{{goodsInfo.saleingPriceStr}}万</view>
       </view>
-      <view class='l-flex-hc'>
+      <!-- <view class='l-flex-hc'>
         <text class='l-text-gray'>{{goodsInfo.discountPriceOnLine > 0 ? '已加价' : '已优惠'}}</text>
         <view class='l-rest l-text-right'>￥{{goodsInfo.discountPriceOnLineStr}}</view>
-      </view>
+      </view> -->
       <view class='l-flex-hc'>
         <text class='l-text-gray'>生产日期</text>
-        <view class='l-rest l-text-right'>{{goodsInfo.dateOfManufacture}}</view>
+        <view class='l-rest l-text-right'>{{goodsInfo.dateOfManufacture || '--'}}</view>
       </view>
       <view class='l-flex-hc'>
         <text class='l-text-gray'>物流周期</text>
-        <view class='l-rest l-text-right'>{{goodsInfo.logisticsCycle}}天</view>
+        <view class='l-rest l-text-right'>{{goodsInfo.logisticsCycle || '--'}}天</view>
       </view>
       <view class='l-flex-hc'>
         <text class='l-text-gray'>开票周期</text>
-        <view class='l-rest l-text-right'>{{goodsInfo.invoiceCycle}}天</view>
+        <view class='l-rest l-text-right'>{{goodsInfo.invoiceCycle || '--'}}天</view>
       </view>
       <view class='l-flex-h' wx:if='{{goodsInfo.remarks}}'>
         <text class='l-text-gray'>车辆备注</text>

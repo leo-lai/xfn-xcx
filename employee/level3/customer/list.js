@@ -125,7 +125,7 @@ Page({
     }
     this.setData({ 'list.loading': true })
 
-    app.post(app.config.customerList, {
+    app.ajax(app.config.customer.allList, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
       // 兼容非分页返回

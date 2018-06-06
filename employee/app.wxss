@@ -246,6 +246,7 @@ button.l-btn-min3::after{display: none;}
 .l-margin-lr{margin-left: 30rpx; margin-right: 30rpx;}
 .l-margin-lr-s{margin-left: 15rpx; margin-right: 15rpx;}
 .l-padding{padding: 30rpx;}
+.l-padding-m{padding: 20rpx;}
 .l-padding-lr{padding-left: 30rpx; padding-right: 30rpx;}
 .l-padding-xl{padding: 50rpx;}
 .l-padding-t{padding-top: 30rpx;}
