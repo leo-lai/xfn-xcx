@@ -36,7 +36,7 @@
     
     <navigator class='_item' url='/level3/parts/index' hover-class='none'>
       <image src='/images/20180510011.png'></image>
-      <view>加装/上牌</view>
+      <view>加装/上牌/贴膜</view>
     </navigator>
     <navigator class='_item' url='/pages/offer/index' hover-class='none'>
       <image src='/images/20180510007.png'></image>
@@ -79,29 +79,29 @@
         <view class='{{customer.userCount > 0 ? "_num2" : "_num"}}'>{{customer.userCount}}</view>
         <view class='_txt'>新增预约客户</view>
       </navigator>
-      <navigator class='_item' url='/level3/customer/list-order' hover-class='none'>
+      <navigator class='_item' url='/level3/customer/list-order?month={{month}}' hover-class='none'>
         <view class='{{customer.total > 0 ? "_num2" : "_num"}}'>{{customer.total}}</view>
         <view class='_txt'>本月总订单</view>
       </navigator>
-      <navigator class='_item' url='/level3/customer/list-order?sta=1' hover-class='none'>
+      <navigator class='_item' url='/level3/customer/list-order?month={{month}}&sta=1' hover-class='none'>
         <view class='{{customer.unpayDeposit > 0 ? "_num2" : "_num"}}'>{{customer.unpayDeposit}}</view>
         <view class='_txt'>待收定金</view>
       </navigator>
-      <navigator class='_item' url='/level3/customer/list-order?sta=3' hover-class='none'>
+      <navigator class='_item' url='/level3/customer/list-order?month={{month}}&sta=3' hover-class='none'>
         <view class='{{customer.bankAudit > 0 ? "_num2" : "_num"}}'>{{customer.bankAudit}}</view>
         <view class='_txt'>待银行审核</view>
       </navigator>
     </view>
     <view class='l-grid-menu'>
-      <navigator class='_item' url='/level3/customer/list-order?sta=5' hover-class='none'>
+      <navigator class='_item' url='/level3/customer/list-order?month={{month}}&sta=5' hover-class='none'>
         <view class='{{customer.undelivery > 0 ? "_num2" : "_num"}}'>{{customer.undelivery}}</view>
         <view class='_txt'>待出库</view>
       </navigator>
-      <navigator class='_item _rest' url='/level3/customer/list-order?sta=6' hover-class='none'>
+      <navigator class='_item _rest' url='/level3/customer/list-order?month={{month}}&sta=6' hover-class='none'>
         <view class='{{customer.others > 0 ? "_num2" : "_num"}}'>{{customer.others}}</view>
         <view class='_txt'>加装/上牌/贴膜</view>
       </navigator>
-      <navigator class='_item' url='/level3/customer/list-order?sta=17' hover-class='none'>
+      <navigator class='_item' url='/level3/customer/list-order?month={{month}}&sta=17' hover-class='none'>
         <view class='{{customer.finished > 0 ? "_num2" : "_num"}}'>{{customer.finished}}</view>
         <view class='_txt'>已完款可放行</view>
       </navigator>

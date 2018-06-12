@@ -33,7 +33,9 @@
     <view class='l-flex-h'>
       <image class='l-avatar' mode='aspectFit' style='width: 80rpx; height: 80rpx; margin-right: 30rpx;' src='{{item.thumb}}'></image>
       <view class='l-rest'>
-        <view class='l-h4'>{{item.customerUsersName}}</view>
+        <view class='l-h4'>
+          {{item.customerUsersName}}
+        </view>
         <view class='l-inline' catchtap='noopFn'>
           <view class='l-inline' data-val='{{item.phoneNumber}}' bindtap='callPhone' bindtap='callPhone'>
             <text class='l-fs-m'>{{item.phoneNumber}}</text>
@@ -55,11 +57,15 @@
       </view>
       <view class='l-flex-h'>
         <text class='l-margin-r-s l-text-gray'>销售顾问</text>
-        <text class='l-rest'>{{item.systemUserName || '无'}}</text>
+        <text class='l-rest'>{{item.systemUserName || '--'}}</text>
+      </view>
+      <view class='l-flex-h'>
+        <text class='l-margin-r-s l-text-gray'>客户强度</text>
+        <text class='l-rest'>{{item.intensity || '--'}}</text>
       </view>
       <view class='l-flex-h'>
         <text class='l-margin-r-s l-text-gray'>登记时间</text>
-        <text class='l-rest'>{{item.timeOfAppointmentDate || '无'}}</text>
+        <text class='l-rest'>{{item.timeOfAppointmentDate || '--'}}</text>
       </view>
     </view>
     

@@ -11,7 +11,7 @@ Page({
     buyTime: app.config.baseData.buyTime,
     buyWay: app.config.baseData.buyWay,
     orderState: {
-      '1': '待交定金',
+      '1': '待收定金',
       '3': '等待银行审核',
       '4': '银行审核不通过',
       '5': '等待车辆出库',

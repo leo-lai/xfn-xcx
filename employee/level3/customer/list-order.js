@@ -7,11 +7,19 @@ Page({
    */
   data: {
     topTips: '',
+    stateTitle: {
+      '1': '待收定金订单',
+      '3': '待银行审核订单',
+      '5': '待车辆出库订单',
+      '6': '加装精品/上牌/贴膜订单',
+      '17': '已完款可放行订单'
+    },
     filter: {
       loading: false,
       data: {
         keywords: '',
-        state: ''
+        state: '',
+        month: ''
       }
     },
     list: {
@@ -37,10 +45,18 @@ Page({
    */
   onReady: function () {
     app.onLogin(userInfo => {
+      let state = this.options.sta || ''
+      let month = this.options.month || ''
       this.setData({
         customerUsersId: this.options.id || '',
-        'filter.data.state': this.options.sta || ''
+        'filter.data.month': month,
+        'filter.data.state': state
       })
+
+      wx.setNavigationBarTitle({
+        title: this.data.stateTitle[state] || (month ? '本月客户总订单' : '客户购车单列表'),
+      })
+      
       this.getList()
     }, this.route)
   },

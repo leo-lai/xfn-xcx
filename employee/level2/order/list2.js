@@ -6,6 +6,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    stateTitle: {
+      '1': '开单列表',
+      '5': '待收定金订单',
+      '10': '待配车订单',
+      '15': '待验车订单',
+      '35': '待收尾款订单',
+      '40': '待出库订单',
+      '45': '待上传票证订单'
+    },
     filter: {
       loading: false,
       data: {
@@ -29,12 +38,19 @@ Page({
    */
   onReady: function () {
     app.onLogin(userInfo => {
+      let state = this.options.sta || ''
+      let month = this.options.month || ''
+
       this.setData({
         userInfo,
-        'filter.data.state': this.options.sta || '',
-        'filter.data.month': this.options.month || '',
+        'filter.data.state': state,
+        'filter.data.month': month,
         'isAdmin': userInfo.roleName == '仓管主管',
         'showEdit': userInfo.roleName != '仓管主管'
+      })
+
+      wx.setNavigationBarTitle({
+        title: this.data.stateTitle[state] || (month ? '本月资源总订单' : '资源订单列表'),
       })
 
       setTimeout(this.getList, 50)

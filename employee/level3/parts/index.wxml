@@ -3,7 +3,7 @@
   <navigator url='jing/list' class='l-margin l-bg-white l-padding l-radius'>
     <view class='l-padding l-text-center'>
       <image mode='aspectFit' style='width: 174rpx; height: 104rpx;' src='/images/jing-icon.png'></image>
-      <view>精品加装</view>
+      <view>加装精品</view>
     </view>
   </navigator>
   <navigator url='license/list' class='l-margin l-bg-white l-padding l-radius'>

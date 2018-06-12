@@ -39,6 +39,18 @@
         <button size='mini' class='l-button-main l-margin-lr-s'>出库车辆</button>
       </navigator>
 
+      <navigator wx:if='{{item.orderState == 7}}' url='/level3/parts/jing/list?id={{item.id}}' hover-class='none'>
+        <button size='mini' class='l-button-border l-margin-lr-s'>加装精品</button>
+      </navigator>
+
+      <navigator wx:if='{{item.orderState == 9}}' url='/level3/parts/license/list?id={{item.id}}' hover-class='none'>
+        <button size='mini' class='l-button-border l-margin-lr-s'>车辆上牌</button>
+      </navigator>
+
+      <navigator wx:if='{{item.orderState == 11}}' url='/level3/parts/tiemo/list?id={{item.id}}' hover-class='none'>
+        <button size='mini' class='l-button-border l-margin-lr-s'>车辆贴膜</button>
+      </navigator>
+
       <navigator wx:if='{{item.orderState == 13}}' url='jiaoche?id={{item.id}}' hover-class='none'>
         <button size='mini' class='l-button-main l-margin-lr-s'>客户提车</button>
       </navigator>
@@ -54,12 +66,14 @@
   </view>
   <template is='loadmore' data='{{...list}}' /> 
 
-  <view style='height: 120rpx;'></view>
-  <view class='l-fixed-bottom'>
-    <navigator url='order?ids={{customerUsersId}}' class='l-btn-w60 l-margin-tb' hover-class='none'>
-      <button class='l-button-main'>开单</button>
-    </navigator>
-  </view> 
+  <block wx:if='{{customerUsersId}}'>
+    <view style='height: 120rpx;'></view>
+    <view class='l-fixed-bottom'>
+      <navigator url='order?ids={{customerUsersId}}' class='l-btn-w60 l-margin-tb' hover-class='none'>
+        <button class='l-button-main'>开单</button>
+      </navigator>
+    </view>
+  </block>
 </view>
 
 
