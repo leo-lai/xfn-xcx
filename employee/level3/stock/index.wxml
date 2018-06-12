@@ -15,7 +15,7 @@
   <navigator url='/level3/stock/out/list' class='l-margin l-bg-white l-padding l-radius'>
     <view class='l-padding-btn l-text-center'>
       <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/out-car-icon.png'></image>
-      <view>出库车辆</view>
+      <view>车辆出库</view>
     </view>
   </navigator>
   <!-- 

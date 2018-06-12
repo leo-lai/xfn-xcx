@@ -12,7 +12,7 @@ Page({
       visible: false,
       history: [],
       data: {
-        carsSearch: ''
+        keywords: ''
       }
     },
     list: {
@@ -76,7 +76,7 @@ Page({
     this.setData({
       'list.loading': true
     })
-    app.post(app.config.stockOutList, {
+    app.ajax(app.config.stock.outList, {
       page, ...this.data.filter.data
     }).then(({ data }) => {
       data.list = data.list.map(item => {
@@ -120,7 +120,7 @@ Page({
   filterSearch: function (event) {
     let item = event.currentTarget.dataset.item
     let data = {}
-    data['filter.data.carsSearch'] = ''
+    data['filter.data.keywords'] = ''
     this.setData(data)
     this.getList()
   },
@@ -132,13 +132,13 @@ Page({
       })
     }
     this.setData({
-      'filter.data.carsSearch': event.detail.value
+      'filter.data.keywords': event.detail.value
     })
   },
   // 清楚输入
   clearTyping() {
     this.setData({
-      'filter.data.carsSearch': ''
+      'filter.data.keywords': ''
     })
     this.search()
   },
@@ -152,15 +152,15 @@ Page({
   // 历史搜索
   searchHistory: function (event) {
     this.setData({
-      'filter.data.carsSearch': event.target.dataset.val
+      'filter.data.keywords': event.target.dataset.val
     })
     this.search()
   },
   // 搜索
   search: function () {
     // 本地记录搜索关键词
-    if (this.data.filter.data.carsSearch.trim() && !this.data.filter.history.includes(this.data.filter.data.carsSearch)) {
-      let historyData = this.data.filter.history.concat(this.data.filter.data.carsSearch)
+    if (this.data.filter.data.keywords.trim() && !this.data.filter.history.includes(this.data.filter.data.keywords)) {
+      let historyData = this.data.filter.history.concat(this.data.filter.data.keywords)
       this.setData({
         'filter.history': historyData
       })

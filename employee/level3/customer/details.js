@@ -41,7 +41,8 @@ Page({
   onLoad: function (options) {
     app.onLogin(userInfo => {
       this.setData({ userInfo })
-      app.storage.getItem('customer_details').then(customerInfo => {
+      app.storage.getItem('customer-details').then(customerInfo => {
+        customerInfo.thumb = customerInfo.headPortrait ? app.utils.formatHead(customerInfo.headPortrait) : app.config.avatar,
         this.setData({
           customerInfo,
           'sex.index': Number(customerInfo.agentGender) - 1,

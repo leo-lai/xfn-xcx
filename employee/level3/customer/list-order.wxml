@@ -34,18 +34,32 @@
         </view>
       </view>
     </view>
-    <view class='_ft' catchtap='noopFn' wx:if='{{item.orderState == 17}}'>
-      <button size='mini' class='l-button-border l-margin-lr-s' id='{{item.customerOrderId}}' bindtap='visitShow'>回访备注</button>
+    <view class='_ft' catchtap='noopFn'>
+      <navigator wx:if='{{item.orderState == 5}}' url='/level3/stock/out/info?id={{item.id}}' hover-class='none'>
+        <button size='mini' class='l-button-main l-margin-lr-s'>出库车辆</button>
+      </navigator>
+
+      <navigator wx:if='{{item.orderState == 13}}' url='jiaoche?id={{item.id}}' hover-class='none'>
+        <button size='mini' class='l-button-main l-margin-lr-s'>客户提车</button>
+      </navigator>
+      
+
+      <button wx:if='{{item.orderState == 17}}' size='mini' class='l-button-border l-margin-lr-s' id='{{item.id}}' bindtap='visitShow'>回访备注</button>
+
+      <block wx:if='{{item.orderState == 3 || item.orderState == 4}}'>
+        <button size='mini' class='l-button-border l-margin-lr-s' bindtap='showBankPass' id='{{item.id}}'>重新选择贷款方案</button>
+        <button size='mini' class='l-button-main l-margin-lr-s' bindtap='bankPass' id='{{item.id}}' data-val='1'>银行审核通过</button>
+      </block>
     </view>
   </view>
   <template is='loadmore' data='{{...list}}' /> 
 
-  <!-- <view style='height: 120rpx;'></view>
+  <view style='height: 120rpx;'></view>
   <view class='l-fixed-bottom'>
-    <navigator url='order?ids={{idcustomerUsersId}}' class='l-btn-w60 l-margin-tb' hover-class='none'>
-      <button class='l-button-main'>新增客户订单</button>
+    <navigator url='order?ids={{customerUsersId}}' class='l-btn-w60 l-margin-tb' hover-class='none'>
+      <button class='l-button-main'>开单</button>
     </navigator>
-  </view> -->
+  </view> 
 </view>
 
 
@@ -60,4 +74,29 @@
     </view>
   </view>
   <text class='l-icon-61a _close' bindtap='visitClose'></text>
+</view>
+
+<!-- 银行审核备注 -->
+<view class='l-margin l-radius' wx:if='{{bankResult.overLoanRefuse == 1}}'>
+  <view class='weui-panel'>
+    <view class='l-flex-hc l-padding-btn l-border-b'>
+      <view class='l-rest l-h4'>银行审核备注</view>
+    </view>
+    <view class='weui-panel__bd l-padding'>{{bankResult.loanRefuseRemarks}}</view>
+  </view>
+</view>
+
+<!-- 银行审核不通过 -->
+<view catchtouchmove='noopFn' class='l-popup-center l-flex-vhc' wx:if='{{bankPass.visible}}'>
+  <view class='_inner l-padding' style='width: 70%;'>
+    <view class='weui-msg'>
+      <view class='weui-msg__opr-area'>
+        <view class='weui-btn-area l-btn-w60'>
+          <button class='l-button-main' bindtap='changeBank'>更改贷款银行</button>
+          <button class='l-button-border l-margin-t' bindtap='bankPass' data-val='2'>改为全款支付</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <text class='l-icon-61a _close' bindtap='closeBankPass'></text>
 </view>

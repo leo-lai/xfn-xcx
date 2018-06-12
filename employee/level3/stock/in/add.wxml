@@ -21,10 +21,10 @@
           <view class='weui-label'>供应商</view>
         </view>
         <view class='weui-cell__bd l-text-right'>
-          <picker id='supplierId' data-picker='supplier' bindchange='bindInput' value='{{supplier.index}}' range='{{supplier.list}}' range-key='name'>
+          <picker id='supplierId' data-picker='supplier' bindchange='bindInput' value='{{supplier.index}}' range='{{supplier.list}}' range-key='supplierName'>
             <view class='weui-select weui-select_in-select-after'>
               <text wx:if='{{supplier.index === -1}}' class='l-text-gray'>请选择</text>
-              <text wx:else>{{supplier.list[supplier.index].name}}</text>
+              <text wx:else>{{supplier.list[supplier.index].supplierName}}</text>
             </view>
           </picker>
         </view>

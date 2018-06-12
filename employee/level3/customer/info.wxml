@@ -6,30 +6,30 @@
       <view class='weui-cell'>
         <image class='l-avatar' mode='aspectFit' style='width: 80rpx; height: 80rpx; margin-right: 30rpx;' src='{{customerInfo.thumb}}'></image>
         <view class='weui-cell__bd'>
-          <view class='l-h4'>{{customerInfo.userName}}</view>
+          <view class='l-h4'>{{customerInfo.name}}</view>
           <text class='l-fs-m'>{{customerInfo.phone}}</text>
         </view>
-        <view class='weui-cell__ft l-text-theme'>查看资料</view>
+        <view class='weui-cell__ft l-text-theme' bindtap='showCustomerDetails'>查看资料</view>
       </view>
       <view class='weui-cell'>
         <view class='weui-cell__bd'>意向车辆</view>
-        <view class='weui-cell__ft'>{{carInfo.intentionCarInfo}}</view>
+        <view class='weui-cell__ft'>{{appointInfo.intentionCarInfo}}</view>
       </view>
       <view class='weui-cell'>
         <view class='weui-cell__bd'>打算购车方案</view>
-        <view class='weui-cell__ft'>{{buyWay[carInfo.expectWayId-1] || '--'}}</view>
+        <view class='weui-cell__ft'>{{buyWay[appointInfo.expectWayId-1] || '--'}}</view>
       </view>
       <view class='weui-cell'>
         <view class='weui-cell__bd'>打算购车时间</view>
-        <view class='weui-cell__ft'>{{buyTime[carInfo.carPurchaseIntention-1]}}</view>
+        <view class='weui-cell__ft'>{{buyTime[appointInfo.carPurchaseIntention-1]}}</view>
       </view>
       <view class='weui-cell'>
         <view class='weui-cell__bd'>预约到店时间</view>
-        <view class='weui-cell__ft'>{{carInfo.appointmentDate}} {{carInfo.timeOfAppointment || '--'}}</view>
+        <view class='weui-cell__ft'>{{appointInfo.appointmentDate}} {{appointInfo.timeOfAppointment || '--'}}</view>
       </view>
       <view class='weui-cell'>
         <view class='weui-cell__bd'>销售顾问</view>
-        <view class='weui-cell__ft'>{{carInfo.systemUserName}}</view>
+        <view class='weui-cell__ft'>{{appointInfo.systemUserName}}</view>
       </view>
     </view>
   </view>
@@ -116,11 +116,7 @@
         -->
       </view>
 
-      <view class='weui-cell l-text-center' wx:if='{{orderInfo.customerOrderState == 13}}'>
-        <navigator class='l-btn-w60 l-padding-btn' url='jiaoche?id={{orderInfo.customerOrderId}}' hover-class='none'>
-          <button class='l-button-main'>客户提车</button>
-        </navigator>
-      </view>
+      
     </view>
 
     <!-- 无购车单 -->
@@ -135,7 +131,7 @@
 
   <view style='height: 120rpx;'></view>
   <view class='l-fixed-bottom l-padding l-flex-hvc'>
-    <navigator style='width: 50%;' class='l-text-theme l-fs-s' hover-class='none' url='order-list?id={{customerInfo.id}}'>
+    <navigator style='width: 50%;' class='l-text-theme l-fs-s' hover-class='none' url='list-order?id={{customerInfo.id}}'>
       <button class='l-button-border' bindtap='delCar'>查看购车单列表</button>
     </navigator>
     <view style='width: 50%;' class='l-btn-w60 l-margin-lr-s'>

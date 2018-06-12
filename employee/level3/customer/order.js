@@ -55,7 +55,7 @@ Page({
         ids: this.options.ids ? this.options.ids.split(',') : ['', '']
       }
       this.getInfo().then(_ => {
-        this.getSales()
+        // this.getSales()
         this.getOrderPay()
         let followInformation = this.data.orderInfo.followInformation ? this.data.orderInfo.followInformation.split(',') : []
         let boutiqueInformation = this.data.orderInfo.boutiqueInformation ? this.data.orderInfo.boutiqueInformation.split(',') : []

@@ -1,8 +1,8 @@
 /* pages/user/index.wxss */
 .l-mine-card{
-  text-align: center;
-  padding: 60rpx;
-  background-color: #eee;
+  padding: 30rpx;
+  background-image: linear-gradient(90deg, #fa5539, #ff6c53);
+  color: #fff;
 }
 .l-circle-icon{
   width: 180rpx; height: 180rpx; box-sizing: border-box;

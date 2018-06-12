@@ -95,10 +95,10 @@ Page({
       'carList.visible': false
     })
   },
-  gotoOrder: function () { // 没库存，去订车
-    app.storage.setItem('car-stock-order-info', this.data.info)
-    app.navigateTo('../car-stock-order-add/index')
-  },
+  // gotoOrder: function () { // 没库存，去订车
+  //   app.storage.setItem('car-stock-order-info', this.data.info)
+  //   app.navigateTo('../car-stock-order-add/index')
+  // },
   outStockOk: function () {
     if (this.data.carList.slted.length === 0) {
       this.showTopTips('请选择要出库的车辆')

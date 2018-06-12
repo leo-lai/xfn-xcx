@@ -79,7 +79,7 @@ Page({
     this.setData(data)
   },
   getSupplier: function () { // 获取供应商列表
-    app.post(app.config.supplierList).then(({ data }) => {
+    app.ajax(app.config.stock.supplierList).then(({ data }) => {
       this.setData({
         'supplier.index': -1,
         'supplier.list': data

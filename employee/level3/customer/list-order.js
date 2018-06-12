@@ -25,7 +25,11 @@ Page({
     visit: {
       visible: false,
       data: {}
-    }
+    },
+    bankPass: {
+      orderId: '',
+      visible: false
+    },
   },
 
   /**
@@ -34,6 +38,7 @@ Page({
   onReady: function () {
     app.onLogin(userInfo => {
       this.setData({
+        customerUsersId: this.options.id || '',
         'filter.data.state': this.options.sta || ''
       })
       this.getList()
@@ -154,6 +159,51 @@ Page({
       this.setData({ 'visit.loading': false })
     })
   },
+  // 银行审核
+  changeBank: function (){
+    this.closeBankPass()
+    let customerOrderId = this.data.bankPass.orderId || ''
+    app.navigateTo(`order?ids=,${customerOrderId}`)
+  },
+  bankPass: function (event) {
+    let isPass = event.currentTarget.dataset.val
+    let customerOrderId = event.target.id || this.data.bankPass.orderId || ''
+    let promise
+    wx.showLoading({ mask: true })
+    if (isPass == 1) { // 通过审核
+      promise = app.post(app.config.bankPass, { customerOrderId })
+    } else if (isPass == 2) { // 不通过审核，全款支付
+      promise = app.post(app.config.bankNotPass, { customerOrderId })
+    }
+
+    promise && promise.then(_ => {
+      app.toast('操作成功').then(_ => {
+        this.closeBankPass()
+        this.getList()
+      })
+    }).finally(_ => {
+      wx.hideLoading()
+    })
+  },
+  bankUpload: function () {
+    app.storage.setItem('bankInfo', {
+      bankAuditsImage: this.data.orderInfo.bankAuditsImage,
+      bankAuditsvideo: this.data.orderInfo.bankAuditsvideo
+    })
+    app.navigateTo('/pages/bank-uploader/index?id=' + this.data.customerInfo.customerUsersId)
+  },
+  showBankPass: function (event) {
+    this.setData({
+      'bankPass.orderId': event.target.id,
+      'bankPass.visible': true
+    })
+  },
+  closeBankPass: function () {
+    this.setData({
+      'bankPass.visible': false
+    })
+  },
+
 
   // 搜索相关=================================================
   // 正在输入

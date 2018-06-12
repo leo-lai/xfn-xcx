@@ -34,8 +34,17 @@
         </view>
       </view>
     </view>
-    <view class='_ft' catchtap='noopFn' wx:if='{{item.orderState == 17}}'>
-      <button size='mini' class='l-button-border l-margin-lr-s' id='{{item.customerOrderId}}' bindtap='visitShow'>回访备注</button>
+    <view class='_ft' catchtap='noopFn'>
+      <navigator wx:if='{{item.customerOrderState == 13}}' url='jiaoche?id={{item.customerOrderId}}' hover-class='none'>
+        <button size='mini' class='l-button-main l-margin-lr-s'>客户提车</button>
+      </navigator>
+
+      <button wx:if='{{item.customerOrderState == 17}}' size='mini' class='l-button-border l-margin-lr-s' id='{{item.customerOrderId}}' bindtap='visitShow'>回访备注</button>
+
+      <block wx:if='{{item.customerOrderState == 3 || item.customerOrderState == 4}}'>
+        <button size='mini' class='l-button-border l-margin-lr-s' bindtap='showBankPass'>重新选择贷款方案</button>
+        <button size='mini' class='l-button-main l-margin-lr-s' bindtap='bankPass' data-val='1'>银行审核通过</button>
+      </block>
     </view>
   </view>
   <template is='loadmore' data='{{...list}}' /> 

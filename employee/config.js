@@ -91,6 +91,15 @@ let config = {
     outStock: `${baseUrl2}/ucenter_v1/stockout`,
   },
 
+  // 库存管理
+  stock: {
+    // 供应商列表
+    supplierList: `${baseUrl2}/ucenter_v1/supplier`,
+    // 出库列表
+    outList: `${baseUrl2}/ucenter_v1/stockcarlist`,
+    
+  },
+
   // 学堂
   school: {
     list: `${baseUrl2}/article_v1/index`,
@@ -211,7 +220,7 @@ let config = {
   // 精品加装
   carPartList: `${baseUrl}/carsProductsList`,
   // 供应商列表
-  supplierList: `${baseUrl}/supplierListList`,
+  // supplierList: `${baseUrl}/supplierListList`,
   // 销售顾问列表
   salesList: `${baseUrl}/salesList`,
   // 分配销售顾问

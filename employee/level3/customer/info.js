@@ -25,11 +25,11 @@ Page({
     bankPass: {
       visible: false
     },
-    customerInfo: {},
-    orderInfo: {},
-    appointInfo: {},
-    carInfo: {},
-    remarkInfo: {
+    customerInfo: {},     // 客户信息
+    customerDetails: {},  // 客户详细资料
+    appointInfo: {},      // 预约车辆
+    orderInfo: {},        // 订单信息
+    remarkInfo: {         // 客户记录
       showAll: false,
       visible: false,
       loading: false,
@@ -65,14 +65,21 @@ Page({
     return app.ajax(app.config.customer.info, {
       id: this.$params.ids[0] || ''
     }).then(({data}) => {
-      let carInfo = data.carInfo[0] || data.carInfo
-      carInfo.appointmentDate = carInfo.appointmentDate ? (carInfo.appointmentDate.split(' ')[0] || '') : ''
-      data.thumb = data.headPortrait ? app.utils.formatHead(data.headPortrait) : app.config.avatar
+      let appointInfo = data.carInfo[0] || data.carInfo
+      appointInfo.appointmentDate = appointInfo.appointmentDate ? (appointInfo.appointmentDate.split(' ')[0] || '') : ''
+      let customerInfo = {
+        id: data.id,
+        thumb: data.headPortrait ? app.utils.formatHead(data.headPortrait) : app.config.avatar,
+        name: data.userName,
+        phone: data.phone
+      }
+      let customerDetails = data.userInfo
 
       this.setData({
-        customerInfo: data,
+        customerInfo,
+        customerDetails,
+        appointInfo,
         'remarkInfo.list': data.remarks,
-        carInfo,
       })
     })
 
@@ -171,7 +178,7 @@ Page({
   },
   // 显示客户资料
   showCustomerDetails: function () {
-    app.storage.setItem('customer_details', this.data.customerInfo)
+    app.storage.setItem('customer-details', this.data.customerDetails)
     app.navigateTo('details')
   },
   // 显示购车单信息
