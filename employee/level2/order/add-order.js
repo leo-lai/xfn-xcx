@@ -307,13 +307,11 @@ Page({
     wx.showLoading({ mask: true })
     app.json(app.config.lv2.orderAddOrder, formData).then(({ data }) => {
       app.storage.removeItem('shop-order-car-' + this.options.id)
+      app.storage.setItem('lv2-order-list-refresh', 1)
+
       app.toast('保存成功', true).then(_ => {
         app.getPrevPage().then(prevPage => {
-          if (prevPage.route === 'level2/order/list') { // 列表进来
-            prevPage.getList()
-          } else if (prevPage.route === 'level2/order/info') { // 详情进来
-            prevPage.getInfo()
-          }
+          prevPage.getInfo && prevPage.getInfo()
         })
       })
     }).catch(err => {

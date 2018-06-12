@@ -46,7 +46,7 @@
     </view>
     <view class='l-border-t l-padding-t l-margin-t l-fs-s'>
       <view class='l-flex-h'>
-        <text class='l-margin-r-s l-text-gray'>购置车辆</text>
+        <text class='l-margin-r-s l-text-gray'>意向车辆</text>
         <text class='l-rest'>{{item.carsName}}</text>
       </view>
       <view class='l-flex-h'>

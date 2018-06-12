@@ -20,9 +20,7 @@ Page({
       areaId: '',
       areaName: '',
       address: '',
-      longitude: '',
-      latitude: '',
-      remarks: ''
+      remark: ''
     }
   },
   /**
@@ -41,6 +39,9 @@ Page({
         wx.setNavigationBarTitle({ title: '新增汽贸店' })
       }
     })
+  },
+  onUnload: function() {
+    app.storage.removeItem('lv2-customer-info')
   },
   /**
    * 生命周期函数--监听页面显示
@@ -115,13 +116,9 @@ Page({
     }
 
     wx.showLoading({ mask: true })
-    app.post(app.config.lv2.storeAdd, this.data.formData).then(({ data }) => {
-      if (this.data.formData.orgId) {
-        app.storage.setItem('lv2-customer-info', this.data.formData)
-        app.storage.setItem('lv2-customer-info-refresh', 1)
-      }else{
-        app.storage.setItem('lv2-customer-list-refresh', 1)
-      }
+    let url = this.data.formData.orgId ? app.config.consumer.storeEdit : app.config.consumer.storeAdd
+    app.post(url, this.data.formData).then(({ data }) => {
+      app.storage.setItem('lv2-customer-list-refresh', 1)
       app.toast('保存成功', true)
       
     }).catch(err => {

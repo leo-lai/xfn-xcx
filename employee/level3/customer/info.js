@@ -22,15 +22,13 @@ Page({
       '15': '已人车合照',
       '17': '已完款，可交车放行'
     },
-    appointInfo: {
-      visible: false,
-      data: null
-    },
     bankPass: {
       visible: false
     },
-    orderInfo: {},
     customerInfo: {},
+    orderInfo: {},
+    appointInfo: {},
+    carInfo: {},
     remarkInfo: {
       showAll: false,
       visible: false,
@@ -53,10 +51,7 @@ Page({
       this.$params = {
         ids: options.ids ? options.ids.split(',') : ['', '']
       }
-      wx.showNavigationBarLoading()
-      this.getInfo().finally(_ => {
-        wx.hideNavigationBarLoading()
-      })
+      this.getInfo()
     }, this.route)
   },
   /**
@@ -67,31 +62,45 @@ Page({
   },
   // 客户详情
   getInfo: function () {
-    return app.post(app.config.customerInfo, {
-      customerUsersId: this.$params.ids[0] || '',
-      customerUsersOrgId: this.$params.ids[1] || ''
-    }).then(({ data }) => {
-      if (data) {
-        data.customerMap.thumb = data.customerMap.headPortrait ?
-          app.utils.formatHead(data.customerMap.headPortrait) : app.config.avatar
-        this.setData({
-          'isNull': false,
-          'bankResult': {
-            loanRefuseRemarks: data.loanRefuseRemarks,
-            overLoanRefuse: data.overLoanRefuse
-          },
-          'appointInfo.data': data.appointmentMap,
-          'orderInfo': data.orderMap,
-          'customerInfo': data.customerMap,
-          'remarkInfo._list': data.remarksMap.list,
-          'remarkInfo.list': data.remarksMap.list.length > 0 ? [data.remarksMap.list[0]] : []
-        })
-      } else {
-        this.setData({
-          'isNull': true
-        })
-      }
+    return app.ajax(app.config.customer.info, {
+      id: this.$params.ids[0] || ''
+    }).then(({data}) => {
+      let carInfo = data.carInfo[0] || data.carInfo
+      carInfo.appointmentDate = carInfo.appointmentDate ? (carInfo.appointmentDate.split(' ')[0] || '') : ''
+      data.thumb = data.headPortrait ? app.utils.formatHead(data.headPortrait) : app.config.avatar
+
+      this.setData({
+        customerInfo: data,
+        'remarkInfo.list': data.remarks,
+        carInfo,
+      })
     })
+
+    // return app.post(app.config.customerInfo, {
+    //   customerUsersId: this.$params.ids[0] || '',
+    //   customerUsersOrgId: this.$params.ids[1] || ''
+    // }).then(({ data }) => {
+    //   if (data) {
+    //     data.customerMap.thumb = data.customerMap.headPortrait ?
+    //       app.utils.formatHead(data.customerMap.headPortrait) : app.config.avatar
+    //     this.setData({
+    //       'isNull': false,
+    //       'bankResult': {
+    //         loanRefuseRemarks: data.loanRefuseRemarks,
+    //         overLoanRefuse: data.overLoanRefuse
+    //       },
+    //       'appointInfo.data': data.appointmentMap,
+    //       'orderInfo': data.orderMap,
+    //       'customerInfo': data.customerMap,
+    //       'remarkInfo._list': data.remarksMap.list,
+    //       'remarkInfo.list': data.remarksMap.list.length > 0 ? [data.remarksMap.list[0]] : []
+    //     })
+    //   } else {
+    //     this.setData({
+    //       'isNull': true
+    //     })
+    //   }
+    // })
   },
   // 查看上传资料
   viewBankInfo: function () {
@@ -168,7 +177,7 @@ Page({
   // 显示购车单信息
   showCustomerOrder: function () {
     this.closeBankPass()
-    let customerUsersId = this.data.customerInfo.customerUsersId || ''
+    let customerUsersId = this.data.customerInfo.id || ''
     let customerOrderId = this.data.orderInfo.customerOrderId || ''
     app.navigateTo(`order?ids=${customerUsersId},${customerOrderId}`)
   },

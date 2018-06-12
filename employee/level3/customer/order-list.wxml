@@ -43,7 +43,7 @@
   <view style='height: 120rpx;'></view>
   <view class='l-fixed-bottom'>
     <navigator url='order?ids={{customerUsersId}}' class='l-btn-w60 l-margin-tb' hover-class='none'>
-      <button class='l-button-main'>新增客户订单</button>
+      <button class='l-button-main'>开单</button>
     </navigator>
   </view>
 </view>

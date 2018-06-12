@@ -44,11 +44,11 @@
           <input class='weui-input' placeholder='请输入街道、门牌号等' maxlength='{{100}}' confirm-type='next' id='address' value='{{formData.address}}' bindinput='bindInput' />
         </view>
       </view>
-      <view class='weui-cell weui-cell_input'>
+       <view class='weui-cell weui-cell_input'>
         <view class='weui-cell__bd' style='padding: 15rpx 0;'>
-          <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注' id='remarks' value='{{formData.remarks}}' bindinput='bindInput'></textarea>
+          <textarea style='width: 100%; min-height: 100rpx;' auto-height placeholder='请输入备注' id='remark' value='{{formData.remark}}' bindinput='bindInput'></textarea>
         </view>
-      </view>
+      </view> 
     </view>
   </view>
   <view style='height: 120rpx;'></view>

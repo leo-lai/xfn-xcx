@@ -125,7 +125,7 @@ Page({
       app.back()
     }else{
       app.storage.setItem('lv2-customer-info', currentItem)
-      app.navigateTo('view')
+      app.navigateTo('add?id=' + currentItem.orgId)
     }
   },
 

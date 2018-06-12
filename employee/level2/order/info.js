@@ -91,6 +91,7 @@ Page({
       orgPhone: '',
       orderType: '',
       logisticsType: '',
+      freight: '',
       pickCarDate: '',
       pickCarAddr: ''
     }, this.data.info)
@@ -213,6 +214,7 @@ Page({
             isDel: 1
           }).then(({ data }) => {
             app.toast('删除成功', false).then(_ => {
+              app.storage.removeItem('lv2-order-list-refresh', 1)
               this.getInfo()
             })
           }).catch(err => {

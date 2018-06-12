@@ -78,6 +78,10 @@ let config = {
   consumer: {
     // 门店列表
     storeList: `${baseUrl2}/ucenter_v1/organizationlist`,
+    // 新增门店
+    storeAdd: `${baseUrl2}/ucenter_v1/organization/create`,
+    // 编辑门店
+    storeEdit: `${baseUrl2}/ucenter_v1/organization/edit`,
     // 资源订单列表
     orderList: `${baseUrl2}/ucenter_v1/consumerlist`,
     // 资源订单详情
@@ -155,7 +159,7 @@ let config = {
   // 车辆库存详情
   carStockInfo: `${baseUrl}/stockCarInfo`,
   // 搜索客户
-  customerSearch: `${baseUrl}/customerPhoneSearchList`,
+  // customerSearch: `${baseUrl}/customerPhoneSearchList`,
   // 预约客户列表
   customerBespeak: `${baseUrl}/bespeakCustomerOrgList`,
   // 订单客户列表

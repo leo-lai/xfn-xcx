@@ -100,7 +100,7 @@
         <view class='l-margin-t-s l-fs-s'>
           <view>
             <text class='l-dmr'>裸车价：{{carItem.nakedPrice}}元</text>
-            <text>购买数量：{{carItem.carNum}}</text>
+            <text>购买数量：{{carItem.carNum}}辆</text>
           </view>
           <view>
             <text class='l-dmr'>交强险：{{carItem.trafficCompulsoryInsurancePrice || 0}}元</text>
