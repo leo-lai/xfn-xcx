@@ -4,7 +4,7 @@
     <view class='l-flex-hc'>
       <text class='l-h4 l-margin-r-m'>{{info.materialName}}</text>
       <view class='l-rest'></view>
-      <button wx:if='{{userInfo.orgLevel === 2}}' class='l-btn-min1' size='mini' bindtap='upOff'>下架素材</button>
+      <button class='l-btn-min1' size='mini' bindtap='upOff'>下架素材</button>
     </view>
     <view class='l-fs-s l-text-gray'>
       <text class='l-margin-r'>创建人：{{info.systemUsersVo.realName}}</text>
@@ -15,17 +15,15 @@
     <view class='l-flex-hc'>
       <text class='l-h4 l-margin-r-m'>素材海报</text>
       <view class='l-rest'></view>
-      <button wx:if='{{userInfo.orgLevel === 2}}' class='l-btn-min1' size='mini' bindtap='eidtInfo'>编辑</button>
+      <button class='l-btn-min1' size='mini' bindtap='eidtInfo'>编辑</button>
     </view>
     <view class='l-images' bindtap='previewImage' data-urls='{{info.imageArr}}'>
       <image id='{{item}}' src='{{item}}' wx:for='{{info.imageArr}}' wx:key='*this'></image>
     </view>
   </view>
 
-  <block wx:if='{{userInfo.orgLevel === 3}}'>
-    <view style='height: 120rpx;'></view>
-    <view class='l-fixed-bottom l-padding'>
-      <button class='l-button-main l-btn-w60' bindtap='shareAdd'>创建分享</button>
-    </view>
-  </block>
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom l-padding'>
+    <button class='l-button-main l-btn-w60' bindtap='shareAdd'>创建分享</button>
+  </view>
 </view>

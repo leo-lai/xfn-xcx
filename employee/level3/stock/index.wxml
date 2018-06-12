@@ -1,6 +1,6 @@
 <!--pages/car-stock/home.wxml-->
 <view class='l-page-full'>
-  <!-- <navigator wx:if="{{userInfo.orgLevel == 1}}" url='/level3/stock/online/list' class='l-margin l-bg-white l-padding l-radius'>
+  <!-- <navigator url='/level3/stock/online/list' class='l-margin l-bg-white l-padding l-radius'>
     <view class='l-padding-btn l-text-center'>
       <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='/images/sell-car-icon.png'></image>
       <view>在售车辆</view>

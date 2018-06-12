@@ -72,6 +72,8 @@ let config = {
     visitList: `${baseUrl2}/ucenter_v1/visit`,
     // 用户订单列表
     orderList: `${baseUrl2}/ucenter_v1/customerlist`,
+    // 加装/上牌/贴膜列表
+    partList: `${baseUrl2}/ucenter_v1/carsproductlist`,
   },
 
   // 资源管理

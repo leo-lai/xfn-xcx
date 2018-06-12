@@ -216,12 +216,10 @@
   </view>
   <view class='l-margin-t'></view>
   
-  <block wx:if='{{userInfo.orgLevel === 3}}'>
-    <view style='height: 120rpx;'></view>
-    <view class='l-fixed-bottom'>
-      <view class='l-btn-w60 l-margin-tb'>
-        <button class='l-button-main' bindtap='submit'>保存修改</button>
-      </view>
+  <view style='height: 120rpx;'></view>
+  <view class='l-fixed-bottom'>
+    <view class='l-btn-w60 l-margin-tb'>
+      <button class='l-button-main' bindtap='submit'>保存修改</button>
     </view>
-  </block>
+  </view>
 </view>

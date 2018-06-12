@@ -71,8 +71,9 @@ Page({
     this.setData({
       'list.loading': true
     })
-    app.post(app.config.licenseList, {
-      page, ...this.data.filter.data
+    app.ajax(app.config.customer.partList, {
+      state: 9, page,
+      ...this.data.filter.data
     }).then(({ data }) => {
       this.setData({
         'list.more': data.list.length >= data.rows,

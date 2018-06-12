@@ -2,7 +2,7 @@
 <import src='/template/loadmore.wxml' />
 <view class='l-page-full'>
   <view class='weui-tab'>
-    <view class='weui-navbar l-bg-white l-sticky' hidden='{{userInfo.orgLevel === 3}}'>
+    <view class='weui-navbar l-bg-white l-sticky'>
       <block wx:for='{{tabs.tit}}' wx:key='*this'>
         <view id='{{index}}' class='weui-navbar__item {{tabs.index == index ? "weui-bar__item_on" : ""}}' bindtap='tabClick'>
           <view class='weui-navbar__title'>{{item}}</view>
@@ -11,7 +11,7 @@
       <view class='weui-navbar__slider' style='left: {{tabs.left}}px; transform: translateX({{tab.offset}}px); -webkit-transform: translateX({{tabs.offset}}px);'></view>
     </view>
 
-    <view class='l-list-filter' catchtouchmove='noopFn' style='top: {{userInfo.orgLevel === 3 ? 0 : 102}}rpx;'>
+    <view class='l-list-filter' catchtouchmove='noopFn' style='top: 102rpx;'>
       <view class='_input l-flex-hc'>
         <view class='l-rest'>
           <input bindinput='filterTyping' confirm-type='search' bindconfirm='search' placeholder='输入素材名称查询' value='{{filter.data.keywords}}' />
@@ -30,7 +30,7 @@
             <view class='l-rest'>
               <view class='l-h4 l-text-wrap2'>{{item.materialName}}</view>
               <view class='l-margin-t-s'>
-                <view wx:if='{{userInfo.orgLevel === 2}}' class='l-inline' catchtap='noopFn' >
+                <view class='l-inline' catchtap='noopFn' >
                   <button wx:if='{{!item.overShelf}}' class='l-fr' size="mini" bindtap='upOff' id="{{item.materialId}}" data-val='1'>上架</button>
                   <button wx:else class='l-fr' size="mini" bindtap='upOff' id="{{item.materialId}}" data-val='0'>下架</button>
                 </view>
@@ -44,10 +44,8 @@
     </view>
   </view>
 
-  <block wx:if='{{userInfo.orgLevel === 2}}'>
-    <navigator url='add' class='l-fixed-right' hover-class='none'>
-      <image src='/images/20180417015.png'></image>
-      <text>新增素材模板</text>
-    </navigator>
-  </block>
+  <navigator url='add' class='l-fixed-right' hover-class='none'>
+    <image src='/images/20180417015.png'></image>
+    <text>新增素材模板</text>
+  </navigator>
 </view>

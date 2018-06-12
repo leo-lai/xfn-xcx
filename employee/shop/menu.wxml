@@ -1,18 +1,6 @@
 <!--shop/menu.wxml-->
 <view class='l-page-full'>
-  <navigator url='/shop/online/list' class='l-margin l-bg-white l-padding l-radius'>
-    <view class='l-padding-btn l-text-center'>
-      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='{{resURL}}/employee/20180417007.png'></image>
-      <view>在售车辆</view>
-    </view>
-  </navigator>
-  <navigator url='/shop/active/list' class='l-margin l-bg-white l-padding l-radius'>
-    <view class='l-padding-btn l-text-center'>
-      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='{{resURL}}/employee/20180417008.png'></image>
-      <view>热销活动</view>
-    </view>
-  </navigator>
-  <block wx:if='{{userInfo.orgLevel === 2}}'>
+  <block wx:if='{{userInfo.orgLevel === 1}}'>
     <navigator url='/shop/store/list' class='l-margin l-bg-white l-padding l-radius'>
       <view class='l-padding-btn l-text-center'>
         <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='{{resURL}}/employee/20180417009.png'></image>
@@ -26,6 +14,19 @@
       </view>
     </navigator>
   </block>
+  
+  <navigator url='/shop/online/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='{{resURL}}/employee/20180417007.png'></image>
+      <view>在售车辆</view>
+    </view>
+  </navigator>
+  <navigator url='/shop/active/list' class='l-margin l-bg-white l-padding l-radius'>
+    <view class='l-padding-btn l-text-center'>
+      <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='{{resURL}}/employee/20180417008.png'></image>
+      <view>热销活动</view>
+    </view>
+  </navigator>
   <navigator url='/shop/seek/list' class='l-margin l-bg-white l-padding l-radius'>
     <view class='l-padding-btn l-text-center'>
       <image mode='aspectFit' style='width: 160rpx; height: 104rpx;' src='{{resURL}}/employee/20180417011.png'></image>

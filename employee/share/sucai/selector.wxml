@@ -17,7 +17,7 @@
     <view class='l-rest'>
       <view class='l-h4 l-text-wrap1'>{{item.materialName}}</view>
       <view class='l-margin-t-s'>
-        <view wx:if='{{userInfo.orgLevel === 2}}' class='l-inline' catchtap='noopFn' >
+        <view class='l-inline' catchtap='noopFn' >
           <button wx:if='{{!item.overShelf}}' class='l-fr' size="mini" bindtap='upOff' id="{{item.materialId}}" data-val='1'>上架</button>
           <button wx:else class='l-fr' size="mini" bindtap='upOff' id="{{item.materialId}}" data-val='0'>下架</button>
         </view>

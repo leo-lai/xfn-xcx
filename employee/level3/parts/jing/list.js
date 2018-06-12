@@ -64,8 +64,9 @@ Page({
     this.setData({
       'list.loading': true
     })
-    app.post(app.config.carPartList, {
-      page, ...this.data.filter.data
+    app.ajax(app.config.customer.partList, {
+      state: 7, page, 
+      ...this.data.filter.data
     }).then(({ data }) => {
       this.setData({
         'list.more': data.list.length >= data.rows,
