@@ -52,15 +52,14 @@ let config = {
   },
 
   // ================================================
-  // 首页
-  index: {
-    data: `${baseUrl2}/ucenter_v1/index`,
-  },
   // 报价单
   offerPrice: `${baseUrl2}/ucenter_v1/quotation`,
   offerInfo: `${baseUrl2}/ucenter_v1/quotationDetail`,
-
-  // 客户管理
+  // 首页------------------------------------
+  index: {
+    data: `${baseUrl2}/ucenter_v1/index`,
+  },
+  // 客户管理-----------------------------------
   customer: {
     // 客户列表
     allList: `${baseUrl2}/ucenter_v1/userlist`,
@@ -75,8 +74,7 @@ let config = {
     // 加装/上牌/贴膜列表
     partList: `${baseUrl2}/ucenter_v1/carsproductlist`,
   },
-
-  // 资源管理
+  // 资源管理---------------------------------------
   consumer: {
     // 门店列表
     storeList: `${baseUrl2}/ucenter_v1/organizationlist`,
@@ -92,8 +90,7 @@ let config = {
     // 资源单出库
     outStock: `${baseUrl2}/ucenter_v1/stockout`,
   },
-
-  // 库存管理
+  // 库存管理--------------------------------
   stock: {
     // 供应商列表
     supplierList: `${baseUrl2}/ucenter_v1/supplier`,
@@ -101,14 +98,12 @@ let config = {
     outList: `${baseUrl2}/ucenter_v1/stockcarlist`,
     
   },
-
-  // 学堂
+  // 学堂---------------------------------
   school: {
     list: `${baseUrl2}/article_v1/index`,
     info: `${baseUrl2}/article_v1/detail`,
   },
-
-  // 商城接口
+  // 商城接口------------------------------
   shop: {
     // 仓库列表
     cangList: `${baseUrl}/shop/organizationWarehouseList`,
@@ -141,121 +136,11 @@ let config = {
     // 配置支付信息
     storePayInfo: `${baseUrl}/shop/allInPayConfigure`,
   },
-  
-  // 车辆品牌
-  brandList: `${commonUrl}/carsBrandList`,
-  // 车系
-  familyList: `${commonUrl}/carsFamilyList`,
-  // 车类型(品牌，车系，年款，高低配等)
-  carTypeList: `${commonUrl}/carsListList`,
-  // 图片文字识别
-  image2text: `${commonUrl}/imageRecognition`,
-
-  // 上传个人微信二维码
-  wxQrImage: `${baseUrl}/weixinQrImage`,
-  // 上传文件
-  uploadFile: `${baseUrl}/uploadFile`,
-  // 注册/登录
-  login: `${baseUrl}/login`,
-  // 更改密码
-  password: `${baseUrl}/changePassword`,
-  // 车辆库存列表
-  carStockList: `${baseUrl}/stockCarList`,
-  // 在售车型列表
-  carOnlineList: `${baseUrl}/orgCarsConfigureList`,
-  // 在售车型详情
-  carOnlineInfo: `${baseUrl}/orgCarsConfigureInfo`,
-  // 新增在售
-  carStockAdd: `${baseUrl}/editOrgCarsConfigure`,
-  // 车辆库存详情
-  carStockInfo: `${baseUrl}/stockCarInfo`,
-  // 搜索客户
-  // customerSearch: `${baseUrl}/customerPhoneSearchList`,
-  // 预约客户列表
-  customerBespeak: `${baseUrl}/bespeakCustomerOrgList`,
-  // 订单客户列表
-  customerOrder: `${baseUrl}/orderStateCustomerList`,
-  // 客户列表v2 (2018-01-04)
-  customerList: `${baseUrl}/customerUserList`,
-  // 门店列表
-  storeList: `${baseUrl}/organizationLevelList`,
-  // 客户详情
-  customerInfo: `${baseUrl}/customerUsersrInfo`,
-  // 添加备注
-  customerRemark: `${baseUrl}/addCustomerRemarks`,
-  // 新增客户
-  customerAdd: `${baseUrl}/addCustomerUsersr`,
-  // 修改客户资料
-  customerDetails: `${baseUrl}/changeUserInfo`,
-  // 客户购车单信息
-  customerOrderInfo: `${baseUrl}/customerOrderAllInfo`,
-  // 客户开单前
-  customerOrderBefore: `${baseUrl}/createOrderBefor`,
-  // 客户开单
-  customerOrderAdd: `${baseUrl}/editCustomerOrder`,
-  // 客户订单列表
-  customerOrderList: `${baseUrl}/myCustomerOrderList`,
-  // 车身颜色列表
-  cheshen: `${baseUrl}/carColourList`,
-  // 内饰颜色
-  neishi: `${baseUrl}/carInteriorList`,
-  // 上传资料
-  customerUpload: `${baseUrl}/addBankAudits`,
-  // 交付车辆
-  customerJiaoche: `${baseUrl}/turnOverVehicle`,
-  // 待出库单列表
-  stockOutList: `${baseUrl}/customerOrderList`,
-  // 出库单详情
-  stockOutInfo: `${baseUrl}/customerOrderInfo`,
-  // 获取出库单可出库车辆
-  stockOutCarList: `${baseUrl}/customerOrderStockCar`,
-  // 确定出库车辆
-  stockOutCar: `${baseUrl}/customerOrderStockCarPutout`,
-  // 待上牌列表
-  licenseList: `${baseUrl}/orderLicensePlateList`,
-  // 上牌完成
-  licenseDone: `${baseUrl}/licensePlateDone`,
-  // 待贴膜列表
-  tiemoList: `${baseUrl}/carsPadPastingList`,
-  // 贴膜完成
-  tiemoDone: `${baseUrl}/carsPadPastingDone`,
-  // 精品加装
-  carPartList: `${baseUrl}/carsProductsList`,
-  // 供应商列表
-  // supplierList: `${baseUrl}/supplierListList`,
-  // 销售顾问列表
-  salesList: `${baseUrl}/salesList`,
-  // 分配销售顾问
-  changeSales: `${baseUrl}/systenUserChangeCustomerOrg`,
-  // 精品完成时间
-  estimateDate: `${baseUrl}/addCarsProductsEstimateDate`,
-  // 精品详情
-  carPartInfo: `${baseUrl}/carsProductsInfo`,
-  // 加装完成
-  carPartDone: `${baseUrl}/carsProductsDone`,
-  // 银行审核通过
-  bankPass: `${baseUrl}/bankApprovalPass`,
-  // 银行审核不通过，全款支付尾款
-  bankNotPass: `${baseUrl}/changeFullPayment`,
-  // 标记为过线检查
-  overTheLine: `${baseUrl}/overTheLine`,
-  // 回访备注
-  orderVisit: `${baseUrl}/orderVisit`,
-  // 业绩查询
-  salerReport: `${baseUrl}/querySalesPerformance`,
-
-  // 三级订车--------------------------------
-  // 订车单列表
-  stockOrderList: `${baseUrl}/stockOrderList`,
-  // 订车单详情
-  stockOrderInfo: `${baseUrl}/stockOrderInfo`,
-  // 取消订车单
-  stockOrderCancel: `${baseUrl}/stockOrderCancel`,
-  // 订车单签收
-  stockOrderSign: `${baseUrl}/stockOrderSign`,
-  // 新增订车单
-  stockOrderAdd: `${baseUrl}/stockOrderCreate`,
-
+  // auth----------------------------------
+  auth: {
+    // 登录接口
+    login: `${baseUrl2}/login_v1/index`,
+  },
   // 二级人员--------------------------------
   lv2: {
     // (门店)客户列表
@@ -290,9 +175,9 @@ let config = {
     orderDelMen: `${baseUrl}/consumerOrderUser/delete`,
     // 更新订单状态
     orderState: `${baseUrl}/consumerOrder/updateState`,
-    // 车架号列表
+    // 可配车架号列表
     frameList: `${baseUrl}/consumerOrderInfo/queryVin`,
-    // 配好的车架号列表
+    // 已配车架号列表
     carFrame: `${baseUrl}/consumerOrderCar/list`,
     // 配车
     carMatch: `${baseUrl}/consumerOrderInfo/distributeCar`,
@@ -317,26 +202,7 @@ let config = {
     // 退款
     refund: `${baseUrl}/consumerOrder/countermand`,
   },
-  // 采购员列表
-  buyerList: `${baseUrl}/orgOneSelfList`,
-  // 仓位列表
-  cangList: `${baseUrl}/organizationWarehouseList`,
-  // 入库单列表
-  stockInList: `${baseUrl}/storageList`,
-  // 新增入库单
-  stockInAdd: `${baseUrl}/storageEdit`,
-  // 入库单详情
-  stockInInfo: `${baseUrl}/storageInfo`,
-  // 入库单新增车辆
-  stockInAddCar: `${baseUrl}/storageCarEdit`,
-  // 入库单删除车辆
-  stockInDelCar: `${baseUrl}/storageCarDelete`,
-  // 入库单删除
-  stockInDel: `${baseUrl}/storageDelete`,
-  // 全部已入库
-  stockInSure: `${baseUrl}/storageOverSure`,
-  
-  // 素材分享
+  // 素材分享--------------------------------
   share: {
     // 素材列表
     sucaiList: `${baseUrl}/shop/myShareMaterialList`,
@@ -348,7 +214,7 @@ let config = {
     shareInfo: `${baseUrl}/shop/shareMaterialInfoInfo`,
     shareLink: `${baseUrl2}/publics_v1/createImage`,
   },
-  // 物流接口
+  // 物流接口--------------------------------
   exp: {
     // 非专线运费配置
     freight1: `${baseUrl}/dynamicLineEdit`,
@@ -407,6 +273,142 @@ let config = {
     // 物流单状态
     wuliuState: `${baseUrl}/updateDistributionState`,
   },
+  
+  // 车辆品牌
+  brandList: `${commonUrl}/carsBrandList`,
+  // 车系
+  familyList: `${commonUrl}/carsFamilyList`,
+  // 车类型(品牌，车系，年款，高低配等)
+  carTypeList: `${commonUrl}/carsListList`,
+  // 图片文字识别
+  image2text: `${commonUrl}/imageRecognition`,
+  // 上传个人微信二维码
+  wxQrImage: `${baseUrl}/weixinQrImage`,
+  // 上传文件
+  uploadFile: `${baseUrl}/uploadFile`,
+  // 更改密码
+  password: `${baseUrl}/changePassword`,
+  // 车辆库存列表
+  carStockList: `${baseUrl}/stockCarList`,
+  // 在售车型列表
+  carOnlineList: `${baseUrl}/orgCarsConfigureList`,
+  // 在售车型详情
+  carOnlineInfo: `${baseUrl}/orgCarsConfigureInfo`,
+  // 新增在售
+  carStockAdd: `${baseUrl}/editOrgCarsConfigure`,
+  // 车辆库存详情
+  carStockInfo: `${baseUrl}/stockCarInfo`,
+  // 添加备注
+  customerRemark: `${baseUrl}/addCustomerRemarks`,
+  // 新增客户
+  customerAdd: `${baseUrl}/addCustomerUsersr`,
+  // 修改客户资料
+  customerDetails: `${baseUrl}/changeUserInfo`,
+  // 客户购车单信息
+  customerOrderInfo: `${baseUrl}/customerOrderAllInfo`,
+  // 客户开单前
+  customerOrderBefore: `${baseUrl}/createOrderBefor`,
+  // 客户开单
+  customerOrderAdd: `${baseUrl}/editCustomerOrder`,
+  // 客户订单列表
+  customerOrderList: `${baseUrl}/myCustomerOrderList`,
+  // 车身颜色列表
+  cheshen: `${baseUrl}/carColourList`,
+  // 内饰颜色
+  neishi: `${baseUrl}/carInteriorList`,
+  // 上传资料
+  customerUpload: `${baseUrl}/addBankAudits`,
+  // 交付车辆
+  customerJiaoche: `${baseUrl}/turnOverVehicle`,
+  // 待出库单列表
+  stockOutList: `${baseUrl}/customerOrderList`,
+  // 出库单详情
+  stockOutInfo: `${baseUrl}/customerOrderInfo`,
+  // 获取出库单可出库车辆
+  stockOutCarList: `${baseUrl}/customerOrderStockCar`,
+  // 确定出库车辆
+  stockOutCar: `${baseUrl}/customerOrderStockCarPutout`,
+  // 上牌完成
+  licenseDone: `${baseUrl}/licensePlateDone`,
+  // 贴膜完成
+  tiemoDone: `${baseUrl}/carsPadPastingDone`,
+  // 销售顾问列表
+  salesList: `${baseUrl}/salesList`,
+  // 分配销售顾问
+  changeSales: `${baseUrl}/systenUserChangeCustomerOrg`,
+  // 精品完成时间
+  estimateDate: `${baseUrl}/addCarsProductsEstimateDate`,
+  // 精品详情
+  carPartInfo: `${baseUrl}/carsProductsInfo`,
+  // 加装完成
+  carPartDone: `${baseUrl}/carsProductsDone`,
+  // 银行审核通过
+  bankPass: `${baseUrl}/bankApprovalPass`,
+  // 银行审核不通过，全款支付尾款
+  bankNotPass: `${baseUrl}/changeFullPayment`,
+  // 标记为过线检查
+  overTheLine: `${baseUrl}/overTheLine`,
+  // 回访备注
+  orderVisit: `${baseUrl}/orderVisit`,
+  // 采购员列表
+  buyerList: `${baseUrl}/orgOneSelfList`,
+  // 仓位列表
+  cangList: `${baseUrl}/organizationWarehouseList`,
+  // 入库单列表
+  stockInList: `${baseUrl}/storageList`,
+  // 新增入库单
+  stockInAdd: `${baseUrl}/storageEdit`,
+  // 入库单详情
+  stockInInfo: `${baseUrl}/storageInfo`,
+  // 入库单新增车辆
+  stockInAddCar: `${baseUrl}/storageCarEdit`,
+  // 入库单删除车辆
+  stockInDelCar: `${baseUrl}/storageCarDelete`,
+  // 入库单删除
+  stockInDel: `${baseUrl}/storageDelete`,
+  // 全部已入库
+  stockInSure: `${baseUrl}/storageOverSure`,
+  
+  
+
+  /*********************废弃接口 start************************/
+  // 登录
+  // login: `${baseUrl}/login`,
+  // 搜索客户
+  customerSearch: `${baseUrl}/customerPhoneSearchList`,
+  // 预约客户列表
+  customerBespeak: `${baseUrl}/bespeakCustomerOrgList`,
+  // 订单客户列表
+  customerOrder: `${baseUrl}/orderStateCustomerList`,
+  // 客户列表v2 (2018-01-04)
+  customerList: `${baseUrl}/customerUserList`,
+  // 门店列表
+  storeList: `${baseUrl}/organizationLevelList`,
+  // 客户详情
+  customerInfo: `${baseUrl}/customerUsersrInfo`,
+  // 待贴膜列表
+  // tiemoList: `${baseUrl}/carsPadPastingList`,
+  // 待上牌列表
+  // licenseList: `${baseUrl}/orderLicensePlateList`,
+  // 精品加装列表
+  // carPartList: `${baseUrl}/carsProductsList`,
+  // 供应商列表
+  // supplierList: `${baseUrl}/supplierListList`,
+
+  // 三级订车--------------------------------
+  // 订车单列表
+  stockOrderList: `${baseUrl}/stockOrderList`,
+  // 订车单详情
+  stockOrderInfo: `${baseUrl}/stockOrderInfo`,
+  // 取消订车单
+  stockOrderCancel: `${baseUrl}/stockOrderCancel`,
+  // 订车单签收
+  stockOrderSign: `${baseUrl}/stockOrderSign`,
+  // 新增订车单
+  stockOrderAdd: `${baseUrl}/stockOrderCreate`,
+  // 业绩查询
+  salerReport: `${baseUrl}/querySalesPerformance`,
+  /*********************废弃接口 end************************/
 }
 
 module.exports = config

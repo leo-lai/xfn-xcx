@@ -35,7 +35,7 @@ Page({
     app.onLogin(userInfo => {
       this.setData({
         userInfo,
-        'isAdmin': userInfo.roleName == '仓管主管',
+        'auditor': userInfo.roleName.indexOf('资源部主管') !== -1,
         'showEdit': this.options.edit !== '0'
       })
 
@@ -137,6 +137,7 @@ Page({
       app.toast('保存成功', false).then(_ => {
         this.closeFrameList()
         this.getCarFrame()
+        app.storage.setItem('lv2-order-list-refresh', 1)
         app.getPrevPage().then(prevPage => prevPage.getInfo && prevPage.getInfo())
       })
     }).finally(_ => {
@@ -171,6 +172,7 @@ Page({
     let url = action == 1 ? app.config.lv2.carChange1 : app.config.lv2.carChange2
     wx.showLoading()
     app.post(url, { carId }).then(_ => {
+      app.storage.setItem('lv2-order-list-refresh', 1)
       app.toast('操作成功', false).then(_ => {
         this.getCarFrame()
       })

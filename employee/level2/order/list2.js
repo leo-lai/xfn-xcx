@@ -45,8 +45,7 @@ Page({
         userInfo,
         'filter.data.state': state,
         'filter.data.month': month,
-        'isAdmin': userInfo.roleName == '仓管主管',
-        'showEdit': userInfo.roleName != '仓管主管'
+        'auditor': userInfo.roleName.indexOf('资源部主管') !== -1,
       })
 
       wx.setNavigationBarTitle({
@@ -112,16 +111,19 @@ Page({
       }
 
       data.list.forEach(item => {
-        // countermandApply 是否退款中
-        // 37 已退款
-        item.showEdit = this.data.showEdit && !item.countermandApply && item.orderState != 37
-        item.infos.forEach(cars => {
-          cars.changePrice2 = Math.abs(cars.changePrice)
-          cars.auditNum = 0 // 待审核车辆
-          cars.cars = []
-          cars.cars && cars.cars.forEach(frame => {
+        // 37 已退款不可编辑 countermandApply 是否退款中
+        item.showEdit = !item.countermandApply && item.orderState != 37
+
+        // 仓管
+        item.infos.forEach(carItem => {
+          carItem.changePrice2 = Math.abs(carItem.changePrice)
+          carItem.auditNum = 0 // 待审核车辆
+
+          // 车架号列表
+          carItem.frames = carItem.cars || []
+          carItem.frames.forEach(frame => {
             if (frame.auditState == 5) {
-              cars.auditNum += 1
+              carItem.auditNum += 1
             }
           })
         })

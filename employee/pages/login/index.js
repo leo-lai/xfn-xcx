@@ -113,7 +113,7 @@ Page({
     }
 
     wx.showLoading({ mask: true })
-    app.post(app.config.login, this.data.formData).then(({data}) => {
+    app.post(app.config.auth.login, this.data.formData).then(({data}) => {
       // 由于获取用户信息是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处触发回调函数
       app.storage.setItem('phoneNumber', this.data.formData.phoneNumber)

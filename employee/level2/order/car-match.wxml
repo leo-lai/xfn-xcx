@@ -38,7 +38,7 @@
         </view> -->
 
         <!-- 主管审核 -->
-        <view class='l-margin-t-s' wx:if='{{isAdmin && item.auditState == 5}}' data-id='{{item.id}}' bindtap='examineCar'>
+        <view class='l-margin-t-s' wx:if='{{auditor && item.auditState == 5}}' data-id='{{item.id}}' bindtap='examineCar'>
           <button size='mini' class='l-button-main l-margin-r' data-action='1'>同意换车</button>
           <button size='mini' class='l-button-border' data-action='0'>不同意换车</button>
         </view>
@@ -63,7 +63,7 @@
               <text class='l-inline l-btn-link' data-item='{{item}}' bindtap='carEditPrice'>协商修改价格</text>
             </view>
           </view>
-          <view class='l-margin-t-s l-text-theme' wx:if='{{item.auditState == 5}}'>换车申请审核中，请耐心等待</view>
+          <view class='l-margin-t-s l-text-theme' wx:if='{{!auditor && item.auditState == 5}}'>换车申请审核中，请耐心等待</view>
         </block>
       </view>
     </view>
@@ -72,9 +72,13 @@
   <block wx:if='{{!(carFrame.length > 0)}}'>
     <view style='height: 120rpx;'></view>
     <view class='l-fixed-bottom l-padding'>
-      <button disabled='{{frameList.list.length === 0}}' class='l-button-main l-btn-w60' bindtap='showFrameList'>
-        {{frameList.list.length === 0 ? '库存不足' : '配车'}}
-      </button>
+      <view class='l-text-center' wx:if='{{frameList.list.length === 0}}'>
+        <text class='l-text-gray'>该车型库存不足，</text>
+        <navigator class='l-inline l-text-link' url='/level3/stock/in/list'>请先入库车辆</navigator>
+      </view>
+      <view wx:else class='l-btn-w60'>
+         <button class='l-button-main' bindtap='showFrameList'>配车</button>
+      </view>
     </view>
   </block>
 

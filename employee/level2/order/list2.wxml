@@ -31,17 +31,17 @@
             <text>数量：{{carItem.carNum}}</text>
           </view>
 
-          <block wx:if='{{item.showEdit}}'>
+          <!-- 主管审核换车申请 -->
+          <block wx:if='{{auditor && carItem.auditNum > 0}}'>
+            <view data-item='{{carItem}}' data-index='{{index}}' bindtap='carMatch'>
+              <text class='l-btn-link'>去审核</text>
+            </view>
+          </block>
+          <!-- 销售经理，销售员配车验车 -->
+          <block wx:elif='{{item.showEdit}}'>
             <view data-item='{{carItem}}' data-index='{{index}}' bindtap='carMatch'>
               <text wx:if='{{item.orderState == 10}}' class='l-btn-link'>去配车</text>
               <text wx:if='{{item.orderState == 15}}' class='l-btn-link'>去验车</text>
-            </view>
-          </block>
-
-          <!-- 主管审核换车申请 -->
-          <block wx:if='{{isAdmin && carItem.auditNum > 0}}'>
-            <view data-item='{{carItem}}' data-index='{{index}}' bindtap='carMatch'>
-              <text class='l-btn-link'>去审核</text>
             </view>
           </block>
         </view>
@@ -52,11 +52,6 @@
         <button size='mini' class='l-button-border'>电子合同</button>
       </navigator>
 
-      <!-- <navigator url='info?id={{item.id}}' hover-class='none'>
-        <button size='mini' class='l-button-border'>查看详情</button>
-      </navigator> -->
-
-      <!-- 非主管二级 -->
       <block wx:if='{{item.showEdit}}'>
         <!-- 取消订单 -->
         <button id='{{item.id}}' bindtap='cancel' wx:if='{{item.orderState < 10}}' size='mini' class='l-button-border'>取消</button>
