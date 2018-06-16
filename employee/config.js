@@ -22,10 +22,10 @@
  *                佛祖坐镇 顺利上线
  */
 var env = 'dev'  // 测试
-// var env = 'prod' // 正式
-let getHost = (domainName = 'api') => env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
+var env = 'prod' // 正式
+let getHost = (domainName = 'v2') => env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
 
-let hosts = [getHost('tomcat'), getHost('api'), getHost('shop')]
+let hosts = [getHost('tomcat'), getHost('v2'), getHost('shop')]
 
 let resURL = 'https://res.xfnauto.com'
 let commonUrl = hosts[0] + '/tauto/common'
@@ -86,7 +86,7 @@ let config = {
     orderList: `${baseUrl2}/ucenter_v2/consumerlist`,
     // 资源订单详情
     orderInfo: `${baseUrl2}/ucenter_v2/consumerDetail`,
-    contractImage: `${baseUrl2}/publics_v1/contract`,
+    contractImage: `${baseUrl2}/publics_v2/contract`,
     // 资源单出库
     outStock: `${baseUrl2}/ucenter_v2/stockout`,
   },
@@ -100,8 +100,8 @@ let config = {
   },
   // 学堂---------------------------------
   school: {
-    list: `${baseUrl2}/article_v1/index`,
-    info: `${baseUrl2}/article_v1/detail`,
+    list: `${baseUrl2}/article_v2/index`,
+    info: `${baseUrl2}/article_v2/detail`,
   },
   // 商城接口------------------------------
   shop: {
@@ -139,7 +139,7 @@ let config = {
   // auth----------------------------------
   auth: {
     // 登录接口
-    login: `${baseUrl2}/login_v1/index`,
+    login: `${baseUrl2}/login_v2/index`,
   },
   // 二级人员--------------------------------
   lv2: {
@@ -212,7 +212,7 @@ let config = {
     shareList: `${baseUrl}/shop/myShareMaterialInfoList`,
     shareAdd: `${baseUrl}/shop/shareMaterialInfoEdit`,
     shareInfo: `${baseUrl}/shop/shareMaterialInfoInfo`,
-    shareLink: `${baseUrl2}/publics_v1/createImage`,
+    shareLink: `${baseUrl2}/publics_v2/createImage`,
   },
   // 物流接口--------------------------------
   exp: {
