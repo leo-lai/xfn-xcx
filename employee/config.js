@@ -53,49 +53,49 @@ let config = {
 
   // ================================================
   // 报价单
-  offerPrice: `${baseUrl2}/ucenter_v1/quotation`,
-  offerInfo: `${baseUrl2}/ucenter_v1/quotationDetail`,
+  offerPrice: `${baseUrl2}/ucenter_v2/quotation`,
+  offerInfo: `${baseUrl2}/ucenter_v2/quotationDetail`,
   // 首页------------------------------------
   index: {
-    data: `${baseUrl2}/ucenter_v1/index`,
+    data: `${baseUrl2}/ucenter_v2/index`,
   },
   // 客户管理-----------------------------------
   customer: {
     // 客户列表
-    allList: `${baseUrl2}/ucenter_v1/userlist`,
+    allList: `${baseUrl2}/ucenter_v2/userlist`,
     // 客户基本详情（预约及记录信息）
-    info: `${baseUrl2}/ucenter_v1/userdetail`,
+    info: `${baseUrl2}/ucenter_v2/userdetail`,
     // 重点客户，新增预约客户，今日预计到店
-    list: `${baseUrl2}/ucenter_v1/customers`,
+    list: `${baseUrl2}/ucenter_v2/customers`,
     // 今日回访
-    visitList: `${baseUrl2}/ucenter_v1/visit`,
+    visitList: `${baseUrl2}/ucenter_v2/visit`,
     // 用户订单列表
-    orderList: `${baseUrl2}/ucenter_v1/customerlist`,
+    orderList: `${baseUrl2}/ucenter_v2/customerlist`,
     // 加装/上牌/贴膜列表
-    partList: `${baseUrl2}/ucenter_v1/carsproductlist`,
+    partList: `${baseUrl2}/ucenter_v2/carsproductlist`,
   },
   // 资源管理---------------------------------------
   consumer: {
     // 门店列表
-    storeList: `${baseUrl2}/ucenter_v1/organizationlist`,
+    storeList: `${baseUrl2}/ucenter_v2/organizationlist`,
     // 新增门店
-    storeAdd: `${baseUrl2}/ucenter_v1/organization/create`,
+    storeAdd: `${baseUrl2}/ucenter_v2/organization/create`,
     // 编辑门店
-    storeEdit: `${baseUrl2}/ucenter_v1/organization/edit`,
+    storeEdit: `${baseUrl2}/ucenter_v2/organization/edit`,
     // 资源订单列表
-    orderList: `${baseUrl2}/ucenter_v1/consumerlist`,
+    orderList: `${baseUrl2}/ucenter_v2/consumerlist`,
     // 资源订单详情
-    orderInfo: `${baseUrl2}/ucenter_v1/consumerDetail`,
+    orderInfo: `${baseUrl2}/ucenter_v2/consumerDetail`,
     contractImage: `${baseUrl2}/publics_v1/contract`,
     // 资源单出库
-    outStock: `${baseUrl2}/ucenter_v1/stockout`,
+    outStock: `${baseUrl2}/ucenter_v2/stockout`,
   },
   // 库存管理--------------------------------
   stock: {
     // 供应商列表
-    supplierList: `${baseUrl2}/ucenter_v1/supplier`,
+    supplierList: `${baseUrl2}/ucenter_v2/supplier`,
     // 出库列表
-    outList: `${baseUrl2}/ucenter_v1/stockcarlist`,
+    outList: `${baseUrl2}/ucenter_v2/stockcarlist`,
     
   },
   // 学堂---------------------------------
@@ -109,13 +109,13 @@ let config = {
     cangList: `${baseUrl}/shop/organizationWarehouseList`,
     // 在售列表
     // goodsList: `${baseUrl}/shop/orgShopGoodsCarsList`,
-    goodsList: `${baseUrl2}/ucenter_v1/shop`,
+    goodsList: `${baseUrl2}/ucenter_v2/shop`,
     goodsEdit: `${baseUrl}/shop/shopGoodsCarsEdit`,
     goodsInfo: `${baseUrl}/shop/shopGoodsCarsInfo`,
     goodsUpOff: `${baseUrl}/shop/shopGoodsCarsShelves`,
     // 活动列表
     // activeList: `${baseUrl}/shop/orgActivityList`,
-    activeList: `${baseUrl2}/ucenter_v1/shop/activity`,
+    activeList: `${baseUrl2}/ucenter_v2/shop/activity`,
     activeUpOff: `${baseUrl}/shop/activityShelves`,
     activeEdit: `${baseUrl}/shop/activityEdit`,
     // 预约单列表
