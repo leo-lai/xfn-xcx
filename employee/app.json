@@ -57,7 +57,6 @@
     "level2/store/add",
     "level2/store/list",
     "level2/store/view",
-    "level2/order/list",
     "level2/order/list2",
     "level2/order/add-order",
     "level2/order/add",

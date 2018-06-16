@@ -102,6 +102,7 @@ Page({
 
     this.setData({ 'list.loading': true })
     return app.ajax(app.config.customer.orderList, {
+      customerId: this.data.customerUsersId,
       page, rows,
       ...this.data.filter.data
     }).then(({ data }) => {

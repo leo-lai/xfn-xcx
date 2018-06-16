@@ -154,10 +154,8 @@ Page({
 
     wx.showLoading()
     app.post(app.config.customerJiaoche, this.data.formData).then(_ => {
-      app.getPrevPage().then(prevPage => {
-        prevPage.getInfo()
-      })
-      app.toast('交付车辆成功', true)
+      app.storage.setItem('lv2-order-list-refresh', 1)
+      app.toast('操作成功', true)
     }).catch(_ => {
       wx.hideLoading()
     })

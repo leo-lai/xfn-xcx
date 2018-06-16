@@ -137,7 +137,7 @@
             <button wx:if='{{info.state < 30}}' class='l-button-border l-margin-lr-s' size='mini' data-url='car?ids={{info.id}},{{item.id}}' data-item='{{carItem}}' bindtap='carEdit'>编辑</button>
           </block>
 
-          <button wx:if='{{isAdmin && carItem.auditNum > 0}}' class='l-button-main l-margin-lr-s' size='mini' data-item='{{carItem}}' bindtap='carMatch'>去审核</button>
+          <button wx:if='{{auditor && carItem.auditNum > 0}}' class='l-button-main l-margin-lr-s' size='mini' data-item='{{carItem}}' bindtap='carMatch'>去审核</button>
 
           <button wx:if='{{info.state >= 10}}' class='l-button-border l-margin-lr-s' size='mini' data-item='{{carItem}}' bindtap='carMatch'>查看详情</button>
         </view>

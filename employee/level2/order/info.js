@@ -18,7 +18,7 @@ Page({
     app.onLogin(userInfo => {
       this.setData({
         userInfo,
-        'isAdmin': userInfo.roleName == '仓管主管'
+        'auditor': userInfo.roleName.indexOf('资源主管') !== -1,
       })
       this.getInfo()
     }, this.route)
@@ -66,7 +66,7 @@ Page({
       data.pay1Image = pay1Image
       data.pay2Image = pay2Image
 
-      data.showEdit = this.data.userInfo.roleName != '仓管主管' && !data.countermandApply && data.state != 37
+      data.showEdit = !data.countermandApply && data.state != 37 && data.state != 50
 
       this.setData({ info: data })
 

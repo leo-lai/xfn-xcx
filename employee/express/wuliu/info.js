@@ -17,7 +17,7 @@ Page({
     app.onLogin(userInfo => {
       this.setData({
         userInfo,
-        'isAdmin': ['仓管主管', '仓管'].includes(userInfo.roleName)
+        'auditor': userInfo.roleName.indexOf('资源主管') !== -1,
       })
       this.getInfo()
     }, this.route)

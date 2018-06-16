@@ -37,7 +37,7 @@
         <view class='l-rest l-text-theme' style='margin: 0 10rpx 0 20rpx;'>￥{{tuoyunItem.amount}}</view>
 
         <!-- 专线运输 -->
-        <block wx:if='{{isAdmin && item.consignmentType == 2}}'>
+        <block wx:if='{{auditor && item.consignmentType == 2}}'>
           <navigator wx:if='{{item.distributionState == 7}}' url='money?id={{item.distributionId}}&cars={{tuoyunItem.cars}}' hover-class='none'>
             <button class='l-btn-min1 {{tuoyunItem.goodsCarState > 8 ? "_disabled" : ""}}' size='mini'>收款</button>
           </navigator>
@@ -83,7 +83,7 @@
       </block>
 
       <!-- 专线运输 -->
-      <view wx:elif='{{item.distributionState == 7 && isAdmin && item.consignmentType == 2}}' class='l-inline l-margin-lr-s' bindtap='changeState' id='{{item.distributionId}}'>
+      <view wx:elif='{{item.distributionState == 7 && auditor && item.consignmentType == 2}}' class='l-inline l-margin-lr-s' bindtap='changeState' id='{{item.distributionId}}'>
         <button data-state='8' size='mini' class='l-button-main'>
         全部已收款</button>
       </view>

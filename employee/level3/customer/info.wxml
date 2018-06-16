@@ -132,7 +132,7 @@
   <view style='height: 120rpx;'></view>
   <view class='l-fixed-bottom l-padding l-flex-hvc'>
     <navigator style='width: 50%;' class='l-text-theme l-fs-s' hover-class='none' url='list-order?id={{customerInfo.id}}'>
-      <button class='l-button-border' bindtap='delCar'>查看购车单列表</button>
+      <button class='l-button-border'>查看购车单列表</button>
     </navigator>
     <view style='width: 50%;' class='l-btn-w60 l-margin-lr-s'>
       <button class='l-button-main' bindtap='showCustomerOrder'>开单</button>

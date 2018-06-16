@@ -45,7 +45,7 @@ Page({
         userInfo,
         'filter.data.state': state,
         'filter.data.month': month,
-        'auditor': userInfo.roleName.indexOf('资源部主管') !== -1,
+        'auditor': userInfo.roleName.indexOf('资源主管') !== -1,
       })
 
       wx.setNavigationBarTitle({

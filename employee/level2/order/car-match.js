@@ -35,7 +35,7 @@ Page({
     app.onLogin(userInfo => {
       this.setData({
         userInfo,
-        'auditor': userInfo.roleName.indexOf('资源部主管') !== -1,
+        'auditor': userInfo.roleName.indexOf('资源主管') !== -1,
         'showEdit': this.options.edit !== '0'
       })
 
