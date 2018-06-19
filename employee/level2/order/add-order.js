@@ -140,6 +140,7 @@ Page({
       case 'userPhone':
         data['customerInfo.' + id] = value
         break
+      case 'carNum':
       case 'isDiscount':
       case 'changePrice':
       case 'nakedPrice':
@@ -160,6 +161,7 @@ Page({
       changePrice,
       guidePrice,
       nakedPrice,
+      carNum,
       trafficCompulsoryInsurancePrice,
       commercialInsurancePrice
     } = this.data.carInfo
@@ -171,7 +173,7 @@ Page({
     commercialInsurancePrice = Number(commercialInsurancePrice) || 0
 
     nakedPrice = guidePrice + changePrice
-    let finalPrice = nakedPrice + trafficCompulsoryInsurancePrice + commercialInsurancePrice
+    let finalPrice = (nakedPrice + trafficCompulsoryInsurancePrice + commercialInsurancePrice) * carNum
 
     this.setData({
       'carInfo.nakedPrice': nakedPrice,

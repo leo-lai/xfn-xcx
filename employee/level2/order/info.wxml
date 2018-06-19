@@ -7,7 +7,7 @@
       <view class='l-rest'></view>
       <view class='l-text-theme'>{{info.orderStateName}}</view>
     </view>
-    <view class='l-text-gray l-margin-t-s'>
+    <view class='l-text-gray'>
       <text class='l-dmr'>联系人：{{info.orgLinker}}</text>
       <text>联系电话：{{info.orgPhone}}</text>
     </view>
@@ -93,7 +93,8 @@
       <view class='l-margin-t-m {{index < item.infos.length - 1? "l-border-b l-padding-b" : ""}}' wx:for='{{item.infos}}' wx:for-item='carItem' wx:key='id'>
         <view>{{carItem.carsName}}</view>
         <view class='l-text-gray l-fs-s'>
-          <text class='l-dmr'>车身颜色：{{carItem.colorName}}</text>
+          <text class='l-margin-r'>车身：{{carItem.colorName}}</text>
+          <text v-if="{{carItem.interiorName}}" class='l-margin-r'>内饰：{{carItem.interiorName}}</text>
           <text>指导价：{{carItem.guidePrice}}元</text>
         </view>
 
@@ -104,11 +105,11 @@
           </view>
           <view>
             <text class='l-dmr'>交强险：{{carItem.trafficCompulsoryInsurancePrice || 0}}元</text>
-            <text>商业险：{{carItem.commercialInsurancePrice || 0}}元</text>
+            <text>商业保险：{{carItem.commercialInsurancePrice || 0}}元</text>
           </view>
           <view>
-            <text class='l-dmr'>应付定金：{{carItem.depositPrice}}元</text>
-            <text>{{carItem.changePrice > 0 ? '加价金额' : '优惠金额'}}：{{carItem.changePrice2}}元</text>
+            <text class='l-dmr'>{{carItem.changePrice > 0 ? '加价金额' : '优惠金额'}}：{{carItem.changePrice2}}元</text>
+            <text>应付定金：{{carItem.depositPrice}}元</text>
           </view>
         </view>
 

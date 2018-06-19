@@ -3,16 +3,17 @@
   <view class='l-padding'>
     <view class='l-h4 l-margin-t'>{{info.carsName}}</view>
     <view class='l-fs-s l-text-gray'>
-      <text class='l-margin-r'>车身颜色：{{info.colorName}}</text>
-      <text>指导价：{{info.guidePrice}}</text>
+      <text class='l-margin-r'>车身：{{info.colorName}}</text>
+      <text v-if="{{info.interiorName}}" class='l-margin-r'>内饰：{{info.interiorName}}</text>
+      <text>指导价：{{info.guidePrice}}元</text>
     </view>
     <view class='l-margin-t-s'>
       <view>购买数量：{{info.carNum}}</view>
       <view>裸车价：{{info.nakedPrice}}元</view>
       <view>交强险：{{info.trafficCompulsoryInsurancePrice || 0}}元</view>
-      <view>商业险：{{info.commercialInsurancePrice || 0}}元</view>
-      <view>应付定金：{{info.depositPrice}}元</view>
+      <view>商业保险险：{{info.commercialInsurancePrice || 0}}元</view>
       <view>{{info.changePrice > 0 ? '加价金额' : '优惠金额'}}：{{info.changePrice2}}元</view>
+      <view>应付定金：{{info.depositPrice}}元</view>
     </view>
     <view wx:if='{{info.remark}}' class='l-margin-t l-text-gray'>备注：{{info.remark}}</view>
 
@@ -69,7 +70,7 @@
     </view>
   </view>
 
-  <block wx:if='{{!(carFrame.length > 0)}}'>
+  <block wx:if='{{!(carFrame.length > 0) && showEdit}}'>
     <view style='height: 120rpx;'></view>
     <view class='l-fixed-bottom l-padding'>
       <view class='l-text-center' wx:if='{{frameList.list.length === 0}}'>
@@ -104,11 +105,6 @@
               </view>
             </label>
           </checkbox-group>
-          <view class='l-padding l-text-center' wx:if='{{frameList.list.length === 0}}'>
-            <view class='l-br'></view>
-            <view class='l-text-gray'>库存不足</view>
-            <view class='l-br'></view>
-          </view>
         </view>
       </scroll-view>
       <view class='_ft'>

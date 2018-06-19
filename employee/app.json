@@ -117,7 +117,8 @@
     "pages/week-selector/index",
     "pages/guide/index",
     "pages/school/list",
-    "pages/school/info"
+    "pages/school/info",
+    "pages/guide/list"
   ],
   "window": {
     "backgroundColor": "#eee",
