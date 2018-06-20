@@ -1,4 +1,5 @@
 <!--level2/order/frame-edit.wxml-->
+<view class='weui-toptips weui-toptips_warn' hidden='{{!topTips}}'>{{topTips}}</view>
 <view class='l-page-full'>
   <view class='l-padding l-bg-white'>
     <view class='l-h4 l-margin-t'>{{info.carsName}}</view>
@@ -14,12 +15,12 @@
 
   <view class='weui-cells__title'>请完善车架号</view>
   <view class='weui-cells weui-cells_after-title'>
-    <view class='weui-cell weui-cell_input'>
+    <view class='weui-cell weui-cell_input' wx:for='{{frameList}}' wx:key='id'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>车架号</view>
+        <view class='weui-label'>车架号{{index + 1}}</view>
       </view>
       <view class='weui-cell__bd'>
-        <input class='weui-input' placeholder='请输入车架号'/>
+        <input class='weui-input' bindinput='frameInput' data-index='{{index}}' value='{{item.vin}}' placeholder='请输入车架号'/>
       </view>
     </view>
   </view>

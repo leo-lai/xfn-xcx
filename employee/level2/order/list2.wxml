@@ -44,7 +44,7 @@
               <text wx:if='{{item.orderState == 15}}' class='l-btn-link'>去验车</text>
             </view>
             <view data-item='{{carItem}}' data-index='{{index}}' bindtap='carFrame'>
-              <text wx:if='{{item.orderState == 41}}' class='l-btn-link'>完善车架号</text>
+              <text wx:if='{{item.orderState == 41}}' class='l-btn-link'>上传车架号</text>
             </view>
           </block>
         </view>
@@ -71,8 +71,13 @@
 
         <!-- 配车完成/验车完成 -->
         <view class='l-inline' data-val='{{item.id}}' bindtap='carMatchOk'>
-          <button wx:if='{{item.orderState == 10}}' size='mini' class='l-button-main' data-state='15'>配车完成</button>
-          <button wx:if='{{item.orderState == 15}}' size='mini' class='l-button-main' data-state='35'>验车完成</button>
+          <button wx:if='{{item.orderState == 10}}' size='mini' class='l-button-main' data-state='15'>确定配车完成</button>
+          <button wx:if='{{item.orderState == 15}}' size='mini' class='l-button-main' data-state='35'>确定验车完成</button>
+        </view>
+
+        <!-- 确定上传车架号完成 -->
+        <view class='l-inline' data-val='{{item.id}}' bindtap='carFrameOk'>
+          <button wx:if='{{item.orderState == 41}}' size='mini' class='l-button-main' data-state='15'>确定上传车架号完成</button>
         </view>
 
         <!-- 出库 -->

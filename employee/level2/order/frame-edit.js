@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    topTips: '',
     isAjax: false,
     frameList: [],
   },
@@ -17,13 +18,14 @@ Page({
     app.storage.getItem('lv2-order-car-info').then(info => {
       console.log(info)
       this.setData({ info })
+      this.getCarFrames()
     })
   },
-  // 获取车架号列表
-  getFrameList: function () {
+  // 获取订单车辆列表
+  getCarFrames: function () {
     wx.showLoading()
-    app.post(app.config.lv2.frameList, {
-      infoId: this.ids[0]
+    app.ajax(app.config.consumer.carFrames, {
+      infoId: this.options.id
     }).then(({ data }) => {
       this.setData({
         'isAjax': true,
@@ -33,22 +35,42 @@ Page({
       wx.hideLoading()
     })
   },
+  // 顶部显示错误信息
+  showTopTips: function (topTips = '') {
+    this.setData({ topTips })
+    clearTimeout(this.toptipTimeid)
+    this.toptipTimeid = setTimeout(() => {
+      this.setData({ topTips: '' })
+    }, 3000)
+  },
+  // 输入车架号
+  frameInput: function (event) {
+    let frameList = this.data.frameList
+    let index = event.target.dataset.index
+    let value = event.detail.value
+
+    frameList[index].vin = value
+    this.setData({ frameList })
+  },
   // 保存车架号
   submit: function () {
-    if (!this.data.formData.stockCarId) {
-      wx.showModal({
-        content: '请选择车架号',
-        showCancel: false
-      })
-      return
+    let formData = {
+      orderId: this.data.info.orderId,
+      cars: ''
     }
+    let cars = []
+    this.data.frameList.forEach(item => {
+      cars.push(item.id + '|' + (item.vin || ''))
+    })
+    formData.cars = cars.join(',')
 
     wx.showLoading({ mask: true })
-    app.post(app.config.lv2.carMatch2, this.data.formData)
+    app.post(app.config.consumer.framesEdit, formData)
       .then(_ => {
-        app.toast('配车成功', true).then(_ => {
+        app.toast('保存成功', true).then(_ => {
           app.getPrevPage().then(prevPage => {
-            prevPage.getCarFrame && prevPage.getCarFrame()
+            prevPage.getList && prevPage.getList()
+            prevPage.getInfo && prevPage.getInfo()
           })
         })
       }).finally(_ => {

@@ -96,7 +96,9 @@ let config = {
     // 资源单车架号列表 
     carFrames: `${baseUrl2}/ucenter_v2/consumer/getConsumerCars`,
     // 完善资源单车架号
-    framesEdit: `${baseUrl2}/ucenter_v2/setframe`
+    framesEdit: `${baseUrl2}/ucenter_v2/setframe`,
+    // 完成资源单车架号
+    framesOk: `${baseUrl2}/ucenter_v2/consumer/updateState`
   },
   // 库存管理--------------------------------
   stock: {

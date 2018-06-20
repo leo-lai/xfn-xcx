@@ -190,9 +190,31 @@ Page({
     let carItem = event.currentTarget.dataset.item
     let index = event.currentTarget.dataset.index
     let item = this.data.list.data[index]
+    carItem.orderId = item.id
     carItem.orderState = item.orderState
     app.storage.setItem('lv2-order-car-info', carItem)
-    app.navigateTo('frame-edit?edit=' + (item.showEdit ? 1 : 0))
+    app.navigateTo('frame-edit?id=' + carItem.id)
+  },
+  carFrameOk: function (event) {
+    let orderId = event.currentTarget.dataset.val
+    wx.showModal({
+      title: '确认提示',
+      content: '是否确定已全部上传完车架号？',
+      success: res => {
+        if (res.confirm) {
+          wx.showLoading()
+          app.ajax(app.config.consumer.framesOk, {
+            orderId
+          }).then(_ => {
+            app.toast('上传完成', false).finally(_ => {
+              this.getList()
+            })
+          }).catch(_ => {
+            wx.hideLoading()
+          })
+        }
+      }
+    })
   },
   // 出库
   outCar: function (event) {
