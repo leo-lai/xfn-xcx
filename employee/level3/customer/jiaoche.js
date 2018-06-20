@@ -154,7 +154,7 @@ Page({
 
     wx.showLoading()
     app.post(app.config.customerJiaoche, this.data.formData).then(_ => {
-      app.storage.setItem('lv2-order-list-refresh', 1)
+      app.storage.setItem('lv3-order-list-refresh', 1)
       app.toast('操作成功', true)
     }).catch(_ => {
       wx.hideLoading()

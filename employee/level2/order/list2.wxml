@@ -43,6 +43,9 @@
               <text wx:if='{{item.orderState == 10}}' class='l-btn-link'>去配车</text>
               <text wx:if='{{item.orderState == 15}}' class='l-btn-link'>去验车</text>
             </view>
+            <view data-item='{{carItem}}' data-index='{{index}}' bindtap='carFrame'>
+              <text wx:if='{{item.orderState == 41}}' class='l-btn-link'>完善车架号</text>
+            </view>
           </block>
         </view>
       </view>

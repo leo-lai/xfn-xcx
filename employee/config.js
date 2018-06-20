@@ -23,7 +23,10 @@
  */
 var env = 'dev'  // 测试
 // var env = 'prod' // 正式
-let getHost = (domainName = 'v2') => env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
+let getHost = (domainName = 'api') => {
+  domainName = env === 'dev' ? domainName : 'v2'
+  return env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
+}
 
 let hosts = [getHost('tomcat'), getHost('api'), getHost('shop')]
 
@@ -76,6 +79,7 @@ let config = {
   },
   // 资源管理---------------------------------------
   consumer: {
+    orderEdit: `${baseUrl2}/ucenter_v2/consumer/update`,
     // 门店列表
     storeList: `${baseUrl2}/ucenter_v2/organizationlist`,
     // 新增门店
@@ -89,6 +93,10 @@ let config = {
     contractImage: `${baseUrl2}/publics_v2/contract`,
     // 资源单出库
     outStock: `${baseUrl2}/ucenter_v2/stockout`,
+    // 资源单车架号列表 
+    carFrames: `${baseUrl2}/ucenter_v2/consumer/getConsumerCars`,
+    // 完善资源单车架号
+    framesEdit: `${baseUrl2}/ucenter_v2/setframe`
   },
   // 库存管理--------------------------------
   stock: {

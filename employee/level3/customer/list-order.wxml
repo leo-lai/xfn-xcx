@@ -34,24 +34,28 @@
         </view>
       </view>
     </view>
-    <view class='_ft' catchtap='noopFn'>
-      <navigator wx:if='{{item.orderState == 5}}' url='/level3/stock/out/info?id={{item.id}}' hover-class='none'>
+    <view class='_ft l-text-center' catchtap='noopFn'>
+      <navigator class='l-inline' wx:if='{{item.orderState == 1 || item.orderState == 15 || item.orderState == 19}}' url='order?ids=,{{item.id}}' hover-class='none'>
+        <button size='mini' class='l-button-border l-margin-lr-s'>查看详情</button>
+      </navigator>
+
+      <navigator class='l-inline' wx:if='{{item.orderState == 5}}' url='/level3/stock/out/info?id={{item.id}}' hover-class='none'>
         <button size='mini' class='l-button-main l-margin-lr-s'>出库车辆</button>
       </navigator>
 
-      <navigator wx:if='{{item.orderState == 7}}' url='/level3/parts/jing/list?id={{item.id}}' hover-class='none'>
+      <navigator class='l-inline' wx:if='{{item.orderState == 7}}' url='/level3/parts/jing/list?id={{item.id}}' hover-class='none'>
         <button size='mini' class='l-button-border l-margin-lr-s'>加装精品</button>
       </navigator>
 
-      <navigator wx:if='{{item.orderState == 9}}' url='/level3/parts/license/list?id={{item.id}}' hover-class='none'>
+      <navigator class='l-inline' wx:if='{{item.orderState == 9}}' url='/level3/parts/license/list?id={{item.id}}' hover-class='none'>
         <button size='mini' class='l-button-border l-margin-lr-s'>车辆上牌</button>
       </navigator>
 
-      <navigator wx:if='{{item.orderState == 11}}' url='/level3/parts/tiemo/list?id={{item.id}}' hover-class='none'>
+      <navigator class='l-inline' wx:if='{{item.orderState == 11}}' url='/level3/parts/tiemo/list?id={{item.id}}' hover-class='none'>
         <button size='mini' class='l-button-border l-margin-lr-s'>车辆贴膜</button>
       </navigator>
 
-      <navigator wx:if='{{item.orderState == 13}}' url='jiaoche?id={{item.id}}' hover-class='none'>
+      <navigator class='l-inline' wx:if='{{item.orderState == 13}}' url='jiaoche?id={{item.id}}' hover-class='none'>
         <button size='mini' class='l-button-main l-margin-lr-s'>客户提车</button>
       </navigator>
       

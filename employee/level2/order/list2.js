@@ -185,6 +185,15 @@ Page({
       }
     })
   },
+  // 完善车架号
+  carFrame: function (event) {
+    let carItem = event.currentTarget.dataset.item
+    let index = event.currentTarget.dataset.index
+    let item = this.data.list.data[index]
+    carItem.orderState = item.orderState
+    app.storage.setItem('lv2-order-car-info', carItem)
+    app.navigateTo('frame-edit?edit=' + (item.showEdit ? 1 : 0))
+  },
   // 出库
   outCar: function (event) {
     let item = this.data.list.data[event.currentTarget.dataset.index]

@@ -41,11 +41,12 @@
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>年收入（万）</view>
+        <view class='weui-label'>年收入</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='annualIncome' value='{{customerInfo.annualIncome}}' bindinput='bindInput' type='digit' maxlength='{{9}}'/>
       </view>
+      <view class='l-cell-right'>万</view>
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
@@ -183,11 +184,12 @@
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>
-        <view class='weui-label'>税后年收入（万）</view>
+        <view class='weui-label'>税后年收入</view>
       </view>
       <view class='weui-cell__bd l-text-right'>
         <input class='weui-input' placeholder='请填写' id='annualIncomeAfterTax' value='{{customerInfo.annualIncomeAfterTax}}' bindinput='bindInput' type='digit' maxlength='{{9}}'/>
       </view>
+      <view class='l-cell-right'>万</view>
     </view>
     <view class='weui-cell weui-cell_input'>
       <view class='weui-cell__hd'>

@@ -118,7 +118,8 @@
     "pages/guide/index",
     "pages/school/list",
     "pages/school/info",
-    "pages/guide/list"
+    "pages/guide/list",
+    "level2/order/frame-edit"
   ],
   "window": {
     "backgroundColor": "#eee",

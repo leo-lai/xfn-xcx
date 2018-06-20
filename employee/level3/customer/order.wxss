@@ -2,3 +2,4 @@
 .weui-cells._disabled{position: relative; color: #999;}
 .weui-cells._disabled::after{content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 100;}
 radio{transform: scale(0.8); margin: -10rpx;}
+.l-page-disabled ._add{ display: none; }

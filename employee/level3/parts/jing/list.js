@@ -117,6 +117,7 @@ Page({
     }).then(_ => {
       this.getList()
       app.toast('操作成功')
+      app.storage.setItem('lv3-order-list-refresh', 1)
     }).catch(_ => {
       wx.hideLoading()
     })

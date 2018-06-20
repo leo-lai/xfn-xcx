@@ -208,8 +208,10 @@ Page({
         orderInfo,
         'bank.index': this.data.bank.list.findIndex(item => item.id === orderInfo.loanBank)
       })
-      this.getCheshen(orderInfo.familyId)
-      this.getNeishi(orderInfo.familyId)
+      if (orderInfo.familyId) {
+        this.getCheshen(orderInfo.familyId)
+        this.getNeishi(orderInfo.familyId)
+      }
     }).finally(_ => {
       wx.hideNavigationBarLoading()
     })

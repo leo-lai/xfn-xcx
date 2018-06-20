@@ -115,7 +115,7 @@ Page({
     }
 
     wx.showLoading({ mask: true })
-    app.post(app.config.lv2.orderEdit, this.data.formData).then(({ data }) => {
+    app.post(app.config.consumer.orderEdit, this.data.formData).then(({ data }) => {
       app.toast('保存成功', true).then(_ => {
         app.getPrevPage().then(prevPage => {
           prevPage.getInfo && prevPage.getInfo()

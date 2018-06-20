@@ -46,6 +46,7 @@ Page({
       customerOrderId: this.options.id
     }).then(_ => {
       app.getPrevPage().then(prevPage => prevPage.getList())
+      app.storage.setItem('lv3-order-list-refresh', 1)
       app.toast('加装完成', true)
     }).catch(_ => {
       wx.hideLoading()

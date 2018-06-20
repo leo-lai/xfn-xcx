@@ -169,6 +169,7 @@ Page({
 
     this.setData({ 'visit.loading': true })
     app.post(app.config.orderVisit, this.data.visit.data).then(({ data }) => {
+      this.visitClose()
       app.toast('操作成功').then(_ => {
         this.getList()
       })
