@@ -42,6 +42,7 @@ Page({
     orderPay: '0.00',
     orderInfo: {
       customerOrderId: '',
+      customerOrderState: '',
       isMortgage: 1
     }
   },
@@ -55,6 +56,7 @@ Page({
         ids: this.options.ids ? this.options.ids.split(',') : ['', '']
       }
       this.getInfo().then(_ => {
+        console.log(this.data.orderInfo)
         // this.getSales()
         this.getOrderPay()
         let followInformation = this.data.orderInfo.followInformation ? this.data.orderInfo.followInformation.split(',') : []
