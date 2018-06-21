@@ -22,13 +22,12 @@
  *                佛祖坐镇 顺利上线
  */
 var env = 'dev'  // 测试
-// var env = 'prod' // 正式
+var env = 'prod' // 正式
 let getHost = (domainName = 'api') => {
-  domainName = env === 'dev' ? domainName : 'v2'
   return env === 'dev' ? `http://${domainName}.mifengqiche.com` : `https://${domainName}.xfnauto.com`
 }
 
-let hosts = [getHost('tomcat'), getHost('api'), getHost('shop')]
+let hosts = [getHost('tomcat'), env === 'dev' ? getHost('api') : getHost('v2'), getHost('shop')]
 
 let resURL = 'https://res.xfnauto.com'
 let commonUrl = hosts[0] + '/tauto/common'

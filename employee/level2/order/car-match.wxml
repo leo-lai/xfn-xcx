@@ -70,7 +70,7 @@
     </view>
   </view>
 
-  <block wx:if='{{showEdit && info.orderState >= 10 &&  info.orderState < 35}}'>
+  <block wx:if='{{showEdit && carFrame.length == 0 && info.orderState == 10}}'>
     <view style='height: 120rpx;'></view>
     <view class='l-fixed-bottom l-padding'>
       <view class='l-text-center' wx:if='{{frameList.list.length === 0}}'>

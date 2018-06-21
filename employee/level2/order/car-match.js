@@ -134,7 +134,7 @@ Page({
       infoId: this.data.info.id,
       stockCarIds: this.data.frameList.slted.join(',')
     }).then(_ => {
-      app.toast('保存成功', false).then(_ => {
+      app.toast('保存成功', true).then(_ => {
         this.closeFrameList()
         this.getCarFrame()
         app.storage.setItem('lv2-order-list-refresh', 1)
