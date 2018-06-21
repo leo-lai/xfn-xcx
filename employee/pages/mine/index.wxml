@@ -17,9 +17,9 @@
       <image class='l-circle-icon' src='/images/password-icon.png'></image>
       <text>更改密码</text>
     </navigator>
-    <item class='_item' hover-class='_hover' bindtap='logout'>
+    <navigator class='_item' hover-class='_hover' url='../login/change'>
       <image class='l-circle-icon' src='/images/exit-icon.png'></image>
-      <text>退出登录</text>
-    </item>
+      <text>更换账号</text>
+    </navigator>
   </view>
 </view>

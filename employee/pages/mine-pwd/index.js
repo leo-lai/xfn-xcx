@@ -56,8 +56,19 @@ Page({
 
     wx.showLoading({ mask: true })
     app.post(app.config.password, this.data.formData).then(({ data }) => {
-      app.updateUserInfo({ sessionId: data.sessionId })
-      app.toast('更改成功', true)
+      // app.updateUserInfo({ sessionId: data.sessionId })
+      wx.hideLoading()
+      wx.showModal({
+        content: '修改密码成功，请重新登录',
+        showCancel: false,
+        confirmText: '去登录',
+        // confirmColor: '#fa5539',
+        success: res => {
+          wx.redirectTo({
+            url: '/pages/login/index',
+          })
+        }
+      })
     }).catch(err => {
       wx.hideLoading()
     })

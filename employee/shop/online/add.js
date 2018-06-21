@@ -207,6 +207,7 @@ Page({
         'formData.carsId': carType.id,
         'formData.carsName': carType.name,
         'formData.guidingPrice': carType.price,
+        'formData.familyId': family.id,
         'formData.colourId': '',
         'formData.colourName': '',
         'formData.interiorId': '',

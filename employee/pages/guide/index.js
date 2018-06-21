@@ -100,11 +100,15 @@ Page({
   onReady: function () {
     let current = this.data.list.data.filter(item => item.id == this.options.id)[0]
     this.setData({ current })
+    this.videoContext = wx.createVideoContext('myVideo')
     wx.setNavigationBarTitle({
       title: current.title,
     })
   },
 
+  videoPlay: function () {
+    this.videoContext.requestFullScreen()
+  },
   /**
    * 用户点击右上角分享
    */

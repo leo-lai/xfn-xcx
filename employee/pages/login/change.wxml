@@ -1,0 +1,24 @@
+<!--pages/login/change.wxml-->
+<view class='l-page-full'>
+  <view class='weui-cells__title'>已登录账号</view>
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell weui-cell_access' hover-class='weui-cell_active' wx:for='{{list}}' wx:key='phoneNumber' data-index='{{index}}' bindtap='login'>
+      <view class='weui-cell__hd'>
+        <image mode='aspectFit' class='l-avatar' src='/images/mine-selected.png'></image>
+      </view>
+      <view class='weui-cell__bd'>
+        <view>{{item.phoneNumber}}</view>
+      </view>
+      <view class='weui-cell__ft weui-cell__ft_in-access'>
+        <view class='l-text-wrap1'>{{item.orgName}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='weui-cells weui-cells_after-title l-margin-t'>
+    <navigator url='index?delta=2' class='weui-cell weui-cell_access' hover-class='weui-cell_active'>
+      <view class='weui-cell__bd'>新账号登录</view>
+      <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+    </navigator>
+  </view>
+</view>

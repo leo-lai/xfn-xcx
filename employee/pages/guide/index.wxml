@@ -2,6 +2,6 @@
 <view class='l-page-full l-video-bg' style='background-image:url({{resURL}}/employee/20180515004.jpg)'>
   <image mode='widthFix' style='display:block;width: 100%;' src='{{resURL}}/employee/20180515003.png'></image>
   <view class='l-video-box'>
-    <video src='{{current.src}}'></video>
+    <video id='myVideo' bindplay='videoPlay' src='{{current.src}}'></video>
   </view>
 </view>

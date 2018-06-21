@@ -1,0 +1,2 @@
+/* pages/login/change.wxss */
+.l-avatar{width: 40rpx; height: 40rpx; margin-right: 15rpx;}

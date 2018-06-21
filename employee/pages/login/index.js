@@ -10,6 +10,7 @@ Page({
       banner: app.config.resURL + '/employee/login-banner.jpg'
     },
     topTips: '',
+    remember: true,
     formData: {
       nikeName: '',
       phoneNumber: '',
@@ -45,8 +46,12 @@ Page({
     data['formData.' + event.target.id] = event.detail.value
     this.setData(data)
   },
+  rememberChange: function() {
+    this.setData({
+      remember: !this.data.remember
+    })
+  },
   getLoginInfo: function(res) {
-    console.log(res)
     if (res.detail.errMsg === 'getUserInfo:ok'){
       this.data.formData.rawData = res.detail.rawData
       this.data.formData.signature = res.detail.signature
@@ -102,23 +107,52 @@ Page({
     // })
   },
   // 登录
-  submit() {
-    if (!this.data.formData.phoneNumber) {
+  submit: function() {
+    let formData = this.data.formData
+
+    if (!formData.phoneNumber) {
       this.showTopTips('请输入手机号码')
       return
     }
-    if (!this.data.formData.password) {
+    if (!formData.password) {
       this.showTopTips('请输入密码')
       return
     }
 
     wx.showLoading({ mask: true })
-    app.post(app.config.auth.login, this.data.formData).then(({data}) => {
+    app.post(app.config.auth.login, formData).then(({data}) => {
       // 由于获取用户信息是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处触发回调函数
-      app.storage.setItem('phoneNumber', this.data.formData.phoneNumber)
+      app.storage.setItem('phoneNumber', formData.phoneNumber)
+      app.storage.getItem('login_list').then(loginList => {
+        loginList = loginList || []
+
+        let loginInfo = {
+          phoneNumber: formData.phoneNumber,
+          password: formData.password,
+          orgName: data.orgName,
+          headPortrait: data.headPortrait,
+          nikeName: data.nikeName,
+        }
+
+        if (this.data.remember) {
+          if (loginList.filter(item => item.phoneNumber == loginInfo.phoneNumber).length > 0) {
+            loginList = loginList.map(item => {
+              return item.phoneNumber == loginInfo.phoneNumber ? loginInfo : item
+            })
+          } else {
+            loginList.push(loginInfo)
+          }
+        }else{
+          loginList = loginList.filter(item => item.phoneNumber != loginInfo.phoneNumber)
+        }
+        app.storage.setItem('login_list', loginList)
+      })
+      
       app.updateUserInfo(data)
-      app.toast('登录成功', true)
+      app.toast('登录成功', false).then(_ => {
+        app.back(this.options.delta ? Number(this.options.delta) : 1)
+      })
     }).catch(err => {
       wx.hideLoading()
     })

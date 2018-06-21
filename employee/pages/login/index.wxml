@@ -15,5 +15,10 @@
     <view class='l-padding'>
       <button open-type='getUserInfo' bindgetuserinfo='getLoginInfo' class='l-button-main'>登录</button>
     </view>
+    <view class='l-remember' bindtap='rememberChange'>
+      <icon type='circle' size='16' wx:if='{{!remember}}'></icon>
+      <icon color='#fa5539' type='success' size='16' wx:if='{{remember}}'></icon>
+      记住登录
+    </view>
   </view>
 </view>
